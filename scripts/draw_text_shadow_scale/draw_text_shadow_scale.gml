@@ -1,4 +1,4 @@
-function draw_text_shadow(x, y, text, xscale, yscale = xscale, angle = 0) {
+function draw_text_shadow_scale(x, y, text, xscale, yscale = xscale, angle = 0) {
     var _color = draw_get_color(),
 		_text = string_hash_to_newline(text)
 	
