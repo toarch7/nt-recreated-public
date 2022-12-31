@@ -2,7 +2,7 @@
  Open-source rebuild of Nuclear Throne.
 [It is also more known as Nuclear Throne Mobile](https://toncho.itch.io/nuclear-throne-mobile/)
 
-[Nuclear Throne](https://store.steampowered.com/app/242680/Nuclear_Throne/]) is a game created and owned by Vlambeer.
+[Nuclear Throne](https://nuclearthrone.com/]) is a game created and owned by [Vlambeer](https://vlambeer.com/). All rights reserved.
 The recreation is based of an Update 19th of the game, which is officially claimed as a version allowed to be decompiled and modded.
 
 General purpose of this modification is to allow much wider range of people to get into Nuclear Throne which is being an amazing game.
@@ -27,10 +27,10 @@ Build configurations:
  * Compile SDK: 28
  * NDK: r23 or r24
 
-If you'd like to be able to access external storage, you need to downgrade your IDE and Runtime to these versions:
+If you'd like to be able to access external storage, downgrade your IDE and Runtime the following:
  * IDE: v2.3.7.606
  * Runtime: 2.3.7.476
-This is needed since newest GooglePlay Requirements (which are followed by default when building using newer GMS) are essentially restricting most of storage permissions
+This is needed since newest GooglePlay Requirements (which are followed by default) are essentially restricting most of the storage permissions.
 
 Download SDK & NDK using [AndroidStudio](https://developer.android.com/studio/)
 
