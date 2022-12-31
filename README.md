@@ -6,7 +6,7 @@ The recreation is based of an Update 19th of the game, which is officially claim
 
 General purpose of this modification is to allow much wider range of people to get into Nuclear Throne which is being an amazing game.
 
-The Source exists for educational purposes or bigger modding possibilities.
+The Source exists for educational purposes or bigger modding possibilities. For more convenient exploration I recommend using [GMEdit](https://yellowafterlife.itch.io/gmedit) by YellowAfterlife
 
 (this is also widely known as [Nuclear Throne Mobile](https://toncho.itch.io/nuclear-throne-mobile/))
 
