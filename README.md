@@ -34,6 +34,7 @@ Build configurations:
 If you'd like to be able to access external storage, downgrade your IDE and Runtime the following:
  * IDE: v2.3.7.606
  * Runtime: 2.3.7.476
+
 This is needed since newest GooglePlay Requirements (which are followed by default) are essentially restricting most of the storage permissions.
 
 Download SDK & NDK using [AndroidStudio](https://developer.android.com/studio/)
