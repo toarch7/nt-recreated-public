@@ -15,7 +15,7 @@ The Source exists for educational purposes or bigger modding possibilities. For 
 not allowing to publicly store (most of) assets made by them unless all rights are cleared by myself.
 And, sadly, most of the creators weren't able grant me legal permissions to do so.
 
-I'm not allowed to give any alternative downloads, although you can extract resources from release version of the game yourself by additional tinkering and with help of [UndertaleModTool](https://github.com/krzys-h/UndertaleModTool). 
+I'm not allowed to give any alternative downloads, although you can extract resources from release version of the game yourself with help of [UndertaleModTool](https://github.com/krzys-h/UndertaleModTool) additional tinkering. 
 
 Additionally you can bring your own assets which are fine to be distributed safely.
 
