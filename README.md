@@ -16,7 +16,7 @@ able to allow me use the assets.
  Additionaly you can bring your own assets which are fine to be distributed safely.
 
 # Building
- Building is only possible with GameMakerStudio 2.
+ Building from this source is only possible with GameMakerStudio 2.
 
 ## Android
 Build configurations:
@@ -43,9 +43,9 @@ Download SDK & NDK using [AndroidStudio](https://developer.android.com/studio/)
  Contributions are welcomed, unless your changes don't match what is present in release version of the original game.
  This topic is going to be expanded later.
 
-# Distribution
+# Distributing
  Requirements of usermade builds weren't strictly stated by Vlambeer, but the general rules are:
- * No form of monetary barrier should exists to access any form of content or source
+ * No form of monetary barrier should exists to access the game or any form of content and source
  * You must clearly state that this is not an official build of Nuclear Throne
  * You should not remove any Vlambeer branding
  * You should not proclaim your build is a result of a partnership with original authors
