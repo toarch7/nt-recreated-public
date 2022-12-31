@@ -6,14 +6,17 @@ Open-source rebuild of Nuclear Throne.
 The recreation is based of an Update 19th of the game, which is officially claimed as a version allowed to be decompiled and modded.
 
 General purpose of this modification is to allow much wider range of people to get into Nuclear Throne which is being an amazing game.
+
 The Source exists for educational purposes or bigger modding possibilities.
 
 # Resources legality and foreword to building
  Unfortunately it is not possible to run project from this source right away, due to an Vlambeer respecting work of their contributors and employees,
 not allowing to publicly store (most of) assets made by them unless all rights are cleared by myself.
 And, sadly, most of the creators weren't able grant me legal permissions to do so.
- I'm not allowed to give any alternative downloads, although you can extract resources from release version of the game yourself by additional tinkering and with help of [UndertaleModTool](https://github.com/krzys-h/UndertaleModTool). 
- Additionaly you can bring your own assets which are fine to be distributed safely.
+
+I'm not allowed to give any alternative downloads, although you can extract resources from release version of the game yourself by additional tinkering and with help of [UndertaleModTool](https://github.com/krzys-h/UndertaleModTool). 
+
+dditionaly you can bring your own assets which are fine to be distributed safely.
 
 # Building
  Building from this source is only possible with GameMakerStudio 2.
