@@ -17,7 +17,7 @@ And, sadly, most of the creators weren't able grant me legal permissions to do s
 
 I'm not allowed to give any alternative downloads, although you can extract resources from release version of the game yourself by additional tinkering and with help of [UndertaleModTool](https://github.com/krzys-h/UndertaleModTool). 
 
-dditionaly you can bring your own assets which are fine to be distributed safely.
+Additionally you can bring your own assets which are fine to be distributed safely.
 
 # Building
  Building from this source is only possible with GameMakerStudio 2.
