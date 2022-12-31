@@ -1,0 +1,5 @@
+snd_play_hit_big(sndDevastatorExplo, 0.3)
+event_inherited()
+instance_create(x, y, PortalClear)
+repeat(4)
+instance_create(((x + random(48)) - 24), ((y + random(48)) - 24), PlasmaImpact)

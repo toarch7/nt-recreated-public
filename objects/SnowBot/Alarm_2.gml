@@ -1,0 +1,1 @@
+spr_idle = sprSnowBotIdle

@@ -1,0 +1,46 @@
+{
+  "spriteId": {
+    "name": "sprVenuzTV",
+    "path": "sprites/sprVenuzTV/sprVenuzTV.yy",
+  },
+  "solid": false,
+  "visible": true,
+  "spriteMaskId": {
+    "name": "mskVenuzTV",
+    "path": "sprites/mskVenuzTV/mskVenuzTV.yy",
+  },
+  "persistent": false,
+  "parentObjectId": {
+    "name": "prop",
+    "path": "objects/prop/prop.yy",
+  },
+  "physicsObject": false,
+  "physicsSensor": false,
+  "physicsShape": 0,
+  "physicsGroup": 0,
+  "physicsDensity": 0.5,
+  "physicsRestitution": 0.1,
+  "physicsLinearDamping": 0.1,
+  "physicsAngularDamping": 0.1,
+  "physicsFriction": 0.2,
+  "physicsStartAwake": true,
+  "physicsKinematic": false,
+  "physicsShapePoints": [
+    {"x":-117.0,"y":-84.0,},
+    {"x":12.0,"y":12.0,},
+  ],
+  "eventList": [
+    {"isDnD":false,"eventNum":0,"eventType":0,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+    {"isDnD":false,"eventNum":0,"eventType":1,"collisionObjectId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+  ],
+  "properties": [],
+  "overriddenProperties": [],
+  "parent": {
+    "name": "Crib",
+    "path": "folders/Objects/Enviroment/Crib.yy",
+  },
+  "resourceVersion": "1.0",
+  "name": "VenuzTV",
+  "tags": [],
+  "resourceType": "GMObject",
+}

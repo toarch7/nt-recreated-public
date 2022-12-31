@@ -1,0 +1,1 @@
+event_perform(ev_other, ev_animation_end)

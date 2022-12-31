@@ -1,0 +1,1 @@
+motion_add(point_direction(other.x + random(2) - 1, other.y + random(2) - 1, x, y), 1)

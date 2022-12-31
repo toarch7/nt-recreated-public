@@ -1,0 +1,1 @@
+if sprite_index == sprBlueFlameDisappear instance_destroy()

@@ -1,0 +1,2 @@
+draw_enable_drawevent(0)
+instance_deactivate_all(1)

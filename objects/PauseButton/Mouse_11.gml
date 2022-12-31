@@ -1,0 +1,1 @@
+clicked = 0

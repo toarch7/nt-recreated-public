@@ -1,0 +1,1 @@
+if other.team > 1 hp = 0

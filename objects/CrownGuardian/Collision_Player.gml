@@ -1,0 +1,1 @@
+if (spr_idle == sprGuardianIdle) event_inherited()

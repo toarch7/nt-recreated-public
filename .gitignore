@@ -1,0 +1,11 @@
+# Can't legally distribute assets
+# Music is fine though
+
+sprites/*
+sounds/snd*
+sounds/amb*
+
+node_modules
+beautifier.js
+package.json
+package-lock.json

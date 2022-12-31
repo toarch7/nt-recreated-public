@@ -1,0 +1,1 @@
+followmove = 1

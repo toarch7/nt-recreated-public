@@ -1,0 +1,1 @@
+if GameCont.loops == 1 scrBossIntro(4)

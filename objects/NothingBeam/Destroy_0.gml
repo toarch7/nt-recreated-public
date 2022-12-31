@@ -1,0 +1,2 @@
+audio_stop_sound(sndNothingBeamLoop)
+snd_play(sndNothingBeamEnd)

@@ -1,0 +1,1 @@
+texture_set_interpolation(0)

@@ -1,0 +1,42 @@
+{
+  "spriteId": {
+    "name": "sprGreenExplosion",
+    "path": "sprites/sprGreenExplosion/sprGreenExplosion.yy",
+  },
+  "solid": false,
+  "visible": true,
+  "spriteMaskId": {
+    "name": "mskExplosion",
+    "path": "sprites/mskExplosion/mskExplosion.yy",
+  },
+  "persistent": false,
+  "parentObjectId": {
+    "name": "Explosion",
+    "path": "objects/Explosion/Explosion.yy",
+  },
+  "physicsObject": false,
+  "physicsSensor": false,
+  "physicsShape": 0,
+  "physicsGroup": 0,
+  "physicsDensity": 0.5,
+  "physicsRestitution": 0.1,
+  "physicsLinearDamping": 0.1,
+  "physicsAngularDamping": 0.1,
+  "physicsFriction": 0.2,
+  "physicsStartAwake": true,
+  "physicsKinematic": false,
+  "physicsShapePoints": [],
+  "eventList": [
+    {"isDnD":false,"eventNum":0,"eventType":4,"collisionObjectId":{"name":"hitme","path":"objects/hitme/hitme.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMEvent",},
+  ],
+  "properties": [],
+  "overriddenProperties": [],
+  "parent": {
+    "name": "FX",
+    "path": "folders/Objects/FX.yy",
+  },
+  "resourceVersion": "1.0",
+  "name": "GreenExplosion",
+  "tags": [],
+  "resourceType": "GMObject",
+}

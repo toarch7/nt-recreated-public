@@ -1,0 +1,1 @@
+if sprite_index == sprMessengerSigh sprite_index = sprMessengerWalk

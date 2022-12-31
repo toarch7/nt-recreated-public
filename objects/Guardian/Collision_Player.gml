@@ -1,0 +1,1 @@
+if (spr_idle == sprPalaceGuardianIdle) event_inherited()

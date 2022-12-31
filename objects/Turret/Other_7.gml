@@ -1,0 +1,1 @@
+if (spr_idle == sprTurretAppear) spr_idle = sprTurretIdle

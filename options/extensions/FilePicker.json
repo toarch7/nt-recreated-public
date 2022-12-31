@@ -1,0 +1,9 @@
+{
+  "extensionId": {
+    "name": "FilePicker",
+    "path": "extensions/FilePicker/FilePicker.yy"
+  },
+  "resourceVersion": "1.0",
+  "resourceType": "GMExtensionConfigSet",
+  "configurables": null
+}

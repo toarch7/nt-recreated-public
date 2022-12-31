@@ -1,0 +1,1 @@
+if available && !hover snd_play(sndMenuSelect)

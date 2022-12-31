@@ -1,0 +1,86 @@
+if draw_unlock {
+    if instance_exists(GenCont) or instance_exists(LevCont) or instance_exists(AchievementSplash) {
+        alarm[1] = 90
+        exit
+    }
+
+    if splat_index != 3 splat_index++
+
+    draw_sprite(sprUnlockPopupSplat, splat_index, view_width, view_height)
+
+    draw_set_halign(fa_right)
+    draw_set_valign(fa_top)
+
+    if splat_index == 3 {
+        draw_text_nt(view_width - 2, view_height - 24, unlock_text)
+    }
+
+    draw_set_halign(fa_left)
+}
+
+if !instance_exists(Player) && room == romGame {
+    draw_set_valign(fa_center)
+    draw_set_color(c_dkgray)
+    draw_set_font(fontSmall)
+
+    if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(Vlambeer) && !instance_exists(StatChar) && !instance_exists(CharSelect) && !instance_exists(LevCont) && !instance_exists(UnlockScreen) && !bossintro {
+        draw_set_halign(fa_left)
+        draw_text_shadow(4, view_height - 4, "v" + string(GAME_BUILD))
+    }
+
+    draw_set_valign(fa_top)
+    draw_set_halign(fa_left)
+    draw_set_font(fntL)
+} else if global.custom_seed {
+    draw_set_valign(fa_center)
+    draw_set_color(c_ltgray)
+    draw_set_font(fontSmall)
+
+    if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(CharSelect) && !instance_exists(LevCont) && !instance_exists(UnlockScreen) && !bossintro {
+        draw_set_halign(fa_left)
+        draw_text_shadow(4, view_height - string_height("Aa"), "[seed " + GameCont.seed + "]")
+    }
+
+    draw_set_valign(fa_top)
+    draw_set_halign(fa_left)
+    draw_set_font(fntL)
+}
+
+if instance_exists(Player) && opt_pausebutton && !instance_exists(Credits) {
+    draw_sprite_ext(sprPauseButton, 0, view_width - 18, 18, 0.7, 0.7, 0, c_white, 0.5)
+
+    for (var touch = 0; touch <= 4; touch++) {
+        if device_mouse_check_button_pressed(touch, mb_left) {
+            if point_in_circle(device_mouse_x_to_gui(touch), device_mouse_y_to_gui(touch), view_width - 18, 18, 16) {
+                KeyCont.press_paus[global.index] = 1
+            }
+        }
+    }
+}
+
+//draw_set_color(c_purple)
+//draw_rectangle(-32, 0, 0, view_height, 0)
+//draw_rectangle(view_width + 32, 0, view_width, view_height, 0)
+//draw_set_color(c_white)
+
+if saving {
+    if !instance_exists(Vlambeer) && !instance_exists(GenCont) {
+        draw_sprite_ext(sprSaving, saving_index, view_width - 15, view_height - 15, 1, 1, 0, c_black, 1)
+        draw_sprite_ext(sprSaving, saving_index, view_width - 16, view_height - 15, 1, 1, 0, c_black, 1)
+        draw_sprite_ext(sprSaving, saving_index, view_width - 16, view_height - 16, 1, 1, 0, c_white, 1)
+
+        saving_index += 0.5
+
+        if saving_index >= sprite_get_number(sprSaving) {
+            saving_index = 0
+        }
+    } else saving = 0
+
+    saving--
+}
+
+if paused && !want_pause {
+    instance_activate_object(Player)
+    with TopCont scrDrawHUD()
+    instance_deactivate_object(Player)
+}
