@@ -2,7 +2,8 @@
 Opensource rebuild of Nuclear Throne.
 
 [Nuclear Throne](https://nuclearthrone.com/]) is a game created and owned by [Vlambeer](https://vlambeer.com/). All rights reserved.
-The recreation is based of an Update 19th of the game, which is officially claimed as a version allowed to be decompiled and modded.
+
+The recreation is based of update 19th of the game, which is officially claimed as a version allowed to be decompiled and modded.
 
 General purpose of this modification is to allow much wider range of people to get into Nuclear Throne which is being an amazing game.
 
