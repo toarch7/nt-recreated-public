@@ -1,15 +1,13 @@
 # Nuclear Throne Recreated
-Opensource rebuild of Nuclear Throne.
+Open source rebuild of Nuclear Throne and [Android port](https://toncho.itch.io/nuclear-throne-mobile/)
 
 [Nuclear Throne](https://nuclearthrone.com/]) is a game created and owned by [Vlambeer](https://vlambeer.com/). All rights reserved.
 
-The recreation is based of update 19th of the game, which is officially claimed as a version allowed to be decompiled and modded.
+The recreation is based on update 19th of the game, which is officially claimed as a version allowed to be decompiled and modded.
 
-General purpose of this modification is to allow much wider range of people to get into Nuclear Throne which is being an amazing game.
+General purpose of this modification is a mobile support, to allow much wider range of people to get into Nuclear Throne which is being an amazing game.
 
-The Source exists for educational purposes or bigger modding possibilities. For more convenient exploration I recommend using [GMEdit](https://yellowafterlife.itch.io/gmedit) by YellowAfterlife
-
-(this is also widely known as [Nuclear Throne Mobile](https://toncho.itch.io/nuclear-throne-mobile/))
+The source is public for education and modding reasons. For more convenient exploration I recommend using [GMEdit](https://yellowafterlife.itch.io/gmedit) by YellowAfterlife
 
 # Resources legality and foreword to building
  Unfortunately it is not possible to run project from this source right away, due to an Vlambeer respecting work of their contributors and employees,
