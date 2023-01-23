@@ -65,13 +65,16 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
         }
 
         if !speed {
-            if sprite_index != spr_hurt sprite_index = spr_idle
+            if sprite_index != spr_hurt
+                sprite_index = spr_idle
         } else {
-            if sprite_index != spr_hurt sprite_index = spr_walk
+            if sprite_index != spr_hurt
+                sprite_index = spr_walk
         }
 
         if sprite_index = spr_hurt {
-            if image_index > 2 sprite_index = spr_idle
+            if image_index > 2
+                sprite_index = spr_idle
         }
     } else {
         //rolling
@@ -112,13 +115,15 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
         if roll speed = rollspeed
 
         if !speed {
-            if sprite_index != spr_hurt sprite_index = spr_idle
+            if sprite_index != spr_hurt
+                sprite_index = spr_idle
         } else {
-            if sprite_index != spr_hurt sprite_index = spr_walk
+            if sprite_index != spr_hurt
+                sprite_index = spr_walk
         }
 
-        if sprite_index == spr_hurt {
-            if image_index > 2 sprite_index = spr_idle
+        if sprite_index == spr_hurt && image_index > 2 {
+            sprite_index = spr_idle
         }
     }
 

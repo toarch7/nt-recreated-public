@@ -6,7 +6,8 @@ if instance_exists(Player) {
     } else if friction != 1.5 friction = 1.5
 } else if friction != 1.5 friction = 1.5
 
-if sprite_index != spr_hurt sprite_index = spr_idle
+if sprite_index != spr_hurt
+    sprite_index = spr_idle
 
 if sprite_index = spr_hurt {
     if image_index > 2 sprite_index = spr_idle

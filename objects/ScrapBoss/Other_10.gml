@@ -18,7 +18,8 @@ if walk {
     }
 
     if !walk {
-        if sprite_index != spr_hurt sprite_index = spr_idle
+        if sprite_index != spr_hurt
+            sprite_index = spr_idle
     }
 }
 

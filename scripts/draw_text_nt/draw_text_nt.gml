@@ -1,5 +1,5 @@
 globalvar draw_text_nt_chache;
-draw_text_nt_chache = {}
+		  draw_text_nt_chache = {}
 
 function draw_text_nt(_x, _y, _text, scale = 1) {
 	draw_set_font(UberCont.font)
