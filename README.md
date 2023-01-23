@@ -1,23 +1,22 @@
 # Nuclear Throne Recreated
-Opensource rebuild of Nuclear Throne.
+Open source rebuild of Nuclear Throne and [Android port](https://toncho.itch.io/nuclear-throne-mobile/)
 
 [Nuclear Throne](https://nuclearthrone.com/]) is a game created and owned by [Vlambeer](https://vlambeer.com/). All rights reserved.
-The recreation is based of an Update 19th of the game, which is officially claimed as a version allowed to be decompiled and modded.
 
-General purpose of this modification is to allow much wider range of people to get into Nuclear Throne which is being an amazing game.
+The recreation is based on update 19th of the game, which is officially claimed as a version allowed to be decompiled and modded.
 
-The Source exists for educational purposes or bigger modding possibilities. For more convenient exploration I recommend using [GMEdit](https://yellowafterlife.itch.io/gmedit) by YellowAfterlife
+General purpose of this modification is a mobile support, to allow much wider range of people to get into Nuclear Throne which is being an amazing game.
 
-(this is also widely known as [Nuclear Throne Mobile](https://toncho.itch.io/nuclear-throne-mobile/))
+The source is public for education and modding reasons. For more convenient exploration I recommend using [GMEdit](https://yellowafterlife.itch.io/gmedit) by YellowAfterlife
 
 # Resources legality and foreword to building
  Unfortunately it is not possible to run project from this source right away, due to an Vlambeer respecting work of their contributors and employees,
 not allowing to publicly store (most of) assets made by them unless all rights are cleared by myself.
 And, sadly, most of the creators weren't able grant me legal permissions to do so.
 
-I'm not allowed to give any alternative downloads, although you can extract resources from release version of the game yourself by additional tinkering and with help of [UndertaleModTool](https://github.com/krzys-h/UndertaleModTool). 
+I'm not allowed to give any alternative downloads, although you can extract resources from release version of the game yourself with help of [UndertaleModTool](https://github.com/krzys-h/UndertaleModTool) additional tinkering. 
 
-dditionaly you can bring your own assets which are fine to be distributed safely.
+Additionally you can bring your own assets which are fine to be distributed safely.
 
 # Building
  Building from this source is only possible with GameMakerStudio 2.
