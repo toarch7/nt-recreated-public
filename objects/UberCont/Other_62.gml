@@ -20,49 +20,7 @@ if async_load[? "id"] == update_request {
             if result[? "version"] > GAME_BUILD {
                 update_message = show_question_async("Update " + string(result[? "versionName"]) + " b" + string(result[? "version"]) + " available.\n Open download page?")
             }
-            /*
-			seedoffset = scrReal(result[? "seedOffset"])
-			
-			if !result[? "thronebutt"] {
-				show_debug_message("Thronebutt is disabled, using offline method.")
-				
-				var date = date_current_datetime()
-				var seed = date_get_day(date) * 4 + date_get_month(date) * 8 + date_get_year(date) * 16 + seedoffset
-				
-				random_set_seed(seed)
-				seed = irandom(999999)
-				
-				daily_seed = seed
-				daily_time = 86400
-				can_daily = 1
-				
-				random_set_seed(date_get_week(date_current_datetime()) + (date_year * 100) + seedoffset)
-				weekly_data = ds_map_create()
-				weekly_data[? "char"] = irandom(11) + 1
-				weekly_data[? "crown"] = 2 + irandom(11)
-				weekly_data[? "bskin"] = irandom(1)
-				weekly_data[? "seed"] = irandom(999999)
-				weekly_data[? "active"] = 1
-				weekly_data[? "week"] = date_get_week(date_current_datetime())
-				weekly_data[? "seq"] = 430000
-				
-				var wep = -1
-				
-				do {
-					wep = irandom(123) + 1
-					
-					if string_copy(wep, 1, 4) == "GOLD" or wep == 12 or wep == 109 or wep == 108 or wep == 1 or wep == 56 {
-						wep = -1
-					}
-				} until wep != -1
-				
-				weekly_data[? "startwep"] = wep
-				
-				can_weekly = 1
-			} else {
-				show_debug_message("Thronebutt ok, requesting...")
-			}
-			*/
+            
             update_info = result
         }
     }
@@ -119,12 +77,27 @@ if async_load[? "id"] == weekly_request && get_daily_times < 5 {
 
         can_weekly = 1
 
-        if opt_console can_weekly = 0
+        if opt_console
+            can_weekly = 0
+        
+        random_set_seed(weekly_data[? "seed"])
 
         weekly_data[? "week"] = date_get_week(date_current_datetime())
 
-        if !is_undefined(weekly_data[? "seed"]) {
-            weekly_data[? "seed"] += seedoffset
+        if weekly_data[? "char"] > 15 {
+            weekly_data[? "char"] = irandom(11) + 1
+        }
+        
+        if weekly_data[? "bskin"] > 1 {
+            weekly_data[? "bskin"] = choose(0, 1)
+        }
+        
+        if weekly_data[? "wep"] > 125 {
+            weekly_data[? "wep"] = choose(irandom_range(2, 36), irandom_range(47, 55), irandom_range(57, 97), irandom_range(104, 125))
+        }
+        
+        if weekly_data[? "crown"] > 13 {
+            weekly_data[? "crown"] = irandom_range(2, 13)
         }
     } else weekly_request = -1
 }
