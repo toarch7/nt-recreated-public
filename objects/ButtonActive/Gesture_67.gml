@@ -4,12 +4,12 @@ if UberCont.opt_keyboard or UberCont.opt_gamepad exit
 var a = 0,
     touch = event_data[? "touch"]
 
-    with MobileUI {
-        if index == touch a = 1
-    }
+with MobileUI {
+    if index == touch a = 1
+}
 
     // ignore long touches or occupied ones
-if a or UberCont.touch_duration[touch] > 10 {
+if a or (touch < 4 && UberCont.touch_duration[touch] > 10) {
     exit
 }
 
