@@ -107,11 +107,11 @@ if !hp {
             }
 
             dir = instance_create(x, y, PopupText)
-            dir.mytext = "+" + string(round(typ_ammo[type] / 2)) + " " + string(typ_name[type])
-
-            if Player.ammo[type] >= typ_amax[type] {
-                dir.mytext = "MAX " + string(typ_name[type])
-            }
+			dir.mytext = "+" + string(round(typ_ammo[type] / 2)) + " " + loc(typ_name[type])
+			
+			if ammo[type] >= typ_amax[type] {
+				dir.mytext = loc_sfmt("MAX %", loc(typ_name[type]))
+			}
         }
 
         //SOME KILLS REGENERATE HEALTH
