@@ -1,20 +1,3 @@
-/*if keyboard_check_pressed(ord("N")) {
-	open_two_windows(0)
-}
-
-if UberCont.opt_bksides {
-	view_width = 320
-	view_height = 240
-	camera_set_view_size(view_camera, view_width, view_height)
-	camera_set_view_border(view_camera, ideal_width * opt_scaling, ideal_height * opt_scaling)
-	display_set_gui_size(view_width, view_height)
-}
-
-if !scrCanInput() {
-	instance_create(0, 0, PauseImage)
-}
-*/
-
 if opt_console && !instance_exists(Console) {
     instance_create(0, 0, Console)
 }
@@ -121,7 +104,8 @@ for (var i = 0; i < KeyCont.players; i++) {
 
                 KeyCont.press_paus[i] = 0
             }
-        } else {
+        }
+		else {
             with PauseButton {
                 if image_index == 3 {
                     clicked = 1
@@ -209,26 +193,15 @@ if opt_prtcls {
     with RainSplash instance_destroy()
 }
 
-global.time++
-/*
-KeyCont.press_horn[global.index] = 0
+global.time ++
 
-KeyCont.gamepad[global.index] = opt_gamepad
-KeyCont.aimassist[global.index] = opt_assist
-
-if !paused && !instance_exists(GenCont)
-scrSetKeyboardInputs(global.index)
-*/
-if mouse_wheel_up() {
-    global.inputDelay++
-
-    if global.inputDelay > 29 {
-        global.inputDelay = 0
-    }
-} else if mouse_wheel_down() {
-    global.inputDelay--
-
-    if global.inputDelay < 0 {
-        global.inputDelay = 29
-    }
+if paused && instance_exists(PauseButton) {
+	if keyboard_check_pressed(ord("R")) {
+		with PauseButton {
+			if image_index == 1 or image_index == 6 {
+				event_perform(ev_mouse, ev_left_release)
+				break
+			}
+		}
+	}
 }

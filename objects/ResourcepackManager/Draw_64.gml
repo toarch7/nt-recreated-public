@@ -128,10 +128,10 @@ if mode != 4 {
             if _if[5] != -2 {
                 draw_set_font(fntL)
 
-                draw_text_nt(28, _y + 4, _if[0])
+                draw_text_nt(28, _y + 4, _if[0] + "@w")
 
                 UberCont.font = fontSmall
-                draw_text_nt(28, _y + 14, _if[8])
+                draw_text_nt(28, _y + 14, _if[8] + "@w")
                 UberCont.font = fntL
 
                 if _if[9] != undefined {
@@ -336,7 +336,7 @@ if mode == 4 {
         draw_text_ext(4, 72, _if[1], height, view_width - 4)
 
         draw_set_font(fntL)
-        draw_text_nt(38, 42, _if[0])
+        draw_text_nt(38, 42, _if[0] + "@w")
 
         draw_set_color(c_white)
         draw_set_font(fontSmall)

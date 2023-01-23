@@ -4,6 +4,8 @@ if hover > 0 {
     if !hover {
         hover = 0
     }
-} else if clicked {
+}
+else if clicked {
     light = 1
-} else light = 0
+}
+else light = 0

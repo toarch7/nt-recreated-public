@@ -7,7 +7,8 @@ if sprite_index == sprGameOverResults {
     UberCont.paused = 0
     UberCont.want_menu2 = 1
     UberCont.show_results = 1
-} else switch image_index {
+}
+else switch image_index {
     case 0:
         //MENU
         if instance_exists(GameOver) {
