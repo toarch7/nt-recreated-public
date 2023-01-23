@@ -271,9 +271,10 @@ function handle_console_command(str) {
                 }
 
                 try {
-                    Console.seed = real(args[0])
-                    print("Seed set to " + string(Console.seed))
-                } catch (e) {
+                    Console[$ "seed"] = real(args[0])
+                    print("Seed set to " + string(Console[$ "seed"]))
+                }
+                catch (e) {
                     printc("Bad value given.", c_red)
                 }
                 break

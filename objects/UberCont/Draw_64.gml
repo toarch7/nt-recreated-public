@@ -38,7 +38,7 @@ if !instance_exists(Player) && room == romGame {
 
     if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(CharSelect) && !instance_exists(LevCont) && !instance_exists(UnlockScreen) && !bossintro {
         draw_set_halign(fa_left)
-        draw_text_shadow(4, view_height - string_height("Aa"), "[seed " + GameCont.seed + "]")
+        draw_text_shadow(4, view_height - string_height("Aa"), "[seed " + global.seed + "]")
     }
 
     draw_set_valign(fa_top)

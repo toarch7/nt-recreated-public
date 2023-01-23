@@ -22,8 +22,10 @@ function rng_init() {
     if UberCont.daily_run {
         if UberCont.weekly_run {
             global.seed = scrReal(UberCont.weekly_data[? "seed"])
-        } else global.seed = UberCont.daily_seed
-    } else {
+        }
+        else global.seed = UberCont.daily_seed
+    }
+    else {
         if file_exists(game_directory + "seed.txt") {
             global.custom_seed = 1
 
@@ -32,7 +34,8 @@ function rng_init() {
             file_text_close(file)
 
             show_debug_message("Custom seed: " + string(global.seed))
-        } else if instance_exists(Console) && Console.seed != undefined {
+        }
+        else if instance_exists(Console) && Console.seed != undefined {
             global.seed = scrReal(Console.seed)
             global.custom_seed = 1
         }
