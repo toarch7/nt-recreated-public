@@ -1,6 +1,7 @@
 alarm[1] = 20 + random(10)
 
-if sprite_index != spr_hurt sprite_index = spr_idle
+if sprite_index != spr_hurt
+    sprite_index = spr_idle
 
 scrTarget()
 if target > 0 {
