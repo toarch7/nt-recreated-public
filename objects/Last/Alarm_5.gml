@@ -3,7 +3,7 @@ if (drawspr == sprLastWarpIn) {
 
     scrTarget()
 
-    if (target > 0) {
+    if (instance_exists(target)) {
         with(instance_create(x, y, LastBall)) {
             hit_id = other.hit_id
             team = other.team

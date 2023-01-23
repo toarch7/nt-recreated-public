@@ -2,7 +2,7 @@ alarm[1] = 20 + random(20)
 var _control = control
 control = 0
 scrTarget()
-if target > 0 {
+if instance_exists(target) {
     if random(3) < 1 and freeze > 40 {
         //MIND CONTROL
         control = 1

@@ -5,7 +5,7 @@ if sprite_index != spr_hurt
 
 scrTarget()
 
-if target > 0 {
+if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         if random(3) < 1 {
             direction = target_direction + 180

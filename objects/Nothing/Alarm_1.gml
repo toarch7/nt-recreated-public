@@ -20,7 +20,7 @@ if hp <= max_hp * 0.4 {
 
 scrTarget()
 
-if instance_exists(target) && target > 0 {
+if instance_exists(target) && instance_exists(target) {
     if (point_distance(x, y, target.x, target.y) > 290) || (target.y < y + 48) || introwalk == 0 {
         introwalk = 1
         walkdir = point_direction(xstart, y, xstart, target.y)

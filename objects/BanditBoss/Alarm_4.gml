@@ -7,7 +7,7 @@ if charge = 0 {
     snd_play(sndBigBanditMelee)
     scrTarget()
 
-    if target > 0 {
+    if instance_exists(target) {
         gunangle = target_direction
         motion_add(gunangle, 10)
     }

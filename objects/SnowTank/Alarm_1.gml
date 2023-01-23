@@ -1,12 +1,12 @@
 alarm[1] = 40 + random(30)
 rest = 0
 scrTarget()
-if target > 0 {
+if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         if ammo = 0 and random(6) < 1 and point_distance(x, y, target.x, target.y) > 64 and point_distance(x, y, target.x, target.y) < 240 {
             snd_play(sndSnowTankAim)
             scrTarget()
-            if target > 0 gunangle = target_direction alarm[2] = 40
+            if instance_exists(target) gunangle = target_direction alarm[2] = 40
 
             ammo = 16
         }

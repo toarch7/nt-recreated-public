@@ -1,6 +1,6 @@
 alarm[1] = 20 + random(10)
 scrTarget()
-if target > 0 {
+if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         if point_distance(target.x, target.y, x, y) > 64 {
             if random(6) < 1 {
@@ -16,7 +16,7 @@ if target > 0 {
                 gunangle = target_direction
 
                 scrTarget()
-                if random(5) < 1 and target > 0 {
+                if random(5) < 1 and instance_exists(target) {
                     with Raven {
                         if id != other.id and point_distance(x, y, other.x, other.y) < 120 {
                             if collision_line(other.target.x, other.target.y, x, y, Wall, 1, 1) < 0 and random(3) < 2 scrRavenLift()

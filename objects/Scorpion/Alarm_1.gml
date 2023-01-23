@@ -1,6 +1,6 @@
 alarm[1] = 30 + random(10)
 scrTarget()
-if target > 0 {
+if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 and random(2) < 1 {
         ammo = 10
         alarm[2] = 1

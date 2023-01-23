@@ -568,6 +568,7 @@
     {"id":{"name":"ModScript4","path":"scripts/ModScript4/ModScript4.yy",},"order":4,},
     {"id":{"name":"mus2","path":"sounds/mus2/mus2.yy",},"order":60,},
     {"id":{"name":"ModScript33","path":"scripts/ModScript33/ModScript33.yy",},"order":29,},
+    {"id":{"name":"files_find_all","path":"scripts/files_find_all/files_find_all.yy",},"order":184,},
     {"id":{"name":"sprCrownPedIdle","path":"sprites/sprCrownPedIdle/sprCrownPedIdle.yy",},"order":3,},
     {"id":{"name":"sprCrownPedClose","path":"sprites/sprCrownPedClose/sprCrownPedClose.yy",},"order":5,},
     {"id":{"name":"mskCrownPed","path":"sprites/mskCrownPed/mskCrownPed.yy",},"order":7,},

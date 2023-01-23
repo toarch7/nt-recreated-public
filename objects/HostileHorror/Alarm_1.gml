@@ -1,6 +1,6 @@
 alarm[1] = (10 + random(10))
 scrTarget()
-if target > 0 {
+if instance_exists(target) {
     if !collision_line(x, y, target.x, target.y, Wall, 0, 0) || random(6) < 1 {
         if point_distance(target.x, target.y, x, y) > 48 || (random(8) < 1 && raddrop > 0) {
             if random(2 + point_distance(x, y, target.x, target.y) / 100) < 1 {

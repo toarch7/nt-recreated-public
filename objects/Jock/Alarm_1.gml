@@ -5,7 +5,7 @@ if sprite_index != spr_hurt
 
 scrTarget()
 
-if target > 0 {
+if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         if point_distance(target.x, target.y, x, y) > 96 {
             gunangle = target_direction

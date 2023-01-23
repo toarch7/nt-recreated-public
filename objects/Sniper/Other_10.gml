@@ -5,7 +5,7 @@ if walk > 0 {
     motion_add(direction, 0.8)
 }
 
-if gonnafire = 1 and alarm[2] > 5 and target > 0 {
+if gonnafire = 1 and alarm[2] > 5 and instance_exists(target) {
     gunangle = target_direction
 }
 

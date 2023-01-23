@@ -1,7 +1,7 @@
 alarm[1] = 10 + random(5)
 
 scrTarget()
-if target > 0 {
+if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         if point_distance(target.x, target.y, x, y) > 48 {
             if random(2) < 1 && distance_to_object(target) <= 96 {

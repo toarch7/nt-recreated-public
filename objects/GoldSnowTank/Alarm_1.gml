@@ -7,7 +7,7 @@ if instance_exists(target) {
             snd_play_hit_big(sndGoldTankAim, .2)
             scrTarget()
 
-            if target > 0 {
+            if instance_exists(target) {
                 gunangle = target_direction
             }
 

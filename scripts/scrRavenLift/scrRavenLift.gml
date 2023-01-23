@@ -15,7 +15,7 @@ function scrRavenLift() {
         z = 0
         scrTarget()
 
-        if target > 0 {
+        if instance_exists(target) {
             do {
                 targetx = x + lengthdir_x(128, point_direction(mouse_x, mouse_y, target.x, target.y) + random(50) - 25)
                 targety = y + lengthdir_y(128, point_direction(mouse_x, mouse_y, target.x, target.y) + random(50) - 25)

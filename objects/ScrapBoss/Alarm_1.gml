@@ -6,7 +6,7 @@ if ammo > 0 {
     sprite_index = spr_fire
     walk = 0
     scrTarget()
-    if target > 0 motion_add(target_direction + turn * 80, 0.3) repeat(6) {
+    if instance_exists(target) motion_add(target_direction + turn * 80, 0.3) repeat(6) {
         with instance_create(x + lengthdir_x(24, gunangle), y + lengthdir_y(16, gunangle), EnemyBullet1) {
             hit_id = other.spr_idle
             creator = other.id

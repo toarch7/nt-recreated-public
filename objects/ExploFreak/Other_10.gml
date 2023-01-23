@@ -11,6 +11,6 @@ if walk > 0 {
 
 if speed > 3 speed = 3
 
-if target > 0 {
+if instance_exists(target) {
     if instance_exists(target) mp_potential_step(target.x, target.y, 1, 0)
 }

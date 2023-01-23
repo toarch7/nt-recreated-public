@@ -21,7 +21,7 @@ if sprite_index == sprRavenLift {
 
     scrTarget()
 
-    if target > 0 {
+    if instance_exists(target) {
         with Raven {
             if point_distance(x, y, other.x, other.y) < 120 and point_distance(x, y, other.x, other.y) > 32 {
                 if collision_line(other.target.x, other.target.y, x, y, Wall, 1, 1) < 0 and random(3) < 2 scrRavenLift()

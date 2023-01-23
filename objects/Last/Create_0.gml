@@ -28,7 +28,7 @@ with(instance_create(x, y, PopoExplosion)) {
 wkick = 0
 scrTarget()
 
-if target > 0 {
+if instance_exists(target) {
     gunangle = target_direction
 }
 

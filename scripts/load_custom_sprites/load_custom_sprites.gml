@@ -7,15 +7,16 @@ function load_custom_sprites(path) {
         file_text_close(f)
     }
 
-    var find = file_find_first(path + "*.png", 0)
+    var _find = files_find_all(path + "*.png")
 
     var index = 0,
         b = 0
 
     var replace_frames = {}
 
-    while find != "" {
-        var handled = 0
+    for(var _f = 0; _f < array_length(_find); _f ++) {
+        var handled = 0,
+			find = _find[_f]
 
         if string_char_at(find, 1) != "s" {
             handled = 1
@@ -70,7 +71,7 @@ function load_custom_sprites(path) {
                     handled = 1
                 }
             }
-
+			
             if !handled && sprite_exists(asset) {
                 var frames = sprite_get_number(asset)
                 var sprite = sprite_add(path + find, frames, 0, 0, sprite_get_xoffset(asset), sprite_get_yoffset(asset))
@@ -109,27 +110,16 @@ function load_custom_sprites(path) {
                 status = 1
             }
         }
-
-        find = file_find_next()
-
-        if (find == ""
-        or index > 0) && index < sprite_get_number(sprBigNames) {
-            find = "sprBigNames_frame" + string(index) + ".png"
-            b = 1
-            index++
-        }
     }
-
+	
     var keys = struct_keys(replace_frames)
-
+	
     for (var j = 0; j < array_length(keys); j++) {
         var f = replace_frames[$ keys[j]]
         var asset = real(keys[j])
-
+		
         sprite_replace_frames(asset, f)
     }
-
-    file_find_close()
-
+	
     return status
 }

@@ -1,7 +1,7 @@
 alarm[1] = 15 + random(20)
 
 scrTarget()
-if target > 0 and roll = 0 {
+if instance_exists(target) and roll = 0 {
     if random(hp / 2 + 2 + target.can_shoot * 3) < 1 and freeze > 40 {
         //ROLL
         if point_distance(x, y, target.x, target.y) > 150 direction = target_direction + random(60) - 30

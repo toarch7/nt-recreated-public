@@ -1,7 +1,7 @@
 alarm[1] = 15 + random(5)
 
 scrTarget()
-if target > 0 {
+if instance_exists(target) {
 
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         //SEE TARGET

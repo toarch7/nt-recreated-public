@@ -2,7 +2,7 @@ alarm[1] = 40
 scrTarget()
 meleedamage = 0
 sprite_index = spr_idle
-if target > 0 {
+if instance_exists(target) {
     //CHARGE ATTACK
     if point_distance(x, y, target.x, target.y) < 120 and random(4) < 1 {
         snd_play(sndSnowBotSlideLoop)

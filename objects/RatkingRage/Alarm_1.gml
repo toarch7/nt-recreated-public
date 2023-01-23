@@ -1,6 +1,6 @@
 alarm[1] = 30 + random(10)
 scrTarget()
-if target > 0 {
+if instance_exists(target) {
     if point_distance(x, y, target.x, target.y) < 100 {
         //charge
         walk = 40 + random(10)

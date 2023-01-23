@@ -7,7 +7,7 @@ if GameCont.loops {
 meleedamage = 0
 
 scrTarget()
-if target > 0 {
+if instance_exists(target) {
     if point_distance(x, y, target.x, target.y) < 240 or intro = 0 {
         if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 and point_distance(x, y, target.x, target.y) > 48 and intro = 1 {
             if random(3) < 2 {

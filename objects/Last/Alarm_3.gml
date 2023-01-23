@@ -1,5 +1,5 @@
 scrTarget()
-if (target > 0) {
+if (instance_exists(target)) {
     do {
         tarx = ((target.x + random(320)) - 160)
         tary = ((target.y + random(320)) - 160)
