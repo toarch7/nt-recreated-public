@@ -7,16 +7,22 @@ function scrFire(wep, useAmmo) { // why... just why...
     var oldshake = BackCont.shake
 
     if race == 7 && skill_get(5) && random(30 - wep_cost[wep]) < 1 {
-        var typ = wep_type[choose(wep, bwep)]
+        var typ = wep_type[bwep]
 
-        if typ == 0 {
-            typ = irandom(4) + 1
-        }
+        if typ > 0 {
+            var amount = floor(typ_ammo[typ] / 2),
+                popup = instance_create(x, y, PopupText)
+            
+            with popup {
+			    mytext = "+" + string(amount) + " " + loc(typ_name[type])
+            }
 
-        ammo[typ] += floor(typ_ammo[typ] / 2)
+            ammo[typ] += amount
 
-        if ammo[typ] > typ_amax[typ] {
-            ammo[typ] = typ_amax[typ]
+            if ammo[typ] > typ_amax[typ] {
+                popup.mytext = loc_sfmt("MAX %", loc(typ_name[type]))
+                ammo[typ] = typ_amax[typ]
+            }
         }
     }
 
