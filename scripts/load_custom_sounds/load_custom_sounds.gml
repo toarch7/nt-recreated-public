@@ -6,10 +6,12 @@ function load_custom_sounds(path) {
         file_text_write_string(f, "")
         file_text_close(f)
     }
-
-    var find = file_find_first(path + "*.ogg", 0)
-
-    while find != "" {
+	
+	var _find = files_find_all(path + "*.ogg")
+	
+    for(var i = 0; i < array_length(_find); i ++) {
+		var find = _find[i]
+		
         if find != "musThemeB.ogg" && string_copy(find, 1, 7) != "musBoss" && string_copy(find, 1, 3) == "mus" {
             find = string_replace(find, "B.ogg", "b.ogg")
         }
