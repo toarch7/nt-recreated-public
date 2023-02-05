@@ -45,7 +45,10 @@ Download SDK & NDK using [AndroidStudio](https://developer.android.com/studio/)
 
 # Contributing
  Contributions are welcomed, unless your changes don't match what is present in release version of the original game.
- This topic is going to be expanded later.
+ 
+ Please do not commit changes if they're just fixing the syntax and don't contain any actual codebase changes.
+ 
+ If you'd like to be mentioned in credits, you can edit your nickname in at `Credits` object [create event](https://github.com/toarch7/nt-recreated-public/blob/main/objects/Credits/Create_0.gml) as contributor or translator depending on your commit.
 
 # Distributing
  Requirements of usermade builds weren't strictly stated by Vlambeer, but the general rules are:
