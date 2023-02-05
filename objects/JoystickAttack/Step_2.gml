@@ -3,8 +3,7 @@ event_inherited()
 var aimbot = save_get_val("controls", "aimbot", 0)
 
 if aimbot {
-    with Player
-    if index == global.index {
+    with Player if index == global.index {
         var _aim_target = instance_nearest(x, y, enemy)
 
         if instance_exists(NothingInactive) {
@@ -13,9 +12,11 @@ if aimbot {
             if !_aim_target[$ "hitable"] {
                 _aim_target = noone
             }
-        } else if instance_exists(LastIntro) {
+        }
+		else if instance_exists(LastIntro) {
             _aim_target = instance_nearest(x, y, LastIntro)
-        } else if distance_to_object(BigGenerator) <= 32 {
+        }
+		else if distance_to_object(BigGenerator) <= 32 {
             _aim_target = instance_nearest(x, y, BigGenerator)
         }
 
@@ -23,7 +24,8 @@ if aimbot {
 
         if _aim_target && !collision_line(x, y, _aim_target.x, _aim_target.y, Wall, 1, 1) {
             d = point_direction(x, y, _aim_target.x, _aim_target.y)
-        } else d = KeyCont.dir_move[index]
+        }
+		else d = KeyCont.dir_move[index]
 
         if d != -1 {
             KeyCont.dir_fire[index] = angle_lerp(KeyCont.dir_fire[index], d, 0.75)
@@ -61,22 +63,25 @@ if !aimbot {
 
         if device_mouse_check_button_released(index, mb_left) KeyCont.press_fire[global.index] = 1
 
-        if !device_mouse_check_button(index, mb_left) or(distance_to_point(mx, my) > rad * 3) {
+        if !device_mouse_check_button(index, mb_left) or (distance_to_point(mx, my) > rad * 3) {
             index = -1
         }
 
         vdis = dis * 2
         hold = 30
-    } else {
+    }
+	else {
         dis = 0
 
         if !hold {
             if vdis > 0 {
                 vdis--
             }
-        } else hold--
+        }
+		else hold--
     }
-} else {
+}
+else {
     KeyCont.hold_fire[global.index] = device_mouse_check_button(i, mb_left)
     KeyCont.press_fire[global.index] = device_mouse_check_button_pressed(i, mb_left)
     KeyCont.release_fire[global.index] = device_mouse_check_button_released(i, mb_left)

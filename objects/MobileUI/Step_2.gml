@@ -11,7 +11,8 @@ if instance_exists(MenuOptions) && MenuOptions.editing_mode && !UberCont.opt_gam
         if !device_mouse_check_button(index, mb_left) {
             index = -1
         }
-    } else if i != -1 {
+    }
+	else if i != -1 {
         var a = -1
 
         with MobileUI {
