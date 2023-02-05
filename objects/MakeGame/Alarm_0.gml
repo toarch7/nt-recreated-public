@@ -93,7 +93,9 @@ if loading {
         instance_destroy()
 
         instance_destroy()
-
+		
+		instance_activate_all()
+		
         room_restart()
     }
 } else room_goto(romGame)

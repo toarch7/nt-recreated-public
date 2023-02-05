@@ -194,7 +194,9 @@ try {
                     level = _level
                     ultrapoints = _ultrapoints
                     crownpoints = _crownpoints
-
+					
+					instance_activate_all()
+					
                     room_restart()
                 }
                 break
@@ -249,6 +251,7 @@ try {
                 with Player {
                     if race == 6 {
                         GameCont.gocrib = 1
+						instance_activate_all()
                         room_restart()
                     }
                 }

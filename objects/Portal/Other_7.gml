@@ -43,6 +43,8 @@ if sprite_index = sprPortalDisappear or sprite_index = sprProtoPortalDisappear o
                 GameCont.blacksword = 1
             }
         }
+		
+		instance_activate_all()
 
         room_restart()
     }

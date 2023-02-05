@@ -33,6 +33,8 @@ if sprite_index = sprBigPortalDisappear {
             buffer_write(global.buffer, buffer_u8, GameCont.crownpoints)
             buffer_send(global.buffer)
         }
+		
+		instance_activate_all()
 
         room_restart()
     }

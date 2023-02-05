@@ -5,7 +5,9 @@ if instance_exists(GameCont) {
         with Spiral instance_destroy()
 
         instance_create(0, 0, Cinematic)
-
+		
+		instance_activate_all()
+		
         room_restart()
 
         instance_destroy()

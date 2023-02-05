@@ -7,6 +7,8 @@ if splat_index < 3 && paused {
 }
 
 if want_restart {
+	instance_activate_all()
+	
     if instance_exists(CoopController) && global.is_server {
         global.seed = randomize()
         buffer_seek(global.buffer, buffer_seek_start, 0)
@@ -122,7 +124,8 @@ KeyCont.press_paus[global.index] = keyboard_check_pressed(vk_escape) or keyboard
 
 if want_menu2 {
     //scrSave()
-
+	instance_activate_all()
+	
     with GameCont {
         ds_list_clear(skills)
     }
