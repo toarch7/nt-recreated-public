@@ -1,5 +1,5 @@
 #macro GAME_VERSION "r2.5.2"
-#macro GAME_BUILD 2523
+#macro GAME_BUILD 2524
 
 opt_fulscrn = 1
 opt_fitscrn = 1
