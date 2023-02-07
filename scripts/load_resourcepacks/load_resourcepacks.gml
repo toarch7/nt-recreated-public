@@ -6,7 +6,11 @@ function load_resourcepacks() {
     global.customSprites = []
     global.customareacolors = {}
     global.customshadowcolors = {}
-
+	
+	if !directory_exists(game_directory + "resourcepacks") {
+		directory_create(game_directory + "resourcepacks")
+	}
+	
     load_resourcepacks_from(game_directory + "resourcepacks/")
 }
 
@@ -102,9 +106,7 @@ function load_resourcepacks_from(p) {
         data[$ "info"] = info
 
         array_push(Resourcepacks, data)
-
-        print("\n", f, (l ? "local" : "downloaded"), "issues:", status)
-
+		
         if l && status > 0 {
             var str = "Something went wrong:\n\n"
 
