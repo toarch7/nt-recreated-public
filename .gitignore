@@ -9,3 +9,5 @@ node_modules
 beautifier.js
 package.json
 package-lock.json
+
+scripts/scrSendDailyData/scrSendDailyData.gml
