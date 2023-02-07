@@ -10,4 +10,4 @@ beautifier.js
 package.json
 package-lock.json
 
-scripts/scrSendDailyData/scrSendDailyData.gml
+scripts/scrSendDailyData/*
