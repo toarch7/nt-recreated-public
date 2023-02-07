@@ -20,7 +20,8 @@ curse = 0
 if GameCont.crown > 1 && instance_exists(GenCont) {
     if rng_random(6, 7) <= 1 or(GameCont.crown == 11 && rng_random(6, 7) <= 4) {
         curse = 1
-    } else curse = 0
+    }
+	else curse = 0
 }
 
 if GameCont.area == 101 {
@@ -30,5 +31,10 @@ if GameCont.area == 101 {
 if curse {
     if GameCont.area == 101 {
         sprite_index = sprCursedClamChest
-    } else sprite_index = sprCursedChest
+    }
+	else sprite_index = sprCursedChest
+}
+
+if GameCont.race == 7 && GameCont.ultra == 2 {
+	sprite_index = curse ? sprCursedChestSteroidsUltra : sprWeaponChestSteroidsUltra
 }
