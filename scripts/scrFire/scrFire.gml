@@ -6,15 +6,15 @@ function scrFire(wep, useAmmo) {
     var oldviewy2 = BackCont.viewy2
     var oldshake = BackCont.shake
 
-    if race == 7 && skill_get(5) && random(30 - wep_cost[wep]) < 1 {
-        var typ = wep_type[bwep]
-
+    if race == 7 && skill_get(5) && (random(typ_ammo[wep_type[wep]]) < wep_cost[wep]) && ((random(2) < 1 or !bcan_shoot) && random(3) < 2) {
+		var typ = wep_type[bwep]
+		
         if typ > 0 {
             var amount = floor(typ_ammo[typ] / 2),
                 popup = instance_create(x, y, PopupText)
             
             with popup {
-			    mytext = "+" + string(amount) + " " + loc(typ_name[typ])
+			    mytext = "+" + string(amount) + " " + loc(other.typ_name[typ])
             }
 
             ammo[typ] += amount
