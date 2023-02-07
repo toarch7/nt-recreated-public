@@ -21,6 +21,8 @@ if ammo {
 
     expl_x += lengthdir_x(32, direction)
     expl_y += lengthdir_y(32, direction)
-    alarm[0] = 3
-    ammo--
-} else instance_destroy()
+	
+    alarm[0] = 1
+    ammo --
+}
+else instance_destroy()
