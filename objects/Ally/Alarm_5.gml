@@ -1,1 +1,1 @@
-//snd_play_hit(sndGuardWeave, 0)
+snd_play_hit(sndGuardWeave, 0)

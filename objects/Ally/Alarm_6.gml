@@ -1,1 +1,1 @@
-//snd_play_hit(sndGuardBob, 0)
+snd_play_hit(sndGuardBob, 0)

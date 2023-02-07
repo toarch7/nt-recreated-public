@@ -31,10 +31,15 @@ if instance_exists(Player) {
         }
 
         if race == 10 && ultra_get(1) { // PERSONAL GUARD
+			var i = 0
+			
             repeat 2 {
                 with instance_create(10016, 10016, Ally) {
+					alarm[5 + i] = 5 + i * 15
                     creator = other.id
                 }
+				
+				i ++
             }
         }
 
