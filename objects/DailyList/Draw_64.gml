@@ -15,7 +15,8 @@ if instance_exists(Menu) {
     draw_rectangle(0, 0, view_width, view_height, 0)
     draw_set_alpha(1)
     draw_set_color(c_white)
-} else {
+}
+else {
     draw_set_halign(fa_center)
     draw_text_nt(view_width / 2, 12, loc(string_upper(viewtype))) //loc_sfmt("@wYOUR % RUN ENTIRES", loc(string_upper(viewtype))))
     draw_set_halign(fa_left)
@@ -36,6 +37,8 @@ if !array_length(keys) {
 
 var avg = kills / len
 draw_text_nt(38, 14, loc("@dAVERAGE SCORE") + ":#" + string(avg))
+
+draw_set_color(c_white)
 
 draw_set_valign(fa_top)
 
@@ -59,7 +62,8 @@ if maxpages > 1 {
         if point_in_circle(mx, my, view_width / 2 - 96, view_height - 16, 16) {
             snd_play(sndClick)
             touchl = 1
-        } else if point_in_circle(mx, my, view_width / 2 + 96, view_height - 16, 16) {
+        }
+		else if point_in_circle(mx, my, view_width / 2 + 96, view_height - 16, 16) {
             snd_play(sndClick)
             touchr = 1
         }
