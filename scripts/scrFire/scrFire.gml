@@ -1,4 +1,4 @@
-function scrFire(wep, useAmmo) { // why... just why...
+function scrFire(wep, useAmmo) {
     can_shoot = 0
     reload = wep_load[wep]
 
@@ -14,13 +14,13 @@ function scrFire(wep, useAmmo) { // why... just why...
                 popup = instance_create(x, y, PopupText)
             
             with popup {
-			    mytext = "+" + string(amount) + " " + loc(typ_name[type])
+			    mytext = "+" + string(amount) + " " + loc(typ_name[typ])
             }
 
             ammo[typ] += amount
 
             if ammo[typ] > typ_amax[typ] {
-                popup.mytext = loc_sfmt("MAX %", loc(typ_name[type]))
+                popup.mytext = loc_sfmt("MAX %", loc(typ_name[typ]))
                 ammo[typ] = typ_amax[typ]
             }
         }
