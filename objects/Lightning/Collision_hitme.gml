@@ -1,4 +1,4 @@
-if other.team != team && other.hp && !other.inframes {
+if other.team != team && other.hp > 0 && !other.inframes {
     with other {
         if object_index == Player {
             last_hit = other.hit_id

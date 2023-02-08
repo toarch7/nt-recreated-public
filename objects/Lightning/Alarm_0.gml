@@ -1,4 +1,4 @@
-var oldx, oldy, dst
+var oldx, oldy, dst = 8 + random(4)
 
 if instance_exists(enemy) {
     dir = instance_nearest(x + lengthdir_x(80, direction), y + lengthdir_y(80, direction), enemy)
@@ -16,29 +16,27 @@ if instance_exists(enemy) {
     }
 }
 
-image_angle = direction
-speed = 0
-
-if GameCont.area == 0 && instance_exists(InvisiWall) {
-    dst = 8 + random(4)
-    x += lengthdir_x(dst, direction)
-    y += lengthdir_y(dst, direction)
-} else {
-    move_contact_solid(direction, 8 + random(4))
-
-    if !place_free(x, y) {
+if !(GameCont.area == 0 && instance_exists(InvisiWall)) {
+	x += lengthdir_x(dst, direction)
+	y += lengthdir_y(dst, direction)
+	
+    if place_meeting(x, y, Wall) {
         x = xprevious
         y = yprevious
-        direction += 180
+		direction += 180
     }
 }
 
+image_angle = direction
+speed = 0
+
 speed = 0
 image_xscale = ((-point_distance(x, y, oldx, oldy)) / 2)
-ammo -= 1
+ammo --
 
 if ammo {
-    image_index += .4 / ammo
+    image_index += 0.4 / ammo
+	
     with instance_create(x, y, Lightning) {
         hit_id = other.hit_id
         direction = other.direction
@@ -48,4 +46,7 @@ if ammo {
         image_index = other.image_index
         event_perform(ev_alarm, 0)
     }
-} else instance_create(x + lengthdir_x(image_xscale / 2, image_angle), y + lengthdir_y(image_xscale / 2, image_angle), LightningHit)
+}
+else {
+	instance_create(x + lengthdir_x(image_xscale / 2, image_angle), y + lengthdir_y(image_xscale / 2, image_angle), LightningHit)
+}

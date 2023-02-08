@@ -1,12 +1,10 @@
 hit_id = -1
 
 typ = 0
-image_speed = .4
+image_speed = 0.4
 
-if instance_exists(Player) {
-    if skill_get(17) {
-        image_speed = .3
-    }
+if skill_get(17) {
+	image_speed = 0.3
 }
 
 if GameCont.area == 101 {
