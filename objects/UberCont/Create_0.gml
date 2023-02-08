@@ -1,5 +1,5 @@
 #macro GAME_VERSION "r2.5.2"
-#macro GAME_BUILD 2526
+#macro GAME_BUILD 2527
 
 opt_fulscrn = 1
 opt_fitscrn = 1
@@ -205,7 +205,11 @@ gamepad_set_axis_deadzone(0, 0.2)
 localcoop = 0
 gamepad_sel = 0
 
-update_request = scrHttpGet("https://raw.githubusercontent.com/toarch7/torcherdev/main/ntmobile.json")
+if opt_updates {
+	update_request = scrHttpGet("https://raw.githubusercontent.com/toarch7/torcherdev/main/ntmobile.json")
+}
+else update_request = -1
+
 update_info = undefined
 update_message = -1
 

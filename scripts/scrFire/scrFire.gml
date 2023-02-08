@@ -1874,6 +1874,7 @@ function scrFire(wep, useAmmo) {
                 creator = other.id
             }
         }
+		wkick = 4
     }
 
     //HYPER SLUGGER
@@ -1884,6 +1885,7 @@ function scrFire(wep, useAmmo) {
             creator = other.id
         }
         snd_play_gun(sndHyperSlugger)
+		wkick = 6
     }
 
     //PLASMA MINIGUN

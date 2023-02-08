@@ -5,3 +5,5 @@ alarm[0] = 4
 
 dist = 0
 hit_id = sprDisc
+
+creator = noone
