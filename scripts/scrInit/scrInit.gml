@@ -7,7 +7,8 @@ function scrInit() {
         file_text_close(f)
 
         saveData = json_decode(raw)
-    } else saveData = ds_map_create()
+	}
+	else saveData = ds_map_create()
 
     if saveData < 0 or is_undefined(saveData) {
         show_message_async("Your save data has corrupted. Please do not close the game while saving icon is on-screen.")
@@ -122,6 +123,7 @@ function scrInit() {
     opt_cursorcol = ini_read_string("Visual", "CrosshairColor", "-1")
     opt_outlines = ini_read_real("Visual", "Outlines", 1)
     opt_console = ini_read_real("Options", "Console", 0)
+    opt_updates = ini_read_real("Options", "UpdateChecker", 1)
 
     #region read healthbar color
 
@@ -167,6 +169,7 @@ function scrInit() {
     ini_write_real("Options", "OnlineFeatures", opt_online)
     ini_write_real("Options", "Achievements", opt_achievs)
     ini_write_real("Options", "Console", opt_console)
+    ini_write_real("Options", "UpdateChecker", opt_updates)
     ini_write_real("Visual", "Outlines", opt_outlines)
 
     if opt_healthcol == "-1" {
