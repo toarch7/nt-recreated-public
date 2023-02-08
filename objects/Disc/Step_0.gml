@@ -9,3 +9,7 @@ if instance_exists(Player) and instance_exists(enemy) {
         y += lengthdir_y(1, point_direction(x, y, dir.x, dir.y))
     }
 }
+
+if alarm[0] == -1 && team != -1 {
+	alarm[0] = 4
+}
