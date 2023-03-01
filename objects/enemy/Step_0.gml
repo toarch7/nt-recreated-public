@@ -1,6 +1,4 @@
 //WKICK
-if !global.is_server exit
-
 if wkick > 0 {
     wkick -= 1
 } else if wkick < 0 {

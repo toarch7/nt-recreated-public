@@ -40,9 +40,3 @@ snd_hurt = sndHitFlesh
 snd_dead = sndEnemyDie
 snd_mele = sndMaggotBite
 
-index = 0
-
-if instance_exists(CoopController) {
-    index = ++global.hitme_index
-    global.coopenemylist[$ string(index)] = id
-}

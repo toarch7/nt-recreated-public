@@ -10,71 +10,49 @@ if want_restart {
 	instance_activate_all()
 	
     if instance_exists(CoopController) && global.is_server {
-        global.seed = randomize()
-        buffer_seek(global.buffer, buffer_seek_start, 0)
-        buffer_write(global.buffer, buffer_u8, event.restart)
-        buffer_write(global.buffer, buffer_u32, global.seed)
-        buffer_send(global.buffer)
-
+        global.seed = irandom(rng_m)
         random_set_seed(global.seed)
     }
 
     continued_run = 0
     file_delete("gamestate.dat")
-
+	
     scrVolume()
     surface_free(pauseimg)
     sprite_delete(pausespr)
     pausespr = -1
     paused = 0
-
-    with Player instance_destroy(id, 0)
-    with RadChest instance_destroy(id, 0)
-    with RadChestBig instance_destroy(id, 0)
-
-    snd_play(sndMutant0Cnfm)
-
-    with enemy instance_destroy(id, 0)
-
+	
     with all {
-        if object_index != UberCont && object_index != Console && object_index != CoopController && persistent {
-            persistent = false
+        if object_index != UberCont && object_index != Console && object_index != CoopController {
             instance_destroy(id, 0)
         }
     }
-
+	
     instance_create(0, 0, GameCont)
-
+	
     GameCont.crown = global.crownpick
     GameCont.skillpoints = 0
 
     scrSpawnPlayers(global.index)
 
-    with WepPickup {
-        instance_destroy()
-    }
-
-    with MobileUI {
-        instance_destroy()
-    }
-
     scrRaces()
     scrCrowns()
 
     if !daily_run or weekly_run {
-        with MusCont
-        instance_destroy()
-
+        with MusCont {
+			instance_destroy()
+		}
+		
         instance_create(0, 0, MusCont)
 
         room_restart()
         GameCont.area = 1
         GameCont.subarea = 0
 
-        with WepPickup
-        instance_destroy()
-
-        GameCont.skillpoints = 0
+        with WepPickup {
+			instance_destroy()
+		}
     }
 
     instance_create(x, y, GenCont)
@@ -155,7 +133,7 @@ if want_menu2 {
     want_menu2 = 0
 }
 
-if !instance_exists(PauseImage) {
+if !lockstep_stop {
     ds_list_clear(UPDATE_WALLS)
 
     with Wall {

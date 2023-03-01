@@ -4,7 +4,6 @@ global.pc_build = ((os_type == os_windows) or(os_type == os_linux))
 
 firstry = 0
 
-
 if os_check_permission("android.permission.WRITE_EXTERNAL_STORAGE") != os_permission_granted { //!file_exists("permcheck") {
     firstry = 1
 }

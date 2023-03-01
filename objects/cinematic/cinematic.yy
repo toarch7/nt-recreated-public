@@ -30,8 +30,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "EndingCutscene",
-    "path": "folders/Objects/EndingCutscene.yy",
+    "name": "Cinematic",
+    "path": "folders/Objects/Cinematic.yy",
   },
   "resourceVersion": "1.0",
   "name": "Cinematic",

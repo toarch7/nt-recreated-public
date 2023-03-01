@@ -69,7 +69,7 @@ if subarea < 3 && !(area == 0 or area == 2 or area == 4 or area == 6) {
 					break
 				}
 				
-	            if (!irandom(20) or p.hp <= 1) && crownvisits < 3 {
+	            if (!irandom(20) or hp <= 1) && crownvisits < 3 {
 	                _proto = 1
 					
 	                if !GameCont.loops && (GameCont.area == 1 or GameCont.area == 7) {

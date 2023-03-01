@@ -1,10 +1,6 @@
 if !can_pick exit
 
 if KeyCont.press_pick[p] && other.visible && other.id == instance_nearest(x, y, WepPickup) {
-    if instance_exists(CoopController) {
-        random_set_seed(CoopController.ai_seed)
-    }
-
     if !curse or(curse && other.curse) or!bwep {
         instance_create(x, y, WepSwap)
 

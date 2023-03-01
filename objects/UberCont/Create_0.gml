@@ -230,9 +230,9 @@ global.time = 0
 
 global.crownpick = 1
 
-window_set_fullscreen(save_get_val("other", "fullscreen", 1))
+open_two_windows(1)
 
-// open_two_windows(1)
+window_set_fullscreen(save_get_val("other", "fullscreen", 1))
 
 if os_type == os_android volqueue = ds_queue_create()
 

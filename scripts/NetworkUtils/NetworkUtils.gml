@@ -12,7 +12,7 @@ function network_free_id(index) {
     ds_stack_push(global.netidstack, index)
 }
 
-function buffer_send(buffer, important = 0) {
+function buffer_send(buffer) {
     with CoopController {
         if global.is_server {
             var _keys = struct_keys(connectedports)
@@ -22,13 +22,8 @@ function buffer_send(buffer, important = 0) {
 
                 network_send_udp(socket, connectedports[$ port], real(port), buffer, buffer_tell(buffer))
             }
-        } else network_send_udp(socket, ip, PORT, buffer, buffer_tell(buffer))
-
-        if important {
-            var impbuff = buffer_create(buffer_get_size(buffer), buffer_grow, 1)
-            buffer_copy(buffer, 0, buffer_get_size(buffer), impbuff, 0)
-            importantpackets[$ generate_uid()] = impbuff
         }
+		else network_send_udp(socket, ip, PORT, buffer, buffer_tell(buffer))
     }
 }
 

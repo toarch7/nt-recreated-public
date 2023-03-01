@@ -83,13 +83,6 @@ else switch image_index {
         break
 
     case 3:
-        //CONTINUE
-        if instance_exists(CoopController) {
-            buffer_seek(global.buffer, buffer_seek_start, 0)
-            buffer_write(global.buffer, buffer_u8, event.unpause)
-            buffer_send(global.buffer)
-        }
-
         scrUnpause()
 
         with JoystickMove event_perform(ev_create, 0)

@@ -5,7 +5,6 @@
   },
   "solid": false,
   "visible": true,
-  "managed": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
@@ -34,8 +33,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "EndingCutscene",
-    "path": "folders/Objects/EndingCutscene.yy",
+    "name": "Cinematic",
+    "path": "folders/Objects/Cinematic.yy",
   },
   "resourceVersion": "1.0",
   "name": "Messenger",

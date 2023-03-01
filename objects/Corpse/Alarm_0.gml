@@ -15,25 +15,9 @@ if !instance_exists(Portal) && !instance_exists(GenCont) && !scr_check_enemies()
                         type = 2
                     }
                 }
-
-                if instance_exists(CoopController) {
-                    buffer_seek(global.buffer, buffer_seek_start, 0)
-                    buffer_write(global.buffer, buffer_u8, event.floorclear)
-                    buffer_write(global.buffer, buffer_string, string(x))
-                    buffer_write(global.buffer, buffer_string, string(y))
-                    buffer_send(global.buffer)
-                }
             }
         } else if !instance_exists(IDPDSpawn) && !instance_exists(Nothing2Appear) && !instance_exists(Nothing2) && !instance_exists(NothingSpiral) {
             instance_create(x, y, Nothing2Appear)
-
-            if instance_exists(CoopController) {
-                buffer_seek(global.buffer, buffer_seek_start, 0)
-                buffer_write(global.buffer, buffer_u8, event.floorclear)
-                buffer_write(global.buffer, buffer_string, string(x))
-                buffer_write(global.buffer, buffer_string, string(y))
-                buffer_send(global.buffer)
-            }
         }
     }
 }

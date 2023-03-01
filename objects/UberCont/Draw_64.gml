@@ -59,10 +59,7 @@ if instance_exists(Player) && opt_pausebutton && !instance_exists(Credits) {
     }
 }
 
-//draw_set_color(c_purple)
-//draw_rectangle(-32, 0, 0, view_height, 0)
-//draw_rectangle(view_width + 32, 0, view_width, view_height, 0)
-//draw_set_color(c_white)
+draw_text(128, 128, scrCollectInputs())
 
 if saving {
     if !instance_exists(Vlambeer) && !instance_exists(GenCont) {

@@ -39,6 +39,8 @@ if os_type == os_android && check == os_permission_granted {
     }
 } else game_directory = ""
 
+randomize()
+
 instance_create(0, 0, UberCont)
 
 if loading {

@@ -8,13 +8,13 @@
 global.custom_seed = 0
 global.seed = 0
 
-function rng_init() {
-    global.rng_m = int64(2147483647)
-    global.rng_a = 1103515245
-    global.rng_c = 12345
+#macro rng_m 2147483647
+#macro rng_a 1103515245
+#macro rng_c 12345
 
+function rng_init() {
     if !global.coop {
-        global.seed = randomize()
+        global.seed = irandom(rng_m)
     }
 
     global.custom_seed = 0
@@ -41,9 +41,10 @@ function rng_init() {
         }
     }
 
-    for (var i = 0; i <= 12; i++)
-    global.rng_state[i] = global.seed
-
+    for (var i = 0; i <= 12; i ++) {
+		global.rng_state[i] = global.seed
+	}
+	
     //0 - generation
     //1 - enemies
     //2 - props

@@ -1,3 +1,5 @@
+// @description Server - pinging
+
 alarm[2] = 30
 
 var keys = struct_keys(connectedports)
@@ -23,7 +25,8 @@ for (var i = 0; i < len; i++) {
         instance_activate_object(Revive)
 
         with Player {
-            if index == _index instance_destroy(id, 0)
+            if index == _index
+				instance_destroy(id, 0)
         }
 
         with Revive {

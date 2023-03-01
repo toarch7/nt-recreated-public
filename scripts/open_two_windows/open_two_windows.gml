@@ -20,4 +20,5 @@ function open_two_windows(move = 1) {
     }
 
     window_set_fullscreen(0)
+	save_set_val("other", "fullscreen", 0)
 }

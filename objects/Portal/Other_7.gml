@@ -22,22 +22,6 @@ if sprite_index = sprPortalDisappear or sprite_index = sprProtoPortalDisappear o
     snd_stop(sndPortalLoop)
 
     if instance_exists(Player) {
-        if instance_exists(CoopController) {
-            buffer_seek(global.buffer, buffer_seek_start, 0)
-            buffer_write(global.buffer, buffer_u8, event.setarea)
-            buffer_write(global.buffer, buffer_u8, GameCont.area)
-            buffer_write(global.buffer, buffer_u8, GameCont.subarea)
-            buffer_write(global.buffer, buffer_u8, GameCont.hard)
-            buffer_write(global.buffer, buffer_u8, GameCont.loops)
-            buffer_write(global.buffer, buffer_string, string(GameCont.rad))
-            buffer_write(global.buffer, buffer_u8, GameCont.skillpoints)
-            buffer_write(global.buffer, buffer_string, string(GameCont.kills))
-            buffer_write(global.buffer, buffer_u8, GameCont.level)
-            buffer_write(global.buffer, buffer_u8, GameCont.ultrapoints)
-            buffer_write(global.buffer, buffer_u8, GameCont.crownpoints)
-            buffer_send(global.buffer)
-        }
-
         with WepPickup {
             if wep == 46 && GameCont.area == 1 {
                 GameCont.blacksword = 1

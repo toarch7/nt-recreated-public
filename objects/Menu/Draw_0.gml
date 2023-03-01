@@ -223,14 +223,6 @@ if canloadout {
                     save_set_val("ccrown", string(race), i)
                     loadout_crown = i
                     snd_play(sndMenuCrown)
-
-                    if global.coop {
-                        buffer_seek(global.buffer, buffer_seek_start, 0)
-                        buffer_write(global.buffer, buffer_u8, event.crownpick)
-                        buffer_write(global.buffer, buffer_u8, global.index)
-                        buffer_write(global.buffer, buffer_u8, loadout_crown)
-                        buffer_send(global.buffer)
-                    }
                 } else {
                     alarm[11] = 45
                     hint = "locked"

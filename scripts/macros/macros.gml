@@ -14,6 +14,9 @@
 // Multiplayer player instance index
 global.index = 0
 
+globalvar lockstep_stop;
+lockstep_stop = 0
+
 col_unavailable = merge_color(c_gray, c_dkgray, 0.5)
 
 view_width = 320
@@ -69,15 +72,19 @@ global.coopenemylist = {}
 global.index = 0
 
 #macro KeyCont global._KeyCont
+
 KeyCont = {
+	gamepad: [0, 0, 0, 0],
+	keyboard: [0, 0, 0, 0],
+    aimassist: [0, 0, 0, 0],
+	
+    activeforever: [0, 0, 0, 0],
+    moving: [0, 0, 0, 0],
+	
+	
     dir_move: [0, 0, 0, 0],
     dir_fire: [0, 0, 0, 0],
-    moving: [0, 0, 0, 0],
-
-    gamepad: [0, 0, 0, 0],
-    aimassist: [0, 0, 0, 0],
-    activeforever: [0, 0, 0, 0],
-
+	
     crosshair: [0, 0, 0, 0],
 
     players: 1
@@ -94,6 +101,50 @@ for (var i = 0; i < array_length(keys); i++) {
     KeyCont[$ "release_" + keys[i]] = [0, 0, 0, 0]
 
     KeyCont[$ "hold_" + keys[i]] = [0, 0, 0, 0]
+}
+
+global.input_keys_list = [
+	"gamepad",
+	"keyboard",
+	"aimassist",
+	
+	"activeforever",
+	"moving",
+	
+	"press_fire",
+	"press_spec",
+	"press_pick",
+	"press_swap",
+	"press_paus",
+	"press_horn",
+	
+	"release_fire",
+	"release_spec",
+	"release_pick",
+	"release_swap",
+	"release_paus",
+	"release_horn",
+	
+	"hold_fire",
+	"hold_spec",
+	"hold_pick",
+	"hold_swap",
+	"hold_paus",
+	"hold_horn"
+]
+
+global.input_keys_list_length = array_length(global.input_keys_list)
+
+function scrCollectInputs() {
+	var val = 0
+	
+	for(var i = 0; i < global.input_keys_list_length; i ++) {
+		if KeyCont[$ global.input_keys_list[i]][global.index] {
+			val |= power(2, i + 1)
+		}
+	}
+	
+	return val
 }
 
 #macro gpad global._gpad_key
