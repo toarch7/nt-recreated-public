@@ -60,12 +60,6 @@ try {
     print(e.message)
 }
 
-if skill_get(8) && !instance_exists(GammaGuts) {
-    with instance_create(x, y, GammaGuts) {
-        owner = other.id
-    }
-}
-
 if string_count("GOLD", wep_name[wep]) && !irandom(2) {
     with instance_create(x + random_spread(10), y + random_spread(10), CaveSparkle) {
         if irandom(1) depth = other.depth - 1

@@ -1,5 +1,3 @@
-if !isset("hp") exit
-
 visible = 1
 sprite_index = spr_idle
 frogcharge = 0
@@ -7,13 +5,17 @@ frogcharge = 0
 view_xview = x - view_width / 2
 view_yview = y - view_height / 2
 
+if skill_get(8) && !instance_exists_var(GammaGuts, "creator", id) {
+    with instance_create(x, y, GammaGuts) {
+        creator = other.id
+    }
+}
+
 if is_me {
     GameCont.race = race
     GameCont.bskin = bskin
     scrUnlock()
 }
-
-snd_stop(sndSalamanderFire)
 
 reload = 0
 breload = 0

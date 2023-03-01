@@ -1,4 +1,5 @@
-if other.object_index == Van exit
+if other.object_index == Van
+	exit
 
 with other {
     hp -= 6
@@ -11,6 +12,7 @@ with other {
 if other.hp <= 0 {
     sprite_index = sprGammaBlast
     image_index = 0
+	
     with enemy {
         if distance_to_object(other) <= 12 && !inframes {
             hp -= 8

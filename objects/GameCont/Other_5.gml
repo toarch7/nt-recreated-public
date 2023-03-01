@@ -10,7 +10,8 @@ alarm[10] = -1
 if area < 100 {
     lastarea = area
     lastsubarea = subarea
-} else if subarea == 1 {
+}
+else if subarea == 1 {
     if area == 107 {
         fromcrib = 1
         area = hqarea
@@ -119,11 +120,14 @@ if instance_exists(Player) && (instance_exists(RadChest) or instance_exists(RadC
 
 if global.hardmode && race == 9 && area == 2 && !UberCont.cskingot[9] {
     UberCont.cskingot[9] = 1
-    show_unlock_popup("@wCHICKEN B-SKIN UNLOCKED@s#FOR REACHING 2-1 IN HARDMODE")
-    with instance_create(0, 0, UnlockScreen) {
+    
+	show_unlock_popup("@wCHICKEN B-SKIN UNLOCKED@s#FOR REACHING 2-1 IN HARDMODE")
+    
+	with instance_create(0, 0, UnlockScreen) {
         race = 9;
         skin = 1
     }
+	
     scrAchievement(18)
 }
 
@@ -138,21 +142,29 @@ if !UberCont.hardgot && loops >= 2 {
     show_unlock_popup("@wHARDMODE UNLOCKED@s#FOR REACHING LOOP 2")
 }
 
+snd_stop(sndSalamanderFire)
+
 rng_reset()
 
 if !instance_exists(CoopController) && !UberCont.opt_console {
     var p = UberCont.paused
-
-    if p instance_activate_object(Player)
-
+	
+    if p {
+		instance_activate_object(Player)
+	}
+	
     if level_end {
         level_end = 0
         scrGameSave()
     }
 
-    if instance_exists(Player) scrGameSaveInfo()
-
-    if p instance_deactivate_object(Player)
+    if instance_exists(Player) {
+		scrGameSaveInfo()
+	}
+	
+    if p {
+		instance_deactivate_object(Player)
+	}
 }
 
 level_end = 0

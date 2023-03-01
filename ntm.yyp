@@ -934,6 +934,7 @@
     {"id":{"name":"mskGuardianDog","path":"sprites/mskGuardianDog/mskGuardianDog.yy",},"order":13,},
     {"id":{"name":"sprFlyIdle","path":"sprites/sprFlyIdle/sprFlyIdle.yy",},"order":1,},
     {"id":{"name":"sprFlyWalk","path":"sprites/sprFlyWalk/sprFlyWalk.yy",},"order":3,},
+    {"id":{"name":"instance_exists_var","path":"scripts/instance_exists_var/instance_exists_var.yy",},"order":185,},
     {"id":{"name":"sprFlyHurt","path":"sprites/sprFlyHurt/sprFlyHurt.yy",},"order":5,},
     {"id":{"name":"sprFlyDead","path":"sprites/sprFlyDead/sprFlyDead.yy",},"order":7,},
     {"id":{"name":"sprMaggotFly","path":"sprites/sprMaggotFly/sprMaggotFly.yy",},"order":9,},

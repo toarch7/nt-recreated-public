@@ -1,5 +1,3 @@
-if !isset("hp") exit
-
 if skill_get(27) && max_hp > 1 && !can_spirit && !spirit {
     can_spirit = 1
 }
