@@ -6,15 +6,20 @@ if walk > 0 {
 
 if speed > 3.5 speed = 3.5
 
-if instance_exists(Player) {
-    if Player.speed > 0 || hp < max_hp freeze++
-    if Player.can_shoot freeze += 3
+if instance_exists(target) {
+    if target.speed > 0 or hp < max_hp {
+		freeze ++
+	}
+	
+	if target.can_shoot {
+		freeze += 3
+	}
 }
 
 if control {
     with projectile {
-        if team == other.team || object_index == EnemyLaser
-        continue
+        if team == other.team or typ == 0
+			continue
 
         var dir = point_direction(other.x, other.y, x, y)
 

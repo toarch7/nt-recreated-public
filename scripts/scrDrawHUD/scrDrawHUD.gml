@@ -161,7 +161,7 @@ function scrDrawHUD(plr = noone) {
 
         //EXPERIENCE BAR
         draw_set_halign(fa_center)
-        if cont.skillpoints > 0 or cont.ultrapoints draw_sprite(sprExpBarLevel, 0, 4, 4) draw_sprite(sprExpBar, (cont.rad / (60 * cont.level)) * 16, 4, 4)
+        if cont.skillpoints > 0 or cont.ultrapoints draw_sprite(sprExpBarLevel, 0, 4, 4) draw_sprite(sprExpBar, (cont.rad / cont.max_rad) * 16, 4, 4)
         if cont.level < 10 {
             draw_set_color(c_black)
             draw_text(11, 17 - string_height(("A")) / 2, (string(cont.level)))

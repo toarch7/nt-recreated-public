@@ -60,20 +60,33 @@ if subarea < 3 && !(area == 0 or area == 2 or area == 4 or area == 6) {
 } else if area < 100 {
     if area < 7 {
         area += 1
+		
         if instance_exists(Player) {
-            if (!irandom(20) or Player.hp <= 1) && crownvisits < 3 {
-                proto = 1
-
-                if !loops && (area == 1 or area == 7) {
-                    proto = 0
-                }
-            } else proto = 0
-
-            if area == 4 && instance_exists(Player) {
-                with Player
-                if curse or bcurse {
-                    GameCont.area = 104
-                }
+			var _proto = 0
+			
+			with Player {
+				if _proto {
+					break
+				}
+				
+	            if (!irandom(20) or p.hp <= 1) && crownvisits < 3 {
+	                _proto = 1
+					
+	                if !GameCont.loops && (GameCont.area == 1 or GameCont.area == 7) {
+	                    _proto = 0
+	                }
+	            }
+				else _proto = 0
+			}
+			
+			proto = _proto
+			
+            if area == 4 {
+                with Player {
+	                if curse or bcurse {
+	                    GameCont.area = 104
+	                }
+				}
             }
         }
     } else if area != 107 {

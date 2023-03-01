@@ -10,9 +10,14 @@ if instance_exists(creator) {
     //FIRING
     with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), Shank) {
         longarms = 0
+		
         creator = other.creator
-        if instance_exists(Player) longarms = skill_get(13) * 2
-        motion_add(creator.gunangle + (random(30) - 15 * Player.accuracy), 4 + longarms)
+        
+		if instance_exists(Player) {
+			longarms = skill_get(13) * 2
+		}
+		
+        motion_add(creator.gunangle + (random(30) - 15 * creator.accuracy), 4 + longarms)
         image_angle = direction
         team = other.team
     }

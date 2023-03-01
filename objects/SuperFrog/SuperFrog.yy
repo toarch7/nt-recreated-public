@@ -5,7 +5,6 @@
   },
   "solid": false,
   "visible": true,
-  "managed": true,
   "spriteMaskId": {
     "name": "mskExploder",
     "path": "sprites/mskExploder/mskExploder.yy",

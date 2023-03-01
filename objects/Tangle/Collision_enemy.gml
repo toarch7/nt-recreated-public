@@ -11,7 +11,8 @@ with other {
         if skill_get(5) {
             if hp <= max_hp / 3 {
                 hp = 0
-                motion_add(point_direction(Player.x, Player.y, x, y), 5)
+				
+                motion_add(point_direction(other.x, other.y, x, y), 5)
 
                 with instance_create(x, y, AnimParticle) {
                     sprite_index = sprTangleKill

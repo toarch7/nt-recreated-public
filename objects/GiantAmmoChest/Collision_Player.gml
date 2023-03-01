@@ -17,6 +17,6 @@ if !instance_exists(GenCont) {
 
     instance_create(x, y, VenuzAmmoSpawn)
     snd_play(sndBigWeaponChest)
-    snd_play(Player.snd_chst)
+    snd_play(other.snd_chst)
     instance_destroy()
 }

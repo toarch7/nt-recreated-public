@@ -4,9 +4,12 @@ if instance_exists(NothingInactive) or instance_exists(BecomeNothing) or instanc
 }
 
 if instance_exists(Player) {
-    if Player.x < x {
+	var p = instance_nearest(x, y, Player)
+	
+    if p.x < x {
         image_xscale = -1
-    } else image_xscale = 1
+    }
+	else image_xscale = 1
 
     if sprite_index = sprPortal or sprite_index = sprProtoPortal or sprite_index = sprPopoPortal {
         with WepPickup {

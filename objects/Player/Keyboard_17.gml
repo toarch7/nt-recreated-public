@@ -21,13 +21,16 @@ if UberCont.public = 0 {
 
     if keyboard_check_pressed(ord("Z")) or mouse_wheel_up() {
 
-        Player.ammo[1] += 200
-        Player.ammo[2] += 20
-        Player.ammo[3] += 20
-        Player.ammo[4] += 20
-        Player.ammo[5] += 20
-        if wep < maxwep wep += 1
-        else wep = 1
+		ammo[1] += 200
+        ammo[2] += 20
+        ammo[3] += 20
+        ammo[4] += 20
+        ammo[5] += 20
+        
+		if wep < maxwep {
+			wep += 1
+		}
+		else wep = 1
     }
 
     if keyboard_check_pressed(ord("F")) && !GameCont.ultrapoints {
@@ -41,11 +44,11 @@ if UberCont.public = 0 {
 
     if keyboard_check_pressed(ord("X")) or mouse_wheel_down() {
 
-        Player.ammo[1] += 200
-        Player.ammo[2] += 20
-        Player.ammo[3] += 20
-        Player.ammo[4] += 20
-        Player.ammo[5] += 20
+        ammo[1] += 200
+        ammo[2] += 20
+        ammo[3] += 20
+        ammo[4] += 20
+        ammo[5] += 20
 
         if wep > 1 wep -= 1
         else wep = maxwep

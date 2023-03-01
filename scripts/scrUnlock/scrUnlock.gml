@@ -2,6 +2,8 @@ function scrUnlock() {
     dir = 0
     totkills = 0
     totdeaths = 0
+	
+	var plr = instance_is(self, Player) ? id : instance_exists_var(Player, "is_me", 1)
 
     loops = GameCont.loops - global.hardmode
 
@@ -22,12 +24,15 @@ function scrUnlock() {
     }
 
     //MELTING:
-    if !Player.hp && !UberCont.cgot[4] {
+    if !plr.hp && !UberCont.cgot[4] {
         UberCont.cgot[4] = 1
+		
         show_unlock_popup("@wMELTING UNLOCKED#@sFOR DYING")
-        with instance_create(0, 0, UnlockScreen) {
+        
+		with instance_create(0, 0, UnlockScreen) {
             race = 4
         }
+		
         scrAchievement(0)
     }
 

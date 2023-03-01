@@ -109,12 +109,17 @@ function scrPopChests() {
                 instance_change(Wind, Player)
             }
         }
-
-        if Player.race == 12 {
-            with RadChest {
-                instance_destroy(id, 0)
-                instance_create(x, y, RogueChest)
-            }
+		
+		with Player {
+	        if race != 12
+				continue
+			
+	        with RadChest {
+	            instance_destroy(id, 0)
+	            instance_create(x, y, RogueChest)
+	        }
+			
+			break
         }
     }
 }

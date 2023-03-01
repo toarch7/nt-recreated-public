@@ -17,9 +17,6 @@ pingbuffer = -1
 server = -1
 
 if global.is_server {
-    //socket = network_create_server(network_socket_tcp, PORT, 1)
-    //server = network_create_server(network_socket_udp, PORT + 1, 1)
-
     socket = network_create_socket_ext(network_socket_udp, PORT)
     server = network_create_server(network_socket_tcp, PORT, 8)
 
@@ -35,7 +32,8 @@ if global.is_server {
 
     alarm[0] = 5
     alarm[2] = 30
-} else {
+}
+else {
     socket = network_create_socket(network_socket_udp)
 
     alarm[1] = 1

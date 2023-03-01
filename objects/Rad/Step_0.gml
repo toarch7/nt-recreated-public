@@ -3,10 +3,14 @@ if !speed {
 
     if distance_to_object(ProtoStatue) < 170 && !collision_line(x, y, ProtoStatue.x, ProtoStatue.y, Wall, 0, 0) && ProtoStatue.hp < ProtoStatue.max_hp * 0.7 {
         target = instance_nearest(x, y, ProtoStatue)
-    } else if distance_to_object(HostileHorror) < 170 && HostileHorror.charge <= 0 && !collision_line(x, y, HostileHorror.x, HostileHorror.y, Wall, 0, 0) {
+    }
+	else if distance_to_object(HostileHorror) < 170 && HostileHorror.charge <= 0 && !collision_line(x, y, HostileHorror.x, HostileHorror.y, Wall, 0, 0) {
         target = instance_nearest(x, y, HostileHorror)
-    } else if instance_exists(Player) {
-        if (distance_to_object(Player) < 80 + (skill_get(3) * 60) && !Player.horrornorad) || instance_exists(Portal) {
+    }
+	else if instance_exists(Player) {
+		var p = instance_nearest(x, y, Player)
+		
+        if (distance_to_object(p) < 80 + (skill_get(3) * 60) && !p.horrornorad) || instance_exists(Portal) {
             target = instance_nearest(x, y, Player)
         }
     }

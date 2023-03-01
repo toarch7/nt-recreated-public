@@ -27,16 +27,21 @@ with instance_create(x, y, BallMumDeath) {
 }
 
 if instance_exists(Player) {
-    if Player.race == 10 {
+    if GameCont.race == 10 {
         if !UberCont.cskingot[10] {
             show_unlock_popup("@wREBEL B-SKIN UNLOCKED#@sFOR DEFEATING BALL MUM")
-            with instance_create(0, 0, UnlockScreen) {
+            
+			with instance_create(0, 0, UnlockScreen) {
                 race = 10;
                 skin = 1
             }
+		
+	        scrAchievement(AchievID.REBEL_BSKIN)
+			
             UberCont.cskingot[10] = 1
-            scrAchievement(19)
         }
+		
+		scrAchievement(AchievID.BOSS_FROG)
     }
 }
 

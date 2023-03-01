@@ -119,7 +119,9 @@ if !instance_exists(CoopController) {
 
 if GameCont.crownpoints > 0 or GameCont.skillpoints > 0 or GameCont.ultrapoints > 0 {
     instance_create(x, y, LevCont)
-} else {
-    with instance_create(x, y, GenCont)
-    race = Player.race
+}
+else {
+    with instance_create(x, y, GenCont) {
+		race = GameCont.race
+	}
 }

@@ -6,7 +6,7 @@
     "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "Mod_MenuCreate",
+  "name": "instance_is",
   "tags": [],
   "resourceType": "GMScript",
 }

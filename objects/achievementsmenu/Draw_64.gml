@@ -1,69 +1,63 @@
-var diy = 0,
-    scale = 1
-var vwhalf = view_width / 2 - 24
+var xx = 56, yy = 48
 
-draw_set_valign(fa_center)
+draw_set_valign(fa_top)
 
-var split = 0
-
-for (var i = 0; i < array_length(chiev_name); i++) {
-    if i == 9 or i == 21 or i == 29 or i == 37 {
-        split = 1
-    }
-
-    var _y = 52 + diy * 32 - ypos
-
-    var name = chiev_name[i]
-    var text = string_hash_to_newline(chiev_text[i])
-
-    if chiev_hide[i] && !chiev_have[i] {
-        name = "???"
-        text = "???"
-    }
-
-    scale = clamp(1 + (vwhalf - string_width(text)) / vwhalf, 0.5, 1)
-
-    if diy * 32 > ypos - 32 && diy * 32 < ypos + view_height {
-        draw_set_halign(fa_left)
-        draw_text_nt(8, _y, (chiev_have[i] ? "@g" : "@s") + name)
-
-        draw_set_halign(fa_right)
-
-        draw_set_color(c_black)
-        draw_text_transformed(view_width - 8 + scale, _y + scale, text, scale, scale, 0)
-        draw_text_transformed(view_width - 8, _y + scale, text, scale, scale, 0)
-
-        draw_set_color(chiev_have[i] ? c_gray : c_dkgray)
-        draw_text_transformed(view_width - 8, _y, text, scale, scale, 0)
-    }
-
-    if split {
-        draw_sprite_ext(sprAchievementsMenuSeparator, 0, view_width / 2, _y + 32, 1, 1, 0, c_gray, 1)
-        split = 0
-        diy++
-    }
-
-    diy++
+for(var i = 0; i < array_length(chiev_name); i ++) {
+	if view_height - (yy - ypos) > 0 {
+		draw_sprite_stretched_ext(sprAchievementSplash, 0, 8, yy - ypos - 10, max(0, anim[i]), 38, c_black, 0.5)
+		
+		anim[i] = lerp(anim[i], view_width - 32, 0.4)
+		
+		if chiev_hide[i] && !chiev_have[i] {
+			draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_black, 1)
+			draw_text_nt(xx, yy - ypos + 5, "@dHIDDEN")
+		}
+		else {
+			draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 11 - ypos, 1, 1, 0, c_black, 1)
+			draw_sprite_ext(sprButtonAchievements, 0, xx - 27, yy + 11 - ypos, 1, 1, 0, c_black, 1)
+			draw_sprite_ext(sprButtonAchievements, 0, xx - 27, yy + 10 - ypos, 1, 1, 0, c_black, 1)
+			
+			var c = "@s"
+			
+			if chiev_have[i] {
+				draw_sprite(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos)
+				c = "@w"
+			}
+			else {
+				draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_dkgray, 1)
+			}
+			
+			draw_text_nt(xx, yy - ypos, c + chiev_name[i])
+			
+			var scale = min(1, 1 - (string_width(string_hash_to_newline(chiev_text[i])) / (view_width - 32) - 0.5))
+			
+			draw_text_nt(xx, yy - ypos + 10, "@s" + chiev_text[i], scale)
+		}
+	}
+	
+	yy += 40
+	
+	if yy - ypos > view_height {
+		break
+	}
 }
-
-draw_set_color(c_white)
-
-/*if hiddens {
-	draw_set_halign(fa_center)
-	draw_set_valign(fa_center)
-    draw_text_nt(view_width / 2, _y + 32, loc_sfmt("+% HIDDEN", hiddens))
-}*/
 
 draw_set_color(c_black)
 
-draw_rectangle(0, view_height - 32, view_width, view_height, 0)
-draw_rectangle(0, 0, view_width, 32, 0)
+draw_rectangle(0, view_height - 36, view_width, view_height + 2, 0)
+draw_rectangle(0, -2, view_width, 36, 0)
 
 draw_set_color(c_white)
+
 draw_set_halign(fa_center)
 
 draw_text_shadow(view_width / 2, 12, loc("ACHIEVEMENTS"))
 draw_text_shadow(view_width / 2, 24, string(unlocks) + "/" + string(array_length(chiev_name)))
 
 draw_set_halign(fa_left)
+
 draw_set_valign(fa_top)
+
+draw_sprite_ext(sprOptionSlider, 0, view_width - 16, 48, 1.6, 1, 270, c_white, 1)
+
+draw_sprite_ext(sprSliderEnd, 0, view_width - 18, 48 + (view_height - 96) * (ypos / max_height), 1, 1, 90, c_white, 1)

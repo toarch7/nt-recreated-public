@@ -11,6 +11,17 @@ if instance_exists(Player) {
 
 image_speed = 0
 
-if instance_exists(Player) && Player.curse && Player.bcurse && !irandom(3) {
-    instance_change(CursedPickup, 1)
+if instance_exists(Player) {
+	var _curse = 0
+	
+	with Player {
+		if curse && bcurse {
+			_curse = 1
+			break
+		}
+	}
+	
+	if _curse && !irandom(3) {
+		instance_change(CursedPickup, 1)
+	}
 }

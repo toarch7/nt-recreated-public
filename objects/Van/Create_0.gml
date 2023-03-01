@@ -12,10 +12,16 @@ spr_hurt = sprVanHurt
 spr_dead = sprVanDead
 snd_hurt = sndVanHurt
 right = choose(1, - 1)
-if instance_exists(Player) {
-    if (Player.x < x) right = -1
-    else right = 1
+
+var p = instance_nearest(x, y, Player)
+
+if instance_exists(p) {
+    if p.x < x {
+		right = -1
+	}
+	else right = 1
 }
+
 drive = 1
 break_walls = 24
 drivespeed = 8

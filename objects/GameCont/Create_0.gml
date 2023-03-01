@@ -22,6 +22,7 @@ crownvisits = 0
 ultrapoints = 0
 last_hit = -1
 rad = 0
+max_rad = 60
 level = 1
 enemies = 0
 timer = 0

@@ -7,8 +7,10 @@ snd_loop(sndPortalLoop)
 
 if instance_exists(Player) {
     with projectile {
-        if team != Player.team instance_destroy(id, 0)
-    }
+        if team != 2 {
+			instance_destroy(id, 0)
+		}
+	}
 }
 
 with Wall {
@@ -38,11 +40,15 @@ if instance_exists(Player) with WeaponChest {
             curse = other.curse
             sprite_index = wep_sprt[wep]
         }
+		
+		var p = instance_nearest(x, y, Player)
 
-        if Player.race == 7 && Player.ultra == 1 with pickup {
-            instance_copy(0)
-            motion_add(random(360), 2)
-        }
+        if p.race == 7 && p.ultra == 1 {
+			with pickup {
+	            instance_copy(0)
+	            motion_add(random(360), 2)
+	        }
+		}
 
         snd_play(sndWeaponChest)
     }

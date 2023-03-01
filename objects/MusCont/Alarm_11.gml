@@ -87,9 +87,13 @@ if ((oldarea != area) || ((!snd_is_playing(song)) || (!audio_exists(song)))) {
     }
     if (area == 106) {
         song = mus106
-        if instance_exists(Player) {
-            if (Player.race == 12) song = mus106b
+		
+		with Player {
+			if is_me && race == 12 {
+				other.song = mus106b
+			}
         }
+		
         amb = amb106
     }
     if (area == 107) {

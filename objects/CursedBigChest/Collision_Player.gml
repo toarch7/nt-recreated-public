@@ -45,6 +45,6 @@ if !instance_exists(GenCont) {
     }
 
     snd_play(sndBigWeaponChest)
-    snd_play(Player.snd_chst)
+    snd_play(other.snd_chst)
     instance_destroy()
 }

@@ -90,7 +90,8 @@ for (var i = 0; i < KeyCont.players; i++) {
                 paused = 1
                 getpauseimg = 1
                 splat_index = 0
-                pauseRace = Player.race
+				
+                pauseRace = GameCont.race
 
                 audio_pause_all()
 

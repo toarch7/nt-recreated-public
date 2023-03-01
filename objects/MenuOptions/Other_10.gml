@@ -337,11 +337,11 @@ for (var i = 0; i < array_length(options[category]); i++) {
             draw_set_halign(fa_left)
 
             var wdefault = sprite_get_width(sprOptionSlider) - 6
-            var w = wdefault * opt.value
-            var h = sprite_get_height(sprOptionSlider)
-            draw_sprite(sprOptionSlider, 0, dx + 64, dy)
-            draw_sprite_part(sprOptionSlider, 1, 0, 0, w + 1, h + 1, dx + 4, dy - 9)
-            draw_sprite(sprSliderEnd, 0, dx + 62 + w - wdefault / 2, dy)
+			var w = wdefault * opt.value
+			var h = sprite_get_height(sprOptionSlider)
+			draw_sprite(sprOptionSlider, 0, dx + 14, dy)
+			draw_sprite_part(sprOptionSlider, 1, 0, 0, w + 1, h + 1, dx + 4, dy - 9)
+			draw_sprite(sprSliderEnd, 0, dx + 62 + w - wdefault / 2, dy)
 
             if pointed && !wait {
                 var _v = opt.value

@@ -41,8 +41,8 @@ if do_thing {
                 other.weapon = wep_sprt[wep]
                 other.bweapon = wep_sprt[bwep]
 
-                if GameCont.tottimer > UberCont.cbst_fast[Player.race] {
-                    UberCont.cbst_fast[Player.race] = GameCont.tottimer
+                if GameCont.tottimer < UberCont.cbst_fast[GameCont.race] {
+                    UberCont.cbst_fast[GameCont.race] = GameCont.tottimer
                 }
             }
         }

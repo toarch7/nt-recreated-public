@@ -24,10 +24,10 @@ if instance_exists(VaultStatue) {
     }
 } else {
     with instance_create(x, y, Portal)
-    type = 3
+		type = 3
 }
 
-snd_play(Player.snd_crwn)
+snd_play(other.snd_crwn)
 
 with VaultStatue {
     hp = 0

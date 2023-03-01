@@ -6,11 +6,6 @@ is_new = 1
 targetx = 10016
 targety = 10016
 
-if instance_exists(Player) {
-    targetx = Player.x
-    targety = Player.y
-}
-
 image_speed = 0.4
 
 alarm[1] = 30 + random(90)

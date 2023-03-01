@@ -19,4 +19,4 @@ spr_shadow = shd32
 //behavior
 alarm[1] = 10 + random(10)
 
-if instance_exists(Player) motion_add(point_direction(Player.x, Player.y, x, y), 1)
+motion_add(point_direction(10016, 10016, x, y), 1)

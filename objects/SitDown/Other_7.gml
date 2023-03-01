@@ -2,18 +2,20 @@ if (sprite_index && sprite_index != spr_sit) or alarm[2] {
     sprite_index = spr_sit
     alarm[0] = 430
 
-    var s = GameCont.area == 106 ? Player.snd_cptn : Player.snd_thrn
-
+    var s = GameCont.area == 106 ? Player.snd_cptn : Player.snd_thrn,
+		race = GameCont.race
+	
     snd_play(s)
+	
+    UberCont.ctot_wins[race]++
+	UberCont.ctot_strk[race]++
 
-    UberCont.ctot_wins[Player.race]++UberCont.ctot_strk[Player.race]++
-
-    if UberCont.ctot_strk[Player.race] > UberCont.cbst_strk[Player.race] {
-        UberCont.cbst_strk[Player.race] = UberCont.ctot_strk[Player.race]
+    if UberCont.ctot_strk[race] > UberCont.cbst_strk[race] {
+        UberCont.cbst_strk[race] = UberCont.ctot_strk[race]
     }
 
-    if GameCont.tottimer < UberCont.cbst_fast[Player.race] {
-        UberCont.cbst_fast[Player.race] = GameCont.tottimer
+    if GameCont.tottimer < UberCont.cbst_fast[race] {
+        UberCont.cbst_fast[race] = GameCont.tottimer
     }
 
     if sprite_index == sprMutant9HeadlessSit {

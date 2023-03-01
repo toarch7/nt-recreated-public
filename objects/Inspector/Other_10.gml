@@ -7,9 +7,14 @@ if walk > 0 {
 
 if speed > 3 speed = 3
 
-if instance_exists(Player) {
-    if Player.speed > 0 or hp < max_hp freeze += 1
-    if Player.can_shoot = 0 freeze += 3
+if instance_exists(target) {
+    if target.speed > 0 or hp < max_hp {
+		freeze += 1
+	}
+	
+    if !target.can_shoot {
+		freeze += 3
+	}
 }
 
 if control = 1 {

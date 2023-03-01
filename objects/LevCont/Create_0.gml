@@ -132,9 +132,12 @@ if GameCont.crownpoints > 0 {
     }
 
     if !instance_exists(CoopController) {
-        if instance_exists(Player) && Player.race == 11 {
-            with UltraIcon x -= 20
-            with instance_create(view_xview + view_width / 2 + 40, view_yview + view_height - 20, UltraIcon) {
+        if instance_exists_var(Player, "race", 11) {
+            with UltraIcon {
+				x -= 20
+			}
+			
+			with instance_create(view_xview + view_width / 2 + 40, view_yview + view_height - 20, UltraIcon) {
                 num = 3
 
                 if GameCont.crown == 8 {

@@ -7,8 +7,12 @@ if !instance_exists(WantBoss) {
     if instance_number(BanditBoss) <= 1 with MusCont alarm[1] = 1
 }
 
-if !GameCont.loops && instance_exists(Player) && Player.race == 10 {
-    snd_play(sndMutant10KillBigBandit)
+if !GameCont.loops {
+	with Player {
+		if race == 10 {
+			snd_play(sndMutant10KillBigBandit)
+		}
+	}
 }
 
 if instance_exists(CanOasis) {

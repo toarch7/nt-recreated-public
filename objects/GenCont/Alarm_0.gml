@@ -48,12 +48,12 @@ if instance_exists(Player) {
 
 
 if instance_exists(Player) {
-    view_xview = Player.x - view_width / 2
-    view_yview = Player.y - view_height / 2
+    view_xview = 10016 - view_width / 2
+    view_yview = 10016 - view_height / 2
 
     with Crown {
-        x = Player.x
-        y = Player.y
+        x = 10016
+        y = 10016
         alarm[2] = 1
     }
 }

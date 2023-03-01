@@ -5,7 +5,6 @@
   },
   "solid": false,
   "visible": true,
-  "managed": true,
   "spriteMaskId": {
     "name": "mskBandit",
     "path": "sprites/mskBandit/mskBandit.yy",

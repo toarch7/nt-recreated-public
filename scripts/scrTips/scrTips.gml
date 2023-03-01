@@ -5,7 +5,9 @@ function scrTips() {
 	
 	if !instance_exists(Player)
 		tiptype = 0
-
+	
+	var plr = instance_random(Player)
+	
 	 // Generic
 	if tiptype == 0 {
 	    tip = choose (
@@ -214,21 +216,23 @@ function scrTips() {
 	
 	 //Weapons
 	if tiptype == 3 {
-	    tip = Player.wep_text[Player.wep]
+	    tip = plr.wep_text[plr.wep]
 	}
 
 	 //Mutations
 	if tiptype = 4 {
 	    if GameCont.level == 1 {
 	        tip = ""
-	    } else {
+	    }
+		else {
 	        dir = 0
         
 	        do {
-	            dir = irandom(Player.maxskill)
-	        } until skill_get(dir)
+	            dir = irandom(plr.maxskill)
+	        }
+			until skill_get(dir)
         
-	        tip = Player.skill_tips[dir]
+	        tip = plr.skill_tips[dir]
 	    }
 	}
 

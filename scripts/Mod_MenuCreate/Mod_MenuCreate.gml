@@ -1,3 +1,0 @@
-function Mod_MenuCreate() {
-
-}

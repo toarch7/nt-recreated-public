@@ -9,8 +9,10 @@ if GameCont.area != 101 {
 
 if instance_exists(Player) {
     with projectile {
-        if team != Player.team instance_destroy(id, 0)
-    }
+        if team != 2 {
+			instance_destroy(id, 0)
+		}
+	}
 }
 
 instance_create(x, y, PortalClear)
@@ -43,11 +45,15 @@ if instance_exists(Player) {
                         snd_play_pitch(sndCursedChest, .5)
                     } else snd_play(sndCursedChest)
                 }
-
-                if Player.race == 7 && Player.ultra == 1 with pickup {
-                    instance_copy(0)
-                    motion_add(random(360), 2)
-                }
+				
+				var p = instance_nearest(x, y, Player)
+				
+                if p && p.race == 7 && p.ultra == 1 {
+					with pickup {
+	                    instance_copy(0)
+	                    motion_add(random(360), 2)
+	                }
+				}
 
                 instance_destroy()
                 snd_play(sndWeaponChest)
@@ -84,10 +90,13 @@ with RogueChest {
     }
 }
 
-if instance_exists(Player) && Player.race == 12 {
+with Player {
+	if race != 12
+		continue
+	
     repeat 2 {
-        instance_create(x, y, IDPDSpawn)
+        instance_create(other.x, other.y, IDPDSpawn)
     }
-
+	
     GameCont.popolevel -= 1.5
 }

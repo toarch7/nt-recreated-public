@@ -1,4 +1,4 @@
-if instance_exists(Player) {
-    x = Player.x
-    y = Player.y
+if instance_exists(creator) {
+    x = creator.x
+    y = creator.y
 }

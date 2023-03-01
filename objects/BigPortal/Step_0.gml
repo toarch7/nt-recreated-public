@@ -1,6 +1,10 @@
 if instance_exists(Player) {
-    if Player.x < x image_xscale = -1
-    else image_xscale = 1
+    var p = instance_nearest(x, y, Player)
+	
+	if p.x < x {
+		image_xscale = -1
+	}
+	else image_xscale = 1
 
     if sprite_index == sprBigPortal {
         with WepPickup {

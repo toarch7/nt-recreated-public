@@ -295,5 +295,3 @@ with MusCont {
 event_user(0)
 
 dailylistfavor = 0
-
-Mod_MenuCreate()

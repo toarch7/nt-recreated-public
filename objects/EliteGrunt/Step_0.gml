@@ -3,16 +3,24 @@ event_inherited();
 if !roll {
     fuel = 100
     angle = 0
+	
     if walk > 0 {
-        walk--motion_add(direction, 0.8)
+		motion_add(direction, 0.8)
+        walk--
     }
 
-    if speed > 3 speed = 3
+    if speed > 3
+		speed = 3
 
-    if instance_exists(Player) {
-        if Player.speed > 0 or hp < max_hp freeze++
-        if !Player.can_shoot freeze += 3
-    }
+    if instance_exists(target) {
+        if target.speed > 0 or hp < max_hp {
+			freeze ++
+		}
+		
+        if !target.can_shoot {
+			freeze += 3
+		}
+	}
 
     exit
 }

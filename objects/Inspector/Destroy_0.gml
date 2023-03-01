@@ -2,6 +2,10 @@ scrDrop(20, 0)
 
 event_inherited()
 
+if GameCont.race == 12 {
+	UberCont.ctot_uniq[12]++
+}
+
 with Grunt {
     freeze += 100
 }

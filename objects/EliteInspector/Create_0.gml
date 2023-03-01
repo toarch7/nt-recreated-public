@@ -34,10 +34,6 @@ wepangle = choose(-140, 140)
 wepflip = 1
 
 freeze = 0
-if instance_exists(Player) {
-    lastx = Player.x
-    lasty = Player.y
-} else {
-    lastx = x
-    lasty = y
-}
+
+lastx = x
+lasty = y

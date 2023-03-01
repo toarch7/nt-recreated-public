@@ -8,9 +8,9 @@ else if hspeed < 0 right = -1
 
 speed = 2.5
 
-if instance_exists(Player) {
-    if close = 0 and point_distance(x, y, Player.x, Player.y) < 64 {
-        close = 1
+if instance_exists(target) {
+    if !close && point_distance(x, y, target.x, target.y) < 64 {
         snd_play(sndFrogClose)
+        close = 1
     }
 }

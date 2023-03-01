@@ -2,8 +2,8 @@ scrDrop(80, 0)
 
 event_inherited()
 
-if instance_exists(Player) {
-    if Player.race == 12 UberCont.ctot_uniq[12]++
+if GameCont.race == 12 {
+	UberCont.ctot_uniq[12] ++
 }
 
 with Grunt

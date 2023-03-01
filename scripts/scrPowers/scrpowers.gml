@@ -331,35 +331,47 @@ function scrPowers() {
             }
 
             if ultra == 2 && random(1) <= .4 {
-                if random(Player.max_hp) > Player.hp and random(3) < 2 {
-                    if GameCont.crown != 9 {
+                if random(max_hp) > hp and random(3) < 2 {
+                    if crown_current != crwn_love {
                         instance_create(x, y, HealthChest)
-                    } else instance_create(x, y, AmmoChest)
-                } else if GameCont.crown != 9 {
+                    }
+					else instance_create(x, y, AmmoChest)
+                }
+				else if crown_current != crwn_love {
                     instance_create(x, y, choose(WeaponChest, AmmoChest))
-                } else instance_create(x, y, AmmoChest)
+                }
+				else instance_create(x, y, AmmoChest)
             }
 
-            with instance_create(x, y, RobotEat)
-            image_xscale = Player.right
+            with instance_create(x, y, RobotEat) {
+				image_xscale = other.right
+				creator = other.id
+			}
 
             if random(max_hp) > hp {
                 instance_create(x, y, HPPickup)
-            } else instance_create(x, y, AmmoPickup)
+            }
+			else instance_create(x, y, AmmoPickup)
 
             if curse {
                 curse = 0
                 hp -= 7
-                repeat(10) instance_create(x + random(16) - 8, y + random(16) - 8, Curse)
-            }
+				
+                repeat 10 {
+					instance_create(x + random(16) - 8, y + random(16) - 8, Curse)
+				}
+				
+				snd_play_hit_big(snd_hurt)
+			}
 
             scrSwapWeps()
             bwep = 0
 
-            if skill_get(5) = 1 {
+            if skill_get(5) {
                 snd_play(sndRobotEatUpg)
                 instance_create(x, y, AmmoPickup)
-            } else snd_play(sndRobotEat)
+            }
+			else snd_play(sndRobotEat)
 
             breload = 0
             instance_create(x, y, Smoke)

@@ -15,7 +15,7 @@ snd_dead = sndSuperFrogExplode
 //behavior
 alarm[1] = 40 + random(40)
 
-if instance_exists(Player) motion_add(point_direction(Player.x, Player.y, x, y), 1)
+motion_add(point_direction(10016, 10016, x, y), 1)
 
 close = 0
 

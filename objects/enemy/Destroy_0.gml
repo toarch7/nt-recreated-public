@@ -32,63 +32,16 @@ if corpse {
 snd_play(snd_dead)
 
 sleep(20 + size * 15)
+
 if instance_exists(Player) {
     with Player {
-        if race == 4 other.raddrop += 1
-    }
+        if race == 4 {
+			other.raddrop += 1
+		}
+	}
 }
 
-do {
-    if raddrop >= 15 {
-        raddrop -= 10
-
-        with instance_create(x, y, BigRad) {
-            motion_add(other.direction, other.speed)
-            motion_add(random(360), random(other.raddrop / 2) + 5)
-
-            repeat speed
-            speed *= 0.9
-
-            if instance_exists(Player) && Player.race == 11 && ultra_get(1) {
-                repeat 4 {
-                    with instance_create(x, y, HorrorBullet) {
-                        creator = Player.id
-                        direction = other.direction + random_range(-8, 8)
-
-                        if instance_exists(creator) && creator.bskin sprite_index = sprHorrorBullet2
-
-                        speed = 9
-                        image_angle = direction
-                        team = creator.team
-                    }
-                }
-            }
-        }
-    }
-} until raddrop <= 15
-
-repeat raddrop {
-    with instance_create(x, y, Rad) {
-        motion_add(other.direction, other.speed)
-        motion_add(random(360), random(other.raddrop / 2) + 5)
-
-        repeat speed
-        speed *= 0.9
-
-        if instance_exists(Player) && Player.race == 11 && ultra_get(1) {
-            with instance_create(x, y, HorrorBullet) {
-                creator = Player.id
-                direction = other.direction
-
-                if instance_exists(creator) && creator.bskin sprite_index = sprHorrorBullet2
-
-                speed = 9
-                image_angle = direction
-                team = creator.team
-            }
-        }
-    }
-}
+scrRadDrop(raddrop)
 
 if !hp {
     //SOME KILLS REGENERATE AMMO
@@ -143,9 +96,11 @@ if !hp {
             if reload reload = max(1, floor(reload * 0.6)) if breload breload = max(1, floor(breload * 0.6)) fingers = 6
         }
     }
-    if instance_exists(Player) && place_meeting(x, y, Tangle) && Player.race == 5 && ultra_get(2) {
-        instance_create(x, y, Sapling)
-    }
+    if instance_exists(Player) && place_meeting(x, y, Tangle) {
+		if ultra_get(2, 5) {
+	        instance_create(x, y, Sapling)
+	    }
+	}
 }
 
 if instance_exists(CoopController) {
