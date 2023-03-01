@@ -1,7 +1,7 @@
 {
   "option_android_sync_amazon": false,
   "option_android_display_name": "Nuclear Throne",
-  "option_android_version": "2.5.2",
+  "option_android_version": "2.6.0",
   "option_android_tools_from_version": false,
   "option_android_build_tools": "28.0.3",
   "option_android_support_lib": "28.0.1",
