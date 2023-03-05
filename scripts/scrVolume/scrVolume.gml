@@ -1,6 +1,7 @@
 function scrVolume() {
     with MusCont {
-        var mvol = clamp(UberCont.opt_musvol, 0, 1)
+        var mvol = clamp(UberCont.opt_musvol, 0, 1),
+			avol = clamp(UberCont.opt_ambvol, 0, 1)
         audio_master_gain(clamp(UberCont.opt_sndvol, 0, 1))
 
         //if sound_exists(song)
@@ -8,8 +9,7 @@ function scrVolume() {
 
         //if sound_exists(amb)
         //audio_sound_gain(amb, clamp(UberCont.opt_ambvol, 0, 1), 0)
-
-        audio_sound_gain(sndCarLoop, clamp(UberCont.opt_ambvol, 0, 1), 0)
+		
         audio_sound_gain(sndBossWin, mvol, 0)
         audio_sound_gain(musBossDead, mvol, 0)
         audio_sound_gain(musThemeA, mvol, 0)
@@ -24,5 +24,8 @@ function scrVolume() {
         audio_sound_gain(musBoss6, mvol, 0)
         audio_sound_gain(musBoss7, mvol, 0)
         audio_sound_gain(musBoss8, mvol, 0)
+
+        audio_sound_gain(sndPortalLoop, avol, 0)
+        audio_sound_gain(sndCarLoop, avol, 0)
     }
 }

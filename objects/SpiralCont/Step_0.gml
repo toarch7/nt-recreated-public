@@ -49,7 +49,8 @@ if type != 4 {
             image_angle = other.image_angle
         }
     }
-} else instance_create(x, y, SpiralStar)
+}
+else instance_create(x, y, SpiralStar)
 
 if (area == 0 && !instance_exists(NothingSpiral)) or area != 0 {
     if !instance_exists(LevCont) && !instance_exists(GenCont) && !instance_exists(SitDown) && instance_exists(BackCont) && !instance_exists(Credits) && active {

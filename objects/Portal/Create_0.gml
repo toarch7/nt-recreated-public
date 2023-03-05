@@ -4,8 +4,8 @@ endgame = 100
 
 if GameCont.area != 101 {
     snd_play(sndPortalOpen)
-    snd_loop(sndPortalLoop)
-} else snd_play(sndOasisPortal)
+}
+else snd_play(sndOasisPortal)
 
 if instance_exists(Player) {
     with projectile {
@@ -100,3 +100,5 @@ with Player {
 	
     GameCont.popolevel -= 1.5
 }
+
+close = 0

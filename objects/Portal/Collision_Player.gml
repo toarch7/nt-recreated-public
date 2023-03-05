@@ -6,6 +6,8 @@ other.depth = depth - 1
 other.mask_index = mskNone
 
 if endgame > 30 {
+	close = 1
+	
 	alarm[1] = 90
 	
 	var p = other.id

@@ -2,6 +2,9 @@ if !isset("type") type = 1
 
 if sprite_index == sprPortalSpawn {
     instance_create(x, y, PortalShock)
+	
+	var s = snd_loop(sndPortalLoop)
+	audio_sound_set_track_position(s, random(audio_sound_length(s)))
 
     if type = 1 sprite_index = sprPortal
 

@@ -2,7 +2,7 @@ fishx = room_width / 2
 fishy = room_height / 2
 bossfight = instance_exists(Nothing2) or instance_exists(Nothing2Appear)
 
-image_angle = random(1000)
+image_angle = random(360)
 active = 0
 
 letterbox = 0
@@ -36,3 +36,6 @@ repeat 150 {
 }
 
 active = 1
+
+var s = snd_loop(sndPortalLoop)
+audio_sound_set_track_position(s, random(audio_sound_length(s)))
