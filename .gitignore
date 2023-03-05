@@ -1,7 +1,16 @@
-# Can't legally distribute assets
-# Music is fine though
+# Ignore all pngs except mobile-only and icons from options
 
 *.png
+
+!sprites/sprMobileControlAbility/*
+!sprites/sprMobileControlCorners/*
+!sprites/sprMobileControlCornersSmaller/*
+!sprites/sprMobileControlCrosshair/*
+!sprites/sprMobileVolumeControl/*
+!sprites/sprMobileVolumeControlRU/*
+!sprites/sprButtonDiscord/*
+!sprites/sprbuttonachievements/*
+!sprites/sprite1337/*
 
 sounds/snd*
 sounds/amb*
