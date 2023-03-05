@@ -3,25 +3,28 @@
 if index == -1 or instance_exists(CoopMenu)
     exit
 
-// send own
-var _inputs = scrCollectInputs(),
-	_dir_move = KeyCont.dir_move[global.index],
-	_dir_fire = KeyCont.dir_fire[global.index],
-	_crosshair = KeyCont.crosshair[global.index]
-
-buffer_seek(inputsbuffer, buffer_seek_start, 0)
-buffer_write(inputsbuffer, buffer_u8, event.inputs)
-
-buffer_write(inputsbuffer, buffer_u8, global.index)
-buffer_write(inputsbuffer, buffer_u32, _inputs)
-buffer_write(inputsbuffer, buffer_f16, _dir_move)
-buffer_write(inputsbuffer, buffer_f16, _dir_fire)
-buffer_write(inputsbuffer, buffer_u8, _crosshair)
-
-ds_stack_push(inputs[global.index], _inputs, _dir_move, _dir_fire, _crosshair)
-
-buffer_send(inputsbuffer)
-
+if input_frames {
+	// send own
+	var _inputs = scrCollectInputs(),
+		_dir_move = KeyCont.dir_move[global.index],
+		_dir_fire = KeyCont.dir_fire[global.index],
+		_crosshair = KeyCont.crosshair[global.index]
+	
+	buffer_seek(inputsbuffer, buffer_seek_start, 0)
+	buffer_write(inputsbuffer, buffer_u8, event.inputs)
+	
+	buffer_write(inputsbuffer, buffer_u8, global.index)
+	buffer_write(inputsbuffer, buffer_u32, _inputs)
+	buffer_write(inputsbuffer, buffer_f16, _dir_move)
+	buffer_write(inputsbuffer, buffer_f16, _dir_fire)
+	buffer_write(inputsbuffer, buffer_u8, _crosshair)
+	
+	ds_stack_push(inputs[global.index], _inputs, _dir_move, _dir_fire, _crosshair)
+	
+	buffer_send(inputsbuffer)
+	
+	input_frames --
+}
 
 
 // handle others
@@ -50,25 +53,9 @@ for(var i = 0; i < 2; i ++) {
 	KeyCont.crosshair[i] = _crosshair
 }
 
-if disconnect >= 900 { // connection terminated
-	with Player {
-		if is_me
-			continue
-		
-		instance_destroy(id, 0)
-	}
-	
-	with Revive
-		instance_destroy(id, 0)
-	
-	if GameCont.coopultra {
-		GameCont.coopultra = 0
-		GameCont.ultrapoints ++
-	}
-	
+if disconnect >= 900 {
+	lockstep_stop = 1
 	stop = 0
-	
-	instance_destroy()
 }
 
 if stop {
@@ -100,4 +87,23 @@ else {
 		
 		disconnect = 0
 	}
+}
+
+if disconnect >= 900 { // connection terminated
+	with Player {
+		if is_me
+			continue
+		
+		instance_destroy(id, 0)
+	}
+	
+	with Revive
+		instance_destroy(id, 0)
+	
+	if GameCont.coopultra {
+		GameCont.coopultra = 0
+		GameCont.ultrapoints ++
+	}
+	
+	instance_destroy()
 }

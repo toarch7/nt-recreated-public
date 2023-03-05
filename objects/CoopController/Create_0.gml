@@ -5,9 +5,11 @@ inputs = [
 	ds_stack_create()
 ]
 
-frame = 0
 delay = 3
 disconnect = 0
+
+input_frames = delay
+frame = 0
 
 global.coop = 1
 

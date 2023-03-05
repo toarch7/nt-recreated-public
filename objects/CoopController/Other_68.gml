@@ -133,6 +133,8 @@ try {
 				
 				ds_stack_push(inputs[_index], _inputs, _dir_move, _dir_fire, _crosshair)
 				
+				input_frames = delay
+				
 				break
         }
 

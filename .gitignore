@@ -1,7 +1,8 @@
 # Can't legally distribute assets
 # Music is fine though
 
-sprites/*/
+*.png
+
 sounds/snd*
 sounds/amb*
 
