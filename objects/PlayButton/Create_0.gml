@@ -8,8 +8,6 @@ hover = 0
 
 wait = 7
 
-col_unavailable = merge_color(c_gray, c_dkgray, .5)
-
 gpadsel = 0
 
 depth = -1000

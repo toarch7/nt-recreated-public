@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "Masks",
+    "path": "folders/Sprites/Masks.yy",
   },
   "resourceVersion": "1.0",
   "name": "mskNothing",

@@ -1,6 +1,7 @@
 if type == 2 {
     image_angle += 10 + sin(image_angle / 300) * 2 + random(1)
-} else {
+}
+else {
     image_angle += 8 + sin(image_angle / 300) * 1
 }
 

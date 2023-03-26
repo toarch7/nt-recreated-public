@@ -121,8 +121,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "CinematicStuff",
-    "path": "folders/Sprites/CinematicStuff.yy",
+    "name": "Cinematic",
+    "path": "folders/Sprites/Misc & Details/Cinematic.yy",
   },
   "resourceVersion": "1.0",
   "name": "sprMessengerIdle",

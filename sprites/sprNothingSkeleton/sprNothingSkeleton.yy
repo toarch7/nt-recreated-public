@@ -90,7 +90,7 @@
   "nineSlice": null,
   "parent": {
     "name": "Nothing",
-    "path": "folders/Sprites/Nothing.yy",
+    "path": "folders/Sprites/Enemies/Nothing.yy",
   },
   "resourceVersion": "1.0",
   "name": "sprNothingSkeleton",

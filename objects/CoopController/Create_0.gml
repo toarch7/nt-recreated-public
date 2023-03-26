@@ -1,15 +1,12 @@
 inputs = [
-	ds_stack_create(),
-	ds_stack_create(),
-	ds_stack_create(),
-	ds_stack_create()
+	{}, {}, {}, {}
 ]
 
-delay = 3
+delay = 4
 disconnect = 0
 
-input_frames = delay
-frame = 0
+frame = 0 // real inputs (anticipated)
+netframe = 0 // network inputs (synced)
 
 global.coop = 1
 
@@ -23,7 +20,7 @@ global.netfreeid = 1
 global.netidstack = ds_stack_create()
 
 global.buffer = buffer_create(1, buffer_grow, 1)
-inputsbuffer = buffer_create(90, buffer_fixed, 1)
+inputsbuffer = buffer_create(122, buffer_fixed, 1)
 broadcast_buffer = -1
 pingbuffer = -1
 server = -1

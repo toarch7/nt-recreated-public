@@ -1,5 +1,16 @@
 draw_set_color(c_white)
 
+var str = string(random_get_seed()) + " " + string(frame) + " " + string(netframe) + "\n"
+
+for(var i = 0; i < array_length(inputs); i ++) {
+	str += string(inputs[i][$ netframe]) + "\n"
+}
+
+if variable_global_exists("rng_state")
+str += string_replace_all(string(global.rng_state), ",", "\n")
+
+draw_text(96, 24, str)
+
 if !instance_exists(CoopMenu) {
     draw_set_color(c_gray)
     draw_set_font(fontSmall)
@@ -13,16 +24,13 @@ if !instance_exists(CoopMenu) {
     draw_set_font(UberCont.font)
     draw_set_color(c_white)
 	
-	for(var i = 0; i < array_length(inputs); i ++) {
-		draw_text_shadow(24, 128 + i * 10, ds_stack_size(inputs[i]))
-	}
-
     exit
 }
 
 if !instance_exists(Menu) && instance_exists(CoopMenu) && global.is_server && socket >= 0 {
     CoopMenu.text = "PLAYERS JOINED: " + string(array_length(playerindexes) + 1) + "/4"
 }
+
 
 var mx = device_mouse_x_to_gui(0),
 	my = device_mouse_y_to_gui(0)
@@ -53,8 +61,8 @@ if global.is_server {
 
             UberCont.playerinstances[$ string(_ind)] = new PlayerInstance(_ind, 0, 0)
         }
-
-        global.seed = irandom(rng_m)
+		
+        global.seed = randomize()
         random_set_seed(global.seed)
 
         for (var i = 0; i <= 12; i++) {

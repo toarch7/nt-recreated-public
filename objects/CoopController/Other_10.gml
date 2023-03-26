@@ -3,8 +3,7 @@
 if index == -1 or instance_exists(CoopMenu)
     exit
 
-if input_frames {
-	// send own
+if frame < netframe + delay {
 	var _inputs = scrCollectInputs(),
 		_dir_move = KeyCont.dir_move[global.index],
 		_dir_fire = KeyCont.dir_fire[global.index],
@@ -15,43 +14,46 @@ if input_frames {
 	
 	buffer_write(inputsbuffer, buffer_u8, global.index)
 	buffer_write(inputsbuffer, buffer_u32, _inputs)
+	buffer_write(inputsbuffer, buffer_u32, frame)
 	buffer_write(inputsbuffer, buffer_f16, _dir_move)
 	buffer_write(inputsbuffer, buffer_f16, _dir_fire)
 	buffer_write(inputsbuffer, buffer_u8, _crosshair)
 	
-	ds_stack_push(inputs[global.index], _inputs, _dir_move, _dir_fire, _crosshair)
-	
 	buffer_send(inputsbuffer)
 	
-	input_frames --
+	inputs[index][$ frame] = [ _inputs, _dir_move, _dir_fire, _crosshair ]
+	
+	frame ++
 }
 
 
-// handle others
+// read inputs
 var stop = 0
 
-for(var i = 0; i < 2; i ++) {
-	var stack = inputs[i]
-	
-	if ds_stack_empty(stack) {
-		stop = 1
-		continue
+//
+	for(var i = 0; i < 2; i ++) {
+		var _input = inputs[i][$ netframe]
+		
+		if _input == undefined {
+			stop = 1
+			break
+		}
+		
+		var _inputs = _input[0],
+			_dir_move = _input[1],
+			_dir_fire = _input[2],
+			_crosshair = _input[3]
+		
+		for(var j = 0; j < global.input_keys_list_length; j ++) {
+			var n = power(2, j + 1)
+			KeyCont[$ global.input_keys_list[j]][i] = (_inputs & n) == n
+		}
+		
+		KeyCont.dir_move[i] = _dir_move
+		KeyCont.dir_fire[i] = _dir_fire
+		KeyCont.crosshair[i] = _crosshair
 	}
-	
-	var _crosshair = ds_stack_pop(stack),
-		_dir_fire = ds_stack_pop(stack),
-		_dir_move = ds_stack_pop(stack),
-		_inputs = ds_stack_pop(stack)
-	
-	for(var j = 0; j < global.input_keys_list_length; j ++) {
-		var n = power(2, j + 1)
-		KeyCont[$ global.input_keys_list[j]][i] = (_inputs & n) == n
-	}
-	
-	KeyCont.dir_move[i] = _dir_move
-	KeyCont.dir_fire[i] = _dir_fire
-	KeyCont.crosshair[i] = _crosshair
-}
+//
 
 if disconnect >= 900 {
 	lockstep_stop = 1
@@ -87,12 +89,20 @@ else {
 		
 		disconnect = 0
 	}
+	
+	for(var i = 0; i < 2; i ++) {
+		delete inputs[i][$ netframe]
+	}
+	
+	netframe ++
 }
 
 if disconnect >= 900 { // connection terminated
 	with Player {
-		if is_me
+		if is_me {
+			index = 0
 			continue
+		}
 		
 		instance_destroy(id, 0)
 	}

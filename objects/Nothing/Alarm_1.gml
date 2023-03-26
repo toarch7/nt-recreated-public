@@ -1,8 +1,8 @@
 walk = 0
 flame = sprThroneFlameIdle
 
-for (var i = 0; i < ds_list_size(UPDATE_WALLS); i++) {
-    var obj = UPDATE_WALLS[| i]
+for (var i = 0; i < ds_list_size(global.lis_walls_visible); i++) {
+    var obj = global.lis_walls_visible[| i]
 
     with obj {
         if place_meeting(x, y, other) {

@@ -24,8 +24,8 @@
   "properties": [],
   "overriddenProperties": [],
   "parent": {
-    "name": "Props",
-    "path": "folders/Objects/Props.yy",
+    "name": "Menu",
+    "path": "folders/Objects/Menu.yy",
   },
   "resourceVersion": "1.0",
   "name": "CampfireOff",

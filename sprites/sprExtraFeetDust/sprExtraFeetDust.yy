@@ -85,8 +85,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "Sprites",
-    "path": "folders/Sprites.yy",
+    "name": "GFX",
+    "path": "folders/Sprites/GFX.yy",
   },
   "resourceVersion": "1.0",
   "name": "sprExtraFeetDust",

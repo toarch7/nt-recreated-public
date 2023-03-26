@@ -14,8 +14,8 @@ function scrShadows() {
     draw_clear_alpha(c_black, 0)
 
     try {
-        for (var i = 0; i < ds_list_size(UPDATE_WALLS); i++) {
-            with UPDATE_WALLS[| i] {
+        for (var i = 0; i < ds_list_size(global.lis_walls_visible); i++) {
+            with global.lis_walls_visible[| i] {
                 if !position_meeting(x, y + 16, TopSmall) {
                     draw_sprite_ext(outspr, outindex, x - view_xview, y + 2 + 16 - view_yview, 1, - 1, 0, c_black, 1)
                 }

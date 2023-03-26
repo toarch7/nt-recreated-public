@@ -257,7 +257,7 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
     } else aimassist_wait--
 
     if KeyCont.press_fire[index] or(KeyCont.hold_fire[index] && (wep_auto[wep] or race == 7)) or clicked or(KeyCont.press_spec[index] && (race == 5 or race == 6 or race == 7 or race == 14)) {
-        if KeyCont.aimassist[index] && wep_type[wep] != 0 && is_undefined(global.AimAsistBlacklist[$ string(wep)]) {
+        if KeyCont.aimassist[index] && wep_type[wep] != 0 && is_undefined(global.wep_no_assist[$ string(wep)]) {
             var _aim_target = noone
             var _raycasted = 1
 

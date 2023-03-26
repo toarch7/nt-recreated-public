@@ -7,30 +7,21 @@ sprite_index = asset_get_index("sprFloor" + string(area) + "Explo")
 image_speed = 0
 image_index = choose(1, 2, 3, 4)
 
-/*instance_create(x - 32, y, Top)
-instance_create(x, y - 32, Top)
-instance_create(x, y + 32, Top)
-instance_create(x + 32, y, Top)
-instance_create(x - 32, y - 32, Top)
-instance_create(x + 32, y - 32, Top)
-instance_create(x - 32, y + 32, Top)
-instance_create(x + 32, y + 32, Top)*/
+if !position_meeting(x - 16, y, Floor) && !position_meeting(x - 16, y, Wall) ds_list_add(global.lis_walls_visible, instance_create(x - 16, y, Wall))
 
-if !position_meeting(x - 16, y, Floor) && !position_meeting(x - 16, y, Wall) ds_list_add(UPDATE_WALLS, instance_create(x - 16, y, Wall))
+if !position_meeting(x + 16, y, Floor) && !position_meeting(x + 16, y, Wall) ds_list_add(global.lis_walls_visible, instance_create(x + 16, y, Wall))
 
-if !position_meeting(x + 16, y, Floor) && !position_meeting(x + 16, y, Wall) ds_list_add(UPDATE_WALLS, instance_create(x + 16, y, Wall))
+if !position_meeting(x, y + 16, Floor) && !position_meeting(x, y + 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x, y + 16, Wall))
 
-if !position_meeting(x, y + 16, Floor) && !position_meeting(x, y + 16, Wall) ds_list_add(UPDATE_WALLS, instance_create(x, y + 16, Wall))
+if !position_meeting(x, y - 16, Floor) && !position_meeting(x, y - 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x, y - 16, Wall))
 
-if !position_meeting(x, y - 16, Floor) && !position_meeting(x, y - 16, Wall) ds_list_add(UPDATE_WALLS, instance_create(x, y - 16, Wall))
+if !position_meeting(x - 16, y + 16, Floor) && !position_meeting(x - 16, y + 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x - 16, y + 16, Wall))
 
-if !position_meeting(x - 16, y + 16, Floor) && !position_meeting(x - 16, y + 16, Wall) ds_list_add(UPDATE_WALLS, instance_create(x - 16, y + 16, Wall))
+if !position_meeting(x + 16, y - 16, Floor) && !position_meeting(x + 16, y - 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x + 16, y - 16, Wall))
 
-if !position_meeting(x + 16, y - 16, Floor) && !position_meeting(x + 16, y - 16, Wall) ds_list_add(UPDATE_WALLS, instance_create(x + 16, y - 16, Wall))
+if !position_meeting(x + 16, y + 16, Floor) && !position_meeting(x + 16, y + 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x + 16, y + 16, Wall))
 
-if !position_meeting(x + 16, y + 16, Floor) && !position_meeting(x + 16, y + 16, Wall) ds_list_add(UPDATE_WALLS, instance_create(x + 16, y + 16, Wall))
-
-if !position_meeting(x - 16, y - 16, Floor) && !position_meeting(x - 16, y - 16, Wall) ds_list_add(UPDATE_WALLS, instance_create(x - 16, y - 16, Wall))
+if !position_meeting(x - 16, y - 16, Floor) && !position_meeting(x - 16, y - 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x - 16, y - 16, Wall))
 
 with BackCont {
     shake += 2

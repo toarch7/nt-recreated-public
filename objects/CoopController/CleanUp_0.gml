@@ -12,10 +12,6 @@ buffer_delete(global.buffer)
 
 ds_stack_destroy(global.netidstack)
 
-for(var i = 0; i < array_length(inputs); i ++) {
-	ds_stack_destroy(inputs[i])
-}
-
 with UberCont {
 	var inst = playerinstance_get(global.index)
 	

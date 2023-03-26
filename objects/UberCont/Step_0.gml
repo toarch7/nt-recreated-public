@@ -134,11 +134,11 @@ if want_menu2 {
 }
 
 if !lockstep_stop {
-    ds_list_clear(UPDATE_WALLS)
+    ds_list_clear(global.lis_walls_visible)
 
     with Wall {
         if x > view_xview - 32 && y > view_yview - 32 && x < view_xview + view_width + 32 && y < view_yview + view_height + 32 {
-            ds_list_add(UPDATE_WALLS, id)
+            ds_list_add(global.lis_walls_visible, id)
         }
     }
 
@@ -151,10 +151,10 @@ if !lockstep_stop {
     }
 
     if instance_exists(Cinematic) {
-        ds_list_clear(UPDATE_WALLS)
+        ds_list_clear(global.lis_walls_visible)
 
         with Wall {
-            ds_list_add(UPDATE_WALLS, id)
+            ds_list_add(global.lis_walls_visible, id)
         }
     }
 }
@@ -165,7 +165,7 @@ if mainvol < 1 {
 
 audio_emitter_gain(mainsound, mainvol)
 
-camera_set_view_pos(view_camera, view_xview_val, view_yview_val)
+camera_set_view_pos(view_camera, view_xview, view_yview)
 
 if opt_prtcls {
     with Smoke instance_destroy()
@@ -185,5 +185,48 @@ if paused && instance_exists(PauseButton) {
 				break
 			}
 		}
+	}
+}
+
+
+
+// Handle inputs
+
+KeyCont.press_horn[global.index] = 0
+KeyCont.gamepad[global.index] = opt_gamepad
+KeyCont.keyboard[global.index] = opt_keyboard
+KeyCont.aimassist[global.index] = opt_assist
+
+if opt_gamepad {
+    scrSetGamepadInputs(global.index)
+}
+else if opt_keyboard {
+    scrSetKeyboardInputs(global.index)
+
+    if localcoop {
+        scrSetGamepadInputs(1)
+    }
+}
+else {
+	with MobileUI {
+		event_user(0)
+	}
+	
+    for (var i = 0; i < array_length(touch_duration); i++) {
+        if device_mouse_check_button(i, mb_left) {
+            touch_duration[i] ++
+        }
+		else touch_duration[i] = 0
+    }
+}
+
+if volqueue != -1 && !ds_queue_empty(volqueue) {
+    var a = ds_queue_dequeue(volqueue)
+    scrHandleVolumeControl(a[0], a[1])
+}
+
+if instance_exists(CoopController) {
+	with CoopController {
+		event_user(0)
 	}
 }

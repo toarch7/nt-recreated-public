@@ -1,23 +1,20 @@
-#macro c_text_background make_colour_rgb(49, 41, 61)
 #macro border_width 48
-#macro MAX_PLAYERS 1
-#macro c_gold make_colour_rgb(218, 208, 146)
-#macro c_ultra make_color_rgb(68, 198, 22)
-#macro c_mapred make_color_rgb(200, 43, 43)
-#macro UPDATE_WALLS global.lisUpdateWalls
-#macro view_width global.view_width_val
-#macro view_height global.view_height_val
-#macro view_xview UberCont.view_xview_val
-#macro view_yview UberCont.view_yview_val
-#macro col_unavailable global.col_unavailable_val
 
-// Multiplayer player instance index
+#macro c_gold 0xdad092
+#macro c_ultra 0x44c616
+#macro c_dgray 0x808080
+#macro c_tooltip 0x32283c
+
+#macro view_width global.g_view_width
+#macro view_height global.g_view_height
+#macro view_xview global.g_view_xview
+#macro view_yview global.g_view_yview
+
+// Multiplayer PlayerInstance index
 global.index = 0
 
 globalvar lockstep_stop;
 lockstep_stop = 0
-
-col_unavailable = merge_color(c_gray, c_dkgray, 0.5)
 
 view_width = 320
 view_height = 240
@@ -90,9 +87,12 @@ KeyCont = {
     players: 1
 }
 
-#macro TeamColor global.TeamColor_val
-TeamColor = [make_color_rgb(196, 97, 255), make_color_rgb(17, 213, 113),
-make_color_rgb(255, 41, 41), make_color_rgb(41, 149, 255)]
+global.player_color = [
+	make_color_rgb(196, 97, 255),
+	make_color_rgb(17, 213, 113),
+	make_color_rgb(255, 41, 41),
+	make_color_rgb(41, 149, 255)
+]
 
 var keys = ["fire", "spec", "pick", "swap", "paus", "horn"]
 
@@ -385,33 +385,32 @@ device_mouse_dbclick_enable(0)
 
 mp_potential_settings(90, 5, 5, 0)
 
-global.AimAsistBlacklist = {}
+global.wep_no_assist = {}
 
-global.AimAsistBlacklist[$ "2"] = 1
-global.AimAsistBlacklist[$ "8"] = 1
-global.AimAsistBlacklist[$ "12"] = 1
-global.AimAsistBlacklist[$ "25"] = 1
-global.AimAsistBlacklist[$ "32"] = 1
-global.AimAsistBlacklist[$ "35"] = 1
-global.AimAsistBlacklist[$ "37"] = 1
-global.AimAsistBlacklist[$ "36"] = 1
-global.AimAsistBlacklist[$ "48"] = 1
-global.AimAsistBlacklist[$ "49"] = 1
-global.AimAsistBlacklist[$ "51"] = 1
-global.AimAsistBlacklist[$ "60"] = 1
-global.AimAsistBlacklist[$ "63"] = 1
-global.AimAsistBlacklist[$ "65"] = 1
-global.AimAsistBlacklist[$ "68"] = 1
-global.AimAsistBlacklist[$ "76"] = 1
-global.AimAsistBlacklist[$ "110"] = 1
-global.AimAsistBlacklist[$ "113"] = 1
-global.AimAsistBlacklist[$ "119"] = 1
-global.AimAsistBlacklist[$ "122"] = 1
-global.AimAsistBlacklist[$ "125"] = 1
-global.AimAsistBlacklist[$ "111"] = 1
+global.wep_no_assist[$ "2"] = 1
+global.wep_no_assist[$ "8"] = 1
+global.wep_no_assist[$ "12"] = 1
+global.wep_no_assist[$ "25"] = 1
+global.wep_no_assist[$ "32"] = 1
+global.wep_no_assist[$ "35"] = 1
+global.wep_no_assist[$ "37"] = 1
+global.wep_no_assist[$ "36"] = 1
+global.wep_no_assist[$ "48"] = 1
+global.wep_no_assist[$ "49"] = 1
+global.wep_no_assist[$ "51"] = 1
+global.wep_no_assist[$ "60"] = 1
+global.wep_no_assist[$ "63"] = 1
+global.wep_no_assist[$ "65"] = 1
+global.wep_no_assist[$ "68"] = 1
+global.wep_no_assist[$ "76"] = 1
+global.wep_no_assist[$ "110"] = 1
+global.wep_no_assist[$ "113"] = 1
+global.wep_no_assist[$ "119"] = 1
+global.wep_no_assist[$ "122"] = 1
+global.wep_no_assist[$ "125"] = 1
+global.wep_no_assist[$ "111"] = 1
 
 #macro target_direction point_direction(x, y, target.x, target.y)
-
 
 #macro crown_current GameCont.crown
 

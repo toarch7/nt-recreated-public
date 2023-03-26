@@ -127,13 +127,14 @@ try {
 			case event.inputs:
 				var _index = buffer_read(data, buffer_u8),
 					_inputs = buffer_read(data, buffer_u32),
+					_frame = buffer_read(data, buffer_u32),
 					_dir_move = buffer_read(data, buffer_f16),
 					_dir_fire = buffer_read(data, buffer_f16),
 					_crosshair = buffer_read(data, buffer_u8)
 				
-				ds_stack_push(inputs[_index], _inputs, _dir_move, _dir_fire, _crosshair)
+				inputs[_index][$ _frame] = [ _inputs, _dir_move, _dir_fire, _crosshair ]
 				
-				input_frames = delay
+				localdelay = get_timer()
 				
 				break
         }

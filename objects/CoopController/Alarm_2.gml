@@ -1,4 +1,4 @@
-// @description Server - pinging
+/// @description Server - pinging
 
 alarm[2] = 30
 

@@ -26,7 +26,7 @@ try {
     }
 
     if UberCont.opt_walls {
-        var _l = global.lisUpdateWalls
+        var _l = global.lis_walls_visible
 
         for (var i = 0; i < ds_list_size(_l); i++) {
             with _l[| i] {

@@ -59,11 +59,6 @@ birthday = 0
 ideal_width = view_width
 ideal_height = 240
 
-view_xview_val = 0
-view_yview_val = 0
-view_width_val = ideal_width
-view_height_val = ideal_height
-
 max_view_width = round(240 * (display_get_width() / display_get_height()))
 
 //set view size
@@ -142,7 +137,7 @@ want_menu = 0
 want_menu2 = 0
 show_results = 0
 
-global.lisUpdateWalls = ds_list_create()
+global.lis_walls_visible = ds_list_create()
 global.floor_screen = ds_list_create()
 
 boss = 0

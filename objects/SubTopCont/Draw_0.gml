@@ -5,8 +5,8 @@ try {
         scrDrawBloom()
     }
 
-    for (i = 0; i < ds_list_size(UPDATE_WALLS); i++) {
-        with UPDATE_WALLS[| i]
+    for (i = 0; i < ds_list_size(global.lis_walls_visible); i++) {
+        with global.lis_walls_visible[| i]
         if instance_exists(id) {
             draw_sprite_part(outspr, outindex, l, r, w, h, x - 4 + l, y - 12 + r)
         }
