@@ -15,7 +15,7 @@ if ammo {
         var t = target
 
         with instance_create(x, y, MomProjectile) {
-            motion_add(point_direction(x, y, t.x, t.y) + random_spread(30), 4)
+            motion_add(point_direction(x, y, t.x, t.y) + orandom(30), 4)
             snd_play_gun(sndBallMamaFire, 0)
             image_angle = direction
             team = other.team

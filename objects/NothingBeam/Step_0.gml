@@ -28,14 +28,14 @@ if charge {
         }
     }
 
-    instance_create(x + random_spread(20), y + random_spread(1) + image_yscale, NothingBeamHit)
+    instance_create(x + orandom(20), y + orandom(1) + image_yscale, NothingBeamHit)
 
     if BackCont.shake < 3 {
         BackCont.shake = 3
     }
 
     if !disappear {
-        with instance_create(x + random_spread(20), creator.y + 48 + random(24), NothingBeamParticle) {
+        with instance_create(x + orandom(20), creator.y + 48 + random(24), NothingBeamParticle) {
             vspeed = 12 + random(10)
             image_angle = direction
         }

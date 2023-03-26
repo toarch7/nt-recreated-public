@@ -27,7 +27,7 @@ if instance_exists(creator) && sprite_index != spr_disappear {
 }
 
 if time >= 28 {
-    draw_sprite(sprite_index, - 1, x + random_spread(1), y + yoff)
+    draw_sprite(sprite_index, - 1, x + orandom(1), y + yoff)
 } else {
     draw_sprite(sprite_index, - 1, x, y + yoff)
 }

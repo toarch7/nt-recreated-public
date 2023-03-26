@@ -1,7 +1,7 @@
 instance_create(x, y, PortalClear)
 
 if GameCont.loops - (GameCont.area == 0) >= 3 {
-    instance_create(x + random_spread(2), y + random_spread(2), PopoFreak)
+    instance_create(x + orandom(2), y + orandom(2), PopoFreak)
     exit
 }
 

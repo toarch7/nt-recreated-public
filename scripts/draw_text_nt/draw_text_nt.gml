@@ -61,8 +61,8 @@ function draw_text_nt(_x, _y, _text, scale = 1) {
 						// case "z": drawcol = color_RED; break // warp[z]one red
 						
 						case "q": // earth[q]uake
-							_x = _x + random_spread(1)
-							_y = _y + random_spread(1)
+							_x = _x + orandom(1)
+							_y = _y + orandom(1)
 						break
 						
 						case "(": // sprite

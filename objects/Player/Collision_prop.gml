@@ -1,1 +1,1 @@
-motion_add(point_direction(other.x + random_spread(1), other.y + random_spread(1), x, y), 1)
+motion_add(point_direction(other.x + orandom(1), other.y + orandom(1), x, y), 1)

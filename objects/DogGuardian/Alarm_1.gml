@@ -13,7 +13,7 @@ if instance_exists(target) {
             image_index = 0
             speed = 0
             jumpdist = point_distance(x, y, target.x, target.y) * 1.1
-            jumpdir = target_direction + random_spread(20)
+            jumpdir = target_direction + orandom(20)
             alarm[2] = 10
             alarm[1] = 300
         } else motion_add(target_direction, 1.4)

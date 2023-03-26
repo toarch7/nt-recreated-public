@@ -1,5 +1,5 @@
-shky = random_spread(shake)
-shkx = random_spread(shake)
+shky = orandom(shake)
+shkx = orandom(shake)
 
 if gamepad_button_check_pressed(0, gpad.face1) {
     event_perform(ev_mouse, ev_global_left_press)

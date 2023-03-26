@@ -12,7 +12,7 @@ if ammo > 0 {
     alarm[3] = 1
 
     repeat 10 {
-        with instance_create(x + random_spread(16), y + 50, NothingBeam) {
+        with instance_create(x + orandom(16), y + 50, NothingBeam) {
             hit_id = other.hit_id
             motion_add(270, 16)
             motion_add(point_direction(other.x, other.y, other.targetx, other.targety), 12)

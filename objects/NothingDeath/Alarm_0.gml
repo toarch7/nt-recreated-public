@@ -6,12 +6,12 @@ snd_play(sndNothingDeath2)
 sprite_index = spr_dead
 
 repeat 30 {
-    with instance_create(x + random(128) - 96, y + random_spread(50), GreenExplosion)
+    with instance_create(x + random(128) - 96, y + orandom(50), GreenExplosion)
     hit_id = other.hit_id
 }
 
 repeat 20 {
-    instance_create(x + random_spread(120), y + random_spread(120), GroundFlame)
+    instance_create(x + orandom(120), y + orandom(120), GroundFlame)
 }
 
 repeat 20 {

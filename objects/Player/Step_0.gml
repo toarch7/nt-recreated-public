@@ -406,7 +406,7 @@ if reload > 0 {
                 depth = other.depth - 1
                 alarm[0] = 8
                 friction = 0.25
-                motion_add(other.gunangle + 180 + random_spread(45), 2 + random(2))
+                motion_add(other.gunangle + 180 + orandom(45), 2 + random(2))
             }
         }
     }
@@ -597,7 +597,7 @@ if last_hp != hp {
                 // SUPER BLAST ARMOR
 
                 repeat 3 {
-                    with instance_create(x + random_spread(2), y + random_spread(2), PopoExplosion) {
+                    with instance_create(x + orandom(2), y + orandom(2), PopoExplosion) {
                         image_xscale = 0.5
                         image_yscale = 0.5
                         team = other.team

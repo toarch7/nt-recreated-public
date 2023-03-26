@@ -15,7 +15,7 @@ if target {
             alarm[2] = 10
             alarm[1] = 30
         } else {
-            direction = target_direction + random_spread(15)
+            direction = target_direction + orandom(15)
 
             if random(4) < 1 {
                 speed = 0

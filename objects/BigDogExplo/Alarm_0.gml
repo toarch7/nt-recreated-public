@@ -1,9 +1,9 @@
 repeat 32 {
-    with instance_create(x + random_spread(32), y + random_spread(32), SmallExplosion) hit_id = other.sprite_index
-    with instance_create(x + random_spread(48), y + random_spread(48), Explosion) hit_id = other.sprite_index
+    with instance_create(x + orandom(32), y + orandom(32), SmallExplosion) hit_id = other.sprite_index
+    with instance_create(x + orandom(48), y + orandom(48), Explosion) hit_id = other.sprite_index
 }
 
-repeat 20 instance_create(x + random_spread(80), y + random_spread(80), GroundFlame)
+repeat 20 instance_create(x + orandom(80), y + orandom(80), GroundFlame)
 
 snd_play_hit_big(sndExplosionXL, 0.1)
 instance_destroy()

@@ -28,7 +28,7 @@ if instance_exists(Player) {
     with WeaponChest {
         if distance_to_object(other) <= 48 {
             repeat 1 + (object_index == BigWeaponChest or object_index == CursedBigChest) * 2 {
-                pickup = instance_create(x + random_spread(1), y + random_spread(1), WepPickup)
+                pickup = instance_create(x + orandom(1), y + orandom(1), WepPickup)
 
                 with pickup {
                     scrWeapons()

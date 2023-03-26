@@ -73,7 +73,7 @@ function scrPopProps() {
                         with instance_nearest(x, y, Wall) {
                             instance_create(x + 8, y + 8, TopDecalCity)
                         }
-                    } else instance_create(x + 16 + random_spread(4), y + 16 + random_spread(4), StreetLight)
+                    } else instance_create(x + 16 + orandom(4), y + 16 + orandom(4), StreetLight)
                 } else if distance_to_point(10016, 10016) > 128 instance_create(x + 16, y + 16, choose(Hydrant, Car))
             }
 

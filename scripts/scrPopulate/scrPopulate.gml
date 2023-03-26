@@ -238,7 +238,7 @@ function scrPopulate() {
 
     with TechnoMancer {
         repeat(6) {
-            instance_create(x + random_spread(60), y + random_spread(60), PortalClear)
+            instance_create(x + orandom(60), y + orandom(60), PortalClear)
         }
     }
 }

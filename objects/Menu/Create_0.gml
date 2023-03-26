@@ -138,7 +138,7 @@ if UberCont.cgot[9] && instance_exists(char[9]) {
     char[9].spr_from = sprChickenMenuDeselect
     char[9].spr_slct = sprChickenMenu
 
-    with instance_create(char[9].x + random_spread(2), char[9].y + random_spread(4) - 32, TV) {
+    with instance_create(char[9].x + orandom(2), char[9].y + orandom(4) - 32, TV) {
         instance_create(x, y, PortalClear)
     }
 }

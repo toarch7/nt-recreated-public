@@ -3,7 +3,7 @@ inputs = [
 ]
 
 delay = 4
-disconnect = 0
+netwait = 0
 
 frame = 0 // real inputs (anticipated)
 netframe = 0 // network inputs (synced)

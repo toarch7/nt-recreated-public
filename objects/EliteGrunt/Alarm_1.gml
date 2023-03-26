@@ -15,7 +15,7 @@ if instance_exists(target) {
         scrRight(0)
         alarm[1] /= 3
     } else if random(2) < 1 && freeze > 40 {
-        if dist > 150 direction = dir + random_spread(30)
+        if dist > 150 direction = dir + orandom(30)
         else direction = dir + random_range(70, 130) * choose(1, - 1)
 
         speed = 4
@@ -25,7 +25,7 @@ if instance_exists(target) {
     }
 
     if !collision_line(x, y, target.x, target.y, Wall, 0, 0) {
-        gunangle = dir + random_spread(15)
+        gunangle = dir + orandom(15)
         scrRight(1)
 
         if random(3) < 2 && freeze > 40 {
@@ -33,8 +33,8 @@ if instance_exists(target) {
             alarm[2] = 1
             alarm[1] = 14 + random(2)
         } else {
-            if dist > 48 direction = dir + random_spread(25)
-            else direction = dir + 180 + random_spread(25)
+            if dist > 48 direction = dir + orandom(25)
+            else direction = dir + 180 + orandom(25)
 
             speed = 0.4
             walk = 10 + random(10)
@@ -53,12 +53,12 @@ if instance_exists(target) {
         walk = 0
         grenades--
 
-        gunangle = dir + random_spread(10)
+        gunangle = dir + orandom(10)
         wkick = 8
         snd_play_hit_big(sndEliteGruntRocketFire, 0.2)
         with instance_create(x, y, IDPDRocket) {
             hitid = sprEliteGruntIdle
-            motion_add(other.gunangle + random_spread(10), 10)
+            motion_add(other.gunangle + orandom(10), 10)
             image_angle = direction
             team = other.team
         }

@@ -28,7 +28,7 @@ if instance_exists(target) {
             snd_play_hit_big(sndEliteInspectorAlarmed, 0.2)
             walk = 0
         } else {
-            direction = target_direction + random_spread(20)
+            direction = target_direction + orandom(20)
             speed = 0.4
             walk = 30 + random(10)
             alarm[1] /= 2
@@ -45,7 +45,7 @@ if instance_exists(target) {
         wkick = 8
         with instance_create(x, y, PopoNade) {
             hit_id = sprEliteInspectorIdle
-            motion_add(other.gunangle + random_spread(10), 10)
+            motion_add(other.gunangle + orandom(10), 10)
             image_angle = direction
             team = other.team
         }

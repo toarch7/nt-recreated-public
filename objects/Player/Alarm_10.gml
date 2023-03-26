@@ -61,7 +61,7 @@ try {
 }
 
 if string_count("GOLD", wep_name[wep]) && !irandom(2) {
-    with instance_create(x + random_spread(10), y + random_spread(10), CaveSparkle) {
+    with instance_create(x + orandom(10), y + orandom(10), CaveSparkle) {
         if irandom(1) depth = other.depth - 1
     }
 }

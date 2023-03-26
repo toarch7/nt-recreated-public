@@ -50,7 +50,7 @@ function scrDrop(argument0, argument1) {
         if rng_random(9, 100) < argument1 * (1 + skill_get(4) * 0.6) {
             //drop weps
 			if confiscate {
-				instance_create(x + random_spread(2), y + random_spread(2), WeaponChest)
+				instance_create(x + orandom(2), y + orandom(2), WeaponChest)
 			}
 			else {
 	            with instance_create(x + random(4) - 2, y + random(4) - 2, WepPickup) {

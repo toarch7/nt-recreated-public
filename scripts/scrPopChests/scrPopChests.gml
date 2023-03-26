@@ -44,7 +44,7 @@ function scrPopChests() {
 
     if instance_exists(WeaponChest) && GameCont.area != 107 {
         do {
-            with instance_nearest(10016 + random_spread(250), 10016 + random_spread(250), WeaponChest)
+            with instance_nearest(10016 + orandom(250), 10016 + orandom(250), WeaponChest)
             instance_destroy()
         } until instance_number(WeaponChest) <= gol + wgol
 
@@ -52,7 +52,7 @@ function scrPopChests() {
 
     if instance_exists(RadChest) {
         do {
-            with instance_nearest(10016 + random_spread(250), 10016 + random_spread(250), RadChest)
+            with instance_nearest(10016 + orandom(250), 10016 + orandom(250), RadChest)
             instance_destroy()
         } until instance_number(RadChest) <= gol + rgol
 
@@ -65,14 +65,14 @@ function scrPopChests() {
 
     if instance_exists(AmmoChest) {
         do {
-            with instance_nearest(10016 + random_spread(250), 10016 + random_spread(250), AmmoChest)
+            with instance_nearest(10016 + orandom(250), 10016 + orandom(250), AmmoChest)
             instance_destroy()
         } until instance_number(AmmoChest) <= gol + agol
     }
 
     if instance_exists(HealthChest) {
         do {
-            with instance_nearest(10016 + random_spread(250), 10016 + random_spread(250), HealthChest)
+            with instance_nearest(10016 + orandom(250), 10016 + orandom(250), HealthChest)
             instance_destroy()
         } until instance_number(HealthChest) <= gol + rgol
 

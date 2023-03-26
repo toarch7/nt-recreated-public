@@ -21,9 +21,26 @@ if frame < netframe + delay {
 	
 	buffer_send(inputsbuffer)
 	
-	inputs[index][$ frame] = [ _inputs, _dir_move, _dir_fire, _crosshair ]
+	inputs[global.index][$ frame] = [ _inputs, _dir_move, _dir_fire, _crosshair ]
 	
 	frame ++
+}
+// if waiting for long enough, assume packets got lost and send anticipated inputs again
+else if netwait > 30 {
+	var f = frame - (netwait % delay + 1),
+		_input = inputs[global.index][$ f]
+	
+	buffer_seek(inputsbuffer, buffer_seek_start, 0)
+	buffer_write(inputsbuffer, buffer_u8, event.inputs)
+	
+	buffer_write(inputsbuffer, buffer_u8, global.index)
+	buffer_write(inputsbuffer, buffer_u32, _input[0])
+	buffer_write(inputsbuffer, buffer_u32, f)
+	buffer_write(inputsbuffer, buffer_f16, _input[1])
+	buffer_write(inputsbuffer, buffer_f16, _input[2])
+	buffer_write(inputsbuffer, buffer_u8, _input[3])
+	
+	buffer_send(inputsbuffer)
 }
 
 
@@ -55,7 +72,7 @@ var stop = 0
 	}
 //
 
-if disconnect >= 900 {
+if netwait >= 900 {
 	lockstep_stop = 1
 	stop = 0
 }
@@ -69,7 +86,7 @@ if stop {
 		instance_activate_object(UberCont)
 	}
 	
-	disconnect ++
+	netwait ++
 }
 else {
 	if lockstep_stop {
@@ -87,7 +104,7 @@ else {
 		}
 		else instance_activate_all()
 		
-		disconnect = 0
+		netwait = 0
 	}
 	
 	for(var i = 0; i < 2; i ++) {
@@ -97,7 +114,7 @@ else {
 	netframe ++
 }
 
-if disconnect >= 900 { // connection terminated
+if netwait >= 900 { // connection terminated
 	with Player {
 		if is_me {
 			index = 0

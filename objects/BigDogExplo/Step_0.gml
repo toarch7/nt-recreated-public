@@ -1,5 +1,5 @@
 if random(8) < 1 {
-    with instance_create(x + random_spread(24), y + random_spread(24), Explosion) {
+    with instance_create(x + orandom(24), y + orandom(24), Explosion) {
         hit_id = other.sprite_index
     }
 
@@ -7,7 +7,7 @@ if random(8) < 1 {
 }
 
 if random(4) < 1 {
-    with instance_create(x + random_spread(12), y + random_spread(12), SmallExplosion) {
+    with instance_create(x + orandom(12), y + orandom(12), SmallExplosion) {
         hit_id = other.sprite_index
     }
 

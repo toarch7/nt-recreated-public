@@ -14,8 +14,8 @@ if GameCont.crown == 2 {
     snd_play_hit_big(sndExplosionXL, 0.2)
 
     repeat 10 {
-        instance_create(x + random_spread(1), y + random_spread(1), Explosion)
-        instance_create(x + random_spread(1), y + random_spread(1), Explosion)
+        instance_create(x + orandom(1), y + orandom(1), Explosion)
+        instance_create(x + orandom(1), y + orandom(1), Explosion)
     }
 }
 

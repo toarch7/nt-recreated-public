@@ -705,7 +705,7 @@ function scrFire(wep, useAmmo) {
 
         repeat 3 {
             with instance_create(x, y, Splinter) {
-                motion_add(other.gunangle + random_spread(10) * other.accuracy, 20 + random(4))
+                motion_add(other.gunangle + orandom(10) * other.accuracy, 20 + random(4))
                 image_angle = direction
                 team = other.team
             }
@@ -713,7 +713,7 @@ function scrFire(wep, useAmmo) {
 
         repeat 2 {
             with instance_create(x, y, Splinter) {
-                motion_add(other.gunangle + random_spread(5) * other.accuracy, 20 + random(4))
+                motion_add(other.gunangle + orandom(5) * other.accuracy, 20 + random(4))
                 image_angle = direction
                 team = other.team
             }
@@ -1498,7 +1498,7 @@ function scrFire(wep, useAmmo) {
 
         repeat(6) {
             with instance_create(x, y, FlameShell) {
-                motion_add(other.gunangle + random_spread(15) * other.accuracy, 12 + random(6))
+                motion_add(other.gunangle + orandom(15) * other.accuracy, 12 + random(6))
                 image_angle = direction
                 team = other.team;
                 creator = other.id
@@ -1565,7 +1565,7 @@ function scrFire(wep, useAmmo) {
 
         repeat 4 {
             with instance_create(x, y, Splinter) {
-                motion_add(other.gunangle + random_spread(4) * other.accuracy, 20 + random(4))
+                motion_add(other.gunangle + orandom(4) * other.accuracy, 20 + random(4))
                 image_angle = direction
                 team = other.team
             }
@@ -1586,7 +1586,7 @@ function scrFire(wep, useAmmo) {
             if i == 7 offset = -10
 
             with instance_create(x, y, FlameShell) {
-                motion_add(other.gunangle + (random_spread(15) * other.accuracy) + offset, 12 + random(6))
+                motion_add(other.gunangle + (orandom(15) * other.accuracy) + offset, 12 + random(6))
                 image_angle = direction
                 team = other.team;
                 creator = other.id
@@ -1914,7 +1914,7 @@ function scrFire(wep, useAmmo) {
         for (i = -1; i <= 1; i++)
         with instance_create(x, y, FlameShell) {
             {
-                motion_add(other.gunangle + (other.i * 10 + random_spread(6)) * other.accuracy, 16)
+                motion_add(other.gunangle + (other.i * 10 + orandom(6)) * other.accuracy, 16)
                 image_angle = direction
                 team = other.team;
                 creator = other.id
@@ -2174,7 +2174,7 @@ function scrFire(wep, useAmmo) {
 
         with instance_create(x, y, ConfettiBall) {
             sticky = 0
-            motion_add(other.gunangle + random_spread(15) * other.accuracy, 8)
+            motion_add(other.gunangle + orandom(15) * other.accuracy, 8)
             image_angle = direction
             team = other.team
         }

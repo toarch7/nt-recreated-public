@@ -26,7 +26,7 @@ if !speed {
         } else GameCont.rad += 1
 
         snd_play(sndRadPickup)
-        with instance_create(x + random_spread(3), y + random_spread(3), RadEat) {
+        with instance_create(x + orandom(3), y + orandom(3), RadEat) {
             sprite_index = other.object_index == BigRad ? sprEatBigRad : sprEatRad
 
             if skill_get(3) {
@@ -46,7 +46,7 @@ if (!speed && place_meeting(x, y, Player)) or place_meeting(x, y, Portal) {
         GameCont.rad += 10
     } else GameCont.rad++
 
-    with instance_create(x + random_spread(3), y + random_spread(3), RadEat) {
+    with instance_create(x + orandom(3), y + orandom(3), RadEat) {
         sprite_index = other.object_index == BigRad ? sprEatBigRad : sprEatRad
 
         if skill_get(3) {

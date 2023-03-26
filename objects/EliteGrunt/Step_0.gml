@@ -36,4 +36,4 @@ if instance_exists(target) motion_add(target_direction, 0.4)
 
 speed = 7
 angle = direction - 90
-instance_create(x + random_spread(3), y + random_spread(3), Dust)
+instance_create(x + orandom(3), y + orandom(3), Dust)

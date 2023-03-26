@@ -220,7 +220,7 @@ with SpiralCont {
 }
 
 while instance_number(IDPDSpawn) > 5 + GameCont.loops {
-    with instance_nearest(10016 + random_spread(480), 10016 + random_spread(480), IDPDSpawn) {
+    with instance_nearest(10016 + orandom(480), 10016 + orandom(480), IDPDSpawn) {
         instance_destroy()
     }
 }

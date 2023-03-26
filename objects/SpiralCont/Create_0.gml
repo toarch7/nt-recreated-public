@@ -1,3 +1,8 @@
+
+instance_destroy(id, 0)
+exit
+
+
 fishx = room_width / 2
 fishy = room_height / 2
 bossfight = instance_exists(Nothing2) or instance_exists(Nothing2Appear)
@@ -21,6 +26,7 @@ if instance_exists(GameCont) {
 
     if GameCont.area == 103 or GameCont.area == 107 type = 4
 }
+
 
 repeat 150 {
     event_perform(ev_step, 0)

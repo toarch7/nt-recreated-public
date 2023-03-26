@@ -5,7 +5,7 @@ wkick = 5
 
 with instance_create(x, y, IDPDBullet) {
     hit_id = sprEliteGruntIdle
-    motion_add(other.gunangle + random_spread(2), 10)
+    motion_add(other.gunangle + orandom(2), 10)
     image_angle = direction
     team = other.team
 }

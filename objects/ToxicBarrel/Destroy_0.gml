@@ -9,5 +9,5 @@ snd_play(sndExplosion)
 snd_play(sndToxicBarrelGas)
 
 repeat 2 + irandom(3) {
-    instance_create(x + random_spread(10), y + random_spread(10), GroundFlame)
+    instance_create(x + orandom(10), y + orandom(10), GroundFlame)
 }

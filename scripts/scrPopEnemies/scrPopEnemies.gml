@@ -79,15 +79,21 @@ function scrPopEnemies() {
             } else if (random(3) < 1) instance_create(x + 16, y + 16, choose(Grunt, Shielder, Inspector))
         }
     }
-    if (spawnarea == 105) {
-        if (random(8) < 1) instance_create(x + 16, y + 16, JungleFly)
-        else if (random(30) < 1) {
+	
+    if spawnarea == 105 {
+        if random(8) < 1 {
+			instance_create(x + 16, y + 16, JungleFly)
+		}
+		else if random(30) < 1 {
             instance_create(x + 16, y + 16, Barrel)
-            instance_create(((x + 16 + random(4)) - 2), ((y + 16 + random(4)) - 2), JungleBandit)
-            instance_create(((x + 16 + random(4)) - 2), ((y + 16 + random(4)) - 2), JungleBandit)
-            instance_create(((x + 16 + random(4)) - 2), ((y + 16 + random(4)) - 2), JungleBandit)
-        } else instance_create(x + 16, y + 16, choose(JungleBandit, JungleBandit, JungleBandit, JungleBandit, JungleBandit, JungleBandit, Maggot, MeleeFake, MeleeFake))
-    }
+            instance_create(x + 16 + orandom(2), y + 16 + orandom(2), JungleBandit)
+            instance_create(x + 16 + orandom(2), y + 16 + orandom(2), JungleBandit)
+            instance_create(x + 16 + orandom(2), y + 16 + orandom(2), JungleBandit)
+        }
+		else {
+			instance_create(x + 16, y + 16, choose(JungleBandit, JungleBandit, JungleBandit, JungleBandit, JungleBandit, JungleBandit, Maggot, MeleeFake, MeleeFake))
+		}
+	}
 
 
 

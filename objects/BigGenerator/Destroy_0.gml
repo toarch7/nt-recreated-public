@@ -6,7 +6,7 @@ if GameCont.crown == 5 scrDrop(0, 60) repeat 2
 scrDrop(100, 0)
 
 repeat 5 + irandom(7) {
-    with instance_create(x, y + random_spread(16), GroundFlame) {
+    with instance_create(x, y + orandom(16), GroundFlame) {
         move_contact_solid(random(360), 8 + random(12))
     }
 }

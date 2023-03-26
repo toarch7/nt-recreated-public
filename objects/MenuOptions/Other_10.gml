@@ -61,8 +61,8 @@ if erasing_progress {
         _y = 0
 
     if erasing_progress == 1 && self.press > 2 {
-        _x = random_spread(self.press - 2)
-        _y = random_spread(self.press - 2)
+        _x = orandom(self.press - 2)
+        _y = orandom(self.press - 2)
     }
 
     var o = 32

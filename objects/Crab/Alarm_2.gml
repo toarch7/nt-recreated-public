@@ -3,14 +3,14 @@ if ammo > 0 {
 
     with instance_create(x, y, EnemyBullet2) {
         hit_id = other.hit_id
-        motion_add(other.gunangle + random_spread(3) - 20, 5 + random(2))
+        motion_add(other.gunangle + orandom(3) - 20, 5 + random(2))
         image_angle = direction
         team = other.team
     }
 
     with instance_create(x, y, EnemyBullet2) {
         hit_id = other.hit_id
-        motion_add(other.gunangle + random_spread(3) + 20, 5 + random(2))
+        motion_add(other.gunangle + orandom(3) + 20, 5 + random(2))
         image_angle = direction
         team = other.team
     }

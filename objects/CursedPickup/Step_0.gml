@@ -3,6 +3,6 @@ else image_index += 0.4
 
 if !irandom(3) {
     with instance_create(x, y, Curse) {
-        hspeed = random_spread(1)
+        hspeed = orandom(1)
     }
 }
