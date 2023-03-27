@@ -48,47 +48,49 @@ try {
 
                 share = 0
                 break
-
+			
             case event.start:
                 var _indexes = buffer_read(data, buffer_string)
                 playerindexes = json_parse(_indexes)
-
+				
                 instance_create(0, 0, GameCont)
-
+				
                 UberCont.playerinstances[$ "0"] = new PlayerInstance(0, 0, 0)
-
+				
                 for (var i = 0; i < array_length(playerindexes); i++) {
                     var _ind = playerindexes[i]
 
                     UberCont.playerinstances[$ string(_ind)] = new PlayerInstance(_ind, 0, 0)
                 }
-
+				
                 global.seed = buffer_read(data, buffer_u32)
                 random_set_seed(global.seed)
-
+				
                 for (var i = 0; i <= 12; i++) {
                     global.rng_state[i] = global.seed
                 }
-
+				
                 with SpiralCont instance_destroy()
-
+				
                 UberCont.daily_run = 0
                 UberCont.weekly_run = 0
-
+				
                 instance_create(0, 0, MenuGen)
-
+				
                 with FloorMaker instance_destroy()
                 with ChestOpen instance_destroy()
-
+				
                 with CoopMenu {
                     server = -1
-
+					
                     instance_destroy()
                 }
-
+				
+				lockstep_stop = 1
+				
                 share = 0
                 break
-
+			
             case event.update_playerinstance:
                 var _index = buffer_read(data, buffer_u8)
                 var inst = playerinstance_get(_index)
@@ -111,18 +113,6 @@ try {
                     snd_play(snd_slct)
                 }
                 break
-
-            case event.run_start:
-                global.seed = buffer_read(data, buffer_u32)
-                random_set_seed(global.seed)
-
-                scrRunStart()
-                break
-
-            case event.restart:
-                global.seed = buffer_read(data, buffer_u32)
-                UberCont.want_restart = 1
-                break
 			
 			case event.inputs:
 				var _index = buffer_read(data, buffer_u8),
@@ -130,9 +120,10 @@ try {
 					_frame = buffer_read(data, buffer_u32),
 					_dir_move = buffer_read(data, buffer_f16),
 					_dir_fire = buffer_read(data, buffer_f16),
-					_crosshair = buffer_read(data, buffer_u8)
+					_crosshair = buffer_read(data, buffer_u8),
+					_event = buffer_read(data, buffer_string)
 				
-				inputs[_index][$ _frame] = [ _inputs, _dir_move, _dir_fire, _crosshair ]
+				inputs[_index][$ _frame] = [ _inputs, _dir_move, _dir_fire, _crosshair, _event ]
 				
 				localdelay = get_timer()
 				

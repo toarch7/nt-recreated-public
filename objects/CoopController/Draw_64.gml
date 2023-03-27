@@ -2,13 +2,6 @@ draw_set_color(c_white)
 
 var str = string(random_get_seed()) + " " + string(frame) + " " + string(netframe) + "\n"
 
-for(var i = 0; i < array_length(inputs); i ++) {
-	str += string(inputs[i][$ netframe]) + "\n"
-}
-
-if variable_global_exists("rng_state")
-str += string_replace_all(string(global.rng_state), ",", "\n")
-
 draw_text(96, 24, str)
 
 if !instance_exists(CoopMenu) {
@@ -87,5 +80,7 @@ if global.is_server {
         buffer_write(global.buffer, buffer_string, json_stringify(playerindexes))
         buffer_write(global.buffer, buffer_u32, global.seed)
         buffer_send(global.buffer)
+		
+		lockstep_stop = 1
     }
 }

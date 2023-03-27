@@ -88,7 +88,8 @@ function scrSpawnPlayer(_index = 0, _race = 1, _skin = 0) {
             spr_dead = asset_get_index("sprMutant" + string(race) + "Dead")
             spr_gosit = asset_get_index("sprMutant" + string(race) + "GoSit")
             spr_sit = asset_get_index("sprMutant" + string(race) + "Sit")
-        } else if sprite_exists(asset_get_index("sprMutant" + string(race) + "BIdle")) {
+        }
+		else if sprite_exists(asset_get_index("sprMutant" + string(race) + "BIdle")) {
             spr_idle = asset_get_index("sprMutant" + string(race) + "BIdle")
             spr_walk = asset_get_index("sprMutant" + string(race) + "BWalk")
             spr_hurt = asset_get_index("sprMutant" + string(race) + "BHurt")

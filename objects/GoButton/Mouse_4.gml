@@ -1,6 +1,8 @@
-if global.coop && !global.is_server exit
+if net_event(ev_mouse, ev_left_press)
+	exit
 
-with CharSelect
-if selected {
-    scrRunStart()
+with CharSelect {
+	if selected {
+	    scrRunStart()
+	}
 }

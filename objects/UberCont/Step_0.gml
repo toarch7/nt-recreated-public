@@ -9,11 +9,9 @@ if splat_index < 3 && paused {
 if want_restart {
 	instance_activate_all()
 	
-    if instance_exists(CoopController) && global.is_server {
-        global.seed = irandom(rng_m)
-        random_set_seed(global.seed)
-    }
-
+	random_set_seed(global.seed)
+    global.seed = irandom(rng_m)
+    
     continued_run = 0
     file_delete("gamestate.dat")
 	

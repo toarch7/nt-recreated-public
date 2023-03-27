@@ -21,7 +21,6 @@
     "path": "texturegroups/TexPage1",
   },
   "ascenderOffset": 0,
-  "ascender": 0,
   "glyphs": {
     "32": {"x":32,"y":2,"w":8,"h":8,"character":32,"shift":8,"offset":0,},
     "33": {"x":224,"y":158,"w":6,"h":8,"character":33,"shift":8,"offset":2,},

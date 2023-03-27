@@ -343,10 +343,11 @@ function scrSetKeyboardInputs(index = 0) {
         KeyCont.moving[index] = 0
     }
 
-    with Player
-    if self.index == index {
-        KeyCont.dir_fire[index] = point_direction(x, y, mouse_x, mouse_y)
-    }
+    with Player {
+	    if self.index == index {
+	        KeyCont.dir_fire[index] = point_direction(x, y, mouse_x, mouse_y)
+	    }
+	}
 }
 
 function month_name_short(month) {

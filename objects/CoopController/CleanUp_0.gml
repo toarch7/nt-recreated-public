@@ -12,6 +12,8 @@ buffer_delete(global.buffer)
 
 ds_stack_destroy(global.netidstack)
 
+ds_stack_destroy(event_stack)
+
 with UberCont {
 	var inst = playerinstance_get(global.index)
 	

@@ -7,7 +7,8 @@ if frame < netframe + delay {
 	var _inputs = scrCollectInputs(),
 		_dir_move = KeyCont.dir_move[global.index],
 		_dir_fire = KeyCont.dir_fire[global.index],
-		_crosshair = KeyCont.crosshair[global.index]
+		_crosshair = KeyCont.crosshair[global.index],
+		_event = !ds_stack_empty(event_stack) ? json_stringify(ds_stack_pop(event_stack)) : "[]"
 	
 	buffer_seek(inputsbuffer, buffer_seek_start, 0)
 	buffer_write(inputsbuffer, buffer_u8, event.inputs)
@@ -18,10 +19,11 @@ if frame < netframe + delay {
 	buffer_write(inputsbuffer, buffer_f16, _dir_move)
 	buffer_write(inputsbuffer, buffer_f16, _dir_fire)
 	buffer_write(inputsbuffer, buffer_u8, _crosshair)
+	buffer_write(inputsbuffer, buffer_string, _event)
 	
 	buffer_send(inputsbuffer)
 	
-	inputs[global.index][$ frame] = [ _inputs, _dir_move, _dir_fire, _crosshair ]
+	inputs[global.index][$ frame] = [ _inputs, _dir_move, _dir_fire, _crosshair, _event ]
 	
 	frame ++
 }
@@ -39,6 +41,7 @@ else if netwait > 30 {
 	buffer_write(inputsbuffer, buffer_f16, _input[1])
 	buffer_write(inputsbuffer, buffer_f16, _input[2])
 	buffer_write(inputsbuffer, buffer_u8, _input[3])
+	buffer_write(inputsbuffer, buffer_u8, _input[4])
 	
 	buffer_send(inputsbuffer)
 }
@@ -59,7 +62,8 @@ var stop = 0
 		var _inputs = _input[0],
 			_dir_move = _input[1],
 			_dir_fire = _input[2],
-			_crosshair = _input[3]
+			_crosshair = _input[3],
+			_event = _input[4]
 		
 		for(var j = 0; j < global.input_keys_list_length; j ++) {
 			var n = power(2, j + 1)
@@ -69,6 +73,25 @@ var stop = 0
 		KeyCont.dir_move[i] = _dir_move
 		KeyCont.dir_fire[i] = _dir_fire
 		KeyCont.crosshair[i] = _crosshair
+		
+		if _event != "[]" {
+			var _data = json_parse(_event),
+				_ind = global.index
+			
+			event_run = 1
+			global.index = i
+			
+			with _data[1] {
+				if net_index == _data[0] {
+					event_perform(_data[2], _data[3])
+					
+					break
+				}
+			}
+			
+			event_run = 0
+			global.index = _ind
+		}
 	}
 //
 

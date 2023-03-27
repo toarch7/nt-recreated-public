@@ -1,6 +1,7 @@
 if !isset("appeary") {
     appeary = num * 32
-} else if appeary {
+}
+else if appeary {
     appeary = lerp(appeary, 0, .7)
 
     if !appeary {

@@ -1,8 +1,3 @@
-
-instance_destroy(id, 0)
-exit
-
-
 fishx = room_width / 2
 fishy = room_height / 2
 bossfight = instance_exists(Nothing2) or instance_exists(Nothing2Appear)

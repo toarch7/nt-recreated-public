@@ -150,25 +150,17 @@ if canloadout {
                     snd_play(sndMenuASkin)
                     port_x = 150
                     save_set_val("cskin", string(race), loadout_skin)
-                } else if point_in_circle(mx, my, view_width - 152, view_height / 2, 24) && !loadout_skin {
+                }
+				else if point_in_circle(mx, my, view_width - 152, view_height / 2, 24) && !loadout_skin {
                     if race_skin[race] {
                         loadout_skin = 1
                         port_x = 150
                         snd_play(sndMenuBSkin)
                         save_set_val("cskin", string(race), loadout_skin)
-                    } else {
+                    }
+					else {
                         alarm[11] = 90
                         hint = "locked#" + skin_lock[race]
-                    }
-                }
-
-                if loadout_skin != _skin {
-                    inst.skin = loadout_skin
-
-                    if global.coop {
-                        buffer_seek(global.buffer, buffer_seek_start, 0)
-                        buffer_write(global.buffer, buffer_u8, event.update_playerinstance)
-                        buffer_send(inst.write(global.buffer))
                     }
                 }
             }

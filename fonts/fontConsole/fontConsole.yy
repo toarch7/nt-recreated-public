@@ -1,7 +1,4 @@
 {
-  "resourceType": "GMFont",
-  "resourceVersion": "1.0",
-  "name": "fontConsole",
   "hinting": 0,
   "glyphOperations": 0,
   "interpreter": 0,
@@ -24,7 +21,6 @@
     "path": "texturegroups/Default",
   },
   "ascenderOffset": 1,
-  "ascender": 12,
   "glyphs": {
     "32": {"x":2,"y":2,"w":4,"h":16,"character":32,"shift":4,"offset":0,},
     "33": {"x":235,"y":56,"w":2,"h":16,"character":33,"shift":4,"offset":1,},
@@ -269,4 +265,8 @@
     "name": "Fonts",
     "path": "folders/Fonts.yy",
   },
+  "resourceVersion": "1.0",
+  "name": "fontConsole",
+  "tags": [],
+  "resourceType": "GMFont",
 }

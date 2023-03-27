@@ -2,6 +2,9 @@ inputs = [
 	{}, {}, {}, {}
 ]
 
+event_stack = ds_stack_create()
+event_run = 0
+
 delay = 4
 netwait = 0
 
@@ -20,7 +23,7 @@ global.netfreeid = 1
 global.netidstack = ds_stack_create()
 
 global.buffer = buffer_create(1, buffer_grow, 1)
-inputsbuffer = buffer_create(122, buffer_fixed, 1)
+inputsbuffer = buffer_create(128, buffer_grow, 1)
 broadcast_buffer = -1
 pingbuffer = -1
 server = -1

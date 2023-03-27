@@ -22,4 +22,4 @@ with Player {
     }
 }
 
-selectindex = -1
+net_index = instance_number(object_index)

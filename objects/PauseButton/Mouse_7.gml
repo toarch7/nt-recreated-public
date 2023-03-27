@@ -1,3 +1,6 @@
+if net_event(ev_mouse, ev_left_press)
+	exit
+
 if instance_exists(MenuOptions) exit
 
 snd_play(sndClick)

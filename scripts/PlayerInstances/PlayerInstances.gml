@@ -23,13 +23,6 @@ function scrRunStart() {
         save_set_val("etc", "seed", UberCont.daily_seed)
     }
 	
-    if global.coop && global.is_server {
-        buffer_seek(global.buffer, buffer_seek_start, 0)
-        buffer_write(global.buffer, buffer_u8, event.run_start)
-        buffer_write(global.buffer, buffer_u32, global.seed)
-        buffer_send(global.buffer)
-    }
-	
     room_restart()
 }
 

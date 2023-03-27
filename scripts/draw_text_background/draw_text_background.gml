@@ -2,13 +2,12 @@
 /// @param x
 /// @param y
 /// @param text
-function draw_text_background(argument0, argument1, argument2) {
-    __width = ceil(string_width(string_hash_to_newline(argument2)) / 2) + 4
-    __height = string_height(string_hash_to_newline(argument2))
-
-    draw_rectangle_colour(argument0 - __width, argument1 - 2, argument0 + __width, argument1 + __height, c_text_background, c_text_background, c_text_background, c_text_background, 0)
-    draw_text(argument0, argument1, string_hash_to_newline(argument2))
-
-
-
+function draw_text_background(_x, _y, _text) {
+	var _str = string_hash_to_newline(_text),
+		width = ceil(string_width(_str) / 2) + 4,
+		height = string_height(_str)
+	
+    draw_rectangle_colour(_x - width, _y - 2, _x + width, _y + height, c_tooltip, c_tooltip, c_tooltip, c_tooltip, 0)
+	
+    draw_text(_x, _y, _str)
 }
