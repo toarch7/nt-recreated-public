@@ -1,6 +1,9 @@
-# Ignore all pngs except mobile-only and icons from options
+# Ignore all resources except ones unique to recreation
 
 *.png
+
+sounds/*/*
+!sounds/*/*.yy
 
 !sprites/sprMobileControlAbility/*
 !sprites/sprMobileControlCorners/*
@@ -12,8 +15,6 @@
 !sprites/sprbuttonachievements/*
 !sprites/sprite1337/*
 
-sounds/snd*
-sounds/amb*
 
 node_modules
 beautifier.js
