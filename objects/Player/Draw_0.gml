@@ -88,5 +88,3 @@ if instance_exists(GameCont) && GameCont.area == 101 && race != 1 && race != 8 {
 if infammo {
     draw_sprite(sprGunWarrant, infammo * 0.4, x, y)
 }
-
-draw_text(x, y - 16, is_me)

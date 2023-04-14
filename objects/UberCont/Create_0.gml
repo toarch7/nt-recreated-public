@@ -1,4 +1,4 @@
-#macro GAME_VERSION "r2.6"
+#macro GAME_VERSION "b2.6"
 #macro GAME_BUILD 2600
 
 opt_fulscrn = 1

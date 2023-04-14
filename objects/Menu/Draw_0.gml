@@ -10,8 +10,6 @@ var _w = widescreen
 race = inst.race
 loadout_wep = 0
 
-draw_text(view_xview + 96, view_yview + 100, string(race) + " " + string(inst))
-
 if instance_exists(DailyList) {
     if dailylistfavor < 48 {
         dailylistfavor += 16
