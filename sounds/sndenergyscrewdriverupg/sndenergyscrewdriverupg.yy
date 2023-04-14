@@ -11,7 +11,7 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "sndenergyscrewdriverupg.wav",
+  "soundFile": "sndEnergyScrewdriverUpg.wav",
   "duration": 0.392062,
   "parent": {
     "name": "Weapon Sounds",

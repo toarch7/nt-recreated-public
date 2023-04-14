@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndClickBack",
-  "duration": 0.176375,
+  "duration": 0.171375,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndCrownRandom",
-  "duration": 0.535,
+  "duration": 0.53,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

@@ -11,7 +11,7 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "sndTVOn.wav",
+  "soundFile": "sndtvon.wav",
   "duration": 0.529687,
   "parent": {
     "name": "Sounds",

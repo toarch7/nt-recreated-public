@@ -11,7 +11,7 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "sndenergyhammer.wav",
+  "soundFile": "sndEnergyHammer.wav",
   "duration": 0.409094,
   "parent": {
     "name": "Weapon Sounds",

@@ -11,7 +11,7 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "sndTurnChair.wav",
+  "soundFile": "sndturnchair.wav",
   "duration": 0.767563,
   "parent": {
     "name": "Sounds",

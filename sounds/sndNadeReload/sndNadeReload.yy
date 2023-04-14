@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndNadeReload",
-  "duration": 0.184438,
+  "duration": 0.179437,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

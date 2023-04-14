@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndPlasmaReloadUpg",
-  "duration": 1.005,
+  "duration": 1.0,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

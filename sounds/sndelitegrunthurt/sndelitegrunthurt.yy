@@ -11,7 +11,7 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "sndelitegrunthurt.wav",
+  "soundFile": "sndEliteGruntHurt.wav",
   "duration": 0.762406,
   "parent": {
     "name": "EliteGrunt",

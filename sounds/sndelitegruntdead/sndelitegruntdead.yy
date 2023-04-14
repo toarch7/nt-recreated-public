@@ -11,7 +11,7 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "sndelitegruntdead.wav",
+  "soundFile": "sndEliteGruntDead.wav",
   "duration": 0.671625,
   "parent": {
     "name": "EliteGrunt",

@@ -11,7 +11,7 @@
     "name": "audiogroup_default",
     "path": "audiogroups/audiogroup_default",
   },
-  "soundFile": "sndlasercannonupg.wav",
+  "soundFile": "sndLaserCannonUpg.wav",
   "duration": 3.184563,
   "parent": {
     "name": "Weapon Sounds",
