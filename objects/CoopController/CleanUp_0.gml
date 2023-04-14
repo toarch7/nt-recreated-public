@@ -2,11 +2,11 @@ if broadcast_buffer {
 	buffer_delete(broadcast_buffer)
 }
 
-if server {
+if server != -1
 	network_destroy(server)
-}
 
-network_destroy(socket)
+if socket != -1
+	network_destroy(socket)
 
 buffer_delete(global.buffer)
 
@@ -27,3 +27,5 @@ with UberCont {
 }
 
 lockstep_stop = 0
+
+draw_enable_drawevent(true)

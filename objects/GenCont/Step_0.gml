@@ -33,24 +33,3 @@ if safespawn {
         }
     }
 }
-
-/*with BecomeScrapBoss {
-	var dir = instance_furthest(10016, 10016, Floor)
-	
-	if dir {
-		var dis = point_distance(10016, 10016, dir.x, dir.y)
-		var dirct = point_direction(10016, 10016, dir.x, dir.y)
-		
-		var dar = instance_nearest(10016 + lengthdir_x(dis * 0.75, dirct), 10016 + lengthdir_y(dis * 0.75, dirct), Floor)
-		
-		with dir image_blend = c_blue
-		with dar image_blend = c_red
-		
-		if dar {
-			x = dar.x
-			y = dar.y
-			xprevious = x
-			yprevious = y
-		}
-	}
-}*/

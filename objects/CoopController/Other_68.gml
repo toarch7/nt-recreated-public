@@ -86,6 +86,8 @@ try {
                     instance_destroy()
                 }
 				
+				snd_play(sndPortalOld)
+				
 				lockstep_stop = 1
 				
                 share = 0
@@ -122,6 +124,10 @@ try {
 					_dir_fire = buffer_read(data, buffer_f16),
 					_crosshair = buffer_read(data, buffer_u8),
 					_event = buffer_read(data, buffer_string)
+				
+				if netframe != _frame {
+					print("netframe mismatch uhh local:", netframe, ", got:", _frame)
+				}
 				
 				inputs[_index][$ _frame] = [ _inputs, _dir_move, _dir_fire, _crosshair, _event ]
 				

@@ -97,10 +97,12 @@ function scrUnlock() {
     }
 
     var p = noone
-    with Player
-    if is_me {
-        p = id
-    }
+	
+    with Player {
+	    if is_me {
+	        p = id
+	    }
+	}
 
     if instance_exists(p) && p.hp > 0 && p.race != 14 && p.race != 15 with p {
         if wep && string_copy(wep_name[wep], 0, 4) == "GOLD" && (race != 6 or(race == 6 && wep != 39)) && UberCont.cwep[race] != wep {
@@ -114,7 +116,8 @@ function scrUnlock() {
             if wep == 122 or wep == 123 {
                 scrAchievement(25)
             }
-        } else if bwep && string_copy(wep_name[bwep], 0, 4) == "GOLD" && (race != 6 or(race == 6 && bwep != 39)) && UberCont.cwep[race] != bwep {
+        }
+		else if bwep && string_copy(wep_name[bwep], 0, 4) == "GOLD" && (race != 6 or(race == 6 && bwep != 39)) && UberCont.cwep[race] != bwep {
             UberCont.cwep[race] = bwep
             snd_play(sndGoldWeaponLock)
             show_unlock_popup(wep_name[bwep] + "#@sSTORED")
@@ -172,21 +175,25 @@ function scrUnlock() {
 
     if !instance_exists(SitDown) {
         if !UberCont.cskingot[6] {
-            can = 1
-            for (i = 1; i <= 12; i++) {
+            var can = 1
+			
+            for (var i = 1; i <= 12; i++) {
                 if string_copy(wep_name[UberCont.cwep[i]], 0, 4) != "GOLD" {
-                    can = 0;
+                    can = 0
                     break
                 }
             }
 
             if can {
                 UberCont.cskingot[6] = 1
+				
                 show_unlock_popup("@wY.V. B-SKIN UNLOCKED#@sFOR UNLOCKING GOLDEN WEAPON WITH EVERY CHARACTER")
-                with instance_create(0, 0, UnlockScreen) {
-                    race = 6;
+                
+				with instance_create(0, 0, UnlockScreen) {
+                    race = 6
                     skin = 1
                 }
+				
                 scrAchievement(15)
             }
         }

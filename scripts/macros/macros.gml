@@ -1,9 +1,8 @@
 #macro border_width 48
 
-#macro c_gold 0xdad092
-#macro c_ultra 0x44c616
-#macro c_dgray 0x808080
-#macro c_tooltip 0x32283c
+#macro c_gold      9490650
+#macro c_ultra     1492541
+#macro c_tooltip   4008241
 
 #macro view_width global.g_view_width
 #macro view_height global.g_view_height

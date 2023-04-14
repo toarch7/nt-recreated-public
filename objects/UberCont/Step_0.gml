@@ -1,7 +1,3 @@
-if opt_console && !instance_exists(Console) {
-    instance_create(0, 0, Console)
-}
-
 if splat_index < 3 && paused {
     splat_index++
 }
@@ -155,10 +151,14 @@ if !lockstep_stop {
             ds_list_add(global.lis_walls_visible, id)
         }
     }
+	
+	if opt_console && !instance_exists(Console) {
+	    instance_create(0, 0, Console)
+	}
 }
 
 if mainvol < 1 {
-    mainvol = lerp(mainvol, 1, .4)
+    mainvol = lerp(mainvol, 1, 0.4)
 }
 
 audio_emitter_gain(mainsound, mainvol)

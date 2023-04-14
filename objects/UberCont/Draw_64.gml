@@ -59,8 +59,6 @@ if instance_exists(Player) && opt_pausebutton && !instance_exists(Credits) {
     }
 }
 
-draw_text(128, 128, scrCollectInputs())
-
 if saving {
     if !instance_exists(Vlambeer) && !instance_exists(GenCont) {
         draw_sprite_ext(sprSaving, saving_index, view_width - 15, view_height - 15, 1, 1, 0, c_black, 1)
@@ -72,7 +70,8 @@ if saving {
         if saving_index >= sprite_get_number(sprSaving) {
             saving_index = 0
         }
-    } else saving = 0
+    }
+	else saving = 0
 
     saving--
 }

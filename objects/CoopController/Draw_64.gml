@@ -21,7 +21,12 @@ if !instance_exists(CoopMenu) {
 }
 
 if !instance_exists(Menu) && instance_exists(CoopMenu) && global.is_server && socket >= 0 {
-    CoopMenu.text = "PLAYERS JOINED: " + string(array_length(playerindexes) + 1) + "/4"
+	var str = ""
+	
+	str += "PLAYERS JOINED: " + string(array_length(playerindexes) + 1) + "/4"
+	str += "\n\nDELAY: " + string(round(delay / 30 * 1000)) + "MS"
+	
+    CoopMenu.text = str
 }
 
 
@@ -46,18 +51,18 @@ if global.is_server {
 	
     if mouse_check_button_pressed(mb_left) && point_in_rectangle(mx, my, dx - 48, dy - 12, dx + 48, dy + 12) {
         instance_create(0, 0, GameCont)
-
+		
         UberCont.playerinstances[$ "0"] = new PlayerInstance(0, 0, 0)
-
+		
         for (var i = 0; i < array_length(playerindexes); i++) {
             var _ind = playerindexes[i]
-
+			
             UberCont.playerinstances[$ string(_ind)] = new PlayerInstance(_ind, 0, 0)
         }
 		
         global.seed = randomize()
         random_set_seed(global.seed)
-
+		
         for (var i = 0; i <= 12; i++) {
 			global.rng_state[i] = global.seed
 		}
@@ -80,6 +85,8 @@ if global.is_server {
         buffer_write(global.buffer, buffer_string, json_stringify(playerindexes))
         buffer_write(global.buffer, buffer_u32, global.seed)
         buffer_send(global.buffer)
+		
+		snd_play(sndPortalOld)
 		
 		lockstep_stop = 1
     }

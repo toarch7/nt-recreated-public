@@ -3,6 +3,10 @@ function scrRunStart() {
 	
     GameCont.crown = Menu.loadout_crown
 	
+	if instance_exists(CoopController) {
+		global.index = CoopController.index
+	}
+	
     scrSpawnPlayers(global.index)
 	
     global.crownpick = GameCont.crown

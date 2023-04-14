@@ -1008,6 +1008,7 @@
     {"id":{"name":"sprVanDead","path":"sprites/sprVanDead/sprVanDead.yy",},"order":11,},
     {"id":{"name":"mus5b","path":"sounds/mus5b/mus5b.yy",},"order":65,},
     {"id":{"name":"sprVanHurt","path":"sprites/sprVanHurt/sprVanHurt.yy",},"order":13,},
+    {"id":{"name":"net_add_data","path":"scripts/net_add_data/net_add_data.yy",},"order":192,},
     {"id":{"name":"sprVanDeactivatedHurt","path":"sprites/sprVanDeactivatedHurt/sprVanDeactivatedHurt.yy",},"order":15,},
     {"id":{"name":"mskVan","path":"sprites/mskVan/mskVan.yy",},"order":17,},
     {"id":{"name":"sprPopoFreakWalk","path":"sprites/sprPopoFreakWalk/sprPopoFreakWalk.yy",},"order":1,},

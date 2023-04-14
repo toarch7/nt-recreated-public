@@ -36,10 +36,10 @@ if (flags & 2) == 2 && instance_exists(GenCont) {
         with FloorMaker
         event_perform(ev_step, 0)
 
-        iter++
+        iter ++
 
         if iter >= 100
-        break
+			break
     } until instance_number(Floor) >= GenCont.goal
 }
 
@@ -54,7 +54,8 @@ if array_length(history) {
         }
 
         keyboard_string = history[historypos]
-    } else if keyboard_check_pressed(vk_down) {
+    }
+	else if keyboard_check_pressed(vk_down) {
         historypos++
 
         if historypos >= array_length(history) {

@@ -32,22 +32,28 @@ else if netwait > 30 {
 	var f = frame - (netwait % delay + 1),
 		_input = inputs[global.index][$ f]
 	
-	buffer_seek(inputsbuffer, buffer_seek_start, 0)
-	buffer_write(inputsbuffer, buffer_u8, event.inputs)
-	
-	buffer_write(inputsbuffer, buffer_u8, global.index)
-	buffer_write(inputsbuffer, buffer_u32, _input[0])
-	buffer_write(inputsbuffer, buffer_u32, f)
-	buffer_write(inputsbuffer, buffer_f16, _input[1])
-	buffer_write(inputsbuffer, buffer_f16, _input[2])
-	buffer_write(inputsbuffer, buffer_u8, _input[3])
-	buffer_write(inputsbuffer, buffer_u8, _input[4])
-	
-	buffer_send(inputsbuffer)
+	if _input != undefined {
+		buffer_seek(inputsbuffer, buffer_seek_start, 0)
+		buffer_write(inputsbuffer, buffer_u8, event.inputs)
+		
+		buffer_write(inputsbuffer, buffer_u8, global.index)
+		buffer_write(inputsbuffer, buffer_u32, _input[0])
+		buffer_write(inputsbuffer, buffer_u32, f)
+		buffer_write(inputsbuffer, buffer_f16, _input[1])
+		buffer_write(inputsbuffer, buffer_f16, _input[2])
+		buffer_write(inputsbuffer, buffer_u8, _input[3])
+		buffer_write(inputsbuffer, buffer_string, _input[4])
+		
+		buffer_send(inputsbuffer)
+	}
+	else {
+		print("input resend failed, ", frame, (netwait % delay + 1), netframe)
+	}
 }
 
 
 // read inputs
+
 var stop = 0
 
 //
@@ -81,11 +87,54 @@ var stop = 0
 			event_run = 1
 			global.index = i
 			
-			with _data[1] {
-				if net_index == _data[0] {
-					event_perform(_data[2], _data[3])
+			if _data[0] == "other" {
+				if _data[1] == "crown" {
+					GameCont.crown = _data[2]
+				}
+				else if _data[1] = "playerinstance" {
+					UberCont.playerinstances[$ string(i)] = _data[2]
 					
-					break
+					if instance_exists(Menu) {
+						var is_me = net_isme()
+						
+						with Menu {
+							if is_me {
+								var race = _data[2].race
+								
+								if race >= 13 && race <= 15 {
+									loadout = 0
+								}
+								
+								port_x = 150
+							}
+							else ports_x[i] = 150
+						}
+					}
+				}
+				else if _data[1] == "console" {
+					var l = []
+					
+					with Player if index != i {
+						instance_deactivate_object(id)
+						array_push(l, id)
+					}
+					
+					with Console {
+						handle_console_command(_data[2])
+					}
+					
+					for(var j = 0; j < array_length(l); j ++) {
+						instance_activate_object(l[j])
+					}
+				}
+			}
+			else { // perform events
+				with _data[1] {
+					if net_index == _data[0] {
+						event_perform(_data[2], _data[3])
+						
+						break
+					}
 				}
 			}
 			

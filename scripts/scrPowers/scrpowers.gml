@@ -271,7 +271,7 @@ function scrPowers() {
 
     //YUNG VENUZ
     var yvmobilepopping = race == 6 && scrYVCanPop(wep) && KeyCont.activeforever[index] && KeyCont.press_fire[index]
-    if race == 6 && can_shoot && (((UberCont.opt_keyboard or UberCont.opt_gamepad) && KeyCont.press_spec[index]) or yvmobilepopping) {
+    if race == 6 && can_shoot && (((is_keyboard(index) or is_gamepad(index)) && KeyCont.press_spec[index]) or yvmobilepopping) {
         if scrYVCanPop(wep) {
             if ammo[wep_type[wep]] < wep_cost[wep] * (2 + skill_get(5) * 2) && wep_type[wep] != 0 && GameCont.rad >= wep_rads[wep] {
                 scrEmpty()
@@ -522,7 +522,7 @@ function scrPowers() {
     }
 
     // ROUGE
-    if race == 12 && KeyCont.press_spec[index] && (UberCont.opt_gamepad or UberCont.opt_keyboard) {
+    if race == 12 && KeyCont.press_spec[index] && (is_gamepad(index) or is_keyboard(index)) {
         var px = mouse_x,
             py = mouse_y
 

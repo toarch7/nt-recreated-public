@@ -1,4 +1,11 @@
 function handle_console_command(str) {
+	if instance_exists(CoopController) && !CoopController.event_run {
+		
+		net_add_data("other", "console", str)
+		
+		exit
+	}
+	
     var cmdraw = string_split_array(str, " ")
     var cmd = string_split_array(string_lower(str), " ")
 
@@ -58,7 +65,7 @@ function handle_console_command(str) {
                     var _x = 10016
                     var _y = 10016
 
-                    if global.pc_build {
+                    if global.pc_build && !instance_exists(CoopController) {
                         _x = mouse_x
                         _y = mouse_y
                     }

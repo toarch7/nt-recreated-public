@@ -10,11 +10,14 @@ var _w = widescreen
 race = inst.race
 loadout_wep = 0
 
+draw_text(view_xview + 96, view_yview + 100, string(race) + " " + string(inst))
+
 if instance_exists(DailyList) {
     if dailylistfavor < 48 {
         dailylistfavor += 16
     }
-} else if dailylistfavor {
+}
+else if dailylistfavor {
     dailylistfavor -= 24
 
     if dailylistfavor < 0 {
@@ -69,7 +72,9 @@ draw_rectangle(view_xview, view_yview + view_height, view_xview + view_width, vi
 draw_set_color(c_white)
 draw_text_nt(view_xview - yoff * 4 + 6, view_yview + view_height - 56, string_replace(loc(race_pass[race]) + "#" + loc(race_acti[race]), ", ", "#"))
 
-port_x = lerp(port_x, 0, 0.8)
+if port_x > 0 {
+	port_x = lerp(port_x, 0, 0.8)
+}
 
 if splat_index < 3 splat_index++
 
@@ -128,6 +133,8 @@ if canloadout {
             }
 
             if loadout {
+				var w = inst.cwep
+				
                 if point_in_circle(mx, my, view_width - 96, view_height - 48, 24) && loadout_wep {
                     inst.cwep = UberCont.race_swep[race]
 
@@ -143,26 +150,44 @@ if canloadout {
                     snd_play(sndGoldWeaponSelect)
                     save_set_val("cswep", string(race), loadout_wep)
                 }
+				
+				if inst.cwep != w && instance_exists(CoopController) {
+					net_add_data("other", "playerinstance", struct_clone(inst))
+					inst.cwep = w
+				}
 
-                var _skin = loadout_skin
-                if point_in_circle(mx, my, view_width - 152, view_height / 2 - 32, 24) && loadout_skin {
-                    loadout_skin = 0
+                var _skin = inst.skin
+				
+                if point_in_circle(mx, my, view_width - 152, view_height / 2 - 32, 24) && _skin {
+                    _skin = 0
                     snd_play(sndMenuASkin)
-                    port_x = 150
-                    save_set_val("cskin", string(race), loadout_skin)
+                    save_set_val("cskin", string(race), _skin)
                 }
-				else if point_in_circle(mx, my, view_width - 152, view_height / 2, 24) && !loadout_skin {
+				else if point_in_circle(mx, my, view_width - 152, view_height / 2, 24) && !_skin {
                     if race_skin[race] {
-                        loadout_skin = 1
-                        port_x = 150
+                        _skin = 1
+                        
                         snd_play(sndMenuBSkin)
-                        save_set_val("cskin", string(race), loadout_skin)
+                        save_set_val("cskin", string(race), _skin)
                     }
 					else {
                         alarm[11] = 90
-                        hint = "locked#" + skin_lock[race]
+                        hint = skin_lock[race]
                     }
                 }
+				
+				if inst.skin != _skin {
+					inst.skin = _skin
+					loadout_skin = _skin
+					
+					if instance_exists(CoopController) {
+						net_add_data("other", "playerinstance", struct_clone(inst))
+						
+						// hide until event is handled
+						port_x = -view_width
+					}
+					else port_x = 150
+				}
             }
         }
     }
@@ -251,7 +276,17 @@ if instance_exists(char[race]) {
 }
 
 with CharSelect {
-    draw_sprite_ext(qm(UberCont.cgot[num] or other.weekly, sprCharSelect, sprCharSelectLocked), num, x, y + yoff + 16, 1, 1, 0, qm(selected, c_white, c_gray), 1)
+	var c = c_gray,
+		spr = sprCharSelectLocked
+	
+	if selected
+		c = c_white
+	
+	if UberCont.cgot[num] or other.weekly {
+		spr = sprCharSelect
+	}
+	
+    draw_sprite_ext(spr, num, x, y + yoff + 16, 1, 1, 0, c, 1)
 }
 
 with CharSelect {

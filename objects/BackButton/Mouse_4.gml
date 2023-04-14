@@ -22,7 +22,8 @@ if instance_exists(ResourcepackManager) {
     }
 
     snd_play(sndClickBack)
-} else if instance_exists(MenuOptions) && !(UberCont.opt_gamepad && MenuOptions.editing_mode) {
+}
+else if instance_exists(MenuOptions) && !(UberCont.opt_gamepad && MenuOptions.editing_mode) {
     with MenuOptions {
         event_perform(ev_keypress, vk_backspace)
     }

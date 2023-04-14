@@ -1,3 +1,3 @@
-function is_keyboard() {
-	return KeyCont.keyboard[global.index]
+function is_keyboard(index = global.index) {
+	return KeyCont.keyboard[index]
 }
