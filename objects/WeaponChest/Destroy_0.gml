@@ -1,16 +1,12 @@
 with instance_create(x, y, ChestOpen) {
 	if GameCont.race == 7 && GameCont.ultra == 2 {
-		sprite_index = curse ? sprCursedChestSteroidsUltraOpen : sprWeaponChestSteroidsUltraOpen
+		sprite_index = other.curse ? sprCursedChestSteroidsUltraOpen : sprWeaponChestSteroidsUltraOpen
 		
 		break
 	}
 	
     if other.curse {
         sprite_index = sprCursedChestOpen
-
-        if GameCont.area == 101 {
-            sprite_index = sprCursedClamChestOpen
-        }
     }
 	else if GameCont.area == 101 {
         sprite_index = sprClamChestOpen

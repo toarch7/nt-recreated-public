@@ -1743,8 +1743,6 @@
     {"id":{"name":"sprWeaponChest","path":"sprites/sprWeaponChest/sprWeaponChest.yy",},"order":5,},
     {"id":{"name":"sprClamChest","path":"sprites/sprClamChest/sprClamChest.yy",},"order":6,},
     {"id":{"name":"sprClamChestOpen","path":"sprites/sprClamChestOpen/sprClamChestOpen.yy",},"order":7,},
-    {"id":{"name":"sprCursedClamChest","path":"sprites/sprCursedClamChest/sprCursedClamChest.yy",},"order":8,},
-    {"id":{"name":"sprCursedClamChestOpen","path":"sprites/sprCursedClamChestOpen/sprCursedClamChestOpen.yy",},"order":9,},
     {"id":{"name":"sprSlice","path":"sprites/sprSlice/sprSlice.yy",},"order":10,},
     {"id":{"name":"sprRadChest","path":"sprites/sprRadChest/sprRadChest.yy",},"order":11,},
     {"id":{"name":"sprAmmoChestOpen","path":"sprites/sprAmmoChestOpen/sprAmmoChestOpen.yy",},"order":12,},
@@ -3773,6 +3771,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/localizations","resourceVersion":"1.0","name":"ua.loc","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/localizations","resourceVersion":"1.0","name":"fa.loc","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/localizations","resourceVersion":"1.0","name":"es.loc","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/localizations","resourceVersion":"1.0","name":"default.loc","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "2.3.7.606",

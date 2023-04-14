@@ -24,15 +24,11 @@ if GameCont.crown > 1 && instance_exists(GenCont) {
 	else curse = 0
 }
 
-if GameCont.area == 101 {
-    sprite_index = sprClamChest
-}
-
 if curse {
-    if GameCont.area == 101 {
-        sprite_index = sprCursedClamChest
-    }
-	else sprite_index = sprCursedChest
+    sprite_index = sprCursedChest
+}
+else if GameCont.area == 101 {
+    sprite_index = sprClamChest
 }
 
 if GameCont.race == 7 && GameCont.ultra == 2 {
