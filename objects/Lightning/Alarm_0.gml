@@ -1,4 +1,4 @@
-var oldx, oldy, dst = 8 + random(4)
+var oldx, oldy, dst = 8 + random(4), dir
 
 if instance_exists(enemy) {
     dir = instance_nearest(x + lengthdir_x(80, direction), y + lengthdir_y(80, direction), enemy)
@@ -16,16 +16,16 @@ if instance_exists(enemy) {
     }
 }
 
-if !(GameCont.area == 0 && instance_exists(InvisiWall)) {
+//
 	x += lengthdir_x(dst, direction)
 	y += lengthdir_y(dst, direction)
 	
-    if place_meeting(x, y, Wall) {
+    if place_meeting(x, y, Wall) && !instance_is(InvisiWall, instance_place(x, y, Wall)) {
         x = xprevious
         y = yprevious
 		direction += 180
     }
-}
+//
 
 image_angle = direction
 speed = 0
