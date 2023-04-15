@@ -4,7 +4,7 @@ function scrLoadLocalizations() {
 		failed = ""
 
     while _find != "" {
-        if _find == "default" {
+        if _find == "default.loc" {
 			_find = file_find_next()
 			
 			continue

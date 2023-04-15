@@ -34,7 +34,7 @@ if rp_warning {
 
     draw_set_valign(fa_top)
     draw_set_halign(fa_left)
-
+	
     exit
 }
 
@@ -132,16 +132,12 @@ if erasing_progress {
 
                         self[$ "funnysound"] = audio_play_sound(sndNothingSielence, 1000, 1)
                         audio_sound_pitch(self[$ "funnysound"], 0.5)
-
-                        print("his name is", self[$ "funnysound"], "look him up in gif search")
                     }
                 }
 
                 if point_in_rectangle(mx, my, view_width / 2 - 10, view_height / 2 + o + 12, view_width / 2 + 10, view_height / 2 + o + 20) {
                     snd_play(sndClickBack)
-
-                    print("hellllloooooooooo???????????????", self[$ "funnysound"])
-
+					
                     if self[$ "funnysound"] != undefined {
                         with SpiralCont
                         visible = 1
@@ -291,10 +287,18 @@ for (var i = 0; i < array_length(options[category]); i++) {
             }
 
             if opt.value < 5 {
-                draw_sprite_ext(sprOptionButtons, opt.value - 1, dx + 1, dy + 1, 1, 1, 0, c_black, 1)
-                draw_sprite_ext(sprOptionButtons, opt.value - 1, dx, dy + 1, 1, 1, 0, c_black, 1)
-                draw_sprite_ext(sprOptionButtons, opt.value - 1, dx, dy, 1, 1, 0, pointed ? c_white : c_ltgray, 1)
-            } else {
+				var name = scrMenuButtonName(sprOptionButtons, opt.value - 1)
+				
+				if loc_exists(name) {
+					draw_bigname(dx, dy, loc(name), pointed ? c_white : c_ltgray)
+				}
+				else {
+	                draw_sprite_ext(sprOptionButtons, opt.value - 1, dx + 1, dy + 1, 1, 1, 0, c_black, 1)
+	                draw_sprite_ext(sprOptionButtons, opt.value - 1, dx, dy + 1, 1, 1, 0, c_black, 1)
+	                draw_sprite_ext(sprOptionButtons, opt.value - 1, dx, dy, 1, 1, 0, pointed ? c_white : c_ltgray, 1)
+				}
+            }
+			else {
                 if pointed draw_set_color(c_white)
                 else draw_set_color(c_silver)
 

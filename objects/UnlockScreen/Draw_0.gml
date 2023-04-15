@@ -22,17 +22,44 @@ draw_sprite(sprSkillSplat, splatimg, (view_xview + (view_width / 2)), ((view_yvi
 var sprt = skin ? sprBigNameCenteredB : sprBigNameCentered
 
 if addy > 0 {
-    draw_sprite_ext(sprt, race, ((view_xview + 1) + (view_width / 2)), ((view_yview + view_height) - 62) - addy, 1, 1, 0, c_black, 1)
-    draw_sprite_ext(sprt, race, ((view_xview + 1) + (view_width / 2)), (((view_yview + 1) + view_height) - 62) - addy, 1, 1, 0, c_black, 1)
-    draw_sprite_ext(sprt, race, (view_xview + (view_width / 2)), (((view_yview + 1) + view_height) - 62) - addy, 1, 1, 0, c_black, 1)
-    draw_sprite(sprt, race, (view_xview + (view_width / 2)), ((view_yview + view_height) - 62) - addy)
+	var name = scrMenuButtonName(sprt, race)
+	
+	if loc_exists(name) {
+		if sprt == sprBigNameCenteredB {
+			name += loc_exists("unlockscreen_B") ? " " + loc("unlockscreen_B") : " B"
+		}
+		
+		draw_set_halign(fa_center)
+		draw_set_valign(fa_center)
+		
+		draw_bigname(view_xview + view_width / 2, view_yview + view_height - 62 - addy, loc(name), c_white, 1)
+		
+		draw_set_halign(fa_left)
+		draw_set_valign(fa_top)
+	}
+    else {
+		draw_sprite_ext(sprt, race, ((view_xview + 1) + (view_width / 2)), ((view_yview + view_height) - 62) - addy, 1, 1, 0, c_black, 1)
+	    draw_sprite_ext(sprt, race, ((view_xview + 1) + (view_width / 2)), (((view_yview + 1) + view_height) - 62) - addy, 1, 1, 0, c_black, 1)
+	    draw_sprite_ext(sprt, race, (view_xview + (view_width / 2)), (((view_yview + 1) + view_height) - 62) - addy, 1, 1, 0, c_black, 1)
+	    draw_sprite(sprt, race, (view_xview + (view_width / 2)), ((view_yview + view_height) - 62) - addy)
+	}
 }
 
 if addy > 1 {
-    draw_sprite_ext(sprTextUnlocked, 0, ((view_xview + 1) + (view_width / 2)), ((view_yview + view_height) - 24) - addy, 1, 1, 0, c_black, 1)
-    draw_sprite_ext(sprTextUnlocked, 0, ((view_xview + 1) + (view_width / 2)), (((view_yview + 1) + view_height) - 24) - addy, 1, 1, 0, c_black, 1)
-    draw_sprite_ext(sprTextUnlocked, 0, (view_xview + (view_width / 2)), (((view_yview + 1) + view_height) - 24) - addy, 1, 1, 0, c_black, 1)
-    draw_sprite(sprTextUnlocked, 0, (view_xview + (view_width / 2)), ((view_yview + view_height) - 24) - addy)
+	if loc_exists("UNLOCKED!") {
+		draw_set_halign(fa_center)
+		draw_set_valign(fa_center)
+		
+		draw_bigname(view_xview + view_width / 2, view_yview + view_height - 24 - addy, loc("UNLOCKED!"), c_white, 1)
+		
+		draw_set_halign(fa_left)
+		draw_set_valign(fa_top)
+	}
+	else {
+	    draw_sprite_ext(sprTextUnlocked, 0, ((view_xview + 1) + (view_width / 2)), ((view_yview + view_height) - 24) - addy, 1, 1, 0, c_black, 1)
+	    draw_sprite_ext(sprTextUnlocked, 0, ((view_xview + 1) + (view_width / 2)), (((view_yview + 1) + view_height) - 24) - addy, 1, 1, 0, c_black, 1)
+	    draw_sprite_ext(sprTextUnlocked, 0, (view_xview + (view_width / 2)), (((view_yview + 1) + view_height) - 24) - addy, 1, 1, 0, c_black, 1)
+	    draw_sprite(sprTextUnlocked, 0, (view_xview + (view_width / 2)), ((view_yview + view_height) - 24) - addy)
+	}
 }
-
 if splatimg < 3 splatimg += 1

@@ -1,5 +1,5 @@
 #macro GAME_VERSION "b2.6"
-#macro GAME_BUILD 2601
+#macro GAME_BUILD 2602
 #macro BETA 1
 
 opt_fulscrn = 1

@@ -81,15 +81,3 @@ if paused && !want_pause {
     with TopCont scrDrawHUD()
     instance_deactivate_object(Player)
 }
-
-draw_set_color(c_white)
-
-draw_set_halign(fa_center)
-
-if !keyboard_check(vk_shift)
-draw_set_valign(fa_center)
-
-draw_bigname(device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), "TEST")
-
-draw_set_halign(fa_left)
-draw_set_valign(fa_top)

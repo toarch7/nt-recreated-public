@@ -51,16 +51,28 @@ if inst.skin {
     prt = sprBigPortraitSkin
 }
 
-view_yview++draw_sprite(prt, race, view_xview - yoff * 4 - port_x - 24, view_yview + view_height - 38)
+view_yview ++
+
+draw_sprite(prt, race, view_xview - yoff * 4 - port_x - 24, view_yview + view_height - 38)
+
 draw_sprite(sprCharSplat, splat_index, view_xview - yoff * 1.6, view_yview + view_height - 36)
 
-draw_sprite_ext(sprBigNames, race, view_xview - yoff * 4 + 1, view_yview + view_height - 60 + ((race == 0) * 26), 1, 1, 0, c_black, 1)
-draw_sprite_ext(sprBigNames, race, view_xview - yoff * 4 + 1, view_yview + 2 + view_height - 60 + ((race == 0) * 26), 1, 1, 0, c_black, 1)
-draw_sprite_ext(sprBigNames, race, view_xview - yoff * 4, view_yview + 2 + view_height - 60 + ((race == 0) * 26), 1, 1, 0, c_black, 1)
+if loc_exists(race_name[race]) {
+	draw_set_valign(fa_center)
+	
+	draw_bigname(view_xview - yoff * 4, view_yview + view_height - 60 - (race > 0) * 16, loc(string_upper(race_name[race])), c_white, 1)
+	
+	draw_set_valign(fa_top)
+}
+else {
+	draw_sprite_ext(sprBigNames, race, view_xview - yoff * 4 + 1, view_yview + view_height - 60 + ((race == 0) * 26), 1, 1, 0, c_black, 1)
+	draw_sprite_ext(sprBigNames, race, view_xview - yoff * 4 + 1, view_yview + 2 + view_height - 60 + ((race == 0) * 26), 1, 1, 0, c_black, 1)
+	draw_sprite_ext(sprBigNames, race, view_xview - yoff * 4, view_yview + 2 + view_height - 60 + ((race == 0) * 26), 1, 1, 0, c_black, 1)
 
-draw_sprite(sprBigNames, race, view_xview - yoff * 4, view_yview + view_height - 60 + ((race == 0) * 26))
+	draw_sprite(sprBigNames, race, view_xview - yoff * 4, view_yview + view_height - 60 + ((race == 0) * 26))
+}
 
-view_yview--
+view_yview --
 
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
@@ -85,7 +97,7 @@ with GoButton {
     x = view_xview + view_width - 24 + yoff * 4
     y = view_yview + view_height - 12
 
-    draw_self()
+    event_perform(ev_draw, 0)
 }
 
 draw_sprite(sprLoadoutSplat, splat_index, view_xview + yoff + view_width, view_yview + view_height - 31)

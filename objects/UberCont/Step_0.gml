@@ -69,6 +69,8 @@ for (var i = 0; i < KeyCont.players; i++) {
                 pauseRace = GameCont.race
 
                 audio_pause_all()
+				
+				audio_resume_sound(sndMenuClick)
 
                 with MusCont {
                     if sound_exists(song) audio_resume_sound(song)

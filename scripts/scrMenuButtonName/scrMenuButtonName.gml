@@ -1,7 +1,7 @@
-function scrMenuButtonName() {
-    switch sprite_index {
+function scrMenuButtonName(spr = sprite_index, img = image_index) {
+    switch spr {
         case sprMenuButton:
-            switch image_index {
+            switch img {
                 case 0:
                     return "PLAY"
                 case 1:
@@ -18,7 +18,7 @@ function scrMenuButtonName() {
             break
 
         case sprPlayButtons:
-            switch image_index {
+            switch img {
                 case 0:
                     return "NORMAL"
                 case 1:
@@ -33,7 +33,7 @@ function scrMenuButtonName() {
         case sprBigNames:
         case sprBigNameCentered:
         case sprBigNameCenteredB:
-            switch image_index {
+            switch img {
                 case 0:
                     return "RANDOM"
                 case 1:
@@ -72,20 +72,28 @@ function scrMenuButtonName() {
             break
 
         case sprPauseButtons:
-            switch image_index {
+            switch img {
                 case 0:
                     return "MENU"
                 case 1:
+                    return "RETRY"
+                case 6:
                     return "RETRY"
                 case 2:
                     return "SETTINGS"
                 case 3:
                     return "CONTINUE"
+				case 4:
+					return "BACK"
+				case 5:
+					return "QUIT"
+				case 7:
+					return "BOK!"
             }
             break
 
         case sprOptionButtons:
-            switch image_index {
+            switch img {
                 case 0:
                     return "AUDIO"
                 case 1:
@@ -98,13 +106,41 @@ function scrMenuButtonName() {
             break
 
         case sprCoopButton:
-            switch image_index {
+            switch img {
                 case 0:
                     return "HOST"
                 case 1:
                     return "JOIN"
             }
             break
+		
+		case sprBossName:
+			switch img {
+				case 0:
+					return "BIG# BANDIT"
+				case 1:
+					return "BIG# DOG"
+				case 2:
+					return "LIL# HUNTER"
+				case 3:
+					return "THRONE"
+				case 4:
+					return "THRONE# II"
+				case 5:
+					return "MOM"
+				case 6:
+				case 9:
+					return "HYPER# CRYSTAL"
+				case 7:
+					return "TECHNOMANCER"
+				case 8:
+					return "CAPTAIN"
+			}
+			
+			break
+		
+		case sprGameOverResults:
+			return "RESULTS"
     }
 
     return ""

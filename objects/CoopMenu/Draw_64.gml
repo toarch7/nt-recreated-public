@@ -62,13 +62,10 @@ draw_set_halign(fa_left)
 
 if !instance_exists(CoopController) {
     draw_set_halign(fa_right)
-
-    gpu_set_fog(1, c_black, 0, 1)
-    draw_sprite_ext(sprCoopButton, 0, dx + 1, dy + 1, 0.75, 0.75, 0, c_white, 1)
-    draw_sprite_ext(sprCoopButton, 0, dx + 1, dy, 0.75, 0.75, 0, c_white, 1)
-    gpu_set_fog(0, c_black, 0, 1)
-
-    draw_sprite_ext(sprCoopButton, 0, dx, dy, 0.75, 0.75, 0, c_white, 1)
+	
+	draw_bigname(dx, dy, "HOST", c_white)
+	
+	draw_set_halign(fa_center)
 
     if mouse_check_button_pressed(mb_left) && active {
         if point_in_rectangle(mx, my, dx - 48, dy - 12, dx + 48, dy + 12) {

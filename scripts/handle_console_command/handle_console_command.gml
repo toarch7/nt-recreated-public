@@ -102,7 +102,19 @@ function handle_console_command(str) {
             case "rad":
                 GameCont.rad += real(args[0])
                 break
-
+			
+			case "intro":
+			case "bossintro":
+				scrBossIntro(real(args[0]))
+				break
+			
+			case "unlockscreen":
+				with instance_create(x, y, UnlockScreen) {
+		            race = irandom(15)
+		            skin = irandom(1)
+		        }
+				break
+			
             case "mut":
             case "skill":
                 var s = scrContentIdByName(args, GameCont.skill_name)

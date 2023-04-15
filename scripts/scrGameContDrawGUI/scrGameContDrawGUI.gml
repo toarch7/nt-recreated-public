@@ -1,5 +1,5 @@
 function scrGameContDrawGUI() {
-    if !instance_exists(Menu) && UberCont.opt_timer && (!instance_exists(Credits) or(instance_exists(Credits) && !Credits.visible)) {
+    if UberCont.opt_timer && !instance_exists(Menu) && !instance_exists(PauseButton) && (!instance_exists(Credits) or(instance_exists(Credits) && !Credits.visible)) {
         draw_set_color(c_white)
         draw_set_halign(fa_right)
         draw_set_valign(fa_top)
@@ -14,30 +14,32 @@ function scrGameContDrawGUI() {
 
         if coopultra {
             draw_sprite(sprUltraIconCoopHUD, coopultra - 1, view_width - 12 - 16 * dix, 13)
-            dix++
-        } else if ultra {
+            dix ++
+        }
+		else if ultra {
             draw_sprite(sprUltraIconHUD, ultr_indx[race, ultra], view_width - 12 - 16 * dix, 13)
-            dix++
+            dix ++
         }
 
         for (var dir = 0; dir < ds_list_size(skills); dir++) {
             var __sk = skills[| dir]
 
             if __sk == patienceskill
-            continue
+				continue
 
             if __sk == 25 {
                 if patienceskill {
                     draw_sprite(sprSkillIconHUD, patienceskill, view_width - 12 - 16 * dix, 12)
                     draw_sprite(sprPatienceIconHUD, 0, view_width - 12 - 16 * dix, 12)
-                } else draw_sprite(sprSkillIconHUD, __sk, view_width - 12 - 16 * dix, 12)
+                }
+				else draw_sprite(sprSkillIconHUD, __sk, view_width - 12 - 16 * dix, 12)
 
-                dix++
+                dix ++
                 continue
             }
 
             draw_sprite(sprSkillIconHUD, __sk, view_width - 12 - 16 * dix, 12)
-            dix++
+            dix ++
         }
     }
 }

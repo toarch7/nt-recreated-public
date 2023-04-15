@@ -19,35 +19,48 @@ if bossintro {
     var _w = 36
     draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + 36, 0)
     draw_rectangle(view_xview, view_yview + view_height, view_xview + view_width, view_yview + view_height - 36, 0)
-
+	
     draw_set_color(c_white)
-
+	
     if boss != 4 && boss != 6 && boss != 9 && boss != 7 && boss != 8 {
         draw_sprite(sprBossIntroBackLayer, boss, view_xview + view_width / 2 + bossx * 1.6, view_yview + view_height / 2 - 31)
     }
-
+	
     draw_sprite(sprBossIntro, boss, view_xview + view_width / 2 + bossx, view_yview + view_height / 2 - 31)
-
+	
     if boss == 4 or boss == 6 or boss == 9 or boss == 7 or boss == 8 {
         draw_sprite(sprBossIntroBackLayer, boss, view_xview + view_width / 2 + bossx * 0.5, view_yview + view_height / 2 - 31)
     }
-
+	
     if bossx > 20 or bossx < 5 {
         bossx -= 60
     } else bossx -= 0.5
-
+	
     if bossx < 20 {
         draw_sprite(sprBossNameSplat, splat_index, view_xview + view_width / 2, view_yview + view_height / 2)
-
+		
         if splat_index < 3 {
             splat_index++
         }
-
-        draw_sprite_ext(sprBossName, boss, view_xview + view_width / 2 + 1 + bossnamex, view_yview + view_height / 2, 1, 1, 0, c_black, 1)
-        draw_sprite_ext(sprBossName, boss, view_xview + view_width / 2 + 1 + bossnamex, view_yview + view_height / 2 + 1, 1, 1, 0, c_black, 1)
-        draw_sprite_ext(sprBossName, boss, view_xview + view_width / 2 + 1 + bossnamex, view_yview + view_height / 2 + 1, 1, 1, 0, c_black, 1)
-        draw_sprite(sprBossName, boss, view_xview + view_width / 2 + bossnamex, view_yview + view_height / 2)
-
+		
+		var name = scrMenuButtonName(sprBossName, boss)
+		
+		if loc_exists(name) {
+	        draw_set_halign(fa_left)
+			draw_set_valign(fa_center)
+			
+			draw_bigname(view_xview + view_width / 2 + bossnamex, view_yview + view_height / 2, loc(name), c_white, 1)
+			
+			draw_set_halign(fa_left)
+			draw_set_valign(fa_top)
+		}
+		else {
+			draw_sprite_ext(sprBossName, boss, view_xview + view_width / 2 + 1 + bossnamex, view_yview + view_height / 2, 1, 1, 0, c_black, 1)
+	        draw_sprite_ext(sprBossName, boss, view_xview + view_width / 2 + 1 + bossnamex, view_yview + view_height / 2 + 1, 1, 1, 0, c_black, 1)
+	        draw_sprite_ext(sprBossName, boss, view_xview + view_width / 2 + 1 + bossnamex, view_yview + view_height / 2 + 1, 1, 1, 0, c_black, 1)
+	        draw_sprite(sprBossName, boss, view_xview + view_width / 2 + bossnamex, view_yview + view_height / 2)
+		}
+		
         if bossx < 5 {
             bossnamex += 20
         } else bossnamex += 0.5
@@ -99,10 +112,21 @@ if bossintro {
     draw_set_alpha(1)
 
     var yoff = (daily_run or global.hardmode) * 4
-
-    draw_sprite_ext(sprTextPaused, 0, view_xview + view_width / 2 + 1, view_yview + 52 + 1 - yoff, 1, 1, 0, c_black, 1)
-    draw_sprite(sprTextPaused, 0, view_xview + view_width / 2, view_yview + 52 - yoff)
-
+	
+	if loc_exists("PAUSED") {
+		draw_set_halign(fa_center)
+		draw_set_valign(fa_center)
+		
+		draw_bigname(view_xview + view_width / 2 + 1, view_yview + 52 + 1 - yoff, loc("PAUSED"), c_white)
+		
+		draw_set_halign(fa_left)
+		draw_set_valign(fa_top)
+	}
+	else {
+	    draw_sprite_ext(sprTextPaused, 0, view_xview + view_width / 2 + 1, view_yview + 52 + 1 - yoff, 1, 1, 0, c_black, 1)
+	    draw_sprite(sprTextPaused, 0, view_xview + view_width / 2, view_yview + 52 - yoff)
+	}
+	
     var _w = 36
     draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + _w, 0)
     draw_rectangle(view_xview, view_yview + view_height, view_xview + view_width, view_yview + view_height - _w, 0)

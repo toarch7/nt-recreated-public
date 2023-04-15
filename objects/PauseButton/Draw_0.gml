@@ -1,12 +1,33 @@
-col = light ? c_white : c_ltgray
+var col = light ? c_white : c_ltgray,
+	name = scrMenuButtonName()
 
-y -= appear
+y -= appear + hover
 
-draw_sprite_ext(sprite_index, image_index, x, y + 1 - hover, 1, 1, 0, c_black, 1)
-draw_sprite_ext(sprite_index, image_index, x + 1, y + 1 - hover, 1, 1, 0, c_black, 1)
-draw_sprite_ext(sprite_index, image_index, x, y - hover, 1, 1, 0, col, 1)
+if loc_exists(name) {
+	var a = 0
+	
+	if sprite_index == sprPauseButtons {
+		if image_index == 0 or image_index == 1 or image_index == 4 or image_index == 7 {
+			a = 6
+		}
+		else if image_index == 2 or image_index == 3 or image_index == 5 or image_index == 6 {
+			a = -6
+		}
+	}
+	
+	draw_set_halign(fa_center)
+	
+	draw_bigname(x + sign(a) * 8, y - 8, loc(name), col, 0.65, a)
+	
+	draw_set_halign(fa_left)
+}
+else {
+	draw_sprite_ext(sprite_index, image_index, x,     y + 1, 1, 1, 0, c_black, 1)
+	draw_sprite_ext(sprite_index, image_index, x + 1, y + 1, 1, 1, 0, c_black, 1)
+	draw_sprite_ext(sprite_index, image_index, x,     y    , 1, 1, 0, col, 1)
+}
 
-y += appear
+y += appear + hover
 
 if appear appear--
 
