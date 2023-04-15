@@ -110,6 +110,7 @@
 	"EXTRA CHEST SPAWN": "ДОПОЛНИТЕЛЬНЫЙ СУНДУК КАЖДЫЙ ЭТАЖ",
 	"MORE WEAPON DROPS": "ПУШКИ ПАДАЮТ ЧАЩЕ",
 
+	"RANDOM": "СЛУЧАЙНО",
 	"FISH": "РЫБА",
 	"CRYSTAL": "КРИСТАЛЛ",
 	"EYES": "ГЛАЗА",
@@ -280,7 +281,7 @@
 	"SETTINGS": "НАСТРОЙКИ",
 	"ENABLED": "ВКЛ",
 	"DISABLED": "ВЫКЛ",
-	"SOUND": "ЗВУК",
+	"AUDIO": "ЗВУК",
 	"VIDEO": "ВИДЕО",
 	"GAME": "ИГРА",
 	"CONTROLS": "УПРАВЛЕНИЕ",
@@ -302,6 +303,7 @@
 	
 	"CROSSHAIR": "ПРИЦЕЛ",
 	"LANGUAGE": "ЯЗЫК",
+	"NICKNAME": "ИМЯ",
 	"TIMER": "ТАЙМЕР",
 	"SCREENSHAKE": "ТРЯСКА",
 	"PAUSE BUTTON": "КНОПКА ПАУЗЫ",
@@ -356,13 +358,18 @@
 	"NO": "НЕТ",
 	
 	"PLAY": "ИГРАТЬ",
+	"CO-OP": "КООПЕРАТИВ",
+	"SETTINGS": "НАСТРОЙКИ",
 	"ACHIEVS": "ДОСТИЖЕНИЯ",
 	"STATS": "СТАТИСТИКА",
+	"QUIT": "ВЫЙТИ",
 	
-	"NORMAL": "НОРМАЛЬНЫЙ",
-	"DAILY": "ЕЖЕДНЕВНЫЙ",
-	"WEEKLY": "ЕЖЕНЕДЕЛЬНЫЙ",
+	"NORMAL": "ОБЫЧНЫЙ",
+	"DAILY": "ДЕЙЛИ",
+	"WEEKLY": "ВИКЛИ",
 	"HARD": "СЛОЖНЫЙ",
+	
+	"button_GO": "GO",
 	
 	"LOCAL GAMES": "ИГРЫ РЯДОМ",
 	"REFRESH": "ОБНОВИТЬ",
@@ -373,8 +380,28 @@
 	"RUN HISTORY": "ИСТОРИЯ",
 	"@wNOTHING TO SHOW... YET": "@wЗДЕСЬ ПУСТО... ПОКА ЧТО",
 	"@dAVERAGE SCORE": "@dСРЕДНИЙ СЧЕТ",
+	"RESULTS": "РЕЗУЛЬТАТЫ",
 	
 	"ACHIEVEMENTS": "ДОСТИЖЕНИЯ",
+	
+	"MENU": "В МЕНЮ",
+	"RETRY": "ЗАНОВО",
+	"CONTINUE": "ПРОДОЛЖИТЬ",
+	"QUIT": "ВЫЙТИ",
+	"PAUSED": "ПАУЗА",
+	
+	"BIG# BANDIT": "БОЛЬШОЙ# БАНДИТ",
+	"BIG# DOG": "БОЛЬШОЙ# ПЁС",
+	"LIL# HUNTER": "МЕЛКИЙ# ОХОТНИК",
+	"THRONE": "ЯДЕРНЫЙ# ТРОН",
+	"THRONE# II": "ТРОН# II",
+	"MOM": "МАМА",
+	"HYPER# CRYSTAL": "ГИПЕР# КРИСТАЛЛ",
+	"TECHNOMANCER": "ТЕХНО-# МАНCЕР",
+	"CAPTAIN": "КАПИТАН",
+	
+	"UNLOCKED!": "ОТКРЫТО!",
+	"unlockscreen_B": "Б",
 	
 	"MELTING UNLOCKED": "МЕЛТИНГ ОТКРЫТ",
 	"EYES UNLOCKED": "ГЛАЗА ОТКРЫТ",
