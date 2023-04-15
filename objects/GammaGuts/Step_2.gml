@@ -1,6 +1,7 @@
 if instance_exists(creator) {
-    x = creator.x + creator.hspeed
-    y = creator.y + creator.vspeed
+    x = creator.x
+    y = creator.y
     visible = creator.visible
+	depth = creator.depth - 1
 }
 else instance_destroy()
