@@ -29,19 +29,25 @@ if instance_exists(Player) {
         y = 10016
         angle = 0
         instance_create(x, y, PortalClear)
-
-        with WepPickup {
-            if persistent {
-                persistent = false
-                visible = 1
-
-                x = other.x
-                y = other.y
-
-                mask_index = mskWepPickup
-
-                motion_add(random(360), 1.5 + random(1))
-            }
+		
+		if skill_get(8) && !instance_exists_var(GammaGuts, "creator", id) {
+		    with instance_create(x, y, GammaGuts) {
+		        creator = other.id
+		    }
+		}
+	}
+	
+	with WepPickup {
+        if persistent {
+            persistent = false
+            visible = 1
+			
+            x = 10016
+			y = 10016
+			
+            mask_index = mskWepPickup
+			
+            motion_add(random(360), 1.5 + random(1))
         }
     }
 }
