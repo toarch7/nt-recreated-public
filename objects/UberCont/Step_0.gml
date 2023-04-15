@@ -17,11 +17,16 @@ if want_restart {
     pausespr = -1
     paused = 0
 	
+	print("players", instance_number(Player))
+	
     with all {
         if object_index != UberCont && object_index != Console && object_index != CoopController {
             instance_destroy(id, 0)
         }
     }
+	
+	with Player
+		instance_destroy(id, 0)
 	
     instance_create(0, 0, GameCont)
 	
