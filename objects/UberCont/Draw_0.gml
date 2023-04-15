@@ -112,3 +112,4 @@ if bossintro {
 
     scrDrawRoadmap(view_xview + view_width / 2, view_yview + view_height / 2, 1000)
 }
+

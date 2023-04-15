@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+    "name": "draw_text_custom",
+    "path": "folders/Scripts/draw_text_custom.yy",
   },
   "resourceVersion": "1.0",
-  "name": "scrButtonGetName",
+  "name": "draw_bigname",
   "tags": [],
   "resourceType": "GMScript",
 }

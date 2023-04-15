@@ -10,7 +10,7 @@ opt_bksides = 0
 //show_debug_overlay(1)
 
 font = fntL
-big_font = fontBig
+big_font = fntBig
 
 draw_set_font(font)
 
