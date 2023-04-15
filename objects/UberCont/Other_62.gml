@@ -17,8 +17,10 @@ if async_load[? "id"] == update_request {
         show_debug_message(async_load[? "result"])
 
         if !is_undefined(result) {
-            if result[? "version"] > GAME_BUILD {
-                update_message = show_question_async("Update " + string(result[? "versionName"]) + " b" + string(result[? "version"]) + " available.\n Open download page?")
+			var vname = BETA ? "versionBeta": "version"
+			
+            if result[? vname] > GAME_BUILD {
+                update_message = show_question_async("Update " + string(result[? "versionName"]) + " b" + string(result[? vname]) + " available.\n Open download page?")
             }
             
             update_info = result
