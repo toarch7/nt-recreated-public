@@ -222,6 +222,9 @@ function scrAchievements() {
 	max_achieves = array_length(chiev_name) - 1
 
 	for(var i = 0; i <= max_achieves; i ++) {
+		chiev_name[i] = string_upper(chiev_name[i])
+		chiev_text[i] = string_upper(chiev_text[i])
+		
 	    chiev_have[i] = save_get_val("achievement", string(i), 0)
 	}
 	

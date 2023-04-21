@@ -46,7 +46,7 @@ if UberCont.continued_run {
     draw_set_alpha(0.1)
     draw_text(view_xview + view_width / 2, view_yview + 59, "continued")
     draw_set_alpha(1)
-    draw_set_font(fntL)
+    draw_set_font(fntM1)
 }
 
 draw_set_halign(fa_left)

@@ -38,7 +38,7 @@ if mode = 2 {
     UberCont.font = fontSmall
     draw_text_nt(view_xview + view_width / 2, view_yview + view_height - 10, "@d*THIS PORT IS NOT OFFICIAL#AND IS COMPLETELY FREE ON ITCH.IO")
 
-    UberCont.font = fntL
+    UberCont.font = fntM1
 }
 
 if mode == 3 {

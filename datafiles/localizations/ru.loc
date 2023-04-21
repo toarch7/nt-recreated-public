@@ -38,6 +38,10 @@
 	"@wRMB BUTTON@s USES YOUR ABILITY#GIVE IT A GO!": "@wПКМ@s ИСПОЛЬЗУЕТ ТВОЮ АКТИВНУЮ СПОСОБНОСТЬ#ПОПРОБУЙ ПОНАЖИМАТЬ НА НЕЁ",
 	"COOL, WE'RE DONE HERE!": "КРУТО, НА ЭТОМ МЫ ЗАКОНЧИМ!",
 	
+	"LEVEL UP": "НОВЫЙ УРОВЕНЬ",
+	"PICK A CROWN": "ВЫБЕРИ КОРОНУ",
+	"LEVEL ULTRA": "УЛЬТРА УРОВЕНЬ",
+	
 	"RHINO SKIN": "КОЖА НОСОРОГА",
 	"EXTRA FEET": "ДОПОЛНИТЕЛЬНАЯ НОГА",
 	"PLUTONIUM HUNGER": "ПЛУТОНИЕВЫЙ ГОЛОД",
@@ -384,6 +388,16 @@
 	
 	"ACHIEVEMENTS": "ДОСТИЖЕНИЯ",
 	
+	"TOTAL": "ВСЕГО",
+	"AREA": "УРОВЕНЬ",
+    "KILLS": "УБИЙСТВА",
+    "LOOPS": "ЦИКЛЫ",
+    "RUNS": "ЗАБЕГИ",
+    "DEATHS": "СМЕРТИ",
+    "WINS": "ПОБЕДЫ",
+    "TIME": "ВРЕМЯ",
+    "BEST RUN": "ЛУЧШИЙ ЗАБЕГ",
+	
 	"MENU": "В МЕНЮ",
 	"RETRY": "ЗАНОВО",
 	"CONTINUE": "ПРОДОЛЖИТЬ",
@@ -397,11 +411,13 @@
 	"THRONE# II": "ТРОН# II",
 	"MOM": "МАМА",
 	"HYPER# CRYSTAL": "ГИПЕР# КРИСТАЛЛ",
-	"TECHNOMANCER": "ТЕХНО-# МАНCЕР",
+	"TECHNO#MANCER": "ТЕХНО#МАНCЕР",
 	"CAPTAIN": "КАПИТАН",
 	
 	"UNLOCKED!": "ОТКРЫТО!",
 	"unlockscreen_B": "Б",
+	
+	"(HIDDEN)": "(СКРЫТО)",
 	
 	"MELTING UNLOCKED": "МЕЛТИНГ ОТКРЫТ",
 	"EYES UNLOCKED": "ГЛАЗА ОТКРЫТ",
@@ -928,5 +944,11 @@
 	"watch out": "осторожно",
 	"make it": "сделай это",
 	"careful": "осторожнее",
-	"always believe in your soul": "верь в себя"
+	"always believe in your soul": "верь в себя",
+	"the taste of mud": "вкус грязи",
+    "drink blood": "пей кровь",
+    "brr": "брр",
+    "telekinesis pushes projectiles away": "телекинез отталкивает снаряды",
+    "it's okay to be scared": "быть испуганным это нормально",
+    "feeling lucky": "удача на твоей стороне"
 }

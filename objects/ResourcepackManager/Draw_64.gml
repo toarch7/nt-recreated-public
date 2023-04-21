@@ -126,13 +126,13 @@ if mode != 4 {
             draw_set_alpha(1)
 
             if _if[5] != -2 {
-                draw_set_font(fntL)
+                draw_set_font(fntM1)
 
                 draw_text_nt(28, _y + 4, _if[0] + "@w")
 
                 UberCont.font = fontSmall
                 draw_text_nt(28, _y + 14, _if[8] + "@w")
-                UberCont.font = fntL
+                UberCont.font = fntM1
 
                 if _if[9] != undefined {
                     draw_text_shadow(28, _y + 24, (browsing ? ("$" + string(_if[4]) + " ") : "") + string(_if[9]))
@@ -228,7 +228,7 @@ if mode != 4 {
         draw_sprite_ext(sprDailyListArrow, 1, view_width / 2 + 48, view_height - 14, 1, 1, 270, can ? c_white : c_dkgray, 1)
     }
 
-    draw_set_font(fntL)
+    draw_set_font(fntM1)
 
     draw_set_valign(fa_center)
     draw_set_halign(fa_right)
@@ -335,7 +335,7 @@ if mode == 4 {
         draw_set_color(c_white)
         draw_text_ext(4, 72, _if[1], height, view_width - 4)
 
-        draw_set_font(fntL)
+        draw_set_font(fntM1)
         draw_text_nt(38, 42, _if[0] + "@w")
 
         draw_set_color(c_white)
@@ -446,7 +446,7 @@ if mode == 4 {
             }
         }
 
-        draw_set_font(fntL)
+        draw_set_font(fntM1)
 
         var screenshots = _if[11]
 

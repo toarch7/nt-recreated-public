@@ -10,7 +10,7 @@ for(var i = 0; i < array_length(chiev_name); i ++) {
 		
 		if chiev_hide[i] && !chiev_have[i] {
 			draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_black, 1)
-			draw_text_nt(xx, yy - ypos + 5, "@dHIDDEN")
+			draw_text_nt(xx, yy - ypos + 5, "@d" + loc("HIDDEN"))
 		}
 		else {
 			draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 11 - ypos, 1, 1, 0, c_black, 1)
@@ -27,11 +27,11 @@ for(var i = 0; i < array_length(chiev_name); i ++) {
 				draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_dkgray, 1)
 			}
 			
-			draw_text_nt(xx, yy - ypos, c + chiev_name[i])
+			draw_text_nt(xx, yy - ypos, c + loc(chiev_name[i]))
 			
 			var scale = min(1, 1 - (string_width(string_hash_to_newline(chiev_text[i])) / (view_width - 32) - 0.5))
 			
-			draw_text_nt(xx, yy - ypos + 10, "@s" + chiev_text[i], scale)
+			draw_text_nt(xx, yy - ypos + 10, "@s" + loc(chiev_text[i]), scale)
 		}
 	}
 	

@@ -30,7 +30,7 @@ if !instance_exists(Player) && room == romGame {
 
     draw_set_valign(fa_top)
     draw_set_halign(fa_left)
-    draw_set_font(fntL)
+    draw_set_font(fntM1)
 }
 else if global.custom_seed {
     draw_set_valign(fa_center)
@@ -44,7 +44,7 @@ else if global.custom_seed {
 
     draw_set_valign(fa_top)
     draw_set_halign(fa_left)
-    draw_set_font(fntL)
+    draw_set_font(fntM1)
 }
 
 if instance_exists(Player) && opt_pausebutton && !instance_exists(Credits) {

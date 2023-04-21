@@ -18,7 +18,7 @@ if rp_warning {
     // resourcepack warning
     UberCont.font = fontSmall
     draw_text_nt(view_width / 2, view_height / 2 - 16, loc("@sRESOURCEPACKS ARE ONLY UNIQUE TO THIS RECREATION.#THEY ARE MADE BY COMMUNITY, SOLEY TO MAKE THE GAME#LOOK FRESH IF YOU GET BORED.##USING RESOURCEPACKS WASN'T INTENDED BY CREATORS,#SO IT MAY AFFECT YOUR EXPERIENCE."))
-    UberCont.font = fntL
+    UberCont.font = fntM1
 
     if rp_warning < 90 {
         draw_text_nt(view_width / 2, view_height / 2 + 16, "@sOK (" + string(ceil((90 - rp_warning) / 30)) + "S.)")
@@ -447,7 +447,8 @@ for (var i = 0; i < array_length(options[category]); i++) {
 
             if pointed_item != i {
                 draw_set_color(c_ltgray)
-            } else dy--
+            }
+			else dy--
 
             draw_set_halign(fa_right)
             draw_text_shadow(dx - 4, dy, loc(opt.name) + ": ")
@@ -458,8 +459,10 @@ for (var i = 0; i < array_length(options[category]); i++) {
             if is_undefined(opt[$ "invert"]) {
                 if !is_undefined(opt[$ "states"]) {
                     draw_text_shadow(dx + 32, dy, opt.states[opt.value])
-                } else draw_text_shadow(dx + 32, dy, opt.value ? "ON" : "OFF")
-            } else draw_text_shadow(dx + 32, dy, opt.value ? "OFF" : "ON")
+                }
+				else draw_text_shadow(dx + 32, dy, loc(opt.value ? "ON" : "OFF"))
+            }
+			else draw_text_shadow(dx + 32, dy, loc(opt.value ? "OFF" : "ON"))
 
             draw_set_halign(fa_left)
 

@@ -47,17 +47,17 @@ function draw_bigname(_x, _y, _text, col = draw_get_color(), scale = 0.65, angle
     draw_set_color(c_black)
 	
 	if scale >= 1 {
-	    draw_text_transformed(1, 2, _text, scale, scale, 0)
-	    draw_text_transformed(1, 4, _text, scale, scale, 0)
-	    draw_text_transformed(0, 4, _text, scale, scale, 0)
+	    draw_text_transformed(5, 2, _text, scale, scale, 0)
+	    draw_text_transformed(5, 4, _text, scale, scale, 0)
+	    draw_text_transformed(4, 4, _text, scale, scale, 0)
 	}
 	else {
-	    draw_text_transformed(1, 3, _text, scale, scale, 0)
-	    draw_text_transformed(0, 3, _text, scale, scale, 0)
+	    draw_text_transformed(5, 3, _text, scale, scale, 0)
+	    draw_text_transformed(4, 3, _text, scale, scale, 0)
 	}
 	
     draw_set_color(c_white)
-    draw_text_transformed(0, 2, _text, scale, scale, 0)
+    draw_text_transformed(4, 2, _text, scale, scale, 0)
 
     surface_reset_target()
 

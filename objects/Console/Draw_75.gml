@@ -57,7 +57,7 @@ if global.console_active {
     text(display_get_gui_width() / 2, 48, alert, c_red)
 }
 
-draw_set_font(fntL)
+draw_set_font(fntM1)
 
 if os_type == os_android && (!read or global.console_active) {
     draw_set_color(c_black)

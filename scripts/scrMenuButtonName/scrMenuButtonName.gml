@@ -132,7 +132,7 @@ function scrMenuButtonName(spr = sprite_index, img = image_index) {
 				case 9:
 					return "HYPER# CRYSTAL"
 				case 7:
-					return "TECHNOMANCER"
+					return "TECHNO#MANCER"
 				case 8:
 					return "CAPTAIN"
 			}
@@ -141,6 +141,15 @@ function scrMenuButtonName(spr = sprite_index, img = image_index) {
 		
 		case sprGameOverResults:
 			return "RESULTS"
+		
+		case sprTextLevel:
+			return "LEVEL UP"
+		
+		case sprTextCrown:
+			return "PICK A CROWN"
+		
+		case sprTextUltra:
+			return "LEVEL ULTRA"
     }
 
     return ""

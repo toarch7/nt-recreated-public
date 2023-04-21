@@ -251,7 +251,7 @@ function scrDrawHUD(plr = noone) {
         draw_set_color(c_white)
         draw_text(0, 45, "continued")
         draw_set_alpha(1)
-        draw_set_font(fntL)
+        draw_set_font(fntM1)
     }
 
     draw_set_halign(fa_center)

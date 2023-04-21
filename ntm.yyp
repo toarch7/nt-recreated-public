@@ -140,6 +140,7 @@
     {"id":{"name":"sndMutant8Cptn","path":"sounds/sndMutant8Cptn/sndMutant8Cptn.yy",},"order":55,},
     {"id":{"name":"sprGoldPlasmaGun","path":"sprites/sprGoldPlasmaGun/sprGoldPlasmaGun.yy",},"order":221,},
     {"id":{"name":"sprGoldScrewdriver","path":"sprites/sprGoldScrewdriver/sprGoldScrewdriver.yy",},"order":223,},
+    {"id":{"name":"fntM1","path":"fonts/fntM1/fntM1.yy",},"order":4,},
     {"id":{"name":"sprGoldFrogBlaster","path":"sprites/sprGoldFrogBlaster/sprGoldFrogBlaster.yy",},"order":225,},
     {"id":{"name":"sprUltraRevolver","path":"sprites/sprUltraRevolver/sprUltraRevolver.yy",},"order":227,},
     {"id":{"name":"sprUltraShotgun","path":"sprites/sprUltraShotgun/sprUltraShotgun.yy",},"order":229,},
@@ -3021,7 +3022,6 @@
     {"id":{"name":"__init_global","path":"scripts/__init_global/__init_global.yy",},"order":19,},
     {"id":{"name":"__global_object_depths","path":"scripts/__global_object_depths/__global_object_depths.yy",},"order":21,},
     {"id":{"name":"scrGamepadUIControl","path":"scripts/scrGamepadUIControl/scrGamepadUIControl.yy",},"order":134,},
-    {"id":{"name":"fntL","path":"fonts/fntL/fntL.yy",},"order":0,},
     {"id":{"name":"fontSmall","path":"fonts/fontSmall/fontSmall.yy",},"order":1,},
     {"id":{"name":"Wall","path":"objects/Wall/Wall.yy",},"order":1,},
     {"id":{"name":"sprBigFlowerHurt","path":"sprites/sprBigFlowerHurt/sprBigFlowerHurt.yy",},"order":153,},
@@ -3770,6 +3770,7 @@
     {"CopyToMask":-1,"filePath":"datafiles/localizations","resourceVersion":"1.0","name":"fa.loc","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/localizations","resourceVersion":"1.0","name":"es.loc","resourceType":"GMIncludedFile",},
     {"CopyToMask":-1,"filePath":"datafiles/localizations","resourceVersion":"1.0","name":"default.loc","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/localizations","resourceVersion":"1.0","name":"pl.loc","resourceType":"GMIncludedFile",},
   ],
   "MetaData": {
     "IDEVersion": "2.3.7.606",

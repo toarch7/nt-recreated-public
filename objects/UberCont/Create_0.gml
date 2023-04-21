@@ -1,5 +1,5 @@
 #macro GAME_VERSION "b2.6"
-#macro GAME_BUILD 2602
+#macro GAME_BUILD 2603
 #macro BETA 1
 
 opt_fulscrn = 1
@@ -9,7 +9,7 @@ opt_bksides = 0
 
 //show_debug_overlay(1)
 
-font = fntL
+font = fntM1
 big_font = fntBig
 
 draw_set_font(font)

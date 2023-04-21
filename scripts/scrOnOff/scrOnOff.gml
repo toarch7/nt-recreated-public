@@ -1,6 +1,6 @@
-function scrOnOff(argument0) {
-    return qm(argument0, "ON", "OFF")
-
-
-
+function scrOnOff(a) {
+	if a
+		return loc("ON")
+	
+    return loc("OFF")
 }
