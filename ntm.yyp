@@ -140,7 +140,7 @@
     {"id":{"name":"sndMutant8Cptn","path":"sounds/sndMutant8Cptn/sndMutant8Cptn.yy",},"order":55,},
     {"id":{"name":"sprGoldPlasmaGun","path":"sprites/sprGoldPlasmaGun/sprGoldPlasmaGun.yy",},"order":221,},
     {"id":{"name":"sprGoldScrewdriver","path":"sprites/sprGoldScrewdriver/sprGoldScrewdriver.yy",},"order":223,},
-    {"id":{"name":"fntM1","path":"fonts/fntM1/fntM1.yy",},"order":4,},
+    {"id":{"name":"fntM1","path":"fonts/fntM1/fntM1.yy",},"order":0,},
     {"id":{"name":"sprGoldFrogBlaster","path":"sprites/sprGoldFrogBlaster/sprGoldFrogBlaster.yy",},"order":225,},
     {"id":{"name":"sprUltraRevolver","path":"sprites/sprUltraRevolver/sprUltraRevolver.yy",},"order":227,},
     {"id":{"name":"sprUltraShotgun","path":"sprites/sprUltraShotgun/sprUltraShotgun.yy",},"order":229,},
