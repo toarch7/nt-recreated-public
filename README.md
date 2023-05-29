@@ -1,28 +1,26 @@
 # Nuclear Throne Recreated
-Open source rebuild of Nuclear Throne and [Android port](https://toncho.itch.io/nuclear-throne-mobile/)
+Open source rebuild of Nuclear Throne and [mobile port](https://toncho.itch.io/nuclear-throne-mobile/)
 
-[Nuclear Throne](https://nuclearthrone.com/]) is a game created and owned by [Vlambeer](https://vlambeer.com/). All rights reserved.
+[Nuclear Throne](https://nuclearthrone.com) is a game owned by [Vlambeer](https://vlambeer.com/). All rights reserved.
 
-The recreation is based on update 19th of the game, which is officially claimed as a version allowed to be decompiled and modded.
+Primary reason why this exists is mobile support - allowing much wider range of people to experience Nuclear Throne, which is being an amazing game.
 
-General purpose of this modification is a mobile support, to allow much wider range of people to get into Nuclear Throne which is being an amazing game.
+Recreation is based off decompiled version of update 19th with 99%+ of everything from modern versions being reimplemented on top.
 
-The source is public for education and modding reasons. For more convenient exploration I recommend using [GMEdit](https://yellowafterlife.itch.io/gmedit) by YellowAfterlife
+The source is public for educational and modding purposes.
+Using [GMEdit](https://yellowafterlife.itch.io/gmedit) is recommended for convenient exploration.
 
-# Resources legality and foreword to building
- Unfortunately it is not possible to run project from this source right away, due to an Vlambeer respecting work of their contributors and employees,
-not allowing to publicly store (most of) assets made by them unless all rights are cleared by myself.
-And, sadly, most of the creators weren't able grant me legal permissions to do so.
-
-I'm not allowed to give any alternative downloads, although you can extract resources from release version of the game yourself with help of [UndertaleModTool](https://github.com/krzys-h/UndertaleModTool) additional tinkering. 
-
-Additionally you can bring your own assets which are fine to be distributed safely.
+# Legal and foreword to building
+Sadly you can't run this project from source as is due to legal reasons. Vlambeer respect work of their team and contributors.
+It's not allowed to provide any alternative downloads and the tool for extracting resources and packing them back is not ready yet.
+Not to mention that the resources are the only thing that's prohibited from being public. You can make your workarounds from here.
 
 # Building
  Building from this source is only possible with GameMakerStudio 2.
 
 ## Android
-Build configurations:
+(Any config should work actually, this is just how I have set it up for releasing builds)
+
  * Build Tools: 28.0.3
  * Support Library: 28.0.1
  * Target SDK: 28
@@ -34,26 +32,27 @@ If you'd like to be able to access external storage, downgrade your IDE and Runt
  * IDE: v2.3.7.606
  * Runtime: 2.3.7.476
 
-This is needed since newest GooglePlay Requirements (which are followed by default) are essentially restricting most of the storage permissions.
+Newer versions will follow newest Google Play requirements, not allowing to use deprecated SDK.
 
 Download SDK & NDK using [AndroidStudio](https://developer.android.com/studio/)
 
 ## Other platforms
- * Windows doesn't require anything special
- * Ubuntu (or generally most of Linux distros) build instructions can be viewed [here](https://help.yoyogames.com/hc/en-us/articles/235186168-Setting-Up-For-Ubuntu)
- * Mac and iOS are requiring you to own Apple Developer status (which is around $100 per month). There were no official builds to any apple devices, so I have nothing to say about it
+ * Windows doesn't require anything special. The game even has support for Mouse + Keyboard controls.
+ * [Ubuntu](https://help.yoyogames.com/hc/en-us/articles/235186168-Setting-Up-For-Ubuntu)
+ * [iOS](https://help.yoyogames.com/hc/en-us/articles/115001368747-Setting-Up-For-iOS-Including-iPadOS-) (no official builds were made to this)
+ * [Mac](https://help.yoyogames.com/hc/en-us/articles/235186128-Setting-Up-For-macOS) (there too)
+
+(actually could've just said you can follow official Setting Up guides by YoYo smh)
 
 # Contributing
- Contributions are welcomed, unless your changes don't match what is present in release version of the original game.
+ Contributions are welcomed, unless your changes interfere recreation's purity too much (meaning, adding new content is undesired - instead you should create mods).
+ You can also credit yourself [here](https://github.com/toarch7/nt-recreated-public/blob/main/objects/Credits/Create_0.gml) if you have done any substantial changes.
  
- Please do not commit changes if they're just fixing the syntax and don't contain any actual codebase changes.
- 
- If you'd like to be mentioned in credits, you can edit your nickname in at `Credits` object [create event](https://github.com/toarch7/nt-recreated-public/blob/main/objects/Credits/Create_0.gml) as contributor or translator depending on your commit.
+ You can help not only with the code, but also by improving or adding localizations. If you've contributed to a localization, mention yourself in credits accordingly.
 
 # Distributing
- Requirements of usermade builds weren't strictly stated by Vlambeer, but the general rules are:
- * No form of monetary barrier should exists to access the game or any form of content and source
- * You must clearly state that this is not an official build of Nuclear Throne
- * You should not remove any Vlambeer branding
- * You should not proclaim your build is a result of a partnership with original authors
- * Distribuing the game with official assets is purely on your risk. Vlambeer won't take action unless creators are opposite about it
+ Requirements of usermade builds weren't strictly stated, but the general rules are:
+ * No form of monetary barrier should exists to access the game or any form of content (and source)
+ * You should not remove any Vlambeer or Nuclear Throne branding
+ * You must clearly state that this is not an official build of Nuclear Throne and this is not a work of collaboration with Vlambeer
+ * Distribuing the game with official assets is purely on your own risk. Vlambeer won't take actions unless you do something really weird.
