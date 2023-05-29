@@ -12,7 +12,9 @@ Using [GMEdit](https://yellowafterlife.itch.io/gmedit) is recommended for conven
 
 # Legal and foreword to building
 Sadly you can't run this project from source as is due to legal reasons. Vlambeer respect work of their team and contributors.
+
 It's not allowed to provide any alternative downloads and the tool for extracting resources and packing them back is not ready yet.
+
 Not to mention that the resources are the only thing that's prohibited from being public. You can make your workarounds from here.
 
 # Building
@@ -46,13 +48,14 @@ Download SDK & NDK using [AndroidStudio](https://developer.android.com/studio/)
 
 # Contributing
  Contributions are welcomed, unless your changes interfere recreation's purity too much (meaning, adding new content is undesired - instead you should create mods).
+ 
  You can also credit yourself [here](https://github.com/toarch7/nt-recreated-public/blob/main/objects/Credits/Create_0.gml) if you have done any substantial changes.
  
  You can help not only with the code, but also by improving or adding localizations. If you've contributed to a localization, mention yourself in credits accordingly.
 
 # Distributing
  Requirements of usermade builds weren't strictly stated, but the general rules are:
- * No form of monetary barrier should exists to access the game or any form of content (and source)
+ * No form of monetary barrier should exist to access the game, content and source
  * You should not remove any Vlambeer or Nuclear Throne branding
  * You must clearly state that this is not an official build of Nuclear Throne and this is not a work of collaboration with Vlambeer
  * Distribuing the game with official assets is purely on your own risk. Vlambeer won't take actions unless you do something really weird.
