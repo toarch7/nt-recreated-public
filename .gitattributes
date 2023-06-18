@@ -1,2 +1,3 @@
 # Auto detect text files and perform LF normalization
+*.yy linguist-language=GML
 * text=auto
