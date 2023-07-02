@@ -11,7 +11,7 @@ The source is public for educational and modding purposes.
 Using [GMEdit](https://yellowafterlife.itch.io/gmedit) is recommended for convenient exploration.
 
 # Legal and foreword to building
-Sadly you can't run this project from source as is due to legal reasons. Vlambeer respect work of their team and contributors.
+Sadly you can't run this project from source, since the actual resources for sprites and sounds are not included due to legal reasons. Vlambeer respect work of their team and contributors and can't allow raw game files being out somewhere on internet.
 
 It's not allowed to provide any alternative downloads and the tool for extracting resources and packing them back is not ready yet.
 
