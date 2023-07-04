@@ -1,11 +1,7 @@
 function print() {
-    var str = ""
+    var str = argument[0]
 
-    for (var __arg = 0; __arg < argument_count; __arg++) {
-        if __arg {
-            str += " "
-        }
-
+    for (var __arg = 1; __arg < argument_count; __arg++) {
         str += string(argument[__arg])
     }
 
