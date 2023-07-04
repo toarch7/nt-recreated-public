@@ -4,7 +4,8 @@ var spr = -1
 
 if GameCont.area == 102 {
     spr = sprFog102
-} else if (GameCont.area == 2 or UberCont.halloween) {
+}
+else if (GameCont.area == 2 or UberCont.halloween) {
     spr = sprFog2
 }
 
@@ -54,61 +55,41 @@ if darkness {
     draw_set_blend_mode(bm_normal)
 }
 
-if instance_exists(Player) with Revive {
-    var _x = clamp(x, view_xview + 30, view_xview + view_width - 30)
-    var _y = clamp(y - 16, view_yview + 6, view_yview + view_height - 6)
-
-    draw_sprite(sprFaintedBar, 0, _x, _y)
-
-    _x -= 16
-    _y -= 5
-    if alarm[4] {
-        draw_set_color(merge_color(c_red, c_black, 0.5 + sin(GameCont.tottimer / 4) * 0.25))
-        draw_rectangle(_x + 2, _y + 2, _x + 2 + alarm[4] / 300 * 28, _y + 6, 0)
-    } else if alarm[5] {
-        draw_set_color(c_red)
-        draw_rectangle(_x + 2, _y + 2, _x + alarm[5] / 30 * 28, _y + 6, 0)
-    }
-    _x += 16
-    _y += 5
-
-    draw_set_color(c_white)
+if instance_exists(Player) {
+	with Revive {
+	    var _x = clamp(x, view_xview + 30, view_xview + view_width - 30),
+			_y = clamp(y - 16, view_yview + 6, view_yview + view_height - 6)
+		
+	    draw_sprite(sprFaintedBar, 0, _x, _y)
+		
+	    _x -= 16
+	    _y -= 5
+		
+	    if alarm[4] {
+	        draw_set_color(merge_color(c_red, c_black, 0.5 + sin(GameCont.tottimer / 4) * 0.25))
+	        draw_rectangle(_x + 2, _y + 2, _x + 2 + alarm[4] / 300 * 28, _y + 6, 0)
+	    }
+		else if alarm[5] {
+	        draw_set_color(c_red)
+	        draw_rectangle(_x + 2, _y + 2, _x + alarm[5] / 30 * 28, _y + 6, 0)
+	    }
+		
+	    _x += 16
+	    _y += 5
+		
+	    draw_set_color(c_white)
+	}
 }
 
-if UberCont.getpauseimg && !instance_exists(GenCont) && surface_exists(application_surface) {
-    with UberCont {
-        if pausespr && sprite_exists(pausespr) {
-            sprite_delete(pausespr)
-        }
-
-        var srf = surface_create(view_width, view_height)
-        surface_set_target(srf)
-        draw_surface_ext(application_surface, 0, 0, 1 / opt_scaling, 1 / opt_scaling, 0, c_white, 1)
-
-        if !instance_exists(NothingSpiral) with Spiral {
-            draw_sprite_ext(sprite_index, - 1, x, y, image_xscale * 5, image_yscale * 5, image_angle, c_white, 1)
-            draw_sprite_ext(sprite_index, - 1, x, y, image_xscale * 5, image_yscale * 5, image_angle, c_black, 0.8 - image_xscale)
-        }
-
-        draw_set_blend_mode(bm_add)
-        draw_set_color(c_black)
-        draw_rectangle(0, 0, view_width, view_height, 0)
-        draw_set_color(c_white)
-        draw_set_blend_mode(bm_normal)
-        surface_reset_target()
-
-        pausespr = sprite_create_from_surface(srf, 0, 0, view_width, view_height, 0, 0, 0, 0)
-
-        getpauseimg = 0
-    }
-}
 
 if !instance_exists(MenuGen) {
-    if !instance_exists(NothingSpiral) with Spiral {
-        draw_sprite_ext(sprite_index, - 1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_white, 1)
-        draw_sprite_ext(sprite_index, - 1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_black, 0.8 - image_xscale)
-    }
-
+    if !instance_exists(NothingSpiral) {
+		with Spiral {
+	        draw_sprite_ext(sprite_index, - 1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_white, 1)
+	        draw_sprite_ext(sprite_index, - 1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_black, 0.8 - image_xscale)
+	    }
+	}
+	
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
 
@@ -127,7 +108,8 @@ if !instance_exists(MenuGen) {
     draw_set_valign(fa_top)
 }
 
-with WepSwap draw_self()
+with WepSwap
+	draw_self()
 
 if instance_exists(Portal) {
     with Portal {

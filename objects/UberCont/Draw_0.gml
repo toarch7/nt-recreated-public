@@ -63,27 +63,18 @@ if bossintro {
 		
         if bossx < 5 {
             bossnamex += 20
-        } else bossnamex += 0.5
-    }
-} else if paused {
-    if !instance_exists(GenCont) {
-        if pausespr && sprite_exists(pausespr) {
-            draw_sprite_ext(pausespr, 0, view_xview, view_yview, 1, 1, 0, c_white, 1)
         }
+		else bossnamex += 0.5
     }
-
-    with TopCont {
-        if darkness && surface_exists(dark) {
-            draw_set_blend_mode(bm_subtract)
-            draw_surface(dark, view_xview, view_yview)
-            draw_set_blend_mode(bm_normal)
-        }
-    }
-
+}
+else if paused && sprite_exists(pausespr) {
+	var names = struct_keys(playerinstances),
+		length = array_length(names),
+		pos = 0
+	
+	draw_sprite_ext(pausespr, 0, view_xview, view_yview, 1, 1, 0, c_white, 1)
+	
     draw_set_color(c_black)
-    var names = struct_keys(playerinstances)
-    var length = array_length(names)
-    var pos = 0
 
     for (var i = 0; i < length; i++) {
         var pinstance = playerinstances[$ names[i]]
@@ -95,15 +86,17 @@ if bossintro {
 
         if pinstance.race == 9 && pinstance.hp <= 0 {
             prt = sprPortraitChickenHeadless
-        } else if pinstance.race == 10 && pinstance.skin && GameCont.area == 5 {
+        }
+		else if pinstance.race == 10 && pinstance.skin && GameCont.area == 5 {
             prt = sprPortraitRebelHooded
         }
 
         if global.index == i {
             draw_sprite(prt, pinstance.race, view_xview - 160 + splat_index * 45, view_yview + view_height - 28)
-        } else {
+        }
+		else {
             draw_sprite_ext(prt, pinstance.race, view_xview + view_width + 128 - splat_index * 45 + pos * 36, view_yview + view_height - 24, - 1, 1, 0, c_white, 1)
-            pos++
+            pos ++
         }
     }
 

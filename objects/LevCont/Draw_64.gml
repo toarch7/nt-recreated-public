@@ -1,6 +1,5 @@
-if instance_exists(Player) && !instance_exists(Cinematic) {
+if instance_exists(Player) && !instance_exists(Cinematic)
     scrDrawHUD()
-}
 
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)

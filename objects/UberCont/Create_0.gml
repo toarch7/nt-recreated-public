@@ -107,8 +107,6 @@ seedoffset = 0
 daily_request = tb_api("daily")
 weekly_request = tb_api("weekly")
 
-getpauseimg = 0
-
 can_daily = 0
 can_weekly = 0
 
@@ -119,7 +117,6 @@ local_id = device_info[? "udid"]
 save_set_val("etc", "local_id", local_id)
 ds_map_destroy(device_info)
 
-pauseRace = 0
 pausespr = -1
 
 global.coop = 0

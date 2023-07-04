@@ -1,4 +1,3 @@
-//draw_background(bakMut,view_xview,view_yview)
 scrDrawSpiral()
 
 draw_set_halign(fa_center)

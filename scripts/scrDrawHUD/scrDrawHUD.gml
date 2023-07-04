@@ -1,7 +1,6 @@
 function scrDrawHUD(plr = noone) {
-    if !UberCont.opt_hud && room == romGame {
+    if !UberCont.opt_hud && room == romGame
         exit
-    }
 
     if plr == noone {
         with Player
@@ -14,23 +13,24 @@ function scrDrawHUD(plr = noone) {
 
     var cont = GameCont
 
-    if instance_exists(MakeGame) cont = MakeGame.cont
+    if instance_exists(MakeGame)
+		cont = MakeGame.cont
 
-    var ammo = plr.ammo
-    var race = plr.race
-    var wep = plr.wep
-    var bwep = plr.bwep
-    var ultra = plr.ultra
-    var hp = plr.hp
-    var max_hp = plr.max_hp
-    var wep_name = plr.wep_name
-    var wep_type = plr.wep_type
-    var wep_cost = plr.wep_cost
-    var wep_sprt = plr.wep_sprt
-    var typ_amax = plr.typ_amax
-    var typ_name = plr.typ_name
-    var typ_ammo = plr.typ_ammo
-    var wave = plr.wave
+    var ammo = plr.ammo,
+		race = plr.race,
+		wep = plr.wep,
+		bwep = plr.bwep,
+		ultra = plr.ultra,
+		hp = plr.hp,
+		max_hp = plr.max_hp,
+		wep_name = plr.wep_name,
+		wep_type = plr.wep_type,
+		wep_cost = plr.wep_cost,
+		wep_sprt = plr.wep_sprt,
+		typ_amax = plr.typ_amax,
+		typ_name = plr.typ_name,
+		typ_ammo = plr.typ_ammo,
+		wave = plr.wave
 
     if instance_exists(CoopController) {
         ultra = 0
@@ -69,7 +69,8 @@ function scrDrawHUD(plr = noone) {
                     draw_text(23 + 44, 7, (string(hp) + "/" + string(max_hp)))
                 }
             } else draw_text_shadow(23 + 44, 7, string(hp) + "/" + string(max_hp))
-        } else {
+        }
+		else {
             draw_sprite_ext(sprBleedHUD, 2, 22, 7, 84 - max(0, 84 * (plr.bleed / 150)), 1, 0, c_gray, 1)
             draw_set_halign(fa_center)
 

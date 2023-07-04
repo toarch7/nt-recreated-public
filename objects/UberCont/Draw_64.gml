@@ -1,3 +1,5 @@
+/// @description Unlock, version, pause, etc
+
 if draw_unlock {
     if instance_exists(GenCont) or instance_exists(LevCont) or instance_exists(AchievementSplash) {
         alarm[1] = 90
@@ -73,11 +75,14 @@ if saving {
     }
 	else saving = 0
 
-    saving--
+    saving --
 }
 
 if paused && !want_pause {
     instance_activate_object(Player)
-    with TopCont scrDrawHUD()
+	
+    with TopCont
+		scrDrawHUD()
+	
     instance_deactivate_object(Player)
 }

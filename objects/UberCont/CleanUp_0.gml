@@ -20,3 +20,6 @@ for (var i = 0; i < array_length(keys); i++) {
         surface_free(s)
     }
 }
+
+if buffer_exists(replay_buffer)
+	buffer_delete(replay_buffer)

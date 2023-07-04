@@ -61,21 +61,24 @@ for (var i = 0; i < KeyCont.players; i++) {
     if KeyCont.press_paus[i] && !instance_exists(GenCont) && !instance_exists(Credits) && !instance_exists(Cinematic) {
         if !paused {
             if instance_exists(Player) {
-                want_pause = 1
                 paused = 1
-                getpauseimg = 1
+                want_pause = 1
+				
+				scrGetPauseImage()
+				
                 splat_index = 0
 				
-                pauseRace = GameCont.race
-
                 audio_pause_all()
 				
 				audio_resume_sound(sndMenuClick)
+				audio_resume_sound(sndMenuSelect)
 
                 with MusCont {
-                    if sound_exists(song) audio_resume_sound(song)
+                    if sound_exists(song)
+						audio_resume_sound(song)
 
-                    if sound_exists(amb) audio_resume_sound(amb)
+                    if sound_exists(amb)
+						audio_resume_sound(amb)
                 }
 
                 with Player {

@@ -1,13 +1,14 @@
+/// @description Pause the game
+
 if want_pause && instance_exists(Player) && !instance_exists(GenCont) {
     want_pause = 0
-
-    if !bossintro {
+	
+    if !bossintro
         scrMakePauseButtons()
-    }
 
     with MobileUI
-    index = -1
-
+		index = -1
+	
     instance_deactivate_all(1)
     instance_activate_object(BackCont)
     instance_activate_object(GameCont)
@@ -20,7 +21,6 @@ if want_pause && instance_exists(Player) && !instance_exists(GenCont) {
     with PauseButton {
         hover = 5
         visible = 1
-        depth--
+        depth --
     }
 }
-

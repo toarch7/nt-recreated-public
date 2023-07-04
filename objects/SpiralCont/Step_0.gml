@@ -31,7 +31,7 @@ if type != 4 {
 
         depth = other.image_angle
         image_angle = other.image_angle
-
+		
         if other.type == 3 {
             sprite_index = sprSpiralIDPD
 
@@ -55,6 +55,7 @@ else instance_create(x, y, SpiralStar)
 
 if (area == 0 && !instance_exists(NothingSpiral)) or area != 0 {
     if !instance_exists(LevCont) && !instance_exists(GenCont) && !instance_exists(SitDown) && instance_exists(BackCont) && !instance_exists(Credits) && active {
-        instance_destroy()
+        print("selfdestroyed", id)
+		instance_destroy()
     }
 }
