@@ -15,7 +15,4 @@ sounds/*/*
 !sprites/sprbuttonachievements/*
 !sprites/sprite1337/*
 
-package.json
-package-lock.json
-
 scripts/scrSendDailyData/*
