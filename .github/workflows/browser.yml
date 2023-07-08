@@ -1,0 +1,39 @@
+name: Resourcepack browser
+run-name: Update list
+
+on:
+  schedule:
+    - cron: "* */2 * * *"
+  push: # test
+    branches: [ main ]
+
+jobs:
+  Update:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version:
+          - 18.x
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      
+      - name: Install packages
+        run: npm ci axios
+      
+      - name: Run update
+        run: npm run update
+      
+      - name: Push changes
+        run: |
+          git config --global user.email ${{ secrets.MAIL }}
+          git config --global user.name "toncho_"
+          git add resourcepacks.json
+          git commit --allow-empty -m "[automatic update]"
+          git push https://toarch7:${{ secrets.API_TOKEN_GITHUB }}@github.com/toarch7/torcherdev
