@@ -36,4 +36,4 @@ jobs:
           git config --global user.name "toncho_"
           git add resourcepacks.json
           git commit --allow-empty -m "[automatic update]"
-          git push https://toarch7:${{ secrets.API_TOKEN_GITHUB }}@github.com/toarch7/torcherdev
+          git push https://toarch7:${{ secrets.API_TOKEN_GITHUB }}@github.com/toarch7/nt-recreated-public
