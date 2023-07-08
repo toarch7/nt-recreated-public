@@ -248,7 +248,6 @@ function allDone() {
     embed.title = "Malformed packs";
     embed.fields = fields;
 
-    fs.writeFileSync("errors.json", JSON.stringify(embed, null, 2))
     if (fields.length > 0)
         sendEmbed("errors", [ embed ]);
     

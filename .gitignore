@@ -15,9 +15,6 @@ sounds/*/*
 !sprites/sprbuttonachievements/*
 !sprites/sprite1337/*
 
-
-node_modules
-beautifier.js
 package.json
 package-lock.json
 
