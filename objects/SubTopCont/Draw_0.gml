@@ -64,12 +64,12 @@ try {
     with Player {
         if visible {
             if skill_get(27) && !instance_exists(StrongSpiritRefill) && (spirit or spirit_index < 8) {
-                var _y = y - 2 + sin(spirit_y)
+                var _y = y - 2 + sin(spirit_anim)
                 draw_sprite(sprStrongSpirit, spirit_index, x, _y)
 
-                draw_set_blend_mode(bm_add)
+                gpu_set_blendmode(bm_add)
                 draw_sprite(sprStrongSpirit, spirit_index, x, _y)
-                draw_set_blend_mode(bm_normal)
+                gpu_set_blendmode(bm_normal)
             }
 
             if hammerheads && hammerhead {

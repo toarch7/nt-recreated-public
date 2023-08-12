@@ -1,7 +1,4 @@
-if GameCont.area == 0 {
-    instance_destroy(id, 0);
-    exit
-}
+if GameCont.area == 0 {instance_destroy(id, 0); exit}
 
 friction = 0.4
 
@@ -21,3 +18,4 @@ snd_hurt = sndHitMetal
 
 hp = max_hp
 raddrop = 45
+

@@ -13,7 +13,7 @@ if bound_command != "" {
     }
 }
 
-if keyboard_check_pressed(192) or open {
+if key_check("console", keystate_press) or open {
     global.console_active = !global.console_active
 
     event_user(0)
@@ -23,7 +23,7 @@ if keyboard_check_pressed(192) or open {
     open = 0
 }
 
-if keyboard_check_pressed(vk_escape) or(os_type == os_android && keyboard_check_pressed(vk_backspace)) or(keyboard_string == "" && keyboard_check_pressed(vk_enter)) {
+if keyboard_check_pressed(vk_escape) or (os_type == os_android && keyboard_check_pressed(vk_backspace)) or (keyboard_string == "" && keyboard_check_pressed(vk_enter)) {
     global.console_active = 0
 
     event_user(0)
@@ -34,7 +34,7 @@ if (flags & 2) == 2 && instance_exists(GenCont) {
 
     do {
         with FloorMaker
-        event_perform(ev_step, 0)
+			event_perform(ev_step, 0)
 
         iter ++
 
@@ -78,7 +78,8 @@ if keyboard_check_pressed(vk_enter) && string_length(keyboard_string) {
 
     if handle_console_command(keyboard_string) {
         printc(keyboard_string, c_gray)
-    } else printc(keyboard_string, c_white - 1)
+    }
+	else printc(keyboard_string, c_white - 1)
 
     keyboard_string = ""
 

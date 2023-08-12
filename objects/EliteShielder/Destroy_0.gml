@@ -2,15 +2,18 @@ scrDrop(20, 0)
 
 event_inherited()
 
-with Grunt {
+with Grunt
     freeze += 100
-}
-with Shielder {
+with Shielder
     freeze += 100
-}
-with Inspector {
+with Inspector
     freeze += 100
-}
+with EliteGrunt
+    freeze += 100
+with EliteShielder
+    freeze += 100
+with EliteInspector
+    freeze += 100
 
 with WantVan
 canspawn = 1

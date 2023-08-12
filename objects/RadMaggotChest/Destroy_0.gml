@@ -1,11 +1,12 @@
 if hp <= 0 {
-    instance_create(x, y, RadMaggotExplosion)
+	instance_create(x, y, RadMaggotExplosion)
 }
 
-repeat(4) {
-    with instance_create(x, y, Smoke)
-    motion_add(random(360), random(3))
+repeat 4 {
+	with instance_create(x, y, Smoke)
+	motion_add(random(360), random(3))
 }
+
 instance_create(x, y, ExploderExplo)
 snd_play(sndEXPChest)
 

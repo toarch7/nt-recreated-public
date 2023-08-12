@@ -1,10 +1,10 @@
-if instance_exists(ResourcepackManager) exit
+if instance_exists(ResourcepackManager) or global.console_active or text_input_element != undefined or erasing_progress
+	exit
 
 if !editing_mode {
-    if category == 0 {
-        if !instance_exists(GameCont) {
-            view_xview = 0
-            view_yview = 0
+    if category == OptionCategory.Main {
+        if !ingame {
+            camera_set_pos(0, 0)
 
             with instance_create(0, 0, Logo)
             event_perform(ev_alarm, 1)
@@ -18,41 +18,43 @@ if !editing_mode {
 
             instance_destroy(id, 0)
             //game_restart()
-        } else if !instance_exists(PauseButton) {
-            if !UberCont.daily_run {
-                with instance_create(view_xview + 54, view_yview + view_height - 32, PauseButton) {
-                    image_index = 1
-                }
-            }
-
-            with instance_create(view_xview + 45, view_yview + view_height - 64, PauseButton) image_index = 0
-            with instance_create(view_xview + view_width - 72, view_yview + view_height - 64, PauseButton) image_index = 2
-            with instance_create(view_xview + view_width - 72, view_yview + view_height - 32, PauseButton) image_index = 3
-
-            with PauseButton {
-                hover = 4
-                visible = 1
-                depth--
-            }
+        }
+		else {
+			with PauseButton
+				instance_destroy()
+			
+            scrMakePauseButtons()
+			
+			with UberCont
+				splat_index = 0
         }
 
         with BackButton
         instance_destroy()
 
         instance_destroy()
-    } else {
-        wait = 1
-        category = 0
+    }
+	else {
+		self.category_set(
+			!ds_stack_empty(category_stack)
+				? ds_stack_pop(category_stack)
+				: OptionCategory.Main
+			, false)
     }
 
     snd_play(sndClickBack)
-} else {
+}
+else {
     with MobileUI
-    instance_destroy()
-
-    editing_mode = 0
+		instance_destroy()
+	
+    editing_mode = false
+	
+	self.category_set(OptionCategory.Controls, false)
 
     scrSave()
+
+    snd_play(sndClickBack)
 }
 
 if rp_warning {
@@ -60,14 +62,12 @@ if rp_warning {
     category = 0
 }
 
-erasing_progress = 0
 press = 0
 
-//scrOptionsUpdate()
-with UberCont {
-    display_reset(0, opt_resolution)
-}
+slider = undefined
 
-if !ingame {
+await_input = false
+await_keybind = undefined
+
+if !ingame
     audio_resume_all()
-}

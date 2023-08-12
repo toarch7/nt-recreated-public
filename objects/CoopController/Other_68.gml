@@ -5,7 +5,12 @@ try {
     if async_load[? "type"] == network_type_data {
         var data = async_load[? "buffer"]
         var data_type = buffer_read(data, buffer_u8)
-        var share = 1
+		
+		// todo: experimental ntt support /j
+		if data_type == 171
+			data_type = buffer_read(data, buffer_u8) + 1
+		
+        var share = (global.is_server && array_length(playerindexes) > 1)
 
         switch data_type {
             case event.udp_connect:
@@ -50,6 +55,11 @@ try {
                 break
 			
             case event.start:
+				share = false
+				
+				if global.is_server
+					break;
+				
                 var _indexes = buffer_read(data, buffer_string)
                 playerindexes = json_parse(_indexes)
 				
@@ -88,9 +98,8 @@ try {
 				
 				snd_play(sndPortalOld)
 				
-				lockstep_stop = 1
+				// network_lock()
 				
-                share = 0
                 break
 			
             case event.update_playerinstance:
@@ -125,9 +134,16 @@ try {
 					_crosshair = buffer_read(data, buffer_u8),
 					_event = buffer_read(data, buffer_string)
 				
-				if netframe != _frame {
-					print("netframe mismatch uhh local:", netframe, ", got:", _frame)
+				/*
+				if netframe > _frame {
+					print("Overruning the client", _index, "by", netframe - _frame, "frames")
+					
+					network_lock()
 				}
+				else if netframe < _frame {
+					print("Falling behind the client", _index, "by", _frame - netframe, "frames")
+				}
+				*/
 				
 				inputs[_index][$ _frame] = [ _inputs, _dir_move, _dir_fire, _crosshair, _event ]
 				
@@ -136,22 +152,20 @@ try {
 				break
         }
 
-        if global.is_server {
-            if share && array_length(playerindexes) > 1 {
-                var _keys = struct_keys(connectedports)
-
-                for (var i = 0; i < array_length(_keys); i++) {
-                    var port = _keys[i],
-                        _prt = real(port)
+	    if share {
+	        var _keys = struct_keys(connectedports)
+			
+	        for (var i = 0; i < array_length(_keys); i++) {
+	            var port = _keys[i],
+	                _prt = real(port)
 					
-                    if _port != _prt {
-                        network_send_udp(socket, connectedports[$ port], _prt, data, buffer_tell(data))
-                    }
-                }
-            }
-
-            portdelays[$ _port] = get_timer()
-        }
+	            if _port != _prt
+	                network_send_udp(socket, connectedports[$ port], _prt, data, buffer_tell(data))
+	        }
+	    }
+		
+		if global.is_server
+			portdelays[$ _port] = get_timer()
     }
 }
 catch (exception) {

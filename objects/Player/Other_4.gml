@@ -1,3 +1,6 @@
+if !instance_exists(GameCont) // how?? why??
+	exit
+
 visible = 1
 sprite_index = spr_idle
 frogcharge = 0
@@ -22,7 +25,7 @@ froggas = 0
 
 if !instance_exists(Crown) && GameCont.crown > 1 {
     with instance_create(x, y, Crown) {
-        if (GameCont.area > 1) or(GameCont.subarea > 1) or((GameCont.loops - global.hardmode) > 0) {
+        if (GameCont.area > 1) or (GameCont.subarea > 1) or ((GameCont.loops - global.hardmode) > 0) {
             is_new = 0
         }
     }

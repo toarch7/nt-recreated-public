@@ -1,5 +1,5 @@
 function scrGameContDrawGUI() {
-    if UberCont.opt_timer && !instance_exists(Menu) && !instance_exists(PauseButton) && (!instance_exists(Credits) or(instance_exists(Credits) && !Credits.visible)) {
+    if UberCont.opt_timer && !instance_exists(Menu) && !instance_exists(PauseButton) && (!instance_exists(Credits) or (instance_exists(Credits) && !Credits.visible)) {
         draw_set_color(c_white)
         draw_set_halign(fa_right)
         draw_set_valign(fa_top)

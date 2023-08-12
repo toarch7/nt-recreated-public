@@ -2,7 +2,7 @@ function scrVolume() {
     with MusCont {
         var mvol = clamp(UberCont.opt_musvol, 0, 1),
 			avol = clamp(UberCont.opt_ambvol, 0, 1)
-        audio_master_gain(clamp(UberCont.opt_sndvol, 0, 1))
+        audio_master_gain(clamp(UberCont.opt_volume, 0, 1))
 
         //if sound_exists(song)
         //audio_sound_gain(song, mvol, 0)

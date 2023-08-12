@@ -5,9 +5,9 @@ if bossintro {
 
     with TopCont {
         if darkness && surface_exists(dark) {
-            draw_set_blend_mode(bm_subtract)
+            gpu_set_blendmode(bm_subtract)
             draw_surface(dark, view_xview, view_yview)
-            draw_set_blend_mode(bm_normal)
+            gpu_set_blendmode(bm_normal)
         }
     }
 
@@ -130,3 +130,13 @@ else if paused && sprite_exists(pausespr) {
     scrDrawRoadmap(view_xview + view_width / 2, view_yview + view_height / 2, 1000)
 }
 
+if opt_gamepad && instance_exists(ParButton) {
+	with ParButton {
+		if object_index == SkillIcon or object_index == CrownIcon or object_index == UltraIcon {
+			
+			if selected {
+				draw_gamepad_button(gp_face1, 0, bbox_right, bbox_top)
+			}
+		}
+	}
+}

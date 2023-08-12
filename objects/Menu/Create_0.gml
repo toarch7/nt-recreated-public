@@ -95,7 +95,7 @@ for (var i = 0; i < array_length(allchars); i++) {
                 yprevious = y
             }
 
-            until distance_to_object(CampChar) >= 16 && (dir != 9 or(!collision_circle(x, y - 32, 16, CampChar, 1, 1)))
+            until distance_to_object(CampChar) >= 16 && (dir != 9 or (!collision_circle(x, y - 32, 16, CampChar, 1, 1)))
         }
     }
 }
@@ -237,6 +237,7 @@ img = 0
 wave = 0
 p = 0
 port_x = 0
+appear = 0
 ports_x = [0, 0, 0, 0]
 splat_index = 0
 
@@ -245,7 +246,6 @@ alarm[10] = 3
 ///Loadout
 scrCrowns()
 scrRaces()
-scrWeapons()
 
 race_crown = UberCont.race_crown
 race_skin = UberCont.race_skin
@@ -295,3 +295,12 @@ with MusCont {
 event_user(0)
 
 dailylistfavor = 0
+
+if instance_exists(char[race]) {
+	with char[race] {
+	    view_xview = x - view_width / 2
+	    view_yview = y - view_height / 2
+	}
+	
+	camera_set_pos(view_xview, view_yview)
+}

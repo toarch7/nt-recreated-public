@@ -7,3 +7,5 @@ active_button_forever = 0
 alarm[10] = 10
 friction = 0.45
 image_speed = 0.4
+
+recontuations = 0

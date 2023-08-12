@@ -1,1 +1,0 @@
-if hover < 4 && available snd_play(sndMenuSelect)

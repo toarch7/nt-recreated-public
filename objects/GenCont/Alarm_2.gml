@@ -1,7 +1,7 @@
 if GameCont.area == 100 {
     with instance_furthest(10016, 10016, Floor)
     instance_create(x + 16, y + 16, CrownPickup)
-} else if !instance_exists(ProtoStatue) && GameCont.subarea == 2 && ((GameCont.area == 1 && GameCont.loops) or GameCont.area == 3 or GameCont.area == 5 or(GameCont.area == 7 && GameCont.loops)) && GameCont.crownvisits < 3 {
+} else if !instance_exists(ProtoStatue) && GameCont.subarea == 2 && ((GameCont.area == 1 && GameCont.loops) or GameCont.area == 3 or GameCont.area == 5 or (GameCont.area == 7 && GameCont.loops)) && GameCont.crownvisits < 3 {
     flor = instance_furthest(10016, 10016, Floor)
 
     with instance_nearest(

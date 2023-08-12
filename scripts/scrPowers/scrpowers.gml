@@ -1,7 +1,7 @@
 function scrPowers() {
-    if instance_exists(TutorialCont) && TutorialCont.pos == 3 && !TutorialCont.doin {
-        TutorialCont.alarm[0] = 30
-        TutorialCont.doin = 1
+    if instance_exists(TutCont) && TutCont.pos == 3 && !TutCont.doin {
+        TutCont.alarm[0] = 30
+        TutCont.doin = 1
     }
 
     //FISH
@@ -389,9 +389,9 @@ function scrPowers() {
 
             with instance_create(x, y, WepPickup) {
                 wep = other.wep
-                name = other.wep_name[wep]
-                type = other.wep_type[wep]
-                sprite_index = other.wep_sprt[wep]
+                name = wep_name[wep]
+                type = wep_type[wep]
+                sprite_index = wep_sprt[wep]
                 curse = 0
                 motion_add(other.gunangle, 16)
                 team = other.team
@@ -590,8 +590,8 @@ function scrPowers() {
         }
     }
 
-    if instance_exists(TutorialCont) && TutorialCont.pos == 3 && !TutorialCont.doin && KeyCont.press_spec[index] {
-        TutorialCont.alarm[0] = 30
-        TutorialCont.doin = 1
+    if instance_exists(TutCont) && TutCont.pos == 3 && !TutCont.doin && KeyCont.press_spec[index] {
+        TutCont.alarm[0] = 30
+        TutCont.doin = 1
     }
 }

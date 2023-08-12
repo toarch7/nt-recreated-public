@@ -128,4 +128,28 @@ function scrRaces() {
     race_lock[15] = "SECRET CHARACTER"
     race_swep[15] = 255
     skin_lock[15] = "NO SKIN"
+
+    race_name[16] = "CUZ"
+    race_pass[16] = "PLACEHOLDER"
+    race_acti[16] = "PLACEHOLDER"
+    race_butt[16] = "PLACEHOLDER"
+    race_lock[16] = "CANNOT BE UNLOCKED"
+    race_swep[16] = wep_golden_revolver
+    skin_lock[16] = "NO SKIN"
+
+    race_name[17] = "EXPANSION REQUIRED"
+    race_pass[17] = "EXPANSION VERSION IS REQUIRED"
+    race_acti[17] = "TO PLAY THIS CHARACTER"
+    race_butt[17] = ""
+    race_lock[17] = ""
+    race_swep[17] = 1
+    skin_lock[17] = "NO SKIN"
+
+    race_name[18] = "EXPANSION REQUIRED"
+    race_pass[18] = "EXPANSION VERSION IS REQUIRED"
+    race_acti[18] = "TO PLAY THIS CHARACTER"
+    race_butt[18] = ""
+    race_lock[18] = ""
+    race_swep[18] = 1
+    skin_lock[18] = "NO SKIN"
 }

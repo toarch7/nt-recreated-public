@@ -52,6 +52,9 @@ function scrGameLoad() {
             hp = d.hp
             ammo = d.ammo
             spirit = d.spirit
+            max_hp = d.max_hp
+            recontuations = d.recontuations
+            headloses = d.headloses
 
             break
         }
@@ -65,9 +68,9 @@ function scrGameLoad() {
                 with instance_create(10016, 10016, WepPickup) {
                     ammo = 0
                     wep = a[i]
-                    name = UberCont.wep_name[wep]
-                    type = UberCont.wep_type[wep]
-                    sprite_index = UberCont.wep_sprt[wep]
+                    name = wep_name[wep]
+                    type = wep_type[wep]
+                    sprite_index = wep_sprt[wep]
                     image_angle = random(360)
                     mask_index = mskNone
                     persistent = 1

@@ -19,7 +19,7 @@ for (var i = 0; i < len; i++) {
         portdelays[$ port] = undefined
         portdelays = struct_clone(portdelays, 0)
 
-        snd_play(sndMenuSelect)
+        snd_play(sndHover)
 
         instance_activate_object(Player)
         instance_activate_object(Revive)

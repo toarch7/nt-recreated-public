@@ -1,5 +1,5 @@
 if instance_exists(Player) {
-    if GameCont.area = 5 and!instance_exists(GenCont) and!instance_exists(LevCont) and!instance_exists(FloorMaker) {
+    if GameCont.area = 5 and !instance_exists(GenCont) and !instance_exists(LevCont) and !instance_exists(FloorMaker) {
         //SNOW & ICE TEST
         if instance_nearest(x - 16, y - 16, Floor).styleb = 1 friction = 0.05
         else friction = 1.5

@@ -1,29 +1,27 @@
 event_inherited()
 
-var aimbot = save_get_val("controls", "aimbot", 0)
-
-if aimbot {
+if UberCont.opt_aimbot {
     with Player if index == global.index {
-        var _aim_target = instance_nearest(x, y, enemy)
+        var aim_target = instance_nearest(x, y, enemy)
 
         if instance_exists(NothingInactive) {
-            _aim_target = instance_nearest(x, y, NothingInactive)
+            aim_target = instance_nearest(x, y, NothingInactive)
 
-            if !_aim_target[$ "hitable"] {
-                _aim_target = noone
+            if !aim_target[$ "hitable"] {
+                aim_target = noone
             }
         }
 		else if instance_exists(LastIntro) {
-            _aim_target = instance_nearest(x, y, LastIntro)
+            aim_target = instance_nearest(x, y, LastIntro)
         }
 		else if distance_to_object(BigGenerator) <= 32 {
-            _aim_target = instance_nearest(x, y, BigGenerator)
+            aim_target = instance_nearest(x, y, BigGenerator)
         }
 
         var d = -1
 
-        if _aim_target && !collision_line(x, y, _aim_target.x, _aim_target.y, Wall, 1, 1) {
-            d = point_direction(x, y, _aim_target.x, _aim_target.y)
+        if aim_target && !collision_line(x, y, aim_target.x, aim_target.y, Wall, 1, 1) {
+            d = point_direction(x, y, aim_target.x, aim_target.y)
         }
 		else d = KeyCont.dir_move[index]
 
@@ -46,7 +44,7 @@ KeyCont.release_fire[global.index] = 0
 
 if index == -1 index = i
 
-if !aimbot {
+if !UberCont.opt_aimbot {
     if index != -1 {
         var mx = device_mouse_x_to_gui(index)
         var my = device_mouse_y_to_gui(index)

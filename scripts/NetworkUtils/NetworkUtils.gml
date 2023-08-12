@@ -1,11 +1,8 @@
 function network_get_free_id() {
-    var ind = global.netfreeid
-
-    if !ds_stack_empty(global.netidstack) {
+    if !ds_stack_empty(global.netidstack)
         return ds_stack_pop(global.netidstack)
-    } else global.netfreeid++
 
-    return ind
+    return global.netfreeid ++
 }
 
 function network_free_id(index) {
@@ -27,10 +24,43 @@ function buffer_send(buffer) {
     }
 }
 
-function enemy_find_index(ind) {
-    return global.coopenemylist[$ ind]
+function network_lock() {
+	if lockstep_stop
+		exit
+	
+	lockstep_stop = true
+	draw_enable_drawevent(false)
+	
+	instance_deactivate_all(false)
+	instance_activate_object(CoopController)
+	instance_activate_object(UberCont)
 }
 
-function enemy_remove_index(ind) {
-    global.coopenemylist[$ ind] = undefined
+function network_unlock() {
+	if !lockstep_stop
+		exit
+	
+	lockstep_stop = false
+	draw_enable_drawevent(true)
+	
+	if UberCont.paused {
+		instance_activate_object(BackCont)
+		instance_activate_object(GameCont)
+		instance_activate_object(TopCont)
+		instance_activate_object(PauseButton)
+		instance_activate_object(MusCont)
+		instance_activate_object(Console)
+	}
+	else instance_activate_all()
+}
+
+function network_is_locked() {
+	return lockstep_stop
+}
+
+function network_clientcount() {
+	if instance_exists(CoopController)
+		return array_length(CoopController.playerindexes)
+	
+	return 0
 }

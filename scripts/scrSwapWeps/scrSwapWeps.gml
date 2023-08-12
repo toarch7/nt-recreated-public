@@ -33,9 +33,9 @@ function scrSwapWeps() {
 
     drawempty = 30
 
-    if instance_exists(TutorialCont) && TutorialCont.pos == 2 && !TutorialCont.doin {
-        TutorialCont.alarm[0] = 30
-        TutorialCont.doin = 1
+    if instance_exists(TutCont) && TutCont.pos == 2 && !TutCont.doin {
+        TutCont.alarm[0] = 30
+        TutCont.doin = 1
     }
 
 

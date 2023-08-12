@@ -1,11 +1,14 @@
 scrDrawSpiral()
 
-var prt, inst = playerinstance_get(global.index);
+var prt, inst = playerinstance_get(global.index)
 
-var mx = device_mouse_x_to_gui(0)
-var my = device_mouse_y_to_gui(0)
+var mx = device_mouse_x_to_gui(0),
+	my = device_mouse_y_to_gui(0)
 
 var _w = widescreen
+
+if !is_struct(inst)
+	exit
 
 race = inst.race
 loadout_wep = 0
@@ -29,7 +32,7 @@ var yoff = dailylistfavor
 if global.coop {
     var picks = struct_keys(UberCont.playerinstances),
         n = 0
-
+	
     for (var i = array_length(picks) - 1; i >= 0; i--) {
         var _inst = playerinstance_get(picks[i])
 
@@ -80,11 +83,17 @@ draw_set_color(c_black)
 draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + widescreen, 0)
 draw_rectangle(view_xview, view_yview + view_height, view_xview + view_width, view_yview + view_height - widescreen, 0)
 draw_set_color(c_white)
-draw_text_nt(view_xview - yoff * 4 + 6, view_yview + view_height - 56, string_replace(loc(race_pass[race]) + "#" + loc(race_acti[race]), ", ", "#"))
+
+if appear < 2
+	draw_text_nt(view_xview - yoff * 4 + 6, view_yview + view_height - 56 + appear, string_replace(loc(race_pass[race]) + "#" + loc(race_acti[race]), ", ", "#"))
 
 if port_x > 0 {
 	port_x = lerp(port_x, 0, 0.8)
+	
 }
+
+if appear
+	appear --
 
 if splat_index < 3 splat_index++
 
@@ -121,7 +130,13 @@ if loadout_frame > 0 {
 if canloadout {
     if !weekly {
         if (race < 13 or race > 15) {
-            draw_sprite(sprLoadoutArrow, loadout, view_xview + view_width + yoff * 2, view_yview + view_height - 32)
+			var _x = view_xview + view_width + yoff * 2,
+				_y = view_yview + view_height - 32
+			
+			if UberCont.opt_gamepad {
+				draw_gamepad_button(gp_face4, true, _x - 16, _y - 20)
+			}
+            else draw_sprite(sprLoadoutArrow, loadout, _x, _y)
         }
 
         loadout_skin = save_get_val("cskin", string(race), 0)
@@ -211,7 +226,7 @@ if canloadout {
 
     spr_load1 = wep_lout[@race_swep[race]]
 
-    if weekly or!sprite_exists(spr_load1) {
+    if weekly or !sprite_exists(spr_load1) {
         spr_load1 = wep_sprt[cwep]
         no_art = 1
     }

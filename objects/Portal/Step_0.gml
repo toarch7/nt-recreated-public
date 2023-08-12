@@ -43,7 +43,7 @@ if instance_exists(Player) {
 
 if endgame < 100 {
     endgame -= 1
-    if endgame < 0 and(sprite_index = sprPortal or sprite_index = sprProtoPortal or sprite_index = sprPopoPortal) {
+    if endgame < 0 and (sprite_index = sprPortal or sprite_index = sprProtoPortal or sprite_index = sprPopoPortal) {
         image_index = 0
         if type = 1 sprite_index = sprPortalDisappear
         if type = 2 sprite_index = sprPopoPortalDisappear
@@ -56,7 +56,7 @@ if endgame < 100 {
 }
 if !instance_exists(Player) {
     endgame = -1
-    if endgame < 0 and(sprite_index = sprPortal or sprite_index = sprProtoPortal or sprite_index = sprPopoPortal) {
+    if endgame < 0 and (sprite_index = sprPortal or sprite_index = sprProtoPortal or sprite_index = sprPopoPortal) {
         image_index = 0
         if type = 1 sprite_index = sprPortalDisappear
         if type = 2 sprite_index = sprPopoPortalDisappear

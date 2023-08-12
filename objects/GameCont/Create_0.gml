@@ -64,6 +64,8 @@ hqsubarea = 1
 popolevel = 0
 novans = 1
 
+underwater = false
+
 if !UberCont.continued_run {
     rng_init()
 }

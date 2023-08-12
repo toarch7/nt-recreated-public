@@ -3,17 +3,12 @@
 /// @param item
 
 function array_indexof(array, value) {
-    var _val = -1;
-
-    for (var i = 0; i < array_length(array); i++) {
-        if array[i] == value {
-            _val = i;
-        }
-
-        break;
+    for (var i = 0; i < array_length(array); i ++) {
+        if array[i] == value
+            return i
     }
 
-    return _val;
+    return -1
 }
 
 function struct_clone(_struct, _undefineds = 1) {
@@ -133,4 +128,135 @@ function array_join(arr, s = "_") {
         }
 
     return r
+}
+
+function method_call(meth, args = undefined) {
+	/* Generator:
+		let str = "";
+
+		for(let i = 1; i < 30; i ++) {
+			str += `case ${i}:\n\treturn m(`
+			
+			for(let a = 1; a < i; a ++) {
+				str += `argument[${a}]`;
+				
+				if (a + 1 < i)
+					str += ", ";
+			}
+			
+			str += ")\n";
+		}
+		
+		console.log(str);
+	*/
+	
+	if meth == undefined
+		exit
+	
+	var m = method(id, meth)
+	
+	#region lol
+	
+	switch argument_count {
+		case 2:
+			return m(argument[1])
+		case 3:
+			return m(argument[1], argument[2])
+		case 4:
+			return m(argument[1], argument[2], argument[3])
+		case 5:
+			return m(argument[1], argument[2], argument[3], argument[4])
+		case 6:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5])
+		case 7:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6])
+		case 8:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7])
+		case 9:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8])
+		case 10:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9])
+		case 11:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10])
+		case 12:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11])
+		case 13:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12])
+		case 14:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13])
+		case 15:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14])
+		case 16:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15])
+		case 17:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16])
+		case 18:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17])
+		case 19:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18])
+		case 20:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18], argument[19])
+		case 21:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18], argument[19], argument[20])
+		case 22:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18], argument[19], argument[20], argument[21])
+		case 23:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18], argument[19], argument[20], argument[21], argument[22])
+		case 24:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18], argument[19], argument[20], argument[21], argument[22], argument[23])
+		case 25:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18], argument[19], argument[20], argument[21], argument[22], argument[23], argument[24])
+		case 26:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18], argument[19], argument[20], argument[21], argument[22], argument[23], argument[24], argument[25])
+		case 27:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18], argument[19], argument[20], argument[21], argument[22], argument[23], argument[24], argument[25], argument[26])
+		case 28:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18], argument[19], argument[20], argument[21], argument[22], argument[23], argument[24], argument[25], argument[26], argument[27])
+		case 29:
+			return m(argument[1], argument[2], argument[3], argument[4], argument[5], argument[6], argument[7], argument[8], argument[9], argument[10], argument[11], argument[12], argument[13], argument[14], argument[15], argument[16], argument[17], argument[18], argument[19], argument[20], argument[21], argument[22], argument[23], argument[24], argument[25], argument[26], argument[27], argument[28])
+	}
+	
+	#endregion
+	
+	return m()
+}
+
+function range(a, b) {
+	var r = []
+	
+	if a > b {
+		var t = a
+		
+		a = b
+		b = t
+	}
+	
+	for(var i = a; i <= b; i ++) {
+		array_push(r, i)
+	}
+	
+	return r
+}
+
+function file_write(path, str) {
+	var f = file_text_open_write(path)
+    file_text_write_string(f, str)
+    file_text_close(f)
+}
+
+function file_read(path) {
+	var f = file_text_open_read(path),
+		str = ""
+	
+	while !file_text_eof(f) {
+		if str != ""
+			str += "\n"
+		
+		str += file_text_read_string(f)
+		file_text_readln(f)
+	}
+	
+    file_text_close(f)
+	
+	return str
 }

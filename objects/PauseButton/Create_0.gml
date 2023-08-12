@@ -1,7 +1,18 @@
-image_speed = 0
-light = 0
-clicked = 0
+
 hover = 0
+splat = 0
+
+gpadsel = 0
+
+available = 1
+
 appear = 2
 
-net_index = instance_number(object_index)
+image_speed = 0
+depth = -9000
+
+start = global.time
+
+wait = 3
+
+netindex_set()

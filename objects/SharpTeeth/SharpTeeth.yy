@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sprSharpTeeths",
-    "path": "sprites/sprSharpTeeths/sprSharpTeeths.yy",
+    "name": "sprSharpTeeth",
+    "path": "sprites/sprSharpTeeth/sprSharpTeeth.yy",
   },
   "solid": false,
   "visible": true,

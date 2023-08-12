@@ -1,6 +1,6 @@
 if meleedamage > 0 && canmelee && team != other.team {
 
-    if other.inframes or(hp <= 6 && skill_get(8)) exit
+    if other.inframes or (hp <= 6 && skill_get(8)) exit
 
     with other {
         if sprite_index != spr_hurt {

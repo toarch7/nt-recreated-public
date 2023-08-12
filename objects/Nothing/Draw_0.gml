@@ -1,5 +1,5 @@
 if sprite_index == spr_hurt && image_index < 1 {
-    d3d_set_fog(1, c_white, depth, depth + 1)
+    gpu_set_fog(1, c_white, depth, depth + 1)
 }
 
 if walk > 0 && instance_exists(Player) {
@@ -26,7 +26,7 @@ draw_sprite(sprNothingMiddle, - 1, x, y)
 draw_sprite(sprNothingLeft, - 1, x, y)
 draw_sprite(sprNothingRight, - 1, x, y)
 
-d3d_set_fog(0, 0, 0, 0)
+gpu_set_fog(0, 0, 0, 0)
 
 draw_sprite(flame, flanim, x - 89, y - 43)
 draw_sprite(flame, flanim, x + 91, y - 43)

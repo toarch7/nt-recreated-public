@@ -1,6 +1,5 @@
 with instance_create(x, y, WepPickup) {
     curse = 0
-    scrWeapons()
     scrDecideWep(6)
     name = wep_name[wep]
     other.wep = wep

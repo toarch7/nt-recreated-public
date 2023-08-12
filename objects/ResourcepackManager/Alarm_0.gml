@@ -1,3 +1,8 @@
-error = "TIMED OUT."
+/// @description Timeout
 
-if !instance_exists(BackButton) instance_create(0, 0, BackButton)
+error = "TIMED OUT."
+time = 0
+
+snd_play(sndClickBack)
+
+alarm[0] = 7 * room_speed

@@ -40,3 +40,4 @@ snd_hurt = sndHitFlesh
 snd_dead = sndEnemyDie
 snd_mele = sndMaggotBite
 
+dropseed = rng_next_int(RNGSlot.Drops)

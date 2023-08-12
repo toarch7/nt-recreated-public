@@ -1,19 +1,19 @@
-var col = light ? c_white : c_ltgray,
+var col = hover ? c_white : c_uigray,
 	name = scrMenuButtonName()
 
-y -= appear + hover
+y -= appear
 
 if loc_exists(name) {
 	var a = 0
 	
-	if sprite_index == sprPauseButtons {
+	/*if sprite_index == sprPauseButtons {
 		if image_index == 0 or image_index == 1 or image_index == 4 or image_index == 7 {
-			a = 6
+			a = 3
 		}
 		else if image_index == 2 or image_index == 3 or image_index == 5 or image_index == 6 {
-			a = -6
+			a = -3
 		}
-	}
+	}*/
 	
 	draw_set_halign(fa_center)
 	
@@ -27,9 +27,7 @@ else {
 	draw_sprite_ext(sprite_index, image_index, x,     y    , 1, 1, 0, col, 1)
 }
 
-y += appear + hover
-
-if appear appear--
+y += appear
 
 if image_index == 5 && !instance_exists(CoopController) && !save_get_val("etc", "saving_tip", 0) {
     draw_set_valign(fa_center)

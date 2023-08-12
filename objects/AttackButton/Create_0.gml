@@ -14,7 +14,7 @@ dis = 0
 dir = 0
 
 assist = KeyCont.aimassist[global.index]
-_aim_target = noone
+aim_target = noone
 
 crosshair = save_get_val("visual", "crosshair", 0)
 

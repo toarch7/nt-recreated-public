@@ -1,20 +1,16 @@
-with instance_create(x, y, ChestOpen) {
-	if GameCont.race == 7 && GameCont.ultra == 2 {
-		sprite_index = other.curse ? sprCursedChestSteroidsUltraOpen : sprWeaponChestSteroidsUltraOpen
-		
-		break
-	}
-	
+with instance_create(x,y,ChestOpen) {
     if other.curse {
         sprite_index = sprCursedChestOpen
-    }
-	else if GameCont.area == 101 {
+        
+        if GameCont.underwater {
+            sprite_index = sprCursedClamChestOpen
+        }
+    } else if GameCont.underwater {
         sprite_index = sprClamChestOpen
-    }
-	else sprite_index = sprWeaponChestOpen
+    } else sprite_index = sprWeaponChestOpen
 }
 
-if GameCont.area == 101 {
+if GameCont.underwater {
     repeat 12 + random(8) {
         with instance_create(x, y, Bubble) {
             motion_add(random(360), random(2) + 2)
@@ -22,4 +18,5 @@ if GameCont.area == 101 {
     }
 }
 
-instance_create(x, y, FXChestOpen)
+instance_create(x,y,FXChestOpen)
+

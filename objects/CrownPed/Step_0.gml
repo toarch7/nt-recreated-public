@@ -1,4 +1,4 @@
-if sprite_index = sprCrownPedIdle and!place_meeting(x, y, CrownPickup) {
+if sprite_index = sprCrownPedIdle and !place_meeting(x, y, CrownPickup) {
     sprite_index = sprCrownPedClose
     image_speed = 0.4
     image_index = 0

@@ -14,7 +14,7 @@ if endgame > 30 {
 	
 	if other.race == 8 && other.ultra {
 	    with WepPickup if visible {
-	        if string_starts(UberCont.wep_name[wep], "GOLD") {
+	        if string_starts(wep_name[wep], "GOLD") {
 	            repeat 4 {
 	                if random(p.max_hp) > p.hp && GameCont.crown != 2 {
 	                    instance_create(other.x, other.y, HPPickup)

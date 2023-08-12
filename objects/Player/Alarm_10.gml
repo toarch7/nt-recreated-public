@@ -6,7 +6,7 @@ try {
 		scrDisableWallTop()
 	} */
 
-    if race == 11 && ultra == 2 {
+    if race == 11 && ultra == 2 && !instance_exists(GenCont) && !instance_exists(Portal) {
         var _enemy_hp = 0
 
         with enemy

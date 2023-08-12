@@ -13,7 +13,7 @@ while max_steps > 0 {
     x += lengthdir_x(16, direction)
     y += lengthdir_y(16, direction)
     var hit = instance_place(x, y, hitme)
-    if place_meeting(x, y, Wall) or(hit && hit.team != team) {
+    if place_meeting(x, y, Wall) or (hit && hit.team != team) {
         x = xprevious
         y = yprevious
         break

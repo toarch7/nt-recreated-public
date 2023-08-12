@@ -25,7 +25,9 @@ if !instance_exists(Player) && room == romGame {
     draw_set_color(c_dkgray)
     draw_set_font(fontSmall)
 
-    if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(Vlambeer) && !instance_exists(StatChar) && !instance_exists(CharSelect) && !instance_exists(LevCont) && !instance_exists(UnlockScreen) && !bossintro {
+    if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(Vlambeer)
+	&& !instance_exists(StatChar) && !instance_exists(CharSelect) && !instance_exists(LevCont)
+	&& !instance_exists(UnlockScreen) && !bossintro && !(instance_exists(Credits) && !instance_exists(GameCont)) {
         draw_set_halign(fa_left)
         draw_text_shadow(4, view_height - 4, "v" + string(GAME_BUILD))
     }
@@ -52,8 +54,8 @@ else if global.custom_seed {
 if instance_exists(Player) && opt_pausebutton && !instance_exists(Credits) {
     draw_sprite_ext(sprPauseButton, 0, view_width - 18, 18, 0.7, 0.7, 0, c_white, 0.5)
 
-    for (var touch = 0; touch <= 4; touch++) {
-        if device_mouse_check_button_pressed(touch, mb_left) {
+    for (var touch = 0; touch <= 4; touch ++) {
+        if device_mouse_check_button_released(touch, mb_left) {
             if point_in_circle(device_mouse_x_to_gui(touch), device_mouse_y_to_gui(touch), view_width - 18, 18, 16) {
                 KeyCont.press_paus[global.index] = 1
             }
@@ -79,10 +81,12 @@ if saving {
 }
 
 if paused && !want_pause {
-    instance_activate_object(Player)
-	
-    with TopCont
-		scrDrawHUD()
-	
-    instance_deactivate_object(Player)
+	if !want_menu && !want_restart && !instance_exists(MenuOptions) {
+	    instance_activate_object(Player)
+		
+	    with TopCont
+			scrDrawHUD()
+		
+	    instance_deactivate_object(Player)
+	}
 }

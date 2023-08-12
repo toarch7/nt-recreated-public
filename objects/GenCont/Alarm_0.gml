@@ -1,6 +1,4 @@
-if !instance_exists(CoopController) && save_get_val("game", "tutorial", 1) {
-    instance_create(10016, 10016, TutorialCont)
-}
+
 
 with Floor {
     if !position_meeting(x - 16, y - 16, Floor) instance_create(x - 16, y - 16, Wall)
@@ -64,7 +62,7 @@ if instance_exists(Player) {
     }
 }
 
-if !(GameCont.area == 7 && GameCont.subarea == 3) && !(GameCont.area == 106 && GameCont.subarea == 3) && !instance_exists(TutorialCont) {
+if !(GameCont.area == 7 && GameCont.subarea == 3) && !(GameCont.area == 106 && GameCont.subarea == 3) {
     if safespawn {
         with RadChest {
             x += lengthdir_x(other.safefloors * 32, other.safedir)
@@ -73,9 +71,33 @@ if !(GameCont.area == 7 && GameCont.subarea == 3) && !(GameCont.area == 106 && G
     }
 
     scrPopulate()
+	
+	if instance_exists(TutCont) {
+		with enemy {
+			if object_index != TutorialTarget
+				instance_destroy(id, 0)
+		}
+		
+		with Wall {
+			if place_meeting(x, y, Floor)
+				instance_destroy()
+		}
+		
+		with chestprop
+			instance_destroy(id, 0)
+		
+		with RadChest
+			instance_destroy(id, 0)
+		
+		with WantBoss
+			instance_destroy()
+		
+		with WantPopo
+			instance_destroy()
+	}
 
     with Floor {
-        if GameCont.area == 0 && instance_exists(Player) && (rng_random(1, 10 + GameCont.hard) > GameCont.hard or!instance_exists(IDPDSpawn)) {
+        if GameCont.area == 0 && instance_exists(Player) && (rng_random(1, 10 + GameCont.hard) > GameCont.hard or !instance_exists(IDPDSpawn)) {
             if instance_number(IDPDSpawn) < 5 + GameCont.loops instance_create(x + 16, y + 16, IDPDSpawn)
         }
     }

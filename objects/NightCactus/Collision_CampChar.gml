@@ -1,1 +1,4 @@
-if other.race == 15 exit instance_destroy(id, 0)
+if other.race == 15
+	exit
+
+instance_destroy(id, 0)

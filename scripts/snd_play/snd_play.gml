@@ -1,6 +1,8 @@
-function snd_play(argument0) {
-    argument0 = custom_sound_check(argument0)
-
-    audio_stop_sound(argument0)
-    audio_play_sound_on(UberCont.mainsound, argument0, false, 2)
+function snd_play(snd) {
+    snd = custom_sound_check(snd)
+	
+    audio_stop_sound(snd)
+	
+    var s = audio_play_sound_on(UberCont.mainsound, snd, false, 2)
+	audio_sound_gain(s, UberCont.opt_sndvol, 0)
 }

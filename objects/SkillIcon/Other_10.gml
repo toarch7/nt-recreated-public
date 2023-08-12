@@ -15,7 +15,7 @@ with Player {
 
     if skill == 2 {
         maxspeed += 0.5
-        footextra = 1
+        footextra ++
     }
 
     if skill == 10 {

@@ -101,7 +101,7 @@ if !instance_exists(CoopController) {
                 col = "@w"
 
                 if lastpoint != _key {
-                    snd_play(sndMenuSelect)
+                    snd_play(sndHover)
                     lastpoint = _key
                 }
 
@@ -131,7 +131,7 @@ if !instance_exists(CoopController) {
 	
 	if point_in_rectangle(mx, my, dx - 120, dy - h / 2, dx + 4, dy + h / 2) {
 		if lastpoint != _key {
-			snd_play(sndMenuSelect)
+			snd_play(sndHover)
 			lastpoint = _key
 		}
 		
@@ -160,7 +160,7 @@ if !instance_exists(CoopController) {
 
     if point_in_rectangle(mx, my, 4, view_height - 56 - h, w1, view_height - 56 + h) {
         if lastpoint != "remoteip" {
-            snd_play(sndMenuSelect)
+            snd_play(sndHover)
             lastpoint = "remoteip"
         }
 
@@ -172,7 +172,7 @@ if !instance_exists(CoopController) {
 
     if point_in_rectangle(mx, my, 4, view_height - 36 - h, w2, view_height - 36 + h) {
         if lastpoint != "joinremote" {
-            snd_play(sndMenuSelect)
+            snd_play(sndHover)
             lastpoint = "joinremote"
         }
 

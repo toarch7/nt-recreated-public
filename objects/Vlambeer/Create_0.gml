@@ -1,5 +1,10 @@
 scrSetViewSize(0)
 
+x = view_width / 2
+y = view_height / 2
+
+camera_set_pos(0, 0)
+
 if !instance_exists(GameCont) && file_exists("gamestate.dat") {
     instance_create(0, 0, GameCont)
     instance_create(0, 0, Player)
@@ -14,24 +19,40 @@ if !instance_exists(GameCont) && file_exists("gamestate.dat") {
 
         exit
     }
+	
+	with Player {
+		recontuations ++
+		
+		print("Recontinued", recontuations, "times")
+		
+		if recontuations > 1 {
+			headloses += 2
+			max_hp -= 2
+		}
+		
+		hp = min(hp, max_hp)
+		
+		lsthealth = min(lsthealth, hp)
+	}
 
     random_set_seed(global.seed)
 
     scrVolume()
 }
 
-if UberCont.want_menu {
+if UberCont.want_menu2 {
     if !UberCont.show_results {
         with instance_create(x, y, Logo) {
             event_perform(ev_alarm, 1)
         }
-    } else {
+    }
+	else {
         instance_create(x, y, DailyList)
         instance_create(x, y, BackButton)
         UberCont.show_results = 0
     }
-
-    UberCont.want_menu = 0
+	
+    UberCont.want_menu2 = 0
 
     if instance_exists(MusCont) {
         with MusCont
@@ -72,9 +93,3 @@ if UberCont.want_menu {
 }
 
 da = 0
-
-x = view_width / 2
-y = view_height / 2
-
-view_xview = 0
-view_yview = 0

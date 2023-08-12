@@ -16,11 +16,17 @@ with creator {
     }
 
     var flor = instance_nearest(xx, yy, Floor)
+	
     if instance_exists(flor) {
-        x = flor.x + 16
-        y = flor.y + 16
+		with flor {
+			other.x = bbox_center_x
+			other.y = bbox_center_y
+		}
+		
+		xprevious = x
+		yprevious = y
     }
-
+	
     alarm[1] = 30
 }
 

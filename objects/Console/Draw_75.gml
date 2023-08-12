@@ -9,12 +9,57 @@ var read = 0
 if !UberCont.opt_console {
     yy = display_get_gui_height() * 1.9
     read = 1
-} else if os_type == os_android {
+}
+else if os_type == os_android {
     yy = round(yy * 0.65)
 }
 
+display_set_gui_size(width * 2, height * 2)
+
+var dx = 48
+
+if (flags & 4) == 4 {
+	var dx = 48,
+		str = "",
+		bottom = height * 2 - 96
+	
+	with all {
+		if object_index == Spiral or object_index == SpiralDebris or object_index == SpiralStar
+			continue
+		
+		str += object_get_name(object_index) + "\n"
+		
+		if string_height(str) > bottom {
+			draw_text_shadow(dx, 48, str)
+			
+			dx += string_width(str) + 14
+			
+			str = ""
+		}
+	}
+	
+	if str != "" {
+		draw_text_shadow(dx, 48, str)
+		dx += string_width(str) + 14
+	}
+}
+
+if (flags & 8) == 8 {
+	var str = ""
+	
+	draw_set_color(c_white)
+	
+	if global.cheats
+	str += "cheats active"
+	
+	str += "\n camera: " + string(view_xview) + ", " + string(view_yview)
+	str += "\n color: " + string(global.player_color)
+	str += "\n      : " + string(UberCont.opt_color)
+	
+	draw_text_shadow(dx, 48, str)
+}
+
 if global.console_active {
-    display_set_gui_size(width * 2, height * 2)
 
     draw_set_font(fontConsole)
 
@@ -31,12 +76,13 @@ if global.console_active {
     var len = array_length(global.log_output)
 
     for (var i = len - 1; i >= 0; i--) {
-        var str = global.log_output[i],
+        var str = string(global.log_output[i]),
             c = global.log_color[i]
 
         if c == (c_white - 1) {
             text(_x - w + 4, _y, "> " + str, c, 1)
-        } else text(_x, _y, str, c, 1)
+        }
+		else text(_x, _y, str, c, 1)
 
         _y -= string_height(str)
     }
@@ -51,11 +97,12 @@ if global.console_active {
 
     alert = ""
 
-    display_set_gui_size(width, height)
 } else if alert != "" {
     draw_set_halign(fa_center)
     text(display_get_gui_width() / 2, 48, alert, c_red)
 }
+
+display_set_gui_size(width, height)
 
 draw_set_font(fntM1)
 

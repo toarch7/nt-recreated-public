@@ -1,5 +1,5 @@
 function scrDrawSpiral() {
-    try {
+	try {
         draw_set_color(c_black)
 
         var is_menu = object_index == Menu

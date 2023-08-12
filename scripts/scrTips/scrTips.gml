@@ -216,7 +216,7 @@ function scrTips() {
 	
 	 //Weapons
 	if tiptype == 3 {
-	    tip = plr.wep_text[plr.wep]
+	    tip = wep_text[plr.wep]
 	}
 
 	 //Mutations

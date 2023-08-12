@@ -16,8 +16,7 @@ dis = 0
 vdis = 0 //dynamic view
 
 assist = UberCont.opt_assist
-assistpos = UberCont.opt_assistpos
-_aim_target = noone
+aim_target = noone
 
 crosshair = save_get_val("visual", "crosshair", 0)
 

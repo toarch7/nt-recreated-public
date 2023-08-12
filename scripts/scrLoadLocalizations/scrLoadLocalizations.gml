@@ -19,7 +19,7 @@ function scrLoadLocalizations() {
         }
 
         try {
-            AllLocales[$ string_replace(_find, ".loc", "")] = json_parse(_data);
+            localizations_list[$ string_replace(_find, ".loc", "")] = json_parse(_data);
         }
 		catch (e) {
             show_debug_message([_find, e.message])

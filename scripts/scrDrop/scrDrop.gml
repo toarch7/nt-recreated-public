@@ -4,10 +4,12 @@
 function scrDrop(argument0, argument1) {
     var player = instance_nearest(x, y, Player)
 
-    if !instance_exists(player) or!instance_exists(id) exit
+    if !instance_exists(player) or !instance_exists(id) exit
 	
     //roll
-    random_set_seed(rng_next_int(9))
+	var seed = self[$ "dropseed"] ?? rng_next_int(RNGSlot.Pickups)
+	
+    random_set_seed(seed)
 	
 	var confiscate = (player.race == 1 && ultra_get(1)) && !irandom(10)
 	
@@ -28,13 +30,13 @@ function scrDrop(argument0, argument1) {
 		else argument0 *= 0.5
     }
 
-    if player.ammo[player.wep_type[player.wep]] < player.typ_amax[player.wep_type[player.wep]] * 0.2 need += 0.75
-    else if player.ammo[player.wep_type[player.wep]] > player.typ_amax[player.wep_type[player.wep]] * 0.6 need += 0.1
+    if player.ammo[wep_type[player.wep]] < typ_amax[wep_type[player.wep]] * 0.2 need += 0.75
+    else if player.ammo[wep_type[player.wep]] > typ_amax[wep_type[player.wep]] * 0.6 need += 0.1
     else need += 0.5
 
     if player.bwep = 0 need += 0.5
-    else if player.ammo[player.wep_type[player.bwep]] < player.typ_amax[player.wep_type[player.bwep]] * 0.2 need += 0.75
-    else if player.ammo[player.wep_type[player.bwep]] > player.typ_amax[player.wep_type[player.bwep]] * 0.6 need += 0.1
+    else if player.ammo[wep_type[player.bwep]] < typ_amax[wep_type[player.bwep]] * 0.2 need += 0.75
+    else if player.ammo[wep_type[player.bwep]] > typ_amax[wep_type[player.bwep]] * 0.6 need += 0.1
     else need += 0.5
 
     //drop items
@@ -47,14 +49,13 @@ function scrDrop(argument0, argument1) {
 		}
 	}
 	else if argument1 {
-        if rng_random(9, 100) < argument1 * (1 + skill_get(4) * 0.6) {
+        if random(100) < argument1 * (1 + skill_get(4) * 0.6) {
             //drop weps
 			if confiscate {
 				instance_create(x + orandom(2), y + orandom(2), WeaponChest)
 			}
 			else {
 	            with instance_create(x + random(4) - 2, y + random(4) - 2, WepPickup) {
-	                scrWeapons()
 	                scrDecideWep(0)
 	                name = wep_name[wep]
 	                type = wep_type[wep]
@@ -69,7 +70,6 @@ function scrDrop(argument0, argument1) {
     if UberCont.birthday && random(1) <= 0.05 {
         if !global.party_gun_dropped {
             with instance_create(x + random(4) - 2, y + random(4) - 2, WepPickup) {
-                scrWeapons()
                 wep = 82
                 name = wep_name[wep]
                 type = wep_type[wep]

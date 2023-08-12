@@ -81,7 +81,7 @@ function scrSpawnPlayer(_index = 0, _race = 1, _skin = 0) {
         //RACE STUFF
         bskin = _skin
 
-        if !bskin or!sprite_exists(asset_get_index("sprMutant" + string(race) + "BIdle")) {
+        if !bskin or !sprite_exists(asset_get_index("sprMutant" + string(race) + "BIdle")) {
             spr_idle = asset_get_index("sprMutant" + string(race) + "Idle")
             spr_walk = asset_get_index("sprMutant" + string(race) + "Walk")
             spr_hurt = asset_get_index("sprMutant" + string(race) + "Hurt")
@@ -144,7 +144,7 @@ function scrSpawnPlayer(_index = 0, _race = 1, _skin = 0) {
             bwep = 1
             accuracy = 1.8
         }
-
+		
         if race == 13 {
             spr_idle = sprScrapBossIdle
             spr_walk = sprScrapBossWalk
@@ -211,7 +211,7 @@ function scrSpawnPlayer(_index = 0, _race = 1, _skin = 0) {
         drawlowhp = 0
         canrebel = 1
 
-        spirit_y = 0
+        spirit_anim = 0
         spirit_index = 0
 
         infammo = 0

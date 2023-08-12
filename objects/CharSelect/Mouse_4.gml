@@ -59,9 +59,10 @@ if inst.race != race {
 		with Menu {
 			port_x = 150
 			
-			if race >= 13 && race <= 15 {
+			if race >= 13 && race <= 15
 				loadout = 0
-			}
+			
+			appear = 2
 		}
 	}
 	

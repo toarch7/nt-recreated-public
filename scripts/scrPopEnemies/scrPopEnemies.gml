@@ -3,7 +3,7 @@ function scrPopEnemies() {
 
     random_set_seed(rng_next_int(1))
 
-    if ((spawnarea == 1) && !instance_exists(TutorialCont)) {
+    if ((spawnarea == 1) && !instance_exists(TutCont)) {
         if (random(2) < random(GameCont.loops)) instance_create(x + 16, y + 16, choose(Scorpion, Scorpion, Bandit, Bandit, Maggot, JungleFly, JungleFly, MeleeBandit, Sniper))
         else if (styleb == 1) instance_create(x + 16, y + 16, choose(MaggotSpawn, BigMaggot, BigMaggot, Maggot))
         else if (random(7) < 1) instance_create(x + 16, y + 16, choose(MaggotSpawn, Scorpion))
@@ -71,7 +71,7 @@ function scrPopEnemies() {
         }
     }
     if ((spawnarea == 106) && (GameCont.subarea != 3)) {
-        if (random(12) < 1 or!instance_exists(enemy)) {
+        if (random(12) < 1 or !instance_exists(enemy)) {
             if (random(7) < 1) instance_create(x + 16, y + 16, choose(EliteGrunt, EliteShielder, EliteInspector))
             else if (random(4) < 1) {
                 repeat(5)

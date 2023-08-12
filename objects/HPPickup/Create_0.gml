@@ -3,11 +3,18 @@ friction = 0.2
 blink = 30
 alarm[0] = 200 + random(30)
 
+image_speed = 0
 
-//RUSH CROWN
-if instance_exists(Player) {
-    if GameCont.crown = 4 alarm[0] /= 3
-    if GameCont.area = 102 sprite_index = sprSlice
+num = 2
+
+if skill_get(9)
+	num = 4
+
+if crown_current == crwn_haste {
+	alarm[0] /= 3
+	num ++
 }
 
-image_speed = 0
+if GameCont.area == 102 {
+	sprite_index = sprSlice
+}

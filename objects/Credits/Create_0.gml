@@ -30,26 +30,30 @@ credittext = [
 show = 0
 alarm[0] = 60
 
-audio_stop_all()
-
-snd_play(sndRestart)
-
-with instance_create(x, y, SpiralCont)
-bossfight = 1
-
-with MusCont {
-    instance_destroy()
-}
-
-with instance_create(0, 0, MusCont) {
-    snd_stop(song)
-    snd_stop(amb)
-    alarm[0] = -1
-    song = musCredits
-    amb = amb0
-    song = custom_sound_check(song)
-    amb = custom_sound_check(amb)
-    snd_play(song)
+if !instance_exists(MenuOptions) {
+	audio_stop_all()
+	
+	snd_play(sndRestart)
+	
+	if !instance_exists(SpiralCont) {
+		with instance_create(x, y, SpiralCont)
+			bossfight = 1
+	}
+	
+	with MusCont {
+	    instance_destroy()
+	}
+	
+	with instance_create(0, 0, MusCont) {
+	    snd_stop(song)
+	    snd_stop(amb)
+	    alarm[0] = -1
+	    song = musCredits
+	    amb = amb0
+	    song = custom_sound_check(song)
+	    amb = custom_sound_check(amb)
+	    snd_play(song)
+	}
 }
 
 file_delete("gamestate.dat")

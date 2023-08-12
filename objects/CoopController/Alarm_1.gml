@@ -9,7 +9,7 @@ buffer_write(global.buffer, buffer_u8, event.udp_connect)
 network_send_udp(socket, ip, PORT, global.buffer, buffer_tell(global.buffer))
 
 switch loading_text {
-    case "":
+    default:
         loading_text = "|"
         break
     case "|":

@@ -3,22 +3,47 @@
 #macro c_gold      9490650
 #macro c_ultra     1492541
 #macro c_tooltip   4008241
+#macro c_uigray    0x999999
+#macro c_uidark    0x333333
 
 #macro view_width global.g_view_width
 #macro view_height global.g_view_height
 #macro view_xview global.g_view_xview
 #macro view_yview global.g_view_yview
 
+#macro gui_w (display_get_gui_width())
+#macro gui_h (display_get_gui_height())
+
+#macro DrawAlignCenter draw_set_halign(fa_center); draw_set_valign(fa_center)
+#macro DrawAlignDefault draw_set_halign(fa_left); draw_set_valign(fa_top)
+
+#macro ldrx lengthdir_x
+#macro ldry lengthdir_y
+
+#macro bbox_center_x ((bbox_left + bbox_right) / 2)
+#macro bbox_center_y ((bbox_top + bbox_bottom) / 2)
+#macro bbox_width (bbox_right - bbox_left)
+#macro bbox_height (bbox_bottom - bbox_top)
+
+#macro x_rel_view (x - view_xview)
+#macro y_rel_view (y - view_yview)
+
 // Multiplayer PlayerInstance index
 global.index = 0
 
-globalvar lockstep_stop;
+globalvar lockstep_stop, localizations_list;
+localizations_list = { en: {} }
 lockstep_stop = 0
+
+global.localization_current = {}
 
 view_width = 320
 view_height = 240
 
-global.pc_build = 0
+view_xview = 0
+view_yview = 0
+
+global.desktop = 0
 
 global.view_width_max = view_width
 
@@ -27,7 +52,7 @@ function scrSetViewSize(windowresize = 1) {
     var s = UberCont.opt_scaling
     var w = 320
     var h = 240
-
+	
     ideal_width = w
     ideal_height = h
 
@@ -56,14 +81,12 @@ function scrSetViewSize(windowresize = 1) {
     room_set_width(romGame, view_width)
     room_set_height(romGame, view_height)
 
-    if windowresize {
+    if global.desktop && windowresize {
         window_set_size(view_width, view_height)
         window_set_min_width(view_width)
         window_set_min_height(view_height)
     }
 }
-
-global.coopenemylist = {}
 
 global.index = 0
 
@@ -134,7 +157,7 @@ global.input_keys_list = [
 
 global.input_keys_list_length = array_length(global.input_keys_list)
 
-function scrCollectInputs() {
+function scrInputBitmask() {
 	var val = 0
 	
 	for(var i = 0; i < global.input_keys_list_length; i ++) {
@@ -144,49 +167,6 @@ function scrCollectInputs() {
 	}
 	
 	return val
-}
-
-#macro gpad global._gpad_key
-gpad = {
-    shoulderl: gp_shoulderl,
-    shoulderlb: gp_shoulderlb,
-    shoulderr: gp_shoulderr,
-    shoulderrb: gp_shoulderrb,
-
-    face1: gp_face1,
-    face2: gp_face2,
-    face3: gp_face3,
-    face4: gp_face4,
-
-    padd: gp_padd,
-    padu: gp_padu,
-    padl: gp_padl,
-    padr: gp_padr,
-
-    start: gp_start,
-    select: gp_select
-}
-
-function scrGPadReset() {
-    gpad = {
-        shoulderl: gp_shoulderl,
-        shoulderlb: gp_shoulderlb,
-        shoulderr: gp_shoulderr,
-        shoulderrb: gp_shoulderrb,
-
-        face1: gp_face1,
-        face2: gp_face2,
-        face3: gp_face3,
-        face4: gp_face4,
-
-        padd: gp_padd,
-        padu: gp_padu,
-        padl: gp_padl,
-        padr: gp_padr,
-
-        start: gp_start,
-        select: gp_select
-    }
 }
 
 function scrGamepadKeyName(key) {
@@ -228,40 +208,211 @@ function scrGamepadKeyName(key) {
     }
 }
 
-function scrGamepadGet() {
+function scrKeyName(key) {
+	switch key {
+		case mb_left:
+			return "LMB"
+		case mb_right:
+			return "RMB"
+		case mb_middle:
+			return "MIDDLE"
+		
+		case vk_shift:
+			return "SHIFT"
+		case vk_control:
+			return "CTRL"
+		case vk_enter:
+			return "ENTER"
+		case vk_space:
+			return "SPACE"
+		case vk_alt:
+			return "ALT"
+		case vk_delete:
+			return "DELETE"
+		case vk_end:
+			return "END"
+		case vk_tab:
+			return "TAB"
+		case vk_escape:
+			return "ESC"
+		case vk_tidle:
+			return "~"
+		case ord("/"):
+			return "/"
+		
+		case vk_up:
+			return "UP"
+		case vk_down:
+			return "DOWN"
+		case vk_left:
+			return "LEFT"
+		case vk_right:
+			return "RIGHT"
+	}
+	
+	if key >= ord("A") && key <= ord("Z")
+	or key >= ord("0") && key <= ord("9")
+	or key == ord("/")
+		return chr(key)
+	
+	if key >= vk_f1 && key <= vk_f12 {
+		var f = key - vk_f1
+		return "F" + string(f + 1)
+	}
+	
+	return "??"
+}
+
+function scrGamepadAnykey() {
     if gamepad_button_check_pressed(0, gp_shoulderl) {
         return gp_shoulderl
-    } else if gamepad_button_check_pressed(0, gp_shoulderr) {
+    }
+	else if gamepad_button_check_pressed(0, gp_shoulderr) {
         return gp_shoulderr
-    } else if gamepad_button_check_pressed(0, gp_shoulderlb) {
+    }
+	else if gamepad_button_check_pressed(0, gp_shoulderlb) {
         return gp_shoulderlb
-    } else if gamepad_button_check_pressed(0, gp_shoulderrb) {
+    }
+	else if gamepad_button_check_pressed(0, gp_shoulderrb) {
         return gp_shoulderrb
-    } else if gamepad_button_check_pressed(0, gp_face1) {
+    }
+	else if gamepad_button_check_pressed(0, gp_face1) {
         return gp_face1
-    } else if gamepad_button_check_pressed(0, gp_face2) {
+    }
+	else if gamepad_button_check_pressed(0, gp_face2) {
         return gp_face2
-    } else if gamepad_button_check_pressed(0, gp_face3) {
+    }
+	else if gamepad_button_check_pressed(0, gp_face3) {
         return gp_face3
-    } else if gamepad_button_check_pressed(0, gp_face4) {
+    }
+	else if gamepad_button_check_pressed(0, gp_face4) {
         return gp_face4
-    } else if gamepad_button_check_pressed(0, gp_padd) {
+    }
+	else if gamepad_button_check_pressed(0, gp_padd) {
         return gp_padd
-    } else if gamepad_button_check_pressed(0, gp_padu) {
+    }
+	else if gamepad_button_check_pressed(0, gp_padu) {
         return gp_padu
-    } else if gamepad_button_check_pressed(0, gp_padr) {
+    }
+	else if gamepad_button_check_pressed(0, gp_padr) {
         return gp_padr
-    } else if gamepad_button_check_pressed(0, gp_padl) {
+    }
+	else if gamepad_button_check_pressed(0, gp_padl) {
         return gp_padl
-    } else if gamepad_button_check_pressed(0, gp_start) {
+    }
+	else if gamepad_button_check_pressed(0, gp_start) {
         return gp_start
-    } else if gamepad_button_check_pressed(0, gp_select) {
+    }
+	else if gamepad_button_check_pressed(0, gp_select) {
         return gp_select
-    } else if keyboard_check_pressed(vk_space) {
+    }
+	else if keyboard_check_pressed(vk_space) {
         return gp_face1
+    }
+	else if gamepad_button_check_pressed(0, gp_stickl) {
+        return gp_stickl
+    }
+	else if keyboard_check_pressed(gp_stickr) {
+        return gp_stickr
     }
 
     return -1
+}
+
+function scrHandleInputsGeneral(index) {
+	var kc = KeyCont
+	
+	kc.press_horn[index] = 0
+	
+	kc.gamepad[index] = opt_gamepad
+	kc.keyboard[index] = opt_keyboard
+	kc.aimassist[index] = opt_assist
+	kc.crosshair[index] = opt_crosshair
+	
+	// generic inputs
+	if opt_gamepad or opt_keyboard {
+	    kc.hold_fire[index] = key_check("fire", keystate_hold)
+	    kc.press_fire[index] = key_check("fire", keystate_press)
+	    kc.release_fire[index] = key_check("fire", keystate_release)
+		
+	    kc.hold_spec[index] = key_check("spec", keystate_hold)
+	    kc.press_spec[index] = key_check("spec", keystate_press)
+	    kc.release_spec[index] = key_check("spec", keystate_release)
+		
+	    kc.hold_swap[index] = key_check("swap", keystate_hold)
+	    kc.press_swap[index] = key_check("swap", keystate_press)
+	    kc.release_swap[index] = key_check("swap", keystate_release)
+		
+	    kc.hold_pick[index] = key_check("pick", keystate_hold)
+	    kc.press_pick[index] = key_check("pick", keystate_press)
+	    kc.release_pick[index] = key_check("pick", keystate_release)
+		
+	    kc.hold_horn[index] = key_check("horn", keystate_hold)
+	    kc.press_horn[index] = key_check("horn", keystate_press)
+	    kc.release_horn[index] = key_check("horn", keystate_release)
+	}
+	
+	// gamepad
+	if opt_gamepad {
+	    scrSetGamepadInputs(index)
+		scrGamepadUIControl()
+	}
+	// keyboard
+	else if opt_keyboard {
+	    scrSetKeyboardInputs(index)
+		
+	    if localcoop {
+	        scrSetGamepadInputs(1)
+	    }
+		else if gamepad_button_check(0, gp_start) {
+	        opt_gamepad = 1
+	    }
+		
+		// keyboard ui control
+		if instance_exists(ParButton) {
+	        for (var i = 0; i < min(10, instance_number(ParButton)); i++) {
+	            if keyboard_check_pressed(ord(string(i + 1))) {
+	                with instance_find(ParButton, i) {
+	                    selected = 1
+	                    event_perform(ev_mouse, ev_left_press)
+	                }
+
+	                break
+	            }
+	        }
+	    }
+	}
+	// mobile touchscreen
+	else {
+		// call control elements logic
+		with MobileUI
+			event_user(0)
+		
+		// for global touches
+	    for (var i = 0; i < array_length(touch_duration); i++) {
+	        if device_mouse_check_button(i, mb_left) {
+	            touch_duration[i] ++
+	        }
+			else touch_duration[i] = 0
+	    }
+		
+		if os_type == os_android {
+		    var p = self[$ "_pause_old"] ?? 0
+			
+		    if !opt_gamepad && opt_volumecontrol {
+		        if p != paused {
+		            SetVolumeControl(!paused)
+		        }
+		    }
+			
+			if volqueue != -1 && !ds_queue_empty(volqueue) {
+			    var a = ds_queue_dequeue(volqueue)
+			    scrHandleVolumeControl(a[0], a[1])
+			}
+			
+		    self[$ "_pause_old"] = paused
+		}
+	}
 }
 
 function scrSetGamepadInputs(index = 0) {
@@ -274,27 +425,7 @@ function scrSetGamepadInputs(index = 0) {
         KeyCont.dir_move[index] = point_direction(0, 0, kh, kv)
         KeyCont.moving[index] = point_distance(0, 0, kh, kv)
     }
-
-    KeyCont.hold_fire[index] = gamepad_button_check(0, gpad.shoulderr)
-    KeyCont.press_fire[index] = gamepad_button_check_pressed(0, gpad.shoulderr)
-    KeyCont.release_fire[index] = gamepad_button_check_released(0, gpad.shoulderr)
-
-    KeyCont.hold_spec[index] = gamepad_button_check(0, gpad.shoulderl)
-    KeyCont.press_spec[index] = gamepad_button_check_pressed(0, gpad.shoulderl)
-    KeyCont.release_spec[index] = gamepad_button_check_released(0, gpad.shoulderl)
-
-    KeyCont.hold_swap[index] = gamepad_button_check(0, gpad.face3) or gamepad_button_check(0, gp_shoulderrb)
-    KeyCont.press_swap[index] = gamepad_button_check_pressed(0, gpad.face3) or gamepad_button_check_pressed(0, gp_shoulderrb)
-    KeyCont.release_swap[index] = gamepad_button_check_released(0, gpad.face3) or gamepad_button_check_released(0, gp_shoulderrb)
-
-    KeyCont.hold_pick[index] = gamepad_button_check(0, gpad.face1)
-    KeyCont.press_pick[index] = gamepad_button_check_pressed(0, gpad.face1)
-    KeyCont.release_pick[index] = gamepad_button_check_released(0, gpad.face1)
-
-    KeyCont.hold_horn[index] = gamepad_button_check(0, gp_stickl)
-    KeyCont.press_horn[index] = gamepad_button_check_pressed(0, gp_stickl)
-    KeyCont.release_horn[index] = gamepad_button_check_released(0, gp_stickl)
-
+	
     var kh = gamepad_axis_value(0, gp_axisrh)
     var kv = gamepad_axis_value(0, gp_axisrv)
 
@@ -304,8 +435,8 @@ function scrSetGamepadInputs(index = 0) {
 }
 
 function scrSetKeyboardInputs(index = 0) {
-    var kh = keyboard_check(ord("D")) - keyboard_check(ord("A"))
-    var kv = keyboard_check(ord("S")) - keyboard_check(ord("W"))
+    var kh = key_check("east") - key_check("west")
+    var kv = key_check("south") - key_check("north")
 
     KeyCont.moving[index] = 0
 
@@ -313,39 +444,11 @@ function scrSetKeyboardInputs(index = 0) {
         KeyCont.dir_move[index] = point_direction(0, 0, kh, kv)
         KeyCont.moving[index] = 1
     }
-
-    KeyCont.hold_fire[index] = mouse_check_button(mb_left)
-    KeyCont.press_fire[index] = mouse_check_button_pressed(mb_left)
-    KeyCont.release_fire[index] = mouse_check_button_released(mb_left)
-
-    KeyCont.hold_spec[index] = mouse_check_button(mb_right) or(!global.console_active && keyboard_check(ord("R")))
-    KeyCont.press_spec[index] = mouse_check_button_pressed(mb_right) or(!global.console_active && keyboard_check_pressed(ord("R")))
-    KeyCont.release_spec[index] = mouse_check_button_released(mb_right) or(!global.console_active && keyboard_check_released(ord("R")))
-
-    KeyCont.hold_swap[index] = keyboard_check(vk_space)
-    KeyCont.press_swap[index] = keyboard_check_pressed(vk_space)
-    KeyCont.release_swap[index] = keyboard_check_released(vk_space)
-
-    KeyCont.hold_pick[index] = keyboard_check(ord("E"))
-    KeyCont.press_pick[index] = keyboard_check_pressed(ord("E"))
-    KeyCont.release_pick[index] = keyboard_check_released(ord("E"))
-
-    KeyCont.hold_horn[index] = keyboard_check(ord("B"))
-    KeyCont.press_horn[index] = keyboard_check_pressed(ord("B"))
-    KeyCont.release_horn[index] = keyboard_check_released(ord("B"))
-
-    if global.console_active {
-        KeyCont.press_paus[index] = 0
-        KeyCont.press_horn[index] = 0
-        KeyCont.press_pick[index] = 0
-        KeyCont.press_swap[index] = 0
-        KeyCont.moving[index] = 0
-    }
-
-    with Player {
-	    if self.index == index {
-	        KeyCont.dir_fire[index] = point_direction(x, y, mouse_x, mouse_y)
-	    }
+	
+	with Player {
+		if self.index == index {
+		    KeyCont.dir_fire[index] = point_direction(x, y, mouse_x, mouse_y)
+		}
 	}
 }
 
@@ -380,8 +483,25 @@ function month_name_short(month) {
     return "??"
 }
 
+#macro mouse_hover (collision_point(mouse_x, mouse_y, object_index, false, false) == id)
+
+function mouse_ui_clicked() {
+	return UberCont.opt_keyboard ? mouse_check_button_pressed(mb_left) : mouse_check_button_released(mb_left)
+}
+
+function keyboard_anykey() {
+	return !keyboard_check(vk_alt) && keyboard_check_pressed(vk_anykey)
+}
 
 device_mouse_dbclick_enable(0)
+
+
+function camera_set_pos(_x, _y) {
+	view_xview = _x
+	view_yview = _y
+	
+	camera_set_view_pos(view_camera, _x, _y)
+}
 
 mp_potential_settings(90, 5, 5, 0)
 

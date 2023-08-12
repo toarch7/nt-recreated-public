@@ -1,21 +1,34 @@
-if !isset("hover") hover = 2
-if !isset("available") available = 1
+if global.time < start
+	exit
 
-if hover > 0 {
-    hover = lerp(hover, 0, 0.4)
-
-    if !hover {
-        snd_play(sndSlider)
-        hover = 0
-    }
-} else if distance_to_point(mouse_x, mouse_y) < 1 or gpadsel {
-    light = 1
-} else light = 0
-
-if available splat = lerp(splat, light * 4, .4)
-
-if wait wait--
-
-if !os_is_network_connected() && available && (image_index == 1 or image_index == 2) {
-    available = 0
+if global.time == start {
+	snd_play_pitch(sndAppear, 0.7 + random(0.1))
+	
+	visible = 1
+	appear = 2
 }
+else if appear
+	appear --
+
+if !wait && available {
+	var press = mouse_ui_clicked()
+	
+	if mouse_hover {
+		if !is_gamepad() {
+			if !hover {
+				snd_play(sndHover)
+				hover = 1
+			}
+		}
+		
+		if press
+			event_user(0)
+	}
+	else if !is_gamepad() && hover
+		hover = 0
+}
+
+if wait
+	wait --
+
+splat = lerp(splat, hover * 4, 0.4)

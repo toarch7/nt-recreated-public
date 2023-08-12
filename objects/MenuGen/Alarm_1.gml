@@ -36,4 +36,4 @@ with Vlambeer {
     alarm[0] = 30
 }
 
-alarm[2] = 30
+event_perform(ev_alarm, 2)

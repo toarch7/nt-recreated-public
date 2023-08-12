@@ -19,7 +19,7 @@ function load_custom_locales(path) {
             try {
                 var data = json_parse(file_read(p))
                 var name = string_replace(list[i], ".loc", "")
-                var l = AllLocales[$ name]
+                var l = localizations_list[$ name]
 
                 if l != undefined {
                     var keys = struct_keys(data)
@@ -28,7 +28,7 @@ function load_custom_locales(path) {
                         l[$ keys[i]] = data[$ keys[i]]
                     }
                 } else {
-                    AllLocales[$ name] = data
+                    localizations_list[$ name] = data
                 }
             } catch (e) {
                 printc("[!!!] Failed to load localization \"" + p + "\" " + e.message, c_red)

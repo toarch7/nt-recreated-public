@@ -1,41 +1,67 @@
-var _bwp = other.bwep
+var p = instance_nearest(x, y, Player)
 
-if other.race == 13 other.bwep = 7
+if !p
+	exit
 
-if other.ammo[other.wep_type[other.wep]] >= other.typ_amax[other.wep_type[other.wep]] or other.ammo[other.wep_type[other.bwep]] >= other.typ_amax[other.wep_type[other.bwep]]
-type = choose(1, 2, 3, 4, 5)
-else if other.bwep != 0 type = choose(other.wep_type[other.wep], other.wep_type[other.bwep])
-else type = other.wep_type[other.wep]
+with p {
+	var _bwp = bwep,
+		type = 0
+	
+	if race == 13 {
+		bwep = 7
+	}
+	
+	var a = wep_type[wep],
+		b = wep_type[bwep]
+	
+	if ammo[a] >= typ_amax[a] or ammo[b] >= typ_amax[b] {
+		type = choose(1, 2, 3, 4, 5)
+	}
+	else if bwep != 0 {
+		type = choose(a, b)
+	}
+	else type = a
 
-if other.race == 13 other.bwep = _bwp
+	if race == 13 {
+		bwep = _bwp
+	}
 
-if type = 0 type = choose(1, 2, 3, 4, 5)
+	if type == 0 {
+		type = choose(1, 2, 3, 4, 5)
+	}
+	
+	var extra = 0
 
-extra = 0
-//RUSH CROWN
-if GameCont.crown = 4 extra = 1
+	//RUSH CROWN
+	if crown_current == crwn_haste
+		extra = 1
 
-other.ammo[type] += other.typ_ammo[type] + extra
-
-if other.ammo[type] > other.typ_amax[type] other.ammo[type] = other.typ_amax[type]
-
-
-dir = instance_create(x, y, PopupText)
-dir.mytext = "+" + string(other.typ_ammo[type] + extra) + " " + string(loc(other.typ_name[type]))
-if other.ammo[type] = other.typ_amax[type] dir.mytext = loc_sfmt("MAX %", loc(other.typ_name[type]))
-
-snd_play(sndAmmoPickup)
-instance_destroy()
+	ammo[type] = max(typ_ammo[type] + extra, typ_amax[type])
+	
+	var dir = instance_create(x, y, PopupText)
+	
+	dir.mytext = "+" + string(typ_ammo[type] + extra) + " " + loc(typ_name[type])
+	
+	if ammo[type] >= typ_amax[type] {
+		dir.mytext = loc_sfmt("MAX %", loc(typ_name[type]))
+	}
+}
 
 instance_create(x, y, SmallChestPickup)
 
 if GameCont.coopultra == 1 {
-    var plr = other.id
-
-    with Player
-    if id != plr {
-        ammo[other.type] += typ_ammo[other.type]
-
-        if ammo[other.type] > typ_amax[other.type] ammo[other.type] = typ_amax[other.type]
-    }
+	with Player {
+		if id != p {
+			other.x = x
+			other.y = y
+			
+			with other {
+				event_perform(ev_collision, Player)
+			}
+		}
+	}
 }
+
+snd_play(sndAmmoPickup)
+
+instance_destroy()

@@ -1,6 +1,6 @@
 #macro game_directory global.gamepath
 
-global.pc_build = ((os_type == os_windows) or(os_type == os_linux))
+global.desktop = ((os_type == os_windows) or (os_type == os_linux))
 
 firstry = 0
 
@@ -16,6 +16,8 @@ posy = 8
 
 skills = -1
 player = -1
+
+disclaimer = 0
 
 c = -1
 b = -1

@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndNothing2Appear",
-  "duration": 5.605,
+  "duration": 5.6,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

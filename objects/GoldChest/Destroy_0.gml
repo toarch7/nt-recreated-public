@@ -1,4 +1,5 @@
-with instance_create(x, y, ChestOpen)
+with instance_create(x,y,ChestOpen)
 sprite_index = sprGoldChestOpen
 
-instance_create(x, y, FXChestOpen)
+instance_create(x,y,FXChestOpen)
+

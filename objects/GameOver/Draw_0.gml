@@ -44,8 +44,15 @@ draw_text_shadow(view_xview + view_width / 2, view_yview + 48, text)
 if UberCont.continued_run {
     draw_set_font(fontSmall)
     draw_set_alpha(0.1)
-    draw_text(view_xview + view_width / 2, view_yview + 59, "continued")
-    draw_set_alpha(1)
+	
+	var str = "continued"
+	
+	if global.recontuations > 0
+		str = "continued x" + string(global.recontuations)
+	
+    draw_text(view_xview + view_width / 2, view_yview + 59, str)
+    
+	draw_set_alpha(1)
     draw_set_font(fntM1)
 }
 

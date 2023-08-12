@@ -15,26 +15,18 @@ if sprite_index == sprPortalSpawn {
 
 if sprite_index = sprPortalDisappear or sprite_index = sprProtoPortalDisappear or sprite_index = sprPopoPortalDisappear {
     with Player {
-        if reload > 1 reload = 1
-
-        if breload > 1 breload = 1
-    }
-
-    GameCont.level_end = 1
-
-    snd_stop(sndPortalLoop)
-
-    if instance_exists(Player) {
-        with WepPickup {
-            if wep == 46 && GameCont.area == 1 {
-                GameCont.blacksword = 1
-            }
-        }
+        reload = 0
+		breload = 0
 		
-		instance_activate_all()
-
-        room_restart()
+		if wep
+			can_shoot = true
+		
+		if bwep
+			bcan_shoot = true
     }
-
+	
+    if instance_exists(Player) && !GameCont.level_end
+        event_perform(ev_alarm, 1)
+	
     instance_destroy()
 }

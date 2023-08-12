@@ -1,572 +1,885 @@
-#macro UI_SLIDER_WIDTH 120
-#macro UI_SPLAT_OFFSET 64
-#macro UI_STEP_SIZE 32
+#macro UI_SLIDER_OFFSET 15
+#macro SWITCH_STATE_ON "ON"
+#macro SWITCH_STATE_OFF "OFF"
 
-languages = ["en"]
+languages = struct_keys(global.localizations_list)
 
-restart = instance_exists(BackButton)
-remap_pos = 0
-remap_keys = {
-    face1: "CONFIRM/PICKUP",
-    face2: "BACK/CANCEL",
-    face3: "SWAP WEAPON",
-    shoulderr: "FIRE",
-    shoulderl: "ABILITY",
-    padu: "ARROW UP",
-    padd: "ARROW DOWN",
-    padl: "ARROW LEFT",
-    padr: "ARROW RIGHT"
+enum OptionCategory {
+	Main,
+	
+	Audio,
+	Video,
+	Game,
+	Controls,
+	Resourcepacks, // unused
+	Cheats,
+	
+	Video_Display,
+	
+	Game_Profile,
+	Game_Color,
+	Game_Data,
+	
+	Controls_Remapping,
+	Controls_Remapping_Keys,
+	
+	NumOptions
 }
 
-if !restart {
-    instance_create(0, 0, BackButton)
-}
+if !instance_exists(BackButton)
+	instance_create(0, 0, BackButton)
 
-foreach(UberCont.AllLocales, function(val, index) {
-    array_push(languages, index);
-})
-
-resolution = UberCont.opt_resolution
-language = UberCont.opt_language
-pointed_item = 0
 rp_warning = 0
-clickable = 0
-alarm[0] = 5
-
-options = [
-//0 - General
-[{
-    name: "AUDIO",
-    value: 1,
-    type: "category"
-}, {
-    name: "VIDEO",
-    value: 2,
-    type: "category"
-}, {
-    name: "GAME",
-    value: 3,
-    type: "category"
-}, {
-    name: "CONTROLS",
-    value: 4,
-    type: "category"
-}, {
-    name: "RESOURCEPACKS",
-    value: 5,
-    type: "category",
-    onClick: function() {
-        if !save_get_val("etc", "rp_warning", 0) with MenuOptions rp_warning = 1
-
-        return 1
-    }
-}, {
-    name: "DATA",
-    value: 6,
-    type: "category"
-}],
-
-//1 - Sounds
-[{
-    name: "MASTER VOLUME",
-    type: "slider",
-    value: 1,
-    group: "options",
-    key: "sound"
-}, {
-    name: "MUSIC",
-    type: "slider",
-    value: 1,
-    group: "options",
-    key: "music"
-}, {
-    name: "AMBIENCE",
-    type: "slider",
-    value: 1,
-    group: "options",
-    key: "sfx"
-}],
-
-//2 - Video
-[{
-    name: "FULLSCREEN",
-    type: "switch",
-    value: 1,
-    group: "visual",
-    key: "resolution"
-}, {
-    name: "DYNAMIC CAMERA",
-    type: "switch",
-    value: 1,
-    group: "visual",
-    key: "activecam"
-}, {
-    name: "BETTER WALLS",
-    type: "switch",
-    value: 1,
-    group: "visual",
-    key: "walls"
-}, {
-    name: "PARTICLES",
-    type: "switch",
-    value: 0,
-    invert: true,
-    group: "visual",
-    key: "particles"
-}, {
-    name: "BLOOM",
-    type: "switch",
-    value: 1,
-    group: "visual",
-    key: "bloom"
-}, {
-    name: "HUD",
-    type: "switch",
-    value: 1,
-    group: "visual",
-    key: "hud"
-}],
-
-//3 - Game
-[{
-    name: "CROSSHAIR",
-    type: "button",
-    value: 0,
-    group: "visual",
-    key: "crosshair",
-
-    onClick: function() {
-        self.value = self.value + 1
-
-        if self.value > 8 {
-            self.value = 0
-        }
-
-        UberCont.opt_crosshair = self.value
-    },
-
-    onDraw: function(dx, dy) {
-        draw_set_halign(fa_right)
-
-        //draw_sprite(sprScoreSplat, 2, dx - UI_SPLAT_OFFSET, dy)
-        draw_text_shadow(dx - 4, dy, loc(self.name) + ":")
-
-        draw_sprite(sprScoreSplat, 2, dx + 32, dy)
-
-        draw_set_halign(fa_center)
-        if self.value >= 8 {
-            draw_text_shadow(dx + 32, dy, "(NO)")
-        } else draw_sprite_ext(sprCrosshair, self.value, dx + 32, dy, 1, 1, 0, UberCont.opt_cursorcol, 1)
-
-        draw_set_halign(fa_left)
-    }
-},
-
-{
-    name: "LANGUAGE",
-    type: "list",
-    value: "en",
-    group: "etc",
-    key: "language",
-    list: languages,
-    pos: 0
-},
-
-{
-    name: "NICKNAME",
-    type: "input",
-    value: "unnamed",
-    group: "etc",
-    key: "name",
-    message: "Enter your nickname:",
-
-    callback: function(res, opt, optItself) {
-        var result = res[? "result"]
-        var namereq = -1;
-
-        if result == ""
-        exit
-
-        result = string_replace_all(result, "<br>", "")
-        result = string_replace_all(result, "&", "")
-        result = string_replace_all(result, "+", " ")
-        result = string_replace_all(result, "?", "")
-        result = string_replace_all(result, "\\", "")
-
-        if string_length(result) <= 2 {
-            namereq = get_string_async("This nickname is too short.\nEnter valid nickname", "Seeker" + scrAddZero(random(999), 2))
-        }
-
-        if string_length(result) >= 15 {
-            namereq = get_string_async("This nickname is too long (maximum 15 symbols).\nEnter valid nickname", "Seeker" + scrAddZero(random(999), 2))
-        }
-
-        if namereq > -1 && instance_exists(MenuOptions) {
-            MenuOptions.async_options[$ string(namereq)] = opt
-
-            exit
-        }
-
-        optItself.value = result
-        save_set_val(opt[0], opt[1], result)
-        scrOptionsUpdate()
-    }
-},
-
-{
-    name: "TIMER",
-    type: "switch",
-    value: 1,
-    group: "visual",
-    key: "timer"
-}, {
-    name: "BOSS INTROS",
-    type: "switch",
-    value: 1,
-    group: "visual",
-    key: "bossintro"
-}, {
-    name: "SCREENSHAKE",
-    type: "slider",
-    value: 1,
-    group: "visual",
-    key: "screenshake"
-}, {
-    name: "PAUSE BUTTON",
-    type: "switch",
-    value: 1,
-    group: "options",
-    key: "pausebutton"
-}, {
-    name: "SIDE ART",
-    type: "button",
-    value: 1,
-    group: "options",
-    key: "sideart",
-    onClick: function() {
-        if UberCont.opt_resolution exit
-
-        self.value++
-
-        if self.value > 8 {
-            self.value = 0
-        }
-
-        save_set_val(self.group, self.key, self.value)
-    },
-
-    onDraw: function(dx, dy) {
-        //if UberCont.opt_resolution draw_set_color(c_dkgray)
-
-        draw_set_halign(fa_right)
-        //draw_sprite(sprScoreSplat, 2, dx - UI_SPLAT_OFFSET, dy)
-        draw_text_shadow(dx - 4, dy, loc(self.name) + ":")
-
-        draw_sprite(sprScoreSplat, 2, dx + 32, dy)
-
-        draw_set_halign(fa_center)
-        draw_text_shadow(dx + 32, dy, string(self.value) + "/8")
-        draw_set_halign(fa_left)
-
-        draw_set_color(c_white)
-    }
-}],
-
-//4 - Controls
-[
-//{name: "8-WAY MOVEMENT", type: "switch", value: 0, group: "controls", key: "movement"},
-{
-    name: "AIM ASSIST",
-    type: "switch",
-    value: 1,
-    group: "controls",
-    key: "assist"
-},
-//{name: "AIM RELATING TO", type: "switch", value: 0, group: "controls", key: "assistpos", states: ["PLAYER", "CROSSHAIR"]},
-{
-    name: "SIMPLIFY",
-    type: "switch",
-    value: 0,
-    group: "visual",
-    key: "simplify"
-}, {
-    name: "GAMEPAD",
-    type: "switch",
-    value: 0,
-    group: "options",
-    key: "gamepad"
-}, {
-    name: "360 AIMBOT",
-    type: "button",
-    value: 0,
-    group: "controls",
-    key: "aimbot",
-    onClick: function() {
-        self.value = !self.value
-
-        self.name = self.value ? "CASUAL GAMING" : "360 AIMBOT"
-    },
-
-    onDraw: function(dx, dy) {
-        draw_set_halign(fa_right)
-        draw_text_shadow(dx - 4, dy, loc(self.name) + ":")
-
-        draw_sprite(sprScoreSplat, 2, dx + 32, dy)
-
-        draw_set_halign(fa_center)
-        draw_text_shadow(dx + 32, dy, scrOnOff(self.value))
-        draw_set_halign(fa_left)
-    }
-}, {
-    name: "VOLUME CONTROLS",
-    type: "switch",
-    value: 1,
-    group: "controls",
-    key: "volumecontrol"
-}, {
-    name: "SIZE SCALE",
-    type: "slider",
-    value: 0.5,
-    group: "controls",
-    key: "scale"
-}, {
-    name: "REMAP CONTROLS",
-    type: "button",
-
-    onClick: function() {
-        MenuOptions.editing_mode = 1
-        remap_pos = 0
-
-        if !UberCont.opt_gamepad {
-            instance_create(0, 0, ButtonAct)
-            instance_create(0, 0, ButtonActive)
-            instance_create(0, 0, ButtonSwap)
-            instance_create(0, 0, JoystickMove)
-            instance_create(0, 0, JoystickAttack)
-        }
-    },
-
-    onDraw: function(dx, dy) {
-        draw_set_halign(fa_center)
-        //draw_sprite(sprScoreSplat, 2, dx, dy)
-        draw_text_shadow(dx, dy, loc(self.name))
-        draw_set_halign(fa_left)
-    }
-},
-
-{
-    name: "RESET CONTROLS",
-    type: "button",
-
-    onClick: function() {
-        if !UberCont.opt_gamepad {
-            with UberCont {
-                ds_map_delete(saveData, "controls_JoystickMove_x")
-                ds_map_delete(saveData, "controls_JoystickMove_y")
-                ds_map_delete(saveData, "controls_JoystickAttack_x")
-                ds_map_delete(saveData, "controls_JoystickAttack_y")
-                ds_map_delete(saveData, "controls_ButtonActive_x")
-                ds_map_delete(saveData, "controls_ButtonActive_y")
-                ds_map_delete(saveData, "controls_ButtonAct_x")
-                ds_map_delete(saveData, "controls_ButtonAct_y")
-                ds_map_delete(saveData, "controls_ButtonSwap_x")
-                ds_map_delete(saveData, "controls_ButtonSwap_y")
-            }
-        } else {
-            scrGPadReset()
-
-            var remap_keys = {
-                face1: "CONFIRM/PICKUP",
-                face2: "BACK/CANCEL",
-                face3: "SWAP WEAPON",
-                shoulderr: "FIRE",
-                shoulderl: "ABILITY",
-                padu: "ARROW UP",
-                padd: "ARROW DOWN",
-                padl: "ARROW LEFT",
-                padr: "ARROW RIGHT"
-            }
-
-            var names = variable_struct_get_names(remap_keys)
-
-            for (var i = 0; i < array_length(names); i++) {
-                var name = names[i]
-                save_set_val("gamepadkey", name, gpad[$ name])
-            }
-        }
-
-        snd_play(sndMutant0Cnfm)
-    },
-
-    onDraw: function(dx, dy) {
-        draw_set_halign(fa_center)
-        //draw_sprite(sprScoreSplat, 2, dx, dy)
-        draw_text_shadow(dx, dy, loc(self.name))
-        draw_set_halign(fa_left)
-    }
-}],
-
-// 5 - RESOURCEPACKS
-[{
-    name: "INSTALLED",
-    type: "button",
-    onClick: function() {
-        with instance_create(0, 0, ResourcepackManager) {
-            self.list()
-        }
-    }
-},
-
-{
-    name: "BROWSE",
-    type: "button",
-    onClick: function() {
-        with instance_create(0, 0, ResourcepackManager) {
-            if !UberCont.opt_online {
-                error = "DISABLE OFFLINE MODE TO#BROWSE RESOURCEPACKS"
-            } else if UberCont.rp_bl_req != -1 {
-                error = "EXTRA INFO IS NOT LOADED YET,#TRY AGAIN LATER"
-            } else {
-                self.browse()
-            }
-        }
-    }
-},
-
-/*{ name: "IMPORT", type: "button", onClick: function () {
-			instance_create(0, 0, ResourcepackManager).import()
-		}},
-		
-		{ name: "LOGS", type: "button", onClick: function () {
-			var s = "GAME LOGS\n~~~~~~~~~~~\n"
-			
-			for(var i = 0; i < array_length(global.log_output); i ++) {
-				s += global.log_output[i] + "\n"
-			}
-			
-			show_message_async(s)
-		}},*/
-
-{
-    name: "MODDING SERVER",
-    type: "button",
-    onClick: function() {
-        url_open("https://discord.gg/6nEXjPc5e3")
-    }
-}],
-
-// 6 - DATA
-[
-/*{name: "EXPORT DATA", type: "button", onClick: function() {
-			
-		}},
-		
-		{name: "IMPORT DATA", type: "button", onClick: function() {
-			
-		}},*/
-
-{
-    name: "RESET OPTIONS",
-    type: "button",
-    onClick: function() {
-        with MenuOptions
-        erasing_progress = 2
-
-        snd_play(sndClick)
-    }
-},
-
-{
-    name: "ERASE PROGRESS",
-    type: "button",
-    onClick: function() {
-        if !instance_exists(GameCont) {
-            with MenuOptions {
-                erasing_progress = 1
-                wait = 10
-            }
-
-            snd_play(sndClick)
-        }
-    }
-}]]
-
-foreach(options, function(val) {
-    for (var i = 0; i < array_length(val); i++) {
-        var v = val[i];
-
-        if !is_undefined(v[$ "value"]) && !is_undefined(v[$ "group"]) {
-            v.value = save_get_val(v.group, v.key, v.value)
-        }
-
-        if !is_undefined(v[$ "name"]) && v.name == "DELETING IN" {
-            v.value = 3
-        }
-    }
-})
-
-options[1, 0].value = clamp(options[1, 0].value, 0, 1)
-options[1, 1].value = clamp(options[1, 1].value, 0, 1)
-options[1, 2].value = clamp(options[1, 2].value, 0, 1)
-
-if instance_exists(GameCont) {
-    array_delete(options[0], 4, 2)
-    print("removed some options")
-}
-
-/*Controls
-opts[4, 1] = "CHANGE CONTROL POSITION"
-opts[4, 2] = "RESET CONTROL POSITION"
-opts[4, 3] = "8-WAY MOVEMENT"
-opts[4, 4] = "AIM ASIST"
-opts[4, 5] = "SIMPLIFTY"
-opts[4, 6] = "GAMEPAD"
-opts[4, 7] = "360 AIMBOT"
-opts[4, 8] = "BACK"
-
-//Saves
-//opts[5, 1] = "EXPORT TO PASTEBIN"
-//opts[5, 2] = "IMPORT FROM PASTEBIN"
-opts[5, 1] = "DELETE"
-opts[5, 2] = "BACK"
-
-
-for(i = 1; i <= 10; i ++) {
-    green_flash[i] = 0
-}
-
-flash_col = c_lime
-*/
-
-category = 0
-
-default_viewx = view_xview
-default_viewy = view_yview
-
-if !restart {
-    with PauseButton {
-        x -= view_xview
-        y -= view_yview
-    }
-
-    view_xview = 0
-    view_yview = 0
-}
-
-ingame = instance_exists(GameCont)
-wait = 1
-changeName = -1
-pastebinRequest = -1
-getSave = -1
-downloadSave = -1
-namereq = -1
-editing_mode = 0
-press = 0
 erasing_progress = 0
-gamepad_sel = 1
 
-async_options = {}
+back_pressed = false
 
 sliderheld = 0
+editing_mode = false
 
-scrVolume()
+text_input_element = undefined
+text_input_cursor = ""
+text_input_timer = 0
+text_input_shake = 0
+
+await_input = 0
+await_keybind = undefined
+
+category = 0
+category_stack = ds_stack_create()
+
+slider = undefined
+slider_change = 0
+slider_x = 0
+
+pointed_item = 0
+item_count = -1
+
+mouse_active = true
+mx_last = 0
+my_last = 0
+
+drawx = 0
+drawy = 0
+startdrawy = 0
+
+draw_step_size = 16
+
+option_width = 0
+option_height = 0
+option_selected = 0
+option_can_change = true
+option_list_max = 0
+
+debris = noone
+
+clickable = true
+wait = 0
+press = 0
+
+disclaimer_pop = 0
+
+options = []
+option_list = undefined
+option_number = -1
+
+last_change = 0
+
+native_cursor_dll = dll_check("native_cursor")
+
+ingame = instance_exists(GameCont)
+default_viewx = view_xview // o, the burden of legacy crutches
+default_viewy = view_yview
+
+depth = -9999
+
+function option_category_begin(num) {
+	if option_number != -1
+		option_category_end()
+	
+	option_list = []
+	option_number = num
+}
+
+function option_category_end() {
+	if option_number == -1
+		exit
+	
+	options[option_number] = option_list
+	
+	option_list = undefined
+	option_number = -1
+}
+
+function option_element_create(params) {
+	if option_list == undefined
+		exit
+	
+	if params[$ "desktop_only"] && !global.desktop exit
+	if params[$ "mobile_only"] && global.desktop exit
+	
+	if params[$ "ingame"] != undefined && params.ingame != ingame {
+		if option_number != OptionCategory.Main
+			exit
+		
+		params[$ "available"] = false
+		params[$ "condition"] = undefined
+	}
+	
+	params[$ "type"] ??= "button"
+	params[$ "name"] ??= "BUTTON"
+	params[$ "visible"] ??= true
+	params[$ "available"] ??= true
+	params[$ "skip"] ??= false
+	
+	params[$ "value"] ??= undefined
+	params[$ "category"] ??= undefined
+	
+	if params.type == "switch"
+		params[$ "states"] ??= [ SWITCH_STATE_OFF, SWITCH_STATE_ON ]
+	
+	if params.type == "input" {
+		params[$ "previous"] = undefined
+		params[$ "validate"] ??= undefined
+	}
+	
+	params[$ "draw"] ??= undefined
+	params[$ "click"] ??= undefined
+	params[$ "name_get"] ??= undefined
+	params[$ "value_get"] ??= undefined
+	params[$ "condition"] ??= undefined
+	
+	params[$ "sprite"] ??= undefined
+	
+	params[$ "key"] ??= undefined
+	
+	params[$ "width"] ??= 240
+	params[$ "height"] ??= string_height(string_hash_to_newline(params.name))
+	
+	params[$ "anim"] = 0
+	params[$ "splat"] = 0
+	
+	if params.type == "category" or is_undefined(params.key) {
+		params[$ "halign"] ??= fa_center
+	}
+	
+	params[$ "halign"] ??= fa_left
+	params[$ "valign"] ??= fa_center
+	
+	if params.type == "list" {
+		params[$ "list"] ??= []
+		
+		params.list_kind = "numeric"
+		
+		for(var i = 0; i < array_length(params.list); i ++) {
+			if !is_numeric(params.list[i]) {
+				params.list_kind = "collection"; break
+			}
+		}
+	}
+	
+	if !is_undefined(params.sprite)
+		params.height = max(params.height, sprite_get_height(params.sprite[0]))
+	
+	if params.key != undefined && params.value == undefined
+		params.value = UberCont.saveData[? params.key]
+	
+	array_push(option_list, params)
+}
+
+function option_elements_create() {
+	for(var i = 0; i < argument_count; i ++) {
+		if !is_undefined(argument[i])
+			option_element_create(argument[i])
+	}
+}
+
+category_set = function (_category, _queue = true) {
+	if _category >= array_length(options) {
+		print("Can't change category to", _category, ", ID number exceeded", array_length(options))
+		exit
+	}
+	
+	if category != _category && _queue
+		ds_stack_push(category_stack, category)
+	
+	category = _category
+	
+	var items = options[_category]
+	
+	last_change = global.time + 2
+	pointed_item = -1
+	item_count = -1
+	
+	for(var i = 0; i < array_length(items); i ++) {
+		var item = items[i]
+		
+		item.appear = 0
+		
+		if item[$ "awake"] != undefined
+			method_call(item.awake, item)
+		
+		if item.type == "keybind" {
+			if item.condition != undefined
+				item.available = method_call(item.condition, item)
+			
+			if !item.available {
+				item.visible = false
+			}
+			else item.visible = true
+		}
+	}
+	
+	snd_play(_category == OptionCategory.Main ? sndMenuOptions : sndClick)
+}
+
+category_get = function(_category) {
+	if _category >= array_length(options)
+		exit
+	
+	return options[_category]
+}
+
+colorpicker_update_scales = function(color) {
+	var r = color_get_red(color),
+		g = color_get_green(color),
+		b = color_get_blue(color)
+	
+	var col = category_get(OptionCategory.Game_Color)
+	
+	col[1].value = r / 255
+	col[2].value = g / 255
+	col[3].value = b / 255
+}
+
+colorpicker_update_options = function(color) {
+	var val = base_convert(real(color), 10, 16)
+	
+	UberCont.saveData[? "options_color"] = val
+	
+	scrOptionsUpdate()
+}
+
+draw_inline_switch = function(opt) {
+	draw_text_nt(drawx, drawy, loc(opt.name) + ": " + loc(opt.states[opt.value ?? 0]))
+	
+	return true
+}
+
+#region define categories
+
+#region Main
+
+option_category_begin(OptionCategory.Main)
+
+option_elements_create
+(
+	{ type: "category", name: "AUDIO",    category: OptionCategory.Audio,    sprite: [ sprOptionButtons, 0 ] },
+	{ type: "category", name: "VIDEO",    category: OptionCategory.Video,    sprite: [ sprOptionButtons, 1 ] },
+	{ type: "category", name: "GAME",     category: OptionCategory.Game,     sprite: [ sprOptionButtons, 2 ] },
+	{ type: "category", name: "CONTROLS", category: OptionCategory.Controls, sprite: [ sprOptionButtons, 3 ] },
+	
+	{
+		type: "button", name: "RESOURCEPACKS", ingame: false,
+		
+		click: function() {
+			if save_get_val("etc", "rp_warning", 0) {
+				with instance_create(0, 0, ResourcepackManager)
+					event_user(0)
+			}
+			else rp_warning = 1
+		}
+	},
+	
+	{ type: "category", name: "CHEATS",   category: OptionCategory.Cheats, ingame: false,
+		awake: function(opt) {
+			opt.visible = UberCont.opt_cheats
+		}
+	},
+	
+	{ type: "category", name: "DISPLAY",  category: OptionCategory.Video_Display, visible: false },
+	
+	{ type: "category", name: "PROFILE",  category: OptionCategory.Game_Profile,  visible: false },
+	{ type: "category", name: "COLOR",    category: OptionCategory.Game_Color,    visible: false },
+	{ type: "category", name: "DATA",     category: OptionCategory.Game_Data,     visible: false },
+	
+	{ type: "category", name: "REMAPPING", category: OptionCategory.Controls_Remapping, visible: false },
+	{ type: "category", name: "REMAPPING", category: OptionCategory.Controls_Remapping_Keys, visible: false },
+)
+
+option_category_end()
+
+for(var i = 0; i < array_length(options[0]); i ++) {
+	print(options[0, i].name, options[0, i].category)
+}
+
+#endregion
+#region Audio
+
+option_category_begin(OptionCategory.Audio)
+
+option_elements_create(
+	{ type: "slider",  name: "MASTER VOLUME",   key: "volume_master"  },
+	{ type: "slider",  name: "MUSIC VOLUME",    key: "volume_music"   },
+	{ type: "slider",  name: "AMBIENT VOLUME",  key: "volume_ambient" },
+	{ type: "slider",  name: "SFX VOLUME",      key: "volume_sfx"     },
+	{ type: "switch",  name: "3D SOUND",        key: "volume_3dsound"      }
+)
+
+#endregion
+#region Video
+
+option_category_begin(OptionCategory.Video)
+
+option_elements_create(
+	{ type: "switch",  name: "FULLSCREEN",   key: "visual_resolution", mobile_only: true },
+	
+	{
+		type: "list", name: "CROSSHAIR",     key: "options_crosshair",
+		list: range(0, sprite_get_number(sprCrosshair) - 1),
+		
+		draw: function(opt) {
+			if opt.value < sprite_get_number(sprCrosshair) - 1 {
+				draw_sprite(sprCrosshair, opt.value, drawx + 90, drawy)
+			}
+			else draw_text_nt(drawx + 90, drawy, loc("NONE"))
+		},
+		
+		value_get: function(opt) {
+			return opt.value + 1
+		}
+	},
+	
+	{
+		type: "list", name: "SIDE ART",      key: "options_sideart",
+		list: range(0, sprite_get_number(sprSideArt) - 1),
+		
+		condition: function() {
+			return !UberCont.opt_resolution
+		},
+		
+		value_get: function(opt) {
+			if opt.value == 0
+				return loc("NONE")
+			
+			option_list_max --
+			
+			return opt.value
+		}
+	},
+	
+	{ type: "slider",  name: "SCREENSHAKE",      key: "visual_screenshake"  },
+	{ type: "slider",  name: "FREEZE FRAMES",    key: "visual_freezeframes" },
+	
+	{ type: "switch",  name: "WALL FIX",         key: "visual_walls"        },
+	{ type: "switch",  name: "PARTICLES",        key: "visual_particles",   states: [ SWITCH_STATE_ON, SWITCH_STATE_OFF ] },
+	{ type: "switch",  name: "BLOOM",            key: "visual_bloom"        },
+	{ type: "switch",  name: "HIDE HUD",         key: "visual_hud",         states: [ SWITCH_STATE_ON, SWITCH_STATE_OFF ] },
+	
+	{
+		type: "list", name: "PIXEL MODE", key: "visual_scaling", list: range(1, 4),
+		
+		draw: function(opt) {
+			if !instance_exists(debris) {
+				debris = instance_create(view_xview + drawx + 90, view_yview + drawy, Debris)
+				
+				with debris {
+					mask_index = mskNone
+					image_index = 0
+					
+					speed = 0
+					
+					alarm[1] = 1
+					alarm[0] = 2
+				}
+			}
+			else {
+				with debris
+					alarm[0] = 2
+			}
+			
+			// todo: ingame subpixel demo
+		}
+	},
+	
+	{ type: "category", name: "DISPLAY SETTINGS", category: OptionCategory.Video_Display, desktop_only: true }
+)
+
+#endregion
+#region Video_Display
+option_category_begin(OptionCategory.Video_Display)
+
+option_elements_create(
+	{ type: "switch",  name: "FULL RESOLUTION",   key: "visual_resolution"   },
+	{ type: "switch",  name: "FULLSCREEN",        key: "options_fullscreen",
+		click: function (opt) {
+			opt.value = !window_get_fullscreen()
+			window_set_fullscreen(opt.value)
+			
+			scrSetViewSize(true)
+			
+		},
+		
+		value_get: function(opt) {
+			return window_get_fullscreen()
+		}
+	},
+	{ type: "switch",  name: "VSYNC",             key: "options_vsync",
+		click: function(opt) {
+			display_reset(0, opt.value)
+			scrBignameSurfaceCleanup()
+		}
+	}
+)
+
+#endregion
+#region Game
+
+option_category_begin(OptionCategory.Game)
+
+option_elements_create(
+	{ type: "list",     name: "LANGUAGE",          key: "etc_language", list: languages },
+	
+	{ type: "switch",   name: "BOSS INTROS",       key: "visual_bossintro" },
+	{ type: "switch",   name: "PLAY TUTORIAL",     key: "game_tutorial",  ingame: false },
+	{ type: "switch",   name: "TIMER",             key: "visual_timer"     },
+	{
+		type: "switch", name: "CURSOR", desktop_only: true,
+		states: [ "DEFAULT", "NATIVE" ], key: "options_cursor",
+		
+		condition: function(opt) {
+			return native_cursor_dll
+		}
+	},
+	
+	{
+		type: "switch", name: "MOUSELOCK", desktop_only: true,
+		key: "options_mouselock",
+		
+		value_get: function(opt) {
+			if option_selected
+				return "NOT WORKING UNTIL#GAMEMAKER 2023.8"
+			
+			return opt.value
+		}
+	},
+	
+	{ type: "switch",   name: "PAUSE BUTTON",       key: "options_pausebutton", mobile_only: true },
+	
+	{ type: "switch",   name: "ACHIEVEMENT#POPUPS", key: "options_achievements" },
+	
+	{ type: "switch",   name: "AUTO PAUSE",         key: "options_autopause", desktop_only: true },
+	
+	{
+		type: "button", name: "VIEW CREDITS", ingame: false,
+		
+		click: function(opt) {
+			instance_create(0, 0, Credits)
+			snd_play(sndMenuCredits)
+			
+			instance_destroy()
+		}
+	},
+	
+	{ type: "category", name: "PROFILE", category: OptionCategory.Game_Profile }
+)
+
+#endregion
+#region Game_Color
+
+option_category_begin(OptionCategory.Game_Color)
+
+option_elements_create(
+	{
+		type: "input", name: "EDIT HEX", key: undefined, halign: fa_left,
+		
+		draw: function(opt) {
+			var xx = gui_w / 2,
+				yy = 64 + opt.anim,
+				
+				w = 72 + opt.anim,
+				h = 6,
+				
+				val = "NONE"
+			
+			if global.player_color {
+				draw_set_color(c_black)
+				draw_rectangle(xx - w - 2, yy - h - 2, xx + w + 2, yy + h + 3, 0)
+				
+				draw_set_color(c_white)
+				draw_rectangle(xx - w - 1, yy - h - 1, xx + w + 1, yy + h + 1, 0)
+				
+				draw_set_color(c_black)
+				draw_rectangle(xx - w, yy - h, xx + w, yy + h, 0)
+				
+				draw_set_color(global.player_color)
+				draw_rectangle(xx - w, yy - h + 1, xx + w, yy + h, 0)
+				
+				val = string(UberCont.opt_color)
+			}
+			
+			draw_set_color(c_white)
+			draw_set_halign(fa_center)
+			draw_set_valign(fa_middle)
+			draw_text_shadow(xx, yy + 1, val)
+			
+			draw_set_halign(opt.halign)
+			draw_set_valign(opt.valign)
+			
+			return false
+		},
+		
+		awake: function(opt) {
+			opt.value = opt.value_get(opt)
+			opt.previous = opt.value
+			
+			colorpicker_update_scales(global.player_color)
+		},
+		
+		value_get: function(opt) {
+			return UberCont.opt_color
+		},
+		
+		validate: function(opt, str, confirm) {
+			str = string(str)
+			
+			option_can_change = false
+			
+			if string_length(str) > 6 {
+				opt.previous = string_delete(str, 7, string_length(str) - 6)
+				opt.value = opt.previous
+				
+				return true
+			}
+			
+			if (confirm && string_length(str) % 2 != 0)
+				return true
+			
+			if confirm
+				opt.value = base_convert(str, 16, 10)
+			
+			str = string_upper(str)
+			
+			for(var i = 1; i <= string_length(str); i ++) {
+				var o = string_ord_at(str, i)
+				
+				if (o >= ord("A") && o <= ord("F")) or (o >= ord("0") && o <= ord("9"))
+					continue
+				
+				return true
+			}
+			
+			if confirm {
+				colorpicker_update_scales(opt.value)
+				colorpicker_update_options(opt.value)
+			}
+		}
+	},
+	
+	{
+		type: "slider", name: "RED", value: 0, key: "options_color",
+		click: function(opt) {
+			var col = global.player_color
+			
+			option_can_change = false
+			
+			colorpicker_update_options(make_color_rgb(
+				opt.value * 255,
+				color_get_green(col),
+				color_get_blue(col)
+			))
+		}
+	},
+	
+	{
+		type: "slider", name: "GREEN", value: 0, key: "options_color",
+		click: function(opt) {
+			var col = global.player_color
+			
+			option_can_change = false
+			
+			colorpicker_update_options(make_color_rgb(
+				color_get_red(col),
+				opt.value * 255,
+				color_get_blue(col)
+			))
+		}
+	},
+	
+	{
+		type: "slider", name: "BLUE", value: 0, key: "options_color",
+		click: function(opt) {
+			var col = global.player_color
+			
+			option_can_change = false
+			
+			colorpicker_update_options(make_color_rgb(
+				color_get_red(col),
+				color_get_green(col),
+				opt.value * 255
+			))
+		}
+	},
+)
+
+#endregion
+#region Game_Profile
+
+option_category_begin(OptionCategory.Game_Profile)
+
+option_elements_create(
+	{ type: "button", name: "ID", key: "general_uid", available: false }, // todo: id copying in newer gm versions
+	
+	{ type: "input", name: "NICKNAME", key: "etc_name", ingame: false,
+		validate: function(opt, str, confirm) {
+			return scrValidateUsername(opt, str, confirm)
+		}
+	},
+	
+	{ type: "button", name: "COLOR", key: "options_color", ingame: false,
+		click: function () {
+			option_can_change = false
+			self.category_set(OptionCategory.Game_Color)
+		},
+		
+		value_get: function(opt) {
+			if !global.player_color
+				return "DEFAULT"
+			
+			draw_set_color(global.player_color)
+			
+			return "[" + string(UberCont.opt_color) + "]"
+		}
+	},
+	
+	{ type: "category", name: "DATA", category: OptionCategory.Game_Data, ingame: false }
+)
+
+#endregion
+#region Game_Data
+
+option_category_begin(OptionCategory.Game_Data)
+
+option_elements_create(
+	{
+		type: "button", name: "RESET OPTIONS",
+		
+		click: function() {
+			disclaimer_pop = 1
+			erasing_progress = 2
+		}
+	},
+	
+	{
+		type: "button", name: "ERASE PROGRESS", ingame: false,
+		
+		click: function() {
+			disclaimer_pop = 1
+			erasing_progress = 1
+		}
+	},
+)
+
+#endregion
+#region Controls
+
+option_category_begin(OptionCategory.Controls)
+
+option_elements_create(
+	{ type: "switch", name: "GAMEPAD", key: "options_gamepad" },
+	
+	{ type: "list", name: "GAMEPAD STYLE", key: "options_gamepad_type", list: range(0, array_length(gamepad_types) - 1),
+		condition: function() {
+			return is_gamepad(global.index)
+		},
+		
+		draw: function() {
+			if option_selected {
+				for(var i = 0; i < 4; i ++)
+					draw_sprite(gamepad_icon_small, i, (gui_w / 2 - 32) + i * 16, startdrawy - 16)
+			}
+		},
+		
+		value_get: function(opt) {
+			return loc(gamepad_types[opt.value])
+		}
+	},
+	
+	{ type: "switch", name: "KEYBOARD MODE", key: "options_keyboard", mobile_only: true },
+	
+	{ type: "switch", name: "AIM ASSIST", key: "controls_assist", mobile_only: true },
+	{ type: "switch", name: "360 AIMBOT", key: "controls_aimbot", mobile_only: true },
+	
+	{ type: "slider", name: "SIZE SCALE", key: "controls_scale", mobile_only: true },
+	
+	{ type: "button", name: "REMAP CONTROLS",
+		name_get: function(opt) {
+			var str = opt.name
+			
+			if is_gamepad()
+				return str + " " + loc("(GAMEPAD)")
+			
+			if is_keyboard() && !global.desktop
+				return str + " " + loc("(KEYBOARD)")
+			
+			return str
+		},
+		
+		click: function() {
+			if is_gamepad() or is_keyboard() {
+				self.category_set(OptionCategory.Controls_Remapping_Keys)
+				
+				exit
+			}
+			
+			editing_mode = true
+	        remap_pos = 0
+			
+	        if !UberCont.opt_gamepad
+	            scrCreateMobileControls()
+			
+			self.category_set(OptionCategory.Controls_Remapping, false)
+		}
+	},
+	
+	
+)
+
+option_category_end()
+#endregion Controls
+#region Controls_Remapping
+option_category_begin(OptionCategory.Controls_Remapping)
+
+option_elements_create(
+	{ type: "button", name: "DEFAULT PRESET",
+		click: function() {
+			
+			with MobileUI {
+	            ds_map_delete(UberCont.saveData, "controls_" + object_get_name(object_index) + "_x")
+	            ds_map_delete(UberCont.saveData, "controls_" + object_get_name(object_index) + "_y")
+				
+				event_perform(ev_create, 0)
+	        }
+			
+			snd_play(sndRestart)
+		},
+		
+		condition: function() {
+			var any = false
+			
+			with MobileUI {
+				if save_get_val("controls", object_get_name(object_index) + "_x") != undefined
+					any = true
+			}
+			
+			return any
+		}
+	},
+	
+	{ type: "switch", name: "SIMPLIFY", halign: fa_center, key: "visual_simplify", draw: draw_inline_switch },
+	{ type: "switch", name: "VOLUME CONTROLS", halign: fa_center, key: "options_volumecontrol", draw: draw_inline_switch }
+)
+#endregion Controls_Remapping
+#region Controls_Remapping_Keys
+option_category_begin(OptionCategory.Controls_Remapping_Keys)
+
+condition_keyboard = function() { return (is_keyboard() && !is_gamepad()) }
+condition_gamepad = function() { return is_gamepad() }
+
+option_elements_create(
+	{ type: "keybind", name: "FIRE", key: "fire" },
+	{ type: "keybind", name: "ACTIVE", key: "spec" },
+	{ type: "keybind", name: "SWAP", key: "swap" },
+	{ type: "keybind", name: "PICK/USE", key: "pick" },
+	
+	{ type: "keybind", name: "COOP CHAT", key: "chat", condition: condition_keyboard },
+	{ type: "keybind", name: "WALK UP", key: "north", condition: condition_keyboard },
+	{ type: "keybind", name: "WALK DOWN", key: "south", condition: condition_keyboard },
+	{ type: "keybind", name: "WALK LEFT", key: "west", condition: condition_keyboard },
+	{ type: "keybind", name: "WALK RIGHT", key: "east", condition: condition_keyboard },
+	
+	{ type: "keybind", name: "OPEN CONSOLE", key: "console",
+		awake: function(opt) {
+			opt.visible = UberCont.opt_cheats or (ingame && !global.cheats)
+		},
+		
+		condition: condition_keyboard
+	},
+	
+	{ type: "button", name: "DEFAULT PRESET",
+		click: function() {
+			scrKeymapsSetup()
+			scrOptionsSaveKeymaps()
+			scrSave()
+			
+			snd_play(sndRestart)
+		}
+	}
+)
+
+#endregion Controls_Remapping_Keys
+#region Cheats
+option_category_begin(OptionCategory.Cheats)
+
+option_elements_create(
+	{ type: "switch", name: "CONSOLE", key: "cheats_console" },
+	{ type: "switch", name: "GRILLER MODE", key: "cheats_griller" }
+)
+
+#endregion Cheats
+
+option_category_end()
+#endregion
+
+
+element_functions = {}
+
+element_functions[$ "category"] = function(opt) {
+	self.category_set(opt.category)
+}
+
+element_functions[$ "switch"] = function(opt) {
+	opt.value ^= 1
+}
+
+element_functions[$ "list"] = function(opt) {
+	var list = opt.list,
+		index = array_indexof(list, opt.value)
+	
+	if index != -1 && array_length(list) > index + 1 {
+		opt.value = list[index + 1]
+	}
+	else opt.value = list[0]
+}
+
+element_functions[$ "input"] = function(opt) {
+	var v = method_call(opt.value_get, opt) ?? opt.value
+	
+	opt.previous = v
+	keyboard_string = v
+	
+	text_input_element = opt
+	text_input_timer = 0
+}
+
+element_functions[$ "keybind"] = function(opt) {
+	text_input_timer = 0
+	
+	await_input = true
+	await_keybind = opt
+	
+	keyboard_lastkey = -1
+	mouse_lastbutton = -1
+}
+
+// can be removed..?
+foreach(options, function(val) {
+    for (var i = 0; i < array_length(val); i++) {
+        var v = val[i]
+		
+		if is_method(v[$ "awake"])
+			method_call(v.awake, v)
+    }
+})
+
+self.category_set(OptionCategory.Main)

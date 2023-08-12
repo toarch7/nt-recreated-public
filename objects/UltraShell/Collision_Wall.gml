@@ -1,4 +1,5 @@
-if speed > 6 and!snd_is_playing(sndShotgunHitWall) snd_play(sndShotgunHitWall)
+if speed > 6 and !snd_is_playing(sndShotgunHitWall) snd_play(sndShotgunHitWall)
+
 sleep(1)
 move_bounce_solid(00)
 speed *= 0.8

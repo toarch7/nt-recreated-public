@@ -123,7 +123,7 @@ waypoints++
 
 if hard > UberCont.cbst_diff[race] UberCont.cbst_diff[race] = hard
 
-if (instance_exists(WeaponChest) or instance_exists(BigWeaponChest)) and!(area == 1 && subarea == 1) {
+if (instance_exists(WeaponChest) or instance_exists(BigWeaponChest)) and !(area == 1 && subarea == 1) {
     nochest++
 }
 
@@ -167,6 +167,13 @@ if !instance_exists(CoopController) && !UberCont.opt_console {
 	}
 	
     if level_end {
+		with Player {
+			recontuations --
+			
+			if is_me
+				global.recontuations = recontuations
+		}
+		
         level_end = 0
         scrGameSave()
     }

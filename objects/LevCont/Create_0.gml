@@ -6,8 +6,8 @@ for (var i = 0; i <= 15; i++) {
 
 random_set_seed(mutseed[(GameCont.level - GameCont.skillpoints)] + GameCont.wasskeleton * 10203 + ((GameCont.crown == 8) * 1000))
 
-view_xview = 0
-view_yview = 0
+camera_set_pos(0, 0)
+
 wave = 0
 
 placeonpatience = 0
@@ -51,7 +51,8 @@ if GameCont.crownpoints > 0 {
         dir4.crown = 8
         dir5.crown = 11
         dir6.crown = 12
-    } else {
+    }
+	else {
         dir1.crown = 2
         dir2.crown = 6
         dir3.crown = 7
@@ -70,7 +71,8 @@ if GameCont.crownpoints > 0 {
 
     with CrownIcon
     creator = other.id
-} else if GameCont.skillpoints {
+}
+else if GameCont.skillpoints {
     scrSkills()
 
     var maxskills = 4
@@ -81,7 +83,7 @@ if GameCont.crownpoints > 0 {
 
     with Player {
         if race == 11 {
-            maxskills++
+            maxskills ++
         }
     }
 
@@ -112,7 +114,8 @@ if GameCont.crownpoints > 0 {
         x = view_xview + view_width / 2 - (_num * 16) + num * 32 - 16
         y = view_yview + view_height - 20
     }
-} else if GameCont.ultrapoints {
+}
+else if GameCont.ultrapoints {
     scrUltras()
 
     with instance_create(view_xview + view_width / 2 - 20, view_yview + view_height - 20, UltraIcon)
@@ -159,7 +162,8 @@ if UberCont.daily_run && UberCont.april_fools {
     }
 
     if instance_exists(UltraIcon) {
-        GameCont.skillpoints++GameCont.ultrapoints = 0
+        GameCont.skillpoints++
+		GameCont.ultrapoints = 0
     }
 
     with UltraIcon {

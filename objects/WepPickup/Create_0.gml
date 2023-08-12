@@ -15,3 +15,5 @@ creator = noone
 curse = 0
 
 team = 2
+
+dropseed = rng_next_int(RNGSlot.Drops)

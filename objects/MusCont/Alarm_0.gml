@@ -3,7 +3,6 @@ if !audio_is_playing(custom_sound_check(musThemeB)) {
 
     song = custom_sound_check(musThemeB)
 
-    snd_play(song)
-
-    audio_sound_set_track_position(amb, random(audio_sound_length(amb)))
+    snd_play_music(song)
+    snd_play_ambient(amb)
 }

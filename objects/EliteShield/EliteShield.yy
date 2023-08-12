@@ -5,7 +5,6 @@
   },
   "solid": false,
   "visible": true,
-  "managed": true,
   "spriteMaskId": {
     "name": "mskShield",
     "path": "sprites/mskShield/mskShield.yy",

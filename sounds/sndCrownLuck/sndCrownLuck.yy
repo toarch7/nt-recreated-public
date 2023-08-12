@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndCrownLuck",
-  "duration": 3.335,
+  "duration": 3.33,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

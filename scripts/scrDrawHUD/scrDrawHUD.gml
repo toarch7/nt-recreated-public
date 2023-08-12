@@ -23,13 +23,6 @@ function scrDrawHUD(plr = noone) {
 		ultra = plr.ultra,
 		hp = plr.hp,
 		max_hp = plr.max_hp,
-		wep_name = plr.wep_name,
-		wep_type = plr.wep_type,
-		wep_cost = plr.wep_cost,
-		wep_sprt = plr.wep_sprt,
-		typ_amax = plr.typ_amax,
-		typ_name = plr.typ_name,
-		typ_ammo = plr.typ_ammo,
 		wave = plr.wave
 
     if instance_exists(CoopController) {
@@ -54,13 +47,13 @@ function scrDrawHUD(plr = noone) {
             }
 
             if !is_struct(plr) {
-                if ((plr.sprite_index = plr.spr_hurt and plr.image_index < 1 and!instance_exists(Portal)) or plr.lsthealth < hp) and!instance_exists(GenCont) and!instance_exists(LevCont)
+                if ((plr.sprite_index = plr.spr_hurt and plr.image_index < 1 and !instance_exists(Portal)) or plr.lsthealth < hp) and !instance_exists(GenCont) and !instance_exists(LevCont)
                 draw_sprite_ext(sprHealthFill, 0, 22, 7, max(0, 84 * (hp / max_hp)), 1, 0, c_white, 1)
 
                 draw_set_halign(fa_left)
 
                 draw_set_halign(fa_center)
-                if (!((plr.sprite_index = plr.spr_hurt and plr.image_index < 1 and!instance_exists(Portal)) or plr.lsthealth < hp) or sin(wave) > 0) or instance_exists(GenCont) or instance_exists(LevCont) {
+                if (!((plr.sprite_index = plr.spr_hurt and plr.image_index < 1 and !instance_exists(Portal)) or plr.lsthealth < hp) or sin(wave) > 0) or instance_exists(GenCont) or instance_exists(LevCont) {
                     draw_set_color(c_black)
                     draw_text(23 + 44, 8, (string(hp) + "/" + string(max_hp)))
                     draw_text(23 + 45, 8, (string(hp) + "/" + string(max_hp)))
@@ -88,11 +81,11 @@ function scrDrawHUD(plr = noone) {
             if wep_type[bwep] = 0 wid = 32 col = c_dkgray
             if race = 7 col = c_white
 
-            if plr.bcurse d3d_set_fog(1, $8b448c, 0, 0)
+            if plr.bcurse gpu_set_fog(1, $8b448c, 0, 0)
             else if string_copy(wep_name[bwep], 0, 4) == "GOLD"
-            d3d_set_fog(1, c_gold, 0, 0)
+            gpu_set_fog(1, c_gold, 0, 0)
             else if string_copy(wep_name[bwep], 0, 5) == "ULTRA"
-            d3d_set_fog(1, c_ultra, 0, 0)
+            gpu_set_fog(1, c_ultra, 0, 0)
 
             if round(cont.area / 2) == cont.area / 2 or col == c_white or plr.bcurse or string_copy(wep_name[bwep], 0, 4) == "GOLD"
             or string_copy(wep_name[bwep], 0, 5) == "ULTRA"
@@ -103,10 +96,10 @@ function scrDrawHUD(plr = noone) {
                 draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, wid, 14, 68, 17, 1, 1, col, 1)
             }
 
-            d3d_set_fog(0, c_white, 0, 0)
+            gpu_set_fog(0, c_white, 0, 0)
 
             draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, wid, 14, 68, 16, 1, 1, c_black, 1)
-            draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, max(0, wid * min(plr.wep_load[bwep], plr.breload / plr.wep_load[bwep])), 14, 68, 16, 1, 1, c_white, 0.2)
+            draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, max(0, wid * min(wep_load[bwep], plr.breload / wep_load[bwep])), 14, 68, 16, 1, 1, c_white, 0.2)
 
             if wep_type[bwep] != 0 {
                 draw_set_halign(fa_left)
@@ -132,21 +125,21 @@ function scrDrawHUD(plr = noone) {
         var wid = 16
         if wep_type[wep] = 0 wid = 32
 
-        if plr.curse d3d_set_fog(1, $8b448c, 0, 0)
+        if plr.curse gpu_set_fog(1, $8b448c, 0, 0)
         else if string_copy(wep_name[wep], 0, 4) == "GOLD"
-        d3d_set_fog(1, c_gold, 0, 0)
+        gpu_set_fog(1, c_gold, 0, 0)
         else if string_copy(wep_name[wep], 0, 5) == "ULTRA"
-        d3d_set_fog(1, c_ultra, 0, 0)
+        gpu_set_fog(1, c_ultra, 0, 0)
 
         draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, wid, 14, 25, 16, 1, 1, c_white, 1)
         draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, wid, 14, 23, 16, 1, 1, c_white, 1)
         draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, wid, 14, 24, 17, 1, 1, c_white, 1)
         draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, wid, 14, 24, 15, 1, 1, c_white, 1)
 
-        d3d_set_fog(0, c_white, 0, 0)
+        gpu_set_fog(0, c_white, 0, 0)
 
         draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, wid, 14, 24, 16, 1, 1, c_black, 1)
-        draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, max(0, wid * min(plr.wep_load[wep], plr.reload / plr.wep_load[wep])), 14, 24, 16, 1, 1, c_white, 0.2)
+        draw_sprite_part_ext(spr, 1, sprite_get_xoffset(spr), sprite_get_yoffset(spr) - 8, max(0, wid * min(wep_load[wep], plr.reload / wep_load[wep])), 14, 24, 16, 1, 1, c_white, 0.2)
 
         if wep_type[wep] != 0 {
             draw_set_halign(fa_left)
@@ -177,31 +170,31 @@ function scrDrawHUD(plr = noone) {
         //AMMO ICONS
         img = 0
         if wep_type[wep] = 1 img = 1
-        if wep_type[wep] = 1 or(race = 7 and wep_type[wep] = 1) img = 2
+        if wep_type[wep] = 1 or (race = 7 and wep_type[wep] = 1) img = 2
         draw_sprite(sprBulletIconBG, img, 2, 32)
         draw_sprite(sprBulletIcon, 7 - ceil((ammo[1] / typ_amax[1]) * 7), 2, 32)
 
         img = 0
         if wep_type[wep] = 2 img = 1
-        if wep_type[wep] = 2 or(race = 7 and wep_type[wep] = 2) img = 2
+        if wep_type[wep] = 2 or (race = 7 and wep_type[wep] = 2) img = 2
         draw_sprite(sprShotIconBG, img, 12, 32)
         draw_sprite(sprShotIcon, 7 - ceil((ammo[2] / typ_amax[2]) * 7), 12, 32)
 
         img = 0
         if wep_type[wep] = 3 img = 1
-        if wep_type[wep] = 3 or(race = 7 and wep_type[wep] = 3) img = 2
+        if wep_type[wep] = 3 or (race = 7 and wep_type[wep] = 3) img = 2
         draw_sprite(sprBoltIconBG, img, 22, 32)
         draw_sprite(sprBoltIcon, 7 - ceil((ammo[3] / typ_amax[3]) * 7), 22, 32)
 
         img = 0
         if wep_type[wep] = 4 img = 1
-        if wep_type[wep] = 4 or(race = 7 and wep_type[wep] = 4) img = 2
+        if wep_type[wep] = 4 or (race = 7 and wep_type[wep] = 4) img = 2
         draw_sprite(sprExploIconBG, img, 32, 32)
         draw_sprite(sprExploIcon, 7 - ceil((ammo[4] / typ_amax[4]) * 7), 32, 32)
 
         img = 0
         if wep_type[wep] = 5 img = 1
-        if wep_type[wep] = 5 or(race = 7 and wep_type[wep] = 5) img = 2
+        if wep_type[wep] = 5 or (race = 7 and wep_type[wep] = 5) img = 2
         draw_sprite(sprEnergyIconBG, img, 42, 32)
         draw_sprite(sprEnergyIcon, 7 - ceil((ammo[5] / typ_amax[5]) * 7), 42, 32)
 
@@ -245,60 +238,41 @@ function scrDrawHUD(plr = noone) {
             draw_text(110, 7, (string(txt)))
         }
     }
-
+	
     if UberCont.continued_run {
         draw_set_font(fontSmall)
         draw_set_alpha(0.1)
         draw_set_color(c_white)
-        draw_text(0, 45, "continued")
-        draw_set_alpha(1)
+		
+		if global.recontuations > 1 {
+			draw_text(0, 45, "continued x" + string(global.recontuations))
+		}
+        else draw_text(0, 45, "continued")
+        
+		draw_set_alpha(1)
         draw_set_font(fntM1)
     }
 
     draw_set_halign(fa_center)
-
+	draw_set_color(c_white)
+	
     with WepPickup {
         x = round(x)
         y = round(y)
 
         if visible {
             if place_meeting(x, y, plr) {
-                draw_sprite(sprEPickup, UberCont.opt_gamepad, x - view_xview, y - view_yview - 7)
-
-                if type = 1 {
-                    draw_sprite(sprBulletIconBG, 2, x - view_xview + 7, y - view_yview - 21)
-                    draw_sprite(sprBulletIcon, 7 - ceil((ammo[type] / typ_amax[type]) * 7), x - view_xview + 7, y - view_yview - 21)
-                }
-
-                if type = 2 {
-                    draw_sprite(sprShotIconBG, 2, x - view_xview + 7, y - view_yview - 21)
-                    draw_sprite(sprShotIcon, 7 - ceil((ammo[type] / typ_amax[type]) * 7), x - view_xview + 7, y - view_yview - 21)
-                }
-
-                if type = 3 {
-                    draw_sprite(sprBoltIconBG, 2, x - view_xview + 7, y - view_yview - 21)
-                    draw_sprite(sprBoltIcon, 7 - ceil((ammo[type] / typ_amax[type]) * 7), x - view_xview + 7, y - view_yview - 21)
-                }
-
-                if type = 4 {
-                    draw_sprite(sprExploIconBG, 2, x - view_xview + 7, y - view_yview - 21)
-                    draw_sprite(sprExploIcon, 7 - ceil((ammo[type] / typ_amax[type]) * 7), x - view_xview + 7, y - view_yview - 21)
-                }
-
-                if type = 5 {
-                    draw_sprite(sprEnergyIconBG, 2, x - view_xview + 7, y - view_yview - 21)
-                    draw_sprite(sprEnergyIcon, 7 - ceil((ammo[type] / typ_amax[type]) * 7), x - view_xview + 7, y - view_yview - 21)
-                }
-
-                var _name = loc(string(name))
-
-                draw_set_color(c_black)
-                draw_text(x - view_xview, y - view_yview - 30, _name)
-                draw_text(x - view_xview + 1, y - view_yview - 30, _name)
-                draw_text(x - view_xview + 1, y - view_yview - 31, _name)
-                draw_set_color(c_white)
-                draw_text(x - view_xview, y - view_yview - 31, _name)
-
+				var _x = x_rel_view,
+					_y = y_rel_view,
+					
+					off = draw_pickup_button(_x, _y),
+					
+					_name = loc(string(name))
+				
+                scrDrawTypeAmmo(type, ammo[type] / typ_amax[type], _x + off, _y - 21)
+				
+                draw_text_nt(_x, _y - 31, _name)
+				
                 if !UberCont.opt_keyboard && !UberCont.opt_gamepad {
                     with ButtonAct {
                         draw_sprite_ext(other.sprite_index, other.image_index, x, y, 2, 2, other.image_angle, c_white, 1)
@@ -315,13 +289,14 @@ function scrDrawHUD(plr = noone) {
 
     with CarVenusFixed {
         if place_meeting(x, y, plr) {
-            draw_sprite(sprEPickup, UberCont.opt_gamepad, x - view_xview, y - view_yview - 7)
-            draw_set_color(c_black)
-            draw_text(x - view_xview, y - view_yview - 30, (string(name)))
-            draw_text(x - view_xview + 1, y - view_yview - 30, (string(name)))
-            draw_text(x - view_xview + 1, y - view_yview - 31, (string(name)))
-            draw_set_color(c_white)
-            draw_text(x - view_xview, y - view_yview - 31, (string(name)))
+			var _x = x_rel_view,
+				_y = y_rel_view,
+				
+				off = draw_pickup_button(_x, _y)
+			
+            draw_pickup_button(_x, _y)
+			
+			draw_text_shadow(_x + off, _y - 30, loc(name))
 
             with ButtonAct {
                 draw_sprite(other.sprite_index, other.image_index, x, y)
@@ -334,13 +309,14 @@ function scrDrawHUD(plr = noone) {
 
     with JungleFlower {
         if place_meeting(x, y, plr) {
-            draw_sprite(sprEPickup, UberCont.opt_gamepad, x - view_xview, y - view_yview - 7)
-            draw_set_color(c_black)
-            draw_text(x - view_xview, y - view_yview - 30, (string(name)))
-            draw_text(x - view_xview + 1, y - view_yview - 30, (string(name)))
-            draw_text(x - view_xview + 1, y - view_yview - 31, (string(name)))
-            draw_set_color(c_white)
-            draw_text(x - view_xview, y - view_yview - 31, (string(name)))
+            var _x = x_rel_view,
+				_y = y_rel_view,
+				
+				off = draw_pickup_button(_x, _y)
+			
+            draw_pickup_button(_x, _y)
+			
+			draw_text_shadow(_x + off, _y - 30, loc(name))
 
             with ButtonAct {
                 draw_sprite(other.sprite_index, other.image_index, x, y)
@@ -354,13 +330,14 @@ function scrDrawHUD(plr = noone) {
     with Van
     if can_hq && drawspr == sprVanDeactivate {
         if place_meeting(x, y, plr) {
-            draw_sprite(sprEPickup, UberCont.opt_gamepad, x - view_xview, y - view_yview - 7)
-            draw_set_color(c_black)
-            draw_text(x - view_xview, y - view_yview - 30, (string(name)))
-            draw_text(x - view_xview + 1, y - view_yview - 30, (string(name)))
-            draw_text(x - view_xview + 1, y - view_yview - 31, (string(name)))
-            draw_set_color(c_white)
-            draw_text(x - view_xview, y - view_yview - 31, (string(name)))
+            var _x = x_rel_view,
+				_y = y_rel_view,
+				
+				off = draw_pickup_button(_x, _y)
+			
+            draw_pickup_button(_x, _y)
+			
+			draw_text_shadow(_x + off, _y - 30, loc(name))
 
             with ButtonAct {
                 draw_sprite(other.sprite_index, other.image_index, x, y)
@@ -376,4 +353,25 @@ function scrDrawHUD(plr = noone) {
     }
 
     draw_set_color(c_white)
+}
+
+function scrDrawTypeAmmo(type, amount, x, y) {
+	var s;
+	
+	switch type {
+		default:
+			exit
+		
+		case 1: s = "Bullet" break
+		case 2: s = "Shot" break
+		case 3: s = "Bolt" break
+		case 4: s = "Explo" break
+		case 5: s = "Energy" break
+	}
+	
+	var spr = asset_get_index("spr" + s + "Icon"),
+		bg = asset_get_index("spr" + s + "IconBG")
+	
+    draw_sprite(bg, 2, x, y)
+	draw_sprite(spr, 7 - ceil(amount * 7), x, y)
 }

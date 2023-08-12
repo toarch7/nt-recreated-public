@@ -13,3 +13,5 @@ with Floor {
     instance_create(x - 32, y - 32, Top)
     instance_create(x + 32, y - 32, Top)
 }
+
+event_perform(ev_alarm, 3)

@@ -1,4 +1,4 @@
-if !instance_exists(Player) or(instance_exists(Credits) && !Credits.visible) or(instance_exists(Cinematic) && Cinematic.done) {
+if !instance_exists(Player) or (instance_exists(Credits) && !Credits.visible) or (instance_exists(Cinematic) && Cinematic.done) {
     if !UberCont.paused && !instance_exists(GameOver) {
         if instance_number(UnlockScreen) <= 0 && instance_exists(GameCont) && !instance_exists(GenCont) && !instance_exists(Menu) && !instance_exists(MenuGen) {
             instance_create(view_xview, view_yview, GameOver)

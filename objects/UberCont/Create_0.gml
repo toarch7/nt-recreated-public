@@ -1,6 +1,7 @@
-#macro GAME_VERSION "b2.6"
-#macro GAME_BUILD 2603
+#macro GAME_VERSION "b2.6.1"
+#macro GAME_BUILD 2610
 #macro BETA 1
+
 
 opt_fulscrn = 1
 opt_fitscrn = 1
@@ -14,9 +15,6 @@ big_font = fntBig
 
 draw_set_font(font)
 
-mainsound = audio_emitter_create()
-mainvol = 1
-audio_emitter_falloff(mainsound, 100, 300, 1)
 
 global.string_split_list = ds_list_create()
 pauseimg = -1
@@ -25,7 +23,7 @@ pauseimg = -1
 version = GAME_VERSION
 
 //if file_exists("icheat.txt") or file_exists("ICHEAT.txt") or file_exists("ICHEAT.TXT") or file_exists("icheat.TXT")
-public = !global.pc_build
+public = !global.desktop
 
 //DEBUG STUFF
 scrn = 0
@@ -37,15 +35,20 @@ paused = 0
 want_pause = 0
 alarm[0] = 30
 
-scrUberContDefineStructs()
+playerinstances = {}
 
 scrLoadLocalizations()
 
 saving = 0
 saving_index = 0
 
+mainsound = audio_emitter_create()
+mainvol = 1
+
+audio_emitter_falloff(mainsound, 100, 300, 1)
+
 scrInit()
-scrVolume()
+
 scrWeapons()
 
 tot_time = save_get_val("data", "tot_time", 0)
@@ -112,11 +115,6 @@ can_weekly = 0
 
 splat_index = 0
 
-device_info = os_get_info()
-local_id = device_info[? "udid"]
-save_set_val("etc", "local_id", local_id)
-ds_map_destroy(device_info)
-
 pausespr = -1
 
 global.coop = 0
@@ -125,7 +123,6 @@ global.is_server = 0
 device_mouse_dbclick_enable(0) //os_type == os_android)
 
 hp = 1
-showtutorial = save_get_val("game", "tutorial", 1)
 global.hardmode = 0
 
 dont_save = 0
@@ -193,7 +190,7 @@ if hardgot {
     scrAchievement(39)
 }
 
-gamepad_set_axis_deadzone(0, 0.2)
+gamepad_set_axis_deadzone(0, 0.1)
 
 localcoop = 0
 gamepad_sel = 0
@@ -208,12 +205,6 @@ update_message = -1
 
 audio_falloff_set_model(audio_falloff_linear_distance_clamped)
 
-rp_bl_req = scrHttpGet("https://raw.githubusercontent.com/toarch7/torcherdev/main/ntm_resourcepack_extra.json")
-
-rp_unlisted = -1
-rp_approved = -1
-testreq = -1
-
 lastinputframe = 0
 global.inputqueue = ds_queue_create()
 touch_duration = [0, 0, 0, 0]
@@ -223,11 +214,12 @@ global.time = 0
 
 global.crownpick = 1
 
-//open_two_windows(1)
+global.recontuations = 0
 
-window_set_fullscreen(save_get_val("other", "fullscreen", 1))
+// open_two_windows(1)
 
-if os_type == os_android volqueue = ds_queue_create()
+if os_type == os_android
+	volqueue = ds_queue_create()
 
 continued_run = 0
 
@@ -244,3 +236,4 @@ load_resourcepacks()
 	
 	show_message_async(s)
 }*/
+

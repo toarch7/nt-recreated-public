@@ -12,6 +12,21 @@ global.seed = 0
 #macro rng_a 1103515245
 #macro rng_c 12345
 
+enum RNGSlot {
+	
+	Generation = 0,
+	Enemies = 1,
+	Props = 2,
+	Drops = 3,
+	Chest = 4,
+	Skill = 5,
+	
+	Popo = 8,
+	Pickups = 9,
+	
+	Count
+}
+
 function rng_init() {
     if !global.coop {
         global.seed = irandom(rng_m)
@@ -45,16 +60,5 @@ function rng_init() {
 		global.rng_state[i] = global.seed
 	}
 	
-    //0 - generation
-    //1 - enemies
-    //2 - props
-    //3 - decide weapon
-    //4 - chests
-    //5 - mutations
-    //6 - ?
-    //7 - ?
-    //8 - popo?
-    //9 - pickups (not sure if these need seeding)
-
     random_set_seed(global.seed)
 }

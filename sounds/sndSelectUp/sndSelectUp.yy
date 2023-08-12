@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndSelectUp",
-  "duration": 0.277018,
+  "duration": 0.272018,
   "parent": {
     "name": "SFX",
     "path": "folders/Sounds/SFX.yy",

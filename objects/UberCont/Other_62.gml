@@ -1,16 +1,3 @@
-if async_load[? "id"] == rp_bl_req {
-    if !is_undefined(async_load[? "result"]) && async_load[? "result"] != -1 {
-        var result = json_decode(async_load[? "result"])
-
-        if !is_undefined(result) {
-            rp_unlisted = result[? "unlisted"]
-            rp_approved = result[? "approved"]
-
-            rp_bl_req = -1
-        }
-    }
-}
-
 if async_load[? "id"] == update_request {
     if !is_undefined(async_load[? "result"]) && async_load[? "result"] != -1 {
         var result = json_decode(async_load[? "result"])
@@ -57,8 +44,9 @@ if async_load[? "id"] == daily_request && get_daily_times++ < 5 {
         daily_seed = scrReal(text[? "seed"]) + seedoffset
         daily_time = scrReal(text[? "time"])
 
-        can_daily = daily_seed > 0 && !opt_console
-    } else daily_request = -1
+        can_daily = daily_seed > 0 && save_get_val("etc", "seed", "-1") != daily_seed
+    }
+	else daily_request = -1
 }
 
 if async_load[? "id"] == weekly_request && async_load[? "result"] != -1 && get_daily_times < 5 {
@@ -79,9 +67,6 @@ if async_load[? "id"] == weekly_request && async_load[? "result"] != -1 && get_d
 		
 		if weekly_data[? "seed"] != undefined {
 	        can_weekly = 1
-			
-	        if opt_console
-	            can_weekly = 0
 			
 	        random_set_seed(real(weekly_data[? "seed"]))
 			

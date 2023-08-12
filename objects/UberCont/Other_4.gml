@@ -3,6 +3,7 @@ if !instance_exists(Player) {
     scrLoadLoadout()
 
     SetVolumeControl(0)
-} else if os_type == os_android {
-    SetVolumeControl(save_get_val("controls", "volumecontrol", 1))
+}
+else if os_type == os_android {
+    SetVolumeControl(opt_volumecontrol)
 }

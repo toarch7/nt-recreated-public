@@ -40,7 +40,7 @@ function scrDrawRoadmap(_x, _y, _pos, cont = GameCont) {
             draw_line_pixel(_x + wx - 74, _y + wy + 1, _x + lx - 74, _y + ly + 1) //, width)
         }
 
-        if (cont.waysub[dir] == 1) or(cont.waypnt[dir] >= 100) {
+        if (cont.waysub[dir] == 1) or (cont.waypnt[dir] >= 100) {
             draw_sprite(sprMapDotOut, 0, _x + wx - 75, _y + wy)
         }
 
@@ -79,7 +79,7 @@ function scrDrawRoadmap(_x, _y, _pos, cont = GameCont) {
             draw_line_pixel(_x + wx - 75, _y + wy, _x + lx - 75, _y + ly) //, width)
         }
 
-        if (cont.waysub[dir] == 1) or(cont.waypnt[dir] >= 100) {
+        if (cont.waysub[dir] == 1) or (cont.waypnt[dir] >= 100) {
             draw_sprite_ext(sprMapDot, 0, _x + wx - 75, _y + wy, 1, 1, 0, col, 1)
         }
 

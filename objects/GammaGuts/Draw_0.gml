@@ -1,5 +1,5 @@
-draw_set_blend_mode(bm_add)
+gpu_set_blendmode(bm_add)
 
 draw_self()
 
-draw_set_blend_mode(bm_normal)
+gpu_set_blendmode(bm_normal)

@@ -7,8 +7,12 @@ if UberCont.opt_prtcls {
 }
 
 var area;
-if !instance_exists(MenuGen) && !instance_exists(Menu) area = GameCont.area
+
+if !instance_exists(Menu) && instance_exists(GameCont) {
+	area = GameCont.area
+}
 else area = 0
+
 friction = 0.2
 sprite_index = asset_get_index("sprDebris" + string(area))
 image_speed = 0

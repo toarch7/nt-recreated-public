@@ -39,41 +39,18 @@ repeat 3 {
     diy += 32
 }
 
-view_xview = 64 - view_width / 2
-view_yview = 48 - view_height / 2
-
-var goal = 60
+//view_xview = 64 - view_width / 2
+//view_yview = 48 - view_height / 2
 
 repeat 4 {
     instance_create(choose(0, 32, 64, 96, 128), choose(0, 32, 64, 96, 128), FloorMaker)
 }
 
-var iter = 0
+print(instance_number(FloorMaker), instance_number(Floor))
 
-while instance_number(Floor) < 90 && iter < 100 {
-    with FloorMaker
-    scrMakeFloor()
-
-    iter++
-
-    if (iter % 10 == 0) or(instance_number(Floor) >= 90) {
-        with Floor {
-            var f = instance_place(x, y, Floor)
-
-            if f && f.id < id {
-                instance_destroy()
-            }
-        }
-    }
-}
+alarm[1] = 2
 
 instance_create(0, 0, BackCont)
 instance_create(0, 0, TopCont)
 
-event_perform(ev_alarm, 1)
-event_perform(ev_alarm, 2)
-event_perform(ev_alarm, 3)
-
-instance_create(x, y, Menu)
-
-with SpiralCont instance_destroy()
+instance_create(0, 0, Menu)

@@ -1,23 +1,28 @@
 if mouse_check_button_pressed(mb_left) {
     click = 1
+	
     mousex = mouse_x
     mousey = mouse_y
+	
     speed = 0
 }
 
-if UberCont.opt_gamepad {
-	v = gamepad_button_check(0, gpad.padd) - gamepad_button_check(0, gpad.padu)
+if is_gamepad() {
+	var v = (gamepad_button_check(0, gp_padd) - gamepad_button_check(0, gp_padu)) * 4
 	
-	speed = v * 8
+	if v == 0
+		v = gamepad_axis_value(0, gp_axislv)
+	
+	vspeed = v * 8
 }
 
-if mouse_wheel_up() speed = -16
-if mouse_wheel_down() speed = 16
+if mouse_wheel_up() speed = 16
+if mouse_wheel_down() speed = -16
 
 var p = ypos div 40
 
 if p != least {
-	sound_play_pitchvol(sndMenuSelect, 1.1 + random(0.1), 0.3)
+	sound_play_pitchvol(sndHover, 1.1 + random(0.1), 0.3)
 	
 	least = p
 	
@@ -31,10 +36,8 @@ if p != least {
 ypos += lengthdir_y(speed, direction)
 ypos = clamp(ypos, 0, max_height)
 
-if ypos <= 0 or ypos >= max_height {
+if (ypos <= 0 or ypos >= max_height) && speed > 0 {
     speed = 0
 }
 
-view_xview = 0
-view_yview = 0
-
+camera_set_pos(0, 0)

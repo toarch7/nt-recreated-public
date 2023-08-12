@@ -20,7 +20,7 @@ if x > view_xview + view_width * 0.4 and x < view_xview + view_width * 0.6 and y
             if GameCont.area = 3 song = musBoss2
             if GameCont.area = 5 song = musBoss3 sound_loop(song)
             //sound_loop(amb)
-            sound_global_volume(max(0, sqrt(UberCont.opt_sfxvol)))
+            sound_global_volume(max(0, sqrt(UberCont.opt_volume)))
             sound_volume(song, sqrt(UberCont.opt_musvol))
             sound_volume(amb, sqrt(UberCont.opt_ambvol))
         }

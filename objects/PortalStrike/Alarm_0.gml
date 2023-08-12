@@ -22,7 +22,7 @@ if ammo {
     expl_x += lengthdir_x(32, direction)
     expl_y += lengthdir_y(32, direction)
 	
-    alarm[0] = 3
+    alarm[0] = 2
     ammo --
 }
 else instance_destroy()

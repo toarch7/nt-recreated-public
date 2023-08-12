@@ -134,9 +134,9 @@ function scrSkills() {
     skill_msnd[23] = sndMutTriggerFingers
     skill_tips[23] = ""
 
-    skill_name[24] = "SHARP TEETHS"
+    skill_name[24] = "SHARP TEETH"
     skill_text[24] = "DAMAGE TAKEN IS DEALT TO#ALL ENEMIES ON SCREEN"
-    skill_msnd[24] = sndMutSharpTeeths
+    skill_msnd[24] = sndMutSharpTeeth
     skill_tips[24] = ""
 
     skill_name[25] = "PATIENCE"

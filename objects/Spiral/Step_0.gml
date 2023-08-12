@@ -14,7 +14,7 @@ if !instance_exists(SpiralCont) {
     grow *= 1.5
 }
 
-if image_xscale > 2 + (!instance_exists(SpiralCont)) * 2 and(lanim < 0 or lanim > 6) {
+if image_xscale > 2 + (!instance_exists(SpiralCont)) * 2 and (lanim < 0 or lanim > 6) {
     instance_destroy()
 }
 

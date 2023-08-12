@@ -3,7 +3,11 @@ function scrDecideWep(extra) {
         var bottom = -1,
             __cursed = 0,
             target
-
+		
+		var seed = self[$ "dropseed"] ?? rng_next_int(RNGSlot.Drops)
+		
+		random_set_seed(seed)
+		
         if other[$ "curse"] {
             bottom = median(3, 1, ceil((GameCont.hard - global.hardmode * 13) / (1 + global.hardmode * 2)) + extra)
             __cursed = 1
@@ -23,16 +27,12 @@ function scrDecideWep(extra) {
 
         var h = ceil((GameCont.hard - global.hardmode * 13) / (1 + global.hardmode * 2)) + extra
 
-        var wep_name = UberCont.wep_name
-        var wep_area = UberCont.wep_area
-        var wep_type = UberCont.wep_type
-
         do {
             var fine = 0
 
-            wep = round(rng_random(3, maxwep - 1) + 1)
+            wep = round(random(maxwep - 1) + 1)
 
-            if !is_string(wep_name[wep]) or(wep_area[wep] < 0) or(wep_area[wep] < bottom) or(wep_area[wep] > h) {
+            if !is_string(wep_name[wep]) or (wep_area[wep] < 0) or (wep_area[wep] < bottom) or (wep_area[wep] > h) {
                 continue
             }
 
@@ -44,7 +44,7 @@ function scrDecideWep(extra) {
                 continue
             }
 
-            if instance_exists(TutorialCont) && (wep_type[wep] == 0 or wep_type[wep] == 4) {
+            if instance_exists(TutCont) && (wep_type[wep] == 0 or wep_type[wep] == 4) {
                 continue
             }
 
@@ -58,7 +58,7 @@ function scrDecideWep(extra) {
 
             fine = 1
         } until fine
-    } else wep = round(rng_random(3, maxwep - 1) + 1)
+    } else wep = round(random(maxwep - 1) + 1)
 
     return wep
 }

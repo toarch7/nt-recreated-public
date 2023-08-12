@@ -99,88 +99,19 @@ function scrInit() {
     }
 
     //Load
-
-    opt_language = save_get_val("etc", "language", "null")
-
-    if object_index == UberCont {
-        scrLanguageSet(opt_language)
-    }
-
-    scrDefineGamepadBindings()
-
-    //show_message_async(json_encode(saveData))
-
+	
     scrRaces()
     scrCrowns()
 
     ini_open(game_directory + "configs.ini")
-
-    opt_scaling = ini_read_real("Options", "SubpixelMode", 1)
-    opt_keyboard = ini_read_real("Options", "Keyboard", (global.pc_build))
+	
     opt_online = ini_read_real("Options", "OnlineFeatures", 1)
-    opt_achievs = ini_read_real("Options", "Achievements", 1)
-    opt_healthcol = ini_read_string("Visual", "HealthColor", "-1")
-    opt_cursorcol = ini_read_string("Visual", "CrosshairColor", "-1")
-    opt_outlines = ini_read_real("Visual", "Outlines", 1)
-    opt_console = ini_read_real("Options", "Console", 0)
     opt_updates = ini_read_real("Options", "UpdateChecker", 1)
-
-    #region read healthbar color
-
-    if opt_healthcol != "-1" {
-        var _col = string_split_list(opt_healthcol, ",")
-
-        for (var i = 0; i <= 2; i++) {
-            var _c = _col[| i]
-
-            if is_undefined(_c) or _c == "" {
-                _c = "0"
-            }
-
-            _col[| i] = real(_c)
-        }
-
-        opt_healthcol = make_color_rgb(_col[| 0], _col[| 1], _col[| 2])
-    }
-
-    #endregion
-
-    #region read cursor color
-
-    if opt_cursorcol != "-1" {
-        var _col = string_split_list(opt_cursorcol, ",")
-        for (var i = 0; i <= 2; i++) {
-            var _c = _col[| i]
-
-            if is_undefined(_c) or _c == "" {
-                _c = "0"
-            }
-
-            _col[| i] = real(_c)
-        }
-
-        opt_cursorcol = make_color_rgb(_col[| 0], _col[| 1], _col[| 2])
-    }
-
-    #endregion
-
-    ini_write_real("Options", "SubpixelMode", opt_scaling)
-    ini_write_real("Options", "Keyboard", opt_keyboard)
+	
     ini_write_real("Options", "OnlineFeatures", opt_online)
-    ini_write_real("Options", "Achievements", opt_achievs)
-    ini_write_real("Options", "Console", opt_console)
     ini_write_real("Options", "UpdateChecker", opt_updates)
-    ini_write_real("Visual", "Outlines", opt_outlines)
 
-    if opt_healthcol == "-1" {
-        ini_write_string("Visual", "HealthColor", "-1")
-        opt_healthcol = make_color_rgb(252, 56, 0)
-    }
-
-    if opt_cursorcol == "-1" {
-        ini_write_string("Visual", "CrosshairColor", "-1")
-        opt_cursorcol = c_white
-    }
+   
 
     ini_close()
 
@@ -189,38 +120,11 @@ function scrInit() {
         save_set_val("etc", "seed", file_text_read_string(f))
         file_text_close(f)
     }
-
-    opt_hud = save_get_val("visual", "hud", 1)
-    opt_simplify = save_get_val("visual", "simplify", 0)
-    opt_gamepad = save_get_val("options", "gamepad", 0)
-    opt_firemode = save_get_val("controls", "firemode", 0)
-    opt_musvol = save_get_val("options", "music", 1)
-    opt_sfxvol = save_get_val("options", "sfx", 1)
-    opt_ambvol = save_get_val("options", "sfx", 1)
-    opt_sndvol = save_get_val("options", "sound", 1)
-    opt_prtcls = save_get_val("visual", "particles", 0)
-    opt_bloom = save_get_val("visual", "bloom", 1)
-    opt_walls = save_get_val("visual", "walls", 1)
-    opt_crosshair = save_get_val("visual", "crosshair", 0)
-    opt_timer = save_get_val("visual", "timer", 1)
-    opt_bossintro = save_get_val("visual", "bossintro", 1)
-    opt_shake = save_get_val("visual", "screenshake", 1)
-    opt_assist = save_get_val("controls", "assist", 1)
-    // opt_enhancements = save_get_val("controls", "enhancements", 1)
-    opt_assistpos = save_get_val("controls", "assistpos", 1)
-    opt_resolution = save_get_val("visual", "resolution", 1)
-    opt_activecam = save_get_val("visual", "activecam", 1)
-    opt_controls_scale = save_get_val("controls", "scale", 0.5)
-    opt_pausebutton = save_get_val("options", "pausebutton", !global.pc_build)
-    opt_sideart = save_get_val("options", "sideart", 1)
+	
     protowep = save_get_val("etc", "protowep", 56)
-
-    if opt_musvol > 1 opt_musvol = 1
-    if opt_sfxvol > 1 opt_sfxvol = 1
-    if opt_ambvol > 1 opt_ambvol = 1
-
-    if opt_prtcls > 1 opt_prtcls = 0
-
+	
+	
+	
     save_set_val("cgot", "0", 1)
     save_set_val("cgot", "1", 1)
     save_set_val("cgot", "2", 1)
@@ -282,24 +186,38 @@ function scrInit() {
         crowngot[i, 0] = 1
         crowngot[i, 1] = 1
     }
-
+	
     hardgot = save_get_val("etc", "hard", 0)
-
-    scrAchievements()
-    scrLoadLoadout()
-
+	
     /*
-
+	
 	cwep - second sweapon
 	ccrown - character's choosen crown
 	crowngot - is crown unlocked for character
 	cskin - character's choosen skin
 	cskingot - is character's b-skin unlocked
-
+	
 	*/
-
-    UberCont.alarm[10] = 3
-
+	
+	scrOptionsUpdate()
+	
+	with UberCont {
+		if global.desktop {
+			if window_get_fullscreen() != opt_fullscreen
+				window_set_fullscreen(opt_fullscreen)
+			
+			display_reset(0, opt_vsync)
+			
+			opt_assist = 0
+		}
+		else {
+			display_reset(0, 0)
+		}
+	}
+	
+    scrAchievements()
+    scrLoadLoadout()
+	
     scrInitStats()
-    scrVolume()
+	
 }

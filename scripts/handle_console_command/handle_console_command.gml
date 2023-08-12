@@ -30,7 +30,8 @@ function handle_console_command(str) {
         reset: "Reset the game",
         nodeath: "Disable death",
         reload: "Reload all resourcepacks",
-        seed: "Set seed, works properly after restart"
+        seed: "Set seed, works properly after restart",
+		instances: "Display list of existing instances"
     }
 
     if command_binding {
@@ -65,7 +66,7 @@ function handle_console_command(str) {
                     var _x = 10016
                     var _y = 10016
 
-                    if global.pc_build && !instance_exists(CoopController) {
+                    if global.desktop && !instance_exists(CoopController) {
                         _x = mouse_x
                         _y = mouse_y
                     }
@@ -150,7 +151,7 @@ function handle_console_command(str) {
             case "wep":
             case "weapon":
             case "gun":
-                var i = scrContentIdByName(args, UberCont.wep_name)
+                var i = scrContentIdByName(args, wep_name)
 
                 if i != -1 {
                     with Player {
@@ -158,7 +159,7 @@ function handle_console_command(str) {
 
                         var _w = variable_instance_get(id, "_debuglastwep")
 
-                        if wep == _w or!bwep {
+                        if wep == _w or !bwep {
                             bwep = i
                         } else wep = i
 
@@ -260,6 +261,18 @@ function handle_console_command(str) {
                     flags ^= 2
                 } else flags |= 2
                 break
+			
+            case "instances":
+                if (flags & 4) == 4 {
+                    flags ^= 4
+                } else flags |= 4
+                break
+
+            case "overlay":
+                if (flags & 8) == 8 {
+                    flags ^= 8
+                } else flags |= 8
+                break
 
             case "clear":
                 global.log_output = []
@@ -278,6 +291,10 @@ function handle_console_command(str) {
 
             case "reset":
                 game_restart()
+                break
+			
+			case "fps":
+                game_set_speed(real(args[0]), gamespeed_fps)
                 break
 
             case "seed":
@@ -324,7 +341,20 @@ function handle_console_command(str) {
             case "hard":
                 print("Current difficulty:", GameCont.hard)
                 break
-
+			
+			case "option":
+				try {
+					UberCont.saveData[? cmd[0]] = real(cmd[1])
+					print("real")
+					scrOptionsUpdate()
+				}
+				catch(e) {
+					UberCont.saveData[? cmd[0]] = cmd[1]
+					scrOptionsUpdate()
+				}
+				
+				break
+			
             default:
                 return 1
         }

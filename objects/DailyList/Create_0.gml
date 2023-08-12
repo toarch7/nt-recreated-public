@@ -28,7 +28,6 @@ array_sort(weeklykeys, function(a, b) {
 
 alpha = 0
 
-scrWeapons()
 scrUltras()
 
 frame = 0

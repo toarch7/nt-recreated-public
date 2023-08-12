@@ -3,7 +3,7 @@ if speed > 0 {
     exit
 }
 
-if !instance_exists(creator) or!visible exit
+if !instance_exists(creator) or !visible exit
 
 with creator {
     if !bwep {

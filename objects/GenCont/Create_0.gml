@@ -10,7 +10,50 @@ if instance_exists(Player) {
         y = 10016
     }
 
-    if GameCont.area = 0 __background_set_colour(make_color_rgb(106, 122, 175)) if GameCont.area = 1 __background_set_colour(make_color_rgb(175, 143, 106)) if GameCont.area = 2 __background_set_colour(make_color_rgb(76, 89, 70)) if GameCont.area = 3 __background_set_colour(make_color_rgb(138, 150, 158)) if GameCont.area = 4 __background_set_colour(make_color_rgb(129, 82, 188)) if GameCont.area = 5 __background_set_colour(make_color_rgb(180, 189, 197)) if GameCont.area = 6 __background_set_colour(make_color_rgb(9, 28, 32)) if GameCont.area = 7 __background_set_colour(make_color_rgb(97, 29, 36)) if GameCont.area = 100 __background_set_colour(make_color_rgb(67, 53, 35)) if GameCont.area = 101 __background_set_colour(make_color_rgb(81, 209, 200)) if GameCont.area = 102 __background_set_colour(make_color_rgb(160, 75, 99)) if GameCont.area = 103 or GameCont.area = 107 __background_set_colour(make_color_rgb(238, 240, 242)) if GameCont.area = 104 __background_set_colour(make_color_rgb(255, 156, 35)) if GameCont.area = 105 __background_set_colour(make_color_rgb(42, 144, 12)) if GameCont.area = 106 __background_set_colour(make_color_rgb(245, 250, 251))
+    if GameCont.area == 0
+	__background_set_colour(make_color_rgb(106, 122, 175))
+	
+	if GameCont.area == 1
+	__background_set_colour(make_color_rgb(175, 143, 106))
+	
+	if GameCont.area == 2
+	__background_set_colour(make_color_rgb(76, 89, 70))
+	
+	if GameCont.area == 3
+	__background_set_colour(make_color_rgb(138, 150, 158))
+	
+	if GameCont.area == 4
+	__background_set_colour(make_color_rgb(129, 82, 188))
+	
+	if GameCont.area == 5
+	__background_set_colour(make_color_rgb(180, 189, 197))
+	
+	if GameCont.area == 6
+	__background_set_colour(make_color_rgb(9, 28, 32))
+	
+	if GameCont.area == 7
+	__background_set_colour(make_color_rgb(97, 29, 36))
+	
+	if GameCont.area == 100
+	__background_set_colour(make_color_rgb(67, 53, 35))
+	
+	if GameCont.area == 101
+	__background_set_colour(make_color_rgb(81, 209, 200))
+	
+	if GameCont.area == 102
+	__background_set_colour(make_color_rgb(160, 75, 99))
+	
+	if GameCont.area == 103 or GameCont.area == 107
+	__background_set_colour(make_color_rgb(238, 240, 242))
+	
+	if GameCont.area == 104
+	__background_set_colour(make_color_rgb(255, 156, 35))
+	
+	if GameCont.area == 105
+	__background_set_colour(make_color_rgb(42, 144, 12))
+	
+	if GameCont.area == 106
+	__background_set_colour(make_color_rgb(245, 250, 251))
 
 } else __background_set_colour(make_color_rgb(106, 122, 175))
 
@@ -29,17 +72,23 @@ scrTips()
 
 goal = 110
 
-if GameCont.area = 100 goal = 40
+if GameCont.area == 100
+	goal = 40
 
-if GameCont.area == 103 or GameCont.area == 101 or GameCont.area == 7 goal = 130
+if GameCont.area == 103 or GameCont.area == 101 or GameCont.area == 7
+	goal = 130
 
-if GameCont.area == 102 or GameCont.area == 0 goal = 70
+if GameCont.area == 102 or GameCont.area == 0
+	goal = 70
 
-if GameCont.area == 106 && GameCont.area == 3 goal = 48
+if GameCont.area == 106 && GameCont.area == 3
+	goal = 48
 
-if GameCont.area == 7 && GameCont.subarea == 3 goal = 420
+if GameCont.area == 7 && GameCont.subarea == 3
+	goal = 420
 
-if GameCont.area == 107 goal = 20
+if GameCont.area == 107
+	goal = 20
 
 if GameCont.area == 0 {
     goal = 60
@@ -51,17 +100,24 @@ if GameCont.area == 0 {
     }
 
     repeat 7 {
-        with instance_create(10000, 10000, FloorMaker) {
+        with instance_create(10000, 10000, FloorMaker)
             goal = other.goal
-        }
     }
 }
 
+safespawn = 0
+safedir = irandom(3) * 90
+safefloors = 0
+
 if save_get_val("game", "tutorial", 1) {
+	safespawn = true
     goal = 5
+	
+	instance_create(x, y, TutCont)
 }
 
-if instance_exists(MenuGen) goal = 110
+if instance_exists(MenuGen)
+	goal = 110
 
 crown = save_get_val("ccrown", string(GameCont.crown), 1)
 splat = 0
@@ -77,19 +133,16 @@ if GameCont.race == 6 && GameCont.level >= 10 {
     textgenerating = loc("VERIFYING...") + " "
 }
 
-safespawn = 0
-safedir = irandom(3) * 90
-safefloors = 0
-
 if GameCont.loops {
     safespawn = 1
 }
 
-if GameCont.area == 0 or GameCont.area == 107 or GameCont.area == 100 or(GameCont.area == 7 && GameCont.subarea == 3) or(GameCont.area == 106 && GameCont.subarea == 3) {
+if GameCont.area == 0 or GameCont.area == 107 or GameCont.area == 100 or (GameCont.area == 7 && GameCont.subarea == 3) or (GameCont.area == 106 && GameCont.subarea == 3) {
     safespawn = 0
 }
 
 if skill_get(25) && !GameCont.patient {
-    GameCont.skillpoints++GameCont.patiencepick = 1
+    GameCont.skillpoints ++
+	GameCont.patiencepick = 1
     GameCont.patient = 1
 }

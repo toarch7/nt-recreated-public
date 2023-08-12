@@ -4,7 +4,7 @@ BigNameSurfaces = {}
 #macro BIGNAME_YOFFSET 8
 
 function draw_bigname(_x, _y, _text, col = draw_get_color(), scale = 0.65, angle = 0) {
-	_text = string_hash_to_newline(_text)
+	_text = string_upper(string_hash_to_newline(_text))
 	
     var s = BigNameSurfaces[$ _text],
 		h = draw_get_halign(),
@@ -27,8 +27,8 @@ function draw_bigname(_x, _y, _text, col = draw_get_color(), scale = 0.65, angle
 		}
 		
         draw_surface_ext(s, _x, _y, 1, 1, angle, col, a)
-
-        return undefined
+		
+        exit
     }
 	
 	
@@ -63,7 +63,7 @@ function draw_bigname(_x, _y, _text, col = draw_get_color(), scale = 0.65, angle
 
     BigNameSurfaces[$ _text] = s
 
-    draw_set_font(UberCont.font)
+	draw_set_font(fntM1)
 	
 	draw_set_halign(h)
 	draw_set_valign(v)
@@ -71,5 +71,16 @@ function draw_bigname(_x, _y, _text, col = draw_get_color(), scale = 0.65, angle
 	
 	draw_set_color(_c)
 	
-    draw_bigname(_x, _y, _text, scale)
+    draw_bigname(_x, _y, _text, col, angle)
+}
+
+function scrBignameSurfaceCleanup() {
+	var keys = struct_keys(BigNameSurfaces)
+	
+	for (var i = 0; i < array_length(keys); i++) {
+	    var s = BigNameSurfaces[$ keys[i]]
+		
+	    if surface_exists(s)
+	        surface_free(s)
+	}
 }

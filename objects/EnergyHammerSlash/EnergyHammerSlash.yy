@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sprEnergySlash",
-    "path": "sprites/sprEnergySlash/sprEnergySlash.yy",
+    "name": "sprHeavyEnergySlash",
+    "path": "sprites/sprHeavyEnergySlash/sprHeavyEnergySlash.yy",
   },
   "solid": false,
   "visible": true,

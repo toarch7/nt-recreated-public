@@ -7,9 +7,12 @@ event_run = 0
 
 delay = 4
 netwait = 0
+netwait_max = 900
 
 frame = 0 // real inputs (anticipated)
 netframe = 0 // network inputs (synced)
+
+last_frame = "" // last frame w/o inputs (debug)
 
 global.coop = 1
 
@@ -73,6 +76,7 @@ enum event {
     broadcast,
 
     start,
+	
     restart,
 
     update_playerinstance,

@@ -1,5 +1,5 @@
 function printc(text, col) {
-    array_push(global.log_output, text)
+	array_push(global.log_output, string(text))
     array_push(global.log_color, col)
 
     if array_length(global.log_output) >= 20 {

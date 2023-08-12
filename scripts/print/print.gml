@@ -1,8 +1,8 @@
 function print() {
-    var str = argument[0]
+    var str = string(argument[0])
 
     for (var __arg = 1; __arg < argument_count; __arg++) {
-        str += string(argument[__arg])
+        str += " " + string(argument[__arg])
     }
 
     with UberCont {

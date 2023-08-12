@@ -5,7 +5,6 @@
   },
   "solid": false,
   "visible": true,
-  "managed": true,
   "spriteMaskId": {
     "name": "mskBullet2",
     "path": "sprites/mskBullet2/mskBullet2.yy",

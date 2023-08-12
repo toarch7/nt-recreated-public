@@ -5,6 +5,5 @@ amb = amb0c
 song = custom_sound_check(song)
 amb = custom_sound_check(amb)
 
-snd_play(song)
-snd_loop(amb)
-audio_sound_set_track_position(amb, random(audio_sound_length(amb)))
+snd_play_music(song, true)
+snd_play_ambient(amb, true)

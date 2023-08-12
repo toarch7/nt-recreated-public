@@ -1,12 +1,4 @@
-with ResourcepackManager
-depth = other.depth - 1
-
-// Draw menu itself
-event_user(0)
-
-if editing_mode && !UberCont.opt_gamepad {
-    scrDrawMobileControls()
-}
+event_user(1)
 
 with BackButton
-draw_self()
+	event_perform(ev_draw, ev_gui)

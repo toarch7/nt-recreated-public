@@ -1,3 +1,7 @@
+globalvar wep_name, wep_type, wep_auto, wep_cost, wep_area, wep_sprt,
+			wep_text, wep_rads, wep_lout, wep_load, wep_swap,
+			typ_ammo, typ_amax, typ_name, maxwep
+
 function scrWeapons() {
     //WEAPONS
     wep_name[0] = ""
@@ -1312,11 +1316,11 @@ function scrWeapons() {
 
     with Player {
         if race == 1 {
-            other.typ_ammo[1] += 8
-            other.typ_ammo[2] += 2
-            other.typ_ammo[3] += 2
-            other.typ_ammo[4] += 2
-            other.typ_ammo[5] += 3
+            typ_ammo[1] += 8
+            typ_ammo[2] += 2
+            typ_ammo[3] += 2
+            typ_ammo[4] += 2
+            typ_ammo[5] += 3
         }
     }
 

@@ -1,9 +1,4 @@
-if !instance_exists(ButtonSwap) instance_create(0, 0, ButtonSwap)
-if !instance_exists(ButtonActive) instance_create(0, 0, ButtonActive)
-if !instance_exists(ButtonAct) instance_create(0, 0, ButtonAct)
-
-if !instance_exists(JoystickAttack) instance_create(0, 0, JoystickAttack)
-if !instance_exists(JoystickMove) instance_create(0, 0, JoystickMove)
+scrCreateMobileControls()
 
 random_set_seed(global.seed)
 
@@ -11,17 +6,18 @@ with SubTopCont {
     alarm[0] = 1
 }
 
-with Player
-if is_me {
-    with MobileUI {
-        player = other.id
-    }
-
-    if GameCont.area == 7 && GameCont.subarea != 3 {
-        repeat 4 {
-            instance_create(x, y, IDPDSpawn)
-        }
-    }
+with Player {
+	if is_me {
+	    with MobileUI {
+	        player = other.id
+	    }
+		
+	    if GameCont.area == 7 && GameCont.subarea != 3 {
+	        repeat 4 {
+	            instance_create(x, y, IDPDSpawn)
+	        }
+	    }
+	}
 }
 
 if instance_exists(Player) {
@@ -55,59 +51,6 @@ if instance_exists(Player) {
             view_xview = x - view_width / 2
             view_yview = y - view_height / 2
         }
-    }
-}
-
-with RadChest {
-    var p = instance_random(Player)
-
-    if instance_exists(p) {
-        if p.race == 12 {
-            instance_create(x, y, RogueChest)
-            instance_destroy(id, 0)
-            exit
-        }
-
-        if GameCont.noradch > 1 {
-            if !GameCont.horror {
-                instance_create(x, y, HostileHorror)
-                snd_play(sndEXPChest)
-                GameCont.horror = 1
-            }
-
-            instance_destroy(id, 0)
-        } else if GameCont.noradch instance_change(RadChestBig, 1)
-
-        if GameCont.horror {
-            instance_change(RadChestBig, 1)
-        }
-
-        if p.hp < p.max_hp / 2 and rng_random(6, 2) < 1 {
-            instance_create(x, y, HealthChest)
-            instance_destroy(id, 0)
-        }
-
-        if instance_nearest(x - 16, y - 16, Floor).styleb = 1 and GameCont.area = 1 and rng_random(6, 3) < 1 instance_change(RadMaggotChest, true)
-    }
-}
-
-while instance_number(HealthChest) > 1 {
-    with instance_nearest(10016, 10016, HealthChest) {
-        instance_destroy()
-    }
-}
-
-if GameCont.area == 104 {
-    with WeaponChest {
-        instance_create(x, y, CursedBigChest)
-        instance_create(x, y, PortalClear)
-        instance_destroy(id, 0)
-    }
-
-    with BigWeaponChest {
-        instance_create(x, y, CursedBigChest)
-        instance_create(x, y, PortalClear)
-        instance_destroy(id, 0)
     }
 }
 
@@ -178,7 +121,6 @@ if GameCont.area == 0 && instance_exists(Player) && (GameCont.loops - global.har
 
     if isfish {
         with instance_create(10016, 10016, WepPickup) {
-            scrWeapons()
             ammo = 0
             wep = 115
             curse = 0
@@ -193,7 +135,6 @@ if GameCont.area == 0 && instance_exists(Player) && (GameCont.loops - global.har
 if GameCont.area == 1 && (GameCont.loops - global.hardmode) > 0 {
     if GameCont.blacksword {
         with instance_create(10016, 10016, WepPickup) {
-            scrWeapons()
             ammo = 0
             wep = 121
             curse = 0
@@ -279,43 +220,8 @@ if GameCont.area == 0 && GameCont.loops {
     }
 }
 
-if GameCont.crown == 3 {
-    with RadChest {
-        instance_create(x, y, HealthChest)
-        instance_destroy(id, 0)
-    }
-}
-
 if UberCont.halloween && GameCont.subarea == 1 && instance_exists(Bandit) {
     snd_play_hit_big(sndHalloweenWolf, 0.2)
-}
-
-with BigWeaponChest {
-    instance_create(x, y, PortalClear)
-}
-
-if GameCont.crown == 9 {
-    with chestprop
-    if object_index != ProtoChest {
-        instance_create(x, y, AmmoChest)
-        instance_destroy(id, 0)
-    }
-
-    with RadChest {
-        instance_create(x, y, AmmoChest)
-        instance_destroy(id, 0)
-    }
-
-    with WeaponChest {
-        instance_create(x, y, AmmoChest)
-        instance_destroy(id, 0)
-    }
-}
-
-if global.hardmode && ((GameCont.loops - global.hardmode) <= 0 && GameCont.area == 1 && GameCont.subarea == 1) {
-    with Player {
-        instance_create(x, y, BigWeaponChest)
-    }
 }
 
 with ProtoStatue {

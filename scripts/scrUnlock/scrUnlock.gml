@@ -4,15 +4,15 @@ function scrUnlock() {
     totdeaths = 0
 	
 	var plr = instance_is(self, Player) ? id : instance_exists_var(Player, "is_me", 1)
-
+	
     loops = GameCont.loops - global.hardmode
-
+	
     repeat(UberCont.racemax) {
         totkills += UberCont.ctot_kill[dir]
         totdeaths += UberCont.ctot_dead[dir]
         dir += 1
     }
-
+	
     //EYES:
     if GameCont.area == 2 && !UberCont.cgot[3] {
         UberCont.cgot[3] = 1
@@ -105,7 +105,7 @@ function scrUnlock() {
 	}
 
     if instance_exists(p) && p.hp > 0 && p.race != 14 && p.race != 15 with p {
-        if wep && string_copy(wep_name[wep], 0, 4) == "GOLD" && (race != 6 or(race == 6 && wep != 39)) && UberCont.cwep[race] != wep {
+        if wep && string_copy(wep_name[wep], 0, 4) == "GOLD" && (race != 6 or (race == 6 && wep != 39)) && UberCont.cwep[race] != wep {
             UberCont.cwep[race] = wep
             snd_play(sndGoldWeaponLock)
             save_set_val("cwep", string(race), wep)
@@ -117,7 +117,7 @@ function scrUnlock() {
                 scrAchievement(25)
             }
         }
-		else if bwep && string_copy(wep_name[bwep], 0, 4) == "GOLD" && (race != 6 or(race == 6 && bwep != 39)) && UberCont.cwep[race] != bwep {
+		else if bwep && string_copy(wep_name[bwep], 0, 4) == "GOLD" && (race != 6 or (race == 6 && bwep != 39)) && UberCont.cwep[race] != bwep {
             UberCont.cwep[race] = bwep
             snd_play(sndGoldWeaponLock)
             show_unlock_popup(wep_name[bwep] + "#@sSTORED")
@@ -218,4 +218,13 @@ function scrUnlock() {
             }
         }
     }
+	
+	if loops >= 3 && !UberCont.opt_cheats {
+		save_set_val("cheats", "unlocked", true)
+		opt_cheats = true
+		
+		show_unlock_popup("@wCHEATS UNLOCKED#@sCHECK OUT MENU SETTINGS")
+		
+		scrSave()
+	}
 }

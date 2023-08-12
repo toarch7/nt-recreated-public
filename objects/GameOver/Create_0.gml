@@ -17,11 +17,9 @@ var p = 0
 repeat 2 {
     with instance_create(view_xview + view_width / 2, view_yview + view_height / 2 + 58 + p * 32, PauseButton) {
         image_index = p
-        hover = p * 2
-        visible = 1
     }
 
-    p++
+    p ++
 }
 
 if UberCont.daily_run && !UberCont.weekly_run {

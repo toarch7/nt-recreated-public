@@ -1,0 +1,5 @@
+autogen.gml
+*.dll
+*.dylib
+*.so
+*.cpp

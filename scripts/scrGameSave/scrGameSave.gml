@@ -16,13 +16,19 @@ function scrGameSave() {
 
         ammo: undefined,
         hp: undefined,
-        spirit: undefined
+        spirit: undefined,
+		max_hp: undefined,
+		recontuations: undefined,
+		headloses: undefined
     }
 
     with Player {
         d.ammo = ammo
         d.hp = hp
         d.spirit = spirit
+		d.max_hp = max_hp
+		d.recontuations = ++ recontuations
+		d.headloses = headloses
     }
 
     buffer_write(b, buffer_string, json_stringify(d))

@@ -6,7 +6,7 @@ if UberCont.weekly_run {
 }
 
 
-if UberCont.weekly_run or!UberCont.daily_run {
+if UberCont.weekly_run or !UberCont.daily_run {
     //CROWN OF DESTINY
     if crown == 8 {
         GameCont.skillpoints += 1

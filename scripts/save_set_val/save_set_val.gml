@@ -2,6 +2,6 @@
 /// @param section
 /// @param key
 /// @param value
-function save_set_val() {
-    UberCont.saveData[? string(argument[0]) + "_" + string(argument[1])] = argument[2]
+function save_set_val(section, key, value) {
+	UberCont.saveData[? section + "_" + key] = value
 }

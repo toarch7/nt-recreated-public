@@ -16,7 +16,7 @@ if type == 4 or type == 3 {
 }
 
 if random(12) < 1 && type != 4 {
-    if (type == 2 or(random(3) < 1)) && !bossfight {
+    if (type == 2 or (random(3) < 1)) && !bossfight {
         with instance_create(x, y, SpiralDebris) {
             depth = other.image_angle
         }

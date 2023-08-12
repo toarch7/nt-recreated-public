@@ -8,7 +8,6 @@ with Player {
     if string_copy(wep_name[wep], 0, 4) == "GOLD"
     or string_copy(wep_name[bwep], 0, 4) == "GOLD" {
         with instance_create(other.x, other.y, WepPickup) {
-            scrWeapons()
             ammo = 0
             wep = 120
             curse = 0

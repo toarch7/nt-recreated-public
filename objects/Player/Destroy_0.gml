@@ -22,8 +22,6 @@ if GameCont.crown == 2 {
 snd_play(snd_dead)
 
 with instance_create(x, y, WepPickup) {
-    scrWeapons()
-
     wep = other.wep
     ammo = 0
 
@@ -39,8 +37,6 @@ with instance_create(x, y, WepPickup) {
 
 if bwep > 0 {
     with instance_create(x, y, WepPickup) {
-        scrWeapons()
-
         wep = other.bwep
         ammo = 0
 

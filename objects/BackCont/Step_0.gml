@@ -42,16 +42,18 @@ if !instance_exists(LevCont) && !instance_exists(CrownIcon) && !(instance_exists
             }
         }
 
-        if UberCont.opt_activecam && !UberCont.localcoop {
+        if !UberCont.localcoop {
             dir2 = KeyCont.dir_fire[index]
 
             if UberCont.opt_gamepad {
                 var gpx = gamepad_axis_value(0, gp_axisrh)
                 var gpy = gamepad_axis_value(0, gp_axisrv)
-                dis2 = point_distance(0, 0, gpx, gpy) / viewdist
-            } else if UberCont.opt_keyboard {
+                dis2 = (point_distance(0, 0, gpx, gpy) * 72) / viewdist
+            }
+			else if UberCont.opt_keyboard {
                 dis2 = point_distance(x, y, mouse_x, mouse_y) / viewdist
-            } else if instance_exists(JoystickAttack) {
+            }
+			else if instance_exists(JoystickAttack) {
                 if !save_get_val("contorls", "aimbot", 0) {
                     dir2 = KeyCont.dir_fire[global.index]
                     dis2 = JoystickAttack.vdis / viewdist

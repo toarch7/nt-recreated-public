@@ -30,11 +30,14 @@ if spr != -1 {
 
 with Player {
     if visible {
-        if !UberCont.opt_keyboard or(index == 1 && UberCont.localcoop) {
-            var ang = KeyCont.dir_fire[index]
-            draw_sprite_ext(sprCrosshair, KeyCont.crosshair[index], x + lengthdir_x(64, ang), y + lengthdir_y(64, ang), 1, 1, 0, UberCont.opt_cursorcol, index == global.index ? 1 : 0.5)
-        }
-
+		if !instance_exists(PauseImage) {
+	        var ang = KeyCont.dir_fire[index]
+			
+	        if !UberCont.opt_keyboard or index != global.index or is_gamepad(index) {
+	            draw_sprite_ext(sprCrosshair, KeyCont.crosshair[index], x + lengthdir_x(64, ang), y + lengthdir_y(64, ang), 1, 1, 0, UberCont.opt_cursorcol, index == global.index ? 1 : 0.5)
+	        }
+		}
+		
         if KeyCont.players > 1 {
             draw_sprite(sprPlayerIndicator, index, clamp(x, view_xview + 8, view_xview + view_width - 8), clamp(y - 8, view_yview + 16, view_yview + view_height - 4))
         }
@@ -42,17 +45,21 @@ with Player {
 }
 
 if darkness {
-    if !instance_exists(GenCont) && !UberCont.paused {
+	if global.time % 5 == 0 && surface_exists(dark) &&
+	(surface_get_width(dark) != view_width or surface_get_height(dark) != view_height) {
+		surface_resize(dark, view_width, view_height)
+	}
+	
+	if !instance_exists(GenCont) && !UberCont.paused {
         scrDarkness()
     }
 
-    draw_set_blend_mode(bm_subtract)
+    gpu_set_blendmode(bm_subtract)
 
-    if surface_exists(dark) && !UberCont.getpauseimg {
+    if surface_exists(dark)
         draw_surface_ext(dark, view_xview, view_yview, 1, 1, 0, c_white, 1)
-    }
 
-    draw_set_blend_mode(bm_normal)
+    gpu_set_blendmode(bm_normal)
 }
 
 if instance_exists(Player) {

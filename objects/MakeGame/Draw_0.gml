@@ -1,4 +1,38 @@
+if disclaimer {
+	
+	draw_set_halign(fa_center)
+    draw_set_valign(fa_center)
+	
+	var str = (get_timer() / 33333) % 60 > 30 ? "@r!!!" : "@s!!!"
+	
+	draw_set_font(fntM1)
+    draw_text_nt(view_width / 2, view_height / 2, str + " " + loc("DISCLAIMER") + " " + str + loc("@w###THIS IS AN UNOFFICIAL FAN-MADE RECREATION,#NOT AFFILIATED WITH @yVLAMBEER@w.##IT IS DISTRIBUTED FREELY ON ITCH.IO#AND IS OPEN SOURCE ON GITHUB.##IF YOU PAID OR SEE ADS, IT'S RECOMMENDED TO#UNINSTALL THE APPLICATION FOR YOUR OWN SAFETY."))
+	
+	disclaimer ++
+	
+	if disclaimer >= 90 {
+		str = loc("CLICK TO CONTINUE")
+		
+		if disclaimer == 90 {
+			snd_play(sndHover)
+			str = "@w" + str
+		}
+		else str = "@s" + str
+		
+		draw_text_nt(view_width / 2, view_height - 56 + (disclaimer == 90) * 2, str)
+		
+		if mouse_ui_clicked() or keyboard_check_pressed(vk_anykey) {
+			save_set_val("etc", "disclaimer", 1)
+			event_perform(ev_alarm, 0)
+		}
+	}
+	
+	exit
+}
+
 if loading {
+	camera_set_pos(0, 0)
+	
     try {
         var xx = view_width / 2
         var yy = view_height / 2
@@ -19,17 +53,22 @@ if loading {
             if posy == 8 snd_play(sndCrownAppear)
 
             if posy >= 0 posy -= 8
-        } else {
+        }
+		else {
             draw_set_color(c_dkgray)
             pos++
         }
-
-        draw_text_nt(xx + 48, yy + 32 + posy, "@s" + loc("NO") + (UberCont.opt_gamepad ? " [O]" : "") + "@w")
-        draw_text_shadow(xx - 48, yy + 32 + posy, loc("YES") + (UberCont.opt_gamepad ? " [X]" : ""))
+		
+        draw_text_nt(xx + 48, yy + 32 + posy, "@s" + loc("NO") + "@w")
+        draw_text_shadow(xx - 64, yy + 32 + posy, loc("YES"))
+		
+		draw_gamepad_button(gp_face2, 0, xx + 28, yy + 36 + posy)
+		draw_gamepad_button(gp_face1, 0, xx - 42, yy + 36 + posy)
 
         draw_set_color(c_white)
 
         draw_set_halign(fa_left)
+        draw_set_valign(fa_top)
 
         with cont {
             var s = skills
@@ -53,7 +92,7 @@ if loading {
         var p = gamepad_button_check_pressed(0, gp_face1) - gamepad_button_check_pressed(0, gp_face2)
 
         if mouse_check_button_released(mb_left) or p != 0 {
-            if point_in_circle(mx, my, xx + 48, yy + 40, 16) or p == -1 {
+            if point_in_circle(mx, my, xx + 48, yy + 28, 16) or p == -1 {
                 // yesn't
                 file_delete("gamestate.dat")
                 room_goto(romGame)
@@ -64,7 +103,8 @@ if loading {
                 global.hardmode = 0
 
                 instance_destroy()
-            } else if point_in_circle(mx, my, xx - 48, yy + 40, 16) or p == 1 {
+            }
+			else if point_in_circle(mx, my, xx - 48, yy + 28, 16) or p == 1 {
                 // yes
                 room_goto(romGame)
                 instance_destroy()

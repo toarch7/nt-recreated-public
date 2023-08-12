@@ -26,6 +26,5 @@ with UberCont {
 	playerinstances[$ string(global.index)] = inst
 }
 
-lockstep_stop = 0
-
-draw_enable_drawevent(true)
+if network_is_locked()
+	network_unlock()

@@ -9,7 +9,7 @@ song = custom_sound_check(song)
 amb = custom_sound_check(amb)
 
 if !snd_is_playing(musCredits) {
-    snd_play(song)
+    snd_play_music(song)
 
     alarm[0] = audio_sound_length(song) * 30
 
@@ -28,7 +28,7 @@ if (wantmusic == 0) {
     UberCont.opt_ambvol = 0
 }
 
-audio_master_gain(UberCont.opt_sfxvol)
+audio_master_gain(UberCont.opt_volume)
 audio_sound_gain(song, UberCont.opt_musvol, 0)
 audio_sound_gain(amb, UberCont.opt_ambvol, 0)
 

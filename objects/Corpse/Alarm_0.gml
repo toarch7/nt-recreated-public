@@ -1,4 +1,7 @@
 if !instance_exists(Portal) && !instance_exists(GenCont) && !scr_check_enemies() && GameCont.area != 107 && !instance_exists(Menu) && !instance_exists(RadMaggotChest) && !instance_exists(BecomeScrapBoss) && !(GameCont.area == 106 && GameCont.subarea == 3) && !(GameCont.area == 7 && GameCont.subarea == 3) && instance_exists(Player) {
+	if instance_exists(TutCont)
+		exit
+	
     if !instance_exists(CrownGuardian) && !instance_exists(VaultStatue) && !instance_exists(CrownPickup) {
         if GameCont.area {
             if GameCont.area != 107 {

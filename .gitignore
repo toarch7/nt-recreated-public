@@ -16,3 +16,7 @@ sounds/*/*
 !sprites/sprite1337/*
 
 scripts/scrSendDailyData/*
+
+*.dll
+
+merge-tool.js

@@ -1,1 +1,1 @@
-hp = 0
+event_perform(ev_collision, Player)

@@ -19,9 +19,12 @@ if instance_exists(GameCont) {
 if visible && image_index >= 1 {
     if instance_exists(Credits) {
         with Credits visible = 0
-    } else alarm[1] = 2
+    }
+	else alarm[1] = 2
 
     visible = 0
-} else if image_index < 1 {
-    if alarm[0] > 10 alarm[0] = 10
+}
+else if image_index < 1 {
+    if alarm[0] > 10
+		alarm[0] = 10
 }

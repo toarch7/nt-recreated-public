@@ -15,10 +15,10 @@ if instance_exists(GenCont) {
 }
 
 if instance_exists(MenuGen) {
-    goal = 90
+    goal = 50
 }
 
-if save_get_val("game", "tutorial", 1) {
+if instance_exists(TutCont) {
     goal = 1
 }
 

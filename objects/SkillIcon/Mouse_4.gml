@@ -6,7 +6,7 @@ if selected {
 }
 else {
     LevCont.splat = 1
-    snd_play(sndMenuSelect)
+    snd_play(sndHover)
     
 	with SkillIcon {
 		selected = (id == other.id)

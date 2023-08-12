@@ -1,7 +1,7 @@
 if !can_pick exit
 
 if KeyCont.press_pick[p] && other.visible && other.id == instance_nearest(x, y, WepPickup) {
-    if !curse or(curse && other.curse) or!bwep {
+    if !curse or (curse && other.curse) or !bwep {
         instance_create(x, y, WepSwap)
 
         if other.wep == 115 {
@@ -12,9 +12,9 @@ if KeyCont.press_pick[p] && other.visible && other.id == instance_nearest(x, y, 
             else snd_play(sndWeaponPickup)
         }
 
-        if instance_exists(TutorialCont) && TutorialCont.pos == 1 && !TutorialCont.doin {
-            TutorialCont.alarm[0] = 30
-            TutorialCont.doin = 1
+        if instance_exists(TutCont) && TutCont.pos == 1 && !TutCont.doin {
+            TutCont.alarm[0] = 30
+            TutCont.doin = 1
         }
 
         if !bwep {
@@ -57,13 +57,13 @@ if KeyCont.press_pick[p] && other.visible && other.id == instance_nearest(x, y, 
 
 if other.ammo and wep_type[other.wep] {
     if GameCont.crown != 13 {
-        ammo[wep_type[other.wep]] += typ_ammo[other.wep_type[other.wep]] * 2
-        if ammo[wep_type[other.wep]] > typ_amax[other.wep_type[other.wep]] ammo[wep_type[other.wep]] = typ_amax[other.wep_type[other.wep]]
+        ammo[wep_type[other.wep]] += typ_ammo[wep_type[other.wep]] * 2
+        if ammo[wep_type[other.wep]] > typ_amax[wep_type[other.wep]] ammo[wep_type[other.wep]] = typ_amax[wep_type[other.wep]]
 
         if is_me {
             dir = instance_create(x, y, PopupText)
             dir.mytext = "+" + loc_sfmt("% " + loc(typ_name[wep_type[other.wep]]), typ_ammo[wep_type[other.wep]] * 2)
-            if ammo[wep_type[other.wep]] = typ_amax[other.wep_type[other.wep]] dir.mytext = loc_sfmt("MAX %", loc(typ_name[wep_type[other.wep]]))
+            if ammo[wep_type[other.wep]] = typ_amax[wep_type[other.wep]] dir.mytext = loc_sfmt("MAX %", loc(typ_name[wep_type[other.wep]]))
         }
 
         other.ammo = 0

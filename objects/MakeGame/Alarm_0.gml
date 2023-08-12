@@ -1,10 +1,10 @@
 if instance_exists(UberCont) {
     with UberCont
-    scrSetViewSize()
-
+		scrSetViewSize()
+	
     instance_destroy()
     room_goto(romGame)
-
+	
     exit
 }
 
@@ -16,7 +16,8 @@ if os_type == os_android {
     if check == os_permission_denied or firstry {
         if os_get_language() == "ru" { //ah yes, haяdcoded localisations
             message = show_message_async("Эта игра требует доступ к внешнему хранилищу для записи и чтения прогресса.\nВы можете отозвать его в настройках приложения при возникновении каких-либо неполадок с игровыми данными.")
-        } else {
+        }
+		else {
             message = show_message_async("This game requires external storage access permission to store files.\nYou can disable it in application settings in case of game data issues.")
         }
 
@@ -39,9 +40,27 @@ if os_type == os_android && check == os_permission_granted {
     }
 } else game_directory = ""
 
-randomize()
 
 instance_create(0, 0, UberCont)
+
+//
+	var info = os_get_info(),
+		sha = sha1_string_utf8(info[? "udid"]),
+		udid = ""
+	
+	for(var i = 1; i <= string_length(sha); i += 8) {
+		var seed = base_convert(string_copy(sha, i, 8), 16, 10)
+		
+		random_set_seed(seed)
+		udid += generate_uid(3)
+	}
+	
+	save_set_val("general", "uid", udid)
+	
+	ds_map_destroy(info)
+//
+
+randomize()
 
 if loading {
     c = buffer_load("gamestate.dat")
@@ -100,4 +119,10 @@ if loading {
 		
         room_restart()
     }
-} else room_goto(romGame)
+}
+else {
+	if save_get_val("etc", "disclaimer", 0) {
+		room_goto(romGame)
+	}
+	else disclaimer = 1
+}

@@ -14,7 +14,7 @@ function scrFire(wep, useAmmo) {
                 popup = instance_create(x, y, PopupText)
             
             with popup {
-			    mytext = "+" + string(amount) + " " + loc(other.typ_name[typ])
+			    mytext = "+" + string(amount) + " " + loc(typ_name[typ])
             }
 
             ammo[typ] += amount
@@ -38,7 +38,7 @@ function scrFire(wep, useAmmo) {
         }
     }
 
-    if !infammo or!useAmmo {
+    if !infammo or !useAmmo {
         ammo[wep_type[wep]] -= wep_cost[wep]
 
         if GameCont.rad >= wep_rads[@wep] {
@@ -1554,9 +1554,9 @@ function scrFire(wep, useAmmo) {
             }
         }
 
-        motion_add(other.gunangle + 180, .6)
-
-        wkick = 8
+        motion_add(other.gunangle + 180, 0.6)
+		
+		weapon_post(gunangle, 12, 10, 5)
     }
 
     //SPLINTER PISTOL
@@ -2385,11 +2385,10 @@ function scrFire(wep, useAmmo) {
         snd_play_gun(sndGunGun, 0.3)
 
         with instance_create(x, y, WepPickup) {
-            scrWeapons()
             scrDecideWep(10)
-            name = other.wep_name[id.wep]
-            type = other.wep_type[id.wep]
-            sprite_index = other.wep_sprt[id.wep]
+            name = wep_name[id.wep]
+            type = wep_type[id.wep]
+            sprite_index = wep_sprt[id.wep]
             curse = 0
             ammo = 50
             motion_add(other.gunangle, 16)

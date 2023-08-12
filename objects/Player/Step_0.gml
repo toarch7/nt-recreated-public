@@ -12,9 +12,9 @@ if KeyCont.press_swap[index] && bwep != 0 {
         }
     }
 
-    if instance_exists(TutorialCont) && TutorialCont.pos == 2 && !TutorialCont.doin {
-        TutorialCont.alarm[0] = 30
-        TutorialCont.doin = 1
+    if instance_exists(TutCont) && TutCont.pos == 2 && !TutCont.doin {
+        TutCont.alarm[0] = 30
+        TutCont.doin = 1
     }
 
     scrSwapWeps()
@@ -27,21 +27,20 @@ if KeyCont.press_swap[index] && bwep != 0 {
 }
 
 if spirit {
-    spirit_y += 0.1
+    spirit_anim += 0.1
 
-    if spirit_y >= 6.2 spirit_y = 0
-} else if skill_get(27) && spirit_index < 8 {
+    if spirit_anim >= 6.2
+		spirit_anim = 0
+}
+else if skill_get(27) && spirit_index < 8 {
     spirit_index += 0.4
 }
 
-if (instance_exists(GenCont) or(instance_exists(SitDown) && SitDown.sit) or instance_exists(Cinematic) or instance_exists(LevCont)) {
-    speed = 0
-    exit
-} else if instance_exists(SpiralCont) && !instance_exists(Credits) && !instance_exists(NothingSpiral) {
-    with SpiralCont {
-        instance_destroy()
-    }
-}
+if (instance_exists(GenCont)
+or (instance_exists(SitDown) && SitDown.sit)
+or instance_exists(Cinematic)
+or instance_exists(LevCont))
+	{ speed = 0; exit}
 
 if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
     if !roll && canwalk {
@@ -54,9 +53,9 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
                 if speed > spd speed = spd
             }
 
-            if instance_exists(TutorialCont) && TutorialCont.pos == 0 && !TutorialCont.doin {
-                TutorialCont.alarm[0] = 30
-                TutorialCont.doin = 1
+            if instance_exists(TutCont) && TutCont.pos == 0 && !TutCont.doin {
+                TutCont.alarm[0] = 30
+                TutCont.doin = 1
             }
         }
 
@@ -256,9 +255,9 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
         gunangle = KeyCont.dir_fire[index]
     } else aimassist_wait--
 
-    if KeyCont.press_fire[index] or(KeyCont.hold_fire[index] && (wep_auto[wep] or race == 7)) or clicked or(KeyCont.press_spec[index] && (race == 5 or race == 6 or race == 7 or race == 14)) {
+    if KeyCont.press_fire[index] or (KeyCont.hold_fire[index] && (wep_auto[wep] or race == 7)) or clicked or (KeyCont.press_spec[index] && (race == 5 or race == 6 or race == 7 or race == 14)) {
         if KeyCont.aimassist[index] && wep_type[wep] != 0 && is_undefined(global.wep_no_assist[$ string(wep)]) {
-            var _aim_target = noone
+            var aim_target = noone
             var _raycasted = 1
 
             with instance_create(x, y, AimAssist) {
@@ -279,21 +278,21 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
                     }
                 }
 
-                _aim_target = collision_line(x, y, x2, y2, hitme, 0, 1)
+                aim_target = collision_line(x, y, x2, y2, hitme, 0, 1)
 
                 for (var i = 0; i < array_length(l); i++) {
                     instance_activate_object(l[i])
                 }
             }
 
-            if !_aim_target {
-                _aim_target = instance_nearest(x, y, enemy)
+            if !aim_target {
+                aim_target = instance_nearest(x, y, enemy)
             }
 
-            if see_object(_aim_target, id) && _aim_target.object_index != Nothing && _aim_target.object_index != Nothing2 {
-                var _d = point_direction(x, y, _aim_target.x, _aim_target.y)
+            if see_object(aim_target, id) && aim_target.object_index != Nothing && aim_target.object_index != Nothing2 {
+                var _d = point_direction(x, y, aim_target.x, aim_target.y)
 
-                if _aim_target.x > x - 240 && _aim_target.y > y - 180 && _aim_target.x < x + 240 && _aim_target.y < y + 180 {
+                if aim_target.x > x - 240 && aim_target.y > y - 180 && aim_target.x < x + 240 && aim_target.y < y + 180 {
                     if abs(angle_difference(gunangle, _d)) <= 32 {
                         gunangle = _d
                     }
@@ -303,8 +302,8 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
     }
 
     if !(race == 2 && KeyCont.hold_spec[index]) && hp >= 0 {
-        var enoughrads = infammo or(!wep_rads[wep] or(wep_rads[wep] > 0 && GameCont.rad >= wep_rads[wep]))
-        var enoughammo = infammo or(!wep_cost[wep] or ammo[wep_type[wep]] >= wep_cost[wep])
+        var enoughrads = infammo or (!wep_rads[wep] or (wep_rads[wep] > 0 && GameCont.rad >= wep_rads[wep]))
+        var enoughammo = infammo or (!wep_cost[wep] or ammo[wep_type[wep]] >= wep_cost[wep])
 
         if KeyCont.press_fire[p] && race != 7 && !wep_auto[wep] && ((wep_type[wep] == 0 or wep_type[wep] == 1) or can_shoot) && reload < 10 {
             clicked = 1
@@ -350,16 +349,16 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
         }
 
         var yvmobilepopping = race == 6 && (!UberCont.opt_gamepad && !UberCont.opt_keyboard) && KeyCont.activeforever[index] && KeyCont.press_fire[index]
-        if can_shoot && !shielding && enoughammo && enoughrads && (!yvmobilepopping or!scrYVCanPop(wep)) && (clicked or KeyCont.press_fire[index] or(!yvmobilepopping && KeyCont.hold_fire[index] && (wep_auto[wep] or race == 7))) {
+        if can_shoot && !shielding && enoughammo && enoughrads && (!yvmobilepopping or !scrYVCanPop(wep)) && (clicked or KeyCont.press_fire[index] or (!yvmobilepopping && KeyCont.hold_fire[index] && (wep_auto[wep] or race == 7))) {
             scrFire(wep, 1)
 
             clicked = 0
         }
 
-        var enoughrads = infammo or(!wep_rads[bwep] or(wep_rads[bwep] > 0 && GameCont.rad >= wep_rads[bwep]))
-        var enoughammo = infammo or(!wep_cost[bwep] or ammo[wep_type[bwep]] >= wep_cost[bwep])
+        var enoughrads = infammo or (!wep_rads[bwep] or (wep_rads[bwep] > 0 && GameCont.rad >= wep_rads[bwep]))
+        var enoughammo = infammo or (!wep_cost[bwep] or ammo[wep_type[bwep]] >= wep_cost[bwep])
 
-        if race == 7 && enoughammo && enoughrads && KeyCont.hold_spec[index] && bcan_shoot && ammo[wep_type[bwep]] >= wep_cost[bwep] && ((wep_rads[@wep] && GameCont.rad >= wep_rads[@wep]) or!wep_rads[@wep]) {
+        if race == 7 && enoughammo && enoughrads && KeyCont.hold_spec[index] && bcan_shoot && ammo[wep_type[bwep]] >= wep_cost[bwep] && ((wep_rads[@wep] && GameCont.rad >= wep_rads[@wep]) or !wep_rads[@wep]) {
             scrSwapWeps()
             scrFire(wep, 1)
 

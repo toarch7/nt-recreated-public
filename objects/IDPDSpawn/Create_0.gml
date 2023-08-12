@@ -21,7 +21,7 @@ alarm[0] = 40 + instance_number(IDPDSpawn) * 3
 
 elite = 0
 
-if (GameCont.loops > 1 && GameCont.area == 0) or(GameCont.loops && GameCont.area != 0) {
+if (GameCont.loops > 1 && GameCont.area == 0) or (GameCont.loops && GameCont.area != 0) {
     elite = !rng_random(1, 5)
 }
 

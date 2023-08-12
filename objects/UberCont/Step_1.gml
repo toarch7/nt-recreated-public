@@ -1,26 +1,26 @@
 /// @description Pause the game
 
-if want_pause && instance_exists(Player) && !instance_exists(GenCont) {
-    want_pause = 0
+if want_pause {
+	want_pause --
 	
-    if !bossintro
-        scrMakePauseButtons()
-
-    with MobileUI
-		index = -1
+	if !want_pause && instance_exists(Player) && !instance_exists(GenCont) {
+	    want_pause = 0
 	
-    instance_deactivate_all(1)
-    instance_activate_object(BackCont)
-    instance_activate_object(GameCont)
-    instance_activate_object(TopCont)
-    instance_activate_object(PauseButton)
-    instance_activate_object(CoopController)
-    instance_activate_object(MusCont)
-    instance_activate_object(Console)
+	    if !bossintro
+	        scrMakePauseButtons()
 
-    with PauseButton {
-        hover = 5
-        visible = 1
-        depth --
-    }
+	    with MobileUI
+			index = -1
+	
+	    instance_deactivate_all(1)
+		
+	    instance_activate_object(BackCont)
+	    instance_activate_object(GameCont)
+	    instance_activate_object(TopCont)
+	    instance_activate_object(PauseButton)
+	    instance_activate_object(CoopController)
+	    instance_activate_object(MusCont)
+	    instance_activate_object(Console)
+		instance_activate_object(PauseImage)
+	}
 }

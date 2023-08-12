@@ -1,6 +1,7 @@
 if select == 0 {
     scrDrawStats()
-} else scrDrawCharStats()
+}
+else scrDrawCharStats()
 
 if keyboard_check_pressed(vk_alt) {
     diy = 2

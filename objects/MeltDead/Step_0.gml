@@ -5,7 +5,7 @@ if KeyCont.press_spec[p] = 1 {
         y = creator.y
     }
     with Corpse {
-        if image_speed = 0 and(instance_number(enemy) > 0 or instance_exists(Portal)) and x > view_xview and x < view_xview + view_width and y > view_yview and y < view_yview + view_height {
+        if image_speed = 0 and (instance_number(enemy) > 0 or instance_exists(Portal)) and x > view_xview and x < view_xview + view_width and y > view_yview and y < view_yview + view_height {
 
             snd_play(sndExplosion)
             snd_play(sndCorpseExploDead)

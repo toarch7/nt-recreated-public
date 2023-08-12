@@ -1,8 +1,8 @@
-function generate_uid(len = 9) {
+function generate_uid(len = 10) {
     var str = ""
 
     repeat len {
-        str += choose("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "z", "x", "c", "v", "b", "n", "m")
+        str += chr(choose(irandom_range(97, 122), irandom_range(65, 90), irandom_range(48, 57)))
     }
 
     return str

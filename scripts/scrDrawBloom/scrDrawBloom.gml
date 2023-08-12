@@ -1,5 +1,5 @@
 function scrDrawBloom() {
-    draw_set_blend_mode(bm_add)
+    gpu_set_blendmode(bm_add)
 
     with NothingBeam {
         if !charge {
@@ -173,5 +173,5 @@ function scrDrawBloom() {
     with(PlasmaTrail)
     draw_sprite_ext(sprite_index, - 1, x, y, 2, 2, image_angle, c_white, 0.1)
 
-    draw_set_blend_mode(bm_normal)
+    gpu_set_blendmode(bm_normal)
 }

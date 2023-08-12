@@ -46,7 +46,7 @@ if instance_exists(target) and roll = 0 {
                 gunangle = direction
                 if hspeed > 0 right = 1
                 else if hspeed < 0 right = -1
-            } else if random(5 + instance_number(PopoNade) * 3) < 1 and grenades > 0 and freeze > 40 and((point_distance(lastx, lasty, target.x, target.y) < 96 and point_distance(x, y, lastx, lasty) > 64) or random(12) < 1) {
+            } else if random(5 + instance_number(PopoNade) * 3) < 1 and grenades > 0 and freeze > 40 and ((point_distance(lastx, lasty, target.x, target.y) < 96 and point_distance(x, y, lastx, lasty) > 64) or random(12) < 1) {
                 //GRENADE
                 grenades -= 1
                 gunangle = point_direction(x, y, lastx, lasty)
