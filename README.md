@@ -1,61 +1,50 @@
 # Nuclear Throne Recreated
-Open source rebuild of Nuclear Throne and [mobile port](https://toncho.itch.io/nuclear-throne-mobile/)
+Open source rebuild and [android port](https://toncho.itch.io/nuclear-throne-mobile/) of Nuclear Throne.
 
-[Nuclear Throne](https://nuclearthrone.com) is a game owned by [Vlambeer](https://vlambeer.com/). All rights reserved.
+[Nuclear Throne](https://nuclearthrone.com) is a game created and owned by [Vlambeer](https://vlambeer.com/). All rights reserved.
 
-Primary reason why this exists is mobile support - allowing much wider range of people to experience Nuclear Throne, which is being an amazing game.
+Recreation is based off decompiled version of update 19th with 99%+ of everything from present version being restored. Primary reason of this' existence for me is to have fun, - but having fun all only by yourself is lame, so now this project allows much wider range of people experience Nuclear Throne, which is being an amazing game, on their mobile devices.
 
-Recreation is based off decompiled version of update 19th with 99%+ of everything from modern versions being reimplemented on top.
-
-The source is public for educational and modding purposes.
+The public source is for *educational* and modding purposes.
 Using [GMEdit](https://yellowafterlife.itch.io/gmedit) is recommended for convenient exploration.
 
-# Legal and foreword to building
-Sadly you can't run this project from source, since the actual resources for sprites and sounds are not included due to legal reasons. Vlambeer respect work of their team and contributors and can't allow raw game files being out somewhere on internet.
-
-It's not allowed to provide any alternative downloads and the tool for extracting resources and packing them back is not ready yet.
-
-Not to mention that the resources are the only thing that's prohibited from being public. You can make your workarounds from here.
-
 # Building
- Building from this source is only possible with GameMakerStudio 2.
+ Building from this source is only possible with GameMaker (aka GameMaker Studio 2).
+ 
+ As of this moment you have to extract all resources manually from your own copy of the game.
+ Please do not use any official build of the recreation for assets extraction.
 
 ## Android
-(Any config should work actually, this is just how I have set it up for releasing builds)
+ For building on modern versions of the engine you can follow an [official article](https://help.yoyogames.com/hc/en-us/articles/115001368727-Setting-Up-For-Android).
 
- * Build Tools: 28.0.3
- * Support Library: 28.0.1
- * Target SDK: 28
- * Minimum SDK: 16,
- * Compile SDK: 28
- * NDK: r23 or r24
-
-If you'd like to be able to access external storage, downgrade your IDE and Runtime the following:
+Downgrade your IDE and Runtime the following way
  * IDE: v2.3.7.606
  * Runtime: 2.3.7.476
 
-Newer versions will follow newest Google Play requirements, not allowing to use deprecated SDK.
-
-Download SDK & NDK using [AndroidStudio](https://developer.android.com/studio/)
+Download all necessary build tools from [AndroidStudio](https://developer.android.com/studio/).
+In IDE, set these build params
+ * Build Tools: 28.0.3
+ * ~~Support Library: 28.0.1~~
+ * Target SDK: 28
+ * Minimum SDK: 16
+ * Compile SDK: 28
+ * NDK: r23 or r24
 
 ## Other platforms
- * Windows doesn't require anything special. The game even has support for Mouse + Keyboard controls.
  * [Ubuntu](https://help.yoyogames.com/hc/en-us/articles/235186168-Setting-Up-For-Ubuntu)
- * [iOS](https://help.yoyogames.com/hc/en-us/articles/115001368747-Setting-Up-For-iOS-Including-iPadOS-) (no official builds were made to this)
- * [Mac](https://help.yoyogames.com/hc/en-us/articles/235186128-Setting-Up-For-macOS) (there too)
-
-(actually could've just said you can follow official Setting Up guides by YoYo smh)
+ * [iOS](https://help.yoyogames.com/hc/en-us/articles/115001368747-Setting-Up-For-iOS-Including-iPadOS-)
+ * [Mac](https://help.yoyogames.com/hc/en-us/articles/235186128-Setting-Up-For-macOS)
 
 # Contributing
- Contributions are welcomed, unless your changes interfere recreation's purity too much (meaning, adding new content is undesired - instead you should create mods).
+ Contributions are welcomed, unless your changes boldly dismatch contents of the original game.
  
- You can also credit yourself [here](https://github.com/toarch7/nt-recreated-public/blob/main/objects/Credits/Create_0.gml) if you have done any substantial changes.
+ You add youself to the credits [here](https://github.com/toarch7/nt-recreated-public/blob/main/objects/Credits/Create_0.gml) if any substantial changes were made.
  
- You can help not only with the code, but also by improving or adding localizations. If you've contributed to a localization, mention yourself in credits accordingly.
+ **You can help not only by contributing code, but also by improving or adding localizations.** If you've contributed to a localization, mention yourself in credits accordingly.
 
-# Distributing
- Requirements of usermade builds weren't strictly stated, but the general rules are:
- * No form of monetary barrier should exist to access the game, content and source
- * You should not remove any Vlambeer or Nuclear Throne branding
- * You must clearly state that this is not an official build of Nuclear Throne and this is not a work of collaboration with Vlambeer
- * Distribuing the game with official assets is purely on your own risk. Vlambeer won't take actions unless you do something really weird.
+# Libraries used
+ [Input 3](https://github.com/JujuAdams/Input)
+
+ [native_cursor](https://github.com/YAL-GameMaker/native_cursor)
+
+ [execute_shell_simple](https://github.com/YAL-GameMaker/execute_shell_simple)
