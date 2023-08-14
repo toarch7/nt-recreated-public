@@ -16,28 +16,32 @@
   "androidProps": true,
   "installdir": "",
   "files": [
-    {"filename":"VolumeControl.ext","origname":"","init":"","final":"","kind":4,"uncompress":false,"functions":[
+    {"filename":"YYExtra.ext","origname":"","init":"","final":"","kind":4,"uncompress":false,"functions":[
         {"externalName":"IsKitKat","kind":4,"help":"IsKitKat()","hidden":false,"returnType":2,"argCount":0,"args":[],"resourceVersion":"1.0","name":"IsKitKat","tags":[],"resourceType":"GMExtensionFunction",},
         {"externalName":"SetVolumeControl","kind":4,"help":"SetVolumeControl(val)","hidden":false,"returnType":2,"argCount":0,"args":[
             2,
           ],"resourceVersion":"1.0","name":"SetVolumeControl","tags":[],"resourceType":"GMExtensionFunction",},
+        {"externalName":"URLOpen","kind":4,"help":"URLOpen(url)","hidden":false,"returnType":2,"argCount":0,"args":[
+            1,
+          ],"resourceVersion":"1.0","name":"URLOpen","tags":[],"resourceType":"GMExtensionFunction",},
       ],"constants":[],"ProxyFiles":[],"copyToTargets":8,"order":[
-        {"name":"IsKitKat","path":"extensions/VolumeControl/VolumeControl.yy",},
-        {"name":"SetVolumeControl","path":"extensions/VolumeControl/VolumeControl.yy",},
+        {"name":"IsKitKat","path":"extensions/YYExtra/YYExtra.yy",},
+        {"name":"SetVolumeControl","path":"extensions/YYExtra/YYExtra.yy",},
+        {"name":"URLOpen","path":"extensions/YYExtra/YYExtra.yy",},
       ],"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMExtensionFile",},
-    {"filename":"VolumeControl.gml","origname":"","init":"","final":"","kind":2,"uncompress":false,"functions":[
+    {"filename":"YYExtra.gml","origname":"","init":"","final":"","kind":2,"uncompress":false,"functions":[
         {"externalName":"_GetPickedFile","kind":2,"help":"GetPickedFile()","hidden":false,"returnType":2,"argCount":0,"args":[],"resourceVersion":"1.0","name":"GetPickedFile","tags":[],"resourceType":"GMExtensionFunction",},
         {"externalName":"_FilePickerCleanup","kind":2,"help":"","hidden":true,"returnType":2,"argCount":0,"args":[],"resourceVersion":"1.0","name":"FilePickerCleanup","tags":[],"resourceType":"GMExtensionFunction",},
       ],"constants":[],"ProxyFiles":[],"copyToTargets":-1,"order":[
-        {"name":"GetPickedFile","path":"extensions/VolumeControl/VolumeControl.yy",},
-        {"name":"FilePickerCleanup","path":"extensions/VolumeControl/VolumeControl.yy",},
+        {"name":"GetPickedFile","path":"extensions/YYExtra/YYExtra.yy",},
+        {"name":"FilePickerCleanup","path":"extensions/YYExtra/YYExtra.yy",},
       ],"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMExtensionFile",},
   ],
   "classname": "",
   "tvosclassname": null,
   "tvosdelegatename": null,
   "iosdelegatename": "",
-  "androidclassname": "VolumeControl",
+  "androidclassname": "YYExtra",
   "sourcedir": "",
   "androidsourcedir": "",
   "macsourcedir": "",
@@ -71,7 +75,7 @@
     "path": "folders/Extensions.yy",
   },
   "resourceVersion": "1.2",
-  "name": "VolumeControl",
+  "name": "YYExtra",
   "tags": [],
   "resourceType": "GMExtension",
 }
