@@ -6,7 +6,7 @@
     "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "string_split",
+  "name": "url_encode",
   "tags": [],
   "resourceType": "GMScript",
 }

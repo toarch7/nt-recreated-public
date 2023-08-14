@@ -1,6 +1,3 @@
-/// @description string_split_list(string, delimiter)
-/// @param string
-/// @param  delimiter
 function string_split_list(str, delimiter) {
 	ds_list_clear(global.string_split_list)
 	

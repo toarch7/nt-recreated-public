@@ -59,6 +59,9 @@ mouse_active = true
 mx_last = 0
 my_last = 0
 
+mousex = 0
+mousey = 0
+
 drawx = 0
 drawy = 0
 startdrawy = 0
@@ -228,6 +231,11 @@ category_set = function (_category, _queue = true) {
 			}
 			else item.visible = true
 		}
+	}
+	
+	if !global.desktop {
+		mousex = -1000
+		mousey = -1000
 	}
 	
 	snd_play(_category == OptionCategory.Main ? sndMenuOptions : sndClick)

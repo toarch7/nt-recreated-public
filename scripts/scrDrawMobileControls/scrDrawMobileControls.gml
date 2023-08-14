@@ -49,7 +49,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
                 col = make_color_rgb(125, 253, 13)
             }
 
-            var c = instance_exists(TopCont) ? TopCont.crosshair : UberCont.opt_crosshair
+            var c = UberCont.opt_crosshair
 
             draw_sprite_ext(sprMobileControlJoystick, 0, x, y, scale, scale, 0, c_white, 1)
             draw_sprite_ext(sprCrosshairBig, c, x + xx, y + yy, scale / 2, scale / 2, 0, col, 1)

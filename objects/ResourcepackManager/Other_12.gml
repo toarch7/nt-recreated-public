@@ -14,7 +14,7 @@ var m = 0.8,
 	stepX = width + 2,
 	stepY = height + 4
 
-draw_set_font(fontSmall)
+draw_set_font(fntSmall)
 
 DrawAlignDefault;
 

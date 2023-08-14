@@ -16,7 +16,7 @@ for (var i = 0; i <= 4; i++) {
 
 snd_stop(sndLogoLoop)
 
-instance_create(view_xview + 48, view_yview + view_height - 48, ButtonDiscord)
-instance_create(view_xview + 48, view_yview + view_height - 48, ButtonAchievements)
+instance_create(0, 0, ButtonDiscord)
+instance_create(0, 0, ButtonAchievements)
 
 instance_destroy()

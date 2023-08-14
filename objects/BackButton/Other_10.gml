@@ -50,30 +50,38 @@ if instance_exists(DailyList) {
     instance_destroy()
 }
 else if instance_exists(Menu) {
-    with all {
-        if object_index != MusCont && object_index != UberCont && object_index != Console
-			instance_destroy(id, 0)
-    }
-	
-	camera_set_pos(0, 0)
-	
-    with instance_create(0, 0, Logo)
-		event_perform(ev_alarm, 1)
-
-    UberCont.daily_run = 0
-    UberCont.weekly_run = 0
-	
-    UberCont.playerinstances = {}
-	
-    with MusCont {
-        snd_stop(song)
-        snd_stop(amb)
-        event_perform(ev_create, 0)
-    }
-	
-    instance_create(0, 0, SpiralCont)
-	
-    instance_destroy()
+	if !Menu.loadout {
+	    with all {
+	        if object_index != MusCont && object_index != UberCont && object_index != Console
+				instance_destroy(id, 0)
+	    }
+		
+		camera_set_pos(0, 0)
+		
+	    with instance_create(0, 0, Logo)
+			event_perform(ev_alarm, 1)
+		
+	    UberCont.daily_run = 0
+	    UberCont.weekly_run = 0
+		
+	    UberCont.playerinstances = {}
+		
+	    with MusCont {
+	        snd_stop(song)
+	        snd_stop(amb)
+	        event_perform(ev_create, 0)
+	    }
+		
+	    instance_create(0, 0, SpiralCont)
+		
+	    instance_destroy()
+	}
+	else {
+		with Menu {
+			loadout = false
+			gpadmode = false
+		}
+	}
 }
 
 if instance_exists(DrawStats) {

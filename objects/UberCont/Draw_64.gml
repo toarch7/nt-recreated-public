@@ -23,13 +23,13 @@ if draw_unlock {
 if !instance_exists(Player) && room == romGame {
     draw_set_valign(fa_center)
     draw_set_color(c_dkgray)
-    draw_set_font(fontSmall)
+    draw_set_font(fntSmall)
 
     if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(Vlambeer)
 	&& !instance_exists(StatChar) && !instance_exists(CharSelect) && !instance_exists(LevCont)
 	&& !instance_exists(UnlockScreen) && !bossintro && !(instance_exists(Credits) && !instance_exists(GameCont)) {
-        draw_set_halign(fa_left)
-        draw_text_shadow(4, view_height - 4, "v" + string(GAME_BUILD))
+        draw_set_halign(fa_right)
+        draw_text_shadow(view_width - 4, view_height - 4, "v" + string(GAME_BUILD))
     }
 
     draw_set_valign(fa_top)
@@ -39,7 +39,7 @@ if !instance_exists(Player) && room == romGame {
 else if global.custom_seed {
     draw_set_valign(fa_center)
     draw_set_color(c_ltgray)
-    draw_set_font(fontSmall)
+    draw_set_font(fntSmall)
 
     if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(CharSelect) && !instance_exists(LevCont) && !instance_exists(UnlockScreen) && !bossintro {
         draw_set_halign(fa_left)

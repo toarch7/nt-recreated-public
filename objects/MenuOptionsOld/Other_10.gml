@@ -18,7 +18,7 @@ if rp_warning {
     draw_text_nt(view_width / 2, view_height / 2 - 44, loc("@yWARNING"))
 
     // resourcepack warning
-	draw_set_font(fontSmall)
+	draw_set_font(fntSmall)
     draw_text_nt(view_width / 2, view_height / 2 - 16, loc("@sRESOURCEPACKS ARE ONLY UNIQUE TO THIS RECREATION.#THEY ARE MADE BY COMMUNITY, ONLY TO MAKE THE GAME#LOOK FRESH IF YOU'VE GOT BORED.##USING RESOURCEPACKS WASN'T INTENDED BY CREATORS,#SO IT MAY AFFECT YOUR EXPERIENCE."))
     draw_set_font(fntM1)
 

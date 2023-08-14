@@ -1,15 +1,15 @@
 audio_stop_sound(song)
 
-if instance_exists(CrownPed) {
-	song = sndVaultBossWin
-}
-else song = sndBossWin
+var snd = sndBossWin
 
-song = custom_sound_check(song)
+if instance_exists(CrownPed)
+	snd = sndVaultBossWin
+
+snd = custom_sound_check(snd)
 amb = custom_sound_check(amb)
 
-snd_play_music(song)
-snd_play_ambient(song)
+snd_play_music(snd)
+snd_play_ambient(amb)
 
 if GameCont.area != 7 && GameCont.area != 0
 	alarm[3] = 180

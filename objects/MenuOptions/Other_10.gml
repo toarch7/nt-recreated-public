@@ -3,8 +3,13 @@
 draw_set_valign(fa_center)
 draw_set_halign(fa_center)
 
-var mx = device_mouse_x_to_gui(0),
-	my = device_mouse_y_to_gui(0)
+if mouse_check_button(mb_left) or global.desktop {
+	mousex = device_mouse_x_to_gui(0)
+	mousey = device_mouse_y_to_gui(0)
+}
+
+var mx = mousex,
+	my = mousey
 
 option_can_change = true
 
@@ -85,7 +90,7 @@ if rp_warning {
     draw_text_nt(view_width / 2, view_height / 2 - 44, loc("@yWARNING"))
 
     // resourcepack warning
-	draw_set_font(fontSmall)
+	draw_set_font(fntSmall)
     draw_text_nt(view_width / 2, view_height / 2 + disclaimer_pop - 16, loc("@sRESOURCEPACKS ARE ONLY UNIQUE TO THIS RECREATION.#THEY ARE MADE BY COMMUNITY ONLY TO MAKE THE GAME#LOOK FRESH IF YOU'VE GOT BORED.##USING RESOURCEPACKS WASN'T INTENDED BY CREATORS,#SO IT MAY AFFECT YOUR EXPERIENCE."))
     draw_set_font(fntM1)
 
@@ -243,7 +248,7 @@ if erasing_progress {
         }
 
         if wait > 0
-			wait--
+			wait --
     }
 	
 	if disclaimer_pop && !wait

@@ -240,7 +240,7 @@ function scrDrawHUD(plr = noone) {
     }
 	
     if UberCont.continued_run {
-        draw_set_font(fontSmall)
+        draw_set_font(fntSmall)
         draw_set_alpha(0.1)
         draw_set_color(c_white)
 		

@@ -227,13 +227,4 @@ continued_run = 0
 resourcepack_temp_cleanup()
 load_resourcepacks()
 
-/*if soundstatus or spritestatus {
-	var s = "Something went wrong while loading user resources:\n\n"
-	
-	for(var i = 0; i < array_length(global.log_output); i ++) {
-		s += global.log_output[i] + "\n"
-	}
-	
-	show_message_async(s)
-}*/
-
+show_crosshair = true

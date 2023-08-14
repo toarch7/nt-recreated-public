@@ -355,7 +355,6 @@ function scrHandleInputsGeneral(index) {
 	// gamepad
 	if opt_gamepad {
 	    scrSetGamepadInputs(index)
-		scrGamepadUIControl()
 	}
 	// keyboard
 	else if opt_keyboard {

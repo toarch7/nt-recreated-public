@@ -114,6 +114,9 @@ function scrGamepadUIConrolCharSelect(object) {
             }
         }
 
+		if instance_exists(Menu) && Menu.loadout
+			return 1
+	
         with object {
             if gamepad_button_check_pressed(0, gp_face1) && selected
                 event_perform(ev_mouse, ev_left_press)

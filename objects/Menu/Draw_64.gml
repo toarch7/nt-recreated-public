@@ -1,3 +1,5 @@
+event_user(1)
+
 if hint != "" {
     var txt = string_hash_to_newline(loc(string_upper(hint)))
 	

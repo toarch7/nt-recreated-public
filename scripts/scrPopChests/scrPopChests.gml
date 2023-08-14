@@ -210,7 +210,7 @@ function scrPopChests() {
 }
 
 function scrReplacePropWithChest(obj) {
-	if instance_exists(obj) or (GameCont.area == 7 && GameCont.subarea == 3) or GameCont.area >= 100
+	if instance_exists(obj) or GameCont.area == 0 or (GameCont.area == 7 && GameCont.subarea == 3) or GameCont.area >= 100
 		exit
 	
 	var furthest = 0,

@@ -36,7 +36,7 @@ with p {
 	if crown_current == crwn_haste
 		extra = 1
 
-	ammo[type] = max(typ_ammo[type] + extra, typ_amax[type])
+	ammo[type] = min(ammo[type] + typ_ammo[type] + extra, typ_amax[type])
 	
 	var dir = instance_create(x, y, PopupText)
 	
@@ -49,7 +49,9 @@ with p {
 
 instance_create(x, y, SmallChestPickup)
 
-if GameCont.coopultra == 1 {
+if GameCont.coopultra == 1 && alarm[0] != -1 {
+	alarm[0] = -1
+	
 	with Player {
 		if id != p {
 			other.x = x

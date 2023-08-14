@@ -241,7 +241,7 @@ appear = 0
 ports_x = [0, 0, 0, 0]
 splat_index = 0
 
-alarm[10] = 3
+alarm[10] = 5
 
 ///Loadout
 scrCrowns()
@@ -304,3 +304,13 @@ if instance_exists(char[race]) {
 	
 	camera_set_pos(view_xview, view_yview)
 }
+
+gpadmode = false
+gpadpointed = 0
+
+mousex = gui_w / 2
+mousey = gui_h / 2
+
+playerinstance = playerinstance_get(global.index)
+
+event_perform(ev_step, ev_step_begin)

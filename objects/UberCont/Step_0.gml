@@ -59,6 +59,9 @@ KeyCont.press_paus[index] =
 		or gamepad_button_check_pressed(0, gp_start)
 		or (opt_autopause && !paused && !want_pause && (global.desktop ? !window_has_focus() : os_is_paused()))
 
+if global.console_active
+	KeyCont.press_paus[index] = 0
+
 if want_restart {
 	want_restart --
 	
@@ -200,6 +203,9 @@ if paused && !global.console_active && instance_exists(PauseButton) {
 		}
 	}
 }
+
+if opt_gamepad
+	scrGamepadUIControl()
 
 if !paused && !want_pause && !instance_exists(PauseButton) {
 	scrHandleInputsGeneral(index)

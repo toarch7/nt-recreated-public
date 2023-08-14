@@ -9,7 +9,7 @@ str += last_frame + "\n" + string(floor(netframe / 10) * 10) + "\n"
 str += string(inputs[0][$ netframe]) + "\n"
 str += string(inputs[1][$ netframe]) + "\n"
 
-draw_set_font(fontSmall)
+draw_set_font(fntSmall)
 draw_set_halign(fa_left)
 
 draw_text(96, 24, str)
@@ -18,7 +18,7 @@ draw_set_font(fntM1)
 
 if !instance_exists(CoopMenu) {
     draw_set_color(c_gray)
-    draw_set_font(fontSmall)
+    draw_set_font(fntSmall)
     draw_set_halign(fa_left)
 	
     if !global.is_server {

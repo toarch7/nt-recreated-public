@@ -42,7 +42,7 @@ draw_set_color(c_white)
 draw_text_shadow(view_xview + view_width / 2, view_yview + 48, text)
 
 if UberCont.continued_run {
-    draw_set_font(fontSmall)
+    draw_set_font(fntSmall)
     draw_set_alpha(0.1)
 	
 	var str = "continued"
