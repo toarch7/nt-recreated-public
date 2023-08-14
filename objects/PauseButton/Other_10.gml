@@ -17,6 +17,7 @@ else switch image_index {
         //MENU
         if instance_exists(GameOver) {
             image_index = 5
+			draw_enable_drawevent(false)
 
             event_user(0)
 
@@ -57,6 +58,7 @@ else switch image_index {
     case 1:
         // RESTART
         if instance_exists(GameOver) {
+			draw_enable_drawevent(false)
             image_index = 6
 
             event_user(0)
