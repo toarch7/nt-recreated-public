@@ -510,12 +510,14 @@ if race == 7 && breload > 0 {
 if lsthealth < hp {
     drawlowhp = 30
     lsthealth += 1
-
-    if lsthealth >= max_hp lsthealth = max_hp
+	
+    if lsthealth >= max_hp
+		lsthealth = max_hp
 }
 
 if sprite_index != spr_hurt && lsthealth > hp {
-    if drawlowhp < 30 && hp <= 4 snd_play(snd_lowh)
+    if drawlowhp < 30 && hp <= 4
+		snd_play(snd_lowh)
 
     drawlowhp = 30
     lsthealth -= 0.5
@@ -580,7 +582,8 @@ if last_hp != hp {
                     }
                 }
             }
-        } catch (e) {
+        }
+		catch (e) {
             print(e.message)
         }
 
@@ -604,6 +607,9 @@ if last_hp != hp {
                 }
             }
         }
+		else if race == 13 {
+			UberCont.ctot_uniq[13] += hp_diff
+		}
     }
 
     last_hp = hp
@@ -672,7 +678,8 @@ try {
 
 if race == 15 && visible {
     if ultra_get(2) && !irandom(2) {
-        instance_create(x, y, ToxicGas)
+        with instance_create(x, y, ToxicGas)
+			scrFrogGasStat()
     }
 
     speed = maxspeed
@@ -693,7 +700,8 @@ if race == 15 && visible {
         }
 
         if ultra_get(2) && !irandom(1) {
-            instance_create(x, y, ToxicGas)
+            with instance_create(x, y, ToxicGas)
+				scrFrogGasStat()
         }
 
         speed = 0
@@ -703,7 +711,8 @@ if race == 15 && visible {
         snd_stop(sndFrogLoop)
 
         repeat froggas {
-            instance_create(x, y, ToxicGas)
+            with instance_create(x, y, ToxicGas)
+				scrFrogGasStat()
         }
 
         if froggas >= 25 {

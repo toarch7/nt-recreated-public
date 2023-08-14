@@ -233,6 +233,7 @@ function scrSpawnPlayer(_index = 0, _race = 1, _skin = 0) {
 
         canshield = 0
         horrorbeam = 0
+		skeletongamble = 0
         frogcharge = 0
         froggas = 0
         horrortime = 0

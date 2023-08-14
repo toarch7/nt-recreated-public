@@ -24,7 +24,8 @@ function scrTimeSpeedrun(frames) {
     }
 
     while secs >= 60 {
-        mins++secs -= 60
+        mins ++
+		secs -= 60
     }
 
     return scrAddZero(mins, 1) + ":" + scrAddZero(secs, 1) + "." + scrAddZero(round(frames / 30 * 100), 1)

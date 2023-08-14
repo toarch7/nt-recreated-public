@@ -33,27 +33,11 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 
-import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.content;
-
 
 public class YYExtra extends ExtensionBase {
 	private static final int EVENT_OTHER_SOCIAL = 70;
 	private static final int FILE_SELECT_CODE = 42;
-	//private WebView webView;
-	
 	public double volumeControl = 0.0;
-	
-	public void onStart() {
-		/*
-		webView = RunnerActivity.CurrentActivity.findViewById(R.id.webView);
-		
-		webView.getSettings()
-			.setJavaScriptEnabled(true);
-		
-		ToggleWebView(0.0);*/
-		
-	}
 	
 	public double SetVolumeControl( double val ) {
 		Log.i("yoyo", "Set volume control to " + val);
@@ -61,11 +45,6 @@ public class YYExtra extends ExtensionBase {
 	}
 	
 	public boolean onKeyDown( int keyCode, KeyEvent event ) {
-		/*if (keyCode == KeyEvent.KEYCODE_BACK && webView.isEnabled()) {
-			ToggleWebView(0.0);
-			return true;
-		}*/
-		
 		if (volumeControl < 1.0)
 			return false;
 		
@@ -96,7 +75,8 @@ public class YYExtra extends ExtensionBase {
 
 		if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
 			type = "up";
-		} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+		}
+		else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
 			type = "down";
 		}
 		else return false;
@@ -118,51 +98,4 @@ public class YYExtra extends ExtensionBase {
 		
 		return 0.0;
 	}
-	
-	public double URLOpen( String url ) {
-		CustomTabsIntent.Builder builder = CustomTabsIntent.Builder();
-
-		builder.setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary));
-		builder.setShowTitle(true);
-
-		CustomTabsIntent.Builder customTabsIntent = builder.build();
-		customTabsIntent.launchUrl(context, Uri.parse(url));
-
-		return 0.0;
-	}
-	
-	/*
-	public double OpenURL( String url ) {
-		final String openUrlLink = url;
-		
-		RunnerActivity.CurrentActivity.runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				Log.i("yoyo", "WebView loadUrl: " + openUrlLink);
-				
-				webView.setEnabled(true);
-				webView.setWebViewClient(new WebViewClient());
-				webView.setVisibility(View.VISIBLE);
-				webView.loadUrl(openUrlLink);
-			}
-		});
-		
-		return 0.0;
-	}
-	
-	public double ToggleWebView( double status ) {
-		if (status > 0.0) {
-			webView.setEnabled(true);
-			webView.setVisibility(View.VISIBLE);
-		}
-		else {
-			webView.setEnabled(false);
-			webView.setVisibility(View.GONE);
-		}
-		
-		Log.i("yoyo", "Toggled webview: " + status);
-		
-		return status;
-	}
-	*/
 }

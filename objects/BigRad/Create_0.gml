@@ -18,7 +18,8 @@ if instance_exists(Player) {
 	
     if p.race == 15 && ultra_get(1) {
         repeat 4 {
-            instance_create(x, y, ToxicGas)
+            with instance_create(x, y, ToxicGas)
+				scrFrogGasStat()
         }
     }
 }

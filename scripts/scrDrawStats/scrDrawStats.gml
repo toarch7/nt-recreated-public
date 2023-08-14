@@ -103,9 +103,10 @@ function scrDrawStats() {
         draw_stat(string(UberCont.race_name[cstrk]), string(bstrk))
         draw_stat_header("")
     }
+	
     if (wins > 0) {
         draw_stat_header("BEST TIME")
-        draw_stat(string(UberCont.race_name[frace]), scrTime(baked_fastest[frace]))
+        draw_stat(string(UberCont.race_name[frace]), scrTimeSpeedrun(baked_fastest[frace]))
         draw_stat_header("")
     }
 	

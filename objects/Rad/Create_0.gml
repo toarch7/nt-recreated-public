@@ -17,7 +17,8 @@ if instance_exists(Player) {
 	var p = instance_nearest(x, y, Player)
 	
     if p.race == 15 && ultra_get(1) && irandom(3) == 1 {
-        instance_create(x, y, ToxicGas)
+        with instance_create(x, y, ToxicGas)
+			scrFrogGasStat()
     }
 }
 

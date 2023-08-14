@@ -18,7 +18,8 @@ function scrPowers() {
 
         if !skill_get(5) {
             if angle == 0 snd_play(sndRoll)
-        } else snd_play(sndFishRollUpg)
+        }
+		else snd_play(sndFishRollUpg)
 
         roll = 1
     }
@@ -567,15 +568,28 @@ function scrPowers() {
             reload = wep_load[wep]
 
             if ultra_get(2) {
-                reload /= 5
-                reload = max(reload, 1)
+                reload = max(reload / 5, 1)
             }
-
+			
+			with instance_create(x, y, BulletHit) {
+				sprite_index = sprBloodGamble
+				image_angle = other.gunangle
+				image_speed = 0.4
+				
+				depth = other.depth - 1
+			}
+			
+			if wep_cost[wep] > 0
+				skeletongamble ++
+			
             if random(typ_ammo[wep_type[wep]] + (skill_get(5) * 12)) < wep_cost[wep] {
                 sprite_index = spr_hurt
                 image_index = 0
+				
                 hp -= 1
-
+				
+				skeletongamble = 0
+				
                 repeat 3 {
                     with instance_create(x, y, BloodStreak) {
                         motion_add(random(360), 2)
@@ -585,6 +599,9 @@ function scrPowers() {
 
                 snd_play(snd_hurt)
             }
+			
+			if skeletongamble > UberCont.ctot_uniq[14]
+				UberCont.ctot_uniq[14] = skeletongamble
 
             snd_play(sndBloodGamble)
         }
