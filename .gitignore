@@ -15,7 +15,7 @@ sounds/*/*
 !sprites/sprbuttonachievements/*
 !sprites/sprite1337/*
 
-scripts/scrSendDailyData/*
+scripts/SECRETS/SECRETS.gml
 
 *.dll
 
