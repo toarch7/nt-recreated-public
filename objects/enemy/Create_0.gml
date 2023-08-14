@@ -14,6 +14,7 @@ canmelee = 1
 
 if skill_get(11) {
     hp = round(hp * 0.8)
+	max_hp = min(hp, max_hp)
 }
 
 if global.hardmode {
