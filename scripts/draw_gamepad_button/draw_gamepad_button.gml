@@ -6,8 +6,6 @@ function draw_gamepad_button(button, big, x, y, col = c_white) {
 }
 
 function gamepad_button_to_image(key) {
-	print("IN", key)
-	
 	switch key {
 		case gp_face1: return 0
 		case gp_face2: return 1
@@ -35,11 +33,7 @@ function gamepad_button_to_image(key) {
 }
 
 function gamepad_key_to_nt_text(key, big = false) {
-	var str = "@(" + string(big ? gamepad_icon_big : gamepad_icon_small) + ":" + string(gamepad_button_to_image(key)) + ")"
-	
-	print(">", str)
-	
-	return str
+	return "@(" + string(big ? gamepad_icon_big : gamepad_icon_small) + ":" + string(gamepad_button_to_image(key)) + ")"
 }
 
 function draw_pickup_button(x, y) {
