@@ -44,7 +44,4 @@ repeat 150 {
 
 active = 1
 
-var s = snd_loop(sndPortalLoop)
-audio_sound_set_track_position(s, random(audio_sound_length(s)))
-
-print("created", id)
+snd_play_ambient(sndPortalLoop, true)

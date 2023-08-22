@@ -67,6 +67,8 @@ if loading {
     b = buffer_decompress(c)
 
     scrUltras()
+	
+	scrVolume()
 
     try {
         var d = json_parse(buffer_read(b, buffer_string)) // extra info
@@ -89,9 +91,7 @@ if loading {
             ammo = d.ammo
             spirit = d.spirit
         }
-
-        show_debug_message(cont)
-
+		
         pos = max(cont.waypoints - 15, 0)
 
         skills = ds_list_create()
@@ -101,7 +101,8 @@ if loading {
 
         instance_create(0, 0, SpiralCont)
         depth = -1000
-    } catch (e) {
+    }
+	catch (e) {
         print_error("Failed to load gamestate:\n" + e.longMessage, 1)
 
         if file_exists("m_gamestate.dat") {

@@ -2,23 +2,28 @@ var oldarea;
 oldarea = area
 subarea = 1
 
-if instance_exists(GameCont) {
-    area = GameCont.area
-    subarea = GameCont.subarea
+if !instance_exists(GameCont)
+	exit
 
-    if GameCont.race == 13 {
-        if song audio_stop_sound(song) if amb audio_stop_sound(amb)
+area = GameCont.area
+subarea = GameCont.subarea
 
-        song = musBoss2
-        amb = -1
-
-        song = custom_sound_check(song)
-
-        snd_loop(song)
-        alarm[0] = -1
-
-        exit
-    }
+if GameCont.race == 13 {
+    if song
+		audio_stop_sound(song)
+	
+	if amb
+		audio_stop_sound(amb)
+	
+    song = musBoss2
+    amb = -1
+	
+    song = custom_sound_check(song)
+	
+    snd_loop(song)
+    alarm[0] = -1
+	
+    exit
 }
 
 if instance_exists(Player)
