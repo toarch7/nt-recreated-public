@@ -59,14 +59,6 @@ if (flags & 8) == 8 {
 	draw_text_shadow(dx, 48, str)
 }
 
-if instance_exists(MusCont) {
-	draw_set_halign(fa_right)
-	
-	draw_text_shadow(gui_w - 4, gui_h / 2, string(audio_sound_get_gain(MusCont.song)) + " " + string(audio_sound_get_gain(MusCont.amb)))
-	
-	draw_set_halign(fa_left)
-}
-
 if global.console_active {
 
     draw_set_font(fontConsole)
