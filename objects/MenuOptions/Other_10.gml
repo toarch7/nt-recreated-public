@@ -7,6 +7,10 @@ if mouse_check_button(mb_left) or global.desktop {
 	mousex = device_mouse_x_to_gui(0)
 	mousey = device_mouse_y_to_gui(0)
 }
+else {
+	mousex = -1000
+	mousey = -1000
+}
 
 var mx = mousex,
 	my = mousey
