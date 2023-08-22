@@ -585,6 +585,7 @@
     {"id":{"name":"files_find_all","path":"scripts/files_find_all/files_find_all.yy",},"order":181,},
     {"id":{"name":"sprCrownPedIdle","path":"sprites/sprCrownPedIdle/sprCrownPedIdle.yy",},"order":3,},
     {"id":{"name":"sprCrownPedClose","path":"sprites/sprCrownPedClose/sprCrownPedClose.yy",},"order":5,},
+    {"id":{"name":"scrBoltTrail","path":"scripts/scrBoltTrail/scrBoltTrail.yy",},"order":552,},
     {"id":{"name":"mskCrownPed","path":"sprites/mskCrownPed/mskCrownPed.yy",},"order":7,},
     {"id":{"name":"sprPStat1Idle","path":"sprites/sprPStat1Idle/sprPStat1Idle.yy",},"order":9,},
     {"id":{"name":"input_axis_threshold_set","path":"scripts/input_axis_threshold_set/input_axis_threshold_set.yy",},"order":1,},

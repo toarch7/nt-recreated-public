@@ -8,16 +8,3 @@ if instance_exists(enemy) && instance_exists(Player) {
         }
     }
 }
-
-/*
-if speed > 0 && damage {
-	var wall = collision_line(x, y, x - hspeed, y - vspeed, Wall, 1, 1)
-	
-	if wall {
-		x -= hspeed * 1.2
-		y -= vspeed * 1.2
-		
-		speed = 1
-		event_perform(ev_collision, Wall)
-	}
-}*/

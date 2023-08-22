@@ -1,5 +1,5 @@
-motion_add(90, 4 + random(4))
-image_speed = .4
-image_angle = 0
-image_xscale = 1
-image_yscale = 1
+motion_add(random(360), random(2))
+gravity = 0.08
+friction = 0.02
+gravity_direction = 90
+image_speed = random(0.2) + 0.1
