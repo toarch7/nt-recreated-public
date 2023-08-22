@@ -305,6 +305,8 @@ if instance_exists(char[race]) {
 	camera_set_pos(view_xview, view_yview)
 }
 
+loadout_wep = 0
+
 gpadmode = false
 gpadpointed = 0
 

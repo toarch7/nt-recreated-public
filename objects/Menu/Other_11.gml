@@ -201,7 +201,7 @@ if canloadout {
 				var w = inst.cwep
 				
 				if loadout_wep {
-	                if pointed_cwep {
+	                if pointed_swep {
 	                    inst.cwep = UberCont.race_swep[race]
 						
 	                    loadout_wep = 0
@@ -209,7 +209,7 @@ if canloadout {
 	                    save_set_val("cswep", string(race), loadout_wep)
 	                }
 				}
-				else if pointed_swep {
+				else if pointed_cwep {
                     inst.cwep = UberCont.cwep[race]
 
                     loadout_wep = 1
