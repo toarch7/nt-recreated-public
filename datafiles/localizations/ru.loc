@@ -46,10 +46,10 @@
 	"SWAP WEAPONS USING @w%#TRY IT A FEW TIMES!": "НАЖАТИЕМ @w%@s МОЖНО СМЕНИТЬ ОРУЖИЕ#ПОПРОБУЙ ЭТО НЕСКОЛЬКО РАЗ!",
 	"@w%@s USES YOUR ABILITY#@wGIVE IT A GO!": "@w%@s ИСПОЛЬЗУЕТ ТВОЮ АКТИВНУЮ СПОСОБНОСТЬ#ИСПРОБУЙ ЕЁ СПОЛНА!",
 	
-	"WALK USING @wLEFT JOYSTICK": "ХОДИ @wЛЕВЫМ СТИКОМ",
+	"WALK USING @w% LEFT JOYSTICK": "ХОДИ ИСПОЛЬЗУЯ @w% ЛЕВЫЙ СТИК",
 	"PICK UP NEW WEAPON WITH @w% BUTTON": "ПОДБЕРИ НОВОЕ ОРУЖИЕ НАЖАВ @w%",
-	"SWAP WEAPONS USING @w% BUTTON#TRY IT A FEW TIMES!": "НАЖАТИЕМ @w%@s МОЖНО СМЕНИТЬ ОРУЖИЕ#ПОПРОБУЙ ЭТО НЕСКОЛЬКО РАЗ!",
-	"@w% BUTTON@s USES YOUR ABILITY#@wGIVE IT A GO!": "@w%@s ИСПОЛЬЗУЕТ ТВОЮ АКТИВНУЮ СПОСОБНОСТЬ#ИСПРОБУЙ ЕЁ СПОЛНА!",
+	"SWAP WEAPONS USING @w% BUTTON#TRY IT A FEW TIMES!": "НАЖМИ КНОПКУ @w%@s ЧТОБЫ СМЕНИТЬ ОРУЖИЕ#ПОПРОБУЙ ЭТО НЕСКОЛЬКО РАЗ!",
+	"@w% BUTTON@s USES YOUR ABILITY#@wGIVE IT A GO!": "КНОПКА @w%@s ИСПОЛЬЗУЕТ ТВОЮ АКТИВНУЮ СПОСОБНОСТЬ#ИСПРОБУЙ ЕЁ СПОЛНА!",
 	
 	" @sAND@w ": " @sИ@w ",
 	"COOL, WE'RE DONE HERE!": "КРУТО, НА ЭТОМ ЗАКОНЧИМ!",

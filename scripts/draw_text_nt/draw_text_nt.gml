@@ -65,7 +65,7 @@ function draw_text_nt(_x, _y, _text, scale = 1) {
 						
 						case "(": // sprite
 							var asset = "",
-								spd = 0
+								index = 0
 							
 							while i <= l {
 								var c = string_char_at(_text, ++ i)
@@ -83,7 +83,7 @@ function draw_text_nt(_x, _y, _text, scale = 1) {
 										n += c
 									}
 									
-									try { spd = real(n) } catch(e) { print(e.longMessage) }
+									try { index = real(n) } catch(e) { print(e.longMessage) }
 								}
 								
 								// sprite
@@ -110,9 +110,10 @@ function draw_text_nt(_x, _y, _text, scale = 1) {
 										8,
 										8,
 										
-										// image speed and index
-										spd,
-										0,
+										// image index
+										index,
+										
+										0, // unused
 										
 										// sprite actual size
 										(sprite_get_bbox_right(temp) + 1) - sprite_get_bbox_left(temp),
@@ -222,7 +223,7 @@ function draw_text_nt(_x, _y, _text, scale = 1) {
 			
 			draw_sprite_ext(
 				sprite,
-				global.time * str[3],
+				str[3],
 				dx,
 				dy,
 				scale,

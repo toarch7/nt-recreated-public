@@ -23,6 +23,9 @@ if !instance_exists(Portal) {
 	
 	str = loc(str)
 	
+	if keyboard_check_pressed(ord("T")) && UberCont.opt_console && alarm[0] == -1
+		alarm[0] = 30
+	
 	if pos == 0 {
 		if sub == 1 {
 			var keys = ""
@@ -34,12 +37,19 @@ if !instance_exists(Portal) {
 			
 			str = string_replace(str, "%", keys)
 		}
+		else if sub == 2 {
+			str = string_replace(str, "%", gamepad_key_to_nt_text("stickl"))
+		}
 	}
 	else if pos < 4 {
 		var keys = [ "pick", "swap", "spec" ],
-			key_name = scrKeyName(keymap_get(keys[pos - 1]))
+			key_code = keymap_get(keys[pos - 1]),
+			key_name = scrKeyName(key_code)
 		
-		str = string_replace(str, "%", "@w" + loc(key_name) + "@s")
+		if sub == 2 {
+			str = string_replace(str, "%", gamepad_key_to_nt_text(key_code))
+		}
+		else str = string_replace(str, "%", "@w" + loc(key_name) + "@s")
 	}
 	
     draw_text_nt(view_width / 2, view_height - 18, "@s" + str)

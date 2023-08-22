@@ -5,6 +5,43 @@ function draw_gamepad_button(button, big, x, y, col = c_white) {
 	draw_sprite_ext(big ? gamepad_icon_big : gamepad_icon_small, button - 32769, x, y, 1, 1, 0, col, draw_get_alpha())
 }
 
+function gamepad_button_to_image(key) {
+	print("IN", key)
+	
+	switch key {
+		case gp_face1: return 0
+		case gp_face2: return 1
+		case gp_face3: return 2
+		case gp_face4: return 3
+		case gp_shoulderl: return 4
+		case gp_shoulderr: return 5
+		case gp_shoulderlb: return 6
+		case gp_shoulderrb: return 7
+		case gp_stickl: return 8
+		case gp_stickr: return 9
+		case gp_padu: return 11
+		case gp_padd: return 12
+		case gp_padl: return 13
+		case gp_padr: return 14
+		case gp_start: return 15
+		case gp_select: return 16
+		
+		case "dpad": return 10
+		case "stickl": return 17
+		case "stickr": return 18
+	}
+	
+	return -1
+}
+
+function gamepad_key_to_nt_text(key, big = false) {
+	var str = "@(" + string(big ? gamepad_icon_big : gamepad_icon_small) + ":" + string(gamepad_button_to_image(key)) + ")"
+	
+	print(">", str)
+	
+	return str
+}
+
 function draw_pickup_button(x, y) {
 	var off = 7
 	

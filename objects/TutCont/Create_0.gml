@@ -2,7 +2,7 @@ pos = 0
 
 text[0, 0] = "WALK USING @wMOVEMENT STICK"
 text[0, 1] = "WALK USING @w% KEYS"
-text[0, 2] = "WALK USING @wLEFT JOYSTICK"
+text[0, 2] = "WALK USING @w% LEFT JOYSTICK"
 
 text[1, 0] = "PICK UP NEW WEAPON WITH @wACT. BUTTON"
 text[1, 1] = "PICK UP NEW WEAPON WITH @w% KEY"
