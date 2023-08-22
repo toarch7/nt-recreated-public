@@ -36,11 +36,28 @@
 	"NOT ENOUGH %": "НЕДОСТАТОЧНО %",
 	"NOT ENOUGH RADS": "НЕДОСТАТОЧНО РАДИАЦИИ",
 	
-	"WALK USING @wLEFT MOVEMENT STICK": "ХОДИ ИСПОЛЬЗУЯ @wЛЕВЫЙ СТИК",
+	"WALK USING @wMOVEMENT STICK": "ХОДИ ИСПОЛЬЗУЯ @wЛЕВЫЙ СТИК",
 	"PICK UP NEW WEAPON WITH @wACT. BUTTON": "ПОДБЕРИ НОВОЕ ОРУЖИЕ НАЖАВ НА#@wКНОПКУ ВЗАИМОДЕЙСТВИЯ",
-	"SWAP WEAPONS WITH @wSWAP BUTTON#TRY IT A FEW TIMES!": "ПОМЕНЯЙ АКТИВНОЕ ОРУЖИЕ МЕСТАМИ СО ВТОРЫМ#СДЕЛАЙ ЭТО ПАРУ РАЗ!",
-	"@wRMB BUTTON@s USES YOUR ABILITY#@wGIVE IT A GO!": "@wПКМ@s ИСПОЛЬЗУЕТ ТВОЮ АКТИВНУЮ СПОСОБНОСТЬ#ПОПРОБУЙ ПОНАЖИМАТЬ НА НЕЁ",
-	"COOL, WE'RE DONE HERE!": "КРУТО, НА ЭТОМ МЫ ЗАКОНЧИМ!",
+	"SWAP WEAPONS USING @wSWAP BUTTON#TRY IT A FEW TIMES!": "ПОМЕНЯЙ АКТИВНОЕ ОРУЖИЕ МЕСТАМИ СО ВТОРЫМ#СДЕЛАЙ ЭТО ПАРУ РАЗ!",
+	"@wABILITY BUTTON@s USES YOUR SPECIAL SKILL#@wGIVE IT A GO!": "@wПКМ@s ИСПОЛЬЗУЕТ ТВОЮ АКТИВНУЮ СПОСОБНОСТЬ#ПОПРОБУЙ ПОНАЖИМАТЬ НА НЕЁ",
+	
+	"WALK USING @w% KEYS": "ХОДИ НА @w%",
+	"PICK UP NEW WEAPON WITH @w% KEY": "ПОДБЕРИ НОВОЕ ОРУЖИЕ НАЖАВ @w%",
+	"SWAP WEAPONS USING @w%#TRY IT A FEW TIMES!": "НАЖАТИЕМ @w%@s МОЖНО СМЕНИТЬ ОРУЖИЕ#ПОПРОБУЙ ЭТО НЕСКОЛЬКО РАЗ!",
+	"@w%@s USES YOUR ABILITY#@wGIVE IT A GO!": "@w%@s ИСПОЛЬЗУЕТ ТВОЮ АКТИВНУЮ СПОСОБНОСТЬ#ИСПРОБУЙ ЕЁ СПОЛНА!",
+	
+	"WALK USING @wLEFT JOYSTICK": "ХОДИ @wЛЕВЫМ СТИКОМ",
+	"PICK UP NEW WEAPON WITH @w% BUTTON": "ПОДБЕРИ НОВОЕ ОРУЖИЕ НАЖАВ @w%",
+	"SWAP WEAPONS USING @w% BUTTON#TRY IT A FEW TIMES!": "НАЖАТИЕМ @w%@s МОЖНО СМЕНИТЬ ОРУЖИЕ#ПОПРОБУЙ ЭТО НЕСКОЛЬКО РАЗ!",
+	"@w% BUTTON@s USES YOUR ABILITY#@wGIVE IT A GO!": "@w%@s ИСПОЛЬЗУЕТ ТВОЮ АКТИВНУЮ СПОСОБНОСТЬ#ИСПРОБУЙ ЕЁ СПОЛНА!",
+	
+	" @sAND@w ": " @sИ@w ",
+	"COOL, WE'RE DONE HERE!": "КРУТО, НА ЭТОМ ЗАКОНЧИМ!",
+	
+	"LMB": "ЛКМ",
+	"RMB": "ПКМ",
+	"SPACE": "ПРОБЕЛ",
+	
 	
 	"LEVEL UP": "НОВЫЙ УРОВЕНЬ",
 	"PICK A CROWN": "ВЫБЕРИ КОРОНУ",

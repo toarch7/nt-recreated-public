@@ -1,6 +1,6 @@
 pos = 0
 
-text[0, 0] = "WALK USING @wLEFT MOVEMENT STICK"
+text[0, 0] = "WALK USING @wMOVEMENT STICK"
 text[0, 1] = "WALK USING @w% KEYS"
 text[0, 2] = "WALK USING @wLEFT JOYSTICK"
 
@@ -8,9 +8,9 @@ text[1, 0] = "PICK UP NEW WEAPON WITH @wACT. BUTTON"
 text[1, 1] = "PICK UP NEW WEAPON WITH @w% KEY"
 text[1, 2] = "PICK UP NEW WEAPON WITH @w% BUTTON"
 
-text[2, 0] = "SWAP WEAPONS WITH @wSWAP BUTTON#TRY IT A FEW TIMES!"
-text[2, 1] = "SWAP WEAPONS WITH @w%#TRY IT A FEW TIMES!"
-text[2, 2] = "SWAP WEAPONS WITH @w% BUTTON#TRY IT A FEW TIMES!"
+text[2, 0] = "SWAP WEAPONS USING @wSWAP BUTTON#TRY IT A FEW TIMES!"
+text[2, 1] = "SWAP WEAPONS USING @w%#TRY IT A FEW TIMES!"
+text[2, 2] = "SWAP WEAPONS USING @w% BUTTON#TRY IT A FEW TIMES!"
 
 text[3, 0] = "@wABILITY BUTTON@s USES YOUR SPECIAL SKILL#@wGIVE IT A GO!"
 text[3, 1] = "@w%@s USES YOUR ABILITY#@wGIVE IT A GO!"
@@ -49,7 +49,3 @@ repeat 4 {
 
 
 wave = 0
-
-if global.desktop or UberCont.opt_gamepad {
-    alarm[0] = 45
-}

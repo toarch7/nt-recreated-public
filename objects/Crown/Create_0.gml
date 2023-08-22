@@ -14,3 +14,6 @@ alarm[0] = 10 + random(10)
 crown = GameCont.crown
 
 walk = 0
+
+if UberCont.showtutorial
+	is_new = false

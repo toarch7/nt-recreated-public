@@ -32,10 +32,10 @@
 	"NOT ENOUGH %": "НЕ ДОСТАТНЬО %",
 	"NOT ENOUGH RADS": "НЕ ДОСТАТНЬО РАДІАЦІЇ",
 	
-	"WALK USING @wLEFT MOVEMENT STICK": "ВИКОРИСТОВУЙТЕ ЛІВИЙ ДЖОЙСТИК ДЛЯ ПЕРЕСУВАННЯ",
+	"WALK USING @wMOVEMENT STICK": "ВИКОРИСТОВУЙТЕ ЛІВИЙ ДЖОЙСТИК ДЛЯ ПЕРЕСУВАННЯ",
 	"PICK UP NEW WEAPON WITH @wACT. BUTTON": "@sПІДБИРАННЯ НОВОЇ ЗБРОЇ @wАКТИВНОЮ КНОПКОЮ",
-	"SWAP WEAPONS WITH @wSWAP BUTTON#TRY IT A FEW TIMES!": "@sОБМІН ЗБРОЇ КНОПКОЮ @wОБМІНУ@s#СПРОБУЙ КІЛЬКА РАЗІВ!",
-	"@wRMB BUTTON@s USES YOUR ABILITY#@wGIVE IT A GO!": "@wПКМ@s ВИКОРИСТАННЯ ТВОГО ВМІННЯ#СПРОБУЙ!",
+	"SWAP WEAPONS USING @wSWAP BUTTON#TRY IT A FEW TIMES!": "@sОБМІН ЗБРОЇ КНОПКОЮ @wОБМІНУ@s#СПРОБУЙ КІЛЬКА РАЗІВ!",
+	"@wABILITY BUTTON@s USES YOUR SPECIAL SKILL#@wGIVE IT A GO!": "@wПКМ@s ВИКОРИСТАННЯ ТВОГО ВМІННЯ#СПРОБУЙ!",
 	"COOL, WE'RE DONE HERE!": "@sКРУТО, ТИ ТУТ ЗАКІНЧИВ!",
 	
 	"WATER BOOST": "ВОДЯНЕ ПРИСКОРЕННЯ",
@@ -85,10 +85,10 @@
 	"NOT ENOUGH %": "НЕ ДОСТАТНЬО %",
 	"NOT ENOUGH RADS": "НЕ ДОСТАТНЬО РАДІАЦІЇ",
 	
-	"WALK USING @wLEFT MOVEMENT STICK": "ВИКОРИСТОВУЙТЕ ЛІВИЙ ДЖОЙСТИК ДЛЯ ПЕРЕСУВАННЯ",
+	"WALK USING @wMOVEMENT STICK": "ВИКОРИСТОВУЙТЕ ЛІВИЙ ДЖОЙСТИК ДЛЯ ПЕРЕСУВАННЯ",
 	"PICK UP NEW WEAPON WITH @wACT. BUTTON": "@sПІДБИРАННЯ НОВОЇ ЗБРОЇ @wАКТИВНОЮ КНОПКОЮ",
-	"SWAP WEAPONS WITH @wSWAP BUTTON#TRY IT A FEW TIMES!": "@sОБМІН ЗБРОЇ КНОПКОЮ @wОБМІНУ@s#СПРОБУЙ КІЛЬКА РАЗІВ!",
-	"@wRMB BUTTON@s USES YOUR ABILITY#@wGIVE IT A GO!": "@wПКМ@s ВИКОРИСТАННЯ ТВОГО ВМІННЯ#СПРОБУЙ!",
+	"SWAP WEAPONS USING @wSWAP BUTTON#TRY IT A FEW TIMES!": "@sОБМІН ЗБРОЇ КНОПКОЮ @wОБМІНУ@s#СПРОБУЙ КІЛЬКА РАЗІВ!",
+	"@wABILITY BUTTON@s USES YOUR SPECIAL SKILL#@wGIVE IT A GO!": "@wПКМ@s ВИКОРИСТАННЯ ТВОГО ВМІННЯ#СПРОБУЙ!",
 	"COOL, WE'RE DONE HERE!": "@sКРУТО, ТИ ТУТ ЗАКІНЧИВ!",
 	
 	"RHINO SKIN": "ШКIРА НОСОРОГА",

@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndWeaponChest",
-  "duration": 0.222846,
+  "duration": 0.217846,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

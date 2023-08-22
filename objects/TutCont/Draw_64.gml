@@ -1,4 +1,4 @@
-if pos >= array_length(text)
+if pos >= array_length(text) or instance_exists(Spiral)
 	exit
 
 if !instance_exists(Portal) {
@@ -21,9 +21,28 @@ if !instance_exists(Portal) {
 	if pos < 4
 		str = text[pos, sub]
 	
+	str = loc(str)
 	
+	if pos == 0 {
+		if sub == 1 {
+			var keys = ""
+			
+			keys += loc(scrKeyName(Key.north[0])) + ", "
+			keys += loc(scrKeyName(Key.west[0])) + ", "
+			keys += loc(scrKeyName(Key.south[0])) + loc(" @sAND@w ")
+			keys += loc(scrKeyName(Key.east[0])) + "@s"
+			
+			str = string_replace(str, "%", keys)
+		}
+	}
+	else if pos < 4 {
+		var keys = [ "pick", "swap", "spec" ],
+			key_name = scrKeyName(keymap_get(keys[pos - 1]))
+		
+		str = string_replace(str, "%", "@w" + loc(key_name) + "@s")
+	}
 	
-    draw_text_nt(view_width / 2, view_height - 18, "@s" + loc(str))
+    draw_text_nt(view_width / 2, view_height - 18, "@s" + str)
 
     draw_set_halign(fa_left)
     draw_set_valign(fa_top)

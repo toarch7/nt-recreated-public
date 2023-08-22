@@ -26,6 +26,9 @@ if !instance_exists(LevCont) && !instance_exists(CrownIcon) && !(instance_exists
     else if instance_exists(NothingDeath) o = NothingDeath
     else if instance_exists(Nothing2Death) o = Nothing2Death
     else if instance_exists(SitDown) o = SitDown
+	
+	if instance_exists(TutCont) && instance_exists(WeaponChest)
+		o = WeaponChest
 
     with Player
     if index == global.index {

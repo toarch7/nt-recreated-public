@@ -1,9 +1,4 @@
 function scrPowers() {
-    if instance_exists(TutCont) && TutCont.pos == 3 && !TutCont.doin {
-        TutCont.alarm[0] = 30
-        TutCont.doin = 1
-    }
-
     //FISH
     if KeyCont.press_spec[index] && race == 1 && visible && canwalk {
         if speed < friction {
