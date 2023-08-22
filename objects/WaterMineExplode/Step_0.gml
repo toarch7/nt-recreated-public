@@ -13,7 +13,7 @@ if image_index >= 9 && !explode {
 	
 	repeat 16 {
 		// we don't talk about it
-	    with instance_create(x, y - 8, EnemyBullet3) {
+	    with instance_create(x, y - 12, EnemyBullet3) {
 	        motion_add(ang, 5 + random(7))
 	        image_angle = direction
 	        team = -1
