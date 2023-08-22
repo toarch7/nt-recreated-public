@@ -11,7 +11,7 @@ function snd_play_hit(snd, pitch = 0.2) {
     audio_stop_sound(snd)
 	
 	audio_sound_pitch(snd, ((1 + random(pitch)) - (pitch / 2)))
-    audio_sound_gain(snd, UberCont.opt_sndvol * max(0, distance_to_object(dir) / 320), 0)
+    audio_sound_gain(snd, max(0, distance_to_object(dir) / 320), 0)
 	
 	if !UberCont.opt_3Dsound
 		return snd_play(snd)

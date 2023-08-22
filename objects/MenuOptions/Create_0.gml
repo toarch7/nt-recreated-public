@@ -327,11 +327,12 @@ for(var i = 0; i < array_length(options[0]); i ++) {
 option_category_begin(OptionCategory.Audio)
 
 option_elements_create(
-	{ type: "slider",  name: "MASTER VOLUME",   key: "volume_master"  },
-	{ type: "slider",  name: "MUSIC VOLUME",    key: "volume_music"   },
-	{ type: "slider",  name: "AMBIENT VOLUME",  key: "volume_ambient" },
-	{ type: "slider",  name: "SFX VOLUME",      key: "volume_sfx"     },
-	{ type: "switch",  name: "3D SOUND",        key: "volume_3dsound"      }
+	{ type: "slider",  name: "MASTER VOLUME",   key: "volume_master"       },
+	{ type: "slider",  name: "MUSIC VOLUME",    key: "volume_music"        },
+	{ type: "slider",  name: "AMBIENT VOLUME",  key: "volume_ambient"      },
+	{ type: "slider",  name: "SFX VOLUME",      key: "volume_sfx"          },
+	{ type: "switch",  name: "3D SOUND",        key: "volume_3dsound"      },
+	{ type: "switch",  name: "STOP ON PAUSE",   key: "volume_pauseonpause" }
 )
 
 #endregion

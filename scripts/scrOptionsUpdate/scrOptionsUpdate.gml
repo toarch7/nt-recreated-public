@@ -13,6 +13,7 @@ function scrOptionsUpdate() {
         opt_ambvol = save_get_val_s("volume", "ambient", 1)
         opt_sndvol = save_get_val_s("volume", "sfx", 1)
 		opt_3Dsound = save_get_val_s("volume", "3dsound", 1)
+		opt_pauseonpause = save_get_val_s("volume", "pauseonpause", 0)
         
 		opt_crosshair = save_get_val_s("options", "crosshair", 0)
         opt_gamepad = save_get_val_s("options", "gamepad", 0)

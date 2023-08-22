@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndPlasmaHit",
-  "duration": 1.525,
+  "duration": 1.52,
   "parent": {
     "name": "Sounds",
     "path": "folders/Sounds.yy",

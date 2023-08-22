@@ -19,7 +19,8 @@ for (var i = 0; i < KeyCont.players; i++) {
 				
                 splat_index = 0
 				
-                audio_pause_all()
+				if opt_pauseonpause
+					audio_pause_all()
 				
 				audio_resume_sound(sndMenuClick)
 				audio_resume_sound(sndHover)
