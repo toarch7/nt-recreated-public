@@ -1,5 +1,5 @@
-globalvar draw_text_nt_chache;
-		  draw_text_nt_chache = {}
+globalvar __draw_text_nt_cache;
+		  __draw_text_nt_cache = {}
 
 function draw_text_nt(_x, _y, _text, scale = 1) {
 	if !string_count("@", _text) {
@@ -14,7 +14,7 @@ function draw_text_nt(_x, _y, _text, scale = 1) {
 	draw_set_halign(fa_left)
 	draw_set_valign(fa_top)
 	
-	var d = draw_text_nt_chache[$ _text]
+	var d = __draw_text_nt_cache[$ _text]
 	
 	if d == undefined {
 		d = [
@@ -90,22 +90,36 @@ function draw_text_nt(_x, _y, _text, scale = 1) {
 								if c == ")" {
 									var spr = asset_get_index(asset)
 									
-									if !sprite_exists(spr)
-										break
+									if !sprite_exists(spr) {
+										// check if is numeric string
+										if string_length(string_digits(asset)) != string_length(asset)
+											break
+										
+										spr = real(asset)
+									}
+									
+									var temp = sprite_duplicate(spr)
+									
+									sprite_collision_mask(temp, 0, 0, 0, 0, 0, 0, bboxkind_precise, 0)
 									
 									var a = [
 										// sprite
 										spr,
 										
-										// size
-										(sprite_get_bbox_right(spr) + 1) - sprite_get_bbox_left(spr),
-										sprite_get_height(spr),
+										// size (as if it was a single character)
+										8,
+										8,
 										
-										
-										// image index and speed
+										// image speed and index
 										spd,
-										0
+										0,
+										
+										// sprite actual size
+										(sprite_get_bbox_right(temp) + 1) - sprite_get_bbox_left(temp),
+										(sprite_get_bbox_bottom(temp) + 1) - sprite_get_bbox_top(temp)
 									]
+									
+									sprite_delete(temp)
 									
 									drawcol = -1
 									h = max(a[2], h)
@@ -136,7 +150,7 @@ function draw_text_nt(_x, _y, _text, scale = 1) {
 		
 		array_push(d[1], [ w, h ])
 		
-		draw_text_nt_chache[$ _text] = d
+		__draw_text_nt_cache[$ _text] = d
 	}
 	
 	var l = array_length(d[0]),
@@ -192,17 +206,35 @@ function draw_text_nt(_x, _y, _text, scale = 1) {
 			if halign == fa_right
 				_x -= (str[1] - string_width("A") + 2) * scale
 			
+			var sprite = str[0],
+				
+				step = round(max(0, str[5] - 16) / 8) * 8,
+				
+				dx = _x - (sprite_get_width(sprite) / 2) + step + 1,
+				dy = _y - (sprite_get_height(sprite) / 2) + 4,
+				
+				offx = sprite_get_xoffset(sprite),
+				offy = sprite_get_yoffset(sprite)
+			
+			_x += step
+			
+			sprite_set_offset(sprite, 0, 0)
+			
 			draw_sprite_ext(
-				str[0],
+				sprite,
 				global.time * str[3],
-				_x + (sprite_get_xoffset(str[0]) / 2 + 6) * scale,
-				_y + (sprite_get_yoffset(str[0]) / 2 + 2) * scale,
+				dx,
+				dy,
 				scale,
 				scale,
 				0,
 				c_white,
 				draw_get_alpha()
 			)
+			
+			_x += step
+			
+			sprite_set_offset(sprite, offx, offy)
 			
 			if halign != fa_right
 				_x += (str[1] - string_width("A") + 2) * scale
