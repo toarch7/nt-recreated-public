@@ -1,13 +1,11 @@
-with instance_create(x,y,ChestOpen) {
+with instance_create(x, y, ChestOpen) {
     if other.curse {
         sprite_index = sprCursedChestOpen
-        
-        if GameCont.underwater {
-            sprite_index = sprCursedClamChestOpen
-        }
-    } else if GameCont.underwater {
+    }
+	else if GameCont.underwater {
         sprite_index = sprClamChestOpen
-    } else sprite_index = sprWeaponChestOpen
+    }
+	else sprite_index = sprWeaponChestOpen
 }
 
 if GameCont.underwater {
@@ -18,5 +16,4 @@ if GameCont.underwater {
     }
 }
 
-instance_create(x,y,FXChestOpen)
-
+instance_create(x, y, FXChestOpen)
