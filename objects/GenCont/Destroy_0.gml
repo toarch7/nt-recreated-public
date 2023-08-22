@@ -1,5 +1,8 @@
 scrCreateMobileControls()
 
+with MusCont
+	alarm[11] = 2
+
 random_set_seed(global.seed)
 
 with SubTopCont {

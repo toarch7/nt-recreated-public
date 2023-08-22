@@ -146,3 +146,6 @@ if skill_get(25) && !GameCont.patient {
 	GameCont.patiencepick = 1
     GameCont.patient = 1
 }
+
+with MusCont
+	alarm[11] = 2
