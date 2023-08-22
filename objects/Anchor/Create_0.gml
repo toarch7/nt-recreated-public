@@ -10,4 +10,4 @@ event_inherited()
 
 
 snd_hurt = sndHitRock
-spr_shadow = shd32
+spr_shadow = shd48
