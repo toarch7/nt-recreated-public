@@ -8,6 +8,20 @@ with UberCont {
 	
 	draw_surface_ext(application_surface, 0, 0, 1 / opt_scaling, 1 / opt_scaling, 0, c_white, 1)
 	
+	with TopCont {
+		print("Hi", darkness, dark)
+		
+		if !darkness
+			continue
+		
+		gpu_set_blendmode(bm_subtract)
+		
+	    if surface_exists(dark)
+			draw_surface_ext(dark, 0, 0, 1, 1, 0, c_white, 1)
+		
+	    gpu_set_blendmode(bm_normal)
+	}
+	
 	gpu_set_blendmode(bm_add)
 	draw_set_color(c_black)
 	

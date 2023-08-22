@@ -44,7 +44,7 @@ with Player {
     }
 }
 
-if darkness {
+if darkness && !instance_exists(PauseImage) {
 	if global.time % 5 == 0 && surface_exists(dark) &&
 	(surface_get_width(dark) != view_width or surface_get_height(dark) != view_height) {
 		surface_resize(dark, view_width, view_height)

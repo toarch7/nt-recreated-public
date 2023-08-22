@@ -1,4 +1,8 @@
+#macro FOG_ALPHA 0.1
+
 darkness = 0
+
+dark = -1
 
 if instance_exists(Player) {
     if GameCont.area && GameCont.area != 106 && round(GameCont.area / 2) == GameCont.area / 2 {
@@ -8,12 +12,13 @@ if instance_exists(Player) {
 
 if darkness {
     dark = surface_create(view_width, view_height)
+	
     surface_set_target(dark)
     draw_clear(c_white)
     surface_reset_target()
 }
 
-col = merge_color(c_ltgray, c_white, .7)
+col = merge_color(c_ltgray, c_white, 0.7)
 crosshair = save_get_val("visual", "crosshair", 0)
 
 gameovertime = 0
@@ -31,4 +36,3 @@ alarm[0] = 1
 
 instance_create(0, 0, SubTopCont)
 
-#macro FOG_ALPHA 0.1
