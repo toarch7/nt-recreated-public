@@ -502,6 +502,8 @@ function camera_set_pos(_x, _y) {
 	camera_set_view_pos(view_camera, _x, _y)
 }
 
+mp_potential_settings(90, 5, 5, 0)
+
 global.wep_no_assist = {}
 
 global.wep_no_assist[$ "2"] = 1
