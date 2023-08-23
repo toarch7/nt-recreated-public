@@ -13,18 +13,8 @@ if p.race != 12 {
     }
 }
 else with p {
-    amount = 1 + (ultra == 1)
-	
-    if rogue_ammo < rogue_ammo_max {
-        with instance_create(x, y, PopupText)
-        mytext = "+" + string(other.amount) + " PORTAL STRIKE" + qm(other.amount > 1, "S", "")
-        
-        rogue_ammo += amount
-    }
-	else {
-		with instance_create(x, y, PopupText)
-			mytext = "MAX PORTAL STRIKES"
-	}
+	with instance_create(x, y, RogueAmmo)
+		event_perform(ev_collision, Player)
 }
 
 snd_play(sndRogueCanister)

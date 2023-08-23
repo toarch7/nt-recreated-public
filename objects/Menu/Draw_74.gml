@@ -1,5 +1,10 @@
+if !instance_exists(Player)
+	scrGamemodePlaybuttons()
+
+// loadout
 event_user(1)
 
+// hint
 if hint != "" {
     var txt = string_hash_to_newline(loc(string_upper(hint)))
 	

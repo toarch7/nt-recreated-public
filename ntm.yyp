@@ -2595,6 +2595,7 @@
     {"id":{"name":"sndSeekerShotgun","path":"sounds/sndSeekerShotgun/sndSeekerShotgun.yy",},"order":209,},
     {"id":{"name":"sndExploGuardianDeadCharge","path":"sounds/sndExploGuardianDeadCharge/sndExploGuardianDeadCharge.yy",},"order":210,},
     {"id":{"name":"sndExploGuardianFire","path":"sounds/sndExploGuardianFire/sndExploGuardianFire.yy",},"order":211,},
+    {"id":{"name":"scrGamemodePlaybuttons","path":"scripts/scrGamemodePlaybuttons/scrGamemodePlaybuttons.yy",},"order":211,},
     {"id":{"name":"sndOasisMelee","path":"sounds/sndOasisMelee/sndOasisMelee.yy",},"order":212,},
     {"id":{"name":"sndOasisPopo","path":"sounds/sndOasisPopo/sndOasisPopo.yy",},"order":213,},
     {"id":{"name":"musThemeB","path":"sounds/musThemeB/musThemeB.yy",},"order":56,},

@@ -1,6 +1,3 @@
-if GameCont.area == 0 {instance_destroy(id, 0); exit}
+event_inherited()
 
-image_speed = 0
-size = 1
-friction = 4
-
+spr_dead = sprRogueChestOpen
