@@ -43,6 +43,8 @@ function draw_bigname(_x, _y, _text, col = draw_get_color(), scale = 0.65, angle
     s = surface_create(ceil(string_width(_text) * scale) + 6, ceil(string_height(_text) * scale) + 2)
 
     surface_set_target(s)
+	
+	draw_clear_alpha(c_black, 0)
 
     draw_set_color(c_black)
 	
