@@ -1,4 +1,5 @@
 var oldarea;
+
 oldarea = area
 subarea = 1
 
@@ -29,7 +30,7 @@ if GameCont.race == 13 {
 if instance_exists(Player)
 	alarm[0] = -1
 
-if oldarea != area or audio_is_playing(song) or !audio_is_playing(amb) {
+if oldarea != area or !audio_is_playing(song) or !audio_is_playing(amb) {
     audio_stop_sound(song)
     audio_stop_sound(amb)
 	
