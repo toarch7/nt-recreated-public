@@ -24,18 +24,23 @@ if !instance_exists(CoopController) {
 
 if gamepad_button_check_pressed(0, gp_start) {
     with UberCont
-    localcoop = 1
+		localcoop = 1
 
     var ind = 0
 
     repeat 2 {
-        var inst = new PlayerInstance(ind, irandom(10) + 1, !irandom(2))
-        UberCont.playerinstances[$ string(ind)] = inst
+        var inst = new PlayerInstance(ind)
+		
+		inst.race = irandom(11) + 1
+		inst.bskin = !irandom(2)
+		
         inst.cwep = UberCont.race_swep[inst.race]
-        ind++
+        
+		ind ++
     }
 
-    with SpiralCont instance_destroy()
+    with SpiralCont
+		instance_destroy()
 
     instance_create(0, 0, GameCont)
     instance_create(0, 0, MenuGen)

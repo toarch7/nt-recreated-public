@@ -1,4 +1,4 @@
-function scrPlayerFire() {
+function scrPlayerFiring() {
 	var enoughrads = scrCheckRads(wep),
 		enoughammo = scrCheckAmmo(wep),
 	
@@ -8,7 +8,7 @@ function scrPlayerFire() {
 	}
 	
     if KeyCont.press_fire[p] && race != 7 && !wep_auto[wep] && ((wep_type[wep] == 0 or wep_type[wep] == 1) or can_shoot) && reload < 10
-        clicked = 1
+        clicked = true
 	
 	if KeyCont.press_fire[index] && (!enoughammo or !enoughrads) {
 		if !enoughammo {
@@ -26,10 +26,8 @@ function scrPlayerFire() {
 		clicked = false
 	}
 	
-    var yvmobilepopping = (race == 6 && is_mobile(index) && KeyCont.activeforever[index] && KeyCont.press_fire[index])
-    
-	if scrCheckCanShoot(wep) && (!yvmobilepopping or !scrYVCanPop(wep)) {
-		if can_shoot && (clicked or KeyCont.press_fire[index] or (!yvmobilepopping && KeyCont.hold_fire[index] && (wep_auto[wep] or race == 7))) {
+	if scrCheckCanShoot(wep) {
+		if can_shoot && (clicked or KeyCont.press_fire[index] or (KeyCont.hold_fire[index] && (wep_auto[wep] or race == 7))) {
 	        scrFire(wep)
 			clicked = 0
 		}

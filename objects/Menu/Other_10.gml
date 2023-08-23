@@ -1,5 +1,5 @@
 if !weekly {
-    var instances = UberCont.playerinstances
+    var instances = playerinstances
     var keys = struct_keys(instances)
 
     for (var i = 0; i < array_length(keys); i++) {

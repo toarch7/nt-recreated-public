@@ -43,4 +43,4 @@ for (var i = 0; i < len; i++) {
     }
 }
 
-KeyCont.players = array_length(struct_keys(UberCont.playerinstances))
+KeyCont.players = array_length(struct_keys(playerinstances))

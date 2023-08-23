@@ -779,7 +779,7 @@
     {"id":{"name":"sprSnowBotCarHurt","path":"sprites/sprSnowBotCarHurt/sprSnowBotCarHurt.yy",},"order":19,},
     {"id":{"name":"sprSwitchBig","path":"sprites/sprSwitchBig/sprSwitchBig.yy",},"order":6,},
     {"id":{"name":"sprSnowBotCarThrow","path":"sprites/sprSnowBotCarThrow/sprSnowBotCarThrow.yy",},"order":21,},
-    {"id":{"name":"scrPlayerFire","path":"scripts/scrPlayerFire/scrPlayerFire.yy",},"order":210,},
+    {"id":{"name":"scrPlayerFiring","path":"scripts/scrPlayerFiring/scrPlayerFiring.yy",},"order":210,},
     {"id":{"name":"sprSnowTankIdle","path":"sprites/sprSnowTankIdle/sprSnowTankIdle.yy",},"order":1,},
     {"id":{"name":"sprSnowTankWalk","path":"sprites/sprSnowTankWalk/sprSnowTankWalk.yy",},"order":3,},
     {"id":{"name":"sndGoldGrenade","path":"sounds/sndGoldGrenade/sndGoldGrenade.yy",},"order":46,},

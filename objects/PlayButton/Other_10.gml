@@ -11,8 +11,8 @@ global.is_server = 1
 with UberCont {
     daily_run = 0
     weekly_run = 0
-
-    playerinstances[$ string(global.index)] = new PlayerInstance(global.index, 0, 0)
+	
+	playerinstance_reset()
 }
 
 switch image_index {

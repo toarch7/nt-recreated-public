@@ -35,8 +35,6 @@ paused = 0
 want_pause = 0
 alarm[0] = 30
 
-playerinstances = {}
-
 scrLoadLocalizations()
 
 saving = 0
@@ -46,6 +44,8 @@ mainsound = audio_emitter_create()
 mainvol = 1
 
 audio_emitter_falloff(mainsound, 100, 300, 1)
+
+playerinstance = new PlayerInstance()
 
 scrInit()
 

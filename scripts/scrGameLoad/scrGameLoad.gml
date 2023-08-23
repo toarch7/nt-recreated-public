@@ -34,7 +34,7 @@ function scrGameLoad() {
 
         delete a
 
-        UberCont.playerinstances = json_parse(buffer_read(b, buffer_string)) // playerinstances
+        playerinstances = json_parse(buffer_read(b, buffer_string)) // playerinstances
 
         var a = json_parse(buffer_read(b, buffer_string)) // player
 

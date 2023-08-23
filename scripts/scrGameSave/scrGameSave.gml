@@ -68,7 +68,7 @@ function scrGameSave() {
     }
 
     // Save playerinstances
-    buffer_write(b, buffer_string, json_stringify(UberCont.playerinstances))
+    buffer_write(b, buffer_string, json_stringify(playerinstances))
 
     // Save player
     with Player

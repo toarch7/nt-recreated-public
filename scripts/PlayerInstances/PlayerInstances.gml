@@ -1,3 +1,8 @@
+globalvar playerinstances, playerinstance;
+
+playerinstances = {}
+playerinstance = undefined
+
 function scrRunStart() {
     random_set_seed(global.seed)
 	
@@ -31,7 +36,7 @@ function scrRunStart() {
 }
 
 function scrSpawnPlayers(myIndex = global.index) {
-    var players = UberCont.playerinstances
+    var players = playerinstances
     var names = struct_keys(players)
 
     for (var i = 0; i < array_length(names); i++) {
@@ -85,14 +90,14 @@ function scrSpawnPlayers(myIndex = global.index) {
                 is_me = 1
 
                 if UberCont.daily_run && !UberCont.weekly_run {
-                    UberCont.ctot_days[race]++
+                    UberCont.ctot_days[race] ++
                 }
 
                 if global.hardmode {
-                    UberCont.ctot_hard[race]++
+                    UberCont.ctot_hard[race] ++
                 }
 
-                UberCont.ctot_runs[race]++
+                UberCont.ctot_runs[race] ++
             }
 
             wep = pinst.cwep
@@ -106,34 +111,115 @@ function scrSpawnPlayers(myIndex = global.index) {
     }
 }
 
-// playerinstances are used to store starting loadout of a physical player
-function PlayerInstance(index = 0, race = 1, skin = 0) constructor {
-    self.index = index
-    self.race = race
-    self.skin = skin
-    self.cwep = 1
-    self.hp = 1
+function PlayerInstance(_index = 0) constructor {
+    index = _index
+	uid = -1
 	
-	self.randchar = 0
+	name = "Player"
+	color = -1
+	
+    race = 0
+    skin = 0
+	
+    cwep = 1
+    hp = 0
+	cprefs = 0
+	randchar = 0
+	
+	birthdate = -1
+	
+	static update_prefs = function() {
+		var cprefs = 0
+		
+		with UberCont {
+			for(var i = 0; i < array_length(cpref_list); i ++) {
+				if self[$ "cpref_" + cpref_list[i]]
+					cprefs |= power(2, i + 1)
+			}
+		}
+		
+		name = scrGetUsername()
+		color = global.player_color
+		
+		if self.cprefs != cprefs
+			KeyCont.activeforever[index] = false
+		
+		self.cprefs = cprefs
+		
+		if instance_exists(CoopController) {
+			// share
+		}
+	}
+	
+	static pref = function(name) {
+		var cprefs = self.cprefs
+		
+		switch name {
+			case "eyes": return (cprefs & 2) == 2
+			case "melting": return (cprefs & 4) == 4
+			case "plant": return (cprefs & 8) == 8
+			case "yv": return (cprefs & 16) == 16
+			case "steroids": return (cprefs & 32) == 32
+			case "horror": return (cprefs & 64) == 64
+			case "rogue": return (cprefs & 128) == 128
+			case "skeleton": return (cprefs & 256) == 256
+		}
+		
+		return 0
+	}
 	
     static write = function(buff) {
-        buffer_write(buff, buffer_u8, self.index)
-        buffer_write(buff, buffer_u8, self.race)
-        buffer_write(buff, buffer_u8, self.skin)
-        buffer_write(buff, buffer_u16, self.cwep)
+        buffer_write(buff, buffer_u8, index)
+		
+        buffer_write(buff, buffer_u8, race)
+        buffer_write(buff, buffer_u8, skin)
+        buffer_write(buff, buffer_u16, cwep)
+		
+        buffer_write(buff, buffer_u32, color)
+        buffer_write(buff, buffer_u32, cprefs)
+		
+        buffer_write(buff, buffer_string, name)
+		
         return buff
     }
 
     static read = function(buff) {
-        self.race = buffer_read(buff, buffer_u8)
-        self.skin = buffer_read(buff, buffer_u8)
-        self.cwep = buffer_read(buff, buffer_u16)
+		
+        race = buffer_read(buff, buffer_u8)
+        skin = buffer_read(buff, buffer_u8)
+        cwep = buffer_read(buff, buffer_u16)
+		
+        color = buffer_read(buff, buffer_u32)
+        cprefs = buffer_read(buff, buffer_u32)
+		
+        name = buffer_read(buff, buffer_string)
     }
+	
+	playerinstances[$ index] = self
+}
+
+function playerinstance_reset(index = global.index) {
+	var old = playerinstance_get(index),
+		old_index = -1
+	
+	if old != undefined
+		old_index = old.index
+	
+	print("RESET", index, old_index, old)
+	
+	var player = new PlayerInstance(index)
+	
+	print("NEW PLAYER", player)
+	
+	if old != undefined && old_index == index
+		player.update_prefs()
+	
+	return player
 }
 
 function playerinstance_remove(index) {
-    UberCont.playerinstances[$ string(index)] = undefined
-    UberCont.playerinstances = struct_clone(UberCont.playerinstances, 0)
+    playerinstances[$ string(index)] = undefined
+    playerinstances = struct_clone(playerinstances, 0)
 
-    show_debug_message("Removed playerinstace. list: " + string(UberCont.playerinstances))
+    show_debug_message("Removed playerinstace. list: " + string(playerinstances))
 }

@@ -65,12 +65,14 @@ try {
 				
                 instance_create(0, 0, GameCont)
 				
-                UberCont.playerinstances[$ "0"] = new PlayerInstance(0, 0, 0)
+				var host = new PlayerInstance(0) // host
 				
-                for (var i = 0; i < array_length(playerindexes); i++) {
-                    var _ind = playerindexes[i]
-
-                    UberCont.playerinstances[$ string(_ind)] = new PlayerInstance(_ind, 0, 0)
+                for (var i = 0; i < array_length(playerindexes); i ++) {
+                    var _ind = playerindexes[i],
+						_inst = new PlayerInstance(_ind)
+					
+					if _ind == global.index
+						_inst.update_prefs()
                 }
 				
                 global.seed = buffer_read(data, buffer_u32)

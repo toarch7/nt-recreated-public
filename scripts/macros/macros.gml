@@ -109,13 +109,6 @@ KeyCont = {
     players: 1
 }
 
-global.player_color = [
-	make_color_rgb(196, 97, 255),
-	make_color_rgb(17, 213, 113),
-	make_color_rgb(255, 41, 41),
-	make_color_rgb(41, 149, 255)
-]
-
 var keys = ["fire", "spec", "pick", "swap", "paus", "horn"]
 
 for (var i = 0; i < array_length(keys); i++) {

@@ -592,7 +592,12 @@ for (var i = 0; i < item_count; i++) {
 				
 				drawx += opt.width / 2
 				
-				drawx += 32
+				var _size = 32
+				
+				if category == OptionCategory.Controls_Preferences
+					_size = 60
+				
+				drawx += _size
 				
 				var val = opt.value
 				
@@ -659,7 +664,7 @@ for (var i = 0; i < item_count; i++) {
 						draw_text_nt(drawx, drawy, loc(val))
 				}
 				
-				drawx -= 32
+				drawx -= _size
 			}
 			else draw_text_nt(drawx, drawy, loc(opt.name))
 		}

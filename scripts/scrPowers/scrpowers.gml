@@ -154,9 +154,7 @@ function scrPowers() {
     }
 
     //YUNG VENUZ
-    var yvmobilepopping = race == 6 && scrYVCanPop(wep) && KeyCont.activeforever[index] && KeyCont.press_fire[index]
-	
-    if race == 6 && can_shoot && ((!is_mobile(index) && KeyCont.press_spec[index]) or yvmobilepopping) {
+    if race == 6 && can_shoot && KeyCont.press_spec[index] {
         if !scrYVCanPop(wep)
 			return snd_play(sndMutant6Melee)
 		
@@ -194,8 +192,8 @@ function scrPowers() {
 			weapon_post(gunangle, 8, 1, 0)
 			motion_add(gunangle + 180, 4)
 			
-			if yvmobilepopping
-				clicked = 0
+			//if yvmobilepopping
+			//	clicked = 0
 			
 			if speed > 5
 				speed = 5

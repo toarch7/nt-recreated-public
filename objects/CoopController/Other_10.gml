@@ -103,7 +103,7 @@ var stop = 0,
 					GameCont.crown = _data[2]
 				}
 				else if _data[1] = "playerinstance" {
-					UberCont.playerinstances[$ string(i)] = _data[2]
+					playerinstances[$ string(i)] = _data[2]
 					
 					if instance_exists(Menu) {
 						var _is_me = net_isme()

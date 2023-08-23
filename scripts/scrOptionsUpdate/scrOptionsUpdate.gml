@@ -60,6 +60,17 @@ function scrOptionsUpdate() {
 		
 		opt_gamepad_type = save_get_val_s("options", "gamepad_type", 0)
 		
+		cpref_list = [ "eyes", "melting", "plant", "yv", "steroids", "horror", "rogue", "skeleton" ]
+		
+		cpref_eyes = save_get_val_s("cprefs", "eyes", 1)
+		cpref_melting = save_get_val_s("cprefs", "melting", 1)
+		cpref_plant = save_get_val_s("cprefs", "plant", 0)
+		cpref_yv = save_get_val_s("cprefs", "yv", 1)
+		cpref_steroids = save_get_val_s("cprefs", "steroids", 1)
+		cpref_horror = save_get_val_s("cprefs", "horror", 1)
+		cpref_rogue = save_get_val_s("cprefs", "rogue", 1)
+		cpref_skeleton = save_get_val_s("cprefs", "skeleton", 0)
+		
 		// Update variables
 		
         scrVolume()
@@ -125,5 +136,7 @@ function scrOptionsUpdate() {
 		scrKeymapsSetup()
 		
 		scrOptionsLoadKeymaps()
+		
+		playerinstance.update_prefs()
     }
 }

@@ -11,7 +11,7 @@ if !is_struct(inst)
 	exit
 
 if global.coop {
-    var picks = struct_keys(UberCont.playerinstances),
+    var picks = struct_keys(playerinstances),
         n = 0
 	
     for (var i = array_length(picks) - 1; i >= 0; i--) {

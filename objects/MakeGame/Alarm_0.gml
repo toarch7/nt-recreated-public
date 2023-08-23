@@ -82,7 +82,7 @@ if loading {
 
         cont = json_parse(buffer_read(b, buffer_string)) // gamecont
 
-        UberCont.playerinstances = json_parse(buffer_read(b, buffer_string)) // playerinstances duh
+        playerinstances = json_parse(buffer_read(b, buffer_string)) // playerinstances duh
 
         player = json_parse(buffer_read(b, buffer_string)) // player
 

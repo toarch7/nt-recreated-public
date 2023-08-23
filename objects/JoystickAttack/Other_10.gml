@@ -33,7 +33,8 @@ if UberCont.opt_aimbot {
     }
 }
 
-if instance_exists(MenuOptions) or UberCont.opt_keyboard or UberCont.opt_gamepad exit
+if instance_exists(MenuOptions) or UberCont.opt_keyboard or UberCont.opt_gamepad
+	exit
 
 var i = get_nearest_touch(rad)
 
@@ -42,7 +43,8 @@ KeyCont.hold_fire[global.index] = 0
 KeyCont.press_fire[global.index] = 0
 KeyCont.release_fire[global.index] = 0
 
-if index == -1 index = i
+if index == -1
+	index = i
 
 if !UberCont.opt_aimbot {
     if index != -1 {
@@ -57,9 +59,11 @@ if !UberCont.opt_aimbot {
         KeyCont.hold_fire[global.index] = 1
 
         // note: press & release are swapped intentionally
-        if device_mouse_check_button_pressed(index, mb_left) KeyCont.release_fire[global.index] = 1
+        if device_mouse_check_button_pressed(index, mb_left)
+			KeyCont.release_fire[global.index] = 1
 
-        if device_mouse_check_button_released(index, mb_left) KeyCont.press_fire[global.index] = 1
+        if device_mouse_check_button_released(index, mb_left)
+			KeyCont.press_fire[global.index] = 1
 
         if !device_mouse_check_button(index, mb_left) or (distance_to_point(mx, my) > rad * 3) {
             index = -1

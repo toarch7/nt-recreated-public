@@ -22,6 +22,7 @@ enum OptionCategory {
 	
 	Controls_Remapping,
 	Controls_Remapping_Keys,
+	Controls_Preferences,
 	
 	NumOptions
 }
@@ -313,6 +314,7 @@ option_elements_create
 	
 	{ type: "category", name: "REMAPPING", category: OptionCategory.Controls_Remapping, visible: false },
 	{ type: "category", name: "REMAPPING", category: OptionCategory.Controls_Remapping_Keys, visible: false },
+	{ type: "category", name: "CHAR PREFS", category: OptionCategory.Controls_Preferences, visible: false },
 )
 
 option_category_end()
@@ -714,7 +716,7 @@ option_elements_create(
 		}
 	},
 	
-	{ type: "switch", name: "KEYBOARD MODE", key: "options_keyboard", mobile_only: true },
+	// { type: "switch", name: "KEYBOARD MODE", key: "options_keyboard", mobile_only: true },
 	
 	{ type: "switch", name: "AIM ASSIST", key: "controls_assist", mobile_only: true },
 	{ type: "switch", name: "360 AIMBOT", key: "controls_aimbot", mobile_only: true },
@@ -751,7 +753,7 @@ option_elements_create(
 		}
 	},
 	
-	
+	{ type: "category", name: "CHARACTER PREFERENCES", category: OptionCategory.Controls_Preferences } // mobile_only: true }
 )
 
 option_category_end()
@@ -827,6 +829,40 @@ option_elements_create(
 )
 
 #endregion Controls_Remapping_Keys
+#region Controls_Preferences
+option_category_begin(OptionCategory.Controls_Preferences)
+
+cpref_condition = function(opt) { return UberCont.ctot_time[opt.char] > 0 }
+cpref_name = function(opt) { return (!UberCont.ctot_time[opt.char]) ? "@d- LOCKED -" : "@(sprPlayerMapIcon:" + string(opt.char) + ")  " + loc(opt.name) }
+
+option_elements_create(
+	{ type: "switch", name: "AUTO TELEKINESIS",      key: "cprefs_eyes", char: 3,
+			condition: cpref_condition, name_get: cpref_name },
+		
+	{ type: "switch", name: "AUTO EXPLOSIONS",       key: "cprefs_melting", char: 4,
+			condition: cpref_condition, name_get: cpref_name },
+		
+	{ type: "switch", name: "AUTO SNARE",            key: "cprefs_plant", char: 5,
+			condition: cpref_condition, name_get: cpref_name },
+		
+	{ type: "switch", name: "POP-POP SWITCH",        key: "cprefs_yv", char: 6,
+			condition: cpref_condition, name_get: cpref_name },
+		
+	{ type: "switch", name: "DUAL WEILD SWITCH",     key: "cprefs_steroids", char: 7,
+			condition: cpref_condition, name_get: cpref_name },
+		
+	{ type: "switch", name: "USE WEAPON BEAMING",    key: "cprefs_horror", char: 11,
+			condition: cpref_condition, name_get: cpref_name },
+		
+	{ type: "switch", name: "SWIPE BOMBING",         key: "cprefs_rogue", char: 12,
+			condition: cpref_condition, name_get: cpref_name },
+	
+	{ type: "switch", name: "GAMBLE SWITCH",         key: "cprefs_skeleton", char: 14,
+			condition: cpref_condition, name_get: cpref_name },
+)
+
+
+#endregion Controls_Preferences
 #region Cheats
 option_category_begin(OptionCategory.Cheats)
 

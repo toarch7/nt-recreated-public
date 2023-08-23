@@ -30,8 +30,8 @@ switch image_index {
             with UberCont {
                 daily_run = 0
                 weekly_run = 0
-
-                playerinstances[$ string(global.index)] = new PlayerInstance(global.index, 0, 0)
+				
+				playerinstance_reset()
             }
         }
 
@@ -55,13 +55,17 @@ switch image_index {
         }
 		
         if n <= 1 {
-            with UberCont playerinstances[$ string(global.index)] = new PlayerInstance(global.index, 0, 0)
-
-            with MainMenuButton instance_destroy()
-            with SpiralCont instance_destroy()
+			playerinstance_reset()
+			
+            with MainMenuButton
+				instance_destroy()
+			
+            with SpiralCont
+				instance_destroy()
 
             if instance_exists(GameCont) {
-                with GameCont instance_destroy()
+                with GameCont
+					instance_destroy()
             }
 
             instance_create(0, 0, GameCont)

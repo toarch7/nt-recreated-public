@@ -88,7 +88,7 @@ function scrDrawRoadmap(_x, _y, _pos, cont = GameCont) {
 
     draw_set_color(c_white)
 
-    var names = struct_keys(UberCont.playerinstances)
+    var names = struct_keys(playerinstances)
 
     var positions = [
         [-3, - 3],

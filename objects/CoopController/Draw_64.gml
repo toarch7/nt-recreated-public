@@ -64,12 +64,11 @@ if global.is_server {
     if mouse_check_button_pressed(mb_left) && point_in_rectangle(mx, my, dx - 48, dy - 12, dx + 48, dy + 12) {
         instance_create(0, 0, GameCont)
 		
-        UberCont.playerinstances[$ "0"] = new PlayerInstance(0, 0, 0)
+        playerinstance = new PlayerInstance(0)
+		playerinstance.update_prefs()
 		
-        for (var i = 0; i < network_clientcount(); i++) {
-            var _ind = playerindexes[i]
-			
-            UberCont.playerinstances[$ string(_ind)] = new PlayerInstance(_ind, 0, 0)
+        for (var i = 1; i < network_clientcount(); i++) {
+			var p = new PlayerInstance(playerindexes[i])
         }
 		
         global.seed = randomize()

@@ -9,8 +9,6 @@ with UberCont {
 	draw_surface_ext(application_surface, 0, 0, 1 / opt_scaling, 1 / opt_scaling, 0, c_white, 1)
 	
 	with TopCont {
-		print("Hi", darkness, dark)
-		
 		if !darkness
 			continue
 		
@@ -33,7 +31,6 @@ with UberCont {
 	surface_reset_target()
 	
 	surface_save(srf, "paus.png")
-	print("PauseImage taken")
 	
 	pausespr = sprite_create_from_surface(srf, 0, 0, view_width, view_height, 0, 0, 0, 0)
 	

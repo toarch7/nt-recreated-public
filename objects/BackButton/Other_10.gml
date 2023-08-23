@@ -64,7 +64,7 @@ else if instance_exists(Menu) {
 	    UberCont.daily_run = 0
 	    UberCont.weekly_run = 0
 		
-	    UberCont.playerinstances = {}
+	    playerinstances = {}
 		
 	    with MusCont {
 	        snd_stop(song)

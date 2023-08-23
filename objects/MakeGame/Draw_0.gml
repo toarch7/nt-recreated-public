@@ -97,7 +97,7 @@ if loading {
                 file_delete("gamestate.dat")
                 room_goto(romGame)
 
-                UberCont.playerinstances = {}
+                playerinstances = {}
                 UberCont.daily_run = 0
                 UberCont.weekly_run = 0
                 global.hardmode = 0

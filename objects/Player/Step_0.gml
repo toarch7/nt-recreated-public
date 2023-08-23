@@ -54,7 +54,7 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
             }
 
             if instance_exists(TutCont) && TutCont.pos == 0 && !TutCont.doin {
-                TutCont.alarm[0] = 30
+                TutCont.alarm[0] = 90
                 TutCont.doin = 1
             }
         }
@@ -302,7 +302,7 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
     }
 
     if !(race == 2 && KeyCont.hold_spec[index]) && hp >= 0 {
-		scrPlayerFire()
+		scrPlayerFiring()
 		
         if race == 7 && KeyCont.hold_spec[index] && bcan_shoot {
 			var press = KeyCont.press_fire[index],
@@ -317,7 +317,7 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
 			
 			scrSwapWeps()
 			
-			scrPlayerFire()
+			scrPlayerFiring()
 			
 			bcan_shoot = can_shoot
 			

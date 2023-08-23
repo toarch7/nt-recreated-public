@@ -22,4 +22,4 @@ if !position_empty(x, y)
 
 team = 3
 
-hit_id = sprPopoExplo
+hit_id = sprPopFoExplo
