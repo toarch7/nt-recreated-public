@@ -48,39 +48,43 @@ global.desktop = 0
 global.view_width_max = view_width
 
 function scrSetViewSize(windowresize = 1) {
-    var aspect_ratio = display_get_width() / display_get_height()
-    var s = UberCont.opt_scaling
-    var w = 320
-    var h = 240
+    var aspect_ratio = display_get_width() / display_get_height(),
+		
+		s = UberCont.opt_scaling,
+		
+		w = 320,
+		h = 240
 	
     ideal_width = w
     ideal_height = h
-
+	
     global.view_width_max = round(ideal_height * aspect_ratio)
-
-    if UberCont.opt_resolution {
+	
+    if UberCont.opt_resolution
         ideal_width = global.view_width_max
-    }
-
-    if ideal_width < w ideal_width = w
-
-    if ideal_width & 1 ideal_width++
-
+	
+    if ideal_width < w
+		ideal_width = w
+	
+    if ideal_width & 1
+		ideal_width ++
+	
     view_width = ideal_width
     view_height = ideal_height
-
-    room_set_view(romInit, 0, true, 0, 0, ideal_width, ideal_height, 0, 0, ideal_width * s, ideal_height * s, 0, 0, 0, 0, noone);
-    room_set_view(romGame, 0, true, 0, 0, ideal_width, ideal_height, 0, 0, ideal_width * s, ideal_height * s, 0, 0, 0, 0, noone);
-    room_set_view_enabled(romGame, 1)
-
+	
+	room_set_view(romInit, 0, true, 0, 0, ideal_width, ideal_height, 0, 0, ideal_width * s, ideal_height * s, 0, 0, 0, 0, noone);
+	room_set_view(romGame, 0, true, 0, 0, ideal_width, ideal_height, 0, 0, ideal_width * s, ideal_height * s, 0, 0, 0, 0, noone);
+	room_set_view_enabled(romGame, 1)
+	
     camera_set_view_size(view_camera, ideal_width, ideal_height)
+	display_set_gui_size(ideal_width, ideal_height)
+	
     surface_resize(application_surface, ideal_width * s, ideal_height * s)
     camera_set_view_border(view_camera, ideal_width * s, ideal_height * s)
-    display_set_gui_size(view_width, view_height)
-
-    room_set_width(romGame, view_width)
-    room_set_height(romGame, view_height)
-
+	
+    room_set_width(romGame, ideal_width)
+    room_set_height(romGame, ideal_height)
+	
     if global.desktop && windowresize {
         window_set_size(view_width, view_height)
         window_set_min_width(view_width)

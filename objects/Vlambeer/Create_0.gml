@@ -1,4 +1,4 @@
-scrSetViewSize(0)
+scrSetViewSize(false)
 
 x = view_width / 2
 y = view_height / 2

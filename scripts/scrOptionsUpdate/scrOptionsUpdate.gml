@@ -91,8 +91,9 @@ function scrOptionsUpdate() {
 		
         scrLanguageSet(opt_language)
 		
-        if res != undefined && (res != opt_resolution or scaling != opt_scaling)
-            scrSetViewSize(0)
+        if res != undefined && (res != opt_resolution or scaling != opt_scaling) {
+            scrSetViewSize(false)
+		}
 		
         if os_type == os_android && (instance_exists(GameCont) or instance_exists(Player))
             SetVolumeControl(opt_volumecontrol)

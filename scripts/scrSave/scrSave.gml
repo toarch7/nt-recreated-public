@@ -13,8 +13,12 @@ function scrSave() {
 	        var data = json_decode(raw)
 			
 			var options = [
-				"cheats_console", "cheats_griller", "options_gamepad", "options_keyboard", "etc_nickname"
+				"cheats_console", "cheats_griller", "options_gamepad", "options_keyboard",
+				"etc_nickname", "visual_resolution", "visual_fullscreen"
 			]
+			
+			for(var i = 0; i < array_length(cpref_list); i ++)
+				array_push(options, "cprefs_" + cpref_list[i])
 			
 			for(var i = 0; i < array_length(options); i ++) {
 				var opt = options[i]

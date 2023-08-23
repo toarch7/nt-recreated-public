@@ -91,6 +91,7 @@ if paused && !want_pause {
 	}
 }
 
+
 /*
 draw_set_font(fntSmall)
 
