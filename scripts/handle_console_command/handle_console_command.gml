@@ -134,6 +134,10 @@ function handle_console_command(str) {
                 instance_destroy(id, 0)
                 with Portal
                 instance_destroy(id, 0)
+				with IDPDSpawn
+                instance_destroy(id, 0)
+				with VanSpawn
+                instance_destroy(id, 0)
 
                 with Player {
                     if mask_index != mskPlayer {

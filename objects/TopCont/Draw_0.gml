@@ -101,10 +101,14 @@ if !instance_exists(MenuGen) {
     draw_set_valign(fa_center)
 
     with PopupText {
-        if visible {
-            draw_set_color(c_white)
-            draw_text_nt(median(view_xview + view_width - 10 - string_width((mytext)) / 2, view_xview + 10 + string_width((mytext)) / 2, x), median(view_yview + view_height - 30, view_yview + 20, y), (string(mytext)))
-        }
+        if !visible
+			continue
+		
+		var _x = clamp(x, view_xview + 20, view_xview + view_width - 20)
+			_y = median(y, view_yview + 5, view_yview + view_height - 5)
+		
+        draw_set_color(c_white)
+        draw_text_nt(_x, _y, loc(mytext))
     }
 
     with LevelUp {

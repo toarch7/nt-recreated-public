@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndIDPDNadeExplo",
-  "duration": 1.005,
+  "duration": 1.0,
   "parent": {
     "name": "Popo",
     "path": "folders/Sounds/Popo.yy",

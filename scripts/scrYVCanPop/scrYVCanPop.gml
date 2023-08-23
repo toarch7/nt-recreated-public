@@ -1,3 +1,3 @@
 function scrYVCanPop(wep) {
-    return wep_type[wep] != 0 && wep != 24 && wep != 27 && wep != 36
+    return wep_type[wep] != 0 && wep != wep_energy_sword && wep != wep_energy_screwdriver && wep != wep_jackhammer
 }

@@ -1,32 +1,32 @@
-function scrFire(wep, useAmmo) {
-    can_shoot = 0
-    reload = wep_load[wep]
-
-    var oldviewx2 = BackCont.viewx2
-    var oldviewy2 = BackCont.viewy2
-    var oldshake = BackCont.shake
-
-    if race == 7 && skill_get(5) && (random(typ_ammo[wep_type[wep]]) < wep_cost[wep]) && ((random(2) < 1 or !bcan_shoot) && random(3) < 2) {
+function scrFire(wep, useAmmo = true) {
+	reload = wep_load[wep]
+	can_shoot = 0
+    
+    var oldviewx2 = BackCont.viewx2,
+		oldviewy2 = BackCont.viewy2,
+		oldshake = BackCont.shake
+	
+    if race == 7 && skill_get(mut_throne_butt) && (random(typ_ammo[wep_type[wep]]) < wep_cost[wep]) && ((random(2) < 1 or !bcan_shoot) && random(3) < 2) {
 		var typ = wep_type[bwep]
 		
         if typ > 0 {
-            var amount = floor(typ_ammo[typ] / 2),
+            var amount = ceil(typ_ammo[typ] / 2),
                 popup = instance_create(x, y, PopupText)
-            
+			
             with popup {
 			    mytext = "+" + string(amount) + " " + loc(typ_name[typ])
             }
-
+			
             ammo[typ] += amount
-
+			
             if ammo[typ] > typ_amax[typ] {
                 popup.mytext = loc_sfmt("MAX %", loc(typ_name[typ]))
                 ammo[typ] = typ_amax[typ]
             }
         }
     }
-
-    if wep_type[wep] == 5 && skill_get(17) {
+	
+    if wep_type[wep] == 5 && skill_get(mut_laser_brain) {
         repeat wep_cost[wep] {
             with instance_create(x, y, AnimParticle) {
                 image_speed = 0.4 - random(0.1)
@@ -37,13 +37,12 @@ function scrFire(wep, useAmmo) {
             }
         }
     }
-
-    if !infammo or !useAmmo {
+	
+    if !infammo && useAmmo {
         ammo[wep_type[wep]] -= wep_cost[wep]
-
-        if GameCont.rad >= wep_rads[@wep] {
-            GameCont.rad -= wep_rads[@wep]
-        }
+		
+        if GameCont.rad >= wep_rads[@ wep]
+            GameCont.rad -= wep_rads[@ wep]
     }
 
     if wep_type[wep] != 0 {
@@ -61,7 +60,7 @@ function scrFire(wep, useAmmo) {
         snd_play_gun(sndPistol)
 
         with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
+			motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
 
         with instance_create(x, y, Bullet1) {
             motion_add(other.gunangle + (random(8) - 4) * other.accuracy, 16)
@@ -2403,11 +2402,12 @@ function scrFire(wep, useAmmo) {
         BackCont.shake += 8
         wkick = 6
     }
-
-
+	
     if object_index == Player && index != global.index {
         BackCont.viewx2 = oldviewx2
         BackCont.viewy2 = oldviewy2
         BackCont.shake = oldshake
     }
+	
+	return true
 }

@@ -1,6 +1,9 @@
 if GameCont.area == 107 && !instance_exists(CarVenusFixed) {
     with Scorchmark {
-        instance_change(CarVenusFixed, 1)
+        with instance_create(x, y, CarVenusFixed)
+			sprite_index = sprVenusCarFixed
+		
+		instance_destroy()
     }
 }
 

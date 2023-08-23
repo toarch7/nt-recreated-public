@@ -28,15 +28,14 @@ if rad > max_rad {
 		
 		with Player {
 			with instance_create(x, y, PopupText) {
-				if GameCont.level >= 10 {
-					mytext = loc("LEVEL ULTRA!")
+				if GameCont.level < 10 {
+					mytext = string_replace("LEVEL %!", "%", GameCont.level)
 				}
-				else mytext = loc_sfmt("LEVEL %!", GameCont.level)
+				else mytext = "LEVEL ULTRA!"
 			}
 			
-			with instance_create(x, y, LevelUp) {
+			with instance_create(x, y, LevelUp)
 				creator = other.id
-			}
 		}
 		
 		if level >= 10 {

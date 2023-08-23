@@ -38,7 +38,7 @@ height ++
 
 draw_sprite(prt, race, -yoff * 4 - port_x - 24, height - 38)
 
-draw_sprite(sprCharSplat, splat_index, -yoff * 1.6, height - 36)
+draw_sprite(sprCharSplat, splat_index, round(-yoff * 1.6), round(height - 36))
 
 if loc_exists(race_name[race]) {
 	draw_set_valign(fa_center)
@@ -76,7 +76,7 @@ if appear
 if splat_index < 3
 	splat_index ++
 
-draw_sprite(sprLoadoutSplat, splat_index, yoff + width, height - 35)
+draw_sprite(sprLoadoutSplat, splat_index, round(yoff + width), round(height - 35))
 
 var canloadout = race != 0
 

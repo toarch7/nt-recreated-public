@@ -302,78 +302,43 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
     }
 
     if !(race == 2 && KeyCont.hold_spec[index]) && hp >= 0 {
-        var enoughrads = infammo or (!wep_rads[wep] or (wep_rads[wep] > 0 && GameCont.rad >= wep_rads[wep]))
-        var enoughammo = infammo or (!wep_cost[wep] or ammo[wep_type[wep]] >= wep_cost[wep])
-
-        if KeyCont.press_fire[p] && race != 7 && !wep_auto[wep] && ((wep_type[wep] == 0 or wep_type[wep] == 1) or can_shoot) && reload < 10 {
-            clicked = 1
-        }
-
-        if clicked {
-            if !enoughammo && wep_type[wep] != 0 {
-                if wep == 29 or wep == 107 {
-                    ammo[wep_type[wep]] += wep_cost[wep]
-                    sprite_index = spr_hurt
-                    image_index = 0
-                    hp -= 1
-                    last_hit = wep_sprt[wep]
-                    snd_play_hit(snd_hurt, 0.2)
-                    sleep(40)
-                } else {
-                    scrEmpty()
-
-                    clicked = 0
-                    show_empty_cooldown = 30
-                }
-            } else if !enoughrads && !show_empty_cooldown {
-                wkick = 4
-
-                with instance_create(x, y, PopupText) {
-                    mytext = "NOT ENOUGH RADS"
-                }
-
-                snd_play_hit(sndUltraEmpty, 0.2)
-
-                show_empty_cooldown = 30
-
-                clicked = 0
-            }
-        }
-
-        var shielding = 0
-
-        with CrystalShield {
-            if creator == other.id && sprite_index != spr_disappear {
-                shielding = 1
-            }
-        }
-
-        var yvmobilepopping = race == 6 && (!UberCont.opt_gamepad && !UberCont.opt_keyboard) && KeyCont.activeforever[index] && KeyCont.press_fire[index]
-        if can_shoot && !shielding && enoughammo && enoughrads && (!yvmobilepopping or !scrYVCanPop(wep)) && (clicked or KeyCont.press_fire[index] or (!yvmobilepopping && KeyCont.hold_fire[index] && (wep_auto[wep] or race == 7))) {
-            scrFire(wep, 1)
-
-            clicked = 0
-        }
-
-        var enoughrads = infammo or (!wep_rads[bwep] or (wep_rads[bwep] > 0 && GameCont.rad >= wep_rads[bwep]))
-        var enoughammo = infammo or (!wep_cost[bwep] or ammo[wep_type[bwep]] >= wep_cost[bwep])
-
-        if race == 7 && enoughammo && enoughrads && KeyCont.hold_spec[index] && bcan_shoot && ammo[wep_type[bwep]] >= wep_cost[bwep] && ((wep_rads[@wep] && GameCont.rad >= wep_rads[@wep]) or !wep_rads[@wep]) {
+		scrPlayerFire()
+		
+        if race == 7 && KeyCont.hold_spec[index] && bcan_shoot {
+			var press = KeyCont.press_fire[index],
+				hold = KeyCont.hold_fire[index]
+			
+			KeyCont.press_fire[index] = false
+			
+			if KeyCont.press_spec[index]
+				KeyCont.press_fire[index] = true
+			
+			KeyCont.hold_fire[index] = true
+			
+			scrSwapWeps()
+			
+			scrPlayerFire()
+			
+			bcan_shoot = can_shoot
+			
             scrSwapWeps()
-            scrFire(wep, 1)
-
-            scrSwapWeps()
-
-            bcan_shoot = 0
-        }
-    }
+			
+			KeyCont.press_fire[index] = press
+			KeyCont.hold_fire[index] = hold
+			
+	    }
+	}
 
     if !roll {
-        if gunangle > 90 && gunangle < 270 right = -1
-        else right = 1
+        if gunangle > 90 && gunangle < 270 {
+			right = -1
+		}
+		else right = 1
 
-        if gunangle > 0 && gunangle < 180 back = 1
-        else back = -1
+        if gunangle > 0 && gunangle < 180 {
+			back = 1
+		}
+		else back = -1
     }
 }
 
@@ -635,24 +600,8 @@ if infammo {
     }
 }
 
-if race == 3 {
-    if ultra == 1 && KeyCont.hold_spec[index] {
-        with projectile {
-            if team == other.team {
-                x = lerp(x, other.x + lengthdir_x(16, direction), .8)
-                y = lerp(y, other.y + lengthdir_y(16, direction), .8)
-            }
-        }
-    } else if ultra == 2 && !KeyCont.hold_spec[index] {
-        with enemy {
-            if distance_to_object(other) <= 96 {
-                motion_add(point_direction(other.x, other.y, x, y), 1)
-            }
-        }
-    }
-}
-
-if show_empty_cooldown show_empty_cooldown--
+if show_empty_cooldown
+	show_empty_cooldown --
 
 //cursed weps
 if curse = 1 && random(6) < 1 {

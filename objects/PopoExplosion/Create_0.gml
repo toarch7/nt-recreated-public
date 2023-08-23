@@ -17,7 +17,8 @@ repeat(20) {
 
 BackCont.shake += 7
 
-if position_meeting(x, y, Floor) instance_create(x, y, Scorch)
+if !position_empty(x, y)
+	instance_create(x, y, Scorch)
 
 team = 3
 

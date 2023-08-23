@@ -8,7 +8,7 @@ if !is_struct(inst)
 
 draw_set_color(c_black)
 draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + widescreen, 0)
-draw_rectangle(view_xview, view_yview + view_height, view_xview + view_width, view_yview + view_height - widescreen, 0)
+draw_rectangle(view_xview, view_yview + view_height, view_xview + view_width, view_yview + view_height - widescreen - 0.25, 0)
 draw_set_color(c_white)
 
 with CharSelect {

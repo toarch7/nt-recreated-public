@@ -29,3 +29,5 @@ else if dailylistfavor {
         dailylistfavor = 0
     }
 }
+
+depth = UberCont.depth + 1

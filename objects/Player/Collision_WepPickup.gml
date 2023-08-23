@@ -20,7 +20,8 @@ if KeyCont.press_pick[p] && other.visible && other.id == instance_nearest(x, y, 
         if !bwep {
             bcurse = curse
             bwep = wep
-        } else {
+        }
+		else {
             with instance_create(other.x, other.y, WepPickup) {
                 scrWeapons()
                 wep = other.wep
