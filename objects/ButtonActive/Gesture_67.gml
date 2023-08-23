@@ -5,38 +5,42 @@ var a = 0,
     touch = event_data[? "touch"]
 
 with MobileUI {
-    if index == touch a = 1
+    if index == touch
+		a = true
 }
 
-    // ignore long touches or occupied ones
+// ignore long touches or occupied ones
 if a or (touch < 4 && UberCont.touch_duration[touch] > 10) {
     exit
 }
 
-var mx = event_data[? "guistartposX"]
-var my = event_data[? "guistartposY"]
+var mx = event_data[? "guistartposX"],
+	my = event_data[? "guistartposY"]
 
-var cx = event_data[? "posX"]
-var cy = event_data[? "posY"]
+var cx = event_data[? "posX"],
+	cy = event_data[? "posY"]
 
 if point_distance(0, 0, event_data[? "diffX"], event_data[? "diffY"]) > 12 && my > 16 {
-    with Player
-    if is_me {
-        if race == 12 && !instance_exists(PortalStrike) {
+	with Player {
+		if index != global.index
+			continue
+		
+		if race == 12 && playerinstance.pref("rogue") && !instance_exists_var(PortalStrike, "creator", id) {
             if rogue_ammo {
+				other.rogue_bombing = true
+				
                 with instance_create(cx, cy, PortalStrike) {
-                    if !UberCont.opt_keyboard && !UberCont.opt_gamepad {
-                        direction = point_direction(cx, cy, device_mouse_x(touch), device_mouse_y(touch))
-                    }
-
                     self.touch = touch
                     creator = other.id
+					
+					event_perform(ev_step, 0)
                 }
 
-                rogue_ammo--other.rogue_bombing = 1
-            } else if !snd_is_playing(sndPortalStrikeEmpty) {
+                rogue_ammo --
+            }
+			else if !snd_is_playing(sndPortalStrikeEmpty) {
                 snd_play(sndPortalStrikeEmpty)
             }
         }
-    }
+	}
 }

@@ -26,10 +26,14 @@ if index != -1 or (do_thing == 1) {
 		or (player.race == 6 && playerinstance.pref("yv"))
 		or (player.race == 14 && playerinstance.pref("skeleton"))
 		or (player.race == 7 && playerinstance.pref("steroids"))
+		or (player.race == 12 && !playerinstance.pref("rogue"))
 		or player.race == 11 {
 			forever ^= 1
 			
             KeyCont.activeforever[_index] = forever
+			
+			if player.race == 12 && forever
+				KeyCont.press_spec[_index] = true
 			
 			if !forever
 				exit
@@ -42,21 +46,17 @@ if index != -1 or (do_thing == 1) {
 }
 
 if forever {
-    if player.race == 3 {
-        KeyCont.hold_spec[_index] = 1
-    }
+    if player.race == 3
+        KeyCont.hold_spec[_index] = true
 
-    if player.race == 4 {
-        KeyCont.press_spec[_index] = 1
-    }
+    if player.race == 4
+        KeyCont.press_spec[_index] = true
 
-    if player.race == 7 {
+    if player.race == 7
         KeyCont.hold_spec[_index] = KeyCont.hold_fire[_index]
-    }
 
-    if player.race == 11 && KeyCont.hold_fire[_index] {
-        KeyCont.hold_spec[_index] = 1
-    }
+    if player.race == 11 && KeyCont.hold_fire[_index]
+        KeyCont.hold_spec[_index] = true
 	
 	with Player {
 		if index != _index

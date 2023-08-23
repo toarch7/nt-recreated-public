@@ -103,6 +103,7 @@ KeyCont = {
 	
     dir_move: [0, 0, 0, 0],
     dir_fire: [0, 0, 0, 0],
+	dis_fire: [0, 0, 0, 0],
 	
     crosshair: [0, 0, 0, 0],
 
@@ -423,6 +424,7 @@ function scrSetGamepadInputs(index = 0) {
 
     if abs(kh) > 0.1 or abs(kv) > 0.1 {
         KeyCont.dir_fire[index] = point_direction(0, 0, kh, kv)
+		KeyCont.dis_fire[index] = point_distance(0, 0, kh, kv)
     }
 }
 
@@ -439,7 +441,11 @@ function scrSetKeyboardInputs(index = 0) {
 	
 	with Player {
 		if self.index == index {
-		    KeyCont.dir_fire[index] = point_direction(x, y, mouse_x, mouse_y)
+			var dir = point_direction(x, y, mouse_x, mouse_y)
+			
+		    KeyCont.dir_fire[index] = dir
+			
+			KeyCont.dis_fire[index] = point_distance(0, 0, ldrx(1, dir), ldry(1, dir))
 		}
 	}
 }

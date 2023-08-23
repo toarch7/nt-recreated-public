@@ -205,11 +205,7 @@ function playerinstance_reset(index = global.index) {
 	if old != undefined
 		old_index = old.index
 	
-	print("RESET", index, old_index, old)
-	
 	var player = new PlayerInstance(index)
-	
-	print("NEW PLAYER", player)
 	
 	if old != undefined && old_index == index
 		player.update_prefs()

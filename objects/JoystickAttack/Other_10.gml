@@ -27,6 +27,7 @@ if UberCont.opt_aimbot {
 
         if d != -1 {
             KeyCont.dir_fire[index] = angle_lerp(KeyCont.dir_fire[index], d, 0.75)
+			KeyCont.dis_fire[global.index] = point_distance(0, 0, ldrx(1, d), ldry(1, d))
         }
 
         break
@@ -55,6 +56,7 @@ if !UberCont.opt_aimbot {
         dis = min(rad, point_distance(x, y, mx, my))
 
         KeyCont.dir_fire[global.index] = dir
+        KeyCont.dis_fire[global.index] = point_distance(0, 0, ldrx(1, dir), ldry(1, dir))
 
         KeyCont.hold_fire[global.index] = 1
 

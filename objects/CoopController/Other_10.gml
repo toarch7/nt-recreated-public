@@ -8,6 +8,7 @@ if frame < netframe + delay {
 		
 		_dir_move = KeyCont.dir_move[global.index],
 		_dir_fire = KeyCont.dir_fire[global.index],
+		_dis_fire = KeyCont.dis_fire[global.index],
 		_crosshair = KeyCont.crosshair[global.index],
 		
 		_event = !ds_stack_empty(event_stack) ? json_stringify(ds_stack_pop(event_stack)) : "[]"
@@ -20,12 +21,13 @@ if frame < netframe + delay {
 	buffer_write(inputsbuffer, buffer_u32, frame)
 	buffer_write(inputsbuffer, buffer_f16, _dir_move)
 	buffer_write(inputsbuffer, buffer_f16, _dir_fire)
+	buffer_write(inputsbuffer, buffer_f16, _dis_fire)
 	buffer_write(inputsbuffer, buffer_u8, _crosshair)
 	buffer_write(inputsbuffer, buffer_string, _event)
 	
 	buffer_send(inputsbuffer)
 	
-	inputs[global.index][$ frame] = [ _inputs, _dir_move, _dir_fire, _crosshair, _event ]
+	inputs[global.index][$ frame] = [ _inputs, _dir_move, _dir_fire, _dis_fire, _crosshair, _event ]
 	
 	frame ++
 	
@@ -89,6 +91,7 @@ var stop = 0,
 		
 		KeyCont.dir_move[i] = _dir_move
 		KeyCont.dir_fire[i] = _dir_fire
+		KeyCont.dis_fire[i] = _dis_fire
 		KeyCont.crosshair[i] = _crosshair
 		
 		if _event != "[]" {

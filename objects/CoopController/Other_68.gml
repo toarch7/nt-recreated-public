@@ -133,6 +133,7 @@ try {
 					_frame = buffer_read(data, buffer_u32),
 					_dir_move = buffer_read(data, buffer_f16),
 					_dir_fire = buffer_read(data, buffer_f16),
+					_dis_fire = buffer_read(data, buffer_f16),
 					_crosshair = buffer_read(data, buffer_u8),
 					_event = buffer_read(data, buffer_string)
 				
@@ -147,7 +148,7 @@ try {
 				}
 				*/
 				
-				inputs[_index][$ _frame] = [ _inputs, _dir_move, _dir_fire, _crosshair, _event ]
+				inputs[_index][$ _frame] = [ _inputs, _dir_move, _dir_fire, _dis_fire, _crosshair, _event ]
 				
 				localdelay = get_timer()
 				

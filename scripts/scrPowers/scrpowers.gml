@@ -417,13 +417,16 @@ function scrPowers() {
             }
         }
     }
+	
+	if is_mobile() && race == 12
+		print(KeyCont.press_spec[index])
 
     // Rogue
-    if race == 12 && KeyCont.press_spec[index] && !is_mobile(index) {
+    if race == 12 && KeyCont.press_spec[index] && (!is_mobile(index) or !playerinstance.pref("rogue")) {
         var px = mouse_x,
             py = mouse_y
 
-        if is_gamepad(index) {
+        if is_gamepad(index) or is_mobile(index) {
             px = x + lengthdir_x(64, KeyCont.dir_fire[index])
             py = y + lengthdir_y(64, KeyCont.dir_fire[index])
         }

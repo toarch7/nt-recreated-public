@@ -21,10 +21,12 @@ with MobileUI {
 var collision = !anyone_else && point_in_circle(mx, my, x, y, max_rad)
 
 if instance_exists(Player) && !hold {
-    with Player
-    if is_me {
-        KeyCont.dir_fire[index] = direction
-    }
+    with Player {
+	    if is_me {
+	        KeyCont.dir_fire[index] = direction
+			KeyCont.dis_fire[index] = 0.67
+	    }
+	}
 }
 
 if !anyone_else && !pause {
@@ -42,14 +44,20 @@ if !anyone_else && !pause {
             if !aim_target.hitable {
                 aim_target = noone
             }
-        } else if instance_exists(LastIntro) {
+        }
+		else if instance_exists(LastIntro) {
             aim_target = instance_nearest(x, y, LastIntro)
-        } else if distance_to_object(BigGenerator) <= 48 {
+        }
+		else if distance_to_object(BigGenerator) <= 48 {
             aim_target = instance_nearest(x, y, BigGenerator)
         }
 
         if aim_target && !collision_line(x, y, aim_target.x, aim_target.y, Wall, 1, 1) {
-            KeyCont.dir_fire[index] = point_direction(x, y, aim_target.x, aim_target.y)
+			var dir = point_direction(x, y, aim_target.x, aim_target.y)
+			
+            KeyCont.dir_fire[index] = dir
+			
+			KeyCont.dis_fire[index] = point_distance(0, 0, ldrx(1, dir), ldry(1, dir))
         }
     }
 
@@ -62,6 +70,7 @@ if !anyone_else && !pause {
         KeyCont.press_fire[global.index] = device_mouse_check_button_pressed(index, mb_left)
         KeyCont.release_fire[global.index] = device_mouse_check_button_released(index, mb_left)
 
-        if KeyCont.hold_fire[global.index] hold = 5
+        if KeyCont.hold_fire[global.index]
+			hold = 5
     }
 }
