@@ -1,6 +1,9 @@
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 
+width = display_get_gui_width()
+height = display_get_gui_height()
+
 var text = self[$ "text"]
 var w = string_width("> ")
 var yy = round(display_get_gui_height() * 1.25)

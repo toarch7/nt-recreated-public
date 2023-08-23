@@ -2769,6 +2769,7 @@
     {"id":{"name":"sndBlackSwordMega","path":"sounds/sndBlackSwordMega/sndBlackSwordMega.yy",},"order":347,},
     {"id":{"name":"sndAllySpawn","path":"sounds/sndAllySpawn/sndAllySpawn.yy",},"order":348,},
     {"id":{"name":"sndAllyDead","path":"sounds/sndAllyDead/sndAllyDead.yy",},"order":349,},
+    {"id":{"name":"Dummy","path":"objects/Dummy/Dummy.yy",},"order":110,},
     {"id":{"name":"sndAllyHurt","path":"sounds/sndAllyHurt/sndAllyHurt.yy",},"order":350,},
     {"id":{"name":"sndSalamanderHurt","path":"sounds/sndSalamanderHurt/sndSalamanderHurt.yy",},"order":351,},
     {"id":{"name":"sndSalamanderCharge","path":"sounds/sndSalamanderCharge/sndSalamanderCharge.yy",},"order":352,},
