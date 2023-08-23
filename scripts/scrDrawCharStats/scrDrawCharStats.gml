@@ -28,7 +28,7 @@ function scrDrawCharStats() {
         else if ((select == 12) && (UberCont.ctot_uniq[12] > 0)) draw_stat("IDPD KILLS", string(UberCont.ctot_uniq[12]))
         else if ((select == 13) && (UberCont.ctot_uniq[13] > 0)) draw_stat("DAMAGED", string(UberCont.ctot_uniq[13]))
         else if ((select == 14) && (UberCont.ctot_uniq[14] > 0)) draw_stat("LUCK STREAK", string(UberCont.ctot_uniq[14]))
-        else if ((select == 15) && (UberCont.ctot_uniq[15] > 0)) draw_stat("GAS VOLUMES", string(UberCont.ctot_uniq[15] / 3) + "M³")
+        else if ((select == 15) && (UberCont.ctot_uniq[15] > 0)) draw_stat("GAS VOLUMES", string(UberCont.ctot_uniq[15] / 1000))
         if (UberCont.ctot_runs[select] > 0) {
             draw_stat_header("")
             draw_stat_header("BEST RUN")
