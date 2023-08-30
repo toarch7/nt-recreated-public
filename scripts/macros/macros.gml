@@ -160,7 +160,7 @@ function scrInputBitmask() {
 	
 	for(var i = 0; i < global.input_keys_list_length; i ++) {
 		if KeyCont[$ global.input_keys_list[i]][global.index] {
-			val |= power(2, i + 1)
+			val |= (1 << i)
 		}
 	}
 	

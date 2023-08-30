@@ -126,15 +126,13 @@ function PlayerInstance(_index = 0) constructor {
 	cprefs = 0
 	randchar = 0
 	
-	birthdate = -1
-	
 	static update_prefs = function() {
 		var cprefs = 0
 		
 		with UberCont {
 			for(var i = 0; i < array_length(cpref_list); i ++) {
 				if self[$ "cpref_" + cpref_list[i]]
-					cprefs |= power(2, i + 1)
+					cprefs |= (1 << (i + 1))
 			}
 		}
 		
@@ -152,20 +150,13 @@ function PlayerInstance(_index = 0) constructor {
 	}
 	
 	static pref = function(name) {
-		var cprefs = self.cprefs
+		var list = UberCont.cpref_list,
+			index = array_indexof(list, name)
 		
-		switch name {
-			case "eyes": return (cprefs & 2) == 2
-			case "melting": return (cprefs & 4) == 4
-			case "plant": return (cprefs & 8) == 8
-			case "yv": return (cprefs & 16) == 16
-			case "steroids": return (cprefs & 32) == 32
-			case "horror": return (cprefs & 64) == 64
-			case "rogue": return (cprefs & 128) == 128
-			case "skeleton": return (cprefs & 256) == 256
-		}
+		if index == -1
+			return false
 		
-		return 0
+		return bit_check(self.cprefs, 1 << (index + 1))
 	}
 	
     static write = function(buff) {

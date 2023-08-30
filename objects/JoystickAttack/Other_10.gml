@@ -103,11 +103,6 @@ with Player {
 		
 		var e = collision_line(x, y, _x, _y, enemy, true, false)
 		
-		with instance_create(_x, _y, Dust)
-			depth = -1000
-		
-		print("UHh", e)
-		
 		if instance_exists(e) && !collision_line(x, y, e.x, e.y, Wall, true, false) {
 			var g = gunangle,
 				need = true

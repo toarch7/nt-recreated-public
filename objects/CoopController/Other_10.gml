@@ -33,7 +33,7 @@ if frame < netframe + delay {
 	
 	
 }
-// if waiting for long enough, assume packets got lost and send anticipated inputs again
+// if waiting for long enough, assume packets were lost and send anticipated inputs again
 else {
 	if netwait > 30 {
 		var f = frame - (netwait % (delay + 1)),
@@ -85,8 +85,7 @@ var stop = 0,
 			_event = _input[4]
 		
 		for(var j = 0; j < global.input_keys_list_length; j ++) {
-			var n = power(2, j + 1) // there are more proper ways of working with bitmasks but uhghfhhahhh
-			KeyCont[$ global.input_keys_list[j]][i] = (_inputs & n) == n
+			KeyCont[$ global.input_keys_list[j]][i] = (_inputs & (1 << j)) != 0
 		}
 		
 		KeyCont.dir_move[i] = _dir_move

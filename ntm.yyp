@@ -3616,6 +3616,7 @@
     {"id":{"name":"DragonBurst","path":"objects/DragonBurst/DragonBurst.yy",},"order":137,},
     {"id":{"name":"JockRocket","path":"objects/JockRocket/JockRocket.yy",},"order":139,},
     {"id":{"name":"EnergyShank","path":"objects/EnergyShank/EnergyShank.yy",},"order":141,},
+    {"id":{"name":"bit_check","path":"scripts/bit_check/bit_check.yy",},"order":212,},
     {"id":{"name":"print_error","path":"scripts/print_error/print_error.yy",},"order":156,},
     {"id":{"name":"sndMutant7Thrn","path":"sounds/sndMutant7Thrn/sndMutant7Thrn.yy",},"order":13,},
     {"id":{"name":"PlasmaImpact","path":"objects/PlasmaImpact/PlasmaImpact.yy",},"order":143,},

@@ -1,3 +1,41 @@
+globalvar race_string_ids, race_numeric_ids;
+
+// todo: remove parse after engine update
+race_string_ids = json_parse(@'
+	{
+		"0": "random",
+		"1": "fish",
+		"2": "crystal",
+		"3": "eyes",
+		"4": "melting",
+		"5": "plant",
+		"6": "skeleton",
+		"7": "steroids",
+		"8": "robot",
+		"9": "chicken",
+		"10": "rebel",
+		"11": "horror",
+		"12": "rogue",
+		"13": "bigdog",
+		"14": "skeleton",
+		"15": "frog",
+		"16": "cuz",
+		"17": "reserved",
+		"18": "reserved",
+	}
+')
+
+var keys = struct_keys(race_string_ids)
+
+race_numeric_ids = {}
+
+for(var i = 0; i < array_length(keys); i ++) {
+	var key = keys[i]
+	
+	race_numeric_ids[$ key] = race_string_ids[$ key]
+}
+
+
 function scrRaces() {
     race_name[0] = "RANDOM"
     race_pass[0] = ""

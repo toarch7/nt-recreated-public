@@ -216,7 +216,7 @@ global.crownpick = 1
 
 global.recontuations = 0
 
-// open_two_windows(1)
+open_two_windows(1)
 
 if os_type == os_android
 	volqueue = ds_queue_create()
