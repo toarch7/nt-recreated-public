@@ -29,14 +29,12 @@ global.buffer = buffer_create(1, buffer_grow, 1)
 inputsbuffer = buffer_create(128, buffer_grow, 1)
 broadcast_buffer = -1
 pingbuffer = -1
-server = -1
 
 pingbuffer = buffer_create(1, buffer_fixed, 1)
 buffer_write(pingbuffer, buffer_u8, event.ping)
 
 if global.is_server {
-    socket = network_create_socket_ext(network_socket_udp, global.port)
-    server = network_create_server(network_socket_tcp, global.port, 8)
+    socket = network_create_server(network_socket_tcp, global.port, 3)
 
     broadcast_buffer = buffer_create(24, buffer_grow, 1)
     buffer_write(broadcast_buffer, buffer_u8, event.broadcast)
@@ -49,30 +47,34 @@ if global.is_server {
     alarm[2] = 30
 }
 else {
-    socket = network_create_socket(network_socket_udp)
+    socket = network_create_socket(network_socket_tcp)
 
     alarm[1] = 1
 }
 
-portdelays = {}
-playerdelays = {}
-playerlatency = {}
-connectedports = {}
-portindexes = {}
+// stores last player ping
+socketdelays = {}
+// stores list of delays
+playerdelaylist = {}
+
+// connections
+sockets = []
+socketindexes = {}
 playerindexes = []
 
-localdelay = current_time
+
 
 enum event {
     _,
-
-    udp_connect,
+	
+	tcp_handshake,
+    tcp_connect,
     disconnect,
     ping,
 	latency,
 	inputs,
 	
-    connect,
+    player_connect,
     leave,
 	refuse,
     set_config,
@@ -96,23 +98,26 @@ importantpackets = {}
 
 depth = -1000
 
-errorcount = 0
-errormax = save_get_val("coop", "bruh", errorcount)
-
 ping_count = 0
 
-event_handlers = {}
-
-refuse = function(message, ip, port) {
-	buffer_seek(global.buffer, buffer_seek_start, 0)
+refuse = function(socket, message) {
+	packet_begin(event.refuse)
+	packet_write(buffer_string, message)
+	packet_send_to(socket)
 	
-	buffer_write(global.buffer, buffer_u8, event.refuse)
-	buffer_write(global.buffer, buffer_string, message)
-	
-	return network_send_udp(socket, ip, port, global.buffer, buffer_tell(global.buffer))
+	self.disconnect(socket, true)
 }
 
-disconnect = function(_index, port = -1) {
+disconnect = function(_socket, _silent = false) {
+	var _index = socketindexes[$ _socket]
+	
+	socketindexes[$ _socket] = undefined
+	array_delete_val(sockets, _socket)
+	network_destroy(_socket)
+	
+	if _index == undefined
+		exit
+	
 	instance_activate_object(Player)
 	instance_activate_object(Revive)
 	
@@ -136,18 +141,20 @@ disconnect = function(_index, port = -1) {
 	if global.is_server {
 		if _index != global.index {
 			array_delete(playerindexes, _index, 1)
-			
-			connectedports[$ port] = undefined
-			connectedports = struct_clone(connectedports, 0)
 			network_free_id(_index)
 		}
 		
-		buffer_seek(global.buffer, buffer_seek_start, 0)
-		buffer_write(global.buffer, buffer_u8, event.disconnect)
-		buffer_write(global.buffer, buffer_u8, _index)
-		buffer_send(global.buffer)
+		if !_silent {
+			packet_begin(event.disconnect)
+			packet_write(buffer_u8, _index)
+			packet_send()
+		}
 	}
 }
+
+#region event handlers
+
+event_handlers = {}
 
 // Crown Change
 event_handlers[$ "crown"] = function(_index, _data) {
@@ -201,4 +208,4 @@ event_handlers[$ "console"] = function(_index, _data) {
 	}
 }
 
-
+#endregion

@@ -154,12 +154,19 @@ global.input_keys_list = [
 ]
 
 global.input_keys_list_length = array_length(global.input_keys_list)
+global.inputs_current = ""
 
 function scrInputBitmask() {
 	var val = 0
 	
+	global.inputs_current = ""
+	
 	for(var i = 0; i < global.input_keys_list_length; i ++) {
-		if KeyCont[$ global.input_keys_list[i]][global.index] {
+		var key = global.input_keys_list[i]
+		
+		if KeyCont[$ key][global.index] {
+			global.inputs_current += key + ": " + string(KeyCont[$ key][global.index]) + "\n"
+			
 			val |= (1 << i)
 		}
 	}

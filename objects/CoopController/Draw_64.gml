@@ -29,23 +29,13 @@ if !instance_exists(CoopMenu) {
 		if host != undefined
 			draw_text_shadow(4, 2, string(round(host.latency)) + "ms")
     }
-	else draw_text_shadow(4, 2, string(variable_struct_names_count(connectedports) + 1) + "/4")
+	else draw_text_shadow(4, 2, string(array_length(sockets) + 1) + "/4")
 
     draw_set_font(fntM1)
     draw_set_color(c_white)
 	
     exit
 }
-
-if !instance_exists(Menu) && instance_exists(CoopMenu) && global.is_server && socket >= 0 {
-	var str = ""
-	
-	str += "PLAYERS JOINED: " + string(array_length(playerindexes) + 1) + "/4"
-	str += "\n\nDELAY: " + string(round(delay / 30 * 1000)) + "MS"
-	
-    CoopMenu.text = str
-}
-
 
 var mx = device_mouse_x_to_gui(0),
 	my = device_mouse_y_to_gui(0)
@@ -95,12 +85,11 @@ if global.is_server {
         with CoopMenu {
             instance_destroy()
         }
-
-        buffer_seek(global.buffer, buffer_seek_start, 0)
-        buffer_write(global.buffer, buffer_u8, event.start)
-        buffer_write(global.buffer, buffer_string, json_stringify(playerindexes))
-        buffer_write(global.buffer, buffer_u32, global.seed)
-        buffer_send(global.buffer)
+		
+        packet_begin(event.start)
+        packet_write(buffer_string, json_stringify(playerindexes))
+        packet_write(buffer_u32, global.seed)
+        packet_send()
 		
 		snd_play(sndPortalOld)
 		

@@ -260,3 +260,17 @@ function file_read(path) {
 	
 	return str
 }
+
+function array_delete_val(array, value) {
+	var l = array_length(array)
+	
+	for(var i = 0; i < l; i ++) {
+		if array[i] == value {
+			array_delete(array, i, 1)
+			
+			return i
+		}
+	}
+	
+	return -1
+}

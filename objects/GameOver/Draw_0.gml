@@ -65,25 +65,3 @@ if offsety offsety -= 32
 with PauseButton {
     y = ystart + other.offsety
 }
-
-/*if instance_exists(CoopController) {
-	draw_set_halign(fa_right)
-	
-	var txt = ""
-	
-	with CoopController {
-		if errorcount {
-			txt = "@w" + string(errorcount) + " @sFATAL ERRORS"
-			
-			if errorcount > errormax {
-				if global.time % 30 > 15 {
-					txt += " #@yNEW BEST!"
-				} else txt += " #@sNEW BEST!"
-			}
-		}
-	}
-	
-	draw_text_nt(view_xview + view_width + 9, view_yview + view_height - 30, txt)
-	
-	draw_set_halign(fa_left)
-}*/

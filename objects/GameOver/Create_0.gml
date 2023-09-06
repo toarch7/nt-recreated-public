@@ -38,19 +38,13 @@ death_pos = 0
 
 offsety = 128
 
-image_speed = .4
+image_speed = 0.4
 
 if instance_exists(Credits) {
     depth = -102
 }
 
 with MobileUI
-instance_destroy()
-
-if instance_exists(CoopController) {
-    with CoopController {
-        save_set_val("coop", "bruh", errorcount)
-    }
-}
+	instance_destroy()
 
 file_delete("gamestate.dat")

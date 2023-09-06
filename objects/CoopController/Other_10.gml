@@ -6,26 +6,25 @@ if index == -1 or instance_exists(CoopMenu)
 if frame < netframe + delay {
 	var _inputs = scrInputBitmask(),
 		
-		_dir_move = KeyCont.dir_move[global.index],
-		_dir_fire = KeyCont.dir_fire[global.index],
-		_dis_fire = KeyCont.dis_fire[global.index],
+		_dir_move = KeyCont.dir_move[index],
+		_dir_fire = KeyCont.dir_fire[index],
+		_dis_fire = KeyCont.dis_fire[index],
 		
 		_event = !ds_stack_empty(event_stack) ? json_stringify(ds_stack_pop(event_stack)) : "[]"
 	
-	buffer_seek(inputsbuffer, buffer_seek_start, 0)
-	buffer_write(inputsbuffer, buffer_u8, event.inputs)
+	packet_begin(event.inputs)
 	
-	buffer_write(inputsbuffer, buffer_u8, global.index)
-	buffer_write(inputsbuffer, buffer_u32, _inputs)
-	buffer_write(inputsbuffer, buffer_u32, frame)
-	buffer_write(inputsbuffer, buffer_f16, _dir_move)
-	buffer_write(inputsbuffer, buffer_f16, _dir_fire)
-	buffer_write(inputsbuffer, buffer_f16, _dis_fire)
-	buffer_write(inputsbuffer, buffer_string, _event)
+	packet_write(buffer_u8, index)
+	packet_write(buffer_u32, _inputs)
+	packet_write(buffer_u32, frame)
+	packet_write(buffer_f16, _dir_move)
+	packet_write(buffer_f16, _dir_fire)
+	packet_write(buffer_f16, _dis_fire)
+	packet_write(buffer_string, _event)
 	
-	buffer_send(inputsbuffer)
+	packet_send()
 	
-	inputs[global.index][$ frame] = [ _inputs, _dir_move, _dir_fire, _dis_fire, _event ]
+	inputs[index][$ frame] = [ _inputs, _dir_move, _dir_fire, _dis_fire, _event ]
 	
 	frame ++
 	
@@ -35,21 +34,20 @@ if frame < netframe + delay {
 else {
 	if netwait > 30 {
 		var f = frame - (netwait % (delay + 1)),
-			_input = inputs[global.index][$ f]
+			_input = inputs[index][$ f]
 		
 		if _input != undefined {
-			buffer_seek(inputsbuffer, buffer_seek_start, 0)
-			buffer_write(inputsbuffer, buffer_u8, event.inputs)
+			packet_begin(event.inputs)
 			
-			buffer_write(inputsbuffer, buffer_u8, global.index)
-			buffer_write(inputsbuffer, buffer_u32, _input[0])
-			buffer_write(inputsbuffer, buffer_u32, f)
-			buffer_write(inputsbuffer, buffer_f16, _input[1])
-			buffer_write(inputsbuffer, buffer_f16, _input[2])
-			buffer_write(inputsbuffer, buffer_f16, _input[3])
-			buffer_write(inputsbuffer, buffer_string, _input[4])
-		
-			buffer_send(inputsbuffer)
+			packet_write(buffer_u8, index)
+			packet_write(buffer_u32, _input[0])
+			packet_write(buffer_u32, f)
+			packet_write(buffer_f16, _input[1])
+			packet_write(buffer_f16, _input[2])
+			packet_write(buffer_f16, _input[3])
+			packet_write(buffer_string, _input[4])
+			
+			packet_send()
 		}
 		else {
 			print("input resend failed, ", frame, (netwait % delay + 1), netframe)
@@ -90,8 +88,7 @@ var stop = 0,
 		KeyCont.dis_fire[i] = _dis_fire
 		
 		if _event != "[]" {
-			var _data = json_parse(_event),
-				_ind = global.index
+			var _data = json_parse(_event)
 			
 			event_run = true
 			global.index = i
@@ -113,7 +110,7 @@ var stop = 0,
 			}
 			
 			event_run = false
-			global.index = _ind
+			global.index = index
 		}
 	}
 //

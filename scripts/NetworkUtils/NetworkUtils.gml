@@ -9,18 +9,46 @@ function network_free_id(index) {
     ds_stack_push(global.netidstack, index)
 }
 
+function packet_begin(_event) {
+	buffer_seek(global.buffer, buffer_seek_start, 0)
+	buffer_write(global.buffer, buffer_u8, _event)
+}
+
+function packet_write(_type, _data) {
+	buffer_write(global.buffer, _type, _data)
+}
+
+function packet_read(_type) {
+	return buffer_read(global.buffer, _type)
+}
+
+function packet_send() {
+	with CoopController {
+		if global.is_server {
+			for(var i = 0; i < array_length(sockets); i ++) {
+				network_send_packet(sockets[i], global.buffer, buffer_tell(global.buffer))
+			}
+		}
+		else {
+			network_send_packet(socket, global.buffer, buffer_tell(global.buffer))
+		}
+	}
+}
+
+function packet_send_to(_socket) {
+	network_send_packet(_socket, global.buffer, buffer_tell(global.buffer))
+}
+
 function buffer_send(buffer) {
     with CoopController {
         if global.is_server {
-            var _keys = struct_keys(connectedports)
-
-            for (var i = 0; i < array_length(_keys); i++) {
-                var port = _keys[i]
-
-                network_send_udp(socket, connectedports[$ port], real(port), buffer, buffer_tell(buffer))
-            }
-        }
-		else network_send_udp(socket, global.ip, global.port, buffer, buffer_tell(buffer))
+			for(var i = 0; i < array_length(sockets); i ++) {
+				network_send_packet(sockets[i], buffer, buffer_tell(buffer))
+			}
+		}
+		else {
+			network_send_packet(socket, buffer, buffer_tell(buffer))
+		}
     }
 }
 
@@ -60,7 +88,7 @@ function network_is_locked() {
 
 function network_clientcount() {
 	if instance_exists(CoopController)
-		return array_length(CoopController.playerindexes)
+		return array_length(CoopController.sockets)
 	
 	return 0
 }

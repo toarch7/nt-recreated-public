@@ -1,11 +1,8 @@
 if index != -1
-	self.disconnect(index)
+	self.disconnect(socket)
 
 if broadcast_buffer
 	buffer_delete(broadcast_buffer)
-
-if server != -1
-	network_destroy(server)
 
 if socket != -1
 	network_destroy(socket)

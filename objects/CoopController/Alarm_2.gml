@@ -5,26 +5,20 @@ if !global.is_server
 
 alarm[2] = 1
 
-var keys = struct_keys(connectedports)
-var len = array_length(keys)
+var len = array_length(sockets)
 
 for (var i = 0; i < len; i++) {
-	var port = keys[i],
-		index = portindexes[$ port]
+	var _socket = sockets[i],
+		_index = socketindexes[$ _socket]
 	
-	if portdelays[$ port] == undefined
-		portdelays[$ port] = current_time
+	if socketdelays[$ _socket] == undefined
+		socketdelays[$ _socket] = current_time
 	
-    if (current_time - portdelays[$ port]) > 15000 {
-		var _index = portindexes[$ port]
-		
-		self.disconnect(_index, port)
-		
+    if (current_time - socketdelays[$ _socket]) > 15000 {
+		self.disconnect(_socket)
 		snd_play(sndHover)
     }
-	else {
-		network_send_udp(socket, connectedports[$ port], real(port), pingbuffer, buffer_tell(pingbuffer))
-	}
+	else network_send_packet(_socket, pingbuffer, buffer_tell(pingbuffer))
 }
 
 KeyCont.players = variable_struct_names_count(playerinstances)

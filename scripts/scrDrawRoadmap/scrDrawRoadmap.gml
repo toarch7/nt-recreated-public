@@ -91,13 +91,15 @@ function scrDrawRoadmap(_x, _y, _pos, cont = GameCont) {
     var names = struct_keys(playerinstances)
 
     var positions = [
-        [-3, - 3],
+        [-3, -3],
         [3, 3],
-        [3, - 3],
+        [3, -3],
         [-3, 3]
     ]
-
-    for (var i = 0; i < min(4, KeyCont.players); i++) {
+	
+	var count = min(4, variable_struct_names_count(playerinstances))
+	
+    for (var i = 0; i < count; i++) {
         var pinst = playerinstance_get(names[i])
 
         if is_undefined(pinst) continue
@@ -106,7 +108,7 @@ function scrDrawRoadmap(_x, _y, _pos, cont = GameCont) {
         var offx = 0
         var offy = 0
 
-        if KeyCont.players > 1 {
+        if count > 1 {
             offx = positions[i, 0]
             offy = positions[i, 1]
         }
