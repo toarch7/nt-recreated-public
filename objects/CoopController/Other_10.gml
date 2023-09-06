@@ -50,7 +50,7 @@ else {
 			packet_send()
 		}
 		else {
-			print("input resend failed, ", frame, (netwait % delay + 1), netframe)
+			print("input resend failed, ", frame, (netwait % (delay + 1)), netframe)
 		}
 	}
 	
@@ -60,6 +60,8 @@ else {
 
 var stop = 0,
 	playercount = array_length(playerindexes) + 1
+
+random_set_seed(global.seed + netframe)
 
 //
 	for(var i = 0; i < playercount; i ++) {

@@ -209,7 +209,7 @@ if opt_gamepad
 	scrGamepadUIControl()
 
 if !paused && !want_pause && !instance_exists(PauseButton) {
-	scrHandleInputsGeneral(index)
+	scrHandleInputsGeneral(global.index)
 	
 	if instance_exists(CoopController) {
 		with CoopController

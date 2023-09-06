@@ -92,7 +92,7 @@ if paused && !want_pause {
 }
 
 
-
+/*
 draw_set_font(fntSmall)
 
 draw_set_halign(fa_left)
@@ -100,7 +100,7 @@ draw_set_halign(fa_left)
 draw_set_color(c_gray)
 
 //draw_text_shadow(-48, 10, string(global.is_server) + " SELF: " + string(global.index) + "\n" + string_delete(string_replace_all(json_stringify(playerinstances), ", ", ",\n"), 1, 2))
-draw_text_shadow(24, 96, string(global.index) + " " + string(scrInputBitmask()) + "\n" + global.inputs_current)
+draw_text_shadow(24, 96, string(global.index) + "\n" + global.inputs_current)
 
 draw_set_color(c_white)
 

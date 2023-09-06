@@ -401,7 +401,7 @@ function scrHandleInputsGeneral(index) {
 	    }
 		
 		if os_type == os_android {
-		    var p = self[$ "_pause_old"] ?? 0
+		    var p = self[$ "_pause_last"] ?? 0
 			
 		    if !opt_gamepad && opt_volumecontrol {
 		        if p != paused {
@@ -414,7 +414,7 @@ function scrHandleInputsGeneral(index) {
 			    scrHandleVolumeControl(a[0], a[1])
 			}
 			
-		    self[$ "_pause_old"] = paused
+		    self[$ "_pause_last"] = paused
 		}
 	}
 }

@@ -202,15 +202,17 @@ try {
 		
         case event.update_playerinstance:
             var _index = buffer_read(data, buffer_u8)
+			
             var inst = playerinstance_get(_index)
+			
             var _skin = inst.skin,
                 _race = inst.race
-				
-                inst.read(data)
-				
-                if inst.skin != _skin or inst.race != _race {
-                    with Menu ports_x[_index] = 150
-                }
+			
+            inst.read(data)
+			
+            if inst.skin != _skin or inst.race != _race {
+                with Menu ports_x[_index] = 150
+            }
 			
             if inst.race != _race {
                 var snd_slct = asset_get_index("sndMutant" + string(inst.race) + "Slct")
