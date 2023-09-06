@@ -81,7 +81,7 @@ var stop = 0,
 			_event = _input[4]
 		
 		for(var j = 0; j < global.input_keys_list_length; j ++)
-			KeyCont[$ global.input_keys_list[j]][i] = bit_check(_inputs, 1 << i)
+			KeyCont[$ global.input_keys_list[j]][i] = bit_check(_inputs, 1 << j)
 		
 		KeyCont.dir_move[i] = _dir_move
 		KeyCont.dir_fire[i] = _dir_fire
