@@ -91,15 +91,15 @@ if paused && !want_pause {
 	}
 }
 
-
 /*
+
 draw_set_font(fntSmall)
 
 draw_set_halign(fa_left)
 
 draw_set_color(c_gray)
 
-draw_text_shadow(-64, 10, string_delete(string_replace_all(json_stringify(playerinstance), ", ", ",\n"), 1, 2))
+draw_text_shadow(-64, 10, string_delete(string_replace_all(json_stringify(playerinstances), ", ", ",\n"), 1, 2))
 
 draw_set_color(c_white)
 

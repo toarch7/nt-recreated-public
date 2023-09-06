@@ -1,46 +1,30 @@
-/// @description Server - pinging
+/// @description Server - Pinging
 
-alarm[2] = 30
+if !global.is_server
+	exit
+
+alarm[2] = 1
 
 var keys = struct_keys(connectedports)
 var len = array_length(keys)
 
 for (var i = 0; i < len; i++) {
-    var port = keys[i]
-
-    network_send_udp(socket, connectedports[$ port], real(port), pingbuffer, buffer_tell(pingbuffer))
-
-    if get_timer() - portdelays[$ port] > 15000000 {
-        var _index = portindexes[$ port]
-
-        connectedports[$ port] = undefined
-        connectedports = struct_clone(connectedports, 0)
-
-        portdelays[$ port] = undefined
-        portdelays = struct_clone(portdelays, 0)
-
-        snd_play(sndHover)
-
-        instance_activate_object(Player)
-        instance_activate_object(Revive)
-
-        with Player {
-            if index == _index
-				instance_destroy(id, 0)
-        }
-
-        with Revive {
-            if index == _index instance_destroy(id, 0)
-        }
-
-        if UberCont.paused {
-            instance_deactivate_object(Player)
-            instance_deactivate_object(Revive)
-        }
-
-        network_free_id(_index)
-        playerinstance_remove(_index)
+	var port = keys[i],
+		index = portindexes[$ port]
+	
+	if portdelays[$ port] == undefined
+		portdelays[$ port] = current_time
+	
+    if (current_time - portdelays[$ port]) > 15000 {
+		var _index = portindexes[$ port]
+		
+		self.disconnect(_index, port)
+		
+		snd_play(sndHover)
     }
+	else {
+		network_send_udp(socket, connectedports[$ port], real(port), pingbuffer, buffer_tell(pingbuffer))
+	}
 }
 
-KeyCont.players = array_length(struct_keys(playerinstances))
+KeyCont.players = variable_struct_names_count(playerinstances)

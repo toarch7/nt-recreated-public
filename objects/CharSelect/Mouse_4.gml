@@ -16,9 +16,8 @@ var is_me = net_isme(),
 	inst = playerinstance_get(),
 	race = num
 
-if instance_exists(CoopController) {
+if instance_exists(CoopController)
 	inst = struct_clone(inst)
-}
 
 if inst.race != race {
     if is_me {

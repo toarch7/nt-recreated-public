@@ -1,10 +1,11 @@
+#macro NETWORK_PORT 25000
+
+global.ip = UberCont.opt_remote_ip
+global.port = UberCont.opt_remote_port
+
 text = ""
 
-global.ip = save_get_val("coop", "lastip", "127.0.0.1")
-
-#macro PORT 25000
-
-server = network_create_server(network_socket_udp, PORT + 1, 1)
+server = network_create_server(network_socket_udp, global.port + 1, 1)
 
 network_set_config(network_config_use_non_blocking_socket, 1)
 
@@ -16,22 +17,37 @@ active = 0
 
 ipprompt = -1
 
+connected = true
+
 host_game = function() {
-    global.is_server = 1
+    instance_destroy(menu, true)
+	
+    global.is_server = true
+	
     network_destroy(server)
-    server = -1
+    
+	server = -1
 
     instance_create(0, 0, CoopController)
-    text = "WAIT FOR OTHER PLAYER..."
+    
+	text = "WAIT FOR OTHER PLAYER..."
 }
 
-join_remote = function(ip) {
-    global.ip = ip
+join_remote = function(ip, port) {
+    instance_destroy(menu, true)
+	
+	global.ip = ip
+	global.port = port
 
     global.is_server = 0
+	
     network_destroy(server)
+	connected = false
     server = -1
 
     instance_create(0, 0, CoopController)
+	
     text = "CONNECTING TO#" + global.ip + "..."
 }
+
+menu = noone

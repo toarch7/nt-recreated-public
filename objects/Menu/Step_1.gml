@@ -1,4 +1,4 @@
-var inst = playerinstance,
+var inst = playerinstance_get(),
 	yoff = dailylistfavor
 
 race = inst.race

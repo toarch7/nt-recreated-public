@@ -2,37 +2,10 @@ if instance_exists(ResourcepackManager) or global.console_active or text_input_e
 	exit
 
 if !editing_mode {
-    if category == OptionCategory.Main {
-        if !ingame {
-            camera_set_pos(0, 0)
-
-            with instance_create(0, 0, Logo)
-            event_perform(ev_alarm, 1)
-
-            with BackButton
-            instance_destroy()
-
-            scrOptionsUpdate()
-
-            scrSave()
-
-            instance_destroy(id, 0)
-            //game_restart()
-        }
-		else {
-			with PauseButton
-				instance_destroy()
-			
-            scrMakePauseButtons()
-			
-			with UberCont
-				splat_index = 0
-        }
-
-        with BackButton
-        instance_destroy()
-
-        instance_destroy()
+	print(text_input_element)
+	
+    if category == OptionCategory.Main or (dispose_on_empty && ds_stack_empty(category_stack)) {
+        event_user(2)
     }
 	else {
 		self.category_set(
@@ -40,8 +13,8 @@ if !editing_mode {
 				? ds_stack_pop(category_stack)
 				: OptionCategory.Main
 			, false)
-    }
-
+	}
+	
     snd_play(sndClickBack)
 }
 else {

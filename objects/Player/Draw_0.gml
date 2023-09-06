@@ -61,13 +61,15 @@ if race == 7 && bwep != 0 && is_me {
 if back = 1 && !shielding && wep draw_sprite_ext(wep_sprt[wep], max(0, fingers), x + lengthdir_x(-wkick, gunangle + (wepangle * (1 - wkick / 20))), y + lengthdir_y(-wkick, gunangle + (wepangle * (1 - wkick / 20))), 1, wepright, gunangle + (wepangle * (1 - wkick / 20)), c_white, 1)
 
 if instance_exists(CoopController) && UberCont.opt_outlines {
-    var c = global.player_color[index]
+    var c = UberCont.opt_healthcol
 
     gpu_set_fog(1, c, 0, 0)
-    draw_sprite_ext(sprite_index, - 1, x - 1, y, right, 1, angle, c_white, 1)
-    draw_sprite_ext(sprite_index, - 1, x + 1, y, right, 1, angle, c_white, 1)
-    draw_sprite_ext(sprite_index, - 1, x, y - 1, right, 1, angle, c_white, 1)
-    draw_sprite_ext(sprite_index, - 1, x, y + 1, right, 1, angle, c_white, 1)
+	
+    draw_sprite_ext(sprite_index, image_index, x - 1, y, right, 1, angle, c_white, 1)
+    draw_sprite_ext(sprite_index, image_index, x + 1, y, right, 1, angle, c_white, 1)
+    draw_sprite_ext(sprite_index, image_index, x, y - 1, right, 1, angle, c_white, 1)
+    draw_sprite_ext(sprite_index, image_index, x, y + 1, right, 1, angle, c_white, 1)
+	
     gpu_set_fog(0, c, 0, 0)
 }
 

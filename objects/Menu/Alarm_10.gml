@@ -4,8 +4,7 @@ if instance_exists(CharSelect) {
 
 with Corpse {
     if instance_exists(CampChar) {
-        if distance_to_object(CampChar) <= 8 {
+        if distance_to_object(CampChar) <= 8
             instance_destroy()
-        }
     }
 }

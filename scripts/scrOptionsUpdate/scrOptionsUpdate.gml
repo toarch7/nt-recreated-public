@@ -58,6 +58,9 @@ function scrOptionsUpdate() {
 		opt_console = save_get_val_s("cheats", "console", 0)
 		opt_griller = save_get_val_s("cheats", "griller", 0)
 		
+		opt_remote_ip = save_get_val_s("coop", "lastip", "127.0.0.1")
+		opt_remote_port = save_get_val_s("coop", "lastport", 25256)
+		
 		opt_gamepad_type = save_get_val_s("options", "gamepad_type", 0)
 		
 		cpref_list = [ "eyes", "melting", "plant", "yv", "steroids", "horror", "rogue", "skeleton" ]
@@ -139,5 +142,12 @@ function scrOptionsUpdate() {
 		scrOptionsLoadKeymaps()
 		
 		playerinstance.update_prefs()
+		
+		try {
+			opt_remote_port = real(opt_remote_port)
+		}
+		catch(e) {
+			opt_remote_port = NETWORK_PORT
+		}
     }
 }

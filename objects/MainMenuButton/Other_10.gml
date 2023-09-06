@@ -91,7 +91,14 @@ switch image_index {
 
     case 2:
         with MainMenuButton instance_destroy()
-        instance_create(view_xview + view_width / 2, view_yview + view_height / 2, MenuOptions)
+		
+        with instance_create(0, 0, MenuOptions) {
+			self.category_set(OptionCategory.Main)
+			
+			x = view_xview + view_width / 2
+			y = view_yview + view_height / 2
+		}
+		
         UberCont.checksettings = 1
         save_set_val("etc", "checksettings", 1)
 		

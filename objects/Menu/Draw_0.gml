@@ -1,9 +1,9 @@
 scrDrawSpiral()
 
-var inst = playerinstance,
+var inst = playerinstance_get(global.index),
 	yoff = dailylistfavor
 
-if !is_struct(inst)
+if inst == undefined
 	exit
 
 draw_set_color(c_black)

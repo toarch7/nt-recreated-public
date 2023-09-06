@@ -1,3 +1,2 @@
-if server != -1 {
+if server != -1
     network_destroy(server)
-}

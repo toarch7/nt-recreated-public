@@ -5,8 +5,26 @@ if index == -1 {
 }
 
 buffer_seek(global.buffer, buffer_seek_start, 0)
+
 buffer_write(global.buffer, buffer_u8, event.udp_connect)
-network_send_udp(socket, ip, PORT, global.buffer, buffer_tell(global.buffer))
+buffer_write(global.buffer, buffer_string, string(GAME_BUILD))
+buffer_write(global.buffer, buffer_string, scrGetUid())
+buffer_write(global.buffer, buffer_string, json_stringify(playerinstance))
+
+var send = network_send_udp(socket, ip, global.port, global.buffer, buffer_tell(global.buffer))
+
+print("Connecting..", send)
+
+if !send {
+	with CoopMenu
+		text = "UNABLE TO REACH THE SERVER"
+	
+	alarm[1] = -1
+	
+	instance_destroy()
+	
+	exit
+}
 
 switch loading_text {
     default:

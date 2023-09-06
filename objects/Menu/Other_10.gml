@@ -1,3 +1,4 @@
+
 if !weekly {
     var instances = playerinstances
     var keys = struct_keys(instances)

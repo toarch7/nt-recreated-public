@@ -130,7 +130,7 @@ function array_join(arr, s = "_") {
     return r
 }
 
-function method_call(meth, args = undefined) {
+function method_execute(meth, args = undefined) {
 	/* Generator:
 		let str = "";
 

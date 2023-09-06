@@ -20,7 +20,7 @@ function buffer_send(buffer) {
                 network_send_udp(socket, connectedports[$ port], real(port), buffer, buffer_tell(buffer))
             }
         }
-		else network_send_udp(socket, ip, PORT, buffer, buffer_tell(buffer))
+		else network_send_udp(socket, global.ip, global.port, buffer, buffer_tell(buffer))
     }
 }
 

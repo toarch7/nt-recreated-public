@@ -1,6 +1,6 @@
 {
   "option_windows_display_name": "Nuclear Throne Recreated",
-  "option_windows_executable_name": "${project_name}",
+  "option_windows_executable_name": "nuclearthrone",
   "option_windows_version": "2.6.1.0",
   "option_windows_company_info": "",
   "option_windows_product_info": "",

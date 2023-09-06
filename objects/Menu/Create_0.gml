@@ -313,6 +313,4 @@ gpadpointed = 0
 mousex = gui_w / 2
 mousey = gui_h / 2
 
-playerinstance = playerinstance_get(global.index)
-
 event_perform(ev_step, ev_step_begin)

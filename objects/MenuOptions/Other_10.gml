@@ -19,7 +19,7 @@ option_can_change = true
 
 if text_input_element != undefined {
 	var opt = text_input_element,
-		name = method_call(opt.name_get, opt) ?? opt.name,
+		name = method_execute(opt.name_get, opt) ?? opt.name,
 		val = opt.value
 	
 	drawx = gui_w / 2
@@ -48,7 +48,8 @@ if text_input_element != undefined {
 		text_input_cursor = "|"
 		text_input_timer = 0
 		
-		if !method_call(opt.validate, opt, keyboard_string, false) {
+		// validation returns true = string is invalid
+		if !method_execute(opt.validate, opt, keyboard_string, false) {
 			opt.value = keyboard_string
 			snd_play(sndAppear)
 		}
@@ -64,7 +65,7 @@ if text_input_element != undefined {
 		if !global.desktop
 			keyboard_virtual_hide()
 		
-		if !method_call(opt.validate, opt, opt.value, true) {
+		if !method_execute(opt.validate, opt, opt.value, true) {
 			if option_can_change {
 				UberCont.saveData[? opt.key] = opt.value
 				scrOptionsUpdate()
@@ -446,7 +447,7 @@ for (var i = 0; i < item_count; i++) {
 	var pointed = 0
 	
 	if opt.condition != undefined
-		opt.available = method_call(opt.condition, opt)
+		opt.available = method_execute(opt.condition, opt)
 	
 	if mouse_active {
 		pointed = point_in_rectangle(mx, my, drawx - _w, drawy - _h, drawx + _w + (opt.type == "slider" ? 96 : 0), drawy + _h)
@@ -529,10 +530,10 @@ for (var i = 0; i < item_count; i++) {
 			var r = undefined
 			
 			if is_method(opt.click)
-				r = method_call(opt.click, opt)
+				r = method_execute(opt.click, opt)
 			
 			if r == undefined
-				r = method_call(element_functions[$ opt.type], opt)
+				r = method_execute(element_functions[$ opt.type], opt)
 			
 			if opt.key != undefined && option_can_change {
 				UberCont.saveData[? opt.key] = opt.value
@@ -556,7 +557,7 @@ for (var i = 0; i < item_count; i++) {
 	if opt.splat > 0
 		draw_sprite(sprMenuButtonSplat, opt.splat, drawx, drawy)
 	
-	if opt.draw && method_call(opt.draw, opt)
+	if opt.draw && method_execute(opt.draw, opt)
 		draw = false
 	
 	if draw {
@@ -585,7 +586,7 @@ for (var i = 0; i < item_count; i++) {
 				var name = opt.name
 				
 				if opt.name_get != undefined
-					name = method_call(opt.name_get, opt)
+					name = method_execute(opt.name_get, opt)
 				
 				if name != undefined
 					draw_text_nt(drawx, drawy, loc(name))
@@ -619,7 +620,7 @@ for (var i = 0; i < item_count; i++) {
 				option_list_max = opt.type == "list" ? array_length(opt.list) : 0
 				
 				if opt.value_get != undefined
-					val = method_call(opt.value_get, opt)
+					val = method_execute(opt.value_get, opt)
 				
 				if val != undefined {
 					if opt.type == "slider" {
@@ -669,7 +670,7 @@ for (var i = 0; i < item_count; i++) {
 			else draw_text_nt(drawx, drawy, loc(opt.name))
 		}
 		
-		method_call(element_functions[$ opt.type + "_draw"], opt)
+		method_execute(element_functions[$ opt.type + "_draw"], opt)
 	}
 	
 	drawy += opt.anim

@@ -24,6 +24,8 @@ enum OptionCategory {
 	Controls_Remapping_Keys,
 	Controls_Preferences,
 	
+	Coop_Menu,
+	
 	NumOptions
 }
 
@@ -221,11 +223,11 @@ category_set = function (_category, _queue = true) {
 		item.appear = 0
 		
 		if item[$ "awake"] != undefined
-			method_call(item.awake, item)
+			method_execute(item.awake, item)
 		
 		if item.type == "keybind" {
 			if item.condition != undefined
-				item.available = method_call(item.condition, item)
+				item.available = method_execute(item.condition, item)
 			
 			if !item.available {
 				item.visible = false
@@ -315,6 +317,8 @@ option_elements_create
 	{ type: "category", name: "REMAPPING", category: OptionCategory.Controls_Remapping, visible: false },
 	{ type: "category", name: "REMAPPING", category: OptionCategory.Controls_Remapping_Keys, visible: false },
 	{ type: "category", name: "CHAR PREFS", category: OptionCategory.Controls_Preferences, visible: false },
+	
+	{ type: "category", name: "CO-OP", category: OptionCategory.Coop_Menu, visible: false },
 )
 
 option_category_end()
@@ -873,6 +877,41 @@ option_elements_create(
 
 #endregion Cheats
 
+#region Coop_Menu
+option_category_begin(OptionCategory.Coop_Menu)
+
+option_elements_create(
+	{ type: "button", name: "HOST GAME", click: function() { CoopMenu.host_game() } },
+	{ type: "button", name: "JOIN DIRECT", click: function() { CoopMenu.join_remote(global.ip, global.port) } },
+	
+	{ type: "input", name: "REMOTE ADDRESS", key: "coop_lastip" },
+	{
+		type: "input", name: "REMOTE PORT", key: "coop_lastport",
+		
+		validate: function(opt, str, confirm) {
+			if string_digits(str) != str or string_length(str) > 5
+				return true
+			
+			if confirm && str == ""
+				return true
+		}
+	},
+	
+	{ type: "button", name: "REFRESH LOCAL" }
+)
+
+local_game_template = {
+	type: "button", name: "???'s GAME",
+	
+	ip: UberCont.opt_remote_ip,
+	port: UberCont.opt_remote_port,
+	
+	click: function(opt) {
+		CoopMenu.join_remote(opt.ip, opt.port)
+	}
+}
+
+#endregion
 option_category_end()
 #endregion
 
@@ -898,7 +937,7 @@ element_functions[$ "list"] = function(opt) {
 }
 
 element_functions[$ "input"] = function(opt) {
-	var v = method_call(opt.value_get, opt) ?? opt.value
+	var v = method_execute(opt.value_get, opt) ?? opt.value
 	
 	opt.previous = v
 	keyboard_string = v
@@ -923,8 +962,8 @@ foreach(options, function(val) {
         var v = val[i]
 		
 		if is_method(v[$ "awake"])
-			method_call(v.awake, v)
+			method_execute(v.awake, v)
     }
 })
 
-self.category_set(OptionCategory.Main)
+dispose_on_empty = false

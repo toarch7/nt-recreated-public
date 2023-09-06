@@ -1,13 +1,13 @@
 /// @description Draw loadout
 
-var inst = playerinstance,
+var inst = playerinstance_get(global.index),
 	yoff = dailylistfavor,
 	press = false,
 	
 	width = gui_w,
 	height = gui_h
 
-if !is_struct(inst)
+if inst == undefined
 	exit
 
 if global.coop {
@@ -22,7 +22,7 @@ if global.coop {
 
         var prt = _inst.skin ? sprBigPortraitSkin : sprBigPortrait
 		
-        draw_sprite_ext(prt, _inst.race, ports_x[i] + width + 16 - n * 24, height - 20, - 1, 1, 0, c_gray, 1)
+        draw_sprite_ext(prt, _inst.race, ports_x[i] + width + 16 - n * 24, height - 38, - 1, 1, 0, c_gray, 1)
         ports_x[i] = lerp(ports_x[i], 0, 0.8)
 
         n ++
@@ -311,10 +311,16 @@ if canloadout {
 					any = true
 				
 	            if press && pointed {
+					press = 0
+					
 	                if race_crown[race, i] {
-	                    save_set_val("ccrown", string(race), i)
-	                    loadout_crown = i
-	                    snd_play(sndMenuCrown)
+						if !net_add_data("other", "crown", i) {
+		                    loadout_crown = i
+							
+		                    snd_play(sndMenuCrown)
+							
+		                    save_set_val("ccrown", string(race), i)
+						}
 	                }
 					else {
 	                    alarm[11] = 45

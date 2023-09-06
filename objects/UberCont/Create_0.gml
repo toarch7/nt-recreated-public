@@ -22,7 +22,6 @@ pauseimg = -1
 //VERSION STUFF ETC.
 version = GAME_VERSION
 
-//if file_exists("icheat.txt") or file_exists("ICHEAT.txt") or file_exists("ICHEAT.TXT") or file_exists("icheat.TXT")
 public = !global.desktop
 
 //DEBUG STUFF
@@ -177,7 +176,8 @@ for (var i = 1; i <= 12; i++) {
 
     if string_copy(wep_name[cwep[i]], 1, 4) == "GOLD" {
         scrAchievement(24)
-    } else all_have_weps = 0
+    }
+	else all_have_weps = 0
 
     if cwep[i] == 122 or cwep[i] == 123 {
         scrAchievement(25)

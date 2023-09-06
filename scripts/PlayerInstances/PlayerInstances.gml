@@ -126,6 +126,8 @@ function PlayerInstance(_index = 0) constructor {
 	cprefs = 0
 	randchar = 0
 	
+	latency = -1
+	
 	static update_prefs = function() {
 		var cprefs = 0
 		
@@ -189,6 +191,10 @@ function PlayerInstance(_index = 0) constructor {
 	playerinstances[$ index] = self
 }
 
+function playerinstance_add(index, inst) {
+	playerinstances[$ index] = inst
+}
+
 function playerinstance_reset(index = global.index) {
 	var old = playerinstance_get(index),
 		old_index = -1
@@ -209,4 +215,43 @@ function playerinstance_remove(index) {
     playerinstances = struct_clone(playerinstances, 0)
 
     show_debug_message("Removed playerinstace. list: " + string(playerinstances))
+}
+
+
+function draw_playerinstance(index, x, y, width = 160, halign = fa_left) {
+	var inst = playerinstance_get(index)
+	
+	if inst == undefined
+		exit
+	
+	var height = 24
+	
+	if halign == fa_center
+		x -= width / 2
+	
+	draw_sprite_stretched_ext(sprAchievementSplash, 0, x, y, width, height, c_black, 0.5)
+	
+	draw_sprite_ext(inst.skin ? sprPlayerMapIcon : sprPlayerMapIconSkin, inst.race, x + 14, y + 10, 1, 1, 0, c_white, 1)
+	
+	y += 4
+	
+	draw_set_valign(fa_middle)
+	draw_set_font(fntSmall)
+	
+	draw_set_color(c_uigray)
+	draw_text_shadow(x + 32, y + 4, "player " + string(inst.index + 1))
+	
+	var latency = inst.index != global.index
+					? string(round(inst.latency)) + "MS."
+					: "(you)"
+	
+	draw_set_halign(fa_right)
+	draw_text_shadow(x + width - 16, y + height / 2 - 2, latency)
+	
+	draw_set_halign(fa_left)
+	draw_set_color(inst.color)
+	draw_text_shadow(x + 32, y + height / 2, inst.name)
+	
+	draw_set_valign(fa_top)
+	draw_set_font(fntM1)
 }

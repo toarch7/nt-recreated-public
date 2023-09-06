@@ -24,30 +24,10 @@ if instance_exists(Credits) && !instance_exists(GameCont) {
 		self.category_set(OptionCategory.Game)
 }
 
-if instance_exists(ResourcepackManager) {
-    with ResourcepackManager
-        instance_destroy()
-	
-    snd_play(sndClickBack)
-}
-else if instance_exists(MenuOptions) && !(UberCont.opt_gamepad && MenuOptions.editing_mode) {
-    with MenuOptions {
-		back_pressed = true
-        event_perform(ev_keypress, vk_backspace)
-    }
-}
-
-if instance_exists(PauseButton) {
-    with PauseButton {
-        if image_index == 3 repeat 2 event_perform(ev_left_release, 0)
-    }
-
-    instance_destroy()
-}
 
 if instance_exists(DailyList) {
     with DailyList
-    instance_destroy()
+		instance_destroy()
 }
 else if instance_exists(Menu) {
 	if !Menu.loadout {
@@ -64,11 +44,12 @@ else if instance_exists(Menu) {
 	    UberCont.daily_run = 0
 	    UberCont.weekly_run = 0
 		
-	    playerinstances = {}
+		playerinstance_reset(global.index)
 		
 	    with MusCont {
 	        snd_stop(song)
 	        snd_stop(amb)
+			
 	        event_perform(ev_create, 0)
 	    }
 		
@@ -83,30 +64,34 @@ else if instance_exists(Menu) {
 		}
 	}
 }
-
-if instance_exists(DrawStats) {
-    with DrawStats
-    instance_destroy()
-
-    with instance_create(0, 0, Logo)
-    event_perform(ev_alarm, 1)
-
-    instance_destroy()
+else if instance_exists(ResourcepackManager) {
+    with ResourcepackManager
+        instance_destroy()
+	
+    snd_play(sndClickBack)
 }
-
-if instance_exists(CoopMenu) {
-    with CoopMenu instance_destroy()
+else if instance_exists(MenuOptions) && !(UberCont.opt_gamepad && MenuOptions.editing_mode) {
+    with MenuOptions {
+		back_pressed = true
+        event_perform(ev_keypress, vk_backspace)
+    }
+	
+	with CoopMenu
+		instance_destroy()
+}
+else if instance_exists(CoopMenu) {
+    with CoopMenu
+		instance_destroy()
 
     if instance_exists(CoopController) {
-        with CoopController {
+        with CoopController
             instance_destroy()
-        }
 
         instance_create(0, 0, CoopMenu)
-    } else {
+    }
+	else {
         with instance_create(0, 0, Logo) {
             event_perform(ev_alarm, 1)
-
             instance_destroy()
         }
 
@@ -114,23 +99,44 @@ if instance_exists(CoopMenu) {
     }
 }
 
+if instance_exists(PauseButton) {
+    with PauseButton {
+        if image_index == 3 {
+			repeat 2
+				event_perform(ev_left_release, 0)
+		}
+    }
+
+    instance_destroy()
+}
+
+if instance_exists(DrawStats) {
+    with DrawStats
+		instance_destroy()
+	
+    with instance_create(0, 0, Logo)
+		event_perform(ev_alarm, 1)
+	
+	instance_destroy()
+}
+
 if instance_exists(AchievementsMenu) {
     with AchievementsMenu
-    instance_destroy()
-
+		instance_destroy()
+	
     with instance_create(0, 0, Logo)
-    event_perform(ev_alarm, 1)
-
+		event_perform(ev_alarm, 1)
+	
     instance_destroy()
 }
 
 if instance_exists(DrawStats) or instance_exists(StatChar) {
     with DrawStats
-    instance_destroy()
+		instance_destroy()
 
     with StatChar
-    instance_destroy()
-
+		instance_destroy()
+	
     instance_destroy()
 }
 
