@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !hitable && distance_to_object(Player) <= 24 {
     hitable = 1
     image_speed = 0.4

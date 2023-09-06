@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 draw_self()
 draw_sprite(sprNothingSkeleton, 0, x, y - 22)
 

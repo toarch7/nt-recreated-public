@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if (hp <= 0) instance_destroy()
 if (wkick != -1) {
     if (wkick > 0) wkick -= 1

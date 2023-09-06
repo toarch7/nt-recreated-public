@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 addx -= 12
 addy -= 12
 

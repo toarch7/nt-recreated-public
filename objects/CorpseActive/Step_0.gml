@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !speed {
     var s = sprite_index
     var i = image_index

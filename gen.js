@@ -1,17 +1,19 @@
+const fs = require("fs");
+
 let remove = false;
 
-if (process.argv.indexOf("--remove") == -1)
+if (process.argv.indexOf("--remove") != -1)
 	remove = true;
 
-function doTheThing(path, remove) {
-	let str = "if lockstep_stop\n\texit";
+function doTheThing(path) {
+	let str = "if lockstep_stop\n\texit\n\n";
 
 	fs.readFile(path, "utf-8", function(_, f) {
 		if (!f.startsWith(str)) {
-			fs.writeFile(path, str + "\n" + f, err => console.log(err));
+			fs.writeFile(path, str + f, err => console.log(err));
 		}
 		else if (remove) {
-			fs.writeFile(path, str.replace("\n" + f, ""), err => console.log(err));
+			fs.writeFile(path, f.replace(str, ""), err => console.log(err));
 		}
 	});
 }
@@ -35,13 +37,13 @@ fs.readdir("objects", function(err, dirs) {
 			
 			fs.exists(path + ev, exists => {
 				if(exists)
-					injectNetcode(path + ev);
+					doTheThing(path + ev);
 			});
 		}
 		
 		fs.readdir(path, function(err, f) {
 			f.forEach(f => {
-				if (f.startsWith("Collision") || f.startsWith("Mouse")) {
+				if (f.startsWith("Collision") || f.startsWith("Mouse"))
 					doTheThing(path + f);
 			});
 		});

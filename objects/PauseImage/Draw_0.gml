@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 
 with UberCont {
 	if pausespr && sprite_exists(pausespr)

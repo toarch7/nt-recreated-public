@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 image_xscale -= .1
 x -= hspeed
 y -= vspeed

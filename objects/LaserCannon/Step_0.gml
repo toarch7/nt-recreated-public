@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(creator) {
     x = creator.x + lengthdir_x(16, creator.gunangle)
     y = creator.y + lengthdir_y(16, creator.gunangle)

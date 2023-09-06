@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var olddir, oldspeed;
 olddir = direction
 oldspeed = speed

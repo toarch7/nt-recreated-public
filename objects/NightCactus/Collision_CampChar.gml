@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.race == 15
 	exit
 

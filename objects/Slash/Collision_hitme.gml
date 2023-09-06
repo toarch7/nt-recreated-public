@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.team != team && !other.inframes {
     with other {
         if !inframes {

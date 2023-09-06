@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if alarm[0] >= 50 {
     view_xview = x - view_width / 2
     view_yview = y - view_height / 2

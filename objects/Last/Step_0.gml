@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 event_inherited()
 if (charge == 1) {
     instance_create(((x + random(8)) - 4), ((y + 4) + random(4)), Dust)

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.team != team && other.hp > 0 && !disappear {
     if other.object_index == Player {
         if other.sprite_index != other.spr_hurt {

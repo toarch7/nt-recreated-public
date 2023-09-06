@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 with other {
     if !UberCont.cgot[12] {
         UberCont.cgot[12] = 1

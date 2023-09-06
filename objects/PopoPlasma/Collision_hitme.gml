@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.team != team and other.hp > 0 {
 
     with other {

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !visible && !instance_exists(Logo) exit
 
 try {

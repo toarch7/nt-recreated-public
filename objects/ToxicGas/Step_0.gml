@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if image_xscale + growspeed < 1 {
     image_xscale += growspeed
     image_yscale += growspeed

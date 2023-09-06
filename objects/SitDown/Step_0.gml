@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if distance_to_object(Player) <= 2 {
     with Player {
         inframes = 30

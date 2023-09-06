@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var col = hover ? c_white : c_uigray,
 	name = scrMenuButtonName()
 

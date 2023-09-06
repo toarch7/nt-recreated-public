@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(GenCont) && instance_exists(LevCont) && instance_exists(SpiralCont) {
     if ambfilter > 0.2
 		ambfilter -= 0.1

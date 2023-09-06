@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 x = xstart + lengthdir_x(dist * image_xscale, angle)
 y = ystart + lengthdir_y(dist * image_xscale, angle)
 //angle += turnspeed

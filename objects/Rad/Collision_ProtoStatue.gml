@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !speed && other.hp < other.max_hp * 0.7 {
     other.rad++snd_play(sndStatueXP)
 

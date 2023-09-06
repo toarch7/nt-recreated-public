@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !charge && instance_exists(creator) {
     anim += 0.4
     if !disappear {

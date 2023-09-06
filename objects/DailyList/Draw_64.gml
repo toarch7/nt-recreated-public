@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var keys = viewtype == "weekly" ? weeklykeys : dailykeys
 var typehistory = history[$ viewtype]
 var yy = 48

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 image_yscale = image_xscale
 if image_xscale <= .4 instance_destroy()
 

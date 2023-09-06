@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !UberCont.cgot[num]
 	sprite_index = sprCharSelectLocked
 

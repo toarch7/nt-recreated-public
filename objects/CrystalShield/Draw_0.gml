@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var yoff = 0
 
 if instance_exists(creator) && sprite_index != spr_disappear {

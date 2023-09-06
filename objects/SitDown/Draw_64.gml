@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if alarm[0] {
     draw_set_alpha(1 - alarm[0] / 265)
     draw_set_color(c_black)

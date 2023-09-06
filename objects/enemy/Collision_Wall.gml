@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 olddir = direction
 oldspeed = speed
 move_bounce_solid(00)

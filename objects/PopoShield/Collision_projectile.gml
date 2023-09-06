@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if image_speed > 0 {
     exit
 }

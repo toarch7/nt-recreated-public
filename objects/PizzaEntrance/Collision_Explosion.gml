@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if image_index = 0 && !instance_exists(BallMum) {
     image_index = 1
     with GameCont {

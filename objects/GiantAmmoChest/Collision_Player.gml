@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !instance_exists(GenCont) {
     if GameCont.crown == 6 {
         with other {

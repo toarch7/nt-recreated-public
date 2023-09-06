@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 draw_set_alpha(0.6)
 draw_set_color(c_black)
 draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + view_height, 0)

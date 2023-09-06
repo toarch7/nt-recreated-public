@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if fall {
     fall --
 	image_angle += rot

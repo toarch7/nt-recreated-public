@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if meleedamage > 0 && canmelee && team != other.team {
     if other.inframes exit
 

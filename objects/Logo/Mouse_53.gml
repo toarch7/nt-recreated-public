@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(GameCont) {
     if GameCont.area == 7 && GameCont.subarea == 3 {
         with Credits instance_destroy()

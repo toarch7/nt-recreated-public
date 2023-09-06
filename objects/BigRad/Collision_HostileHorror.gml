@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 with other {
     if charge <= 0 {
         raddrop += 10

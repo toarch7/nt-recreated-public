@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 //grow = ((grow+1)*1.00005)-1
 grow += 0.0004
 image_xscale += grow

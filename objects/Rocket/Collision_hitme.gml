@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.inframes && other.object_index == Player exit
 
 if other.team != team {

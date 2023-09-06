@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(Player) {
     var p = instance_nearest(x, y, Player)
 	

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(Drama) {
     with BanditBoss {
         draw_sprite_ext(sprite_index, - 1, x, y, right, 1, 0, c_white, 1)

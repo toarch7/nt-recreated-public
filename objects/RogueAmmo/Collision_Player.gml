@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var p = instance_nearest(x, y, Player)
 
 if !p or p.race != 12

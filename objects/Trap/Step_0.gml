@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if fire > 0 && !instance_exists(Portal) {
     if side {
         if !position_meeting(x - 16 + 8, y, Wall) {

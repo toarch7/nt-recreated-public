@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 draw_sprite(sprMenuButtonSplat, splat, x, y)
 
 var col = (available ? (hover ? c_white : c_uigray) : c_uidark),

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if speed > 18 {
     with other {
         instance_destroy()

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 //THIS IS VERY WORK IN PROGRESS, GOTTA ALL HAPPEN WHILE PAUSED, INCLUDING CAMERA PAN
 
 if x > view_xview + view_width * 0.4 and x < view_xview + view_width * 0.6 and y > view_yview + view_height * 0.4 and y < view_yview + view_height * 0.6 {

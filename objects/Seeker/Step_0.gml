@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(enemy) && speed > 0 {
     target = instance_nearest(x, y, enemy)
 

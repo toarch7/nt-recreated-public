@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 move_bounce_solid(00)
 bounces += 1
 if ((bounces > 3) && (speed > 0)) {

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if KeyCont.press_pick[p] = 1 && is_me {
     with other
     instance_change(Wind, false)

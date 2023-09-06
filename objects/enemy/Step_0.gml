@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if wkick > 0 {
     wkick -= 1
 }

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 draw_sprite(sprite_index, - 1, x, y)
 draw_set_color(c_gray)
 draw_rectangle(x, y + 1, x + UberCont.opt_musvol * 100, y + 6, 0)

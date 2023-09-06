@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.ammo[wep_type[other.wep]] = typ_amax[wep_type[other.wep]] or other.ammo[wep_type[other.bwep]] = typ_amax[wep_type[other.bwep]]
 type = choose(1, 2, 3, 4, 5)
 else if other.bwep != 0 type = choose(wep_type[other.wep], wep_type[other.bwep])

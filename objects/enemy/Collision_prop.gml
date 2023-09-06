@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 motion_add(point_direction(other.x, other.y, x, y), 0.5)
 
 if other.team != team and other.hp > 0 and size > other.size and meleedamage > 0 {

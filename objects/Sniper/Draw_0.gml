@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if gonnafire = 1 {
     lasx = x
     lasy = y

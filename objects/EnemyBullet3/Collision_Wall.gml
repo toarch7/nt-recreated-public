@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if speed > 6 and !snd_is_playing(sndShotgunHitWall) snd_play(sndShotgunHitWall)
 move_bounce_solid(00)
 speed *= 0.8

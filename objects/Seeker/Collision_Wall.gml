@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !place_meeting(x, y, hitme) && speed > 0 {
     snd_play(sndBoltHitWall)
 

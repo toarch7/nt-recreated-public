@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 x = view_xview + view_width - 24 - 22 * 2 //-(mouse_x-view_xview)*0.7
 y = view_yview + 12
 

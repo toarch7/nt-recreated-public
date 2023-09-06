@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !UberCont.cgot[num] && !UberCont.weekly_run {
 	with Menu {
         hint = race_lock[other.num]

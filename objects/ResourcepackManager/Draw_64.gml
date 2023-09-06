@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 /// @description hell
 
 time += 0.4

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var c = c_gray
 
 if selected

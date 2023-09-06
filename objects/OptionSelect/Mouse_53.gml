@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if mouse_x > x and mouse_x < x + 24 and mouse_y > y and mouse_y < y + 24 and selected = 0 {
     selected = 1
     instance_create(view_xview + view_width / 2 + 8, view_yview + 40, MusVolSlider)

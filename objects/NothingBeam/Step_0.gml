@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var ang, dst;
 
 if !instance_exists(creator) {

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.race == 15 {
     with other {
         motion_add(point_direction(other.x, other.y, x, y), 1)

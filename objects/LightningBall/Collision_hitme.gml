@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if ((other.team != team) && (other.hp > 0)) {
     BackCont.shake += 6
     instance_destroy()

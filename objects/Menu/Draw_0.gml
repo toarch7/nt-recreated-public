@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 scrDrawSpiral()
 
 var inst = playerinstance_get(global.index),

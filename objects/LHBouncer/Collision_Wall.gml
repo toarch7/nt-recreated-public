@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if (bounce == 0) {
     instance_create(x, y, Dust)
     move_bounce_solid(00)

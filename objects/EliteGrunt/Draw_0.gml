@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if gunangle <= 180 draw_sprite_ext(sprPopoHeavyGun, - 1,
 x + lengthdir_x(-wkick, gunangle),
 y + lengthdir_y(-wkick, gunangle),

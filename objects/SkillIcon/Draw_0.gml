@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !isset("appeary") {
     appeary = num * 32
 }

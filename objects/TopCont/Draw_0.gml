@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 wave += 1
 
 var spr = -1
@@ -39,7 +42,16 @@ with Player {
 		}
 		
         if KeyCont.players > 1 {
-            draw_sprite(sprPlayerIndicator, index, clamp(x, view_xview + 8, view_xview + view_width - 8), clamp(y - 8, view_yview + 16, view_yview + view_height - 4))
+			var pinst = playerinstance_get(index),
+				col = c_white
+			
+			if pinst != undefined
+				col = pinst.color
+			
+			var _x = clamp(x, view_xview + 8, view_xview + view_width - 8),
+				_y = clamp(y - 8, view_yview + 16, view_yview + view_height - 4)
+			
+            draw_sprite_ext(sprPlayerIndicator, index, _x, _y, 1, 1, 0, col, 1)
         }
     }
 }

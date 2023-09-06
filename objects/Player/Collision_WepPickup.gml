@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !can_pick exit
 
 if KeyCont.press_pick[p] && other.visible && other.id == instance_nearest(x, y, WepPickup) {

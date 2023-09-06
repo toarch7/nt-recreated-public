@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if random(8) < 1 {
     with instance_create(x + orandom(24), y + orandom(24), Explosion) {
         hit_id = other.sprite_index

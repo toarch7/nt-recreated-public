@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !roll {
     move_contact_solid(direction, max(1, median(6, speed, 0)))
 

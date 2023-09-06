@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 with other {
     direction = other.direction
     speed = 12

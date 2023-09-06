@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !UberCont.opt_console exit
 
 if UberCont.daily_run or UberCont.weekly_run or UberCont.continued_run exit

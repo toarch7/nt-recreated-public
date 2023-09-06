@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 image_angle = direction
 if ((speed < 6) && (sprite_index != sprHeavySlugDisappear)) {
     sprite_index = sprHeavySlugDisappear

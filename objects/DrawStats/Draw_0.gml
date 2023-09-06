@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if select == 0 {
     scrDrawStats()
 }

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 event_inherited()
 if (speed == 0) timeout += 1
 if (timeout > (40 + (GameCont.loops * 10))) instance_destroy()

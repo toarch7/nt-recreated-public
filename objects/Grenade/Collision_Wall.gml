@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if sticky = 1 {
 
     snd_play(sndGrenadeStickWall)

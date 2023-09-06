@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if speed > 16 {
     speed = 16
 }

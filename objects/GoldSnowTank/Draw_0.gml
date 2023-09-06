@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if ammo > 0 {
     lasx = x
     lasy = y

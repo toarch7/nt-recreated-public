@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(enemy) && instance_exists(Player) {
     if speed > 0 && skill_get(21) && damage {
         dir = instance_nearest(x, y, enemy)

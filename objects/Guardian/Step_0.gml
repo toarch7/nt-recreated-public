@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if ((spr_idle == sprPalaceGuardianDisappear) || (spr_idle == sprPalaceGuardianAppear)) speed = 0
 event_inherited()
 if (sprite_index != spr_hurt) motion_add(direction, 0.6)

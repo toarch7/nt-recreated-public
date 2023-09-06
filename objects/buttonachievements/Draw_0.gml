@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 image_blend = hover ? c_white : c_uigray
 
 y -= hover

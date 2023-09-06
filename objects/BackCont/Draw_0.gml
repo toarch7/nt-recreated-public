@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 //draw
 with Scorch {
     draw_sprite(sprScorchTop, image_index, x, y)

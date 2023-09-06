@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 shky = 0
 shkx = 0
 

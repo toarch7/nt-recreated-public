@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if addy > 0 {
     addx -= sin(wave / 5)
     addy -= 1 - sin(wave / 3) / 2

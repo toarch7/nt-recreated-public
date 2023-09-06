@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if rad > 24 && !charged {
     hp /= 2
     charged = 1

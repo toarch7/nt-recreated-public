@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 event_inherited()
 
 x = view_xview + view_width - 72

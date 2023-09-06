@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 draw_sprite(sprite_index, UberCont.opt_fulscrn, x, y)
 
 

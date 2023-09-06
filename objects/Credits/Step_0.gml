@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if show >= array_length(credittext) && !audio_is_playing(custom_sound_check(musCredits)) && instance_exists(Logo) {
     visible = 0
 

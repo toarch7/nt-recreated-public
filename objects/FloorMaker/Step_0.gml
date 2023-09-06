@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if GameCont.area == 7 && GameCont.subarea == 3 {
     styleb = 0
 

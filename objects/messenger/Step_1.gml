@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if sprite_index == sprMessengerWalk y += 4
 
 if sprite_index == sprMessengerSigh && image_index == 4 && !audio_is_playing(sndLastGrowl) {

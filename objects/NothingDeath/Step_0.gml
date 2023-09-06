@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if alarm[0] >= 5 {
     with instance_create(x + orandom(128), y + orandom(128), choose(Explosion, Explosion, GreenExplosion)) {
         hit_id = other.sprite_index

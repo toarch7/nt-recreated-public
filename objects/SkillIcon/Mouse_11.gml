@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if net_event(ev_mouse, ev_mouse_leave)
 	exit
 

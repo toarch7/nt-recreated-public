@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 //GAME OVER
 draw_set_color(c_black)
 draw_set_alpha(0.7)

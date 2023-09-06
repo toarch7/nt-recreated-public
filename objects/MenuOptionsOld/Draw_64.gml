@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 with ResourcepackManager
 depth = other.depth - 1
 

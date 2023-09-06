@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 GameCont.crownpoints += 1
 
 if !instance_exists(Crown) {

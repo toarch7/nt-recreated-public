@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 x = view_xview + view_width / 2
 y = view_yview - 4
 

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if stuck > 10 exit;
 stuck++
 

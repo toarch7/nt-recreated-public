@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if bounce {
     bounce = 0
     move_bounce_solid(00)

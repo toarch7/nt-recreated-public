@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var dmg = 1 + skill_get(20)
 
 if size >= other.size - 1 && speed > 2 && !other.inframes {

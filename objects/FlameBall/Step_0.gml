@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if (BackCont.shake < 2) BackCont.shake = 2
 
 x += (random(2) - 1)

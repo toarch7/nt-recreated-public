@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.team != team && hit_id > 0 {
     other.last_hit = hit_id
 }

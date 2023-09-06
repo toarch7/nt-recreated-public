@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if speed > 6 snd_play_hit(sndShotgunHitWall, 0.2)
 
 if wallbounce {

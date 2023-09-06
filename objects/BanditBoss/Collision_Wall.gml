@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if charge > 0 or intro = 0 {
     with other {
         instance_destroy()

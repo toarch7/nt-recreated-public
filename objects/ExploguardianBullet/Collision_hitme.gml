@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.team != team && other.hp > 0 && scr_can_hit() {
     with other {
         hp -= 2

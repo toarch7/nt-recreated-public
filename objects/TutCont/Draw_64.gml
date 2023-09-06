@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if pos >= array_length(text) or instance_exists(Spiral)
 	exit
 

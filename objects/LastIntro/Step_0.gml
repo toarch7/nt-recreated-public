@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !instance_exists(Cinematic) {
     if x < view_xview + view_width - 20 && y < view_yview + view_height - 20 && x > view_xview + 20 && y > view_yview + 20 {
         if transtime > 30 && spr_idle == sprDeskIdle {

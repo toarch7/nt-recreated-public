@@ -157,3 +157,10 @@ else {
 	
 	netframe ++
 }
+
+if network_is_locked() {
+	with all {
+		x -= hspeed
+		y -= vspeed
+	}
+}

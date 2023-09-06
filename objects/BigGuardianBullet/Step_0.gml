@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if sprite_index == sprBigGuardianBulletSpawn {
     x = xstart
     y = ystart

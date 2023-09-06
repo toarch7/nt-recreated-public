@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if z > 0 {
     image_angle += rotspeed * speed
 }

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if variable_instance_exists(other.id, "hit") && other.hit exit
 
 if other.inframes && other.object_index == BecomeNothing exit

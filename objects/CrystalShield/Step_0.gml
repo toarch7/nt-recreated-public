@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(creator) {
     if sprite_index != spr_disappear {
         with creator {

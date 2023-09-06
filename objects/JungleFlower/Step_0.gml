@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if feed >= 4 {
     GameCont.area = 105
     GameCont.subarea = 0

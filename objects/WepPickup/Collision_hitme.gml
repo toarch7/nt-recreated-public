@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if mask_index != mskWepPickup {
     if speed > 4 && team != other.team && instance_exists(Player) {
         with other {

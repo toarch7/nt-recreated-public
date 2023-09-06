@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(FlameBurst) timeout = 0
 else {
     timeout += 1

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var xx = 56, yy = 48
 
 draw_set_valign(fa_top)

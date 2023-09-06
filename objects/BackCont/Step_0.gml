@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !instance_exists(LevCont) && !instance_exists(CrownIcon) && !(instance_exists(SpiralCont) && !instance_exists(NothingSpiral)) && !instance_exists(GenCont) {
     var dir = 0
     var dis = 0

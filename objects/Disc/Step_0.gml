@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 instance_create(x, y, DiscTrail)
 dist += 1
 

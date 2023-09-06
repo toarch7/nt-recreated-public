@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var immune
 
 if other.team != team && !other.inframes {

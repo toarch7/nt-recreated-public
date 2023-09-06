@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var numfloors = 0
 var d = safedir
 

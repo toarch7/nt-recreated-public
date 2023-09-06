@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if sprite_index = sprRavenLift z -= 3
 if sprite_index = sprRavenLand z += 3
 

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if team != other.team {
     snd_play_hit(other.snd_hurt, .2)
 

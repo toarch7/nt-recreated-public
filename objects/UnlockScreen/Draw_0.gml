@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !visible exit
 
 var _w = 32

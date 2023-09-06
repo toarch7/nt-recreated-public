@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 image_angle = direction
 
 if speed < 5 { //and sprite_index != sprBullet2Disappear {

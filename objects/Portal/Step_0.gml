@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(NothingInactive) or instance_exists(BecomeNothing) or instance_exists(NothingDeath) {
     instance_destroy(id, 0)
     exit

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if KeyCont.press_pick[p] {
     dir = random(360)
     repeat 2 + random(3) {

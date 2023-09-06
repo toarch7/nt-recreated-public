@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 scrDrawSpiral()
 
 draw_set_halign(fa_center)

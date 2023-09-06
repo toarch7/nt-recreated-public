@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 instance_create(x, y, Smoke)
 image_angle = (direction - 90)
 if (bounces <= 3) {

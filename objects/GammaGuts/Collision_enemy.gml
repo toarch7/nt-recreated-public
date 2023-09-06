@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.object_index == Van
 	exit
 

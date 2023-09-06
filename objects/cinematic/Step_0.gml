@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 with TopCont
 drawcontrols = 0
 

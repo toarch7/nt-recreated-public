@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if speed > 0 {
     snd_play_hit_big(sndBoltHitWall, .2)
     speed = 0

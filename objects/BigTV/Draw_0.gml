@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 draw_self()
 
 if instance_exists(Cinematic) {

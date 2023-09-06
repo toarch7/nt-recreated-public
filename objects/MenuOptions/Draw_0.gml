@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if ingame {
     draw_set_color(c_black)
     draw_set_alpha(0.9)

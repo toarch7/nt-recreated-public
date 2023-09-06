@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 scrTarget()
 if instance_exists(target) {
     if point_distance(x, y, target.x, target.y) < 64 and !instance_exists(Portal) and collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {

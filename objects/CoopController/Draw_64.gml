@@ -1,5 +1,6 @@
 draw_set_color(c_white)
 
+/*
 var str = "seed: " +string(random_get_seed()) + "\n" +
 		  "frame: " + string(frame) + "\n" +
 		  "net(" + string(delay) + "): " + string(netframe) + "\n"
@@ -17,6 +18,7 @@ draw_set_halign(fa_left)
 draw_text(72, 24, str)
 
 draw_set_font(fntM1)
+*/
 
 if !instance_exists(CoopMenu) {
     draw_set_color(c_gray)

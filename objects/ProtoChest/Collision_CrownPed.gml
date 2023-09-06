@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var f = instance_random(Floor)
 
 if f {

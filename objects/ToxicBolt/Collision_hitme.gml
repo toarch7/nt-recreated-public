@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if speed > 0 and other.team != team {
     snd_play_hit(other.snd_hurt, .2)
     if other.hp >= 8 {

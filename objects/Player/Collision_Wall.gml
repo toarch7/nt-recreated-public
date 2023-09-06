@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if roll or race == 15 {
 	move_bounce_solid(0)
 	

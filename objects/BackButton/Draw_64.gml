@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 draw_sprite_ext(sprite_index, image_index, 3, 3 - hover, 1, 1, 0, c_black, 1)
 draw_sprite_ext(sprite_index, image_index, 3, 2 - hover, 1, 1, 0, c_black, 1)
 

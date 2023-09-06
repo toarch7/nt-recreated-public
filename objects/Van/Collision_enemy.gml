@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if meleedamage {
     with other {
         snd_play(other.snd_mele)

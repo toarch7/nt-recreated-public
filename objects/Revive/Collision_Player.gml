@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if (GameCont.tottimer - starttimer < 30) or (other.inframes or other.bleed) && other.object_index == Player exit
 
 hp = clamp(ceil(other.hp / 2), 1, max_hp)

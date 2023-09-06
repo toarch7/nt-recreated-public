@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_number(enemy) < 10 {
     instance_destroy()
     exit

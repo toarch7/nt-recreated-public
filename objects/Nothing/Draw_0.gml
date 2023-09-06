@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if sprite_index == spr_hurt && image_index < 1 {
     gpu_set_fog(1, c_white, depth, depth + 1)
 }

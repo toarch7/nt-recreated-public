@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if sprite_index != sprVenusCarFix {
     if sprite_index != spr_hurt
         sprite_index = spr_idle

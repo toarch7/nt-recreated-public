@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if race == 15 {
     sprite_index = sprMutant15Walk
     speed = 3

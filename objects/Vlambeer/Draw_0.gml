@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !global.console_active {
 	if mouse_ui_clicked() or keyboard_anykey() or scrGamepadAnykey() != -1 {
 		event_perform(ev_alarm, 0)

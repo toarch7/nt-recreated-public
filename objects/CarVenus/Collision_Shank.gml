@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 //MAGIC REPAIR
 var p = instance_nearest(x, y, Player)
 

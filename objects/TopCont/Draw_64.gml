@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var plr = noone
 
 with Player

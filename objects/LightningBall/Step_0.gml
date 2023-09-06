@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if (BackCont.shake < 2) BackCont.shake = 2
 if ((GameCont.area == 101) && ((random(4) < 1) && (speed > 0))) instance_create(x, y, Bubble)
 x += (random(2) - 1)

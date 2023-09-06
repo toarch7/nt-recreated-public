@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if !roll && race != 15 {
     move_contact_solid(direction, max(1, min(maxspeed, speed)))
     if !place_free(x + hspeed, y) {

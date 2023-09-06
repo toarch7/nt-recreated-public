@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 scrTarget()
 
 if target {

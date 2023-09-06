@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 wave += 0.4
 
 if wave > 6.2

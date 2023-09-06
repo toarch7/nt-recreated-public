@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 with instance_create(x, y, WepPickup) {
     curse = 0
     scrDecideWep(6)

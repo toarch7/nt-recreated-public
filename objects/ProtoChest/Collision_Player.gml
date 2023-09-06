@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if sprite_index != sprProtoChestOpen {
     sprite_index = sprProtoChestOpen
     

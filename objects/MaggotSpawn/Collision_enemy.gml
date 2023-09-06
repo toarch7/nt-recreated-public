@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if other.object_index == object_index && id < other.id {
     var d = point_direction(other.x, other.y, x, y) + orandom(1)
     var xx = lengthdir_x(8, d),

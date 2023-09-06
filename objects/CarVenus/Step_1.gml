@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if instance_exists(Player) {
     if GameCont.area = 5 and !instance_exists(GenCont) and !instance_exists(LevCont) and !instance_exists(FloorMaker) {
         //SNOW & ICE TEST

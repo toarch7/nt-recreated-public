@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if hitable {
     instance_change(BecomeNothing, 1)
 

@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 if (other.object_index == LilHunter or other.object_index == Salamander) && team == other.team {
     exit
 }

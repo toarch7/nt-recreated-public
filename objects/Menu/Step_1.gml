@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 var inst = playerinstance_get(),
 	yoff = dailylistfavor
 

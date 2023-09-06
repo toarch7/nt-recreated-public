@@ -1,3 +1,6 @@
+if lockstep_stop
+	exit
+
 with other {
     instance_change(Wind, false)
     event_perform(ev_create, 0)
