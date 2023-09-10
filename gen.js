@@ -22,6 +22,51 @@ const objectblacklist = [
 	"UberCont", "CoopController"
 ];
 
+
+
+
+function funny() {
+	fs.readdir("objects", function(err, dirs) {
+		dirs.forEach(function(dir) {
+			if (objectblacklist.indexOf(dir) != -1) {
+				return;
+			}
+			
+			let path = "objects/" + dir + "/";
+			
+			let str = fs.readFileSync(path + dir + ".yy", "utf-8");
+			
+			let key = "\"parentObjectId\": {";
+			
+			let p1 = str.indexOf(key);
+			
+			if (p1 == -1)
+				return;
+			
+			let part = str.slice(p1, str.length);
+			let p2 = part.indexOf("}");
+			
+			let needed = part.slice(key.length - 1, p2 + 1);
+			let parent = JSON.parse(needed.replace("\",\r\n  }", "\"\n  }")).name;
+			
+			if (parent != "projectile")
+				return;
+			
+			let create = fs.readFileSync(path + "Create_0.gml", "utf-8");
+			
+			if (!create || create.indexOf("event_inherited()") == -1) {
+				console.log(dir, "doesn't inherit projectile's create event");
+				fs.writeFileSync(path + "Create_0.gml", "event_inherited()\n" + create);
+			}
+		});
+	});
+}
+
+
+funny();
+
+return;
+
 fs.readdir("objects", function(err, dirs) {
 	dirs.forEach(function(dir) {
 		if (objectblacklist.indexOf(dir) != -1) {

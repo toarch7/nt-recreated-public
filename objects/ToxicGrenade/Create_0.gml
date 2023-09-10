@@ -1,3 +1,4 @@
+event_inherited()
 friction = 0.1
 alarm[1] = 6
 alarm[0] = 60

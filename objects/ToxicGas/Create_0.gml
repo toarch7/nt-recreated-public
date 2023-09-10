@@ -1,3 +1,4 @@
+event_inherited()
 image_angle = random(360)
 motion_add(random(360), random(1.5) + 0.2)
 

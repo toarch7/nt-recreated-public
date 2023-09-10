@@ -1,3 +1,4 @@
+event_inherited()
 hit_id = -1
 
 typ = 0
