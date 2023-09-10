@@ -13,11 +13,11 @@ else if (GameCont.area == 2 or UberCont.halloween) {
 }
 
 if spr != -1 {
-    var fogx = floor(view_xview / 480) * 480 + 480 - fogscroll
-    var fogy = floor(view_yview / 360) * 360
+    var fogx = floor(view_xview / 480) * 480 + 480 - fogscroll,
+		fogy = floor(view_yview / 360) * 360
 
-    for (var xx = -1; xx <= 1; xx++) {
-        for (var yy = -1; yy <= 1; yy++) {
+    for (var xx = -1; xx <= 1; xx ++) {
+        for (var yy = -1; yy <= 1; yy ++) {
             draw_sprite_ext(spr, 0, fogx + xx * 480, fogy + yy * 360, 1, 1, 0, c_white, FOG_ALPHA)
         }
     }
@@ -33,25 +33,25 @@ if spr != -1 {
 
 with Player {
     if visible {
+		var pinst = playerinstance_get(index),
+			col = c_white
+		
+		if pinst != undefined
+			col = pinst.color
+		
 		if !instance_exists(PauseImage) {
 	        var ang = KeyCont.dir_fire[index]
 			
 	        if !UberCont.opt_keyboard or index != global.index or is_gamepad(index) {
-	            draw_sprite_ext(sprCrosshair, KeyCont.crosshair[index], x + lengthdir_x(64, ang), y + lengthdir_y(64, ang), 1, 1, 0, UberCont.opt_cursorcol, index == global.index ? 1 : 0.5)
+	            draw_sprite_ext(sprCrosshair, KeyCont.crosshair[index], x + lengthdir_x(64, ang), y + lengthdir_y(64, ang), 1, 1, 0, col, index == global.index ? 1 : 0.5)
 	        }
 		}
 		
         if KeyCont.players > 1 {
-			var pinst = playerinstance_get(index),
-				col = c_white
-			
-			if pinst != undefined
-				col = pinst.color
-			
 			var _x = clamp(x, view_xview + 8, view_xview + view_width - 8),
 				_y = clamp(y - 8, view_yview + 16, view_yview + view_height - 4)
 			
-            draw_sprite_ext(sprPlayerIndicator, index, _x, _y, 1, 1, 0, col, 1)
+            draw_sprite_ext(sprPlayerIndicatorB, index, _x, _y, 1, 1, 0, col, 1)
         }
     }
 }

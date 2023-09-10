@@ -5,9 +5,11 @@ try {
 	if _type != network_type_data {
 		
 		if _type == network_type_connect or _type == network_type_non_blocking_connect {
+			print("Connection", _socket)
+			
 			if array_length(sockets) < 4 {
 				array_push(sockets, _socket)
-			
+				
 				packet_begin(event.tcp_handshake)
 				packet_send()
 			}
@@ -124,6 +126,8 @@ try {
 			
 			with CoopMenu
 				text = "@s- CONNECTION REFUSED -:##@w" + _reason
+			
+			print("Server connection refused refused: ", _reason)
 			
 			alarm[1] = -1
 			

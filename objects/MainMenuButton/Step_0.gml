@@ -17,7 +17,7 @@ var press = mouse_ui_clicked()
 
 if mouse_hover {
 	if !is_gamepad() {
-		if !hover {
+		if !hover && available {
 			snd_play(sndHover)
 			hover = 1
 		}

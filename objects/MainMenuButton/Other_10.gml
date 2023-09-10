@@ -1,6 +1,7 @@
 /// @description click
 
-if instance_exists(Logo) or !available exit
+if instance_exists(Logo) or !available
+	exit
 
 switch image_index {
     case 0:

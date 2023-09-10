@@ -12,8 +12,11 @@ for (var i = 0; i < KeyCont.players; i++) {
     if KeyCont.press_paus[i] && !instance_exists(GenCont) && !instance_exists(Credits) && !instance_exists(Cinematic) {
         if !paused {
             if instance_exists(Player) {
-                paused = 1
+                paused = true
                 want_pause = 2
+				
+				if os_type == os_android && opt_volumecontrol
+					SetVolumeControl(false)
 				
 				scrGetPauseImage()
 				
@@ -104,6 +107,9 @@ if want_restart {
 		instance_create(x, y, GenCont)
 		
 		paused = false
+		
+		if os_type == os_android && opt_volumecontrol
+			SetVolumeControl(true)
 		
 	    want_restart = 0
 	}

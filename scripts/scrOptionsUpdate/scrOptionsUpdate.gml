@@ -98,9 +98,6 @@ function scrOptionsUpdate() {
             scrSetViewSize(false)
 		}
 		
-        if os_type == os_android && (instance_exists(GameCont) or instance_exists(Player))
-            SetVolumeControl(opt_volumecontrol)
-		
 		showtutorial = save_get_val_s("game", "tutorial", 1)
 		
 		if scrValidateUsername(undefined, opt_nickname, true) {

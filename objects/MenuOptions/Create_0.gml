@@ -79,8 +79,7 @@ option_list_max = 0
 
 debris = noone
 
-clickable = true
-wait = 0
+wait = true
 press = 0
 
 disclaimer_pop = 0
@@ -920,6 +919,7 @@ element_functions = {}
 
 element_functions[$ "category"] = function(opt) {
 	self.category_set(opt.category)
+	wait = 1
 }
 
 element_functions[$ "switch"] = function(opt) {

@@ -1,1 +1,0 @@
-clickable = 1

@@ -299,7 +299,7 @@ var press = mouse_ui_clicked()
 	
 	items = options[category]
 
-if keyboard_check(vk_alt)
+if keyboard_check(vk_alt) or wait
 	press = 0
 
 if mx != mx_last or my != my_last or mouse_check_button_pressed(mb_any)
@@ -526,7 +526,7 @@ for (var i = 0; i < item_count; i++) {
 				snd_play(sndSlider)
 			}
 		}
-		else if opt.available && (press or slider_change) {
+		else if opt.available && (press or slider_change) && !wait {
 			var r = undefined
 			
 			if is_method(opt.click)
@@ -686,10 +686,12 @@ for (var i = 0; i < item_count; i++) {
 if slider != undefined {
 	var width = sprite_get_width(sprSlider)
 	
-	if mx != slider_x
-		slider_change = 1
-	
-	slider.value = clamp(1 - (width - (mx - slider_x)) / sprite_get_width(sprSlider), 0, 1)
+	if mx > 0 {
+		if mx != slider_x
+			slider_change = 1
+		
+		slider.value = clamp(1 - (width - (mx - slider_x)) / sprite_get_width(sprSlider), 0, 1)
+	}
 	
 	if !mouse_check_button(mb_left)
 		slider_change = 2
@@ -703,7 +705,7 @@ draw_set_color(c_white)
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 
-if (mouse_check_button_released(mb_left) or gamepad_button_check_pressed(0, gp_face1)) && clickable && wait
+if !mouse_check_button(mb_left)
     wait = 0
 
 for(var i = 0; i < array_length(options); i ++) {

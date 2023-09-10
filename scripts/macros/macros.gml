@@ -6,6 +6,8 @@
 #macro c_uigray    0x999999
 #macro c_uidark    0x333333
 
+#macro INT_MAX 2147483647
+
 #macro view_width global.g_view_width
 #macro view_height global.g_view_height
 #macro view_xview global.g_view_xview
@@ -399,23 +401,6 @@ function scrHandleInputsGeneral(index) {
 	        }
 			else touch_duration[i] = 0
 	    }
-		
-		if os_type == os_android {
-		    var p = self[$ "_pause_last"] ?? 0
-			
-		    if !opt_gamepad && opt_volumecontrol {
-		        if p != paused {
-		            SetVolumeControl(!paused)
-		        }
-		    }
-			
-			if volqueue != -1 && !ds_queue_empty(volqueue) {
-			    var a = ds_queue_dequeue(volqueue)
-			    scrHandleVolumeControl(a[0], a[1])
-			}
-			
-		    self[$ "_pause_last"] = paused
-		}
 	}
 }
 
