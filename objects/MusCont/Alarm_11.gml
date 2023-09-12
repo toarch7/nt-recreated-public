@@ -38,7 +38,7 @@ if oldarea != area or !audio_is_playing(song) or !audio_is_playing(amb) {
 		_amb = asset_get_index("amb" + string(GameCont.area))
 	
 	if audio_exists(_song) {
-		if GameCont.proto {
+		if GameCont.proto && GameCont.area != 100 {
 			var _songb = asset_get_index(audio_get_name(_song) + "b")
 			
 			if audio_exists(_songb)
