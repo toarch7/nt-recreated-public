@@ -16,8 +16,6 @@ function snd_play_hit(snd, pitch = 0.2) {
 	if !UberCont.opt_3Dsound
 		return snd_play(snd)
     
-	print("sound", snd, dir == self)
-	
 	if (dir == self) {
 		audio_play_sound_at(snd, ((view_xview + (view_width / 2)) - x), ((view_yview + (view_height / 2)) - y), 0, 64, 320, 1, false, 0)
 	}

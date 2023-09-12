@@ -27,7 +27,7 @@ function scrGameSave() {
         d.hp = hp
         d.spirit = spirit
 		d.max_hp = max_hp
-		d.recontuations = ++ recontuations
+		d.recontuations = recontuations
 		d.headloses = headloses
     }
 
