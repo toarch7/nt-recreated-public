@@ -43,12 +43,22 @@ with Player {
 	        var ang = KeyCont.dir_fire[index]
 			
 	        if !UberCont.opt_keyboard or index != global.index or is_gamepad(index) {
-				var s = KeyCont.dis_fire[index]
+				var s = KeyCont.dis_fire[index],
+					xx = x + lengthdir_x(64 * s, ang),
+					yy = y + lengthdir_y(64 * s, ang),
+					a = min(1, crosshair_alpha)
 				
-				var xx = x + lengthdir_x(64 * s, ang),
-					yy = y + lengthdir_y(64 * s, ang)
+				crosshair_alpha = lerp(crosshair_alpha, (s > 0) * 5, 0.4)
 				
-	            draw_sprite_ext(sprCrosshair, KeyCont.crosshair[index], xx, yy, 1, 1, 0, col, index == global.index ? 1 : 0.5)
+				if s > 0 {
+					crosshair_x = lerp(crosshair_x, xx, 0.8)
+					crosshair_y = lerp(crosshair_y, yy, 0.8)
+				}
+				
+				if index != global.index
+					a *= 0.5
+				
+	            draw_sprite_ext(sprCrosshair, KeyCont.crosshair[index], crosshair_x, crosshair_y, 1, 1, 0, col, a)
 	        }
 		}
 		

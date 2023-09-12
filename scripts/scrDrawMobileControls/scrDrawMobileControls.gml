@@ -28,11 +28,11 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
     }
 
     with JoystickAttack {
-        var dir = KeyCont.dir_fire[global.index]
-        var dis = self.dis
-
-        var xx = lengthdir_x(dis, dir)
-        var yy = lengthdir_y(dis, dir)
+        var dir = KeyCont.dir_fire[global.index],
+			dis = KeyCont.dis_fire[global.index] * rad
+		
+        var xx = lengthdir_x(dis, dir),
+			yy = lengthdir_y(dis, dir)
 
         if UberCont.opt_simplify {
             draw_circle_width(x, y, rad * m, width)
@@ -61,24 +61,37 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
     with ButtonActive {
         if !crystaltb {
             var d = self[$ "do_thing"],
-                c = c_white
+                c = c_white,
+				forever = KeyCont.activeforever[global.index]
+			
+			if forever {
+				c = c_lime
+			}
+			else {
+				if d == -1 {
+					c = c_yellow
+				}
+	            else if d == 2 {
+					c = c_ultra
+				}
+				
+				if index != -1
+					c = merge_color(c, c_gray, 0.5)
+			}
+			
+            draw_sprite_ext(sprMobileControlAbility, 0, x, y, scale * 0.75, scale * 0.75, 0, c, 1)
 
-            if d == -1 c = c_yellow
-            else if d == 2 c = c_lime
-
-            draw_sprite_ext(
-            sprMobileControlAbility, 0,
-            x, y, scale * 0.75, scale * 0.75,
-            0, (KeyCont.activeforever[global.index] ? c_lime : merge_color((index != -1 ? c_gray : c_white), c, 0.5)), 1)
-
-            if instance_exists(plr) && plr.race == 12 {
+            if instance_exists(plr) && plr.race == 12 && plr.pref("rogue") {
                 draw_set_halign(fa_center)
                 draw_set_valign(fa_center)
+				
                 draw_text_shadow(x, y, "SCREEN#SWIPE")
-                draw_set_halign(fa_left)
+                
+				draw_set_halign(fa_left)
                 draw_set_valign(fa_top)
             }
-        } else draw_sprite_ext(sprSkillIconHUD, 5, x, y, scale, scale, 0, c_white, 0.5)
+        }
+		else draw_sprite_ext(sprSkillIconHUD, 5, x, y, scale, scale, 0, c_white, 0.5)
     }
 
 

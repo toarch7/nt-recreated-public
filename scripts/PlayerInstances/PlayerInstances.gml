@@ -155,7 +155,8 @@ function PlayerInstance(_index = 0) constructor {
 		var list = UberCont.cpref_list,
 			index = array_indexof(list, name)
 		
-		if index == -1
+		// todo: uncrutch
+		if index == -1 or (name == "rogue" && instance_exists(CoopController))
 			return false
 		
 		return bit_check(self.cprefs, 1 << (index + 1))

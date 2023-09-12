@@ -43,7 +43,7 @@ if !anyone_else && !pause {
 
         if instance_exists(NothingInactive) {
             aim_target = instance_nearest(x, y, NothingInactive)
-
+			
             if !aim_target.hitable {
                 aim_target = noone
             }

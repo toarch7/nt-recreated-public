@@ -27,7 +27,6 @@ if index != -1 or (do_thing == 1) {
 		or (player.race == 6 && pinst.pref("yv"))
 		or (player.race == 14 && pinst.pref("skeleton"))
 		or (player.race == 7 && pinst.pref("steroids"))
-		or (player.race == 12 && !pinst.pref("rogue"))
 		or player.race == 11 {
 			forever ^= 1
 			
@@ -62,7 +61,6 @@ if forever {
 	with Player {
 		if index != _index
 			continue
-		
 		
 		if (race == 14 && pinst.pref("skeleton"))
 		or (race == 6  && pinst.pref("yv") && scrYVCanPop(wep)) {

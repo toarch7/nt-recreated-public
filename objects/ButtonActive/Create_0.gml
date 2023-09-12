@@ -9,8 +9,6 @@ melting = 0
 
 button_name = "ABILTIY BUTTON"
 
-rogue_bombing = 0
-
 time = 0
 
 do_thing = 0

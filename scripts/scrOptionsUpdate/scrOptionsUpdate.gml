@@ -74,6 +74,7 @@ function scrOptionsUpdate() {
 		cpref_rogue = save_get_val_s("cprefs", "rogue", 1)
 		cpref_skeleton = save_get_val_s("cprefs", "skeleton", 0)
 		
+		
 		// Update variables
 		
         scrVolume()

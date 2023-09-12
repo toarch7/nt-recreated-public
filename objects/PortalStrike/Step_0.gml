@@ -9,30 +9,24 @@ if instance_exists(creator) {
 		
 		inst = playerinstance_get(index),
 		
-		cx = creator.x + ldrx(128 * KeyCont.dis_fire[index], KeyCont.dir_fire[index]),
-		cy = creator.y + ldry(128 * KeyCont.dis_fire[index], KeyCont.dir_fire[index])
+		cx = creator.x + ldrx(view_width * KeyCont.dis_fire[index], KeyCont.dir_fire[index]),
+		cy = creator.y + ldry(view_height * KeyCont.dis_fire[index], KeyCont.dir_fire[index])
 	
-	if inst.pref("rogue") && ButtonActive.rogue_bombing {
+	if inst.pref("rogue") && KeyCont.activeforever[index] {		
         if device_mouse_check_button(touch, mb_left) {
             direction = point_direction(x, y, device_mouse_x(touch), device_mouse_y(touch))
         }
-		else {
-            touch = -1
-        }
+		else touch = -1
     }
 	else direction = point_direction(x, y, cx, cy)
 	
-	if is_mobile(index) {
-		if inst.pref("rogue") {
-			if ButtonActive.rogue_bombing && touch == -1 {
-		        with ButtonActive
-					rogue_bombing = 0
-				
-				event_user(0)
-			}
-		}
-		else if !KeyCont.activeforever[index]
+	if is_mobile(index) && inst.pref("rogue") {
+		
+		if KeyCont.activeforever[index] && touch == -1 {
+		    KeyCont.activeforever[index] = 0
 			event_user(0)
+		}
+		
 	}
 	else if !KeyCont.hold_spec[index]
 		event_user(0)

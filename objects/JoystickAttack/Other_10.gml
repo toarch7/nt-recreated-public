@@ -1,5 +1,10 @@
 event_inherited()
 
+if instance_exists(MenuOptions) or UberCont.opt_keyboard
+	exit
+
+//KeyCont.dis_fire[global.index] = 0
+
 if UberCont.opt_aimbot {
     with Player if index == global.index {
         var aim_target = instance_nearest(x, y, enemy)
@@ -27,14 +32,16 @@ if UberCont.opt_aimbot {
 
         if d != -1 {
             KeyCont.dir_fire[index] = angle_lerp(KeyCont.dir_fire[index], d, 0.75)
-			KeyCont.dis_fire[global.index] = point_distance(0, 0, ldrx(1, d), ldry(1, d))
+			
+			var dis = point_distance(x, y, aim_target.x, aim_target.y)
+			KeyCont.dis_fire[global.index] = min(1, dis / view_width)
         }
-
+		
         break
     }
 }
 
-if instance_exists(MenuOptions) or UberCont.opt_keyboard or UberCont.opt_gamepad
+if UberCont.opt_gamepad
 	exit
 
 var i = get_nearest_touch(rad)
@@ -48,6 +55,8 @@ if index == -1
 	index = i
 
 if !UberCont.opt_aimbot {
+	
+	
     if index != -1 {
         var mx = device_mouse_x_to_gui(index)
         var my = device_mouse_y_to_gui(index)
@@ -56,7 +65,7 @@ if !UberCont.opt_aimbot {
         dis = min(rad, point_distance(x, y, mx, my))
 
         KeyCont.dir_fire[global.index] = dir
-        KeyCont.dis_fire[global.index] = point_distance(0, 0, ldrx(1, dir), ldry(1, dir))
+        KeyCont.dis_fire[global.index] = dis / rad
 
         KeyCont.hold_fire[global.index] = 1
 

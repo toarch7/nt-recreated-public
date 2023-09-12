@@ -1,6 +1,5 @@
 if UberCont.opt_keyboard or UberCont.opt_gamepad exit
 
-
 var a = 0,
     touch = event_data[? "touch"]
 
@@ -27,7 +26,7 @@ if point_distance(0, 0, event_data[? "diffX"], event_data[? "diffY"]) > 12 && my
 		
 		if race == 12 && playerinstance.pref("rogue") && !instance_exists_var(PortalStrike, "creator", id) {
             if rogue_ammo {
-				other.rogue_bombing = true
+				KeyCont.activeforever[global.index] = true
 				
                 with instance_create(cx, cy, PortalStrike) {
                     self.touch = touch

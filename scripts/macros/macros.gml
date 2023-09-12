@@ -440,7 +440,7 @@ function scrSetKeyboardInputs(index = 0) {
 			
 		    KeyCont.dir_fire[index] = dir
 			
-			KeyCont.dis_fire[index] = point_distance(0, 0, ldrx(1, dir), ldry(1, dir))
+			KeyCont.dis_fire[index] = min(1, point_distance(x, y, mouse_x, mouse_y) / view_width)
 		}
 	}
 }

@@ -9,3 +9,17 @@ friction = 0.45
 image_speed = 0.4
 
 recontuations = 0
+
+pref = function(name) {
+	var p = playerinstance_get(index)
+	
+	if p == undefined
+		exit
+	
+	return p.pref(name)
+}
+
+crosshair_x = x
+crosshair_y = y
+
+crosshair_alpha = 0

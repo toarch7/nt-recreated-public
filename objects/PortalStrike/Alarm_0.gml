@@ -1,5 +1,6 @@
-if !ammo
-	exit
+if !ammo {
+	instance_destroy(); exit
+}
 
 with instance_create(x + expl_x + orandom(4), y + expl_y + orandom(4), PopoExplosion) {
     team = -1
