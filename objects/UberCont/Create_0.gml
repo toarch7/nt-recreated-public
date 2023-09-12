@@ -105,7 +105,6 @@ weekly_data = undefined
 get_daily_times = 0
 
 daily_seed = -1
-seedoffset = 0
 daily_request = tb_api("daily")
 weekly_request = tb_api("weekly")
 
@@ -215,8 +214,6 @@ global.time = 0
 global.crownpick = 1
 
 global.recontuations = 0
-
-open_two_windows(1)
 
 if os_type == os_android
 	volqueue = ds_queue_create()

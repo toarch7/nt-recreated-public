@@ -4,10 +4,10 @@ function scrVolume() {
 			avol = clamp(UberCont.opt_ambvol, 0, 1)
         audio_master_gain(clamp(UberCont.opt_volume, 0, 1))
 
-        //if sound_exists(song)
+        //if audio_exists(song)
         //audio_sound_gain(song, mvol, 0)
 
-        //if sound_exists(amb)
+        //if audio_exists(amb)
         //audio_sound_gain(amb, clamp(UberCont.opt_ambvol, 0, 1), 0)
 		
         audio_sound_gain(sndBossWin, mvol, 0)

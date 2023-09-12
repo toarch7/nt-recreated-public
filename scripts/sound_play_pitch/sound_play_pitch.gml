@@ -1,3 +1,14 @@
+function sound_play_pitch(snd, pitch) {
+	var _snd = custom_sound_check(snd)
+	
+	audio_stop_sound(_snd)
+	
+	var s = audio_play_sound_on(UberCont.mainsound, _snd, 0, 10)
+	audio_sound_pitch(s, pitch)
+	
+	return s
+}
+
 function sound_play_pitchvol(snd, pitch, vol) {
 	var _snd = custom_sound_check(snd)
 	

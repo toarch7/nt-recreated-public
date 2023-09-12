@@ -19,8 +19,8 @@ if !walled {
     if guitar {
         var snd = asset_get_index("sndGuitarHit" + string(irandom(6) + 1))
 
-        if sound_exists(snd) {
-            snd_play_hit(snd, 0.2)
-        }
-    } else snd_play(sndMeleeWall)
+        if audio_exists(snd)
+            snd_play_pitch(snd, 0.2)
+    }
+	else snd_play(sndMeleeWall)
 }

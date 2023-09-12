@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": true,
   "parent": {
-    "name": "object",
-    "path": "folders/Scripts/compatibility/object.yy",
+    "name": "compatibility",
+    "path": "folders/Scripts/compatibility.yy",
   },
   "resourceVersion": "1.0",
   "name": "object_get_depth",

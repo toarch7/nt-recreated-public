@@ -6,7 +6,7 @@
     "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "sound_discard",
+  "name": "sound_play_pitch",
   "tags": [],
   "resourceType": "GMScript",
 }

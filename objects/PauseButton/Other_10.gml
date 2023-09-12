@@ -90,9 +90,12 @@ else switch image_index {
 
     case 2:
         //OPTIONS
-        instance_create(0, 0, MenuOptions)
+        with instance_create(0, 0, MenuOptions)
+			self.category_set(OptionCategory.Main)
+		
         with object_index
-        instance_destroy()
+			instance_destroy()
+		
         break
 	
     case 3:

@@ -37,11 +37,11 @@ if oldarea != area or !audio_is_playing(song) or !audio_is_playing(amb) {
 	var _song = asset_get_index("mus" + string(GameCont.area)),
 		_amb = asset_get_index("amb" + string(GameCont.area))
 	
-	if sound_exists(_song) {
+	if audio_exists(_song) {
 		if GameCont.proto {
 			var _songb = asset_get_index(audio_get_name(_song) + "b")
 			
-			if sound_exists(_songb)
+			if audio_exists(_songb)
 				_song = _songb
 		}
 		
@@ -49,7 +49,7 @@ if oldarea != area or !audio_is_playing(song) or !audio_is_playing(amb) {
 	}
 	else song = musBoss4Silence
 	
-	if sound_exists(_amb) {
+	if audio_exists(_amb) {
 		amb = _amb
 	}
 	else amb = amb0b

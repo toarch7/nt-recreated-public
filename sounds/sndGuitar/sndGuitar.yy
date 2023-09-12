@@ -14,8 +14,8 @@
   "soundFile": "sndGuitar",
   "duration": 0.562375,
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy",
+    "name": "Guitar",
+    "path": "folders/Sounds/Guitar.yy",
   },
   "resourceVersion": "1.0",
   "name": "sndGuitar",

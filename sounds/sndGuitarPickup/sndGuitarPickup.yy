@@ -14,8 +14,8 @@
   "soundFile": "sndGuitarPickup",
   "duration": 0.381063,
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy",
+    "name": "Guitar",
+    "path": "folders/Sounds/Guitar.yy",
   },
   "resourceVersion": "1.0",
   "name": "sndGuitarPickup",

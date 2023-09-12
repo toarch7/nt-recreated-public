@@ -3,7 +3,7 @@
   "resourceVersion": "1.0",
   "name": "sndMutHover",
   "conversionMode": 0,
-  "compression": 1,
+  "compression": 2,
   "volume": 1.0,
   "preload": false,
   "bitRate": 128,

@@ -2115,7 +2115,7 @@ function scrFire(wep, useAmmo = true) {
         with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), Slash) {
             dmg = 26
             sprite_index = sprHeavySlash
-            guitar = 1
+            guitar = true
             longarms = 0
             if instance_exists(Player) longarms = skill_get(13) * 2
             motion_add(other.gunangle, 2 + longarms)

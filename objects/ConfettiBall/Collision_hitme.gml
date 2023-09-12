@@ -30,7 +30,7 @@ if team != other.team {
 
         snd = asset_get_index("sndConfetti" + string(irandom(6) + 1))
 
-        if !sound_exists(snd) {
+        if !audio_exists(snd) {
             snd = sndConfetti1
         }
 

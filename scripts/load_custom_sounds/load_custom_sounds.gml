@@ -18,7 +18,7 @@ function load_custom_sounds(path) {
 
         var asset = asset_get_index(string_replace(find, ".ogg", ""))
 
-        if sound_exists(asset) {
+        if audio_exists(asset) {
             var stream = audio_create_stream(path + find)
 
             if stream {

@@ -29,10 +29,10 @@ for (var i = 0; i < KeyCont.players; i++) {
 				audio_resume_sound(sndHover)
 
                 with MusCont {
-                    if sound_exists(song)
+                    if audio_exists(song)
 						audio_resume_sound(song)
 
-                    if sound_exists(amb)
+                    if audio_exists(amb)
 						audio_resume_sound(amb)
                 }
 

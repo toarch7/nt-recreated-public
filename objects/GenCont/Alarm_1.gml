@@ -30,7 +30,7 @@ if instance_exists(Player) {
             if GameCont.area == 106 {
                 var s = asset_get_index("sndMutant" + string(race) + "IDPD")
 
-                if sound_exists(s) {
+                if audio_exists(s) {
                     snd_play_hit_big(s, 0.1)
                 }
             }
