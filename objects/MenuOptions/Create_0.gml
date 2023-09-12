@@ -880,10 +880,38 @@ option_elements_create(
 option_category_begin(OptionCategory.Coop_Menu)
 
 option_elements_create(
-	{ type: "button", name: "HOST GAME", click: function() { CoopMenu.host_game() } },
-	{ type: "button", name: "JOIN DIRECT", click: function() { CoopMenu.join_remote(global.ip, global.port) } },
+	{ type: "category", name: "PROFILE", category: OptionCategory.Game_Profile },
+	
+	{
+		type: "button", name: "HOST GAME",
+		
+		click: function() {
+			
+			if !instance_exists(CoopMenu) {
+				with instance_create(0, 0, CoopMenu)
+					menu = other.id
+			}
+			
+			CoopMenu.host_game()
+		}
+	},
+	
+	{
+		type: "button", name: "JOIN DIRECT",
+		
+		click: function() {
+			
+			if !instance_exists(CoopMenu) {
+				with instance_create(0, 0, CoopMenu)
+					menu = other.id
+			}
+			
+			CoopMenu.join_remote(global.ip, global.port)
+		}
+	},
 	
 	{ type: "input", name: "REMOTE ADDRESS", key: "coop_lastip" },
+	
 	{
 		type: "input", name: "REMOTE PORT", key: "coop_lastport",
 		
@@ -896,7 +924,28 @@ option_elements_create(
 		}
 	},
 	
-	{ type: "button", name: "REFRESH LOCAL" }
+	{ type: "button", name: "REFRESH LOCAL",
+		condition: function (opt) {
+			with CoopMenu {
+				local_count = 0
+				local_games = {}
+				
+				if local_wait
+					return false
+			}
+			
+			return true
+		},
+		
+		click: function() {
+			with CoopMenu {
+				local_wait = 30
+				local_games = {}
+				
+				snd_play(sndClick)
+			}
+		}
+	}
 )
 
 local_game_template = {

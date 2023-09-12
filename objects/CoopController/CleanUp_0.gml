@@ -1,5 +1,17 @@
-if index != -1
+print("COOP CONTROLLER DESTROY (CLEANUP)")
+
+if index != -1 {
+	packet_begin(event.disconnect)
+	packet_write(buffer_u8, global.index)
+	packet_send()
+	
 	self.disconnect(socket)
+}
+
+if global.is_server {
+	for(var i = 0; i < array_length(sockets); i ++)
+		network_destroy(sockets[i])
+}
 
 if broadcast_buffer
 	buffer_delete(broadcast_buffer)
@@ -43,3 +55,12 @@ print("PlayerInstance", playerinstance)
 
 if network_is_locked()
 	network_unlock()
+
+if instance_exists(CoopMenu) {
+	with CoopMenu
+		instance_destroy()
+	
+	instance_create(0, 0, CoopMenu)
+	
+	show_unlock_popup("DISCONNECTED.")
+}

@@ -17,6 +17,7 @@ try {
 		}
 		else if _type == network_type_disconnect {
 			self.disconnect(_socket)
+			instance_destroy()
 		}
 		
 		exit
@@ -138,19 +139,15 @@ try {
 			
 			snd_play(sndHover)
 			
-			if global.is_server {
-				self.disconnect(_socket)
-			}
-			else {
-				if _index == 0 {
-					// server closed
-					instance_destroy()
-					exit
-				}
-				else self.disconnect(_index)
-			}
+			print("DISCONNECT", _index)
 			
-			share = false
+			if !global.is_server {
+				self.disconnect(_index)
+				
+				if _index == 0
+					instance_destroy()
+			}
+			else self.disconnect(_socket)
 			
 			KeyCont.players = variable_struct_names_count(playerinstances)
 			
@@ -234,11 +231,12 @@ try {
 				_inputs = buffer_read(data, buffer_u32),
 				_frame = buffer_read(data, buffer_u32),
 				_dir_move = buffer_read(data, buffer_f16),
+				_moving = buffer_read(data, buffer_f16),
 				_dir_fire = buffer_read(data, buffer_f16),
 				_dis_fire = buffer_read(data, buffer_f16),
 				_event = buffer_read(data, buffer_string)
 			
-			inputs[_index][$ _frame] = [ _inputs, _dir_move, _dir_fire, _dis_fire, _event ]
+			inputs[_index][$ _frame] = [ _inputs, _dir_move, _moving, _dir_fire, _dis_fire, _event ]
 			
 			break
 		

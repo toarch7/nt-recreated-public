@@ -7,6 +7,7 @@ if frame < netframe + delay {
 	var _inputs = scrInputBitmask(),
 		
 		_dir_move = KeyCont.dir_move[index],
+		_moving = KeyCont.moving[index],
 		_dir_fire = KeyCont.dir_fire[index],
 		_dis_fire = KeyCont.dis_fire[index],
 		
@@ -18,13 +19,14 @@ if frame < netframe + delay {
 	packet_write(buffer_u32, _inputs)
 	packet_write(buffer_u32, frame)
 	packet_write(buffer_f16, _dir_move)
+	packet_write(buffer_f16, _moving)
 	packet_write(buffer_f16, _dir_fire)
 	packet_write(buffer_f16, _dis_fire)
 	packet_write(buffer_string, _event)
 	
 	packet_send()
 	
-	inputs[index][$ frame] = [ _inputs, _dir_move, _dir_fire, _dis_fire, _event ]
+	inputs[index][$ frame] = [ _inputs, _dir_move, _moving, _dir_fire, _dis_fire, _event ]
 	
 	frame ++
 	
@@ -45,7 +47,8 @@ else {
 			packet_write(buffer_f16, _input[1])
 			packet_write(buffer_f16, _input[2])
 			packet_write(buffer_f16, _input[3])
-			packet_write(buffer_string, _input[4])
+			packet_write(buffer_f16, _input[4])
+			packet_write(buffer_string, _input[5])
 			
 			packet_send()
 		}
@@ -78,14 +81,16 @@ random_set_seed(global.seed + netframe)
 		
 		var _inputs = _input[0],
 			_dir_move = _input[1],
-			_dir_fire = _input[2],
-			_dis_fire = _input[3],
-			_event = _input[4]
+			_moving = _input[2],
+			_dir_fire = _input[3],
+			_dis_fire = _input[4],
+			_event = _input[5]
 		
 		for(var j = 0; j < global.input_keys_list_length; j ++)
 			KeyCont[$ global.input_keys_list[j]][i] = bit_check(_inputs, 1 << j)
 		
 		KeyCont.dir_move[i] = _dir_move
+		KeyCont.moving[i] = _moving
 		KeyCont.dir_fire[i] = _dir_fire
 		KeyCont.dis_fire[i] = _dis_fire
 		

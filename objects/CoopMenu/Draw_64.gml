@@ -1,5 +1,5 @@
-if lockstep_stop
-	exit
+if local_wait
+	local_wait --
 
 if UberCont.showtutorial {
     draw_set_halign(fa_center)

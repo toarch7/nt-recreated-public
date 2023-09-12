@@ -1,4 +1,7 @@
-if !instance_exists(CoopController) && async_load[? "id"] == server {
+if async_load[? "id"] == server
+	exit
+
+if !instance_exists(CoopController) {
     var _ip = async_load[? "ip"],
 		_port = async_load[? "port"],
 		_buffer = async_load[? "buffer"]
@@ -15,6 +18,8 @@ if !instance_exists(CoopController) && async_load[? "id"] == server {
 		            port: _port,
 		            name: _name
 				}
+				
+				local_count ++
 			}
 	    }
 	}

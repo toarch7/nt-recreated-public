@@ -131,7 +131,6 @@ global.input_keys_list = [
 	"aimassist",
 	
 	"activeforever",
-	"moving",
 	
 	"press_fire",
 	"press_spec",

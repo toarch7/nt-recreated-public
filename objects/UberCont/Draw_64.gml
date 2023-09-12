@@ -80,7 +80,7 @@ if saving {
     saving --
 }
 
-if paused && !want_pause {
+if paused && !want_pause && !instance_exists(CoopController) {
 	if !want_menu && !want_restart && !instance_exists(MenuOptions) {
 	    instance_activate_object(Player)
 		

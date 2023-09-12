@@ -1,7 +1,8 @@
 if net_event(ev_mouse, ev_left_press)
 	exit
 
-if instance_exists(MenuOptions) exit
+if instance_exists(MenuOptions)
+	exit
 
 if sprite_index == sprGameOverResults {
     instance_activate_all()

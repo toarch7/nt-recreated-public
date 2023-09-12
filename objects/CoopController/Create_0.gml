@@ -111,9 +111,14 @@ refuse = function(socket, message) {
 disconnect = function(_socket, _silent = false) {
 	var _index = socketindexes[$ _socket]
 	
+	if !global.is_server
+		_index = _socket
+	
 	socketindexes[$ _socket] = undefined
 	array_delete_val(sockets, _socket)
-	network_destroy(_socket)
+	
+	if global.is_server
+		network_destroy(_socket)
 	
 	if _index == undefined
 		exit

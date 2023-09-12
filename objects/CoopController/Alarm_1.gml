@@ -1,8 +1,7 @@
 /// @description Client - connection
 
-//if index == -1 {
+//if index == -1
 //	alarm[1] = 5
-//}
 
 /*buffer_seek(global.buffer, buffer_seek_start, 0)
 

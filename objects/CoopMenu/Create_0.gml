@@ -10,7 +10,10 @@ server = network_create_server(network_socket_udp, global.port + 1, 1)
 network_set_config(network_config_use_non_blocking_socket, 1)
 
 local_games = {}
-lastpoint = "127.0.0.1"
+local_count = 0
+
+local_wait = 0
+
 refresh = 0
 
 active = 0
