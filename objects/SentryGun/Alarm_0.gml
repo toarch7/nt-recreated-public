@@ -1,18 +1,19 @@
 alarm[0] = 5
 
-if instance_exists(enemy) {
+if instance_exists(enemy) or instance_exists(NothingInactive) {
     target = noone
 
     with enemy {
-        with instance_create(x, y, BECOMETARGET)
-        creator = other.id
+		with instance_create(x, y, BECOMETARGET)
+			creator = other.id
     }
 
-    with NothingInactive
-    if hitable {
-        with instance_create(x, y, BECOMETARGET)
-        creator = other.id
-    }
+    with NothingInactive {
+	    if hitable {
+			with instance_create(x, y, BECOMETARGET)
+				creator = other.id
+	    }
+	}
 
     with BECOMETARGET {
         if collision_line(x, y, other.x, other.y, Wall, 1, 0) > 0 {
@@ -25,7 +26,7 @@ if instance_exists(enemy) {
     }
 
     with BECOMETARGET
-    instance_destroy()
+		instance_destroy()
 
     if target {
         gunangle = target_direction
