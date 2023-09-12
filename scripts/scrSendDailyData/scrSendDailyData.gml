@@ -2,7 +2,7 @@ function scrSendDailyData() {
     if !UberCont.daily_run or is_undefined(UberCont.update_info) or global.cheats
         exit
 	
-	with UberCont
+	with UberCont if !weekly_run
 		can_daily = false
 	
     with Player
