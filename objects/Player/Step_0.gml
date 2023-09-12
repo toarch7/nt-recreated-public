@@ -491,7 +491,7 @@ if sprite_index != spr_hurt && lsthealth > hp {
     lsthealth -= 0.5
 }
 
-if can_spirit && !spirit && hp >= max_hp {
+if can_spirit && !spirit && hp >= max_hp && max_hp > 1 {
     with instance_create(x, y, StrongSpiritRefill) {
         depth = other.depth - 1
         creator = other.id
