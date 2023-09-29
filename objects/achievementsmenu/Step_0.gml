@@ -8,7 +8,16 @@ if mouse_check_button_pressed(mb_left) {
     mousey = mouse_y
 	
     speed = 0
+	
+	if device_mouse_x_to_gui(0) < view_width - 32 {
+		dragging = -1
+	}
 }
+
+if !mouse_check_button(mb_left) && dragging == -1
+	dragging = false
+
+
 
 if is_gamepad() {
 	var v = (gamepad_button_check(0, gp_padd) - gamepad_button_check(0, gp_padu)) * 4
@@ -19,13 +28,14 @@ if is_gamepad() {
 	vspeed = v * 8
 }
 
-if mouse_wheel_up() speed = 16
-if mouse_wheel_down() speed = -16
+if mouse_wheel_up() vspeed = -24
+if mouse_wheel_down() vspeed = 24
 
 var p = ypos div 40
 
 if p != least {
-	sound_play_pitchvol(sndHover, 1.1 + random(0.1), 0.3)
+	if !dragging
+		sound_play_pitchvol(sndHover, 1.1 + random(0.1), 0.3)
 	
 	least = p
 	

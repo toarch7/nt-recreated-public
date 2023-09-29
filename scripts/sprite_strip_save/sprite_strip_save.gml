@@ -7,7 +7,9 @@ function sprite_strip_save(spr, path) {
 
     var s = surface_create(w * n, h)
     surface_set_target(s)
-
+	
+	draw_clear_alpha(c_black, 0)
+	
     for (var i = 0; i < n; i++) {
         draw_sprite(spr, i, i * w + sprite_get_xoffset(spr), sprite_get_yoffset(spr))
     }

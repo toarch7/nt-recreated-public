@@ -29,11 +29,12 @@ function makeKeys() {
 			str += "```\n\n" + header + "\n";
 		console.log(line);
 		
-		diff[key] = val;
+		diff[key] = "";//val;
 	}
 
 	fs.writeFileSync("keys.txt", keys.trim());
 	fs.writeFileSync("out.txt", str + "```");
+	fs.writeFileSync("diff.loc", JSON.stringify(diff, null, 2));
 }
 
 function makeLocale() {
@@ -49,5 +50,4 @@ function makeLocale() {
 	fs.writeFileSync("loc.txt", str);
 }
 
-// makeKeys();
-makeLocale();
+makeKeys();

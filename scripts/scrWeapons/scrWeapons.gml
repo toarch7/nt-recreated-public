@@ -1,6 +1,9 @@
-globalvar wep_name, wep_type, wep_auto, wep_cost, wep_area, wep_sprt,
-			wep_text, wep_rads, wep_lout, wep_load, wep_swap,
-			typ_ammo, typ_amax, typ_name, maxwep
+globalvar wep_name, wep_type, wep_auto, wep_cost, wep_area, wep_sprt, wep_gold,
+			wep_text, wep_rads, wep_lout, wep_load, wep_swap, wep_mele,
+			typ_ammo, typ_amax, typ_name, maxwep;
+
+wep_mele = -1
+wep_gold = -1
 
 function scrWeapons() {
     //WEAPONS
@@ -1313,6 +1316,17 @@ function scrWeapons() {
 
     // 0 - melee, 1 - bullets, 2 - shells, 3 - bolts, 4 - explosives, 5 - energy
     typ_ammo = [0, 32, 8, 7, 6, 10]
+	
+	if wep_mele	== -1 or wep_gold == -1 {
+		wep_mele = []
+		wep_gold = []
+		
+		for(var i = 0; i < array_length(wep_name); i ++) {
+			wep_gold[i] = string_copy(wep_name[i], 1, 4) == "GOLD"
+			
+			wep_mele[i] = wep_type[i] == 0 or i == wep_energy_sword or i == wep_energy_screwdriver or i == wep_energy_hammer
+		}
+	}
 
     with Player {
         if race == 1 {

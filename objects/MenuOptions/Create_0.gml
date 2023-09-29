@@ -1,4 +1,4 @@
-#macro UI_SLIDER_OFFSET 15
+#macro UI_SLIDER_OFFSET 20
 #macro SWITCH_STATE_ON "ON"
 #macro SWITCH_STATE_OFF "OFF"
 
@@ -321,10 +321,6 @@ option_elements_create
 )
 
 option_category_end()
-
-for(var i = 0; i < array_length(options[0]); i ++) {
-	print(options[0, i].name, options[0, i].category)
-}
 
 #endregion
 #region Audio
@@ -721,8 +717,11 @@ option_elements_create(
 	
 	// { type: "switch", name: "KEYBOARD MODE", key: "options_keyboard", mobile_only: true },
 	
-	{ type: "switch", name: "AIM ASSIST", key: "controls_assist", mobile_only: true },
-	{ type: "switch", name: "360 AIMBOT", key: "controls_aimbot", mobile_only: true },
+	{ type: "switch", name: "AIM ASSIST",       key: "controls_assist",       mobile_only: true },
+	{ type: "switch", name: "360 AIMBOT",       key: "controls_aimbot",       mobile_only: true },
+	{ type: "switch", name: "VOLUME CONTROLS",  key: "options_volumecontrol", mobile_only: true },
+	{ type: "switch", name: "SPLIT AIM & FIRE", key: "controls_splitfire", },//mobile_only: true },
+	{ type: "switch", name: "SWAP-STICKS",      key: "controls_swapstick", },//mobile_only: true },
 	
 	{ type: "slider", name: "SIZE SCALE", key: "controls_scale", mobile_only: true },
 	
@@ -767,13 +766,16 @@ option_category_begin(OptionCategory.Controls_Remapping)
 option_elements_create(
 	{ type: "button", name: "DEFAULT PRESET",
 		click: function() {
+			var saveData = UberCont.saveData
 			
 			with MobileUI {
-	            ds_map_delete(UberCont.saveData, "controls_" + object_get_name(object_index) + "_x")
-	            ds_map_delete(UberCont.saveData, "controls_" + object_get_name(object_index) + "_y")
+				ds_map_delete(saveData, "controls_" + key + "_x")
+				ds_map_delete(saveData, "controls_" + key + "_y")
 				
-				event_perform(ev_create, 0)
-	        }
+				instance_destroy()
+			}
+			
+			scrCreateMobileControls()
 			
 			snd_play(sndRestart)
 		},
@@ -782,16 +784,16 @@ option_elements_create(
 			var any = false
 			
 			with MobileUI {
-				if save_get_val("controls", object_get_name(object_index) + "_x") != undefined
-					any = true
+				if custom_position {
+					any = true; break
+				}
 			}
 			
 			return any
 		}
 	},
 	
-	{ type: "switch", name: "SIMPLIFY", halign: fa_center, key: "visual_simplify", draw: draw_inline_switch },
-	{ type: "switch", name: "VOLUME CONTROLS", halign: fa_center, key: "options_volumecontrol", draw: draw_inline_switch }
+	{ type: "switch", name: "SIMPLIFY", halign: fa_center, key: "visual_simplify", draw: draw_inline_switch }
 )
 #endregion Controls_Remapping
 #region Controls_Remapping_Keys

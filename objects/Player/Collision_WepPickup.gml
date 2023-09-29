@@ -1,15 +1,16 @@
 if lockstep_stop
 	exit
 
-if !can_pick exit
+if !can_pick or !other.visible exit
 
-if KeyCont.press_pick[p] && other.visible && other.id == instance_nearest(x, y, WepPickup) {
+if KeyCont.press_pick[p] && other.id == instance_nearest(x, y, WepPickup) {
     if !curse or (curse && other.curse) or !bwep {
         instance_create(x, y, WepSwap)
 
         if other.wep == 115 {
             snd_play(sndGuitarPickup)
-        } else {
+        }
+		else {
             scrWeapons()
             if string_count("GOLD", wep_name[other.wep]) snd_play(sndGoldPickup)
             else snd_play(sndWeaponPickup)
@@ -56,7 +57,15 @@ if KeyCont.press_pick[p] && other.visible && other.id == instance_nearest(x, y, 
 
         with other
         instance_destroy()
-    } else if curse snd_play(sndCursedReminder)
+    }
+	else if curse {
+		snd_play(sndCursedReminder)
+	}
+	
+	if index == global.index {
+		with SwapstickAttack
+			scrSwapstickUpdateSprite(other.id)
+	}
 }
 
 if other.ammo and wep_type[other.wep] {
@@ -71,7 +80,8 @@ if other.ammo and wep_type[other.wep] {
         }
 
         other.ammo = 0
-    } else { //CROWN OF PROTECTION
+    }
+	else { //CROWN OF PROTECTION
         amount = 1 + skill_get(9)
         hp += amount
         if hp > max_hp hp = max_hp

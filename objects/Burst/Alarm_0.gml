@@ -8,7 +8,7 @@ if instance_exists(creator) {
     y = creator.y
     direction = creator.wepangle
     //FIRING
-    snd_play(sndMachinegun)
+    snd_play_gun(sndMachinegun)
     with instance_create(x, y, Shell)
     motion_add(other.direction + 180 + random(50) - 25, 2 + random(2))
 

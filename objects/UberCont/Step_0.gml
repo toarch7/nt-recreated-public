@@ -108,9 +108,6 @@ if want_restart {
 		
 		paused = false
 		
-		if os_type == os_android && opt_volumecontrol
-			SetVolumeControl(true)
-		
 	    want_restart = 0
 	}
 }

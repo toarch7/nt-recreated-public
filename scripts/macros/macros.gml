@@ -16,9 +16,6 @@
 #macro gui_w (display_get_gui_width())
 #macro gui_h (display_get_gui_height())
 
-#macro DrawAlignCenter draw_set_halign(fa_center); draw_set_valign(fa_center)
-#macro DrawAlignDefault draw_set_halign(fa_left); draw_set_valign(fa_top)
-
 #macro ldrx lengthdir_x
 #macro ldry lengthdir_y
 
@@ -93,6 +90,9 @@ function scrSetViewSize(windowresize = 1) {
         window_set_min_height(view_height)
     }
 }
+
+function scrDrawAlignCenter() { draw_set_halign(fa_center); draw_set_valign(fa_center) }
+function scrDrawAlignDefault() { draw_set_halign(fa_left); draw_set_valign(fa_top) }
 
 global.index = 0
 
@@ -389,6 +389,18 @@ function scrHandleInputsGeneral(index) {
 	}
 	// mobile touchscreen
 	else {
+		// reset swap inputs in case of using swapsticks
+		if opt_swapstick {
+			KeyCont.hold_swap[global.index] = 0
+			KeyCont.press_swap[global.index] = 0
+			KeyCont.release_swap[global.index] = 0
+		}
+		
+		if volqueue != -1 && ds_queue_size(volqueue) {
+			var volume_input = ds_queue_dequeue(volqueue)
+			scrHandleVolumeControl(volume_input[0], volume_input[1])
+		}
+		
 		// call control elements logic
 		with MobileUI
 			event_user(0)
@@ -479,7 +491,15 @@ function month_name_short(month) {
 #macro mouse_hover (collision_point(mouse_x, mouse_y, object_index, false, false) == id)
 
 function mouse_ui_clicked() {
-	return UberCont.opt_keyboard ? mouse_check_button_pressed(mb_left) : mouse_check_button_released(mb_left)
+	if global.desktop
+		return mouse_check_button_pressed(mb_left)
+	
+	for(var i = 0; i < 4; i ++) {
+		if device_mouse_check_button_released(i, mb_left)
+			return true
+	}
+	
+	return false
 }
 
 function keyboard_anykey() {

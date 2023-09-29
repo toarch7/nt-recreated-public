@@ -35,3 +35,8 @@ self[$ "text"] = function(x, y, txt, col = draw_get_color(), alpha = draw_get_al
 
     draw_text(x, y, txt)
 }
+
+enemy_test = false
+enemy_count = 0
+enemy_number = 0
+enemy_species = {}

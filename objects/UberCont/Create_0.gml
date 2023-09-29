@@ -30,8 +30,9 @@ scrn_take = 0
 
 //DEFAULT STUFF
 race = 0
-paused = 0
-want_pause = 0
+paused = false
+want_pause = false
+quit_pause = false
 alarm[0] = 30
 
 scrLoadLocalizations()
@@ -205,7 +206,6 @@ update_message = -1
 audio_falloff_set_model(audio_falloff_linear_distance_clamped)
 
 lastinputframe = 0
-global.inputqueue = ds_queue_create()
 touch_duration = [0, 0, 0, 0]
 volqueue = -1
 

@@ -1,6 +1,10 @@
 if lockstep_stop
 	exit
 
+scrDrawAlignCenter()
+draw_bigname(view_xview + view_width / 2, view_yview + 24, loc("STATS"), c_uigray)
+scrDrawAlignDefault()
+
 if select == 0 {
     scrDrawStats()
 }

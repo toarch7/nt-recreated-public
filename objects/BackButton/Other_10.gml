@@ -65,9 +65,15 @@ else if instance_exists(Menu) {
 	}
 }
 else if instance_exists(ResourcepackManager) {
+	with MenuOptions {
+		wait = true
+		self.category_set(OptionCategory.Main)
+	}
+	
     with ResourcepackManager
         instance_destroy()
 	
+    snd_play(sndRestart)
     snd_play(sndClickBack)
 }
 else if instance_exists(MenuOptions) && !(UberCont.opt_gamepad && MenuOptions.editing_mode) {

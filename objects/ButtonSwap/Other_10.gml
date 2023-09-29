@@ -16,4 +16,5 @@ KeyCont.release_swap[global.index] = (do_thing == -1) or (index != -1 && device_
 
 if do_thing {
     do_thing = 2
-} else do_thing = 0
+}
+else do_thing = 0

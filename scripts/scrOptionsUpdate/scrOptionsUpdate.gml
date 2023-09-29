@@ -48,8 +48,9 @@ function scrOptionsUpdate() {
         opt_scaling = save_get_val_s("visual", "scaling", 1)
         opt_hud = save_get_val_s("visual", "hud", 1)
 		
-		opt_firemode = save_get_val_s("controls", "firemode", 0)
         opt_controls_scale = save_get_val_s("controls", "scale", 0.5)
+		opt_swapstick = save_get_val_s("controls", "swapstick", 0)
+		opt_splitfire = save_get_val_s("controls", "splitfire", 0)
 		
         opt_language = save_get_val_s("etc", "language", "null")
 		opt_nickname = save_get_val_s("etc", "name", "null")
@@ -93,6 +94,8 @@ function scrOptionsUpdate() {
 		if !opt_cursorcol
 			opt_cursorcol = c_white
 		
+		print("COLOR", global.player_color, "HP", opt_healthcol, "CROSSHAIR", opt_cursorcol)
+		
         scrLanguageSet(opt_language)
 		
         if res != undefined && (res != opt_resolution or scaling != opt_scaling) {
@@ -134,6 +137,9 @@ function scrOptionsUpdate() {
 		
 		global.gamepad_icon_small = asset_get_index("spr" + pad + "Small")
 		global.gamepad_icon_big = asset_get_index("spr" + pad + "Big")
+		
+		if os_type == os_android
+			SetVolumeControl(opt_volumecontrol)
 		
 		scrKeymapsSetup()
 		

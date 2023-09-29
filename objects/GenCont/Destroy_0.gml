@@ -89,11 +89,14 @@ if (GameCont.area == 7 && GameCont.subarea == 3) or GameCont.area == 0 or GameCo
         instance_create(10016, 8592, Carpet)
         instance_create(10016 - 32, 9984, WeaponChest)
         instance_create(10016 + 32, 9984, AmmoChest)
-
+		
         if skill_get(28) {
             instance_create(10016, 10016 - 32, choose(WeaponChest, RadChest, AmmoChest))
         }
-
+		
+		with chestprop
+			speed = 0
+		
         /*
         instance_create(10016, 8592, NothingInactive)
         instance_create(9856, 8912, BigGeneratorInactive)

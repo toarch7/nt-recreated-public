@@ -22,12 +22,16 @@ walk = 0
 gunangle = random(360)
 alarm[1] = 30 + random(90)
 
-if instance_exists(Player) {
-    if random(60) < GameCont.hard and GameCont.subarea > 1 {
-        instance_create(x, y, GoldScorpion)
-        instance_change(Wind, 0)
-    }
+var chance = 30
+
+if GameCont.crown == 7
+    chance *= 0.7
+
+if random(chance) < (1 + GameCont.loops * 5) && GameCont.subarea > 1 {
+    instance_create(x, y, GoldScorpion)
+    instance_destroy(id, 0)
 }
+
 
 spr_shadow = shd32
 spr_shadow_y = 4

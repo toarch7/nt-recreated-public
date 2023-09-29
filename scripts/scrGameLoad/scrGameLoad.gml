@@ -35,7 +35,9 @@ function scrGameLoad() {
         delete a
 
         playerinstances = json_parse(buffer_read(b, buffer_string)) // playerinstances
-
+		
+		playerinstance = playerinstance_get()
+		
         var a = json_parse(buffer_read(b, buffer_string)) // player
 
         var keys = struct_keys(a)
@@ -85,7 +87,8 @@ function scrGameLoad() {
         buffer_delete(b)
 
         return 1
-    } catch (e) {
+    }
+	catch (e) {
         print_error(e.longMessage, 1)
 
         buffer_delete(c)

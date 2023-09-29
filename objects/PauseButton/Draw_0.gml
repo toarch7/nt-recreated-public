@@ -37,7 +37,7 @@ if image_index == 5 && !instance_exists(CoopController) && !save_get_val("etc", 
     draw_set_halign(fa_center)
 
     draw_set_color(make_color_rgb(59, 62, 67))
-    draw_text_shadow(view_xview + view_width / 2, view_yview + view_height - 16, loc("CLOSE THE GAME DIRECTLY#TO SAVE CURRENT RUN"))
+    draw_text_shadow(view_xview + view_width / 2, view_yview + view_height - 16, loc("QUIT WITHOUT EXITING THROUGH MAIN MENU#TO SAVE AND CONTINUE LATER"))
     draw_set_color(c_white)
 
     draw_set_valign(fa_top)

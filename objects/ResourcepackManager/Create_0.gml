@@ -18,11 +18,11 @@ sorting = [
 	[
 		// ascending
 		function(a, b) {
-			return b.stars - a.stars
+			return sign(b.stars - a.stars)
 		},
 		// descending
 		function(a, b) {
-			return a.stars - b.stars
+			return sign(a.stars - b.stars)
 		}
 	],
 	
@@ -30,11 +30,11 @@ sorting = [
 	[
 		// ascending
 		function(a, b) {
-			return b.updated - a.updated
+			return sign(b.updated - a.updated)
 		},
 		// descending
 		function(a, b) {
-			return a.updated - b.updated
+			return sign(a.updated - b.updated)
 		}
 	]
 ]
@@ -54,3 +54,23 @@ max_height = 0
 friction = 0.4
 
 depth = 1000
+
+dragging = false
+
+last_min = 0
+last_max = 0
+
+sort_pointed = false
+
+opt_resolution_last = UberCont.opt_resolution
+
+print("Resolution current", opt_resolution_last)
+
+if !opt_resolution_last {
+	UberCont.opt_resolution = true
+
+	with UberCont
+		scrSetViewSize(false)
+}
+
+pack_width = (view_width - 40)

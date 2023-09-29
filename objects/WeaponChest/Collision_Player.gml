@@ -28,7 +28,8 @@ if !instance_exists(GenCont) {
 	else if curse {
 	    snd_play(sndCursedChest)
 	    global.rng_state[3] -= 1234
-	} else
+	}
+	else
 		snd_play(sndWeaponChest)
 	
 	if p.race == 7 && p.ultra == 1 {

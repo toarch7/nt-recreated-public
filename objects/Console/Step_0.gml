@@ -1,6 +1,74 @@
 if lockstep_stop
 	exit
 
+if enemy_test && instance_exists(GameCont) {
+	if instance_exists(enemy) {
+		var fine = false;
+		
+		if GameCont.loops {
+			enemy_number += instance_number(enemy) + instance_number(MeleeFake)
+			enemy_count ++
+			
+			fine = true
+		}
+		
+		room_speed = 120
+	
+		GameCont.area = 1
+		GameCont.subarea = 0
+		GameCont.hard = 16
+		GameCont.loops = 1
+		
+		global.seed = randomize()
+		GameCont.seed = global.seed
+		
+		with instance_create(Player.x, Player.y, Portal) {
+			sprite_index = sprPortalDisappear
+			event_perform(ev_other, ev_animation_end)
+		}
+		
+		GameCont.rads = 0
+		
+		var types = {}
+		
+		with enemy {
+			var n = object_get_name(object_index)
+			
+			if types[$ n] == undefined
+				types[$ n] = 0
+			
+			types[$ n] ++
+		}
+		
+		if types[$ "MeleeBandit"] != undefined
+			types[$ "MeleeBandit"] += instance_number(MeleeFake)
+		
+		if fine {
+			var names = variable_struct_get_names(types);
+	
+			for(var i = 0; i < array_length(names); i ++) {
+				var name = names[i];
+			
+				var c = variable_struct_get(enemy_species, name),
+					a = variable_struct_get(types, name)
+			
+				if c == undefined c = 0
+				if a == undefined a = 0
+			
+				variable_struct_set(enemy_species, name, c + a)
+			}
+		
+			names = variable_struct_get_names(enemy_species);
+		
+			for(var i = 0; i < array_length(names); i ++) {
+				print(names[i] + ": " + string(variable_struct_get(enemy_species, names[i]) / enemy_count))
+			}
+			
+			print("#" + string(enemy_count), " Average: ", enemy_number / enemy_count)
+		}
+	}
+}
+
 if !UberCont.opt_console exit
 
 if UberCont.daily_run or UberCont.weekly_run or UberCont.continued_run exit

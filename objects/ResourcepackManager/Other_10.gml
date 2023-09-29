@@ -12,8 +12,10 @@ if items == undefined {
 
 var _items = items
 
+print("Sorting", sort, sort_mode)
 array_sort(_items, sorting[sort, sort_mode])
 
-print(_items)
+ypos = 0
+speed = 0
 
 loaded = true

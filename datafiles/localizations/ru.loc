@@ -15,7 +15,7 @@
 	"@gULTRA": "@gУЛЬТРА",
 	
 	"@sCONTINUE?@w": "ПРОДОЛЖИТЬ?",
-	"CLOSE THE GAME DIRECTLY#TO SAVE CURRENT RUN": "ЗАКРОЙТЕ ИГРУ НАПРЯМУЮ#ЧТОБЫ СОХРАНИТЬ ЗАБЕГ",
+	"QUIT WITHOUT EXITING THROUGH MAIN MENU#TO SAVE AND CONTINUE LATER": "ЗАКРОЙТЕ ИГРУ НЕ ВЫХОДЯ В МЕНЮ#ЧТОБЫ СОХРАНИТЬ И ПРОДОЛЖИТЬ ПОСЛЕ",
 	
 	"BULLETS": "ПУЛЬ",
 	"SHELLS": "ДРОБИ",
@@ -39,7 +39,7 @@
 	"NOT ENOUGH %": "НЕДОСТАТОЧНО %",
 	"NOT ENOUGH RADS": "НЕДОСТАТОЧНО РАДИАЦИИ",
 	
-	"WALK USING @wMOVEMENT STICK": "ХОДИ ИСПОЛЬЗУЯ @wЛЕВЫЙ СТИК",
+	"WALK USING @wMOVEMENT STICK": "ХОДИ ИСПОЛЬЗУЯ @wСТИК ХОДЬБЫ",
 	"PICK UP NEW WEAPON WITH @wACT. BUTTON": "ПОДБЕРИ НОВОЕ ОРУЖИЕ НАЖАВ НА#@wКНОПКУ ВЗАИМОДЕЙСТВИЯ",
 	"SWAP WEAPONS USING @wSWAP BUTTON#TRY IT A FEW TIMES!": "ПОМЕНЯЙ АКТИВНОЕ ОРУЖИЕ МЕСТАМИ СО ВТОРЫМ#СДЕЛАЙ ЭТО ПАРУ РАЗ!",
 	"@wABILITY BUTTON@s USES YOUR SPECIAL SKILL#@wGIVE IT A GO!": "@wПКМ@s ИСПОЛЬЗУЕТ ТВОЮ АКТИВНУЮ СПОСОБНОСТЬ#ПОПРОБУЙ ПОНАЖИМАТЬ НА НЕЁ",
@@ -373,6 +373,8 @@
 	"ABILITY/SHOOT": "СПОСОБНОСТЬ/СТРЕЛЬБА",
 	"CASUAL GAMING": "ПОЛНОЕ#ОКАЗУАЛИВАНИЕ",
 	"360 AIMBOT": "ПОЛНОЕ#АВТОНАВЕДЕНИЕ",
+	"SPLIT AIM & FIRE": "РАЗДЕЛЬНЫЙ ПРИЦЕЛ",
+	"SWAP-STICKS": "СВАП-СТИКИ",
 	"VOLUME CONTROLS": "УПРАВЛЕНИЕ#ГРОМКОСТЬЮ",
 	"SIZE SCALE": "ДОП. РАДИУС",
 	"REMAPPING": "ИЗМЕНЕНИЕ",
@@ -421,12 +423,7 @@
 	"COPYING FILES": "КОПИРОВАНИЕ ФАЙЛОВ",
 	"DOWNLOADING": "ЗАГРУЗКА",
 	"INSTALLED SUCCESSFULLY!": "УСТАНОВКА ЗАВЕРШЕНА!",
-	"MOST RATED": "САМЫЕ ОЦЕНЁННЫЕ",
-	"NEW AND UPDATED": "НОВОЕ И ОБНОВЛЕНИЯ",
-	"LEAST RATED": "САМЫЕ МАЛООЦЕНЁННЫЕ",
-	"LEAST UPDATED": "САМЫЕ НЕОБНОВЛЁННЫЕ",
 	"(MALFORMED)": "(ОШИБКА)",
-	"SORT": "СОРТИРОВКА",
 	"WASN'T ABLE TO FETCH EXTRA INFO": "НЕ ВСЕ ДАННЫЕ ЕЩЁ ЗАГРУЗИЛИСЬ,#ПОПРОБУЙТЕ ПОЗЖЕ",
 	"FETCH FAILED!": "ПОИСК НЕ УДАЛСЯ.",
 	"YOU'VE BEEN RATE LIMITED.\nTRY AGAIN LATER": "СЛИШКОМ МНОГО ЗАПРОСОВ.\nПОПРОБУЙТЕ ПОЗЖЕ",
@@ -438,6 +435,24 @@
 	"INSTALL FAILED.#META JSON STRUCTURE IS MALFORMED": "УСТАНОВКА НЕ УДАЛАСЬ.#ФАЙЛ ПАКА НЕДЕЙСТВИТЕЛЕН",
 	"TIMED OUT.": "ВРЕМЯ ОЖИДАНИЯ ИСТЕКЛО.",
 	"HIDDEN": "СКРЫТО",
+	
+	"SORT": "СОРТИРОВАТЬ",
+	"BY RATING": "ПО ОЦЕНКАМ",
+	"BY UPDATES": "ПО ОБНОВЛЕНИЯМ",
+	"RATING": "ОЦЕНКИ",
+	"UPDATED": "ПОСЛЕДНЕЕ#ОБНОВЛЕНИЕ",
+	"JUST NOW": "СЕЙЧАС",
+	"TODAY": "СЕГОДНЯ",
+	"YESTERDAY": "СЕГОДНЯ",
+	"RECENTLY": "НЕДАВНО",
+	"THIS#WEEK": "НА ЭТОЙ#НЕДЕЛЕ",
+	"LONG AGO": "КРАЙНЕ#ДАВНО",
+	"% D.": "% Д.",
+	
+	"MOST": "БОЛЬШЕ",
+	"LEAST": "МЕНЬШЕ",
+	
+	
 	
 	"RESET OPTIONS": "СБРОСИТЬ НАСТРОЙКИ",
 	"ERASE PROGRESS": "СТЕРЕТЬ ПРОГРЕСС",
@@ -464,11 +479,11 @@
 	
 	"button_GO": "GO",
 	
-	"LOCAL GAMES": "ИГРЫ РЯДОМ",
-	"REFRESH": "ОБНОВИТЬ",
-	"JOIN REMOTE": "IP АДРЕСС",
-	"REMOTE IP": "ПОДКЛЮЧИТЬСЯ",
-	"PORT - %": "ПОРТ - %",
+	"HOST GAME": "СОЗДАТЬ ИГРУ",
+	"JOIN DIRECT": "ПРИСОЕДИНИТЬСЯ",
+	"REMOTE ADDRESS": "АДРЕСС",
+	"REMOTE PORT": "ПОРТ",
+	"REFRESH LOCAL": "ОБНОВИТЬ ИГРЫ РЯДОМ",
 	
 	"RUN HISTORY": "ИСТОРИЯ",
 	"@wNOTHING TO SHOW... YET": "@wЗДЕСЬ ПУСТО... ПОКА ЧТО",

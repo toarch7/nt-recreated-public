@@ -24,3 +24,14 @@ if want_pause {
 		instance_activate_object(PauseImage)
 	}
 }
+
+if quit_pause {
+	if !instance_exists(GenCont) && !instance_exists(LevCont) {
+		with MobileUI
+			instance_destroy()
+		
+		scrCreateMobileControls()
+	}
+	
+	quit_pause = false
+}

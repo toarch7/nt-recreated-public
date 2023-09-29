@@ -6,7 +6,7 @@ function scrBossIntro(argument0) {
 			scrGetPauseImage()
 			
             want_pause = 1
-            paused = 1
+			paused = 1
 			
             bossintro = 1
             boss = argument0

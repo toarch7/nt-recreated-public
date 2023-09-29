@@ -3,7 +3,7 @@ event_inherited()
 if instance_exists(MenuOptions) or UberCont.opt_keyboard
 	exit
 
-//KeyCont.dis_fire[global.index] = 0
+KeyCont.dis_fire[global.index] = 0
 
 if UberCont.opt_aimbot {
     with Player if index == global.index {
@@ -23,19 +23,21 @@ if UberCont.opt_aimbot {
             aim_target = instance_nearest(x, y, BigGenerator)
         }
 
-        var d = -1
+        var _dir = -1
 
         if aim_target && !collision_line(x, y, aim_target.x, aim_target.y, Wall, 1, 1) {
-            d = point_direction(x, y, aim_target.x, aim_target.y)
-        }
-		else d = KeyCont.dir_move[index]
-
-        if d != -1 {
-            KeyCont.dir_fire[index] = angle_lerp(KeyCont.dir_fire[index], d, 0.75)
+            var _dis = point_distance(x, y, aim_target.x, aim_target.y),
+				_dir = point_direction(x, y, aim_target.x, aim_target.y)
 			
-			var dis = point_distance(x, y, aim_target.x, aim_target.y)
-			KeyCont.dis_fire[global.index] = min(1, dis / view_width)
+			KeyCont.dis_fire[global.index] = min(1, (_dis / view_width) * 3)
         }
+		else {
+			_dir = KeyCont.dir_move[index]
+			KeyCont.dis_fire[global.index] = KeyCont.moving[global.index]
+		}
+		
+        if _dir != -1
+            KeyCont.dir_fire[index] = angle_lerp(KeyCont.dir_fire[index], _dir, 0.75)
 		
         break
     }
@@ -54,12 +56,11 @@ KeyCont.release_fire[global.index] = 0
 if index == -1
 	index = i
 
+
 if !UberCont.opt_aimbot {
-	
-	
     if index != -1 {
-        var mx = device_mouse_x_to_gui(index)
-        var my = device_mouse_y_to_gui(index)
+        var mx = device_mouse_x_to_gui(index),
+			my = device_mouse_y_to_gui(index)
 
         var dir = point_direction(x, y, mx, my)
         dis = min(rad, point_distance(x, y, mx, my))
@@ -67,14 +68,16 @@ if !UberCont.opt_aimbot {
         KeyCont.dir_fire[global.index] = dir
         KeyCont.dis_fire[global.index] = dis / rad
 
-        KeyCont.hold_fire[global.index] = 1
-
         // note: press & release are swapped intentionally
-        if device_mouse_check_button_pressed(index, mb_left)
-			KeyCont.release_fire[global.index] = 1
-
-        if device_mouse_check_button_released(index, mb_left)
-			KeyCont.press_fire[global.index] = 1
+		if (dis / rad) > ATTACK_BUTTON_DEADZONE {
+			KeyCont.hold_fire[global.index] = 1
+			
+	        if device_mouse_check_button_pressed(index, mb_left)
+				KeyCont.release_fire[global.index] = 1
+			
+	        if device_mouse_check_button_released(index, mb_left)
+				KeyCont.press_fire[global.index] = 1
+		}
 
         if !device_mouse_check_button(index, mb_left) or (distance_to_point(mx, my) > rad * 3) {
             index = -1
@@ -95,43 +98,23 @@ if !UberCont.opt_aimbot {
     }
 }
 else {
-    KeyCont.hold_fire[global.index] = device_mouse_check_button(i, mb_left)
-    KeyCont.press_fire[global.index] = device_mouse_check_button_pressed(i, mb_left)
-    KeyCont.release_fire[global.index] = device_mouse_check_button_released(i, mb_left)
-
-    index = -1
-}
-
-with Player {
-	if index != global.index
-		continue
+	index = -1
+	dis = 0
 	
-	if race == 5 && playerinstance.pref("plant") && KeyCont.release_fire[index] {
-		var _x = x + ldrx(426 / 2, gunangle),
-			_y = y + ldry(240 / 2, gunangle)
+	if !UberCont.opt_splitfire && i != -1 {
+		var mx = device_mouse_x_to_gui(i),
+			my = device_mouse_y_to_gui(i)
 		
-		var e = collision_line(x, y, _x, _y, enemy, true, false)
+		dis = min(rad, point_distance(x, y, mx, my))
 		
-		if instance_exists(e) && !collision_line(x, y, e.x, e.y, Wall, true, false) {
-			var g = gunangle,
-				need = true
-			
-			with e {
-				if place_meeting(x, y, Tangle)
-					need = false
-			}
-			
-			if instance_exists_var(TangleSeed, "creator", id)
-				need = false
-			
-			if need {
-				gunangle = point_direction(x, y, e.x, e.y)
-				
-				KeyCont.press_spec[index] = true
-				scrPowers()
-				
-				gunangle = g
-			}
+		if !UberCont.opt_swapstick or (dis / rad) > ATTACK_BUTTON_DEADZONE {
+		    KeyCont.hold_fire[global.index] = device_mouse_check_button(i, mb_left)
+		    KeyCont.press_fire[global.index] = device_mouse_check_button_pressed(i, mb_left)
+		    KeyCont.release_fire[global.index] = device_mouse_check_button_released(i, mb_left)
 		}
+		
+		index = i
 	}
 }
+
+scrControlAutoSnare()

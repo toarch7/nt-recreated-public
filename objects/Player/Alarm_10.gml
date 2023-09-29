@@ -18,12 +18,7 @@ try {
             with enemy hp = 0
         }
     }
-
-    with enemy {
-        if !position_meeting(round(x), round(y), Floor) && object_index != Nothing2 && object_index != Nothing && object_index != LilHunter && max_hp < 50 {
-            hp = 0
-        }
-    }
+	
 
     if UberCont.opt_walls {
         var _l = global.lis_walls_visible

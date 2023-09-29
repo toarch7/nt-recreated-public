@@ -89,6 +89,7 @@ function scrPowers() {
 			with AmmoPickup M_EYES_TELEKINESIS;
 			with HPPickup M_EYES_TELEKINESIS;
 			with WepPickup M_EYES_TELEKINESIS;
+			with RadChest M_EYES_TELEKINESIS;
 			with Rad M_EYES_TELEKINESIS;
 		
 			with projectile {

@@ -32,3 +32,6 @@ friction = 0.4
 press = 0
 
 least = 0
+
+dragging = -1
+wait = 10

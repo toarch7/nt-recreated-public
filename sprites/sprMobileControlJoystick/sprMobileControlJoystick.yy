@@ -9,8 +9,8 @@
   "swfPrecision": 2.525,
   "bbox_left": 17,
   "bbox_right": 74,
-  "bbox_top": 19,
-  "bbox_bottom": 74,
+  "bbox_top": 18,
+  "bbox_bottom": 73,
   "HTile": false,
   "VTile": false,
   "For3D": false,
@@ -24,12 +24,15 @@
   "gridX": 0,
   "gridY": 0,
   "frames": [
-    {"compositeImage":{"FrameId":{"name":"fdb47db0-eb2f-4156-9a91-fd8beb8098cf","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"fdb47db0-eb2f-4156-9a91-fd8beb8098cf","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"LayerId":{"name":"7d340e3b-d582-4177-b053-8d9c8bc3d2a0","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"sprMobileControlJoystick","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","name":"fdb47db0-eb2f-4156-9a91-fd8beb8098cf","tags":[],"resourceType":"GMSpriteFrame",},
-    {"compositeImage":{"FrameId":{"name":"40a11130-7fa2-4400-b027-908c66cd2292","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
-        {"FrameId":{"name":"40a11130-7fa2-4400-b027-908c66cd2292","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"LayerId":{"name":"7d340e3b-d582-4177-b053-8d9c8bc3d2a0","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
-      ],"parent":{"name":"sprMobileControlJoystick","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","name":"40a11130-7fa2-4400-b027-908c66cd2292","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"d958cea2-759f-4909-b480-97d355808063","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"d958cea2-759f-4909-b480-97d355808063","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"LayerId":{"name":"e557fe56-58ca-47f2-a28a-684f71b6052a","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"sprMobileControlJoystick","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","name":"d958cea2-759f-4909-b480-97d355808063","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"a8407af6-6712-414f-af23-c0efd7ef5750","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"a8407af6-6712-414f-af23-c0efd7ef5750","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"LayerId":{"name":"e557fe56-58ca-47f2-a28a-684f71b6052a","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"sprMobileControlJoystick","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","name":"a8407af6-6712-414f-af23-c0efd7ef5750","tags":[],"resourceType":"GMSpriteFrame",},
+    {"compositeImage":{"FrameId":{"name":"d97f9d52-8685-4a58-a09d-5c130d7c44b3","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"LayerId":null,"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},"images":[
+        {"FrameId":{"name":"d97f9d52-8685-4a58-a09d-5c130d7c44b3","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"LayerId":{"name":"e557fe56-58ca-47f2-a28a-684f71b6052a","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMSpriteBitmap",},
+      ],"parent":{"name":"sprMobileControlJoystick","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","name":"d97f9d52-8685-4a58-a09d-5c130d7c44b3","tags":[],"resourceType":"GMSpriteFrame",},
   ],
   "sequence": {
     "spriteId": {"name":"sprMobileControlJoystick","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},
@@ -39,13 +42,14 @@
     "playbackSpeedType": 0,
     "autoRecord": true,
     "volume": 1.0,
-    "length": 2.0,
+    "length": 3.0,
     "events": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MessageEventKeyframe>",},
     "moments": {"Keyframes":[],"resourceVersion":"1.0","resourceType":"KeyframeStore<MomentsEventKeyframe>",},
     "tracks": [
       {"name":"frames","spriteId":null,"keyframes":{"Keyframes":[
-            {"id":"fdd244e4-c64e-47f2-94a9-776844757636","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"fdb47db0-eb2f-4156-9a91-fd8beb8098cf","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
-            {"id":"4eeb3e75-3b70-4cb2-accf-a58362ab8f66","Key":1.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"40a11130-7fa2-4400-b027-908c66cd2292","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"5c91914e-8f7d-4048-836e-91d1c2c06e8c","Key":0.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"d958cea2-759f-4909-b480-97d355808063","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"f577bf4c-0f90-44fe-a7ef-3425cea48d51","Key":1.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"a8407af6-6712-414f-af23-c0efd7ef5750","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
+            {"id":"97a4747c-c3f1-47b2-9e83-8ac12c076290","Key":2.0,"Length":1.0,"Stretch":false,"Disabled":false,"IsCreationKey":false,"Channels":{"0":{"Id":{"name":"d97f9d52-8685-4a58-a09d-5c130d7c44b3","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceVersion":"1.0","resourceType":"SpriteFrameKeyframe",},},"resourceVersion":"1.0","resourceType":"Keyframe<SpriteFrameKeyframe>",},
           ],"resourceVersion":"1.0","resourceType":"KeyframeStore<SpriteFrameKeyframe>",},"trackColour":0,"inheritsTrackColour":true,"builtinName":0,"traits":0,"interpolation":1,"tracks":[],"events":[],"isCreationTrack":false,"resourceVersion":"1.0","tags":[],"resourceType":"GMSpriteFramesTrack","modifiers":[],},
     ],
     "visibleRange": null,
@@ -69,7 +73,7 @@
     "resourceType": "GMSequence",
   },
   "layers": [
-    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"7d340e3b-d582-4177-b053-8d9c8bc3d2a0","tags":[],"resourceType":"GMImageLayer",},
+    {"visible":true,"isLocked":false,"blendMode":0,"opacity":100.0,"displayName":"default","resourceVersion":"1.0","name":"e557fe56-58ca-47f2-a28a-684f71b6052a","tags":[],"resourceType":"GMImageLayer",},
   ],
   "nineSlice": null,
   "parent": {

@@ -6,7 +6,7 @@
   "option_android_build_tools": "28.0.1",
   "option_android_support_lib": "28.0.1",
   "option_android_target_sdk": "28",
-  "option_android_minimum_sdk": "16",
+  "option_android_minimum_sdk": "19",
   "option_android_compile_sdk": "28",
   "option_android_package_domain": "com",
   "option_android_package_company": "toncho",

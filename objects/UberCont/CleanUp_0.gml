@@ -2,8 +2,6 @@ if pausespr {
     sprite_delete(pausespr)
 }
 
-ds_queue_destroy(global.inputqueue)
-
 discard_custom_sounds()
 discard_custom_sprites()
 

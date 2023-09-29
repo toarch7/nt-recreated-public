@@ -248,8 +248,9 @@ function handle_console_command(str) {
 
                     if array_length(cmd) > 2 {
                         GameCont.loops = real(string_replace(cmd[2], "l", ""))
-                        GameCont.hard *= (GameCont.loops + 1)
-                    } else GameCont.loops = 0
+                        GameCont.hard += (GameCont.loops * 16)
+                    }
+					else GameCont.loops = 0
 
                     with instance_create(x, y, Portal) {
                         sprite_index = sprPortalDisappear
@@ -284,8 +285,14 @@ function handle_console_command(str) {
                 break
 
             case "mobile":
-                with UberCont
-                opt_keyboard = !opt_keyboard
+				
+                with UberCont {
+					opt_keyboard = !opt_keyboard
+					save_set_val("options", "keyboard", opt_keyboard)
+					
+					print(opt_keyboard ? "Disabled mobile controls" : "Enabled mobile controls")
+				}
+				
                 break
 
             case "restart":

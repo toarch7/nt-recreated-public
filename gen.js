@@ -19,7 +19,9 @@ function doTheThing(path) {
 }
 
 const objectblacklist = [
-	"UberCont", "CoopController"
+	"UberCont", "CoopController", "MobileUI", "ButtonAttack",
+	"JoystickMove", "JoystickAttack", "ButtonActive", "ButtonSwap",
+	"ButtonAct"
 ];
 
 

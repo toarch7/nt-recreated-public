@@ -1,4 +1,7 @@
 function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale) {
+	if UberCont.quit_pause or UberCont.want_pause
+		exit
+	
     var width = 1
 
     scale = min(1 + scale, 1.5)
@@ -21,7 +24,8 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 
             draw_circle(x + xx, y + yy, rad / 3 * m, 0)
             draw_set_color(c_white)
-        } else {
+        }
+		else {
             draw_sprite_ext(sprMobileControlJoystick, 0, x, y, scale, scale, 0, c_white, 1)
             draw_sprite_ext(sprMobileControlJoystick, 1, x + xx, y + yy, scale, scale, 0, c_white, 1)
         }
@@ -29,31 +33,74 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 
     with JoystickAttack {
         var dir = KeyCont.dir_fire[global.index],
-			dis = KeyCont.dis_fire[global.index] * rad
+			dis = self.dis
 		
         var xx = lengthdir_x(dis, dir),
-			yy = lengthdir_y(dis, dir)
-
+			yy = lengthdir_y(dis, dir),
+			ang = 0,
+			draw_out = false
+		
+		var swapstick = instance_is(self, SwapstickAttack),
+			swapstick_scale = 0.8
+		
+		if UberCont.opt_aimbot {
+			ang = 45
+			
+			xx = 0
+			yy = 0
+		}
+		
         if UberCont.opt_simplify {
-            draw_circle_width(x, y, rad * m, width)
+			draw_circle_width(x, y, rad * m, width)
 
-            if dis draw_set_color(c_gray)
-
-            draw_circle(x + xx, y + yy, rad / 3 * m, 0)
+            if dis
+				draw_set_color(c_gray)
+			
+			if ang > 0 {
+				draw_circle_width(x + xx, y + yy, rad / 4 * m, width)
+			}
+            else draw_circle(x + xx, y + yy, rad / 3 * m, 0)
+			
             draw_set_color(c_white)
         }
 		else {
-            var col = UberCont.opt_cursorcol
-
-            if col == c_white {
-                col = make_color_rgb(125, 253, 13)
-            }
-
-            var c = UberCont.opt_crosshair
-
-            draw_sprite_ext(sprMobileControlJoystick, 0, x, y, scale, scale, 0, c_white, 1)
-            draw_sprite_ext(sprCrosshairBig, c, x + xx, y + yy, scale / 2, scale / 2, 0, col, 1)
+            var col = 0x0dfd98,
+				crosshair = UberCont.opt_crosshair
+			
+			if !UberCont.opt_splitfire && UberCont.opt_cursorcol != c_white
+				col = UberCont.opt_cursorcol
+			
+			var _s = scale
+			
+			if swapstick
+				_s *= swapstick_scale
+			
+            draw_sprite_ext(sprMobileControlJoystick, 0, x, y, _s, _s, ang, c_white, 1)
+			draw_sprite_ext(sprCrosshairBig, crosshair, x + xx, y + yy, _s / 2, _s / 2, ang, col, 1)
+			
+			if index != -1 && !(swapstick or UberCont.opt_aimbot ) && (dis / rad) < 0.33
+				draw_sprite_ext(sprMobileControlJoystick, 2, x, y, _s, _s, ang, c_gray, 1)
         }
+		
+		if swapstick {
+			var col = active ? make_color_hsv(65, 242, 252) : c_gray,
+				_s = scale * swapstick_scale
+			
+			if index != -1 && (dis / rad) < ATTACK_BUTTON_DEADZONE
+				col = merge_color(col, c_gray, 0.5)
+			
+			if !UberCont.opt_simplify
+				draw_sprite_ext(sprMobileControlJoystick, 2, x, y, _s, _s, ang, col, 1)
+			
+			var current = instance_exists(plr) ? wep_spr : (wep_sprt[primary ? 1 : 3])
+			
+			if current != mskNone {
+				var col = active ? c_white : c_gray,
+					_s = (scale + 0.5) * 0.67
+				
+				draw_sprite_ext(current, 0, x + xx * 0.37 + 8, y + yy * 0.37 + 12, _s, _s, 60, col, 1)
+			}
+		}
     }
 
     var crystaltb = instance_exists(plr) && plr.race == 2 && skill_get(5)
@@ -100,16 +147,43 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 
         var d = self[$ "do_thing"],
             c = (d == 1 ? c_lime : (d == -1 ? c_yellow : (d == 2 ? c_gray : c_white)))
-
-            if UberCont.opt_simplify {
-                draw_set_color(c)
-                draw_set_alpha(alpha)
-                draw_circle_width(x, y, rad * m, width)
-                draw_set_alpha(1)
-                draw_set_color(c_white)
-            } else {
-                draw_sprite_ext(sprMobileControlCorners, 0, x, y, scale, scale, 0, c, alpha)
-            }
+		
+        if UberCont.opt_simplify {
+            draw_set_color(c)
+            draw_set_alpha(alpha)
+            draw_circle_width(x, y, rad * m, width)
+            draw_set_alpha(1)
+            draw_set_color(c_white)
+        }
+		else {
+            draw_sprite_ext(sprMobileControlCorners, 0, x, y, scale, scale, 0, c, alpha)
+        }
+    }
+	
+	with ButtonAttack {
+        var _s = scale / 2,
+			col = UberCont.opt_cursorcol
+		
+		if UberCont.opt_simplify {
+            draw_set_color(c_white)
+            draw_set_alpha(1)
+			
+            draw_circle_width(x, y, rad / 2 * m, width)
+			
+            draw_set_alpha(1)
+            draw_set_color(c_white)
+			
+			col = c_white
+        }
+		else {
+            draw_sprite_ext(sprMobileControlCorners, 0, x, y, scale, scale, 0, c_white, 1)
+        }
+		
+	    if col == c_white
+	        col = make_color_rgb(125, 253, 13)
+		
+        draw_sprite_ext(sprCrosshairBig, UberCont.opt_crosshair, x, y + _s, _s, _s, 0, c_black, 1)
+        draw_sprite_ext(sprCrosshairBig, UberCont.opt_crosshair, x, y, _s, _s, 0, col, 1)
     }
 
     with ButtonSwap {

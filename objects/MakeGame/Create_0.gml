@@ -2,6 +2,10 @@
 
 global.desktop = ((os_type == os_windows) or (os_type == os_linux))
 
+if global.desktop
+	window_set_cursor(cr_none)
+
+
 firstry = 0
 
 if os_check_permission("android.permission.WRITE_EXTERNAL_STORAGE") != os_permission_granted { //!file_exists("permcheck") {
@@ -31,3 +35,5 @@ alarm[0] = 1
 game_directory = "/files/"
 
 message = -1
+
+date_set_timezone(timezone_utc)

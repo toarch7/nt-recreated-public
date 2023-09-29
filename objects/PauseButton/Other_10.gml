@@ -5,9 +5,11 @@ if instance_exists(MenuOptions)
 	exit
 
 if sprite_index == sprGameOverResults {
-    instance_activate_all()
+    scrUnpause()
 	
-    UberCont.paused = 0
+	with MobileUI
+		instance_destroy()
+	
     UberCont.want_menu = 2
     UberCont.show_results = 1
 	
@@ -44,13 +46,13 @@ else switch image_index {
 
     case 5:
         //QUIT
-        instance_activate_all()
+		scrUnpause()
 		
-        audio_resume_all()
         audio_stop_all()
-		
-        UberCont.paused = 0
         UberCont.want_menu = 2
+		
+		with MobileUI
+			instance_destroy()
 		
 		draw_enable_drawevent(false)
 		
@@ -81,10 +83,13 @@ else switch image_index {
 
     case 6:
         //RESTART
-        audio_resume_all()
-        audio_stop_all()
-		instance_activate_all()
+		scrUnpause()
+		
         UberCont.want_restart = 2
+		
+		with MobileUI
+			instance_destroy()
+		
         break
 
 
@@ -102,13 +107,10 @@ else switch image_index {
 		// CONTINUE
         scrUnpause()
 		
-        with JoystickMove event_perform(ev_create, 0)
-        with ButtonActive event_perform(ev_create, 0)
-        with ButtonAct event_perform(ev_create, 0)
-        with ButtonSwap event_perform(ev_create, 0)
-		
-        with PauseButton instance_destroy()
-        with BackButton instance_destroy()
+        with PauseButton
+			instance_destroy()
+        with BackButton
+			instance_destroy()
 		
         exit
         break

@@ -265,12 +265,17 @@ if erasing_progress {
 }
 
 if editing_mode {
-    editing_mode = 1
+	var any = false
 	
 	with MobileUI {
 		if index != -1 {
-			other.editing_mode = 2; break
+			any = true; break
 		}
+	}
+	
+	if any {
+		mx = -1000
+		my = -1000
 	}
 }
 
@@ -471,11 +476,6 @@ for (var i = 0; i < item_count; i++) {
 			}
 		}
 		else option_selected = (opt == slider)
-		
-		if editing_mode == 2 {
-			option_selected = false
-			pointed = false
-		}
 	}
 	else {
 		option_selected = (pointed_item == i)
@@ -644,7 +644,7 @@ for (var i = 0; i < item_count; i++) {
 						else val = "< " + string(val) + " >"
 					}
 					else if opt.type == "switch" {
-						if is_real(val) && val < 2
+						if (is_real(val) or is_bool(val)) && val < 2
 							val = opt.states[val]
 					}
 					else if opt.type == "keybind" {
