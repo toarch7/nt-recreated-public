@@ -432,6 +432,7 @@
 	"FETCH FAILED!": "ПОИСК НЕ УДАЛСЯ.",
 	"YOU'VE BEEN RATE LIMITED.\nTRY AGAIN LATER": "СЛИШКОМ МНОГО ЗАПРОСОВ.\nПОПРОБУЙТЕ ПОЗЖЕ",
 	"INSTALLING": "УСТАНОВКА",
+	"QUERYING REPO INFO": "ЗАПРОС ИНФОРМАЦИИ",
 	"INSTALL FAILED.#": "УСТАНОВКА НЕ УДАЛАСЬ.#",
 	"INSTALL FAILED.#DOWNLOAD FAILURE": "УСТАНОВКА НЕ УДАЛАСЬ.#ОШИБКА ЗАГРУЗКИ",
 	"INSTALL FAILED.#EXTRACTION OR DOWNLOAD FAILURE": "УСТАНОВКА НЕ УДАЛАСЬ.#ПРОБЛЕМЫ С РАСПАКОВКОЙ ИЛИ ЗАГРУЗКОЙ",
@@ -446,7 +447,9 @@
 	"STARS:": "ЗВЁЗДЫ:",
 	"LOAD PRIORITY:": "ПРИОРИТЕТ:",
 	"VIEW INSTALLED": "ПРОСМОТРЕТЬ УСТАНОВЛЕННЫЕ",
-	"BROWSE AND DOWNLOAD": "НАЙТИ И ЗАГРЗУИТЬ",
+	"BROWSE AND DOWNLOAD": "НАЙТИ И ЗАГРУЗИТЬ",
+	"DIRECT DOWNLOAD": "ПРЯМОЕ СКАЧИВАНИЕ",
+	"%#INSTALLED SUCCESSFULLY!##CLICK ANYWHERE TO CONTINUE": "%#УСТАНОВЛЕНО УСПЕШНО!##НАЖМИТЕ НА ЛЮБОЕ МЕСТО#ЧТОБЫ ПРОДОЛЖИТЬ"
 	"@dNO SCREENSHOTS :(": "@dБЕЗ СКРИНШОТОВ :(",
 	
 	"SORT": "СОРТИРОВАТЬ",

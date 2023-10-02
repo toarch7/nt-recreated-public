@@ -149,7 +149,7 @@ if downloading {
 	
 	if downloaded {
 		if downloaded == 2 {
-			draw_text_nt(view_width / 2, view_height / 2, "@g" + string_replace(loc("%#INSTALLED SUCCESSFULLY!##CLICK ANYWHERE TO CONTINUE BROWSING"), "%", clicked_item.full_name))
+			draw_text_nt(view_width / 2, view_height / 2, "@g" + string_replace(loc("%#INSTALLED SUCCESSFULLY!##CLICK ANYWHERE TO CONTINUE"), "%", clicked_item.full_name))
 			
 			if mouse_ui_clicked() {
 				if !download_destroy {
@@ -234,60 +234,60 @@ if loaded && !downloading {
 		draw_text_shadow_scale(dx - 32, 36, loc("LOAD PRIORITY"), 0.5)
 		scrDrawAlignDefault()
 	}
-}
-
-scrDrawAlignDefault()
-
-if browsing {
-	var str = loc("SORT") + ": ",
-		img = sort + sort_mode * 2
 	
-	var xx = 8,
-		yy = view_height - 18
+	scrDrawAlignDefault()
 	
-	if loaded && point_in_rectangle(mx, my, xx, yy - 10, xx + 120, yy + 10) {
-		if mouse_ui_clicked() {
-			sort ++
+	if browsing {
+		var str = loc("SORT") + ": ",
+			img = sort + sort_mode * 2
+	
+		var xx = 8,
+			yy = view_height - 18
+	
+		if loaded && point_in_rectangle(mx, my, xx, yy - 10, xx + 120, yy + 10) {
+			if mouse_ui_clicked() {
+				sort ++
 			
-			if sort > 1 {
-				sort = 0
-				sort_mode ++
+				if sort > 1 {
+					sort = 0
+					sort_mode ++
 				
-				if sort_mode > 1
-					sort_mode = 0
+					if sort_mode > 1
+						sort_mode = 0
+				}
+			
+				snd_play(sndClick)
+			
+				event_user(0)
 			}
-			
-			snd_play(sndClick)
-			
-			event_user(0)
-		}
 		
-		if !sort_pointed {
-			sort_pointed = true
-			snd_play(sndHover)
+			if !sort_pointed {
+				sort_pointed = true
+				snd_play(sndHover)
+			}
 		}
+		else if sort_pointed
+			sort_pointed = false
+	
+		str += "#" + loc(sort ? "BY UPDATES" : "BY RATING") + " (" + (sort_mode ? "V" : "^") + ")"
+	
+		draw_set_halign(fa_left)
+		draw_set_valign(fa_middle)
+	
+		draw_set_color(sort_pointed ? c_white : c_uigray)
+	
+		draw_sprite_ext(
+			sprResourcepackBrowserSort, img,
+		
+			xx + 12, yy - sort_pointed,
+			1, 1, 0,
+			draw_get_color(), 1
+		)
+	
+		draw_text_nt(xx + 16, yy - sort_pointed, str)
+	
+		draw_set_color(c_white)
+	
+		draw_set_valign(fa_top)
 	}
-	else if sort_pointed
-		sort_pointed = false
-	
-	str += "#" + loc(sort ? "BY UPDATES" : "BY RATING") + " (" + (sort_mode ? "V" : "^") + ")"
-	
-	draw_set_halign(fa_left)
-	draw_set_valign(fa_middle)
-	
-	draw_set_color(sort_pointed ? c_white : c_uigray)
-	
-	draw_sprite_ext(
-		sprResourcepackBrowserSort, img,
-		
-		xx + 12, yy - sort_pointed,
-		1, 1, 0,
-		draw_get_color(), 1
-	)
-	
-	draw_text_nt(xx + 16, yy - sort_pointed, str)
-	
-	draw_set_color(c_white)
-	
-	draw_set_valign(fa_top)
 }
