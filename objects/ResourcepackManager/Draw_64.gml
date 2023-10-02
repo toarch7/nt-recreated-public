@@ -40,12 +40,12 @@ if !loaded {
 		
 		scrDrawAlignDefault()
 		
-		draw_sprite(sprSaving, time, gui_w / 2, gui_h / 2 + 8)
-		
 		gpu_set_fog(true, c_black, 0, 0)
 		draw_sprite(sprSaving, time, gui_w / 2 + 1, gui_h / 2 + 9)
 		draw_sprite(sprSaving, time, gui_w / 2    , gui_h / 2 + 9)
 		gpu_set_fog(false, 0, 0, 0)
+		
+		draw_sprite(sprSaving, time, gui_w / 2, gui_h / 2 + 8)
 	}
 		
 	exit
@@ -152,13 +152,19 @@ if downloading {
 			draw_text_nt(view_width / 2, view_height / 2, "@g" + string_replace(loc("%#INSTALLED SUCCESSFULLY!##CLICK ANYWHERE TO CONTINUE BROWSING"), "%", clicked_item.full_name))
 			
 			if mouse_ui_clicked() {
-				downloading = false
-				downloaded = 0
+				if !download_destroy {
+					downloading = false
+					downloaded = 0
+				}
+				else instance_destroy()
 			}
 		}
 		else {
 			draw_text_nt(view_width / 2, view_height / 2, side + loc("INSTALLING") + side)
 		}
+	}
+	else if download_repo_req != -1 && pack_download == -1 {
+		draw_text_nt(view_width / 2, view_height / 2 - 10, "@d" + side + loc("QUERYING REPO INFO") + side)
 	}
 	else {
 		draw_text_nt(view_width / 2, view_height / 2 - 10, side + loc("DOWNLOADING") + side)
@@ -216,7 +222,7 @@ if show_details {
 
 var dx = pack_width * 0.75 + 18
 
-if loaded {
+if loaded && !downloading {
 	if browsing {
 		draw_set_color(c_uigray)
 		draw_text_shadow_scale(dx - 6, 24, loc("RATING"), 0.67)

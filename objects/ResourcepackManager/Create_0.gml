@@ -163,6 +163,21 @@ sprites_cleanup = function() {
 	}
 }
 
+direct_download = function(repo, branch = -1) {
+	download_repo_req = -1
+	pack_download = -1
+	
+	if branch == -1 {
+		download_repo_req = http_get("https://api.github.com/repos/" + repo)
+	}
+	else pack_download = http_get_file("https://github.com/" + repo + "/archive/refs/heads/" + branch + ".zip", "pack.zip")
+	
+	downloading = true
+	download_size = 0
+	download_length = -1
+	downloaded = 0
+}
+
 screenshot_image = -1
 screenshot_index = 1
 screenshot_type = 0
@@ -181,6 +196,8 @@ downloading = false
 downloaded = false
 download_size = 0
 download_length = 0
+download_destroy = false
+download_repo_req = -1
 
 description_width = view_width / 1.75
 description_height = 48

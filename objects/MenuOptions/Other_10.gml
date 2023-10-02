@@ -22,6 +22,9 @@ if text_input_element != undefined {
 		name = method_execute(opt.name_get, opt) ?? opt.name,
 		val = opt.value
 	
+	if val == undefined
+		val = ""
+	
 	drawx = gui_w / 2
 	drawy = gui_h / 2
 	
@@ -579,7 +582,7 @@ for (var i = 0; i < item_count; i++) {
 			else draw_bigname(drawx, drawy, loc(n))
 		}
 		else {
-			var has_value = (opt.value != undefined && opt.type != "category") or opt.type == "keybind"
+			var has_value = (opt.value != undefined && opt.value != "" && opt.type != "category") or opt.type == "keybind"
 			
 			if has_value {
 				drawx -= opt.width / 2

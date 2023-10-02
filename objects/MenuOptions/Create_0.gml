@@ -891,6 +891,49 @@ option_elements_create(
 			}
 		}
 	},
+	
+	{
+		type: "input", name: "DIRECT DOWNLOAD", value: "",
+		
+		validate: function(opt, str, confirm) {
+			if confirm {
+				var a = "https://github.com/"
+				
+				if string_starts(str, a)
+					str = string_delete(str, 1, string_length(a))
+				
+				if string_char_at(str, string_length(str)) == "/"
+					str = string_delete(str, string_length(str) - 1, 1)
+				
+				if string_count("/", str) != 1
+					return true
+				
+				keyboard_string = ""
+				opt.value = ""
+				
+				with instance_create(0, 0, ResourcepackManager) {
+					var r = string_split(str, "/")
+					
+					if r[| 0] == ""
+						ds_list_delete(r, 0)
+					
+					loaded = true
+					browsing = true
+					
+					clicked_item = {
+						full_name: str,
+						owner: r[| 0],
+						name: r[| 1]
+					}
+					
+					self.direct_download(str)
+					download_destroy = true
+				}
+			}
+			
+			return false
+		}
+	}
 )
 
 #endregion Resourcepacks

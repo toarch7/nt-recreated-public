@@ -90,6 +90,38 @@ if async_load[? "id"] == list_request {
 	}
 }
 
+if async_load[? "id"] == download_repo_req {
+	if async_load[? "status"] != 0
+		exit
+	
+	var result = async_load[? "result"]
+	
+	try {
+		var data = json_parse(result)
+		
+		if data && is_string(data[$ "default_branch"]) {
+			if is_undefined(clicked_item)
+				clicked_item = {}
+			
+			var item = clicked_item
+			
+			item.owner = data.owner.login
+			item.created = data.created_at
+			item.updated = data.updated_at
+			item.stars = data.stargazers_count
+			item.full_name = data.full_name
+			
+			self.direct_download(data.full_name, data.default_branch)
+		}
+	}
+	catch(e) {
+		error = "@sUNABLE TO FETCH INFO.#PERHAPS WRONG REPO WAS GIVEN OR IT DOESN'T EXIST"
+		snd_play(sndClickBack)
+		
+		print(e.message); exit
+	}
+}
+
 if async_load[? "id"] == pack_download {
 	var status = async_load[? "status"]
 	

@@ -82,8 +82,6 @@ function install_resourcepack(file) {
 		for(var i = 0; i < array_length(folders); i ++) {
 			var filename = folders[i]
 			
-			print(">", filename, path + filename, dest_path + filename)
-			
 			if directory_exists(path + filename)
 				directory_move_files(path + filename, dest_path + filename)
 		}

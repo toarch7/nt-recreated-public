@@ -12,7 +12,9 @@ if clicked_item != undefined {
 	item.priority = 0
 	
 	file_write(packdir + "githubdata.json", json_stringify(item))
-	file_write(packdir + "meta.json", json_stringify(item.meta))
+	
+	if item[$ "meta"]
+		file_write(packdir + "meta.json", json_stringify(item.meta))
 }
 
 downloaded = 2

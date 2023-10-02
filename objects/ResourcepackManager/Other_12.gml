@@ -201,15 +201,7 @@ if !screenshot_view && point_in_rectangle(mx, my, dx - width - 32, dy, view_widt
 	}
 	
 	if mouse_ui_clicked() {
-		if browsing {
-			pack_download = http_get_file("https://github.com/" + item.full_name + "/archive/refs/heads/" + item.branch + ".zip", "pack.zip")
-			
-			downloading = true
-			download_size = 0
-			download_length = -1
-			downloaded = 0
-		}
-		else {
+		if !browsing {
 			item.active ^= 1
 			
 			if !item.active {
@@ -219,6 +211,7 @@ if !screenshot_view && point_in_rectangle(mx, my, dx - width - 32, dy, view_widt
 			
 			reload_needed = 2
 		}
+		else self.direct_download(item.full_name, item.branch)
 		
 		snd_play(sndClick)
 	}
