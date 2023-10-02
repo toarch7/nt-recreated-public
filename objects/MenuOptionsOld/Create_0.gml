@@ -149,7 +149,7 @@ options = [
     },
 
     onDraw: function(dx, dy) {
-        //if UberCont.opt_resolution draw_set_color(c_dkgray)
+        //if UberCont.opt_resolution draw_set_color(c_uidark)
 
         draw_set_halign(fa_right)
         //draw_sprite(sprScoreSplat, 2, dx - UI_SPLAT_OFFSET, dy)

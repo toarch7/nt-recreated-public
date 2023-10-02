@@ -1,4 +1,4 @@
-if !instance_exists(GameCont) // how?? why??
+if !instance_exists(GameCont)
 	exit
 
 visible = 1
@@ -9,9 +9,11 @@ view_xview = x - view_width / 2
 view_yview = y - view_height / 2
 
 if is_me {
-    GameCont.race = race
-    GameCont.bskin = bskin
-    scrUnlock()
+	GameCont.race = race
+	GameCont.bskin = bskin
+	
+	if !UberCont.want_menu && !UberCont.want_restart
+		scrUnlock()
 }
 
 reload = 0

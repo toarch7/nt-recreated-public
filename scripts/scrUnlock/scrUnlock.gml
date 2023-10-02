@@ -103,33 +103,8 @@ function scrUnlock() {
 	        p = id
 	    }
 	}
-
-    if instance_exists(p) && p.hp > 0 && p.race != 14 && p.race != 15 with p {
-        if wep && string_copy(wep_name[wep], 0, 4) == "GOLD" && (race != 6 or (race == 6 && wep != 39)) && UberCont.cwep[race] != wep {
-            UberCont.cwep[race] = wep
-            snd_play(sndGoldWeaponLock)
-            save_set_val("cwep", string(race), wep)
-            save_set_val("cswep", string(race), 1)
-            show_unlock_popup(wep_name[wep] + "#@sSTORED")
-            scrAchievement(24)
-
-            if wep == 122 or wep == 123 {
-                scrAchievement(25)
-            }
-        }
-		else if bwep && string_copy(wep_name[bwep], 0, 4) == "GOLD" && (race != 6 or (race == 6 && bwep != 39)) && UberCont.cwep[race] != bwep {
-            UberCont.cwep[race] = bwep
-            snd_play(sndGoldWeaponLock)
-            show_unlock_popup(wep_name[bwep] + "#@sSTORED")
-            save_set_val("cwep", string(race), bwep)
-            save_set_val("cswep", string(race), 1)
-            scrAchievement(24)
-
-            if wep == 122 or wep == 123 {
-                scrAchievement(25)
-            }
-        }
-    }
+	
+    scrGoldenWeaponStoring(p)
 
     if !UberCont.cskingot[@GameCont.race] {
         if race == 2 && GameCont.area == 104 {
@@ -227,4 +202,44 @@ function scrUnlock() {
 		
 		scrSave()
 	}
+}
+
+function scrGoldenWeaponStoring(p) {
+	if !instance_exists(p)
+		exit
+	
+	if p.race == 14 or p.race == 15
+		exit
+	
+	with p {
+		var cwep = UberCont.cwep[race],
+			store = -1
+		
+        if wep_gold[wep] && race_swep[race] != wep && cwep != wep {
+			store = wep
+        }
+		else if wep_gold[bwep] && race_swep[race] != bwep && cwep != bwep {
+			store = bwep
+		}
+		
+		if store != -1 {
+			var pinst = playerinstance_get()
+			
+            snd_play(sndGoldWeaponLock)
+			scrAchievement(24)
+			
+            save_set_val("cwep", string(race), store)
+            save_set_val("cswep", string(race), true)
+			UberCont.cwep[race] = store
+			pinst.cwep = store
+			
+			scrSave()
+			
+            show_unlock_popup("@y" + loc(wep_name[store]) + loc("#@sSTORED"))
+
+            if store == wep_golden_disc_gun
+			or store == wep_golden_nuke_launcher
+                scrAchievement(25)
+		}
+    }
 }

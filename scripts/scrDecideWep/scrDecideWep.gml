@@ -28,36 +28,31 @@ function scrDecideWep(extra) {
         var h = ceil((GameCont.hard - global.hardmode * 13) / (1 + global.hardmode * 2)) + extra
 
         do {
-            var fine = 0
+            var fine = false
 
             wep = round(random(maxwep - 1) + 1)
 
-            if !is_string(wep_name[wep]) or (wep_area[wep] < 0) or (wep_area[wep] < bottom) or (wep_area[wep] > h) {
+            if !is_string(wep_name[wep]) or (wep_area[wep] < 0) or (wep_area[wep] < bottom) or (wep_area[wep] > h)
                 continue
-            }
 
-            if (target.wep == wep or target.bwep == wep) && (target.race != 7 && !(target.wep == wep && target.bwep == wep)) {
+            if (target.wep == wep or target.bwep == wep) && (target.race != 7 && !(target.wep == wep && target.bwep == wep))
                 continue
-            }
 
-            if wep == wep_super_disc_gun && !__cursed {
+            if wep == wep_super_disc_gun && !__cursed
                 continue
-            }
 
-            if instance_exists(TutCont) && (wep_type[wep] == 0 or wep_type[wep] == 4) {
+            if instance_exists(TutCont) && (wep_type[wep] == 0 or wep_type[wep] == 4)
                 continue
-            }
 
-            if !global.hardmode && (wep == wep_golden_disc_gun or wep == wep_golden_nuke_launcher) {
+            if !global.hardmode && (wep == wep_golden_disc_gun or wep == wep_golden_nuke_launcher)
                 continue
-            }
 
-            if wep == wep_gun_gun && crown_current == crwn_guns {
+            if wep == wep_gun_gun && crown_current != crwn_guns
                 continue
-            }
 
-            fine = 1
-        } until fine
+            fine = true
+        }
+		until fine
     } else wep = round(random(maxwep - 1) + 1)
 
     return wep

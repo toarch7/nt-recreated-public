@@ -10,6 +10,7 @@ function scrGameSave() {
         kills: GameCont.kills,
 
         hardmode: global.hardmode,
+		recontinues: global.recontinues,
 
         daily: UberCont.daily_run,
         weekly: UberCont.weekly_run,
@@ -18,7 +19,6 @@ function scrGameSave() {
         hp: undefined,
         spirit: undefined,
 		max_hp: undefined,
-		recontuations: undefined,
 		headloses: undefined
     }
 
@@ -27,7 +27,6 @@ function scrGameSave() {
         d.hp = hp
         d.spirit = spirit
 		d.max_hp = max_hp
-		d.recontuations = recontuations
 		d.headloses = headloses
     }
 
@@ -36,7 +35,10 @@ function scrGameSave() {
     // Save global variables
     var d = {}
 
-    var keys = ["rng_state", "index", "seed", "is_server", "custom_seed", "hardmode", "time", "party_gun_dropped", "crownpick"]
+    var keys = [
+		"rng_state", "index", "seed", "is_server", "custom_seed",
+		"hardmode", "time", "party_gun_dropped", "crownpick", "recontinues"
+	]
 
     for (var i = 0; i < array_length(keys); i++) {
         var key = keys[i]

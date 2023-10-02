@@ -33,8 +33,27 @@ function scrGameLoad() {
         }
 
         delete a
-
-        playerinstances = json_parse(buffer_read(b, buffer_string)) // playerinstances
+		
+		var pinstlist = json_parse(buffer_read(b, buffer_string)),
+			pinstkeys = struct_keys(pinstlist)
+		
+        playerinstances = {} // playerinstances
+		
+		for(var i = 0; i < array_length(pinstkeys); i ++) {
+			var p = pinstlist[$ pinstkeys[i]],
+				pinst = new PlayerInstance(p.index)
+			
+			var keys = struct_keys(p)
+			
+			for(var k = 0; k < array_length(keys); k ++) {
+				var key = keys[k],
+					val = p[$ key]
+				
+				pinst[$ key] = val
+			}
+			
+			playerinstances[$ p.index] = pinst
+		}
 		
 		playerinstance = playerinstance_get()
 		
@@ -55,7 +74,6 @@ function scrGameLoad() {
             ammo = d.ammo
             spirit = d.spirit
             max_hp = d.max_hp
-            recontuations = d.recontuations
             headloses = d.headloses
 
             break

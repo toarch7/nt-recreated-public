@@ -3,14 +3,14 @@ function scrCreateMobileControls(){
 	instance_create(0, 0, ButtonActive)
 	
 	
-	if UberCont.opt_swapstick {
-		with instance_create(0, 0, SwapstickAttack)
+	if UberCont.opt_wepstick {
+		with instance_create(0, 0, WepstickAttack)
 			primary = true
 		
-		with instance_create(0, 0, SwapstickAttack)
+		with instance_create(0, 0, WepstickAttack)
 			primary = false
 		
-		with SwapstickAttack {
+		with WepstickAttack {
 			key += primary ? "_A" : "_B"
 			active = primary
 			

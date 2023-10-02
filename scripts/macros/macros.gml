@@ -389,8 +389,8 @@ function scrHandleInputsGeneral(index) {
 	}
 	// mobile touchscreen
 	else {
-		// reset swap inputs in case of using swapsticks
-		if opt_swapstick {
+		// reset swap inputs in case of using wepsticks
+		if opt_wepstick {
 			KeyCont.hold_swap[global.index] = 0
 			KeyCont.press_swap[global.index] = 0
 			KeyCont.release_swap[global.index] = 0

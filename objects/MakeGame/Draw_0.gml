@@ -58,7 +58,7 @@ if loading {
             if posy >= 0 posy -= 8
         }
 		else {
-            draw_set_color(c_dkgray)
+            draw_set_color(c_uidark)
             pos++
         }
 		

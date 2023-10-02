@@ -40,8 +40,8 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 			ang = 0,
 			draw_out = false
 		
-		var swapstick = instance_is(self, SwapstickAttack),
-			swapstick_scale = 0.8
+		var wepstick = instance_is(self, WepstickAttack),
+			wepstick_scale = 0.8
 		
 		if UberCont.opt_aimbot {
 			ang = 45
@@ -72,19 +72,19 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 			
 			var _s = scale
 			
-			if swapstick
-				_s *= swapstick_scale
+			if wepstick
+				_s *= wepstick_scale
 			
             draw_sprite_ext(sprMobileControlJoystick, 0, x, y, _s, _s, ang, c_white, 1)
 			draw_sprite_ext(sprCrosshairBig, crosshair, x + xx, y + yy, _s / 2, _s / 2, ang, col, 1)
 			
-			if index != -1 && !(swapstick or UberCont.opt_aimbot ) && (dis / rad) < 0.33
+			if index != -1 && !(wepstick or UberCont.opt_aimbot ) && (dis / rad) < 0.33
 				draw_sprite_ext(sprMobileControlJoystick, 2, x, y, _s, _s, ang, c_gray, 1)
         }
 		
-		if swapstick {
+		if wepstick {
 			var col = active ? make_color_hsv(65, 242, 252) : c_gray,
-				_s = scale * swapstick_scale
+				_s = scale * wepstick_scale
 			
 			if index != -1 && (dis / rad) < ATTACK_BUTTON_DEADZONE
 				col = merge_color(col, c_gray, 0.5)

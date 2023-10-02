@@ -31,7 +31,7 @@
     "path": "folders/Objects/Mobile Controls.yy",
   },
   "resourceVersion": "1.0",
-  "name": "SwapstickAttack",
+  "name": "WepstickAttack",
   "tags": [],
   "resourceType": "GMObject",
 }

@@ -151,7 +151,8 @@ if !global.hardmode {
 
 UberCont.ctot_kill[race] += GameCont.kills
 
-scrUnlock()
+if !UberCont.want_menu && !UberCont.want_restart
+	scrUnlock()
 
 if !GameCont.win scrSendDailyData()
 

@@ -69,9 +69,31 @@ if enemy_test && instance_exists(GameCont) {
 	}
 }
 
-if !UberCont.opt_console exit
+if key_check("console", keystate_press) or open {
+	
+	if global.console_active or UberCont.opt_console
+		global.console_active = !global.console_active
 
-if UberCont.daily_run or UberCont.weekly_run or UberCont.continued_run exit
+    event_user(0)
+
+    keyboard_string = ""
+
+    open = false
+}
+
+if keyboard_check_pressed(vk_escape)
+or (os_type == os_android && keyboard_check_pressed(vk_backspace))
+or (keyboard_string == "" && keyboard_check_pressed(vk_enter))
+{
+    global.console_active = false
+    event_user(0)
+}
+
+if !UberCont.opt_console
+ or UberCont.daily_run
+ or UberCont.weekly_run
+ or UberCont.continued_run
+	exit
 
 if bound_command != "" {
     if keyboard_check_pressed(ord("P")) {
@@ -82,22 +104,6 @@ if bound_command != "" {
         bound_command = ""
         print("Bind removed.")
     }
-}
-
-if key_check("console", keystate_press) or open {
-    global.console_active = !global.console_active
-
-    event_user(0)
-
-    keyboard_string = ""
-
-    open = 0
-}
-
-if keyboard_check_pressed(vk_escape) or (os_type == os_android && keyboard_check_pressed(vk_backspace)) or (keyboard_string == "" && keyboard_check_pressed(vk_enter)) {
-    global.console_active = 0
-
-    event_user(0)
 }
 
 if (flags & 2) == 2 && instance_exists(GenCont) {

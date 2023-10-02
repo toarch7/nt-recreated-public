@@ -11,7 +11,7 @@ enum OptionCategory {
 	Video,
 	Game,
 	Controls,
-	Resourcepacks, // unused
+	Resourcepacks,
 	Cheats,
 	
 	Video_Display,
@@ -293,11 +293,9 @@ option_elements_create
 		type: "button", name: "RESOURCEPACKS", ingame: false,
 		
 		click: function() {
-			if save_get_val("etc", "rp_warning", 0) {
-				with instance_create(0, 0, ResourcepackManager)
-					event_user(0)
-			}
-			else rp_warning = 1
+			self.category_set(OptionCategory.Resourcepacks)
+			if !save_get_val("etc", "rp_warning", 0)
+				rp_warning = true
 		}
 	},
 	
@@ -721,7 +719,7 @@ option_elements_create(
 	{ type: "switch", name: "360 AIMBOT",       key: "controls_aimbot",       mobile_only: true },
 	{ type: "switch", name: "VOLUME CONTROLS",  key: "options_volumecontrol", mobile_only: true },
 	{ type: "switch", name: "SPLIT AIM & FIRE", key: "controls_splitfire", },//mobile_only: true },
-	{ type: "switch", name: "SWAP-STICKS",      key: "controls_swapstick", },//mobile_only: true },
+	{ type: "switch", name: "WEAPON-STICKS",      key: "controls_wepstick", },//mobile_only: true },
 	
 	{ type: "slider", name: "SIZE SCALE", key: "controls_scale", mobile_only: true },
 	
@@ -868,6 +866,34 @@ option_elements_create(
 
 
 #endregion Controls_Preferences
+#region Resourcepacks
+option_category_begin(OptionCategory.Resourcepacks)
+
+option_elements_create(
+	{
+		type: "button", name: "VIEW INSTALLED", ingame: false,
+		
+		click: function() {
+			with instance_create(0, 0, ResourcepackManager) {
+				browsing = false
+				event_user(0)
+			}
+		}
+	},
+	
+	{
+		type: "button", name: "BROWSE AND DOWNLOAD", ingame: false,
+		
+		click: function() {
+			with instance_create(0, 0, ResourcepackManager) {
+				browsing = true
+				event_user(0)
+			}
+		}
+	},
+)
+
+#endregion Resourcepacks
 #region Cheats
 option_category_begin(OptionCategory.Cheats)
 

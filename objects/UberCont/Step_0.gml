@@ -219,3 +219,5 @@ if !paused && !want_pause && !instance_exists(PauseButton) {
 			event_user(0)
 	}
 }
+
+playerinstance = playerinstance_get(index)

@@ -64,9 +64,6 @@ function scrPowers() {
 				by2 = y + 120
 			
 			if ultra == 1 {
-				if KeyCont.release_spec[index]
-					print("!!!")
-				
 			    with projectile {
 			        if self[$ "creator"] == other.id {
 			            x = lerp(x, other.x + lengthdir_x(16, direction), 0.8)

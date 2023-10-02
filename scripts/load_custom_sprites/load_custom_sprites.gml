@@ -1,5 +1,5 @@
 function load_custom_sprites(path) {
-    var status = 0
+    var status = false
 
     if !file_exists(path + ".nomedia") {
         var f = file_text_open_write(path + ".nomedia")
@@ -19,7 +19,7 @@ function load_custom_sprites(path) {
 			find = _find[_f]
 
         if string_char_at(find, 1) != "s" {
-            handled = 1
+            handled = true
         }
 
         if !handled {
@@ -32,7 +32,8 @@ function load_custom_sprites(path) {
 
                 if p > 0 {
                     asset = asset_get_index(string_delete(find, p, string_length(find)))
-                } else if string_count("_frame", find) {
+                }
+				else if string_count("_frame", find) {
                     var p = string_pos("_frame", find)
 
                     if p > 0 {
@@ -46,29 +47,34 @@ function load_custom_sprites(path) {
 
                                 if sprite_exists(s) {
                                     var a = string(asset)
-
+									
                                     if replace_frames[$ a] == undefined {
                                         replace_frames[$ a] = []
                                     }
-
+									
                                     replace_frames[$ a][real(frame)] = s
-
-                                    handled = 1
-                                } else if !b {
+									
+									b = true
+                                    handled = true
+                                }
+								else if !b {
                                     printc("[!!!] Failed to load frame " + find + " to replace", c_red)
-                                    status = 1
-                                } else handled = 1
-                            } catch (e) {
-                                printc("[!!!] Failed to parse framecount of sprite " + sprite_get_name(find), c_red)
-                                status = 1
+                                    status = true
+                                }
+								else handled = true
                             }
-                        } else {
+							catch (e) {
+                                printc("[!!!] Failed to parse framecount of sprite " + sprite_get_name(find), c_red)
+                                status = true
+                            }
+                        }
+						else {
                             print("[!] Couldn't find sprite for " + find + " to replace frames.", c_yellow)
-                            status = 1
+                            status = true
                         }
                     }
 
-                    handled = 1
+                    handled = true
                 }
             }
 			
@@ -88,7 +94,7 @@ function load_custom_sprites(path) {
                             // ok
                         } else {
                             printc("[!!!] Failed to replace sprite " + find, c_red);
-                            status = 1
+                            status = true
                         }
                     } else {
                         print("[!!!]", find, "image is invalid. Requested dimensions:",
@@ -97,17 +103,19 @@ function load_custom_sprites(path) {
 
                         printc("^^^ " + find + " is not being replaced", c_red)
 
-                        status = 1
+                        status = true
                         sprite_flush(sprite)
                         sprite_delete(sprite)
                     }
-                } else {
-                    printc("[!!!] Unable to create sprite for " + find, c_red);
-                    status = 1
                 }
-            } else if !b {
+				else {
+                    printc("[!!!] Unable to create sprite for " + find, c_red);
+                    status = true
+                }
+            }
+			else if !b {
                 printc("[!] Unable to find sprite named " + find, c_yellow);
-                status = 1
+                status = true
             }
         }
     }

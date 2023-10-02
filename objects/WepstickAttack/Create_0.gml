@@ -5,7 +5,7 @@ primary = false
 
 active = false
 
-function scrSwapstickUpdateSprite(plr) {
+function scrWepstickUpdateSprite(plr) {
 	var _wep = active ? plr.wep : plr.bwep
 	
 	if _wep

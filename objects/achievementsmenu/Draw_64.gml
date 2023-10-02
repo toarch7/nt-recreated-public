@@ -27,7 +27,7 @@ for(var i = 0; i < array_length(chiev_name); i ++) {
 				c = "@y"
 			}
 			else {
-				draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_dkgray, 1)
+				draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_uidark, 1)
 			}
 			
 			draw_text_nt(xx, yy - ypos, c + loc(chiev_name[i]))

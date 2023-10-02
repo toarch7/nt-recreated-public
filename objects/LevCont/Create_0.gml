@@ -192,4 +192,47 @@ appear = view_height / 2
 if instance_exists(SkillText) appear = 0
 
 with SkillText
-y -= 40
+	y -= 40
+
+
+
+
+
+
+
+
+if UberCont.opt_griller && instance_exists(SkillIcon) {
+	with SkillIcon
+		instance_destroy()
+	
+	var dx = view_xview + view_width / 2,
+		dy = view_yview + view_height - 20
+	
+	var xx = dx,
+		yy = dy,
+		_num = 0
+	
+	for(var i = 1; i <= maxskill; i ++) {
+		if skill_get(i)
+			continue
+		
+		if xx >= view_width - 32 {
+			xx = dx
+			
+			with SkillIcon
+				y -= 32
+		}
+		
+		with SkillIcon
+			if y == yy x -= 12
+		
+		with instance_create(xx, yy, SkillIcon) {
+			num = (_num ++)
+			skill = i
+		}
+		
+		xx += 12
+	}
+}
+
+

@@ -50,8 +50,8 @@ if UberCont.continued_run {
 	
 	var str = "continued"
 	
-	if global.recontuations > 0
-		str = "continued x" + string(global.recontuations)
+	if global.recontinues > 0
+		str = "continued x" + string(global.recontinues)
 	
     draw_text(view_xview + view_width / 2, view_yview + 59, str)
     

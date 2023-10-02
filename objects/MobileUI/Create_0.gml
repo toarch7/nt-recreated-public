@@ -1,4 +1,4 @@
-if !instance_is(self, SwapstickAttack) && instance_number(object_index) > 1 {
+if !instance_is(self, WepstickAttack) && instance_number(object_index) > 1 {
 	instance_destroy(); exit
 }
 

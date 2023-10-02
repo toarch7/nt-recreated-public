@@ -78,7 +78,7 @@ function scrDrawHUD(plr = noone) {
         if bwep != 0 {
             spr = wep_sprt[bwep]
             wid = 16
-            if wep_type[bwep] = 0 wid = 32 col = c_dkgray
+            if wep_type[bwep] = 0 wid = 32 col = c_uidark
             if race = 7 col = c_white
 
             if plr.bcurse gpu_set_fog(1, $8b448c, 0, 0)
@@ -116,7 +116,7 @@ function scrDrawHUD(plr = noone) {
                     if race = 7 or wep_type[bwep] = wep_type[bwep] draw_set_color(c_red)
                     else draw_set_color(c_gray)
                 }
-                if ammo[wep_type[bwep]] = 0 draw_set_color(c_dkgray) draw_text(86, 21, (string(ammo[wep_type[bwep]])))
+                if ammo[wep_type[bwep]] = 0 draw_set_color(c_uidark) draw_text(86, 21, (string(ammo[wep_type[bwep]])))
             }
         }
 
@@ -150,7 +150,7 @@ function scrDrawHUD(plr = noone) {
 
             draw_set_color(c_white)
             if ammo[wep_type[wep]] <= typ_ammo[wep_type[wep]] draw_set_color(c_red)
-            if ammo[wep_type[wep]] = 0 draw_set_color(c_dkgray) draw_text(42, 21, (string(ammo[wep_type[wep]])))
+            if ammo[wep_type[wep]] = 0 draw_set_color(c_uidark) draw_text(42, 21, (string(ammo[wep_type[wep]])))
         }
 
         //EXPERIENCE BAR
@@ -244,8 +244,8 @@ function scrDrawHUD(plr = noone) {
         draw_set_alpha(0.1)
         draw_set_color(c_white)
 		
-		if global.recontuations > 1 {
-			draw_text(0, 45, "continued x" + string(global.recontuations))
+		if global.recontinues > 1 {
+			draw_text(0, 45, "continued x" + string(global.recontinues))
 		}
         else draw_text(0, 45, "continued")
         

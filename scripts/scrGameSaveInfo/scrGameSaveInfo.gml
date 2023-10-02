@@ -23,11 +23,7 @@ function scrGameSaveInfo() {
                 d.spirit = spirit
             }
 			
-			d.recontuations = recontuations
-			
 			d.max_hp = max(1, max_hp)
-			
-			global.recontuations = recontuations
         }
 
         // rebuild the buffer

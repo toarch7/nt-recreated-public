@@ -107,7 +107,7 @@ else {
 		
 		dis = min(rad, point_distance(x, y, mx, my))
 		
-		if !UberCont.opt_swapstick or (dis / rad) > ATTACK_BUTTON_DEADZONE {
+		if !UberCont.opt_wepstick or (dis / rad) > ATTACK_BUTTON_DEADZONE {
 		    KeyCont.hold_fire[global.index] = device_mouse_check_button(i, mb_left)
 		    KeyCont.press_fire[global.index] = device_mouse_check_button_pressed(i, mb_left)
 		    KeyCont.release_fire[global.index] = device_mouse_check_button_released(i, mb_left)

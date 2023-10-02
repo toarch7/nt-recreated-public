@@ -24,10 +24,15 @@
         {"externalName":"URLOpen","kind":4,"help":"URLOpen(url)","hidden":false,"returnType":2,"argCount":0,"args":[
             1,
           ],"resourceVersion":"1.0","name":"URLOpen","tags":[],"resourceType":"GMExtensionFunction",},
+        {"externalName":"ResourcepackInstall","kind":4,"help":"ResourcepackInstall(file_zip, dest_folder)","hidden":false,"returnType":2,"argCount":0,"args":[
+            1,
+            1,
+          ],"resourceVersion":"1.0","name":"ResourcepackInstall","tags":[],"resourceType":"GMExtensionFunction",},
       ],"constants":[],"ProxyFiles":[],"copyToTargets":8,"order":[
         {"name":"IsKitKat","path":"extensions/YYExtra/YYExtra.yy",},
         {"name":"SetVolumeControl","path":"extensions/YYExtra/YYExtra.yy",},
         {"name":"URLOpen","path":"extensions/YYExtra/YYExtra.yy",},
+        {"name":"ResourcepackInstall","path":"extensions/YYExtra/YYExtra.yy",},
       ],"resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMExtensionFile",},
     {"filename":"YYExtra.gml","origname":"","init":"","final":"","kind":2,"uncompress":false,"functions":[
         {"externalName":"_GetPickedFile","kind":2,"help":"GetPickedFile()","hidden":false,"returnType":2,"argCount":0,"args":[],"resourceVersion":"1.0","name":"GetPickedFile","tags":[],"resourceType":"GMExtensionFunction",},

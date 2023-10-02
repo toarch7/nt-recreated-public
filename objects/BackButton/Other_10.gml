@@ -65,16 +65,40 @@ else if instance_exists(Menu) {
 	}
 }
 else if instance_exists(ResourcepackManager) {
-	with MenuOptions {
-		wait = true
-		self.category_set(OptionCategory.Main)
+	if !ResourcepackManager.show_details or ResourcepackManager.error != "" {
+		with MenuOptions {
+			wait = true
+			self.category_set(OptionCategory.Resourcepacks)
+		}
+		
+	    with ResourcepackManager
+	        instance_destroy()
+		
+		snd_play(sndClickBack)
+	}
+	else {
+		with ResourcepackManager {
+			if screenshot_view {
+				screenshot_view = false; break
+			}
+			
+			if downloading {
+				downloading = false
+				pack_download = -1
+				downloaded = 0
+				
+				sound_play_pitch(sndCrownRandom, 0.7 + random(0.3))
+				
+				break
+			}
+			
+			self.screenshots_cleanup()
+			show_details = false
+		}
+		
+		snd_play(sndCrownAppear)
 	}
 	
-    with ResourcepackManager
-        instance_destroy()
-	
-    snd_play(sndRestart)
-    snd_play(sndClickBack)
 }
 else if instance_exists(MenuOptions) && !(UberCont.opt_gamepad && MenuOptions.editing_mode) {
     with MenuOptions {

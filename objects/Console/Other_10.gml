@@ -1,4 +1,7 @@
-if !UberCont.opt_console exit
+if !UberCont.opt_console
+	exit
+
+/// @description update virtual keyboard
 
 if global.console_active {
     snd_play(sndClick)

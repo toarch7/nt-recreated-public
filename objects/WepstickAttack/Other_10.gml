@@ -10,13 +10,13 @@ if wep_spr == mskNone {
 	}
 	
 	if player != noone
-		scrSwapstickUpdateSprite(player)
+		scrWepstickUpdateSprite(player)
 }
 
 if i != -1 && !active {
 	KeyCont.press_swap[global.index] = device_mouse_check_button_pressed(i, mb_left)
 	
-	with SwapstickAttack {
+	with WepstickAttack {
 		if active
 			KeyCont.release_swap[global.index] = true
 		

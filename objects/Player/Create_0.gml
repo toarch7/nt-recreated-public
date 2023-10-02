@@ -8,7 +8,7 @@ alarm[10] = 10
 friction = 0.45
 image_speed = 0.4
 
-recontuations = 0
+recontinues = 0
 
 pref = function(name) {
 	var p = playerinstance_get(index)

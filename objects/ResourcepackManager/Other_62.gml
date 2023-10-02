@@ -5,15 +5,17 @@ if async_load[? "id"] == list_request {
 	
 	var file = async_load[? "result"]
 	
-	if !file_exists(file) {
-		error = "FAILED TO LOAD THE LIST"
+	try {
+		items = json_parse(file_read(file))
+	}
+	catch(e) {
+		error = "@sUNABLE TO FETCH THE LIST.#PLEASE TRY CHECK YOUR NETWORK#OR TRY AGAIN LATER"
+		snd_play(sndClickBack)
 		
-		exit
+		print(e.message); exit
 	}
 	
 	var valid = []
-	
-	items = json_parse(file_read(file))
 	
 	var _time = unix_timestamp()
 	
@@ -24,7 +26,7 @@ if async_load[? "id"] == list_request {
 		if item[$ "hidden"] or item[$ "malformed"]
 			continue
 		
-		var meta = item.meta,
+		var meta = browsing ? item.meta : item,
 			
 			name = meta.name,
 			short = meta.descriptionShort,
@@ -46,26 +48,29 @@ if async_load[? "id"] == list_request {
 		meta.descriptionShort = short
 		meta.description = description
 		
-		if item.full_name == "toarch7/risk-of-rain-resourcepack"
-		or item.full_name == "kcd-shichen/Hyper-Horizon"
-			item.created = _time * 1000
-		
 		if !item[$ "promoted"] {
 			var diff = _time - (item.created div 1000)
-			
-			print("diff", _time, item.created, item.name, ">", diff)
-			
 			item.promoted = (diff) < 604800
 		}
 		else item.promoted = false
 		
+		item.external = true
+		
 		array_push(valid, item)
 	}
 	
+	//test
+	/*
+	repeat (irandom(100) + 100) {
+		var dupe = json_parse(json_stringify(valid[irandom(array_length(valid) - 1)]))
+		array_push(valid, dupe)
+	}*/
+	
 	items = valid
 	
-	max_height = array_length(valid) * 40
+	max_height = max(0, array_length(valid) * 40 - 160)
 	
+	loaded = true
 	event_user(0)
 	
 	var check = {}
@@ -82,5 +87,26 @@ if async_load[? "id"] == list_request {
 		}
 		
 		check[$ item.full_name] = true
+	}
+}
+
+if async_load[? "id"] == pack_download {
+	var status = async_load[? "status"]
+	
+	print(json_encode(async_load))
+	
+	if status == 1 {
+		download_size = async_load[? "sizeDownloaded"]
+		download_length = async_load[? "contentLength"]
+	}
+	else if status == 0 {
+		downloaded = 1
+		snd_play(sndHover)
+		
+		install_resourcepack(async_load[? "result"])
+	}
+	else {
+		error = "UNEXPECTED DOWNLOAD STATUS " + string(status)
+		snd_play(sndClickBack)
 	}
 }

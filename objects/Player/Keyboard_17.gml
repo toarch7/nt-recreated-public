@@ -10,9 +10,7 @@ if UberCont.public = 0 {
     }
 
     if keyboard_check_pressed(ord("R")) {
-        discard_custom_sprites()
-        discard_custom_sounds()
-        load_resourcepacks()
+        game_restart()
     }
 
     if global.console_active exit

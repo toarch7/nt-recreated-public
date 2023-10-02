@@ -167,12 +167,7 @@ if !instance_exists(CoopController) && !UberCont.opt_console {
 	}
 	
     if level_end {
-		with Player {
-			recontuations --
-			
-			if is_me
-				global.recontuations = recontuations
-		}
+		global.recontinues --
 		
         level_end = 0
         scrGameSave()

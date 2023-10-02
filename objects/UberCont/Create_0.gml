@@ -45,7 +45,8 @@ mainvol = 1
 
 audio_emitter_falloff(mainsound, 100, 300, 1)
 
-playerinstance = new PlayerInstance()
+if !is_struct(playerinstance)
+	playerinstance = new PlayerInstance()
 
 scrInit()
 
@@ -213,7 +214,7 @@ global.time = 0
 
 global.crownpick = 1
 
-global.recontuations = 0
+global.recontinues = 0
 
 if os_type == os_android
 	volqueue = ds_queue_create()

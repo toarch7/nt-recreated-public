@@ -49,7 +49,7 @@ function scrOptionsUpdate() {
         opt_hud = save_get_val_s("visual", "hud", 1)
 		
         opt_controls_scale = save_get_val_s("controls", "scale", 0.5)
-		opt_swapstick = save_get_val_s("controls", "swapstick", 0)
+		opt_wepstick = save_get_val_s("controls", "wepstick", 0)
 		opt_splitfire = save_get_val_s("controls", "splitfire", 0)
 		
         opt_language = save_get_val_s("etc", "language", "null")
@@ -93,8 +93,6 @@ function scrOptionsUpdate() {
 		
 		if !opt_cursorcol
 			opt_cursorcol = c_white
-		
-		print("COLOR", global.player_color, "HP", opt_healthcol, "CROSSHAIR", opt_cursorcol)
 		
         scrLanguageSet(opt_language)
 		
@@ -145,7 +143,8 @@ function scrOptionsUpdate() {
 		
 		scrOptionsLoadKeymaps()
 		
-		playerinstance.update_prefs()
+		if is_struct(playerinstance)
+			playerinstance.update_prefs()
 		
 		try {
 			opt_remote_port = real(opt_remote_port)

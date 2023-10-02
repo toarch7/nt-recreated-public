@@ -42,8 +42,8 @@ function scrSwapWeps() {
         TutCont.doin = 1
     }
 	
-	if instance_exists(SwapstickAttack) && index == global.index {
-		with SwapstickAttack
-			scrSwapstickUpdateSprite(other.id)
+	if instance_exists(WepstickAttack) && index == global.index {
+		with WepstickAttack
+			scrWepstickUpdateSprite(other.id)
 	}
 }

@@ -1,4 +1,4 @@
-#macro ATTACK_BUTTON_DEADZONE 0.33
+#macro ATTACK_BUTTON_DEADZONE 0.5
 
 x = view_width + (global.view_width_max - view_width) / 2 - 64
 y = view_height - 64

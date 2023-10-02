@@ -12,7 +12,7 @@ if !isset("appeary") {
     }
 }
 
-draw_set_color(c_dkgray)
+draw_set_color(c_uidark)
 
 draw_sprite_ext(sprite_index, crown, x, y + appeary - sign(selected), 1, 1, 0, qm(selected, c_white, c_gray), 1)
 

@@ -8,7 +8,8 @@ function load_custom_area_colors(path) {
         for (var i = 0; i < array_length(keys); i++) {
             global.customareacolors[$ keys[i]] = data[$ keys[i]]
         }
-    } catch (e) {
+    }
+	catch (e) {
         printc("[!!!] Failed to load custom background colors: " + e.message, c_red)
         status = 1
     }

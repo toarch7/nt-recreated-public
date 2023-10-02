@@ -11,7 +11,7 @@ if !instance_exists(GameCont) && file_exists("gamestate.dat") {
 
     instance_create(0, 0, MusCont)
 
-    UberCont.continued_run = 1
+    UberCont.continued_run = true
 
     if !scrGameLoad() {
         file_delete("gamestate.dat")
@@ -20,12 +20,11 @@ if !instance_exists(GameCont) && file_exists("gamestate.dat") {
         exit
     }
 	
+	global.recontinues ++
+	print("Recontinued", global.recontinues, "times")
+	
 	with Player {
-		recontuations ++
-		
-		print("Recontinued", recontuations, "times")
-		
-		if recontuations > 1 {
+		if global.recontinues > 1 {
 			headloses += 2
 			max_hp -= 2
 		}
@@ -38,6 +37,9 @@ if !instance_exists(GameCont) && file_exists("gamestate.dat") {
     random_set_seed(global.seed)
 
     scrVolume()
+	
+	print("Saving", global.recontinues)
+	scrGameSave()
 }
 
 if UberCont.want_menu2 {

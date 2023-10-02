@@ -7,5 +7,9 @@ if net_event(ev_mouse, ev_mouse_enter)
 if is_keyboard() {
     LevCont.splat = 1
     snd_play(sndHover)
-    selected = 1
+	
+	with SkillIcon
+		selected = false
+	
+    selected = true
 }

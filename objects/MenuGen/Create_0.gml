@@ -46,8 +46,6 @@ repeat 4 {
     instance_create(choose(0, 32, 64, 96, 128), choose(0, 32, 64, 96, 128), FloorMaker)
 }
 
-print(instance_number(FloorMaker), instance_number(Floor))
-
 alarm[1] = 2
 
 instance_create(0, 0, BackCont)

@@ -63,8 +63,8 @@ if KeyCont.press_pick[p] && other.id == instance_nearest(x, y, WepPickup) {
 	}
 	
 	if index == global.index {
-		with SwapstickAttack
-			scrSwapstickUpdateSprite(other.id)
+		with WepstickAttack
+			scrWepstickUpdateSprite(other.id)
 	}
 }
 
