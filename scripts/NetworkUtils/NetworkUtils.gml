@@ -59,9 +59,9 @@ function network_lock() {
 	lockstep_stop = true
 	draw_enable_drawevent(false)
 	
-	instance_deactivate_all(false)
-	instance_activate_object(CoopController)
-	instance_activate_object(UberCont)
+	//instance_deactivate_all(false)
+	//instance_activate_object(CoopController)
+	//instance_activate_object(UberCont)
 }
 
 function network_unlock() {
@@ -71,6 +71,7 @@ function network_unlock() {
 	lockstep_stop = false
 	draw_enable_drawevent(true)
 	
+	/*
 	if UberCont.paused {
 		instance_activate_object(BackCont)
 		instance_activate_object(GameCont)
@@ -79,7 +80,7 @@ function network_unlock() {
 		instance_activate_object(MusCont)
 		instance_activate_object(Console)
 	}
-	else instance_activate_all()
+	else instance_activate_all()*/
 }
 
 function network_is_locked() {

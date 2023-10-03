@@ -21,8 +21,10 @@ if instance_exists(Menu) {
 }
 else {
     draw_set_halign(fa_center)
-    draw_text_nt(view_width / 2, 12, loc(string_upper(viewtype))) //loc_sfmt("@wYOUR % RUN ENTIRES", loc(string_upper(viewtype))))
+    draw_set_valign(fa_middle)
+    draw_bigname(view_width / 2, 18, loc(string_upper(viewtype)), c_uigray)
     draw_set_halign(fa_left)
+    draw_set_valign(fa_top)
 }
 
 draw_set_halign(fa_left)
@@ -39,7 +41,10 @@ if !array_length(keys) {
 }
 
 var avg = kills / len
+
+draw_set_font(fntSmall)
 draw_text_nt(38, 14, loc("@dAVERAGE SCORE") + ":#" + string(avg))
+draw_set_font(fntM1)
 
 draw_set_color(c_white)
 
@@ -73,13 +78,20 @@ if maxpages > 1 {
     }
 
     if touchr or gamepad_button_check_pressed(0, gp_padr) or keyboard_check_pressed(vk_right) {
-        page++snd_play(sndClick)
+        page ++
+		
+		snd_play(sndClick)
+		time = 0
 
         if page >= maxpages {
             page = 0
         }
-    } else if touchl or gamepad_button_check_pressed(0, gp_padl) or keyboard_check_pressed(vk_left) {
-        page--snd_play(sndClick)
+    }
+	else if touchl or gamepad_button_check_pressed(0, gp_padl) or keyboard_check_pressed(vk_left) {
+        page --
+		
+		snd_play(sndClick)
+		time = 0
 
         if page < 0 {
             page = maxpages - 1
@@ -98,69 +110,82 @@ if maxpg > len {
     maxpg = len
 }
 
+time ++
+
 for (var i = pg; i < maxpg; i++) {
-    var run_id = keys[i]
-    var run = typehistory[$ run_id]
+    var anim = clamp(time - (i - pg), 0, 3)
+	
+	var run_id = keys[i],
+		run = typehistory[$ run_id]
+	
     var str = month_name_short(run.month) + ". " + scrAddZero(run.day, 1) + " " + area_get_name(run.area, run.subarea, run.loop)
+	
+    draw_sprite(sprDailySplat, anim, view_width / 2, yy + 3)
+	
+	if anim >= 1
+		draw_text_nt(27, yy + 2 - 6 * (array_length(run.skills) > 0), str)
+	
+	if anim >= 2 {
+	    if run.killed_by != mskNone && is_string(run.killed_by) {
+	        var spr = asset_get_index(run.killed_by)
+			
+	        if !sprite_exists(spr)
+				spr = mskNone
+			
+	        if spr == sprNothing2Idle {
+	            spr = sprKilledByThrone2
+	        }
+			else if spr == sprNothingMiddle {
+	            spr = sprKilledByThrone
+	        }
+			
+	        draw_sprite_ext(spr, frame, view_width - 96, yy + 3, 0.7, 0.7, 0, c_white, 1)
+	    }
+		
+	    draw_sprite(sprKillsIcon, 0, view_width - 72, yy + 3)
+	    draw_text_nt(view_width - 56, yy, string(run.kills))
+		
+	    if run.bwep {
+	        draw_sprite(wep_sprt[run.bwep], 0, view_width / 2 + 10 + 4, yy + 4)
+	        draw_sprite(wep_sprt[run.wep], 0, view_width / 2 + 10 - 4, yy - 2)
+			
+	        draw_sprite_ext(sprLoadoutCrown, run.crown, view_width / 2 - 4, yy, 0.5, 0.5, 0, c_white, 1)
+	    }
+		else {
+	        draw_sprite_ext(sprLoadoutCrown, run.crown, view_width / 2 - 4, yy + 3, 0.5, 0.5, 0, c_white, 1)
+	        draw_sprite(wep_sprt[run.wep], 0, view_width / 2 + 10, yy + 3)
+	    }
+		
+	    draw_sprite(run.skin ? sprPlayerMapIconSkin : sprPlayerMapIcon, run.race, 14, yy + 4)
+	}
+	
+	if anim >= 3 {
+	    var skills = run.skills,
+			len = array_length(skills),
+			px = 0
+		
+	    if run.ultra {
+	        draw_sprite_ext(sprUltraIconHUD, ultr_indx[run.race, run.ultra], 30, yy + 10, 0.5, 0.5, 0, c_white, 1)
+	        px ++
+	    }
+		
+	    for (var j = 0; j < len; j++) {
+	        var skill = skills[j]
+			
+	        draw_sprite_ext(sprSkillIconHUD, skill, 30 + px * 8, yy + 10, 0.5, 0.5, 0, c_white, 1)
+			
+	        if skill == run.patienceskill {
+	            draw_sprite_ext(sprPatienceIconHUD, 0, 30 + px * 8, yy + 10, 0.5, 0.5, 0, c_white, 1)
+	        }
+			
+	        px ++
+	    }
+	}
 
-    draw_sprite(sprDailySplat, 3, view_width / 2, yy + 3)
+    yy += 30 - (3 - anim)
 
-    draw_text_nt(27, yy + 2 - 6 * (array_length(run.skills) > 0), str)
-
-    if run.killed_by != mskNone && is_string(run.killed_by) {
-        var spr = asset_get_index(run.killed_by)
-        if !sprite_exists(spr) spr = mskNone
-
-        if spr == sprNothing2Idle {
-            spr = sprKilledByThrone2
-        } else if spr == sprNothingMiddle {
-            spr = sprKilledByThrone
-        }
-
-        draw_sprite_ext(spr, frame, view_width - 96, yy + 3, 0.7, 0.7, 0, c_white, 1)
-    }
-
-    draw_sprite(sprKillsIcon, 0, view_width - 72, yy + 3)
-    draw_text_nt(view_width - 56, yy, string(run.kills))
-
-    if run.bwep {
-        draw_sprite(wep_sprt[run.bwep], 0, view_width / 2 + 10 + 4, yy + 4)
-        draw_sprite(wep_sprt[run.wep], 0, view_width / 2 + 10 - 4, yy - 2)
-
-        draw_sprite_ext(sprLoadoutCrown, run.crown, view_width / 2 - 4, yy, 0.5, 0.5, 0, c_white, 1)
-    } else {
-        draw_sprite_ext(sprLoadoutCrown, run.crown, view_width / 2 - 4, yy + 3, 0.5, 0.5, 0, c_white, 1)
-        draw_sprite(wep_sprt[run.wep], 0, view_width / 2 + 10, yy + 3)
-    }
-
-    draw_sprite(run.skin ? sprPlayerMapIconSkin : sprPlayerMapIcon, run.race, 14, yy + 4)
-
-    var skills = run.skills
-    var len = array_length(skills)
-    var px = 0
-
-    if run.ultra {
-        draw_sprite_ext(sprUltraIconHUD, ultr_indx[run.race, run.ultra], 30, yy + 10, 0.5, 0.5, 0, c_white, 1)
-        px++
-    }
-
-    for (var j = 0; j < len; j++) {
-        var skill = skills[j]
-
-        draw_sprite_ext(sprSkillIconHUD, skill, 30 + px * 8, yy + 10, 0.5, 0.5, 0, c_white, 1)
-
-        if skill == run.patienceskill {
-            draw_sprite_ext(sprPatienceIconHUD, 0, 30 + px * 8, yy + 10, 0.5, 0.5, 0, c_white, 1)
-        }
-
-        px++
-    }
-
-    yy += 30
-
-    if yy >= view_height - 32 {
+    if yy >= view_height - 32
         break
-    }
 }
 
 frame += 0.4

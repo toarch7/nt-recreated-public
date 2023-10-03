@@ -66,7 +66,7 @@ KeyCont.press_paus[index] =
 if global.console_active
 	KeyCont.press_paus[index] = 0
 
-if want_restart {
+if want_restart && !lockstep_stop {
 	want_restart --
 	
 	KeyCont.press_paus[index] = false
@@ -112,7 +112,7 @@ if want_restart {
 	}
 }
 
-if want_menu {
+if want_menu && !lockstep_stop {
 	want_menu --
 	
 	KeyCont.press_paus[index] = false

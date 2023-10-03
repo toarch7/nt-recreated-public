@@ -110,8 +110,10 @@ daily_seed = -1
 daily_request = tb_api("daily")
 weekly_request = tb_api("weekly")
 
-can_daily = 0
-can_weekly = 0
+can_daily = false
+can_weekly = false
+
+leaderboards_allowed = false
 
 splat_index = 0
 
@@ -226,3 +228,8 @@ resourcepack_temp_cleanup()
 load_resourcepacks()
 
 show_crosshair = true
+
+
+
+
+//open_two_windows(true)

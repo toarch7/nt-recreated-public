@@ -45,10 +45,8 @@ switch image_index {
 						available = 0
 					
 	                if image_index == 1 && !UberCont.can_daily
-						available = 0
-					
-	                if image_index == 2 && !UberCont.can_weekly
-						available = 0
+					or image_index == 2 && !UberCont.can_weekly
+						image_blend = c_uidark
 				}
             }
 

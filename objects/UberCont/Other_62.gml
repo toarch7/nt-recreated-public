@@ -1,8 +1,7 @@
 if async_load[? "id"] == update_request {
     if !is_undefined(async_load[? "result"]) && async_load[? "result"] != -1 {
         var result = json_decode(async_load[? "result"])
-        show_debug_message(async_load[? "result"])
-
+		
         if !is_undefined(result) {
 			var vname = BETA ? "versionBeta": "version"
 			
@@ -10,6 +9,8 @@ if async_load[? "id"] == update_request {
                 update_message = show_question_async("Update " + string(result[? "versionName"]) + " b" + string(result[? vname]) + " available.\n Open download page?")
             }
             
+			leaderboards_allowed = result[? "leaderboardsAllowed"] ?? false
+			
             update_info = result
         }
     }

@@ -49,8 +49,13 @@ if UberCont.want_menu2 {
         }
     }
 	else {
-        instance_create(x, y, DailyList)
-        instance_create(x, y, BackButton)
+        with instance_create(x, y, Leaderboards) {
+			if UberCont.show_results == 2
+				type = "weekly"
+		}
+        
+		instance_create(x, y, BackButton)
+		
         UberCont.show_results = 0
     }
 	
@@ -61,7 +66,8 @@ if UberCont.want_menu2 {
         instance_destroy()
     }
 
-    if !instance_exists(Cinematic) instance_create(x, y, SpiralCont)
+    if !instance_exists(Cinematic)
+		instance_create(x, y, SpiralCont)
 
     instance_create(x, y, MusCont)
 

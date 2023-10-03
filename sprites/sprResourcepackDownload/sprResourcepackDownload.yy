@@ -69,8 +69,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "ntm",
-    "path": "ntm.yyp",
+    "name": "WickedStuff",
+    "path": "folders/Objects/WickedStuff.yy",
   },
   "resourceVersion": "1.0",
   "name": "sprResourcepackDownload",

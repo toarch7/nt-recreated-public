@@ -299,7 +299,7 @@
 	"NO AMMO DROPS#MORE WEAPON DROPS": "ОТСУТСТВИЕ @wПАТРОН@s#БОЛЬШЕ @wОРУЖИЯ@s ВЫПАДАЕТ",
 	"TAKE @wDAMAGE@s AND GAIN @gRADS@s#WHEN OPENING @wCHESTS@s": "ПОЛУЧИТЕ @wУРОН@s И @gРАДИАЦИЮ@s#ПРИ ОТКРЫТИИ @wСУНДУКОВ@s",
 	"MORE @wENEMIES@s#FEWER @gRADS@s": "БОЛЬШЕ @wВРАГОВ@s#МЕНЬШЕ @gРАДИАЦИИ@s",
-	"FREE @gMUTATION@s#NARROW FUTURE": "БЕСПЛАТНАЯ @gМУТАЦИЯ@s#ОГРАНИЧЕННОЕ БУДУШЕЕ",
+	"FREE @gMUTATION@s#NARROW FUTURE": "БЕСПЛАТНАЯ @gМУТАЦИЯ@s#ОГРАНИЧЕННОЕ БУДУЩЕЕ",
 	"@yAMMO@s CHESTS ONLY": "ТОЛЬКО СУНДУКИ С @yПАТРОНАМИ@s",
 	"START @wAREAS@s AT 1 @rHP@s#CHANCE @wENEMIES@s HAVE 1 @rHP@s": "НАЧИНАЙТЕ УРОВНИ С 1 @rХП@s#НЕКОТОРЫЕ ВРАГИ ИМЕЮТ 1 @rХП@s",
 	"A LOT MORE @pCURSED CHESTS@s": "НАМНОГО БОЛЬШЕ @pПРОКЛЯТЫХ СУНДУКОВ@s",
@@ -505,6 +505,7 @@
 	"@wNOTHING TO SHOW... YET": "@wЗДЕСЬ ПУСТО... ПОКА ЧТО",
 	"@dAVERAGE SCORE": "@dСРЕДНИЙ СЧЕТ",
 	"RESULTS": "РЕЗУЛЬТАТЫ",
+	"LEADERBOARDS": "ЛИДЕРЫ",
 	
 	"ACHIEVEMENTS": "ДОСТИЖЕНИЯ",
 	

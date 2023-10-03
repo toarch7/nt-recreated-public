@@ -1,16 +1,30 @@
 /// @description click!
 
-if instance_exists(PlayButton) or instance_exists(DailyList) {
+if instance_exists(Leaderboards) && !instance_exists(DailyList) {
+    with Leaderboards
+		instance_destroy()
+	
+    with instance_create(0, 0, MainMenuButton)
+		event_user(0)
+	
+    instance_destroy()
+}
+else if instance_exists(PlayButton) or instance_exists(DailyList) {
     with PlayButton
 		instance_destroy()
-
-    with instance_create(0, 0, Logo)
-		event_perform(ev_alarm, 1)
-
+	
     with DailyList
 		instance_destroy()
-
-    instance_destroy()
+	
+	if !instance_exists(Leaderboards) {
+	    with instance_create(0, 0, Logo)
+			event_perform(ev_alarm, 1)
+		
+		instance_destroy()
+	}
+	
+	with Leaderboards
+		display = 0
 }
 
 if instance_exists(Credits) && !instance_exists(GameCont) {

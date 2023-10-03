@@ -41,11 +41,11 @@ if !loaded {
 		scrDrawAlignDefault()
 		
 		gpu_set_fog(true, c_black, 0, 0)
-		draw_sprite(sprSaving, time, gui_w / 2 + 1, gui_h / 2 + 9)
-		draw_sprite(sprSaving, time, gui_w / 2    , gui_h / 2 + 9)
+		draw_sprite(sprDailyLoad, time, gui_w / 2 + 1, gui_h / 2 + 9)
+		draw_sprite(sprDailyLoad, time, gui_w / 2    , gui_h / 2 + 9)
 		gpu_set_fog(false, 0, 0, 0)
 		
-		draw_sprite(sprSaving, time, gui_w / 2, gui_h / 2 + 8)
+		draw_sprite(sprDailyLoad, time, gui_w / 2, gui_h / 2 + 8)
 	}
 		
 	exit

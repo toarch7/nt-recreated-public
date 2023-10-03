@@ -8,6 +8,9 @@ var col = (available ? (hover ? c_white : c_uigray) : c_uidark),
 	name = scrMenuButtonName(),
 	offset = appear + hover
 
+if image_blend != c_white
+	col = image_blend
+
 y -= offset
 
 if !loc_exists(name) {

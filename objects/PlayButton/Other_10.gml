@@ -1,8 +1,5 @@
 /// @description click
 
-if !available
-	exit
-
 global.index = 0
 global.hardmode = 0
 global.coop = 0
@@ -18,8 +15,11 @@ with UberCont {
 switch image_index {
     case 1:
         if !UberCont.can_daily {
-            instance_create(0, 0, DailyList)
-            snd_play(sndMenuScores)
+            with instance_create(0, 0, Leaderboards)
+				type = "daily"
+			
+			//instance_create(0, 0, DailyList)
+			snd_play(sndMenuScores)
 			
             with object_index
                 instance_destroy()
@@ -34,7 +34,10 @@ switch image_index {
 
     case 2:
 		if !UberCont.can_weekly {
-            instance_create(0, 0, DailyList)
+            with instance_create(0, 0, Leaderboards)
+				type = "weekly"
+			
+			//instance_create(0, 0, DailyList)
             snd_play(sndMenuScores)
 			
             with object_index

@@ -7,7 +7,8 @@ if GameCont.area == 7 && GameCont.subarea == 3 text = loc("YOU ALMOST REACHED TH
 if GameCont.win {
     if instance_exists(Cinematic) {
         text = loc("YOU HAVE REACHED THE NUCLEAR THRONE")
-    } else if GameCont.area == 106 && GameCont.subarea == 3 {
+    }
+	else if GameCont.area == 106 && GameCont.subarea == 3 {
         text = loc("THE STRUGGLE IS OVER")
     }
 }
@@ -22,14 +23,14 @@ repeat 2 {
     p ++
 }
 
-if UberCont.daily_run && !UberCont.weekly_run {
-    with instance_find(PauseButton, 0) {
+if UberCont.daily_run {
+    with instance_find(PauseButton, 0)
         sprite_index = sprGameOverResults
-    }
-
-    with instance_find(PauseButton, 1) {
-        image_index = 0
-    }
+	
+	if !UberCont.weekly_run {
+	    with instance_find(PauseButton, 1)
+	        instance_destroy()
+	}
 }
 
 kills = GameCont.kills

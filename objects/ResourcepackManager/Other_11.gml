@@ -160,7 +160,7 @@ for(var i = start; i < count; i ++) {
 			0, c_white, 1)
 	}
 	else {
-		draw_sprite(sprSaving, (get_timer() / 33333) * 0.5, xx + 18, _y + 18)
+		draw_sprite(sprDailyLoad, (get_timer() / 33333) * 0.5, xx + 18, _y + 18)
 	}
 	
 	draw_sprite_ext(avatar, 0, dx - 12, _y + 20, 12 / sprite_get_width(avatar), 12 / sprite_get_height(avatar), 0, c_white, 1)

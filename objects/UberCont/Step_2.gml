@@ -12,3 +12,28 @@
 }*/
 
 
+if lockstep_stop {
+	with all {
+		if speed > 0 {
+			x -= hspeed
+			y -= vspeed
+			
+			speed += friction
+		}
+		
+		if image_speed > 0 && image_number > 1
+			image_index -= image_speed
+		
+		for(var i = 0; i < 12; i ++) {
+			if alarm[i] > 0
+				alarm[i] ++
+		}
+	}
+}
+
+if keyboard_check_pressed(ord("P")) {
+	if network_is_locked() {
+		network_unlock()
+	}
+	else network_lock()
+}

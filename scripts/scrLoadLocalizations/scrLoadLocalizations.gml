@@ -17,6 +17,8 @@ function scrLoadLocalizations() {
             _data += file_text_read_string(_file)
             file_text_readln(_file)
         }
+		
+		localizations_list = { en: {} }
 
         try {
             localizations_list[$ string_replace(_find, ".loc", "")] = json_parse(_data);
@@ -24,6 +26,8 @@ function scrLoadLocalizations() {
 		catch (e) {
             show_debug_message([_find, e.message])
         }
+		
+		print("Languages", struct_keys(localizations_list))
 
         file_text_close(_file)
 

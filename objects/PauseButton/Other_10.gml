@@ -1,4 +1,4 @@
-if net_event(ev_mouse, ev_left_press)
+if net_event(ev_other, ev_user0)
 	exit
 
 if instance_exists(MenuOptions)
@@ -11,7 +11,7 @@ if sprite_index == sprGameOverResults {
 		instance_destroy()
 	
     UberCont.want_menu = 2
-    UberCont.show_results = 1
+    UberCont.show_results = 1 + UberCont.weekly_run
 	
 	draw_enable_drawevent(false)
 }
