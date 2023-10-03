@@ -124,7 +124,7 @@ function scrSendDailyData() {
 
             random_set_seed(global.seed)
 
-            var footerstring = "(v" + string(GAME_BUILD) + ") " + save_get_val("general", "uid", "-1")
+            var footerstring = "(v" + string(GAME_BUILD) + ") " + save_get_val("general", "uid", "-1") + ";" + base_convert(global.seed, 10, 16)
 
             if avg <= 0 {
                 footerstring = "(no score improvement)"
