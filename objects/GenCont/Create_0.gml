@@ -105,7 +105,7 @@ if GameCont.area == 0 {
     }
 }
 
-safespawn = 0
+safespawn = true
 safedir = irandom(3) * 90
 safefloors = 0
 
@@ -140,9 +140,9 @@ with instance_create(10000, 10000, FloorMaker) {
     goal = other.goal
 }
 
-if GameCont.loops {
-    safespawn = 1
-}
+//if GameCont.loops {
+//    safespawn = 1
+//}
 
 if GameCont.area == 0 or GameCont.area == 107 or GameCont.area == 100 or (GameCont.area == 7 && GameCont.subarea == 3) or (GameCont.area == 106 && GameCont.subarea == 3) {
     safespawn = 0
@@ -155,4 +155,4 @@ if skill_get(25) && !GameCont.patient {
 }
 
 with MusCont
-	alarm[11] = 2
+	alarm[11] = 1
