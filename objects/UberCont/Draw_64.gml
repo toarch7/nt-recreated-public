@@ -92,7 +92,7 @@ if paused && !want_pause && !instance_exists(CoopController) {
 }
 
 
-if MultiplayerConfig {
+if MultiplayerConfig && false {
 	draw_set_font(fntSmall)
 	draw_set_halign(fa_left)
 	

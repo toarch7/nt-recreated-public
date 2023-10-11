@@ -8,7 +8,7 @@ inputs = [
 event_stack = ds_stack_create()
 event_run = 0
 
-delay = 30
+delay = 4
 netwait = 0
 netwait_max = 900
 
@@ -221,3 +221,5 @@ event_handlers[$ "console"] = function(_index, _data) {
 }
 
 #endregion
+
+depth = UberCont.depth - 1

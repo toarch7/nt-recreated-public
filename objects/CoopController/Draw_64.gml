@@ -1,37 +1,55 @@
 draw_set_color(c_white)
 
-/*
 var str = "seed: " +string(random_get_seed()) + "\n" +
 		  "frame: " + string(frame) + "\n" +
 		  "net(" + string(delay) + "): " + string(netframe) + "\n"
 
-str += last_frame + "\n" + string(floor(netframe / 10) * 10) + "\n"
+// str += last_frame + "\n" + string(floor(netframe / 10) * 10) + "\n"
 
 str += string(inputs[0][$ netframe]) + "\n"
 str += string(inputs[1][$ netframe]) + "\n"
 
-str += "pings:" + string(ping_count)
+// str += "pings:" + string(ping_count)
 
 draw_set_font(fntSmall)
 draw_set_halign(fa_left)
 
-draw_text(72, 24, str)
+draw_text_shadow(72, 24, str)
+
+scrDrawAlignCenter()
+
+with Player {
+	var _x = bbox_center_x - view_xview,
+		_y = bbox_bottom - view_yview + 4
+	
+	draw_text_shadow(_x, _y, string(round(x)) + " " + string(round(y)))
+}
+
+scrDrawAlignDefault()
 
 draw_set_font(fntM1)
-*/
+
 
 if !instance_exists(CoopMenu) {
     draw_set_color(c_gray)
     draw_set_font(fntSmall)
     draw_set_halign(fa_left)
 	
+	var w = 28
+	
+	draw_sprite_stretched_ext(sprAchievementSplash, 0, 0, 0, w, 8, c_black, 0.8)
+	
+	scrDrawAlignCenter()
+	
     if !global.is_server {
 		var host = playerinstance_get(0)
 		
 		if host != undefined
-			draw_text_shadow(4, 2, string(round(host.latency)) + "ms")
+			draw_text_shadow(w / 2, 4, string(round(host.latency)) + "ms")
     }
-	else draw_text_shadow(4, 2, string(array_length(sockets) + 1) + "/4")
+	else draw_text_shadow(w / 2, 4, string(array_length(sockets) + 1) + "/4")
+	
+	scrDrawAlignDefault()
 
     draw_set_font(fntM1)
     draw_set_color(c_white)

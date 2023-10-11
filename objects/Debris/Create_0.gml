@@ -1,11 +1,3 @@
-if UberCont.opt_prtcls {
-    visible = 0
-    size = 1
-    time = 10
-
-    exit
-}
-
 var area;
 
 if !instance_exists(Menu) && instance_exists(GameCont) {

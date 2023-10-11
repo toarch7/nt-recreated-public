@@ -64,7 +64,7 @@ else {
 var stop = 0,
 	playercount = array_length(playerindexes) + 1
 
-//
+if netframe >= delay {
 	for(var i = 0; i < playercount; i ++) {
 		var _input = inputs[i][$ netframe]
 		
@@ -76,6 +76,8 @@ var stop = 0,
 			
 			stop = true; break
 		}
+		
+		random_set_seed(global.seed + netframe)
 		
 		var _inputs = _input[0],
 			_dir_move = _input[1],
@@ -118,7 +120,7 @@ var stop = 0,
 			global.index = index
 		}
 	}
-//
+}
 
 if netwait >= 900 { // connection terminated
 	if network_is_locked()

@@ -173,14 +173,6 @@ audio_emitter_gain(mainsound, UberCont.opt_sndvol * mainvol)
 
 camera_set_view_pos(view_camera, view_xview, view_yview)
 
-if opt_prtcls {
-    with Smoke instance_destroy()
-    with Dust instance_destroy()
-    with Drip instance_destroy()
-    with Debris instance_destroy()
-    with RainSplash instance_destroy()
-}
-
 global.time ++
 
 if paused && !global.console_active && instance_exists(PauseButton) {
@@ -212,6 +204,29 @@ if opt_gamepad
 
 if !paused && !want_pause && !instance_exists(PauseButton)
 	scrHandleInputsGeneral(global.index)
+
+if lockstep_stop {
+	with all {
+		if speed > 0 {
+			x -= hspeed
+			y -= vspeed
+			
+			speed += friction
+		}
+		
+		if image_speed > 0 && image_number > 1
+			image_index -= image_speed
+		
+		for(var i = 0; i < 12; i ++) {
+			if alarm[i] > 0
+				alarm[i] ++
+		}
+		
+		if instance_is(self, Player) {
+			print(x, y, speed, direction, hspeed, vspeed, image_index, image_number)
+		}
+	}
+}
 
 if instance_exists(CoopController) {
 	with CoopController
