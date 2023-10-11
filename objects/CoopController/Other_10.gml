@@ -3,7 +3,7 @@
 if index == -1 or instance_exists(CoopMenu)
     exit
 
-if frame < netframe + delay {
+if frame <= netframe + max(1, delay) {
 	var _inputs = scrInputBitmask(),
 		
 		_dir_move = KeyCont.dir_move[index],
@@ -63,8 +63,6 @@ else {
 
 var stop = 0,
 	playercount = array_length(playerindexes) + 1
-
-random_set_seed(global.seed + netframe)
 
 //
 	for(var i = 0; i < playercount; i ++) {
@@ -163,9 +161,37 @@ else {
 	netframe ++
 }
 
-if network_is_locked() {
-	with all {
-		x -= hspeed
-		y -= vspeed
+if global.is_server && BruteSync {
+	var _seed = global.seed + netframe
+	
+	window_set_caption(_seed)
+	
+	random_set_seed(_seed)
+	
+	packet_begin(event.brutesync)
+	
+	packet_write(buffer_u32, _seed + 1)
+	
+	packet_write(buffer_u32, instance_number(hitme))
+	
+	with hitme {
+		packet_write(buffer_u32, net_index)
+		
+		packet_write(buffer_f32, x)
+		packet_write(buffer_f32, y)
+		
+		packet_write(buffer_f16, speed)
+		packet_write(buffer_f16, direction)
+		
+		for(var i = 0; i < 12; i ++) {
+			if alarm[i] > 0 {
+				packet_write(buffer_u8, i)
+				packet_write(buffer_u16, alarm[i])
+			}
+		}
+		
+		packet_write(buffer_u8, 0xA0)
 	}
+	
+	packet_send()
 }

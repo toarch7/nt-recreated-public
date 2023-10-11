@@ -59,8 +59,11 @@ try {
 			}
 			
 			var user_signature = buffer_read(data, buffer_string),
-				pinst = json_parse(buffer_read(data, buffer_string)),
-				freeid = network_get_free_id()
+				pinst_data = json_parse(buffer_read(data, buffer_string)),
+				freeid = network_get_free_id(),
+				pinst = new PlayerInstance(freeid)
+			
+			playerinstance_set_struct(pinst, pinst_data, true)
 			
 			array_push(playerindexes, freeid)
 			
@@ -97,8 +100,11 @@ try {
 			if _user_signature == scrGetUid() { // is that for me??
 				var _playerinstances = json_parse(buffer_read(data, buffer_string))
 				
-				playerinstances = _playerinstances
-				playerinstance = _pinst
+				playerinstances = {}
+				
+				playerinstances_set_struct_list(_playerinstances)
+				
+				playerinstance = playerinstance_get()
 				
 	            global.index = _index
 	            index = _index
@@ -159,6 +165,8 @@ try {
 			if global.is_server
 				break;
 			
+			started = true
+			
             var _indexes = buffer_read(data, buffer_string)
             playerindexes = json_parse(_indexes)
 			
@@ -176,6 +184,8 @@ try {
 			
             global.seed = buffer_read(data, buffer_u32)
             random_set_seed(global.seed)
+			
+			global.time = 0
 			
             for (var i = 0; i <= 12; i ++) {
                 global.rng_state[i] = global.seed
@@ -299,6 +309,43 @@ try {
 			if inst != undefined
 				inst.latency = _latency
 				
+			break
+		
+		case event.brutesync:
+			if !BruteSync
+				break
+			
+			var _seed = buffer_read(data, buffer_u32)
+			
+			window_set_caption(_seed)
+			
+			random_set_seed(_seed)
+			
+			var _hitmes = buffer_read(data, buffer_u32)
+			
+			repeat _hitmes {
+				var _net_index = buffer_read(data, buffer_u32)
+				
+				with hitme if net_index == _net_index {
+					x = buffer_read(data, buffer_f32)
+					y = buffer_read(data, buffer_f32)
+					
+					speed = buffer_read(data, buffer_f16)
+					direction = buffer_read(data, buffer_f16)
+					
+					for(var i = 0; i < 12; i ++) {
+						var num = buffer_read(data, buffer_u8)
+						
+						if num == 0xA0
+							break
+						
+						alarm[num] = buffer_read(data, buffer_u16)
+					}
+					
+					break
+				}
+			}
+			
 			break
     }
 	

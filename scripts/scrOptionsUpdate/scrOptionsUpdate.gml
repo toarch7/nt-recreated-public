@@ -143,6 +143,8 @@ function scrOptionsUpdate() {
 		
 		scrOptionsLoadKeymaps()
 		
+		print("OPTIONS UPDATE PLAYERINSTANCE", playerinstance)
+		
 		if is_struct(playerinstance)
 			playerinstance.update_prefs()
 		

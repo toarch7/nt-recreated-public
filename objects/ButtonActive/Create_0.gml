@@ -12,3 +12,5 @@ button_name = "ABILTIY BUTTON"
 time = 0
 
 do_thing = 0
+
+rogue_touch = -1

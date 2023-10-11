@@ -1,6 +1,6 @@
 #macro GAME_VERSION "b2.6.1"
 #macro GAME_BUILD 2610
-#macro BETA 1
+#macro BETA true
 
 
 opt_fulscrn = 1
@@ -230,6 +230,5 @@ load_resourcepacks()
 show_crosshair = true
 
 
-
-
-//open_two_windows(true)
+if MultiplayerConfig
+	open_two_windows(true)

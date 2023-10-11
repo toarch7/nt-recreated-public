@@ -34,26 +34,11 @@ function scrGameLoad() {
 
         delete a
 		
-		var pinstlist = json_parse(buffer_read(b, buffer_string)),
-			pinstkeys = struct_keys(pinstlist)
+		var pinstlist = json_parse(buffer_read(b, buffer_string))
 		
         playerinstances = {} // playerinstances
 		
-		for(var i = 0; i < array_length(pinstkeys); i ++) {
-			var p = pinstlist[$ pinstkeys[i]],
-				pinst = new PlayerInstance(p.index)
-			
-			var keys = struct_keys(p)
-			
-			for(var k = 0; k < array_length(keys); k ++) {
-				var key = keys[k],
-					val = p[$ key]
-				
-				pinst[$ key] = val
-			}
-			
-			playerinstances[$ p.index] = pinst
-		}
+		playerinstances_set_struct_list(pinstlist)
 		
 		playerinstance = playerinstance_get()
 		

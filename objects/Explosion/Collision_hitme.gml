@@ -1,7 +1,8 @@
 if lockstep_stop
 	exit
 
-var immune
+var immune,
+	damage = dmg
 
 if other.team != team && !other.inframes {
     with other {
@@ -14,25 +15,27 @@ if other.team != team && !other.inframes {
 
         if !(other.sprite_index == spr_hurt && immune) {
             snd_play_hit(snd_hurt, .2)
-
+			
             if immune {
                 if hp > 4 {
                     if (hp - 5) < 4 {
                         hp = 4
-                    } else {
-                        hp -= 5
+                    }
+					else {
+                        hp -= damage
                     }
                 }
-
+				
                 smoke = 30
-            } else {
+            }
+			else {
                 if object_index == Player {
                     last_hit = other.hit_id
                 }
 
-                hp -= 5
+                hp -= damage
             }
-
+			
             sprite_index = spr_hurt
             motion_add(point_direction(other.x, other.y, x, y), 3)
             if speed > 16 speed = 16 image_index = 0 BackCont.shake += 1

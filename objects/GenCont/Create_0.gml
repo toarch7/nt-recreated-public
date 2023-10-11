@@ -124,13 +124,20 @@ splat = 0
 
 alarm[5] = 600
 
-with instance_create(10000, 10000, FloorMaker) {
-    goal = other.goal
+if instance_exists(CoopController) {
+	goal = 0
+	
+	with Floor
+		instance_destroy()
+	
+	alarm[0] = 1
+	
+	exit
 }
 
-textgenerating = loc("GENERATING...") + " "
-if GameCont.race == 6 && GameCont.level >= 10 {
-    textgenerating = loc("VERIFYING...") + " "
+
+with instance_create(10000, 10000, FloorMaker) {
+    goal = other.goal
 }
 
 if GameCont.loops {

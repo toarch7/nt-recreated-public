@@ -7,6 +7,7 @@
 #macro c_uidark    0x333333
 
 #macro INT_MAX 2147483647
+#macro UINT_MAX 4294967295
 
 #macro view_width global.g_view_width
 #macro view_height global.g_view_height
@@ -26,6 +27,9 @@
 
 #macro x_rel_view (x - view_xview)
 #macro y_rel_view (y - view_yview)
+
+#macro MultiplayerConfig false
+#macro MultiplayerTesting:MultiplayerConfig true
 
 // Multiplayer PlayerInstance index
 global.index = 0
@@ -452,7 +456,7 @@ function scrSetKeyboardInputs(index = 0) {
 			
 		    KeyCont.dir_fire[index] = dir
 			
-			KeyCont.dis_fire[index] = min(1, point_distance(x, y, mouse_x, mouse_y) / view_width)
+			KeyCont.dis_fire[index] = min(1, (point_distance(x, y, mouse_x, mouse_y) / view_width) * 6)
 		}
 	}
 }

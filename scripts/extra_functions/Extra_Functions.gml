@@ -11,23 +11,25 @@ function array_indexof(array, value) {
     return -1
 }
 
-function struct_clone(_struct, _undefineds = 1) {
+function struct_clone(_struct, _keep_undefineds = true) {
     var names = variable_struct_get_names(_struct)
+	
     var struct = {}
 
     for (var i = 0; i < array_length(names); i++) {
         var name = names[i],
             val = _struct[$ name]
-        if !_undefineds && is_undefined(val) continue
+		
+        if !_keep_undefineds && is_undefined(val)
+			continue
+		
         struct[$ name] = val
     }
 
     return struct
 }
 
-function foreach(_data, _func) {
-    var _type = argument_count > 2 ? argument[2] : undefined;
-
+function foreach(_data, _func, _type = undefined) {
     if is_array(_data) {
         for (var __iterator = 0; __iterator < array_length(_data); __iterator++) {
             _func(_data[__iterator], __iterator, _data)
@@ -273,4 +275,27 @@ function array_delete_val(array, value) {
 	}
 	
 	return -1
+}
+
+function struct_trace(struct) {
+	var keys = struct_keys(struct), out = ""
+	
+	for(var i = 0; i < array_length(keys); i ++) {
+		var key = keys[i],
+			val = struct[$ key]
+		
+		if is_method(val) {
+			val = "func()"
+		}
+		else if is_struct(val) {
+			if val != struct {
+				val = "{\n" + string_replace_all(struct_trace(val), "\n", "  \n") + "}"
+			}
+			else val = "{ SELF }"
+		}
+		
+		out += key + ": " + string(val) + "\n"
+	}
+	
+	return out
 }

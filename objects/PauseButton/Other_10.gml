@@ -109,8 +109,12 @@ else switch image_index {
 		
         with PauseButton
 			instance_destroy()
+		
         with BackButton
 			instance_destroy()
+		
+		with MenuOptions
+			event_user(2)
 		
         exit
         break

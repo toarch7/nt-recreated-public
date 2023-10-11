@@ -81,6 +81,8 @@ function scrSpawnPlayers(myIndex = global.index) {
         if pinst[$ "cwep"] == 255 {
             pinst.race = 15
         }
+		
+		KeyCont.activeforever[pinst.index] = false
 
         with scrSpawnPlayer(pinst.index, pinst.race, pinst.skin) {
             is_me = 0
@@ -211,9 +213,40 @@ function playerinstance_reset(index = global.index) {
 	return player
 }
 
+function playerinstance_set_struct(pinst, data, skip_index = false) {
+	var keys = struct_keys(data)
+	
+	for(var k = 0; k < array_length(keys); k ++) {
+		var key = keys[k],
+			val = data[$ key]
+		
+		if key == "index" && skip_index
+			continue
+		
+		pinst[$ key] = val
+	}
+}
+
+function playerinstances_set_struct_list(pinstlist) {
+	var pinstkeys = struct_keys(pinstlist)
+	
+	for(var i = 0; i < array_length(pinstkeys); i ++) {
+		var p = pinstlist[$ pinstkeys[i]],
+			pinst = new PlayerInstance(p.index)
+		
+		print(p.index, "playerinstance data", p)
+		
+		playerinstance_set_struct(pinst, p)
+		
+		print(p.index, "playerinstance written", pinst)
+		
+		playerinstances[$ p.index] = pinst
+	}
+}
+
 function playerinstance_remove(index) {
     playerinstances[$ string(index)] = undefined
-    playerinstances = struct_clone(playerinstances, 0)
+    playerinstances = struct_clone(playerinstances, false)
 
     show_debug_message("Removed playerinstace. list: " + string(playerinstances))
 }

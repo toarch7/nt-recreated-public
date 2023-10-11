@@ -2,6 +2,8 @@
 #macro SWITCH_STATE_ON "ON"
 #macro SWITCH_STATE_OFF "OFF"
 
+netindex_set()
+
 languages = struct_keys(global.localizations_list)
 
 enum OptionCategory {

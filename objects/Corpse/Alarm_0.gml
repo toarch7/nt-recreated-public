@@ -7,9 +7,12 @@ if !instance_exists(Portal) && !instance_exists(GenCont) && !scr_check_enemies()
             if GameCont.area != 107 {
                 if distance_to_object(Floor) > 1 {
                     var flor = instance_nearest(x, y, Floor)
-                    x = flor.x + flor.sprite_width / 2
-                    y = flor.y + flor.sprite_height / 2
-                }
+					
+					if flor {
+	                    x = flor.x + flor.sprite_width / 2
+	                    y = flor.y + flor.sprite_height / 2
+	                }
+				}
 
                 with instance_create(x, y, Portal) {
                     type = 1

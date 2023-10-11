@@ -1,9 +1,11 @@
-if instance_exists(ResourcepackManager) or global.console_active or text_input_element != undefined or erasing_progress
+if net_event(ev_keypress, vk_backspace)
+	exit
+
+if instance_exists(ResourcepackManager) or global.console_active
+or text_input_element != undefined or erasing_progress
 	exit
 
 if !editing_mode {
-	print(text_input_element)
-	
     if category == OptionCategory.Main or (dispose_on_empty && ds_stack_empty(category_stack)) {
         event_user(2)
     }

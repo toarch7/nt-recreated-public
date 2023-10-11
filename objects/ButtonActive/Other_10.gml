@@ -27,7 +27,8 @@ if index != -1 or (do_thing == 1) {
 		or (player.race == 6 && pinst.pref("yv"))
 		or (player.race == 14 && pinst.pref("skeleton"))
 		or (player.race == 7 && pinst.pref("steroids"))
-		or player.race == 11 {
+		or (player.race == 12 && !pinst.pref("rogue"))
+		or (player.race == 11) {
 			forever ^= 1
 			
             KeyCont.activeforever[_index] = forever
@@ -48,14 +49,17 @@ if index != -1 or (do_thing == 1) {
 if forever {
     if player.race == 3
         KeyCont.hold_spec[_index] = true
-
+	
     if player.race == 4
         KeyCont.press_spec[_index] = true
-
+	
     if player.race == 7
         KeyCont.hold_spec[_index] = KeyCont.hold_fire[_index]
-
+	
     if player.race == 11 && KeyCont.hold_fire[_index]
+        KeyCont.hold_spec[_index] = true
+	
+    if player.race == 12
         KeyCont.hold_spec[_index] = true
 	
 	with Player {
@@ -79,6 +83,12 @@ else if (is_mobile() or !(player.race == 7 && pinst.pref("steroids"))) {
     KeyCont.hold_spec[_index] = (do_thing == 2) or (index != -1 && device_mouse_check_button(index, mb_left))
     KeyCont.press_spec[_index] = (do_thing == 1) or (index != -1 && device_mouse_check_button_pressed(index, mb_left))
     KeyCont.release_spec[_index] = (do_thing == -1) or (index != -1 && device_mouse_check_button_released(index, mb_left))
+}
+
+print(rogue_touch, device_mouse_check_button(rogue_touch, mb_left))
+if rogue_touch != -1 && !device_mouse_check_button(rogue_touch, mb_left) {
+	KeyCont.activeforever[global.index] = false
+	rogue_touch = -1
 }
 
 if do_thing {

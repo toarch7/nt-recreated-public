@@ -10,7 +10,7 @@ function makeKeys() {
 	let diff = {};
 	let keys = "";
 	
-	let header = "Can you translate the following text to Ukrainian, while keeping special characters like `@`, `#` and `%` where they should be\n```\n"
+	let header = ""
 	
 	let str = header;
 	

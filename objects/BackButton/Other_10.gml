@@ -1,5 +1,8 @@
 /// @description click!
 
+if net_event(ev_other, ev_user0)
+	exit
+
 if instance_exists(Leaderboards) && !instance_exists(DailyList) {
     with Leaderboards
 		instance_destroy()
@@ -43,7 +46,7 @@ if instance_exists(DailyList) {
     with DailyList
 		instance_destroy()
 }
-else if instance_exists(Menu) {
+else if instance_exists(Menu) && net_isme() {
 	if !Menu.loadout {
 	    with all {
 	        if object_index != MusCont && object_index != UberCont && object_index != Console
@@ -114,7 +117,7 @@ else if instance_exists(ResourcepackManager) {
 	}
 	
 }
-else if instance_exists(MenuOptions) && !(UberCont.opt_gamepad && MenuOptions.editing_mode) {
+else if instance_exists(MenuOptions) && (!(UberCont.opt_gamepad && MenuOptions.editing_mode) or instance_exists(CoopController)) {
     with MenuOptions {
 		back_pressed = true
         event_perform(ev_keypress, vk_backspace)

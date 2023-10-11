@@ -23,3 +23,5 @@ crosshair_x = x
 crosshair_y = y
 
 crosshair_alpha = 0
+
+test_random = 0

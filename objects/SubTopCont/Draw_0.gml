@@ -5,8 +5,8 @@ if instance_exists(GenCont) exit
 
 try {
     if UberCont.opt_bloom {
-        scrDrawBloom()
-    }
+		scrDrawBloom()
+	}
 
     for (i = 0; i < ds_list_size(global.lis_walls_visible); i++) {
         with global.lis_walls_visible[| i]

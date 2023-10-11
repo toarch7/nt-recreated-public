@@ -74,7 +74,7 @@ if loading {
         var d = json_parse(buffer_read(b, buffer_string)) // extra info
         global.hardmode = d.hardmode
 
-        var a = buffer_read(b, buffer_string) // globals (skip)
+        var a = buffer_read(b, buffer_string) // globals (don't need)
         scrGameSaveInfo()
 
         UberCont.daily_run = d.daily
@@ -82,7 +82,7 @@ if loading {
 
         cont = json_parse(buffer_read(b, buffer_string)) // gamecont
 
-        playerinstances = json_parse(buffer_read(b, buffer_string)) // playerinstances duh
+        playerinstances = json_parse(buffer_read(b, buffer_string)) // playerinstances
 
         player = json_parse(buffer_read(b, buffer_string)) // player
 

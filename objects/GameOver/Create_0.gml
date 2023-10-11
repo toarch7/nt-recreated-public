@@ -24,13 +24,15 @@ repeat 2 {
 }
 
 if UberCont.daily_run {
-    with instance_find(PauseButton, 0)
-        sprite_index = sprGameOverResults
+	with instance_find(PauseButton, 1)
+		sprite_index = sprGameOverResults
 	
 	if !UberCont.weekly_run {
-	    with instance_find(PauseButton, 1)
+	    with instance_find(PauseButton, 0)
 	        instance_destroy()
 	}
+	else with instance_find(PauseButton, 0)
+	    image_index = 1
 }
 
 kills = GameCont.kills

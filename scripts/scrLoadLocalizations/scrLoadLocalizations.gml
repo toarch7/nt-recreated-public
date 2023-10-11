@@ -2,7 +2,9 @@ function scrLoadLocalizations() {
     var p = "localizations/",
 		_find = file_find_first(p + "*.loc", 0),
 		failed = ""
-
+	
+	localizations_list = { en: {} }
+	
     while _find != "" {
         if _find == "default.loc" {
 			_find = file_find_next()
@@ -17,8 +19,6 @@ function scrLoadLocalizations() {
             _data += file_text_read_string(_file)
             file_text_readln(_file)
         }
-		
-		localizations_list = { en: {} }
 
         try {
             localizations_list[$ string_replace(_find, ".loc", "")] = json_parse(_data);
@@ -26,13 +26,13 @@ function scrLoadLocalizations() {
 		catch (e) {
             show_debug_message([_find, e.message])
         }
-		
-		print("Languages", struct_keys(localizations_list))
 
         file_text_close(_file)
 
         _find = file_find_next()
     }
+		
+	print("Languages", struct_keys(localizations_list))
 
     file_find_close()
 }

@@ -61,15 +61,10 @@ if global.is_server {
     if mouse_check_button_pressed(mb_left) && point_in_rectangle(mx, my, dx - 48, dy - 12, dx + 48, dy + 12) {
         instance_create(0, 0, GameCont)
 		
-        playerinstance = new PlayerInstance(0)
-		playerinstance.update_prefs()
-		
-        for (var i = 1; i < network_clientcount(); i++) {
-			var p = new PlayerInstance(playerindexes[i])
-        }
-		
         global.seed = randomize()
         random_set_seed(global.seed)
+		
+		global.time = 0
 		
         for (var i = 0; i <= 12; i++) {
 			global.rng_state[i] = global.seed
@@ -87,6 +82,8 @@ if global.is_server {
         with CoopMenu {
             instance_destroy()
         }
+		
+		started = true
 		
         packet_begin(event.start)
         packet_write(buffer_string, json_stringify(playerindexes))

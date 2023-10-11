@@ -20,8 +20,12 @@ if sprite_index == spr_disappear {
             }
 
             var flor = instance_nearest(mouse_x, mouse_y, Floor)
-            x = flor.x + flor.sprite_width / 2
-            y = flor.y + flor.sprite_height / 2
+			
+			if flor {
+	            x = flor.x + flor.sprite_width / 2
+	            y = flor.y + flor.sprite_height / 2
+			}
+			
             xprevious = x
             yprevious = y
         }

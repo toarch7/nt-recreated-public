@@ -26,7 +26,15 @@ else bwepright = right
 
 if bwep != 0 and race != 7 draw_sprite_ext(wep_sprt[bwep], 0, x - right * 2, y, 1, bwepright, 90 + 15 * right, c_silver, 1)
 
-var shielding = race == 2 && KeyCont.hold_spec[index]
+var shielding = false
+
+if race == 2 && instance_exists(CrystalShield) {
+	with CrystalShield {
+		if creator == other.id && sprite_index != spr_disappear {
+			shielding = true; break
+		}
+	}
+}
 
 if wep_type[wep] == 3 && is_me && !shielding && wep != 18 {
     lasx = x
@@ -101,3 +109,10 @@ if instance_exists(GameCont) && GameCont.area == 101 && race != 1 && race != 8
 
 if infammo
     draw_sprite(sprGunWarrant, infammo * 0.4, x, y)
+
+if MultiplayerConfig {
+	draw_text_shadow(x - 32, y - 24, test_random)
+
+	if global.time % 30 == 0
+		test_random = irandom(255)
+}

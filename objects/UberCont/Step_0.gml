@@ -118,7 +118,6 @@ if want_menu && !lockstep_stop {
 	KeyCont.press_paus[index] = false
 	
 	if !want_menu {
-	    //scrSave()
 		instance_activate_all()
 		draw_enable_drawevent(true)
 		
@@ -129,7 +128,7 @@ if want_menu && !lockstep_stop {
 	    file_delete("gamestate.dat")
 	    continued_run = 0
 		
-	    room_restart()
+		room_restart()
 		
 	    want_menu = 0
 	    want_menu2 = 1
@@ -211,13 +210,12 @@ if paused && !global.console_active && instance_exists(PauseButton) {
 if opt_gamepad
 	scrGamepadUIControl()
 
-if !paused && !want_pause && !instance_exists(PauseButton) {
+if !paused && !want_pause && !instance_exists(PauseButton)
 	scrHandleInputsGeneral(global.index)
-	
-	if instance_exists(CoopController) {
-		with CoopController
-			event_user(0)
-	}
+
+if instance_exists(CoopController) {
+	with CoopController
+		event_user(0)
 }
 
 playerinstance = playerinstance_get(index)

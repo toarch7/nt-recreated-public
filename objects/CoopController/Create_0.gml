@@ -1,3 +1,6 @@
+// jsut for testing..
+#macro BruteSync false
+
 inputs = [
 	{}, {}, {}, {}
 ]
@@ -5,7 +8,7 @@ inputs = [
 event_stack = ds_stack_create()
 event_run = 0
 
-delay = 4
+delay = 30
 netwait = 0
 netwait_max = 900
 
@@ -13,6 +16,8 @@ frame = 0 // real inputs (anticipated)
 netframe = 0 // network inputs (synced)
 
 last_frame = "" // last frame w/o inputs (debug)
+
+started = false
 
 global.coop = 1
 
@@ -87,7 +92,9 @@ enum event {
 
     update_playerinstance,
 
-    run_start
+    run_start,
+	
+	brutesync
 }
 
 protowep = 56
@@ -175,7 +182,7 @@ event_handlers[$ "crown"] = function(_index, _data) {
 event_handlers[$ "playerinstance"] = function(_index, _data) {
 	var pinst = _data[2]
 	
-	playerinstances[$ _index] = pinst
+	playerinstance_set_struct(playerinstances[$ _index], pinst, true)
 	
 	if instance_exists(Menu) {
 		var _is_me = net_isme()

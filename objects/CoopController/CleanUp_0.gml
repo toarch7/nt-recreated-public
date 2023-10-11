@@ -1,5 +1,8 @@
 print("COOP CONTROLLER DESTROY (CLEANUP)")
 
+if network_is_locked()
+	network_unlock()
+
 if index != -1 {
 	packet_begin(event.disconnect)
 	packet_write(buffer_u8, global.index)
@@ -31,15 +34,15 @@ with Revive
 	instance_destroy()
 
 with Player {
-	if index == global.index {
-		index = 0
+	if index != global.index {
+		instance_destroy(id, 0)
 	}
-	else instance_destroy(id, 0)
+	else index = 0
 }
 
 with UberCont {
 	global.coop = 0
-	global.is_server = 1
+	global.is_server = true
 	global.index = 0
 	
     playerinstances = {}
@@ -52,9 +55,6 @@ with UberCont {
 }
 
 print("PlayerInstance", playerinstance)
-
-if network_is_locked()
-	network_unlock()
 
 if instance_exists(CoopMenu) {
 	with CoopMenu

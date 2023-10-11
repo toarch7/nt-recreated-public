@@ -9,7 +9,7 @@ for (var i = 0; i <= 4; i++) {
     with instance_create(view_xview + view_width / 2, view_yview + view_height / 2 - ypos + i * 24, MainMenuButton) {
         image_index = i
 		
-		if i == 1 && os_type != os_windows
+		if i == 1 && !MultiplayerConfig
 			available = 0
     }
 }

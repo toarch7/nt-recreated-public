@@ -28,13 +28,15 @@ if point_distance(0, 0, event_data[? "diffX"], event_data[? "diffY"]) > 12 && my
             if rogue_ammo {
 				KeyCont.activeforever[global.index] = true
 				
+				ButtonActive.rogue_touch = touch
+				
                 with instance_create(cx, cy, PortalStrike) {
                     self.touch = touch
                     creator = other.id
 					
 					event_perform(ev_step, 0)
                 }
-
+				
                 rogue_ammo --
             }
 			else if !snd_is_playing(sndPortalStrikeEmpty) {
