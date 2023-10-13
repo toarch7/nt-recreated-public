@@ -26,7 +26,7 @@ if GameCont.crownpoints <= 0 {
     }
 }
 else {
-    txt = "CHOOSE WISELY"
+    txt = loc("CHOOSE WISELY")
     txt2 = ""
 }
 
