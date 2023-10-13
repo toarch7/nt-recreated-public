@@ -59,6 +59,9 @@ function network_lock() {
 	lockstep_stop = true
 	draw_enable_drawevent(false)
 	
+	if instance_exists(CoopController)
+		print("network locked", CoopController.netframe)
+	
 	//instance_deactivate_all(false)
 	//instance_activate_object(CoopController)
 	//instance_activate_object(UberCont)
@@ -70,6 +73,9 @@ function network_unlock() {
 	
 	lockstep_stop = false
 	draw_enable_drawevent(true)
+	
+	if instance_exists(CoopController)
+		print("network unlocked", CoopController.netframe)
 	
 	/*
 	if UberCont.paused {

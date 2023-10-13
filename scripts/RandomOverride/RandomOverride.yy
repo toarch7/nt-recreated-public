@@ -2,11 +2,11 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "general seeding",
-    "path": "folders/Scripts/rng/general seeding.yy",
+    "name": "rng",
+    "path": "folders/Scripts/rng.yy",
   },
   "resourceVersion": "1.0",
-  "name": "rng_next_float",
+  "name": "RandomOverride",
   "tags": [],
   "resourceType": "GMScript",
 }

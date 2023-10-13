@@ -221,10 +221,6 @@ if lockstep_stop {
 			if alarm[i] > 0
 				alarm[i] ++
 		}
-		
-		if instance_is(self, Player) {
-			print(x, y, speed, direction, hspeed, vspeed, image_index, image_number)
-		}
 	}
 }
 

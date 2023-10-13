@@ -61,7 +61,7 @@ else {
 
 // read inputs
 
-var stop = 0,
+var stop = false,
 	playercount = array_length(playerindexes) + 1
 
 if netframe >= delay {
@@ -69,15 +69,13 @@ if netframe >= delay {
 		var _input = inputs[i][$ netframe]
 		
 		// unknown input, enter locked mode
-		if _input == undefined {
+		if _input == undefined or !inputs[i][$ netframe + delay] {
 			last_frame = string(i) + " " + string(netframe)
 			
 			print(index, "Input of", i, "is not known for frame", netframe)
 			
 			stop = true; break
 		}
-		
-		random_set_seed(global.seed + netframe)
 		
 		var _inputs = _input[0],
 			_dir_move = _input[1],
@@ -146,6 +144,8 @@ if netwait >= 900 { // connection terminated
 	
 	exit
 }
+
+global.random_state = global.seed + netframe
 
 if stop {
 	if !network_is_locked()

@@ -2,8 +2,8 @@
   "isDnD": false,
   "isCompatibility": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+    "name": "general seeding",
+    "path": "folders/Scripts/rng/general seeding.yy",
   },
   "resourceVersion": "1.0",
   "name": "rng_next_range",
