@@ -40,6 +40,11 @@ with Player {
 	else index = 0
 }
 
+if instance_exists(GameCont) && GameCont.coopultra {
+	GameCont.coopultra = 0
+	GameCont.ultrapoints ++
+}
+
 with UberCont {
 	global.coop = 0
 	global.is_server = true

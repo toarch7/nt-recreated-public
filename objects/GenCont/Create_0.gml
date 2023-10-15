@@ -125,6 +125,7 @@ splat = 0
 alarm[5] = 600
 
 if instance_exists(CoopController) {
+	// silent world
 	goal = 0
 	
 	with Floor

@@ -5,8 +5,9 @@ function scrSendDailyData() {
 	with UberCont if !weekly_run
 		can_daily = false
 	
-    with Player
-    if is_me {
+    with Player if is_me {
+		#region write run to history
+		
         var d = struct_secure_load(game_directory + "dailyruns.dat")
 
         if is_undefined(d) {
@@ -77,6 +78,8 @@ function scrSendDailyData() {
             struct_secure_save(game_directory + "dailyruns.dat", d)
             struct_secure_save("dailyruns.dat", d)
         }
+		
+		#endregion
 
         var map = ds_map_create();
         map[? "Content-type"] = "application/json";
@@ -96,7 +99,8 @@ function scrSendDailyData() {
             scrSkills()
             scrUltras()
 
-            var mut_list = ""
+            var mut_list = "",
+				runId = base_convert(global.seed, 10, 16)
 
             scrDiscordIcons()
 
@@ -124,7 +128,7 @@ function scrSendDailyData() {
 
             random_set_seed(global.seed)
 
-            var footerstring = "(v" + string(GAME_BUILD) + ") " + save_get_val("general", "uid", "-1") + ";" + base_convert(global.seed, 10, 16)
+            var footerstring = "(v" + string(GAME_BUILD) + ") " + save_get_val("general", "uid", "-1") + ";" + runId
 
             if avg <= 0 {
                 footerstring = "(no score improvement)"
@@ -176,6 +180,37 @@ function scrSendDailyData() {
             if UberCont.weekly_run {
                 hook = URL_WEEKLY_WEBHOOK
             }
+			
+			#region save local entry
+			
+			var _skills = []
+			
+			for(var i = 0; i < GameCont.skills; i ++) {
+				array_push(_skills, GameCont.skills[| i])
+			}
+			
+			var my_entry = {
+				char: GameCont.race,
+				skin: GameCont.bskin,
+				area: GameCont.area,
+				subarea: GameCont.subarea,
+				loops: GameCont.loops,
+				wep: other.wep,
+				bwep: other.bwep,
+				win: GameCont.win,
+				kills: GameCont.kills,
+				ultra: GameCont.ultra,
+				skills: _skills,
+				crown: GameCont.crown,
+				version: UberCont.version,
+				uid: scrGetUid()
+			}
+			
+			my_entry.runId = runId
+			
+			struct_secure_save("local_" + (UberCont.weekly_run ? "weekly" : "daily") + "_entry.dat", my_entry)
+			
+			#endregion
 
             scrHttpRequest(hook, "POST", map, json_stringify(result))
         }

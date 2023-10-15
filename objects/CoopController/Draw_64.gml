@@ -3,6 +3,7 @@ draw_set_color(c_white)
 var str = "seed: " +string(random_get_seed()) + "\n" +
 		  "state: " +string(global.random_state) + "\n" +
 		  "frame: " + string(frame) + "\n" +
+		  "enemies: " + string(instance_number(enemy)) + "\n" +
 		  "net(" + string(delay) + "): " + string(netframe) + "\n"
 
 // str += last_frame + "\n" + string(floor(netframe / 10) * 10) + "\n"

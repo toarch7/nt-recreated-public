@@ -64,12 +64,12 @@ else {
 var stop = false,
 	playercount = array_length(playerindexes) + 1
 
-if netframe >= delay {
+//
 	for(var i = 0; i < playercount; i ++) {
 		var _input = inputs[i][$ netframe]
 		
 		// unknown input, enter locked mode
-		if _input == undefined or !inputs[i][$ netframe + delay] {
+		if _input == undefined or array_length(inputs) < delay {
 			last_frame = string(i) + " " + string(netframe)
 			
 			print(index, "Input of", i, "is not known for frame", netframe)
@@ -118,34 +118,18 @@ if netframe >= delay {
 			global.index = index
 		}
 	}
-}
+	
+	global.random_state = global.seed + netframe
+//
 
 if netwait >= 900 { // connection terminated
 	if network_is_locked()
 		network_unlock()
 	
-	with Player {
-		if is_me {
-			index = 0; continue
-		}
-		
-		instance_destroy(id, 0)
-	}
-	
-	with Revive
-		instance_destroy(id, 0)
-	
-	if GameCont.coopultra {
-		GameCont.coopultra = 0
-		GameCont.ultrapoints ++
-	}
-	
 	instance_destroy()
 	
 	exit
 }
-
-global.random_state = global.seed + netframe
 
 if stop {
 	if !network_is_locked()
@@ -157,8 +141,15 @@ else {
 	if network_is_locked()
 		network_unlock()
 	
-	for(var i = 0; i < 2; i ++)
+	for(var i = 0; i < playercount; i ++)
 		delete inputs[i][$ netframe]
+	
+	if netframe % 30 == 0 {
+		for(var i = 0; i < array_length(inputs); i ++)
+			inputs[i] = struct_clone(inputs[i], false)
+	}
+	
+	netwait = 0
 	
 	netframe ++
 }

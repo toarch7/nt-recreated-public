@@ -23,7 +23,8 @@ if spr_chrg != -1 {
             sprite_index = spr_idle
         }
     }
-} else {
+}
+else {
     if spr_fire != -1 {
         if speed <= 0 {
             if sprite_index != spr_hurt && sprite_index != spr_fire {
