@@ -69,6 +69,9 @@ if UberCont.want_menu2 {
 		
 		instance_create(0, 0, MenuGen)
 		
+		with instance_create(0, 0, SpiralCont)
+			instance_destroy()
+		
 		snd_play(sndMenuCharSelect)
 	}
 	

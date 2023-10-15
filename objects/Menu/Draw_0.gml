@@ -9,6 +9,34 @@ var inst = playerinstance_get(global.index),
 if inst == undefined
 	exit
 
+if global.coop {
+    var picks = struct_keys(playerinstances),
+        n = 0
+	
+    for (var i = array_length(picks) - 1; i >= 0; i--) {
+        var _inst = playerinstance_get(picks[i])
+
+        if _inst.index == global.index or _inst.race == 0
+            continue
+
+        var _prt = _inst.skin ? sprBigPortraitSkin : sprBigPortrait,
+			_ind = _inst.index, px = ports_x[_ind] - n * 24
+		
+        draw_sprite_ext(
+			_prt, _inst.race,
+			
+			view_xview + px + view_width + 16,
+			view_yview + view_height - 24,
+			
+			-1, 1,
+			0, c_gray, 1)
+        
+		ports_x[_ind] = lerp(ports_x[_ind], 0, 0.8)
+
+        n ++
+    }
+}
+
 draw_set_color(c_black)
 draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + widescreen, 0)
 draw_rectangle(view_xview, view_yview + view_height, view_xview + view_width, view_yview + view_height - widescreen - 0.25, 0)

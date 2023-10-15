@@ -286,6 +286,9 @@ with CampChar {
     instance_create(x, y, PortalClear)
 }
 
+if !instance_exists(MusCont)
+	instance_create(0, 0, MusCont)
+
 with MusCont {
     audio_stop_sound(amb)
     amb = custom_sound_check(amb0)

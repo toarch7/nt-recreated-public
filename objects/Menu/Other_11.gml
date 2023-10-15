@@ -10,25 +10,6 @@ var inst = playerinstance_get(global.index),
 if inst == undefined
 	exit
 
-if global.coop {
-    var picks = struct_keys(playerinstances),
-        n = 0
-	
-    for (var i = array_length(picks) - 1; i >= 0; i--) {
-        var _inst = playerinstance_get(picks[i])
-
-        if _inst.index == global.index or _inst.race == 0
-            continue
-
-        var prt = _inst.skin ? sprBigPortraitSkin : sprBigPortrait
-		
-        draw_sprite_ext(prt, _inst.race, ports_x[i] + width + 16 - n * 24, height - 38, - 1, 1, 0, c_gray, 1)
-        ports_x[i] = lerp(ports_x[i], 0, 0.8)
-
-        n ++
-    }
-}
-
 var prt = sprBigPortrait
 
 if inst.skin

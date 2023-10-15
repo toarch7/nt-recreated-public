@@ -2,9 +2,12 @@ max_hp = 1000000
 
 
 spr_idle = sprCampfire
+
 if random(200) < 1 {
     spr_idle = sprCampfireBear
-    MusCont.alarm[6] = 2500
+	
+	with MusCont
+		alarm[6] = 2500
 }
 
 spr_hurt = sprBarrelHurt

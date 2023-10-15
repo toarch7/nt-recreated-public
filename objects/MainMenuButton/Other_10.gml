@@ -126,5 +126,10 @@ switch image_index {
         break
 }
 
+if !instance_exists(Player) {
+	playerinstance.race = 0
+	playerinstance.skin = 0
+}
+
 with UberCont
 	gamepad_sel = 0
