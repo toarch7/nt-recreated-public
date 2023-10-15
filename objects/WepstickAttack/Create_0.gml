@@ -13,4 +13,4 @@ function scrWepstickUpdateSprite(plr) {
 	
 }
 
-rad *= 0.75
+rad *= 0.8

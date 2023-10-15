@@ -21,6 +21,8 @@ items = []
 
 my_entry = undefined
 
+local_entry = undefined
+
 last_min = 0
 last_max = 0
 

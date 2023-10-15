@@ -109,10 +109,3 @@ if instance_exists(GameCont) && GameCont.area == 101 && race != 1 && race != 8
 
 if infammo
     draw_sprite(sprGunWarrant, infammo * 0.4, x, y)
-
-if MultiplayerConfig {
-	draw_text_shadow(x - 32, y - 24, test_random)
-
-	if global.time % 30 == 0
-		test_random = irandom(255)
-}

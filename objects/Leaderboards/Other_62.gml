@@ -22,14 +22,10 @@ if async_load[? "id"] == req {
 			array_push(items, item)
 		}
 		
-		if keyboard_check(ord(1))
-			my_entry.kills *= 10
-		
-		if keyboard_check(ord(2))
-			my_entry.kills *= 0
-		
-		if keyboard_check(ord(3))
-			my_entry.kills *= 1000
+		if my_entry == undefined && local_entry != undefined {
+			array_push(items, local_entry)
+			my_entry = local_entry
+		}
 		
 		array_sort(items, function(a, b) {
 			return sign(b.kills - a.kills)
