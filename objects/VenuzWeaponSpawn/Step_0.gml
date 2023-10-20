@@ -9,5 +9,5 @@ with instance_create(x, y, WepPickup) {
     ammo = 50
     type = wep_type[wep]
     sprite_index = wep_sprt[wep]
-    motion_add(random(360), 10)
+    motion_add(random_angle, 10)
 }

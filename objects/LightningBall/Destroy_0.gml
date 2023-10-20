@@ -1,12 +1,12 @@
 snd_stop(snd)
 snd_play_hit_big(sndLightningCannonEnd, 0.3)
-ang = random(360)
+ang = random_angle
 
 instance_create(x, y, PortalClear)
 
 repeat(9) {
     with(instance_create(x, y, Lightning)) {
-        image_angle = random(360)
+        image_angle = random_angle
         hit_id = other.hit_id
         team = other.team
         ammo = 10 + random(10)

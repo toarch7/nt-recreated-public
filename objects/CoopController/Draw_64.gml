@@ -3,7 +3,8 @@ draw_set_color(c_white)
 var str = "seed: " +string(random_get_seed()) + "\n" +
 		  "state: " +string(global.random_state) + "\n" +
 		  "frame: " + string(frame) + "\n" +
-		  "enemies: " + string(instance_number(enemy)) + "\n" +
+		  //"enemies: " + string(instance_number(enemy)) + "\n" +
+		  "checksum: " + string(checksum) + "\n" +
 		  "net(" + string(delay) + "): " + string(netframe) + "\n"
 
 // str += last_frame + "\n" + string(floor(netframe / 10) * 10) + "\n"
@@ -17,6 +18,12 @@ draw_set_font(fntSmall)
 draw_set_halign(fa_left)
 
 draw_text_shadow(72, 24, str)
+
+if desynced {
+	draw_set_color(c_red)
+	draw_text_shadow(view_width / 2, 24, "DESYNCED!")
+	draw_set_color(c_white)
+}
 
 scrDrawAlignCenter()
 
@@ -83,6 +90,7 @@ if global.is_server {
 		
         global.seed = randomize()
         random_set_seed(global.seed)
+		global.random_state = global.seed
 		
 		global.time = 0
 		
@@ -111,6 +119,8 @@ if global.is_server {
         packet_send()
 		
 		snd_play(sndPortalOld)
+		
+		network_lock()
 		
 		//if network_clientcount() > 0
 		//	network_lock()

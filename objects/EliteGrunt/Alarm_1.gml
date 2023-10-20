@@ -41,7 +41,7 @@ if instance_exists(target) {
             if freeze < 40 alarm[1] += random(30)
         }
     } else if (random(4) < 1) {
-        gunangle = random(360)
+        gunangle = random_angle
         walk = 20 + random(10)
         motion_add(gunangle, 0.4)
 
@@ -64,7 +64,7 @@ if instance_exists(target) {
         }
     }
 } else if random(10) < 1 && !roll {
-    gunangle = random(360)
+    gunangle = random_angle
     walk = 20 + random(10)
     motion_add(gunangle, 0.4)
 

@@ -6,7 +6,7 @@ target = instance_nearest(x, y, Player)
 if instance_exists(target) {
 	direction = point_direction(x, y, target.x, target.y)
 }
-else direction = random(360)
+else direction = random_angle
 
 bounces = 0
 image_speed = 0.4

@@ -362,7 +362,7 @@ function scrPowers() {
                         sprite_index = sprHorrorBullet2
                     }
 
-                    var dir = random(360)
+                    var dir = random_angle
                     x += lengthdir_x(irandom(2 + other.horrortime), dir)
                     y += lengthdir_y(irandom(2 + other.horrortime), dir)
 
@@ -445,7 +445,7 @@ function scrPowers() {
             with instance_create(x, y, BigDogMissile) {
                 team = other.team
                 creator = other.id
-                motion_add(random(360), 2)
+                motion_add(random_angle, 2)
                 move_contact_solid(direction, 14)
             }
         }
@@ -484,7 +484,7 @@ function scrPowers() {
 				
                 repeat 3 {
                     with instance_create(x, y, BloodStreak) {
-                        motion_add(random(360), 2)
+                        motion_add(random_angle, 2)
                         image_angle = direction
                     }
                 }
@@ -512,7 +512,7 @@ function scrMeltingCorpseExplosion() {
     instance_create(x, y, MeltSplat)
     
     if skill_get(5) {
-        ang = random(360)
+        ang = random_angle
 		
 		for(var i = 0; i <= 360; i += 120) {
 			instance_create(x + lengthdir_x(24, ang + i), y + lengthdir_y(24, ang + i), MeatExplosion)
@@ -520,7 +520,7 @@ function scrMeltingCorpseExplosion() {
     }
     
 	if size >= 2 {
-		var ang = random(360)
+		var ang = random_angle
 		
 		for(var i = 0; i <= 360; i += 120) {
 			instance_create(x + lengthdir_x(24, ang + i), y + lengthdir_y(24, ang + i), MeatExplosion)

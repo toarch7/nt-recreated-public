@@ -171,7 +171,7 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
 
                 repeat(12) {
                     with instance_create(x, y, BloodStreak) {
-                        motion_add(random(360), 2 + random(3))
+                        motion_add(random_angle, 2 + random(3))
                         image_angle = direction
                     }
                 }

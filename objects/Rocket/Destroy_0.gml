@@ -4,7 +4,7 @@ snd_play(sndExplosionL)
 
 instance_create(x, y, Explosion)
 
-dir = random(360)
+dir = random_angle
 
 repeat 3 {
     with instance_create(x + lengthdir_x(16, dir), y + lengthdir_y(16, dir), SmallExplosion) {

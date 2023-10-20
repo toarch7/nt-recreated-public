@@ -29,10 +29,10 @@ function scrOptionsLoadKeymaps() {
 		var key = keys[i],
 			control = Key[$ key]
 		
-		control[0] = save_get_val_s("keyboard", key, control[0])
+		control[0] = save_get_option("keyboard", key, control[0])
 		
 		if array_length(control) > 1 {
-			control[1] = save_get_val_s("gamepad", key, control[1])
+			control[1] = save_get_option("gamepad", key, control[1])
 		}
 		
 		Key[$ key] = control
@@ -46,10 +46,10 @@ function scrOptionsSaveKeymaps() {
 		var key = keys[i],
 			control = Key[$ key]
 		
-		save_set_val("keyboard", key, control[0])
+		save_set_value("keyboard", key, control[0])
 		
 		if array_length(control) > 1 {
-			save_set_val("gamepad", key, control[1])
+			save_set_value("gamepad", key, control[1])
 		}
 	}
 }

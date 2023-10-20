@@ -24,3 +24,6 @@ if index != -1 {
     if device_mouse_check_button_released(index, mb_left)
 		index = -1
 }
+
+if UberCont.opt_hiddensticks
+	image_alpha = lerp(image_alpha, (index != -1) * 0.2, 0.4)

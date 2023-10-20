@@ -17,7 +17,7 @@ snd_dead = sndSnowBotDead
 //behavior
 ammo = 10
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 80
 
 spr_shadow = shd24

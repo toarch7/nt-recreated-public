@@ -4,7 +4,7 @@ function scrRavenLift() {
     if nofly <= 0 {
         repeat 6 {
             with instance_create(x + random(16) - 8, y + random(16), Dust) {
-                motion_add(random(360), 3 + random(1))
+                motion_add(random_angle, 3 + random(1))
             }
         }
 

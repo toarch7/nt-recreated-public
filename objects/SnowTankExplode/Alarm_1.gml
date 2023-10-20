@@ -18,5 +18,5 @@ instance_destroy()
 
 repeat 5 {
     with instance_create(x, y, GroundFlame)
-    move_contact_solid(random(360), 8 + random(16))
+    move_contact_solid(random_angle, 8 + random(16))
 }

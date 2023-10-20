@@ -43,7 +43,7 @@ if global.is_server {
 
     broadcast_buffer = buffer_create(24, buffer_grow, 1)
     buffer_write(broadcast_buffer, buffer_u8, event.broadcast)
-    buffer_write(broadcast_buffer, buffer_string, string_copy(save_get_val("etc", "name", "username"), 1, 10))
+    buffer_write(broadcast_buffer, buffer_string, string_copy(save_get_value("etc", "name", "username"), 1, 10))
 
     global.index = 0
     index = 0
@@ -67,6 +67,9 @@ sockets = []
 socketindexes = {}
 playerindexes = []
 
+
+checksum = ""
+desynced = false
 
 
 enum event {

@@ -8,7 +8,7 @@ if pos == 4
 	alarm[0] = 45
 
 if pos > 4 && !instance_exists(Portal) {
-	save_set_val("game", "tutorial", 0)
+	save_set_value("game", "tutorial", 0)
 	instance_create(10016, 10016, Portal)
 }
 
@@ -35,9 +35,9 @@ if pos == 1 {
 				continue
 			
 		    with instance_create(bbox_center_x, bbox_center_y, WeaponChest) {
-				var ang = random(360)
+				var ang = random_angle
 				
-				move_contact_solid(random(360), 32 + random(72))
+				move_contact_solid(random_angle, 32 + random(72))
 				
 			    repeat 20 {
 			        with instance_create(x, y, Dust)

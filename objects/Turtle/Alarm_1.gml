@@ -12,7 +12,7 @@ if instance_exists(target) {
         else alarm[1] /= 2
     } else {
         //CANT SEE
-        direction = random(360)
+        direction = random_angle
 
         if random(4) < 1 walk = 50
         else alarm[1] /= 2

@@ -3,7 +3,7 @@
 if async_load[? "type"] != "unzip"
 	exit
 
-var packdir = string_replace_all(async_load[? "entry"], "\\/", "/")
+var packdir = string_replace_all(async_load[? "entry"], "\\/", "/") + "/"
 
 if clicked_item != undefined {
 	var item = json_parse(json_stringify(clicked_item))

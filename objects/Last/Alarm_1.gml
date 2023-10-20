@@ -24,7 +24,7 @@ if ((target) && instance_exists(target)) {
         alarm[2] = 8
     }
 } else if (random(5) < 1) {
-    motion_add(random(360), 0.4)
+    motion_add(random_angle, 0.4)
     walk = (10 + random(10))
     alarm[1] = ((walk + 10) + random(30))
     if (hspeed > 0) right = 1

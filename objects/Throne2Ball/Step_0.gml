@@ -20,7 +20,7 @@ if (timeout > 15) {
     dir = instance_nearest(x, y, Player)
     angle = ((point_direction(x, y, dir.x, dir.y) + random(60)) - 30)
     with(instance_create(x, y, IDPDPortalCharge)) {
-        move_contact_solid(random(360), (16 + random(32)))
+        move_contact_solid(random_angle, (16 + random(32)))
         sprite_index = sprBeamParticles
         alarm[0] = 10
         motion_add(point_direction(x, y, xstart, ystart), (point_distance(x, y, xstart, ystart) / 20))

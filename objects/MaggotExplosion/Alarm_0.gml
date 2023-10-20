@@ -1,4 +1,4 @@
-var ang = random(360)
+var ang = random_angle
 
 repeat 6 {
     with instance_create(x, y, Maggot) {

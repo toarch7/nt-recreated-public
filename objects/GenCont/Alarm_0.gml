@@ -45,7 +45,7 @@ if instance_exists(Player) {
 			
             mask_index = mskWepPickup
 			
-            motion_add(random(360), 1.5 + random(1))
+            motion_add(random_angle, 1.5 + random(1))
         }
     }
 }

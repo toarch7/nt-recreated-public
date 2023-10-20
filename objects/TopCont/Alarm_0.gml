@@ -9,4 +9,4 @@ if !instance_exists(Player) && UberCont.daily_run {
 
 alarm[0] = 30
 
-crosshair = save_get_val("visual", "crosshair", 0)
+crosshair = save_get_value("visual", "crosshair", 0)

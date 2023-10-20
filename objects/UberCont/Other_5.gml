@@ -1,5 +1,5 @@
-save_set_val("other", "fullscreen", window_get_fullscreen())
-save_set_val("data", "tot_time", tot_time)
+save_set_value("other", "fullscreen", window_get_fullscreen())
+save_set_value("data", "tot_time", tot_time)
 
 KeyCont.players = array_length(struct_keys(playerinstances))
 

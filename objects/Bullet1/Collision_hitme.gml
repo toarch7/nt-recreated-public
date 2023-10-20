@@ -30,7 +30,7 @@ if other.team != team && other.hp > 0 {
             }
 
             with instance_create(x, y, Shell) {
-                image_angle = random(360)
+                image_angle = random_angle
                 motion_add(image_angle, 1 + random(1))
             }
 

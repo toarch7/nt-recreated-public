@@ -9,7 +9,7 @@ BackCont.shake += 2
 snd_play_hit_big(sndDogGuardianLand, 0.2)
 instance_create(x, y, PortalClear)
 
-ang = random(360)
+ang = random_angle
 
 repeat 12 {
     with instance_create(x, y + 10, Dust) {

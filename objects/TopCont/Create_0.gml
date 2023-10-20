@@ -19,7 +19,7 @@ if darkness {
 }
 
 col = merge_color(c_ltgray, c_white, 0.7)
-crosshair = save_get_val("visual", "crosshair", 0)
+crosshair = save_get_value("visual", "crosshair", 0)
 
 gameovertime = 0
 wave = 0

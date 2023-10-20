@@ -137,8 +137,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "ntm",
-    "path": "ntm.yyp",
+    "name": "other",
+    "path": "folders/Sprites/UIs/other.yy",
   },
   "resourceVersion": "1.0",
   "name": "sprDailyLoad",

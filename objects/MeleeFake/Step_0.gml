@@ -23,7 +23,7 @@ if instance_exists(target) {
 
         //behavior
         walk = 0
-        gunangle = random(360)
+        gunangle = random_angle
         alarm[1] = 90 + random(90)
         wepangle = choose(-140, 140)
         wepflip = 1
@@ -62,7 +62,7 @@ if instance_number(enemy) = 0 or hp < max_hp {
 
     //behavior
     walk = 0
-    gunangle = random(360)
+    gunangle = random_angle
     alarm[1] = 90 + random(90)
     wepangle = choose(-140, 140)
     wepflip = 1

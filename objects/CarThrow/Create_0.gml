@@ -16,4 +16,4 @@ event_inherited()
 
 snd_hurt = sndHitMetal
 
-image_angle = random(360)
+image_angle = random_angle

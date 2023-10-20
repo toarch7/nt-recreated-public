@@ -18,7 +18,7 @@ if GameCont.area == 101 {
     snd_dead = sndOasisDeath
 }
 
-move_contact_solid(random(360), random(12))
+move_contact_solid(random_angle, random(12))
 
 //behavior
 walk = 0

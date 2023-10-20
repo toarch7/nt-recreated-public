@@ -85,7 +85,15 @@ for(var i = start; i < count; i ++) {
 	}
 	else avatar = mskNone
 	
-	draw_text_shadow(xx + 8 + offset, _y + 8, meta.name)
+	var name = meta.name
+	
+	if !browsing && !item[$ "active"]
+		name = "(" + loc("DISABLED") + ") " + name
+	
+	if string_length(name) >= 23
+		name = string_copy(name, 1, 23) + "..."
+	
+	draw_text_shadow(xx + 8 + offset, _y + 8, name)
 	
 	draw_set_color(c_white)
 	

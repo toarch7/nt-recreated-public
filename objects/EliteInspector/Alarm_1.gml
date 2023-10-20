@@ -34,7 +34,7 @@ if instance_exists(target) {
             alarm[1] /= 2
         }
     } else if (random(3) < 2) {
-        gunangle = random(360)
+        gunangle = random_angle
         walk = 20 + random(10)
         motion_add(gunangle, 0.4)
 
@@ -51,7 +51,7 @@ if instance_exists(target) {
         }
     }
 } else if random(10) < 1 {
-    gunangle = random(360)
+    gunangle = random_angle
     walk = 20 + random(10)
     motion_add(gunangle, 0.4)
 

@@ -3,10 +3,10 @@ image_speed = 0.4
 
 repeat(10) {
     with instance_create(x, y, Smoke)
-    motion_add(random(360), 1 + random(2))
+    motion_add(random_angle, 1 + random(2))
 }
 
-ang = random(360)
+ang = random_angle
 repeat(20) {
     with instance_create(x, y, Dust)
     motion_add(other.ang, 6)

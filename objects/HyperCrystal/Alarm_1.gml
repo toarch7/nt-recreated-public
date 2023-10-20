@@ -48,6 +48,6 @@ if ((target >= Player) && instance_exists(target)) {
         }
     }
 } else if (random(10) < 1) {
-    motion_add(random(360), 0.4)
+    motion_add(random_angle, 0.4)
     alarm[1] = (10 + random(30))
 }

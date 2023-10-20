@@ -86,7 +86,7 @@ for (var i = 0; i < array_length(allchars); i++) {
                 x = xstart
                 y = ystart
 
-                move_contact_solid(random(360), 32 + random(32) + random(64) * random(1))
+                move_contact_solid(random_angle, 32 + random(32) + random(64) * random(1))
 
                 x = round(x)
                 y = round(y)
@@ -218,12 +218,15 @@ if UberCont.cgot[15] {
         spr_from = sprMutant15Idle
         spr_slct = sprMutant15Idle
         race = 15
+		
+		direction = random(360)
     }
 
     with instance_create(0, 0, CharSelect) {
         num = 15
 
-        image_index = i++pos = image_index
+        image_index = i ++
+		pos = image_index
     }
 }
 

@@ -1,7 +1,9 @@
-function scrCreateMobileControls(){
+function scrCreateMobileControls() {
+	if UberCont.opt_splitfire
+		instance_create(0, 0, ButtonAttack)
+	
 	instance_create(0, 0, ButtonAct)
 	instance_create(0, 0, ButtonActive)
-	
 	
 	if UberCont.opt_wepstick {
 		with instance_create(0, 0, WepstickAttack)
@@ -33,7 +35,4 @@ function scrCreateMobileControls(){
 	}
 	
 	instance_create(0, 0, JoystickMove)
-	
-	if UberCont.opt_splitfire
-		instance_create(0, 0, ButtonAttack)
 }

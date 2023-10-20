@@ -13,11 +13,11 @@ snd_dead = sndFreakPopoDead
 snd_mele = sndFreakMelee
 
 alarm[1] = (20 + random(10))
-walkdir = random(360)
+walkdir = random_angle
 walk = 0
 ammo = 0
 wkick = 0
-gunangle = random(360)
+gunangle = random_angle
 snd_play_hit_big(sndFreakPopoEnter, 0.3)
 instance_create(x, y, PortalClear)
 

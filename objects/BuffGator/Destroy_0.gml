@@ -1,5 +1,5 @@
 scrDrop(32, 0)
-ang = random(360)
+ang = random_angle
 repeat(18) {
     with instance_create(x, y, Shell) {
         sprite_index = sprShotShell

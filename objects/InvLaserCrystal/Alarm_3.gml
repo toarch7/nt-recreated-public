@@ -1,4 +1,4 @@
-var _dir = random(360)
+var _dir = random_angle
 var _dis = random(128)
 
 var X = x + lengthdir_x(_dis, _dir)

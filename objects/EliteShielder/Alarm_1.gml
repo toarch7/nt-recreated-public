@@ -27,7 +27,7 @@ if instance_exists(target) {
             else direction = target_direction + 180 + random_range(-45, 45)
         }
     } else if random(3) < 1 {
-        gunangle = random(360)
+        gunangle = random_angle
         walk = 20 + random(10)
         motion_add(gunangle, 0.4)
 
@@ -41,7 +41,7 @@ if instance_exists(target) {
         speed = 0
         walk = 0
     } else if random(10) < 1 && roll == 0 {
-        gunangle = random(360)
+        gunangle = random_angle
         motion_add(gunangle, 0.4)
         walk = 20 + random(10)
         alarm[1] = walk + 10 + random(30)

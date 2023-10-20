@@ -1,2 +1,2 @@
 image_speed = 0.4
-motion_add(random(360), 2)
+motion_add(random_angle, 2)

@@ -26,9 +26,9 @@ right = 1
 scrTarget()
 side = choose(1, - 1)
 shots = 0
-walkdir = random(360)
-aimdir = random(360)
-direction = random(360)
+walkdir = random_angle
+aimdir = random_angle
+direction = random_angle
 alarm[0] = 1
 alarm[1] = 90
 with(MusCont)

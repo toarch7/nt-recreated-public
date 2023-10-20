@@ -32,7 +32,7 @@ else {
 
 y += appear
 
-if image_index == 5 && !instance_exists(CoopController) && !save_get_val("etc", "saving_tip", 0) {
+if image_index == 5 && !instance_exists(CoopController) && !save_get_value("etc", "saving_tip", 0) {
     draw_set_valign(fa_center)
     draw_set_halign(fa_center)
 

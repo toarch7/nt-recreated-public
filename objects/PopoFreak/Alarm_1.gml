@@ -13,10 +13,10 @@ if (target > Player) {
         }
     } else {
         if (random(4) < 1) walk = 20
-        motion_add(random(360), 3)
+        motion_add(random_angle, 3)
     }
 } else {
     if (random(4) < 1) walk = 20
-    motion_add(random(360), 3)
+    motion_add(random_angle, 3)
 }
 walkdir = direction

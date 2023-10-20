@@ -45,7 +45,13 @@ if text_input_element != undefined {
 			text_input_shake = 0
 	}
 	
+	if opt.key == "etc_name"
+		draw_set_font(fontConsole)
+	
 	draw_text_shadow(drawx, drawy, loc(string(val)) + text_input_cursor)
+	
+	if opt.key == "etc_name"
+		draw_set_font(fntM1)
 	
 	if keyboard_string != val {
 		text_input_cursor = "|"
@@ -76,6 +82,8 @@ if text_input_element != undefined {
 		}
 		else opt.value = opt.previous
 		
+		self.category_set(category, false)
+		
 		text_input_element = undefined
 		
 		back_pressed = false
@@ -99,7 +107,7 @@ if rp_warning {
 
     // resourcepack warning
 	draw_set_font(fntSmall)
-    draw_text_nt(view_width / 2, view_height / 2 + disclaimer_pop - 16, loc("@sRESOURCEPACKS ARE ONLY UNIQUE TO THIS RECREATION.#THEY ARE MADE BY COMMUNITY ONLY TO MAKE THE GAME#LOOK FRESH IF YOU'VE GOT BORED.##USING RESOURCEPACKS WASN'T INTENDED BY CREATORS,#SO IT MAY AFFECT YOUR EXPERIENCE."))
+    draw_text_nt(view_width / 2, view_height / 2 + disclaimer_pop - 16, loc("@sRESOURCEPACKS ARE ONLY UNIQUE TO THIS RECREATION.#THESE ARE COLLECTION OF CUSTOM SPRITES, SOUNDS AND LANGUAGES#MADE BY COMMUNITY TO ADD NEW COLORS TO YOUR GAME.##THIS MAY AFFECT YOUR GAMING EXPERIENCE#IN A NOT INTENDED WAY."))
     draw_set_font(fntM1)
 
     if rp_warning < 90 {
@@ -111,7 +119,7 @@ if rp_warning {
 
     if mouse_ui_clicked() && rp_warning >= 90 && point_in_circle(mx, my, view_width / 2, view_height / 2, 16) {
         snd_play(sndClickBack)
-        save_set_val("etc", "rp_warning", 1)
+        save_set_value("etc", "rp_warning", 1)
         rp_warning = 0
     }
 
@@ -177,7 +185,7 @@ if erasing_progress {
                     }
                 })
 				
-                save_set_val("etc", "rp_warning", 0)
+                save_set_value("etc", "rp_warning", 0)
 				
                 scrOptionsUpdate()
 				

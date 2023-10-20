@@ -22,5 +22,5 @@ repeat 20 {
 if !instance_exists(BigGenerator) && !instance_exists(BigGeneratorInactive) alarm[1] = 60
 else {
     instance_create(x, y + 8, SitDown)
-    save_set_val("cgot", "12", 1)
+    save_set_value("cgot", "12", 1)
 }

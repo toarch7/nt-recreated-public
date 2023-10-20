@@ -184,6 +184,7 @@ try {
 			
             global.seed = buffer_read(data, buffer_u32)
             random_set_seed(global.seed)
+			global.random_state = global.seed
 			
 			global.time = 0
 			
@@ -198,9 +199,6 @@ try {
 			
             instance_create(0, 0, MenuGen)
 			
-            with FloorMaker instance_destroy()
-            with ChestOpen instance_destroy()
-			
             with CoopMenu {
                 server = -1
 				
@@ -208,6 +206,8 @@ try {
             }
 			
 			snd_play(sndPortalOld)
+			
+			network_lock()
 			
             break
 		
@@ -244,9 +244,10 @@ try {
 				_moving = buffer_read(data, buffer_f16),
 				_dir_fire = buffer_read(data, buffer_f16),
 				_dis_fire = buffer_read(data, buffer_f16),
+				_checksum = buffer_read(data, buffer_string),
 				_event = buffer_read(data, buffer_string)
 			
-			inputs[_index][$ _frame] = [ _inputs, _dir_move, _moving, _dir_fire, _dis_fire, _event ]
+			inputs[_index][$ _frame] = [ _inputs, _dir_move, _moving, _dir_fire, _dis_fire, _checksum, _event ]
 			
 			break
 		

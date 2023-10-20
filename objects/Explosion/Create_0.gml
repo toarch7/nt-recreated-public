@@ -11,10 +11,10 @@ if object_index == SmallExplosion c = 8
 
 repeat(c / 2) {
     with instance_create(x, y, Smoke)
-    motion_add(random(360), 2 + random(3))
+    motion_add(random_angle, 2 + random(3))
 }
 
-ang = random(360)
+ang = random_angle
 
 repeat(c) {
     with instance_create(x, y, Dust)
@@ -27,7 +27,7 @@ team = -1
 
 if instance_exists(Player) && GameCont.crown == 2 && (object_index == Explosion or object_index == GreenExplosion) {
     repeat 3 {
-        dir = random(360)
+        dir = random_angle
         with instance_create(x + lengthdir_x(12, dir), y + lengthdir_y(12, dir), SmallExplosion) {
             hit_id = other.hit_id
             team = other.team

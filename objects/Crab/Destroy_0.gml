@@ -2,7 +2,7 @@ scrDrop(30, 0)
 
 event_inherited()
 
-dir = random(360)
+dir = random_angle
 
 repeat 3 {
     with instance_create(x, y, AcidStreak) {

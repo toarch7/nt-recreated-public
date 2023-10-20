@@ -15,7 +15,7 @@ snd_dead = sndFlyDead
 
 //behavior
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 ammo = 3
 fire = 10
 alarm[1] = 50 + random(10)

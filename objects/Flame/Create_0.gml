@@ -10,7 +10,7 @@ typ = 2 //0 = normal, 1 = deflectable, 2 = destructable, 3 = deflectable
 
 image_speed = 0.3 + random(0.2)
 friction = 0.15
-image_angle = random(360)
+image_angle = random_angle
 
 if GameCont.area == 101 instance_destroy()
 

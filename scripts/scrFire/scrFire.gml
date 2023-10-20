@@ -31,7 +31,7 @@ function scrFire(wep, useAmmo = true) {
             with instance_create(x, y, AnimParticle) {
                 image_speed = 0.4 - random(0.1)
                 creator = other.id
-                image_angle = random(360)
+                image_angle = random_angle
                 depth = other.depth - 1
                 sprite_index = sprLaserBrain
             }

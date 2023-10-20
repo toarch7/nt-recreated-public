@@ -1,4 +1,4 @@
-ang = random(360)
+ang = random_angle
 repeat 5 {
     with instance_create(x, y, FlakBullet) {
         motion_add(other.ang, 12 + random(4))
@@ -14,7 +14,7 @@ sprite_index = sprSuperFlakDestroy
 
 repeat(6) {
     with instance_create(x, y, Smoke)
-    motion_add(random(360), random(3))
+    motion_add(random_angle, random(3))
 }
 
 BackCont.shake += 8

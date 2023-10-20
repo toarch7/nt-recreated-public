@@ -346,7 +346,9 @@
 	"CROSSHAIR": "ПРИЦЕЛ",
 	"LANGUAGE": "ЯЗЫК",
 	"PLAY TUTORIAL": "ПРОЙТИ ОБУЧЕНИЕ",
+	"@g[COPIED]": "@g[СКОПИРОВАНО]",
 	"NICKNAME": "ИМЯ",
+	"ENTER YOUR NICKNAME": "ВВЕДИТЕ ВАШ НИК",
 	"TIMER": "ТАЙМЕР",
 	"CURSOR": "КУРСОР",
 	"NATIVE": "СИСТЕМНЫЙ",
@@ -414,7 +416,7 @@
 	"GRILLER MODE": "GRILLER MODE",
 	
 	"@yWARNING": "@yВНИМАНИЕ",
-	"@sRESOURCEPACKS ARE ONLY UNIQUE TO THIS RECREATION.#THEY ARE MADE BY COMMUNITY ONLY TO MAKE THE GAME#LOOK FRESH IF YOU'VE GOT BORED.##USING RESOURCEPACKS WASN'T INTENDED BY CREATORS,#SO IT MAY AFFECT YOUR EXPERIENCE.": "@sРЕСУРСПАКИ - ФУНКЦИЯ, ДОСТУПНАЯ ТОЛЬКО В ВОССОЗДАНИИ.#РЕСУРСПАКИ СОЗДАЮТСЯ СООБЩЕСТВОМ ИГРОКОВ,#ИСКЛЮЧИТЕЛЬНО ЧТОБЫ ОСВЕЖИТЬ ВНЕШНИЙ ВИД ИГРЫ, ЕСЛИ ОН ВАМ НАДОЕЛ.##ИХ ИСПОЛЬЗОВАНИЕ НИКАК НЕ ПОДРАЗУМЕВАЛОСЬ СОЗДАТЕЛЯМИ ИГРЫ,#ТАК ЧТО ЭТО МОЖЕТ ПОВЛИЯТЬ НА ВАШ ИГРОВОЙ ОПЫТ",	
+	"@sRESOURCEPACKS ARE ONLY UNIQUE TO THIS RECREATION.#THESE ARE COLLECTION OF CUSTOM SPRITES, SOUNDS AND LANGUAGES#MADE BY COMMUNITY TO ADD NEW COLORS TO YOUR GAME.##THIS MAY AFFECT YOUR GAMING EXPERIENCE#IN A NOT INTENDED WAY.": "@sРЕСУРСПАКИ - ФУНКЦИЯ, ДОСТУПНАЯ ТОЛЬКО В ВОССОЗДАНИИ.#РЕСУРСПАКИ СОЗДАЮТСЯ СООБЩЕСТВОМ ИГРОКОВ,#ИСКЛЮЧИТЕЛЬНО ЧТОБЫ ОСВЕЖИТЬ ВНЕШНИЙ ВИД ИГРЫ, ЕСЛИ ОН ВАМ НАДОЕЛ.##ИХ ИСПОЛЬЗОВАНИЕ НИКАК НЕ ПОДРАЗУМЕВАЛОСЬ СОЗДАТЕЛЯМИ ИГРЫ,#ТАК ЧТО ЭТО МОЖЕТ ПОВЛИЯТЬ НА ВАШ ИГРОВОЙ ОПЫТ",	
 	"@sUNABLE TO FETCH THE LIST.#PLEASE TRY CHECK YOUR NETWORK#OR TRY AGAIN LATER": "@sОШИБКА ПРИ ПОЛУЧЕНИИ СПИСКА.#ПРОВЕРЬТЕ СВОЁ ПОДКЛЮЧЕНИЕ К СЕТИ,#ИЛИ ПОВТОРИТЕ ПОПЫТКУ ПОЗЖЕ",
 	"INSTALLED": "УСТАНОВЛЕННЫЕ",
 	"BROWSE": "ИСКАТЬ",

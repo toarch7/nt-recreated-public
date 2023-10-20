@@ -17,13 +17,13 @@ if random(3) < 1 {
         snd_play(sndBigDogMissile)
         repeat(3) {
             with instance_create(x, y, ScrapBossMissile)
-            motion_add(random(360), 2)
+            motion_add(random_angle, 2)
         }
         alarm[0] = 10
     } else {
         ammo = 0
         walk = 20 + random(10)
-        motion_add(random(360), 1)
+        motion_add(random_angle, 1)
         alarm[0] = walk + 10
     }
 }

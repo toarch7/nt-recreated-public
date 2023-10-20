@@ -18,7 +18,7 @@ snd_mele = sndGoldScorpionMelee
 //behavior
 ammo = 10
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 30 + random(90)
 
 spr_shadow = shd32

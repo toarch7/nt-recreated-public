@@ -14,6 +14,6 @@ snd_dead = sndTurretDead
 snd_play_hit_big(sndTurretSpawn, 0.2)
 alarm[1] = (60 + random(60))
 ammo = 0
-gunangle = random(360)
+gunangle = random_angle
 offset = 0
 alarm[3] = 1

@@ -21,7 +21,7 @@ if dir == 1 {
             with instance_create(x + random(4) - 2, y + random(4) - 2, Grunt) {
                 if instance_exists(player) {
                     motion_add(point_direction(x, y, player.x, player.y) + random(90) - 45, 4)
-                } else motion_add(random(360), 4)
+                } else motion_add(random_angle, 4)
             }
         }
     } else instance_create(x + random(4) - 2, y + random(4) - 2, EliteGrunt)
@@ -32,7 +32,7 @@ if dir == 2 {
         with instance_create(x + random(4) - 2, y + random(4) - 2, Shielder) {
             if instance_exists(player) {
                 motion_add(point_direction(x, y, player.x, player.y) + random(90) - 45, 4)
-            } else motion_add(random(360), 4)
+            } else motion_add(random_angle, 4)
         }
     } else instance_create(x + random(4) - 2, y + random(4) - 2, EliteShielder)
 }
@@ -42,7 +42,7 @@ if dir == 3 {
         with instance_create(x + random(4) - 2, y + random(4) - 2, Inspector) {
             if instance_exists(player) {
                 motion_add(point_direction(x, y, player.x, player.y) + random(90) - 45, 4)
-            } else motion_add(random(360), 4)
+            } else motion_add(random_angle, 4)
         }
     } else instance_create(x + random(4) - 2, y + random(4) - 2, EliteInspector)
 }

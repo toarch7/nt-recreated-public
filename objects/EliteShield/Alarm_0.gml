@@ -1,6 +1,6 @@
 with creator {
     var len = random(180) + 120
-    var dir = random(360)
+    var dir = random_angle
 
     var iteration = 0
     var xx = x + lengthdir_x(len, dir)

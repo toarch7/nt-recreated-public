@@ -1,6 +1,6 @@
 #macro game_directory global.gamepath
 
-global.desktop = ((os_type == os_windows) or (os_type == os_linux))
+global.desktop = ((os_type == os_windows) or (os_type == os_linux) or (os_type == os_macosx))
 
 if global.desktop
 	window_set_cursor(cr_none)

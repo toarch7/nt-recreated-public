@@ -25,7 +25,7 @@ if instance_exists(target) {
 
     } else if random(5) < 1 {
         //DO NOTHING
-        gunangle = random(360)
+        gunangle = random_angle
         walk = 30
         if hspeed > 0 right = 1
         else if hspeed < 0 right = -1
@@ -35,7 +35,7 @@ if instance_exists(target) {
     else if target.x > x right = 1
 } else if random(5) < 1 {
     //DO NOTHING
-    gunangle = random(360)
+    gunangle = random_angle
     walk = 30
     if hspeed > 0 right = 1
     else if hspeed < 0 right = -1

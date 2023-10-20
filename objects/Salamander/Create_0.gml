@@ -16,7 +16,7 @@ snd_mele = sndSalamanderFire
 myloop = sndSalamanderFire
 ammo = 20
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = (60 + random(90))
 
 spr_shadow = shd32

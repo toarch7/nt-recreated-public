@@ -12,7 +12,7 @@ event_inherited()
 
 //behavior
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 30 + random(90)
 wkick = 0
 timer = 0

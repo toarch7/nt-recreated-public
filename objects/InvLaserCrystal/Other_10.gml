@@ -12,7 +12,7 @@ if alarm[2] > 8 {
     }
     with instance_create(x + random(6) - 3, y + random(6) - 3, LaserCharge) {
         move_contact_solid(other.gunangle, random(480))
-        motion_add(random(360), 2 + random(1))
+        motion_add(random_angle, 2 + random(1))
         alarm[0] = 2 + random(4)
     }
 }

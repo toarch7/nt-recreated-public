@@ -31,7 +31,7 @@ with instance_create(x, y, WepPickup) {
     sprite_index = wep_sprt[wep]
     motion_add(other.direction, other.speed)
     speed += max(0, - other.hp / 5)
-    motion_add(random(360), 2)
+    motion_add(random_angle, 2)
     speed *= 0.8
 }
 
@@ -46,7 +46,7 @@ if bwep > 0 {
         sprite_index = wep_sprt[wep]
         motion_add(other.direction, other.speed)
         speed += max(0, - other.hp / 5)
-        motion_add(random(360), 2)
+        motion_add(random_angle, 2)
         speed *= 0.8
     }
 }
@@ -67,7 +67,7 @@ if race == 14 && is_me && !UberCont.cgot[14] && GameCont.level >= 10 {
 }
 
 if race == 15 {
-    var ang = random(360)
+    var ang = random_angle
 
     repeat 14 {
         with instance_create(x, y, EnemyBullet1) {
@@ -162,7 +162,7 @@ if race == 11 {
             GameCont.rad -= 10
             with instance_create(x, y, BigRad) {
                 motion_add(other.direction, other.speed)
-                motion_add(random(360), random(GameCont.rad / 2) + 3)
+                motion_add(random_angle, random(GameCont.rad / 2) + 3)
                 repeat(speed)
                 speed *= 0.9
             }
@@ -173,7 +173,7 @@ if race == 11 {
     repeat(GameCont.rad) {
         with instance_create(x, y, Rad) {
             motion_add(other.direction, other.speed)
-            motion_add(random(360), random(GameCont.rad / 2) + 3)
+            motion_add(random_angle, random(GameCont.rad / 2) + 3)
             repeat(speed)
             speed *= 0.9
         }

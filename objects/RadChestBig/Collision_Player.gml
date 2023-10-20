@@ -13,7 +13,7 @@ if GameCont.crown == 6 {
 
         repeat(16) {
             with instance_create(x, y, Rad)
-            motion_add(random(360), 2 + random(4))
+            motion_add(random_angle, 2 + random(4))
         }
     }
 }

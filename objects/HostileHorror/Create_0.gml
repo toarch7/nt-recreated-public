@@ -11,7 +11,7 @@ event_inherited()
 snd_hurt = sndMutant11Hurt
 snd_dead = sndMutant11Dead
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 gunoffset = 0
 alarm[1] = 60 + random(10)
 ammo = 0

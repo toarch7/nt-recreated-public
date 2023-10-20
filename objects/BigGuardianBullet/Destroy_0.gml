@@ -13,7 +13,7 @@ with ThroneStatue {
 
 if place_meeting(x, y, Floor) scrDrop(50, 0)
 
-var ang = random(360)
+var ang = random_angle
 var n = 360 / (7 + GameCont.loops)
 var spd = 2
 

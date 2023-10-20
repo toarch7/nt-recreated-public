@@ -11,7 +11,7 @@ if sprite_index == spr_disappear {
 
                     image_speed = 0.4
 
-                    motion_add(random(360), 3 + random(2))
+                    motion_add(random_angle, 3 + random(2))
 
                     friction = 0.4
 

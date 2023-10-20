@@ -1,5 +1,5 @@
 with instance_create(x, y, EnemyBullet2) {
-    motion_add(random(360), 2)
+    motion_add(random_angle, 2)
     image_angle = direction
     team = other.team
     creator = other.id

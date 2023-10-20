@@ -15,10 +15,10 @@ if os_type == os_android {
 
     if check == os_permission_denied or firstry {
         if os_get_language() == "ru" { //ah yes, haяdcoded localisations
-            message = show_message_async("Эта игра требует доступ к внешнему хранилищу для записи и чтения прогресса.\nВы можете отозвать его в настройках приложения при возникновении каких-либо неполадок с игровыми данными.")
+            message = show_message_async("Игра требует доступ к чтению и записи файлов для кастомизации и сохранения прогресса.\nВы можете отозвать разрешение в настройках системы при возникновении неполадок с игровыми данными.")
         }
 		else {
-            message = show_message_async("This game requires external storage access permission to store files.\nYou can disable it in application settings in case of game data issues.")
+            message = show_message_async("The game requires access to read and write files for customization and progress saving.\nYou can revoke the permission in the system settings if there are any issues with game data.")
         }
 
         alarm[0] = -1
@@ -55,7 +55,7 @@ instance_create(0, 0, UberCont)
 		udid += generate_uid(3)
 	}
 	
-	save_set_val("general", "uid", udid)
+	save_set_value("general", "uid", udid)
 	
 	ds_map_destroy(info)
 //
@@ -100,6 +100,7 @@ if loading {
         KeyCont.players = 1
 
         instance_create(0, 0, SpiralCont)
+		
         depth = -1000
     }
 	catch (e) {
@@ -122,7 +123,7 @@ if loading {
     }
 }
 else {
-	if save_get_val("etc", "disclaimer", 0) {
+	if save_get_value("etc", "disclaimer", 0) {
 		room_goto(romGame)
 	}
 	else disclaimer = 1

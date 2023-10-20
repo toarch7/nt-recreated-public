@@ -3,7 +3,7 @@ fishy = room_height / 2
 
 bossfight = instance_exists(Nothing2) or instance_exists(Nothing2Appear)
 
-image_angle = random(360)
+image_angle = random_angle
 active = 0
 
 letterbox = 0

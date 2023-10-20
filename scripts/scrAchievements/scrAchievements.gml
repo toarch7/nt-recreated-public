@@ -225,7 +225,7 @@ function scrAchievements() {
 		chiev_name[i] = string_upper(chiev_name[i])
 		chiev_text[i] = string_upper(chiev_text[i])
 		
-	    chiev_have[i] = save_get_val("achievement", string(i), 0)
+	    chiev_have[i] = save_get_value("achievement", string(i), 0)
 	}
 	
 	if chiev_have[33] {

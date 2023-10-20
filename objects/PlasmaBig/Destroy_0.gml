@@ -2,7 +2,7 @@ if skill_get(17) {
     snd_play_hit(sndPlasmaBigExplodeUpg, 0.2)
 } else snd_play_hit(sndPlasmaBigExplode, 0.2)
 
-ang = random(360)
+ang = random_angle
 repeat(10) {
     with instance_create(xprevious, yprevious, PlasmaBall) {
         motion_add(other.ang, 2)

@@ -29,7 +29,7 @@ function scrRunStart() {
     }
 	
     if UberCont.daily_run && !UberCont.weekly_run {
-        save_set_val("etc", "seed", UberCont.daily_seed)
+        save_set_value("etc", "seed", UberCont.daily_seed)
     }
 	
     room_restart()
@@ -58,7 +58,7 @@ function scrSpawnPlayers(myIndex = global.index) {
 
             if !instance_exists(CoopController) {
                 if !UberCont.daily_run {
-                    pinst.cwep = save_get_val("cswep", string(pinst.race), 0) ? UberCont.cwep[pinst.race] : UberCont.race_swep[pinst.race]
+                    pinst.cwep = save_get_value("cswep", string(pinst.race), 0) ? UberCont.cwep[pinst.race] : UberCont.race_swep[pinst.race]
                 }
 				else if !UberCont.weekly_run {
                     pinst.cwep = race_swep[pinst.race]
@@ -67,10 +67,10 @@ function scrSpawnPlayers(myIndex = global.index) {
 
             if !UberCont.daily_run {
                 with Menu {
-					loadout_crown = save_get_val("ccrown", string(pinst.race), 1)
+					loadout_crown = save_get_value("ccrown", string(pinst.race), 1)
 				}
 				
-				GameCont.crown = save_get_val("ccrown", string(pinst.race), 1)
+				GameCont.crown = save_get_value("ccrown", string(pinst.race), 1)
             }
         }
 

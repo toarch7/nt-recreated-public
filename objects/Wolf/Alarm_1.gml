@@ -28,7 +28,7 @@ if target {
             walk = 0
         }
 
-        motion_add(random(360), 2)
+        motion_add(random_angle, 2)
         motion_add(target_direction, 1.5)
     }
-} else motion_add(random(360), 2)
+} else motion_add(random_angle, 2)

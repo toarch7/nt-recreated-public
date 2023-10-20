@@ -62,6 +62,11 @@ if (flags & 8) == 8 {
 	draw_text_shadow(dx, 48, str)
 }
 
+var scale = 1
+
+if global.desktop
+	scale = 0.67
+
 if global.console_active {
 
     draw_set_font(fontConsole)
@@ -83,11 +88,11 @@ if global.console_active {
             c = global.log_color[i]
 
         if c == (c_white - 1) {
-            text(_x - w + 4, _y, "> " + str, c, 1)
+            text(_x - w + 4, _y, "> " + str, c, 1, scale)
         }
-		else text(_x, _y, str, c, 1)
+		else text(_x, _y, str, c, 1, scale)
 
-        _y -= string_height(str)
+        _y -= string_height(str) * scale
     }
 
     if !read {

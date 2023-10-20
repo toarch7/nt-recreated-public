@@ -15,7 +15,7 @@ if other.team != team && other.hp > 0 {
 
     with instance_create(other.x, other.y, BulletHit) {
         sprite_index = sprHeavySlugHit
-        image_angle = random(360)
+        image_angle = random_angle
     }
 
     instance_destroy()

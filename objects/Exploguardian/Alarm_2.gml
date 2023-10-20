@@ -1,5 +1,5 @@
 sprite_index = spr_fire
-ang = random(360)
+ang = random_angle
 
 repeat 14 {
     with instance_create(x, y, ExploguardianBullet) {

@@ -60,10 +60,10 @@ if instance_exists(Player) {
 if GameCont.area == 5 && GameCont.subarea == 1 && skill_get(18) {
     if instance_exists(prop) {
         with instance_furthest(10016, 10016, prop) {
-            instance_change(JungleFlower, 1)
+            instance_change(IceFlower, 1)
         }
     } else with instance_random(enemy) {
-        instance_create(x, y, JungleFlower)
+        instance_create(x, y, IceFlower)
         instance_destroy(id, 0)
     }
 }
@@ -133,7 +133,7 @@ if GameCont.area == 0 && instance_exists(Player) && (GameCont.loops - global.har
             name = wep_name[wep]
             type = wep_type[wep]
             sprite_index = wep_sprt[wep]
-            image_angle = random(360)
+            image_angle = random_angle
         }
     }
 }
@@ -147,7 +147,7 @@ if GameCont.area == 1 && (GameCont.loops - global.hardmode) > 0 {
             name = wep_name[wep]
             type = wep_type[wep]
             sprite_index = wep_sprt[wep]
-            image_angle = random(360)
+            image_angle = random_angle
         }
 
         GameCont.blacksword = 0
@@ -184,6 +184,8 @@ with Wall {
     }
 }
 
+
+
 if GameCont.area == 0 && GameCont.loops {
     with instance_create(10016, 10016, CampfireOff) {
         if GameCont.race != 1 with instance_create(x, y - 36, Corpse) {
@@ -214,7 +216,7 @@ if GameCont.area == 0 && GameCont.loops {
             if !UberCont.cgot[i] or i == 6 or i == GameCont.race
             continue
 
-            direction = random(360)
+            direction = random_angle
 
             with instance_create(x, y, Corpse) {
                 sprite_index = asset_get_index("sprMutant" + string(i) + "Dead")
@@ -232,6 +234,13 @@ if UberCont.halloween && GameCont.subarea == 1 && instance_exists(Bandit) {
 
 with ProtoStatue {
     if UberCont.weekly_run instance_destroy()
+}
+
+with prop {
+	print("DIS", distance_to_point(10016, 10016))
+	
+	if distance_to_point(10016, 10016) < 96 && object_index != IceFlower
+		instance_destroy(id, 0)
 }
 
 if GameCont.area == 7 && GameCont.subarea == 3 {

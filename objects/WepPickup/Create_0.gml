@@ -1,7 +1,7 @@
-image_angle = random(360)
+image_angle = random_angle
 image_speed = 0
 friction = 0.4
-motion_add(random(360), 0.5 + random(1))
+motion_add(random_angle, 0.5 + random(1))
 
 rotspeed = (random(1) + 1) * choose(1, - 1)
 

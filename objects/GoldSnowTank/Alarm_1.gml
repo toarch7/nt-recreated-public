@@ -16,5 +16,5 @@ if instance_exists(target) {
         }
 
         direction = target_direction + 70 + random(40) * choose(1, - 1)
-    } else motion_add(random(360), .5)
-} else motion_add(random(360), .5)
+    } else motion_add(random_angle, .5)
+} else motion_add(random_angle, .5)

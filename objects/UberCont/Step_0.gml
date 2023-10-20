@@ -218,7 +218,7 @@ if lockstep_stop {
 			image_index -= image_speed
 		
 		for(var i = 0; i < 12; i ++) {
-			if alarm[i] > 0
+			if alarm[i] > -1
 				alarm[i] ++
 		}
 	}

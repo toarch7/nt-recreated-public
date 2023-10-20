@@ -1,7 +1,7 @@
 repeat 16 {
     with instance_create(x, y, Rad) {
         motion_add(other.direction, other.speed)
-        motion_add(random(360), random(4) + 2)
+        motion_add(random_angle, random(4) + 2)
 
         repeat speed {
             speed *= 0.9

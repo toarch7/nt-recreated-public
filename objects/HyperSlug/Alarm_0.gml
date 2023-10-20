@@ -3,7 +3,7 @@ image_speed = 0
 
 repeat(3) {
     with instance_create(x, y, Smoke)
-    motion_add(random(360), random(2))
+    motion_add(random_angle, random(2))
 }
 
 var max_steps = 50
@@ -19,7 +19,7 @@ while max_steps > 0 {
         break
     } else if irandom(2) {
         with instance_create(x, y, Smoke) {
-            motion_add(random(360), random(2))
+            motion_add(random_angle, random(2))
         }
     }
 }

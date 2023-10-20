@@ -18,7 +18,7 @@ walk = 0
 ammo = 0
 attacktype = 0
 introcharge = 0
-gunangle = random(360)
+gunangle = random_angle
 charge = 0
 alarm[1] = 1
 with(instance_create(x, y, PopoExplosion)) {

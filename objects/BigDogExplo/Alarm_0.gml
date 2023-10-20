@@ -12,7 +12,7 @@ var img = 0
 repeat 6 {
     with instance_create(x, y, ScrapBossCorpse) {
         size = other.size - 1
-        motion_add(random(360), (10 + random(6)))
+        motion_add(random_angle, (10 + random(6)))
         sprite_index = sprScrapBossDead
         image_xscale = choose(1, - 1)
         image_index = img

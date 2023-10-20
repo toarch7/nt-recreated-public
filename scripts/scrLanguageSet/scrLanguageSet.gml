@@ -8,7 +8,7 @@ function scrLanguageSet(_lang) {
                 _lang = "en"
             }
 
-            save_set_val("etc", "language", _lang)
+            save_set_value("etc", "language", _lang)
             opt_language = _lang
         }
 

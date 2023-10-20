@@ -13,7 +13,7 @@ if random(4) < 1 {
         with instance_create(x, y, PopoNade) {
             hit_id = other.hit_id
             motion_add(other.direction, 4)
-            motion_add(random(360), 4)
+            motion_add(random_angle, 4)
             image_angle = direction
             team = other.team
         }

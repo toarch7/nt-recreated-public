@@ -15,8 +15,8 @@ snd_dead = sndMolesargeDead
 
 //behavior
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 30 + random(90)
 wkick = 0
 
-move_contact_solid(random(360), random(16))
+move_contact_solid(random_angle, random(16))

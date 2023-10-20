@@ -5,7 +5,6 @@
   },
   "solid": false,
   "visible": true,
-  "managed": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {
@@ -36,7 +35,7 @@
     "path": "folders/Objects/Props.yy",
   },
   "resourceVersion": "1.0",
-  "name": "JungleFlower",
+  "name": "IceFlower",
   "tags": [],
   "resourceType": "GMObject",
 }

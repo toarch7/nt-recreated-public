@@ -6,6 +6,6 @@ if instance_exists(target) {
     walk = 60
     if (random(10) < 1) flip = (-flip)
 } else {
-    walkdir = random(360)
+    walkdir = random_angle
     walk = 60
 }

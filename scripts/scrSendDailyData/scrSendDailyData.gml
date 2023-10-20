@@ -86,7 +86,7 @@ function scrSendDailyData() {
         var date = scrAddZero(UberCont.date_day, 1) + "." + scrAddZero(UberCont.date_month, 1) + "." + string(UberCont.date_year)
         var time = scrAddZero(GameCont.minutes, 1) + ":" + scrAddZero(GameCont.seconds, 1)
 
-        var name = save_get_val("etc", "name", "unnamed")
+        var name = save_get_value("etc", "name", "unnamed")
         name = string_replace_all(name, "?", "_")
         name = string_replace_all(name, "&", "_")
         name = string_replace_all(name, "@", "")
@@ -128,7 +128,7 @@ function scrSendDailyData() {
 
             random_set_seed(global.seed)
 
-            var footerstring = "(v" + string(GAME_BUILD) + ") " + save_get_val("general", "uid", "-1") + ";" + runId
+            var footerstring = "(v" + string(GAME_BUILD) + ") " + save_get_value("general", "uid", "-1") + ";" + runId
 
             if avg <= 0 {
                 footerstring = "(no score improvement)"
@@ -219,6 +219,6 @@ function scrSendDailyData() {
     }
 
     if !UberCont.weekly_run {
-        save_set_val("etc", "seed", UberCont.daily_seed)
+        save_set_value("etc", "seed", UberCont.daily_seed)
     }
 }

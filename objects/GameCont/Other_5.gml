@@ -98,9 +98,13 @@ if subarea < 3 && !(area == 0 or area == 2 or area == 4 or area == 6) {
         if !UberCont.crowngot[race, crown] && crown > 1 && race != 13 && race != 14 && race != 15 {
             UberCont.crowngot[race, crown] = 1
             UberCont.race_crown[race, crown] = 1
-            show_unlock_popup("@w" + crown_name[crown] + "@sUNLOCKED#FOR @w" + race_name[race])
-            scrAchievement(22)
-        }
+			
+            show_unlock_popup(loc_sfmt("@w%@s UNLOCKED#FOR @w%", crown_name[crown], race_name[race]))
+            
+			scrAchievement(22)
+			
+			scrSave()
+		}
 
         if loops > UberCont.cbst_loop[race] UberCont.cbst_loop[race] = loops
 
@@ -149,7 +153,7 @@ if area == 1 && subarea < 3 alarm[0] = 10
 if loops && area > 0 && area != 100 alarm[10] = 30
 
 if !UberCont.hardgot && loops >= 2 {
-    save_set_val("etc", "hard", 1)
+    save_set_value("etc", "hard", 1)
     UberCont.hardgot = 1
     scrAchievement(39)
     show_unlock_popup("@wHARDMODE UNLOCKED@s#FOR REACHING LOOP 2")

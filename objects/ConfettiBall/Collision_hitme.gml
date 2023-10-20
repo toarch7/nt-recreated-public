@@ -23,7 +23,7 @@ if team != other.team {
     if !other.hp {
         repeat 30 {
             with instance_create(x, y, Confetti) {
-                motion_add(random(360), random(14))
+                motion_add(random_angle, random(14))
                 team = other.team
             }
         }

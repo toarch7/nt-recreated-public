@@ -142,14 +142,14 @@ if canloadout {
             else draw_sprite(sprLoadoutArrow, loadout, _x, _y)
         }
 		
-        loadout_skin = save_get_val("cskin", string(race), 0)
-        loadout_wep = save_get_val("cswep", string(race), 0)
+        loadout_skin = save_get_value("cskin", string(race), 0)
+        loadout_wep = save_get_value("cswep", string(race), 0)
 		
         if UberCont.daily_run
 			loadout_wep = 0
 		
         if !instance_exists(CoopController) && !UberCont.daily_run
-			loadout_crown = save_get_val("ccrown", string(race), 1)
+			loadout_crown = save_get_value("ccrown", string(race), 1)
 		
 		var pointed_a = point_in_circle(mx, my, width - 152, height / 2 - 32, button_size),
 			pointed_b = point_in_circle(mx, my, width - 152, height / 2, button_size),
@@ -187,7 +187,7 @@ if canloadout {
 						
 	                    loadout_wep = 0
 	                    snd_play(wep_swap[inst.cwep])
-	                    save_set_val("cswep", string(race), loadout_wep)
+	                    save_set_value("cswep", string(race), loadout_wep)
 	                }
 				}
 				else if pointed_cwep {
@@ -195,7 +195,7 @@ if canloadout {
 
                     loadout_wep = 1
                     snd_play(sndGoldWeaponSelect)
-                    save_set_val("cswep", string(race), loadout_wep)
+                    save_set_value("cswep", string(race), loadout_wep)
                 }
 				
 				if inst.cwep != w && instance_exists(CoopController) {
@@ -208,14 +208,14 @@ if canloadout {
                 if pointed_a && _skin {
                     _skin = 0
                     snd_play(sndMenuASkin)
-                    save_set_val("cskin", string(race), _skin)
+                    save_set_value("cskin", string(race), _skin)
                 }
 				else if pointed_b && !_skin {
                     if race_skin[race] {
                         _skin = 1
                         
                         snd_play(sndMenuBSkin)
-                        save_set_val("cskin", string(race), _skin)
+                        save_set_value("cskin", string(race), _skin)
                     }
 					else {
                         alarm[11] = 90
@@ -300,7 +300,7 @@ if canloadout {
 							
 		                    snd_play(sndMenuCrown)
 							
-		                    save_set_val("ccrown", string(race), i)
+		                    save_set_value("ccrown", string(race), i)
 						}
 	                }
 					else {

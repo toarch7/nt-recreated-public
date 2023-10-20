@@ -1,6 +1,4 @@
-if !isset("corpse") corpse = 1
-
-if corpse {
+if self[$ "corpse"] {
     with instance_create(x, y, Corpse) {
         size = other.size
         sprite_index = other.spr_dead
@@ -8,26 +6,8 @@ if corpse {
     }
 }
 
-do {
-    if raddrop > 15 {
-        raddrop -= 10
-        with instance_create(x, y, BigRad) {
-            motion_add(other.direction, other.speed)
-            motion_add(random(360), random(other.raddrop / 2) + 3)
-            repeat(speed)
-            speed *= 0.9
-        }
-    }
-}
-until raddrop <= 15
+if raddrop > 0
+	scrRadDrop(raddrop)
 
-repeat(raddrop) {
-    with instance_create(x, y, Rad) {
-        motion_add(other.direction, other.speed)
-        motion_add(random(360), random(other.raddrop / 2) + 3)
-        repeat(speed)
-        speed *= 0.9
-    }
-}
-
-if isset("snd_dead") snd_play_hit(snd_dead, 0.2)
+if isset("snd_dead")
+	snd_play_hit(snd_dead, 0.2)

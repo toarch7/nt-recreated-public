@@ -1,4 +1,4 @@
-/// @description Handle inputs
+/// @description Packet & input handling
 
 if index == -1 or instance_exists(CoopMenu)
     exit
@@ -13,6 +13,10 @@ if frame <= netframe + max(1, delay) {
 		
 		_event = !ds_stack_empty(event_stack) ? json_stringify(ds_stack_pop(event_stack)) : "[]"
 	
+	if frame % 4 == 0 {
+		checksum = gamestate_get_checksum()
+	}
+	
 	packet_begin(event.inputs)
 	
 	packet_write(buffer_u8, index)
@@ -22,16 +26,16 @@ if frame <= netframe + max(1, delay) {
 	packet_write(buffer_f16, _moving)
 	packet_write(buffer_f16, _dir_fire)
 	packet_write(buffer_f16, _dis_fire)
+	packet_write(buffer_string, checksum)
 	packet_write(buffer_string, _event)
 	
 	packet_send()
 	
-	inputs[index][$ frame] = [ _inputs, _dir_move, _moving, _dir_fire, _dis_fire, _event ]
+	inputs[index][$ frame] = [ _inputs, _dir_move, _moving, _dir_fire, _dis_fire, checksum, _event ]
 	
 	frame ++
-	
-	
 }
+/*
 // if waiting for long enough, assume packets were lost and send anticipated inputs again
 else {
 	if netwait > 30 {
@@ -48,6 +52,7 @@ else {
 			packet_write(buffer_f16, _input[2])
 			packet_write(buffer_f16, _input[3])
 			packet_write(buffer_f16, _input[4])
+			packet_write(buffer_f16, _input[4])
 			packet_write(buffer_string, _input[5])
 			
 			packet_send()
@@ -56,8 +61,7 @@ else {
 			print("input resend failed, ", frame, (netwait % (delay + 1)), netframe)
 		}
 	}
-	
-}
+}*/
 
 // read inputs
 
@@ -82,7 +86,15 @@ var stop = false,
 			_moving = _input[2],
 			_dir_fire = _input[3],
 			_dis_fire = _input[4],
-			_event = _input[5]
+			_checksum = _input[5],
+			_event = _input[6]
+		
+		if netframe % 4 == 0 {
+			checksum = gamestate_get_checksum()
+			
+			if _checksum != checksum
+				desynced = true
+		}
 		
 		for(var j = 0; j < global.input_keys_list_length; j ++)
 			KeyCont[$ global.input_keys_list[j]][i] = bit_check(_inputs, 1 << j)

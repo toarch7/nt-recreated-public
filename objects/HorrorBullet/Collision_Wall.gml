@@ -10,7 +10,7 @@ if team != 2 {
     if !isset("noraddrop") {
         with instance_create(x, y, Rad) {
             motion_add(other.direction, other.speed)
-            motion_add(random(360), 8)
+            motion_add(random_angle, 8)
 
             repeat(speed) speed *= 0.9
         }

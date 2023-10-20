@@ -1,6 +1,6 @@
 event_inherited()
 
-dir = random(360)
+dir = random_angle
 repeat(8) {
     dir += 45
     with instance_create(x, y, EnemyBullet2) {
@@ -20,7 +20,7 @@ BackCont.shake += 10
 
 repeat(3) {
     with instance_create(x, y, ExploderExplo)
-    motion_add(random(360), random(2) + 2)
+    motion_add(random_angle, random(2) + 2)
 }
 
 snd_play(sndFrogExplode)

@@ -28,6 +28,8 @@
 #macro x_rel_view (x - view_xview)
 #macro y_rel_view (y - view_yview)
 
+#macro random_angle (random(360))
+
 #macro MultiplayerConfig false
 #macro MultiplayerTesting:MultiplayerConfig true
 
@@ -406,8 +408,16 @@ function scrHandleInputsGeneral(index) {
 		}
 		
 		// call control elements logic
-		with MobileUI
+		with MobileUI {
+			if UberCont.opt_stickregions && !instance_exists(MenuOptions) {
+				if (object_index == JoystickMove or object_index == JoystickAttack) {
+					for(var i = 0; i <= 4; i ++)
+						scrStickRegions(i)
+				}
+			}
+			
 			event_user(0)
+		}
 		
 		// for global touches
 	    for (var i = 0; i < array_length(touch_duration); i++) {
@@ -504,6 +514,15 @@ function mouse_ui_clicked() {
 	}
 	
 	return false
+}
+
+function input_ui_horizontal_pressed() {
+	var v = input_gamepad_check_pressed(0, gp_padr) - input_gamepad_check_pressed(0, gp_padl)
+	
+	if v == 0
+		return keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left)
+	
+	return v
 }
 
 function keyboard_anykey() {

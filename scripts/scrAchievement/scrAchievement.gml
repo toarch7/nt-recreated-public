@@ -10,6 +10,6 @@ function scrAchievement(argument0) {
         }
 
         UberCont.chiev_have[argument0] = 1
-        save_set_val("achievement", string(argument0), 1)
+        save_set_value("achievement", string(argument0), 1)
     }
 }

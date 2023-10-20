@@ -13,6 +13,6 @@ snd_hurt = sndLightningCrystalHit
 snd_dead = sndLightningCrystalDeath
 ammo = 4
 explode = 0
-gunangle = random(360)
+gunangle = random_angle
 spr_shadow_y = 4
 alarm[1] = (50 + random(90))

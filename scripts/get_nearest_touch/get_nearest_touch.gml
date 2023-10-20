@@ -1,9 +1,8 @@
 function get_nearest_touch(rad) {
-	if object_index == JoystickMove or object_index == JoystickAttack {
-		rad *= 1.75
-	}
-
-	rad *= UberCont.opt_controls_scale * 1.5 + 0.5
+	if global.console_active
+		return -1
+	
+	rad = get_touch_radius(rad)
 
 	for (var i = 0; i <= 4; i ++) {
 		if !device_mouse_check_button(i, mb_left)
@@ -35,4 +34,16 @@ function get_nearest_touch(rad) {
 	}
 
 	return -1
+}
+
+function get_touch_radius(rad) {
+	if instance_exists(MenuOptions)
+		return rad
+	
+	if object_index == JoystickMove or object_index == JoystickAttack
+		rad *= 1.75
+	
+	rad *= UberCont.opt_controls_scale + 0.5
+	
+	return rad
 }

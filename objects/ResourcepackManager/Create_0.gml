@@ -154,8 +154,6 @@ sprites_cleanup = function() {
 		for(var i = m; i < array_length(sprites); i ++) {
 			var spr = sprites[i]
 			
-			print("delete", spr, i)
-			
 			array_delete(sprites, i, 1)
 			sprite_delete(spr)
 		}

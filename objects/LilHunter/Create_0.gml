@@ -11,7 +11,7 @@ event_inherited()
 snd_hurt = sndLilHunterHurt
 snd_dead = sndLilHunterDeath
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 wkick = 0
 dodge = 0
 z = 0

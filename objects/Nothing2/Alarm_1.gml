@@ -44,14 +44,14 @@ if instance_exists(target) {
         if (shots == (15 + (GameCont.loops * 5))) {
             shots = 0
             alarm[1] += 40
-            aimdir = random(360)
+            aimdir = random_angle
             attack = choose(1, 3)
             exit
         }
     }
     if (attack == 3) {
         snd_play_hit_big(sndNothing2Ball, 0.1)
-        ang = random(360)
+        ang = random_angle
         repeat(4 + GameCont.loops) {
             with(instance_create(x, y, Throne2Ball)) {
                 hit_id = other.spr_idle

@@ -1,7 +1,7 @@
 if place_meeting(x, y, Floor) scrDrop(100, 0)
 snd_play(sndBigballBreak)
 instance_create(x, y, PortalClear)
-ang = random(360)
+ang = random_angle
 spd = 4
 repeat(8) {
     repeat(10) {

@@ -4,6 +4,9 @@ max_height = 0
 
 friction = 0.4
 
+if global.desktop
+	friction = 1
+
 dragging = -1
 wait = 10
 

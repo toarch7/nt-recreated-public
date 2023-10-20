@@ -39,8 +39,8 @@ else switch image_index {
         }
 
         // -1 means tip is seen
-        if !save_get_val("etc", "saving_tip", 0)
-            save_set_val("etc", "saving_tip", -1)
+        if !save_get_value("etc", "saving_tip", 0)
+            save_set_value("etc", "saving_tip", -1)
 		
         break
 

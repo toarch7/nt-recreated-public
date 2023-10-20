@@ -1,6 +1,6 @@
 function scrEraseProgress() {
     with UberCont {
-        var _seed = save_get_val("etc", "seed", - 1)
+        var _seed = save_get_value("etc", "seed", - 1)
 
         ds_map_destroy(saveData)
         saveData = ds_map_create()

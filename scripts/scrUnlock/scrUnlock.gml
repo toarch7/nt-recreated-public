@@ -195,7 +195,7 @@ function scrUnlock() {
     }
 	
 	if loops >= 3 && !UberCont.opt_cheats {
-		save_set_val("cheats", "unlocked", true)
+		save_set_value("cheats", "unlocked", true)
 		opt_cheats = true
 		
 		show_unlock_popup("@wCHEATS UNLOCKED#@sCHECK OUT MENU SETTINGS")
@@ -228,8 +228,8 @@ function scrGoldenWeaponStoring(p) {
             snd_play(sndGoldWeaponLock)
 			scrAchievement(24)
 			
-            save_set_val("cwep", string(race), store)
-            save_set_val("cswep", string(race), true)
+            save_set_value("cwep", string(race), store)
+            save_set_value("cswep", string(race), true)
 			UberCont.cwep[race] = store
 			pinst.cwep = store
 			

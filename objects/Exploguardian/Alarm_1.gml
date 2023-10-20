@@ -5,7 +5,7 @@ walk = alarm[1] - 1
 if !charge {
     if instance_exists(target) && collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         motion_add(target_direction + random(40) - 20, 1.5)
-    } else motion_add(random(360), 0.5)
+    } else motion_add(random_angle, 0.5)
 
     if distance_to_object(target) <= 90 {
         alarm[2] = 60

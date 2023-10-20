@@ -9,7 +9,7 @@ size = 1
 flr = instance_nearest(x, y, Floor)
 x = flr.x + 16
 y = flr.y + 16
-move_contact_solid(random(360), 16)
+move_contact_solid(random_angle, 16)
 
 event_inherited()
 

@@ -3,7 +3,7 @@ if lockstep_stop
 
 if random(3) < 1 {
     with instance_create(x, y, Smoke)
-    motion_add(random(360), random(2))
+    motion_add(random_angle, random(2))
 }
 
 if speed = 0 instance_destroy()

@@ -14,7 +14,7 @@ img = 0
 repeat(5) {
     with(instance_create(x, y, Nothing2Corpse)) {
         size = 1
-        motion_add(random(360), (10 + random(6)))
+        motion_add(random_angle, (10 + random(6)))
         sprite_index = sprNothing2Part
         image_index = other.img
         image_xscale = choose(1, - 1)

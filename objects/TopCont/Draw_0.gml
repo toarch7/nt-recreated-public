@@ -43,8 +43,12 @@ with Player {
 	        var ang = KeyCont.dir_fire[index]
 			
 	        if !UberCont.opt_keyboard or index != global.index or is_gamepad(index) {
-				var s = KeyCont.dis_fire[index],
-					xx = x + lengthdir_x(64 * s, ang),
+				var s = KeyCont.dis_fire[index]
+				
+				if UberCont.opt_fixsight && (index == global.index)
+					s = 1
+				
+				var xx = x + lengthdir_x(64 * s, ang),
 					yy = y + lengthdir_y(64 * s, ang),
 					a = min(1, crosshair_alpha)
 				
@@ -134,8 +138,13 @@ if !instance_exists(MenuGen) {
 		var _x = clamp(x, view_xview + 20, view_xview + view_width - 20)
 			_y = median(y, view_yview + 5, view_yview + view_height - 5)
 		
-        draw_set_color(c_white)
-        draw_text_nt(_x, _y, loc(mytext))
+		draw_set_color(c_white)
+		
+		scrDrawAlignCenter()
+		
+		draw_text_nt(_x, _y, loc(mytext))
+		
+		scrDrawAlignDefault()
     }
 
     with LevelUp {

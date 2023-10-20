@@ -296,7 +296,8 @@ option_elements_create
 		
 		click: function() {
 			self.category_set(OptionCategory.Resourcepacks)
-			if !save_get_val("etc", "rp_warning", 0)
+			
+			if !save_get_value("etc", "rp_warning", 0)
 				rp_warning = true
 		}
 	},
@@ -638,11 +639,42 @@ option_elements_create(
 option_category_begin(OptionCategory.Game_Profile)
 
 option_elements_create(
-	{ type: "button", name: "ID", key: "general_uid", available: false }, // todo: id copying in newer gm versions
+	{ type: "button", name: "ID", key: "general_uid",
+		value_get: function(opt) {
+			var value = opt.value,
+				copied = opt[$ "__copied"]
+			
+			if copied == undefined {
+				if is_string(value) && string_length(value) >= 8
+					return string_copy(value, 1, 5) + "..."
+			}
+			
+			if copied - global.time > 0
+				return "@g[COPIED]"
+			
+			return value
+		},
+		
+		click: function(opt) {
+			if global.desktop {
+				clipboard_set_text(opt.value)
+			}
+			else if os_type == os_android {
+				SetClipboard(opt.value)
+			}
+			else return;
+			
+			opt[$ "__copied"] = global.time + 15
+		}
+	},
 	
 	{ type: "input", name: "NICKNAME", key: "etc_name", ingame: false,
 		validate: function(opt, str, confirm) {
 			return scrValidateUsername(opt, str, confirm)
+		},
+		
+		name_get: function(opt) {
+			return text_input_element == opt ? "ENTER YOUR NICKNAME" : opt.name
 		}
 	},
 	
@@ -662,7 +694,14 @@ option_elements_create(
 		}
 	},
 	
-	{ type: "category", name: "DATA", category: OptionCategory.Game_Data, ingame: false }
+	{
+		type: "category", name: "DATA", category: OptionCategory.Game_Data, ingame: false,
+		
+		awake: function(opt) {
+			if instance_exists(NicknameInput)
+				opt.visible = false
+		}
+	}
 )
 
 #endregion
@@ -720,8 +759,11 @@ option_elements_create(
 	{ type: "switch", name: "AIM ASSIST",       key: "controls_assist",       mobile_only: true },
 	{ type: "switch", name: "360 AIMBOT",       key: "controls_aimbot",       mobile_only: true },
 	{ type: "switch", name: "VOLUME CONTROLS",  key: "options_volumecontrol", mobile_only: true },
-	{ type: "switch", name: "SPLIT AIM & FIRE", key: "controls_splitfire", },//mobile_only: true },
-	{ type: "switch", name: "WEAPON-STICKS",      key: "controls_wepstick", },//mobile_only: true },
+	{ type: "switch", name: "SPLIT AIM & FIRE", key: "controls_splitfire",    mobile_only: true },
+	{ type: "switch", name: "WEAPON-STICKS",    key: "controls_wepstick",     mobile_only: true },
+	{ type: "switch", name: "STICK REGIONS",    key: "controls_stickregions"},//     mobile_only: true },
+	{ type: "switch", name: "HIDE JOYSTICKS",   key: "controls_hiddensticks"},//     mobile_only: true },
+	{ type: "switch", name: "FIXED SIGHT",      key: "controls_fixsight"},//     mobile_only: true },
 	
 	{ type: "slider", name: "SIZE SCALE", key: "controls_scale", mobile_only: true },
 	

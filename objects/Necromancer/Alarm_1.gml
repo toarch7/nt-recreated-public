@@ -41,7 +41,7 @@ if instance_exists(target) {
                 }
             }
         } else if random(2) < 1 {
-            motion_add(random(360), 0.4)
+            motion_add(random_angle, 0.4)
             walk = 20 + random(10)
             alarm[1] = walk + 10 + random(30)
             gunangle = direction
@@ -51,7 +51,7 @@ if instance_exists(target) {
     }
 } else if random(10) < 1 {
     //PLAYER IS NOT THERE
-    motion_add(random(360), 0.4)
+    motion_add(random_angle, 0.4)
     walk = 20 + random(10)
 
     alarm[1] = walk + 10 + random(30)

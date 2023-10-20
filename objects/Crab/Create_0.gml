@@ -18,7 +18,7 @@ snd_mele = sndOasisMelee
 //behavior
 ammo = 8
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 50 + random(90)
 
 spr_shadow = shd48

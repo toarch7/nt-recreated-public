@@ -19,7 +19,7 @@ if sprite_index == sprMutant4Dead or sprite_index == sprMutant4BDead {
     instance_create(x, y, MeltSplat)
 
     if skill_get(5) {
-        ang = random(360)
+        ang = random_angle
         instance_create(x + lengthdir_x(24, ang), y + lengthdir_y(24, ang), MeatExplosion)
         instance_create(x + lengthdir_x(24, ang + 120), y + lengthdir_y(24, ang + 120), MeatExplosion)
         instance_create(x + lengthdir_x(24, ang + 240), y + lengthdir_y(24, ang + 240), MeatExplosion)

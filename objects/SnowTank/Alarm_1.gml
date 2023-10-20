@@ -11,5 +11,5 @@ if instance_exists(target) {
             ammo = 16
         }
         direction = target_direction + (70 + random(40)) * choose(1, - 1)
-    } else motion_add(random(360), 0.5)
-} else motion_add(random(360), 0.5)
+    } else motion_add(random_angle, 0.5)
+} else motion_add(random_angle, 0.5)

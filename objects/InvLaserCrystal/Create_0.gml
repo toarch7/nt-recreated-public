@@ -17,7 +17,7 @@ snd_dead = choose(sndLaserCrystalDeath, sndRavenDie, sndBanditDie, sndEnemyDie)
 
 //behavior
 ammo = 4
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 30 + random(90)
 
 spr_shadow_y = 4

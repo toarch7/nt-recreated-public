@@ -13,7 +13,7 @@ with instance_create(x + expl_x + orandom(4), y + expl_y + orandom(4), PopoExplo
         image_yscale += 0.5
 		
         repeat 4 + random(8)
-            instance_create(x + lengthdir_x(random(48), random(360)), y + lengthdir_y(random(48), random(360)), BlueFlame)
+            instance_create(x + lengthdir_x(random(48), random_angle), y + lengthdir_y(random(48), random_angle), BlueFlame)
     }
 	
     snd_play(sndIDPDNadeExplo)

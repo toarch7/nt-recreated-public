@@ -1,4 +1,4 @@
-#macro ATTACK_BUTTON_DEADZONE 0.5
+#macro ATTACK_BUTTON_DEADZONE 0.42
 
 x = view_width + (global.view_width_max - view_width) / 2 - 64
 y = view_height - 64
@@ -18,7 +18,7 @@ vdis = 0 //dynamic view
 assist = UberCont.opt_assist
 aim_target = noone
 
-crosshair = save_get_val("visual", "crosshair", 0)
+crosshair = save_get_value("visual", "crosshair", 0)
 
 pause = 0
 
@@ -36,3 +36,7 @@ hold = 0
 alarm[1] = 1
 
 wep_spr = mskNone
+
+if UberCont.opt_hiddensticks && !instance_exists(MenuOptions) {
+	image_alpha = 0
+}

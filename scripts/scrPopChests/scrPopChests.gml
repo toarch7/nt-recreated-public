@@ -220,12 +220,12 @@ function scrReplacePropWithChest(obj) {
 		var dis = distance_to_point(10016, 10016)
 		
 		// man that's a lot
-		if object_index == VaultStatue or object_index == ProtoStatue or object_index == JungleFlower
+		if object_index == VaultStatue or object_index == ProtoStatue or object_index == IceFlower
 		or object_index == CarVenus or instance_is(self, RadChest) or object_index == BecomeScrapBoss
 		or object_index == MeleeFake or object_index == LastIntro
 			continue
 		
-		if dis > furthest
+		if dis > 160 && dis > furthest
 			inst = id
 	}
 	

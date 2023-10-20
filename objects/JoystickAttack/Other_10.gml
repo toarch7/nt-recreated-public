@@ -56,6 +56,8 @@ KeyCont.release_fire[global.index] = 0
 if index == -1
 	index = i
 
+if UberCont.opt_hiddensticks
+	image_alpha = lerp(image_alpha, (index != -1) * 0.2, 0.4)
 
 if !UberCont.opt_aimbot {
     if index != -1 {
@@ -64,12 +66,12 @@ if !UberCont.opt_aimbot {
 
         var dir = point_direction(x, y, mx, my)
         dis = min(rad, point_distance(x, y, mx, my))
-
+		
         KeyCont.dir_fire[global.index] = dir
         KeyCont.dis_fire[global.index] = dis / rad
 
         // note: press & release are swapped intentionally
-		if (dis / rad) > ATTACK_BUTTON_DEADZONE {
+		if (dis / rad) > ATTACK_BUTTON_DEADZONE && !UberCont.opt_splitfire {
 			KeyCont.hold_fire[global.index] = 1
 			
 	        if device_mouse_check_button_pressed(index, mb_left)
@@ -78,7 +80,7 @@ if !UberCont.opt_aimbot {
 	        if device_mouse_check_button_released(index, mb_left)
 				KeyCont.press_fire[global.index] = 1
 		}
-
+		
         if !device_mouse_check_button(index, mb_left) or (distance_to_point(mx, my) > rad * 3) {
             index = -1
         }

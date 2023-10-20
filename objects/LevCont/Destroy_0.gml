@@ -1,2 +1,2 @@
 with SkillText
-y += 40
+	y += 40

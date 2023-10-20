@@ -9,7 +9,7 @@ if !instance_exists(CoopController) {
 	    UberCont.protowep = 56
 	} else {
 	    UberCont.protowep = wep
-	    save_set_val("etc", "protowep", wep)
+	    save_set_value("etc", "protowep", wep)
 	}
 } else {
 	if sprite_index == sprProtoChestOpen {

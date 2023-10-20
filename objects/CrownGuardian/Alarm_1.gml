@@ -33,7 +33,7 @@ if (instance_exists(target) && ((spr_idle != sprGuardianDisappear) && (spr_idle 
             }
         }
     } else {
-        motion_add(random(360), 0.5)
+        motion_add(random_angle, 0.5)
         if (random(20) < 1) {
             snd_play_hit_big(sndGuardianDisappear, 0.2)
             spr_idle = sprGuardianDisappear
@@ -41,4 +41,4 @@ if (instance_exists(target) && ((spr_idle != sprGuardianDisappear) && (spr_idle 
             alarm[1] += 60
         }
     }
-} else motion_add(random(360), 0.5)
+} else motion_add(random_angle, 0.5)

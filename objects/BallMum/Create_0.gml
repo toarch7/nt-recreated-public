@@ -20,7 +20,7 @@ corpse = 0
 
 //behavior
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 60
 intro = 0
 
@@ -36,7 +36,7 @@ sndtaunt = 0
 tauntdelay = 0
 ammo = 0
 
-motion_add(random(360), 2)
+motion_add(random_angle, 2)
 
 instance_create(x, y, PortalClear)
 instance_create(x, y - 24, PortalClear)

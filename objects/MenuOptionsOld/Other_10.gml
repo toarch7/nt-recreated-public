@@ -32,7 +32,7 @@ if rp_warning {
 
     if mouse_check_button_released(mb_left) && rp_warning >= 90 && point_in_circle(mx, my, view_width / 2, view_height / 2, 16) {
         snd_play(sndClickBack)
-        save_set_val("etc", "rp_warning", 1)
+        save_set_value("etc", "rp_warning", 1)
         rp_warning = 0
     }
 
@@ -91,7 +91,7 @@ if erasing_progress {
                     }
                 })
 
-                save_set_val("etc", "rp_warning", 0)
+                save_set_value("etc", "rp_warning", 0)
 
                 event_perform(ev_create, 0)
 
@@ -212,7 +212,7 @@ if editing_mode {
 
                 for (var i = 0; i < array_length(names); i++) {
                     var name = names[i]
-                    save_set_val("gamepadkey", name, gpad[$ name])
+                    save_set_value("gamepadkey", name, gpad[$ name])
                 }
 
                 editing_mode = 0
@@ -388,7 +388,7 @@ for (var i = 0; i < array_length(options[category]); i ++) {
                 }
 
                 if opt.value != _v {
-                    save_set_val(opt.group, opt.key, opt.value)
+                    save_set_value(opt.group, opt.key, opt.value)
                     scrOptionsUpdate()
                     show_debug_message(opt.group + "_" + opt.key + " = " + string(opt.value))
 
@@ -427,7 +427,7 @@ for (var i = 0; i < array_length(options[category]); i ++) {
                 }
 
                 if !is_undefined(opt[$ "value"]) {
-                    save_set_val(opt.group, opt.key, opt.value)
+                    save_set_value(opt.group, opt.key, opt.value)
                     scrOptionsUpdate()
                     show_debug_message(opt.group + "_" + opt.key + " = " + string(opt.value))
                 }
@@ -487,7 +487,7 @@ for (var i = 0; i < array_length(options[category]); i ++) {
 
                 if !is_undefined(opt[$ "value"]) {
                     opt.value = !opt.value
-                    save_set_val(opt.group, opt.key, opt.value)
+                    save_set_value(opt.group, opt.key, opt.value)
                     scrOptionsUpdate()
                     show_debug_message(opt.group + "_" + opt.key + " = " + string(opt.value))
                 }
@@ -531,7 +531,7 @@ for (var i = 0; i < array_length(options[category]); i ++) {
 
                 opt.value = opt.list[opt.pos]
 
-                save_set_val(opt.group, opt.key, opt.value)
+                save_set_value(opt.group, opt.key, opt.value)
                 scrOptionsUpdate()
 
                 show_debug_message(opt.group + "_" + opt.key + " = " + string(opt.value))

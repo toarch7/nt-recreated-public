@@ -9,7 +9,7 @@ if point_distance(x, y, targetx, targety) > 24 + random(48) && random(5) < 4 {
     motion_add(point_direction(x, y, targetx, targety) + 180 + random(90) - 45, 2)
     walk = 5 + random(20)
 } else if random(2) < 1 {
-    motion_add(random(360), 2)
+    motion_add(random_angle, 2)
     walk = 5 + random(10)
 }
 

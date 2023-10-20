@@ -1,5 +1,5 @@
 scrDrop(10, 0)
-ang = random(360)
+ang = random_angle
 repeat(14) {
     with(instance_create(x, y, AllyBullet)) {
         motion_add(other.ang, 4)
@@ -26,7 +26,7 @@ do {
         raddrop -= 10
         with(instance_create(x, y, BigRad)) {
             motion_add(other.direction, other.speed)
-            motion_add(random(360), (random((other.raddrop / 2)) + 2))
+            motion_add(random_angle, (random((other.raddrop / 2)) + 2))
             repeat speed
             speed *= 0.9
         }
@@ -36,7 +36,7 @@ do {
 repeat raddrop {
     with(instance_create(x, y, Rad)) {
         motion_add(other.direction, other.speed)
-        motion_add(random(360), (random((other.raddrop / 2)) + 2))
+        motion_add(random_angle, (random((other.raddrop / 2)) + 2))
         repeat speed
         speed *= 0.9
     }

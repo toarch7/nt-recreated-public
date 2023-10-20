@@ -1,7 +1,7 @@
 audio_stop_sound(snd)
 snd_play_hit_big(sndBloodCannonEnd, 0.2)
 instance_create(x, y, PortalClear)
-ang = random(360)
+ang = random_angle
 with(instance_create((x + lengthdir_x(24, ang)), (y + lengthdir_y(24, ang)), MeatExplosion))
 hit_id = other.hit_id
 with(instance_create((x + lengthdir_x(24, (ang + 60))), (y + lengthdir_y(24, (ang + 120))), MeatExplosion))

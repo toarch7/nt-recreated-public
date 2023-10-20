@@ -10,13 +10,13 @@ if instance_exists(target) {
         walk = 15 + random(5)
         alarm[1] = walk + 5
     } else if random(2) < 1 {
-        motion_add(random(360), 0.4)
+        motion_add(random_angle, 0.4)
         walk = 10 + random(10)
         alarm[1] = walk + 10 + random(10)
     }
 
 } else if random(4) < 1 {
-    motion_add(random(360), 0.4)
+    motion_add(random_angle, 0.4)
     walk = 10 + random(10)
     alarm[1] = walk + 10 + random(10)
 }

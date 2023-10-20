@@ -76,7 +76,7 @@ function scrGameLoad() {
                     name = wep_name[wep]
                     type = wep_type[wep]
                     sprite_index = wep_sprt[wep]
-                    image_angle = random(360)
+                    image_angle = random_angle
                     mask_index = mskNone
                     persistent = 1
                     visible = 0

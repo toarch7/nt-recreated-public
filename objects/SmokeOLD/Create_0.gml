@@ -1,3 +1,3 @@
-image_angle = random(360)
+image_angle = random_angle
 friction = 0.2
 image_speed = 0.2 + random(0.1)

@@ -7,6 +7,6 @@ spr_dead = sprBushDead
 
 event_inherited()
 
-move_contact_solid(random(360), random(64))
+move_contact_solid(random_angle, random(64))
 
 snd_hurt = sndHitPlant

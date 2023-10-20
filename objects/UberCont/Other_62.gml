@@ -45,7 +45,7 @@ if async_load[? "id"] == daily_request && get_daily_times++ < 5 {
         daily_seed = scrReal(text[? "seed"])
         daily_time = scrReal(text[? "time"])
 
-        can_daily = daily_seed > 0 && save_get_val("etc", "seed", "-1") != daily_seed
+        can_daily = daily_seed > 0 && save_get_value("etc", "seed", "-1") != daily_seed
     }
 	else daily_request = -1
 }

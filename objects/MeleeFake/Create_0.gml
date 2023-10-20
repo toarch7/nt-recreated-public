@@ -29,7 +29,7 @@ sprite_index = spr_idle
 
 //behavior
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 wepangle = choose(-140, 140)
 wepflip = 1
 

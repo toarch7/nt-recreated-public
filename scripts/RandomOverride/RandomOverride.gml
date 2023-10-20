@@ -16,7 +16,7 @@
 global.random_state = 1
 
 function randomize_wrapper() {
-	var _seed = __randomize()
+	var _seed = 1//__randomize()
 	
 	global.random_state = _seed
 	random_set_seed(_seed)

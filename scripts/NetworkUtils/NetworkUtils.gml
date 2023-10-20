@@ -99,3 +99,41 @@ function network_clientcount() {
 	
 	return 0
 }
+
+global.variable_instance_string = ""
+
+function instance_variables_write() {
+	var variables = variable_instance_get_names(id)
+	var len = array_length(variables)
+	
+	array_push(variables,
+		"x", "y", "speed", "direction", "image_angle", "image_xscale", "image_yscale",
+		"image_index", "image_speed", "image_blend", "image_angle")
+	
+	global.variable_instance_string += "|"
+	
+	for(var i = 0; i < len; i ++) {
+		var vname = variables[i]
+		global.variable_instance_string += vname + "=" + string(self[$ vname])
+	}
+}
+
+function gamestate_get_checksum() {
+	/*
+	global.variable_instance_string = ""
+	
+	var t = get_timer()
+	
+	with all {
+		if instance_is(self, UberCont) or instance_is(self, CoopController)
+			continue
+		
+		instance_variables_write()
+	}
+	
+	var result = md5_string_utf8(global.variable_instance_string)
+	
+	print("Hash time:", get_timer() - t)*/
+	
+	return -1
+}

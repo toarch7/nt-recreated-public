@@ -1,5 +1,5 @@
 dist = random(135) + 10
-angle = random(360)
+angle = random_angle
 turnspeed = random(8) - 4
 rotspeed = random(16) - 8
 
@@ -34,4 +34,4 @@ image_xscale = 0
 image_yscale = 0
 grow = 0
 
-image_angle = random(360)
+image_angle = random_angle

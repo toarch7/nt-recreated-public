@@ -1,9 +1,12 @@
 // called whenever chest is being opened
-// return any value > 0 to prevent further event code
+// return any value >=0.5 to prevent further event code
 function scrChestOpened() {
+	if instance_exists(GenCont)
+		return true
+	
 	var p = instance_nearest(x, y, Player)
 	
-	if !p
+	if !instance_exists(p)
 		exit
 	
 	// crown of hatred
@@ -27,7 +30,7 @@ function scrChestOpened() {
 				
 		        repeat a {
 		            with instance_create(x, y, Rad)
-						motion_add(random(360), 2 + random(4))
+						motion_add(random_angle, 2 + random(4))
 		        }
 		    }
 		}

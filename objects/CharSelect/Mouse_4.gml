@@ -32,10 +32,10 @@ if inst.race != race {
 	}
 	
     inst.race = race
-    inst.skin = save_get_val("cskin", string(race), 0)
+    inst.skin = save_get_value("cskin", string(race), 0)
 	
     if !UberCont.daily_run {
-        inst.cwep = save_get_val("cswep", string(race), 0) ? UberCont.cwep[race] : UberCont.race_swep[race]
+        inst.cwep = save_get_value("cswep", string(race), 0) ? UberCont.cwep[race] : UberCont.race_swep[race]
     }
 	else if !UberCont.weekly_run {
         inst.cwep = race_swep[race]

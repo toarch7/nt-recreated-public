@@ -12,7 +12,7 @@ if !p
 if p.race != 12 {
     repeat 25 {
         with instance_create(x, y, Rad)
-        motion_add(random(360), random(5))
+        motion_add(random_angle, random(5))
     }
 }
 else with p {

@@ -40,5 +40,5 @@ if instance_nearest(x - 16, y - 16, Floor).styleb = 1 {
 
 event_inherited()
 
-move_contact_solid(random(360), random(12))
+move_contact_solid(random_angle, random(12))
 if !place_free(x, y + 12) move_contact_solid(random(90) + 45, random(12))

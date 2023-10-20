@@ -1,6 +1,6 @@
-image_angle = random(360)
+image_angle = random_angle
 alarm[0] = 150 + random(30)
-motion_add(random(360), 1.8 + random(1.2))
+motion_add(random_angle, 1.8 + random(1.2))
 vspeed -= 1.2 - random(0.3)
 fall = 40 + random(30)
 rot = random(6) - 3

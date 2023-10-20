@@ -12,7 +12,7 @@ if image_index >= 9 && !explode {
 	repeat 12
 		instance_create(x, y, Bubble)
 	
-	var ang = random(360)
+	var ang = random_angle
 	
 	repeat 16 {
 		// we don't talk about it

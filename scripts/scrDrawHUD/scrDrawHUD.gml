@@ -307,7 +307,7 @@ function scrDrawHUD(plr = noone) {
         }
     }
 
-    with JungleFlower {
+    with IceFlower {
         if place_meeting(x, y, plr) {
             var _x = x_rel_view,
 				_y = y_rel_view,

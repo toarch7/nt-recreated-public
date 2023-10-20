@@ -1,5 +1,5 @@
 dist = random(135) + 10
-angle = random(360)
+angle = random_angle
 
 image_index = choose(0, 0, 0, 1)
 image_speed = 0

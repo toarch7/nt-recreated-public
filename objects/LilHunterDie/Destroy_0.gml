@@ -1,7 +1,7 @@
 snd_play(sndExplosionL)
 snd_play(sndLilHunterDeath)
 repeat(1 + GameCont.loops) {
-    ang = random(360)
+    ang = random_angle
     with(instance_create((x + lengthdir_x(12, ang)), (y + lengthdir_y(12, ang)), Explosion))
     hit_id = other.sprite_index
     with(instance_create((x + lengthdir_x(12, (ang + 120))), (y + lengthdir_y(12, (ang + 180))), Explosion))

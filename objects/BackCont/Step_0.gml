@@ -60,7 +60,7 @@ if !instance_exists(LevCont) && !instance_exists(CrownIcon) && !(instance_exists
                 dis2 = point_distance(x, y, mouse_x, mouse_y) / viewdist
             }
 			else if instance_exists(JoystickAttack) {
-                if !save_get_val("contorls", "aimbot", 0) {
+                if !save_get_value("contorls", "aimbot", 0) {
                     dir2 = KeyCont.dir_fire[global.index]
                     dis2 = JoystickAttack.vdis / viewdist
                 }

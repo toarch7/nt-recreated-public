@@ -55,7 +55,7 @@ options = [
     value: 5,
     type: "category",
     onClick: function() {
-        if !save_get_val("etc", "rp_warning", 0) {
+        if !save_get_value("etc", "rp_warning", 0) {
 			with MenuOptions rp_warning = 1
 		}
 		else {
@@ -145,7 +145,7 @@ options = [
             self.value = 0
         }
 
-        save_set_val(self.group, self.key, self.value)
+        save_set_value(self.group, self.key, self.value)
     },
 
     onDraw: function(dx, dy) {
@@ -252,7 +252,7 @@ options = [
         }
 
         optItself.value = result
-        save_set_val(opt[0], opt[1], result)
+        save_set_value(opt[0], opt[1], result)
         scrOptionsUpdate()
     }
 },
@@ -397,7 +397,7 @@ options = [
 
             for (var i = 0; i < array_length(names); i++) {
                 var name = names[i]
-                save_set_val("gamepadkey", name, gpad[$ name])
+                save_set_value("gamepadkey", name, gpad[$ name])
             }
         }
 
@@ -453,7 +453,7 @@ foreach(options, function(val) {
         var v = val[i];
 
         if !is_undefined(v[$ "value"]) && !is_undefined(v[$ "group"]) {
-            v.value = save_get_val(v.group, v.key, v.value)
+            v.value = save_get_value(v.group, v.key, v.value)
         }
 
         if !is_undefined(v[$ "name"]) && v.name == "DELETING IN" {

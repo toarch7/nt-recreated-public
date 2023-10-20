@@ -6,7 +6,7 @@ with UberCont {
             race = 12;
             skin = 0
         }
-        save_set_val("cgot", "12", 1)
+        save_set_value("cgot", "12", 1)
     }
 
     scrUnlock()

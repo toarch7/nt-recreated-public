@@ -2,7 +2,7 @@ if lockstep_stop
 	exit
 
 if KeyCont.press_pick[p] {
-    dir = random(360)
+    dir = random_angle
     repeat 2 + random(3) {
         with instance_create(x, y, BloodStreak) {
             motion_add(other.dir, 5)

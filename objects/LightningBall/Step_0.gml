@@ -7,7 +7,7 @@ x += (random(2) - 1)
 y += (random(2) - 1)
 if (random(4) < 1) {
     with(instance_create(x, y, Lightning)) {
-        image_angle = random(360)
+        image_angle = random_angle
         team = other.team
         hit_id = other.hit_id
         ammo = (5 * choose(1, 1, 1, 1, 2, 3))

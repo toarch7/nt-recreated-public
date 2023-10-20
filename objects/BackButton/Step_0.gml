@@ -9,9 +9,15 @@ depth = -1000
 if !visible
 	exit
 
-var press = mouse_ui_clicked()
+var press = mouse_ui_clicked(),
+	backspace = keyboard_check_pressed(vk_backspace)
 
-if (gamepad_button_check_pressed(0, gp_face2) or keyboard_check_pressed(vk_escape))
+with MenuOptions {
+	if text_input_element != undefined
+		backspace = false
+}
+
+if (gamepad_button_check_pressed(0, gp_face2) or keyboard_check_pressed(vk_escape) or backspace)
 or (global.desktop && mouse_check_button_pressed(mb_right) && !(instance_exists(CoopController) && instance_exists(Menu)))
 {
 	if !instance_exists_var(MenuOptions, "await_input", true)

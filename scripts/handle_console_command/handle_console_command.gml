@@ -288,7 +288,7 @@ function handle_console_command(str) {
 				
                 with UberCont {
 					opt_keyboard = !opt_keyboard
-					save_set_val("options", "keyboard", opt_keyboard)
+					save_set_value("options", "keyboard", opt_keyboard)
 					
 					print(opt_keyboard ? "Disabled mobile controls" : "Enabled mobile controls")
 				}

@@ -6,7 +6,7 @@ scrTarget()
 if instance_exists(target) && instance_exists(target) {
     if !collision_line(x, y, target.x, target.y, Wall, 0, 0) {
         direction = ((target_direction + random(20)) - 10)
-    } else direction = random(360)
+    } else direction = random_angle
 
     if random(4) < 1 {
         alarm[2] = 10
@@ -31,7 +31,7 @@ if instance_exists(target) && instance_exists(target) {
         }
     }
 } else {
-    direction = random(360)
+    direction = random_angle
     if random(8) < 1 {
         walk = 50
     }

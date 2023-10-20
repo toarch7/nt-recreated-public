@@ -22,10 +22,10 @@ snd_hurt = sndDogGuardianHurt
 snd_dead = sndDogGuardianDead
 snd_mele = sndDogGuardianMelee
 
-direction = random(360)
+direction = random_angle
 
 //behavior
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 120 + random(10)
 walk = 0
 

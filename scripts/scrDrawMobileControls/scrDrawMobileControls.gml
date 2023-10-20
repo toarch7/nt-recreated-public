@@ -2,7 +2,10 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 	if UberCont.quit_pause or UberCont.want_pause
 		exit
 	
-    var width = 1
+    var width = 1,
+		hiddensticks = UberCont.opt_hiddensticks,
+		simplify = UberCont.opt_simplify,
+		aimbot = UberCont.opt_aimbot
 
     scale = min(1 + scale, 1.5)
     var m = (0.5 + scale) / 2
@@ -16,18 +19,22 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
         var xx = lengthdir_x(dis, dir)
         var yy = lengthdir_y(dis, dir)
 
-        if UberCont.opt_simplify {
-            draw_circle_width(x, y, rad * m, width)
+        if simplify {
+			draw_set_alpha(image_alpha)
+			
+			draw_circle_width(x, y, rad * m, width)
 	
             if dis
 				draw_set_color(c_gray)
 
             draw_circle(x + xx, y + yy, rad / 3 * m, 0)
             draw_set_color(c_white)
+			
+			draw_set_alpha(1)
         }
 		else {
-            draw_sprite_ext(sprMobileControlJoystick, 0, x, y, scale, scale, 0, c_white, 1)
-            draw_sprite_ext(sprMobileControlJoystick, 1, x + xx, y + yy, scale, scale, 0, c_white, 1)
+			draw_sprite_ext(sprMobileControlJoystick, 0, x, y, scale, scale, 0, c_white, image_alpha)
+            draw_sprite_ext(sprMobileControlJoystick, 1, x + xx, y + yy, scale, scale, 0, c_white, image_alpha)
         }
     }
 
@@ -37,21 +44,24 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 		
         var xx = lengthdir_x(dis, dir),
 			yy = lengthdir_y(dis, dir),
+			a = image_alpha,
 			ang = 0,
 			draw_out = false
 		
 		var wepstick = instance_is(self, WepstickAttack),
 			wepstick_scale = 0.8
 		
-		if UberCont.opt_aimbot {
+		if aimbot {
 			ang = 45
 			
 			xx = 0
 			yy = 0
 		}
 		
-        if UberCont.opt_simplify {
-			draw_circle_width(x, y, rad * m, width)
+        if simplify {
+			draw_set_alpha(a)
+			
+            draw_circle_width(x, y, rad * m, width)
 
             if dis
 				draw_set_color(c_gray)
@@ -62,12 +72,14 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
             else draw_circle(x + xx, y + yy, rad / 3 * m, 0)
 			
             draw_set_color(c_white)
+			draw_set_alpha(1)
         }
 		else {
             var col = 0x0dfd98,
-				crosshair = UberCont.opt_crosshair
+				crosshair = UberCont.opt_crosshair,
+				splitfire = UberCont.opt_splitfire
 			
-			if !UberCont.opt_splitfire && UberCont.opt_cursorcol != c_white
+			if !splitfire && UberCont.opt_cursorcol != c_white
 				col = UberCont.opt_cursorcol
 			
 			var _s = scale
@@ -75,12 +87,13 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 			if wepstick
 				_s *= wepstick_scale
 			
-            draw_sprite_ext(sprMobileControlJoystick, 0, x, y, _s, _s, ang, c_white, 1)
-			draw_sprite_ext(sprCrosshairBig, crosshair, x + xx, y + yy, _s / 2, _s / 2, ang, col, 1)
+			draw_sprite_ext(sprMobileControlJoystick, 0, x, y, _s, _s, ang, c_white, a)
 			
-			if index != -1 && !(wepstick or UberCont.opt_aimbot ) && (dis / rad) < 0.33
-				draw_sprite_ext(sprMobileControlJoystick, 2, x, y, _s, _s, ang, c_gray, 1)
-        }
+			draw_sprite_ext(sprCrosshairBig, crosshair, x + xx, y + yy, _s / 2, _s / 2, ang, col, a)
+			
+			if (splitfire && !wepstick) or (index != -1 && !(wepstick or aimbot ) && (!splitfire && (dis / rad) < ATTACK_BUTTON_DEADZONE))
+				draw_sprite_ext(sprMobileControlJoystick, 2, x, y, _s, _s, ang, c_gray, a)
+		}
 		
 		if wepstick {
 			var col = active ? make_color_hsv(65, 242, 252) : c_gray,
@@ -89,8 +102,8 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 			if index != -1 && (dis / rad) < ATTACK_BUTTON_DEADZONE
 				col = merge_color(col, c_gray, 0.5)
 			
-			if !UberCont.opt_simplify
-				draw_sprite_ext(sprMobileControlJoystick, 2, x, y, _s, _s, ang, col, 1)
+			if !simplify
+				draw_sprite_ext(sprMobileControlJoystick, 2, x, y, _s, _s, ang, col, a)
 			
 			var current = instance_exists(plr) ? wep_spr : (wep_sprt[primary ? 1 : 3])
 			
@@ -98,7 +111,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 				var col = active ? c_white : c_gray,
 					_s = (scale + 0.5) * 0.67
 				
-				draw_sprite_ext(current, 0, x + xx * 0.37 + 8, y + yy * 0.37 + 12, _s, _s, 60, col, 1)
+				draw_sprite_ext(current, 0, x + xx * 0.37 + 8, y + yy * 0.37 + 12, _s, _s, 60, col, a)
 			}
 		}
     }
@@ -148,7 +161,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
         var d = self[$ "do_thing"],
             c = (d == 1 ? c_lime : (d == -1 ? c_yellow : (d == 2 ? c_gray : c_white)))
 		
-        if UberCont.opt_simplify {
+        if simplify {
             draw_set_color(c)
             draw_set_alpha(alpha)
             draw_circle_width(x, y, rad * m, width)
@@ -164,7 +177,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
         var _s = scale / 2,
 			col = UberCont.opt_cursorcol
 		
-		if UberCont.opt_simplify {
+		if simplify {
             draw_set_color(c_white)
             draw_set_alpha(1)
 			
@@ -197,7 +210,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
         var bwep = instance_exists(plr) ? plr.bwep : 3
         var reload = instance_exists(plr) ? plr.reload : 4
 
-        if !UberCont.opt_simplify {
+        if !simplify {
             draw_circle_part(x, y, rad * m, width, 1 - reload / wep_load[wep])
         } else draw_circle_width(x, y, rad * m, width)
 
@@ -220,7 +233,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
     }
 
     if UberCont.opt_volumecontrol {
-        var l = save_get_val("etc", "language", "null")
+        var l = save_get_value("etc", "language", "null")
         var s = sprMobileVolumeControl
 
         if l == "ru"
@@ -252,7 +265,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 			else s = lerp(s, 0, 0.2)
 
             if s > 0 {
-                draw_circle_width(x, y, rad * (UberCont.opt_controls_scale * 1.5 + 0.5), s)
+                draw_circle_width(x, y, get_touch_radius(rad), s)
             }
 
             self[$ "fancyrad"] = s

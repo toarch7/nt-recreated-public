@@ -25,7 +25,7 @@ if disclaimer {
 		draw_text_nt(view_width / 2, view_height - 56 + (disclaimer == 90) * 2, str)
 		
 		if mouse_ui_clicked() or keyboard_check_pressed(vk_anykey) {
-			save_set_val("etc", "disclaimer", 1)
+			save_set_value("etc", "disclaimer", 1)
 			event_perform(ev_alarm, 0)
 		}
 	}
@@ -98,14 +98,8 @@ if loading {
             if point_in_circle(mx, my, xx + 48, yy + 28, 16) or p == -1 {
                 // yesn't
                 file_delete("gamestate.dat")
-                room_goto(romGame)
 
-                playerinstances = {}
-                UberCont.daily_run = 0
-                UberCont.weekly_run = 0
-                global.hardmode = 0
-
-                instance_destroy()
+                game_restart()
             }
 			else if point_in_circle(mx, my, xx - 48, yy + 28, 16) or p == 1 {
                 // yes

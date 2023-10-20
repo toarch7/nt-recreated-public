@@ -7,7 +7,7 @@ instance_create(x, y, PortalClear)
 event_inherited()
 
 if charge {
-    ang = random(360)
+    ang = random_angle
     repeat 14 {
         with instance_create(x, y, ExploguardianBullet) {
             team = other.team

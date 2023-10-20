@@ -15,7 +15,7 @@ snd_dead = sndAssassinDie
 
 //behavior
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 90 + random(90)
 wepangle = choose(-140, 140)
 wepflip = 1

@@ -6,14 +6,14 @@ function scrSaveStats() {
     dir = 1
     repeat(racemax) {
         //WRITE THAT SHIT
-        save_set_val("ctotkill", string(dir), 0)
-        save_set_val("ctotdead", string(dir), 0)
-        save_set_val("ctotloop", string(dir), 0)
-        save_set_val("ctottime", string(dir), 0)
-        save_set_val("cbstkill", string(dir), 0)
-        save_set_val("cbstdiff", string(dir), 0)
-        save_set_val("cbstloop", string(dir), 0)
-        save_set_val("cbsttime", string(dir), 0)
+        save_set_value("ctotkill", string(dir), 0)
+        save_set_value("ctotdead", string(dir), 0)
+        save_set_value("ctotloop", string(dir), 0)
+        save_set_value("ctottime", string(dir), 0)
+        save_set_value("cbstkill", string(dir), 0)
+        save_set_value("cbstdiff", string(dir), 0)
+        save_set_value("cbstloop", string(dir), 0)
+        save_set_value("cbsttime", string(dir), 0)
         dir += 1
     }
 

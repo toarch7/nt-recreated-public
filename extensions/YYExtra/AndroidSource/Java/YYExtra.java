@@ -41,6 +41,7 @@ import android.content.DialogInterface;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.text.ClipboardManager;
 
 
 public class YYExtra extends ExtensionBase {
@@ -108,6 +109,23 @@ public class YYExtra extends ExtensionBase {
 		
 		return 0.0;
 	}
+	
+	public double SetClipboard(String text) {
+		ClipboardManager clipboard = (ClipboardManager) RunnerActivity.CurrentActivity.getSystemService(Context.CLIPBOARD_SERVICE); 
+		clipboard.setText(text);
+		
+		Log.i("yoyo", "Set clipboard text to " + text);
+		
+		return 0.0;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public double ResourcepackInstall(String path, String dest) {
 		YYExtra.unzipFirstEntry = "";

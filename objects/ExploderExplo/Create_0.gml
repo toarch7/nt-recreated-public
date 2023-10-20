@@ -1,6 +1,6 @@
 image_speed = 0.4
 
-dir = random(360)
+dir = random_angle
 repeat(6) {
     with instance_create(x, y, Smoke)
     motion_add(other.dir, 4 + random(1))

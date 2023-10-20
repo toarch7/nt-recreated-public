@@ -1,3 +1,5 @@
+#macro CONSOLE_MAX_CAPACITY 40
+
 function print() {
     var str = string(argument[0])
 
@@ -9,7 +11,7 @@ function print() {
         array_push(global.log_output, str)
         array_push(global.log_color, c_white)
 
-        if array_length(global.log_output) >= 20 {
+        if array_length(global.log_output) >= CONSOLE_MAX_CAPACITY {
             array_delete(global.log_output, 0, 1)
             array_delete(global.log_color, 0, 1)
         }

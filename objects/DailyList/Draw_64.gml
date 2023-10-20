@@ -42,9 +42,7 @@ if !array_length(keys) {
 
 var avg = kills / len
 
-draw_set_font(fntSmall)
-draw_text_nt(38, 14, loc("@dAVERAGE SCORE") + ":#" + string(avg))
-draw_set_font(fntM1)
+draw_text_nt(38, 14, loc("@dAVERAGE SCORE") + ":#" + string(avg), 0.67)
 
 draw_set_color(c_white)
 

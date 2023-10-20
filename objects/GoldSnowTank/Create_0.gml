@@ -18,7 +18,7 @@ snd_dead = sndGoldTankDead
 alarm[1] = 120 + random(10)
 
 ammo = 0
-gunangle = random(360)
+gunangle = random_angle
 
 spr_shadow = shd32
 spr_shadow_y = 3

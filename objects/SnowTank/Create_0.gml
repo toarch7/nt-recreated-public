@@ -17,7 +17,7 @@ snd_dead = sndSnowTankDead
 //behavior
 alarm[1] = 30 + random(10)
 ammo = 0
-gunangle = random(360)
+gunangle = random_angle
 rest = 0
 wave = 0
 

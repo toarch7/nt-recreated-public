@@ -6,7 +6,7 @@
     "path": "folders/Scripts/INI.yy",
   },
   "resourceVersion": "1.0",
-  "name": "save_set_val_s",
+  "name": "save_set_option",
   "tags": [],
   "resourceType": "GMScript",
 }

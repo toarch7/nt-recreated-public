@@ -1,5 +1,5 @@
 friction = 0.2
-image_angle = random(360)
+image_angle = random_angle
 
 
 blink = 30

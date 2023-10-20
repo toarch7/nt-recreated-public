@@ -9,7 +9,7 @@ function scrLoadLoadout() {
         race_crown[i, 1] = 1
 
         for (var c = 1; c <= crownmax; c++) {
-            race_crown[i, c] = save_get_val("crowngot" + string(i), string(c), 0)
+            race_crown[i, c] = save_get_value("crowngot" + string(i), string(c), 0)
 
             if !race_crown[i, c] {
                 allcrowns = 0

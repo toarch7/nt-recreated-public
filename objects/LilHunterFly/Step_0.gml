@@ -10,7 +10,7 @@ if sprite_index == sprLilHunterLift {
             y = target.y
 			
             if random(3) < 1 {
-                ang = random(360)
+                ang = random_angle
                 dir = instance_nearest(x + 16 + lengthdir_x(120, ang), y + 16 + lengthdir_y(120, ang), Floor)
                 
 				x = dir.x + random(32)
@@ -33,7 +33,7 @@ if sprite_index == sprLilHunterLand {
         BackCont.shake += 5
         snd_play(sndLilHunterLand)
         instance_create(x, y, PortalClear)
-        firang = random(360)
+        firang = random_angle
 		
         repeat 80 {
             firang += 4.5
@@ -50,7 +50,7 @@ if sprite_index == sprLilHunterLand {
 		
         repeat 6 {
             with(instance_create(((x + random(16)) - 8), (y + random(16)), Dust))
-            motion_add(random(360), (3 + random(1)))
+            motion_add(random_angle, (3 + random(1)))
         }
 		
         z = 0

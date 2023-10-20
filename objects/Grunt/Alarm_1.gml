@@ -41,7 +41,7 @@ if instance_exists(target) and roll = 0 {
             //DONT SEE PLAYER
             if random(4) < 1 {
                 //WALK
-                motion_add(random(360), 0.4)
+                motion_add(random_angle, 0.4)
                 walk = 20 + random(10)
                 gunangle = direction
                 if hspeed > 0 right = 1
@@ -69,7 +69,7 @@ if instance_exists(target) and roll = 0 {
     }
 } else if random(10) < 1 and roll = 0 {
     //NO TARGET
-    motion_add(random(360), 0.4)
+    motion_add(random_angle, 0.4)
     walk = 20 + random(10)
     alarm[1] = walk + 10 + random(30)
     gunangle = direction

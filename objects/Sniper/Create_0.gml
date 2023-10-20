@@ -15,7 +15,7 @@ snd_hurt = sndSniperHit
 
 //behavior
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 60 + random(90)
 gonnafire = 0
 wkick = 0

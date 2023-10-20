@@ -34,7 +34,7 @@ team = 3
 //behavior
 walk = 0
 grenades = 2
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 30 + random(15)
 wkick = 0
 roll = 1

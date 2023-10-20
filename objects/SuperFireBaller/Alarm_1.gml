@@ -37,5 +37,5 @@ if instance_exists(target) {
             sprite_index = spr_fire
             alarm[1] = 8
         } else direction = target_direction + random(20) - 10
-    } else motion_add(random(360), 1)
-} else motion_add(random(360), 0.5)
+    } else motion_add(random_angle, 1)
+} else motion_add(random_angle, 0.5)

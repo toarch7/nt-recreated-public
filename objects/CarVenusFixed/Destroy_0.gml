@@ -8,7 +8,7 @@ with instance_create(x, y + 6, Scorchmark) {
 
 repeat 2 + irandom(3) {
     with instance_create(x, y, GroundFlame) {
-        move_contact_solid(random(360), 4 + random(16))
+        move_contact_solid(random_angle, 4 + random(16))
     }
 }
 

@@ -1,57 +1,56 @@
 function scrRadDrop(raddrop) {
-	var p = instance_nearest(x, y, Player)
+	var p = instance_nearest(x, y, Player),
+		high = 15
 	
-	do {
-		if raddrop >= 15 {
-			raddrop -= 10
+	if instance_is(self, RadChest)
+		high = 26
+	
+	while raddrop >= high {
+		raddrop -= 10
+		
+		with instance_create(x, y, BigRad) {
+			motion_add(other.direction, other.speed)
+			motion_add(random_angle, random(raddrop / 2) + 5)
 			
-			with instance_create(x, y, BigRad) {
-				motion_add(other.direction, other.speed)
-				motion_add(random(360), random(raddrop / 2) + 5)
-				
-				repeat speed
+			repeat speed
 				speed *= 0.9
-				
-				if instance_exists(p) && p.race == 11 && ultra_get(1) {
-				    repeat 4 {
-					    with instance_create(x, y, HorrorBullet) {
-					        creator = p.id
-					        direction = other.direction + random_range(-8, 8)
-							
-							if instance_exists(creator) && creator.bskin
-								sprite_index = sprHorrorBullet2
-							
-					        speed = 9
-					        image_angle = direction
-					        team = creator.team
-					    }
-					}
-				}
+			
+			repeat 4 {
+				scrStalkerProc()
 			}
 		}
-	} until raddrop <= 15
+	}
 	
 	repeat raddrop {
 		with instance_create(x, y, Rad) {
 			motion_add(other.direction, other.speed)
-			motion_add(random(360), random(raddrop / 2) + 5)
+			motion_add(random_angle, random(raddrop / 2) + 5)
 			
 			repeat speed
 			speed *= 0.9
 			
-			if instance_exists(p) && p.race == 11 && ultra_get(1) {
-			    with instance_create(x, y, HorrorBullet) {
-			        creator = p.id
-			        direction = other.direction
-					
-			        if instance_exists(creator) && creator.bskin
-						sprite_index = sprHorrorBullet2
-					
-			        speed = 9
-			        image_angle = direction
-			        team = creator.team
-			    }
-			}
+			scrStalkerProc()
+		}
+	}
+}
+
+function scrStalkerProc() {
+	var drop = id
+	
+	with Player {
+		if race != 11 or !ultra_get(1)
+			continue
+		
+		with instance_create(drop.x, drop.y, HorrorBullet) {
+			creator = other.id
+			direction = drop.direction
+				
+			if other.bskin
+				sprite_index = sprHorrorBullet2
+				
+			speed = 9
+			image_angle = direction
+			team = other.team
 		}
 	}
 }

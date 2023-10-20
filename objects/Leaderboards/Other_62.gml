@@ -14,6 +14,9 @@ if async_load[? "id"] == req {
 			var key = keys[i],
 				item = entries[$ key]
 			
+			if is_undefined(item)
+				continue
+			
 			if key == uid
 				my_entry = item
 			
@@ -41,6 +44,6 @@ if async_load[? "id"] == req {
 		max_height = max(0, (array_length(items) * draw_step_size) - 160)
 	}
 	catch(e) {
-		print(e.longMessage)
+		print_error(e.longMessage)
 	}
 }

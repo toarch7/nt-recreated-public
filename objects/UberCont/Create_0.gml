@@ -52,9 +52,9 @@ scrInit()
 
 scrWeapons()
 
-tot_time = save_get_val("data", "tot_time", 0)
-checksettings = save_get_val("etc", "checksettings", 0)
-tot_time = save_get_val("data", "tot_time", 0)
+tot_time = save_get_value("data", "tot_time", 0)
+checksettings = save_get_value("etc", "checksettings", 0)
+tot_time = save_get_value("data", "tot_time", 0)
 
 xmas = 0
 halloween = 0

@@ -7,7 +7,7 @@ hit_id = other.spr_idle
 
 snd_play(sndToxicBarrelGas)
 
-dir = random(360)
+dir = random_angle
 repeat(20) {
     dir += 360 / 20
     with instance_create(x, y, EnemyBullet2) {
@@ -26,7 +26,7 @@ BackCont.shake += 20
 
 repeat(5) {
     with instance_create(x, y, ExploderExplo)
-    motion_add(random(360), random(2) + 2)
+    motion_add(random_angle, random(2) + 2)
 }
 
 snd_play(sndFrogExplode)

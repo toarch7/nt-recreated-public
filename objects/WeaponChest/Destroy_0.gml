@@ -11,7 +11,7 @@ with instance_create(x, y, ChestOpen) {
 if GameCont.underwater {
     repeat 12 + random(8) {
         with instance_create(x, y, Bubble) {
-            motion_add(random(360), random(2) + 2)
+            motion_add(random_angle, random(2) + 2)
         }
     }
 }

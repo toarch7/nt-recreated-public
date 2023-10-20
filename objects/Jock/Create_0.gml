@@ -18,7 +18,7 @@ spr_shadow = shd32
 
 //behavior
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 30 + random(90)
 wkick = 0
 ammo = 5

@@ -5,8 +5,8 @@ if instance_exists(MenuOptions) && MenuOptions.editing_mode && !UberCont.opt_gam
         x = device_mouse_x_to_gui(index)
         y = device_mouse_y_to_gui(index)
 		
-        save_set_val("controls", key + "_x", x)
-        save_set_val("controls", key + "_y", y)
+        save_set_value("controls", key + "_x", x)
+        save_set_value("controls", key + "_y", y)
 		
         if !device_mouse_check_button(index, mb_left) {
 			event_user(10)

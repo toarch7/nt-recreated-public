@@ -109,7 +109,7 @@ safespawn = true
 safedir = irandom(3) * 90
 safefloors = 0
 
-if save_get_val("game", "tutorial", 1) {
+if save_get_value("game", "tutorial", 1) {
 	safespawn = true
     goal = 5
 	
@@ -119,12 +119,12 @@ if save_get_val("game", "tutorial", 1) {
 if instance_exists(MenuGen)
 	goal = 110
 
-crown = save_get_val("ccrown", string(GameCont.crown), 1)
+crown = save_get_value("ccrown", string(GameCont.crown), 1)
 splat = 0
 
 alarm[5] = 600
 
-if instance_exists(CoopController) {
+if instance_exists(CoopController) && false {
 	// silent world
 	goal = 0
 	

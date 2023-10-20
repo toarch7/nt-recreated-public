@@ -10,7 +10,7 @@ with instance_create(x, y, Explosion) {
     hit_id = other.hit_id
 }
 
-var firang = random(360)
+var firang = random_angle
 
 repeat 80 {
     firang += 4.5
@@ -56,7 +56,7 @@ do {
     if raddrop > 15 {
         with instance_create(x, y, BigRad) {
             motion_add(other.direction, other.speed)
-            motion_add(random(360), random(other.raddrop / 2) + 2)
+            motion_add(random_angle, random(other.raddrop / 2) + 2)
 
             repeat speed {
                 speed *= 0.9
@@ -70,7 +70,7 @@ do {
 repeat raddrop {
     with instance_create(x, y, Rad) {
         motion_add(other.direction, other.speed)
-        motion_add(random(360), random(other.raddrop / 2) + 2)
+        motion_add(random_angle, random(other.raddrop / 2) + 2)
 
         repeat speed {
             speed *= 0.9

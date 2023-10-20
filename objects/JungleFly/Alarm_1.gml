@@ -21,9 +21,9 @@ if target {
         }
     } else {
         rage = 0
-        motion_add(random(360), 1)
+        motion_add(random_angle, 1)
     }
 } else {
     rage = 0
-    motion_add(random(360), 1)
+    motion_add(random_angle, 1)
 }

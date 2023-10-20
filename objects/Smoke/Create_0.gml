@@ -3,9 +3,9 @@ if instance_exists(GenCont) {
     exit
 }
 
-image_angle = random(360)
+image_angle = random_angle
 
-motion_add(random(360), random(1) + 0.5)
+motion_add(random_angle, random(1) + 0.5)
 
 friction = 0.1
 image_speed = 0

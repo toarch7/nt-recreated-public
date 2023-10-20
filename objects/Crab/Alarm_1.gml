@@ -23,7 +23,7 @@ if target {
         right = 1
     }
 } else if random(10) < 1 {
-    motion_add(random(360), 0.4)
+    motion_add(random_angle, 0.4)
 
     gunangle = direction
     walk = 20 + random(10)

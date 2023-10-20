@@ -13,3 +13,6 @@ if fall {
     }
 	else speed = 0
 }
+
+if !speed
+	image_speed = 0

@@ -1,6 +1,6 @@
 event_inherited()
-image_angle = random(360)
-motion_add(random(360), random(1.5) + 0.2)
+image_angle = random_angle
+motion_add(random_angle, random(1.5) + 0.2)
 
 if GameCont.race == 15 && skill_get(5) {
     speed++

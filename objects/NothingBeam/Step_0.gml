@@ -13,7 +13,7 @@ y = creator.y + 48
 
 if charge {
     with instance_create(x, y - 16, NothingBeamChargeParticle) {
-        ang = random(360)
+        ang = random_angle
         dst = 16 + random(64)
         x += lengthdir_x(dst, ang)
         y += lengthdir_y(dst, ang)

@@ -18,7 +18,7 @@ snd_dead = sndRatKingDie
 //behavior
 ammo = choose(3, 4, 5)
 walk = 0
-gunangle = random(360)
+gunangle = random_angle
 alarm[1] = 1 + random(90)
 
 spawns = 0

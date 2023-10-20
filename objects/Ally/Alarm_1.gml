@@ -32,7 +32,7 @@ if ((target >= Player) && instance_exists(target)) {
         if (target.x < x) right = -1
         else if (target.x > x) right = 1
     } else if (random(4) < 3) {
-        motion_add(random(360), 0.4)
+        motion_add(random_angle, 0.4)
         if instance_exists(creator) {
             motion_add(point_direction(x, y, (view_xview + (view_width / 2)), (view_yview + (view_height / 2))), 0.8)
             motion_add(point_direction(x, y, creator.x, creator.y), 1)
@@ -44,7 +44,7 @@ if ((target >= Player) && instance_exists(target)) {
         else if (hspeed < 0) right = -1
     }
 } else if (random(10) < 1) {
-    motion_add(random(360), 0.4)
+    motion_add(random_angle, 0.4)
     walk = (20 + random(10))
     alarm[1] = (walk + 5)
     gunangle = direction

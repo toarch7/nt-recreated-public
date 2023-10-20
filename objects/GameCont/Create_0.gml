@@ -89,6 +89,6 @@ win = 0
 level_end = 0
 
 // set tip as seen on new run
-if save_get_val("etc", "saving_tip", 0) == -1 {
-    save_set_val("etc", "saving_tip", 1)
+if save_get_value("etc", "saving_tip", 0) == -1 {
+    save_set_value("etc", "saving_tip", 1)
 }

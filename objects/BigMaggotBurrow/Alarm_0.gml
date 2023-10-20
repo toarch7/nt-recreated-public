@@ -1,4 +1,4 @@
-ang = random(360)
+ang = random_angle
 var p = instance_nearest(x, y, Player)
 if instance_exists(p) {
     if place_free(p.x + lengthdir_x(64, ang), p.y + lengthdir_y(64, ang)) and place_meeting(p.x + lengthdir_x(64, ang), p.y + lengthdir_y(64, ang), Floor) {

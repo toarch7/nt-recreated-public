@@ -1,5 +1,5 @@
 if sprite_index == sprBallMumDying {
-    var ang = random(360)
+    var ang = random_angle
     team = 1
 
     repeat 80 {

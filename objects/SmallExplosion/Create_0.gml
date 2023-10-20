@@ -9,10 +9,10 @@ c = 5
 
 repeat 3 {
     with instance_create(x, y, Smoke)
-    motion_add(random(360), 1 + random(2))
+    motion_add(random_angle, 1 + random(2))
 }
 
-ang = random(360)
+ang = random_angle
 
 repeat c {
     with instance_create(x, y, Dust) {
