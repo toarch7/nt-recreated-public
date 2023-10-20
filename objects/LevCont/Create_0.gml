@@ -125,13 +125,11 @@ else if GameCont.ultrapoints {
     num = 2
 
     if GameCont.crown == 8 {
-        with instance_find(UltraIcon, irandom(1)) {
+        with instance_random(UltraIcon)
             instance_destroy()
-        }
-
-        with UltraIcon {
+		
+        with UltraIcon
             x = view_width / 2
-        }
     }
 
     if !instance_exists(CoopController) {
@@ -196,6 +194,7 @@ with SkillText
 
 
 grillpage = 0
+grillpadchange = 0
 overgrilled = false
 
 if UberCont.opt_griller && instance_exists(SkillIcon) {

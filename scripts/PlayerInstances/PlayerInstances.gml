@@ -113,24 +113,8 @@ function scrSpawnPlayers(myIndex = global.index) {
     }
 }
 
-function PlayerInstance(_index = 0) constructor {
-    index = _index
-	uid = -1
-	
-	name = "Player"
-	color = -1
-	
-    race = 0
-    skin = 0
-	
-    cwep = 1
-    hp = 0
-	cprefs = 0
-	randchar = 0
-	
-	latency = -1
-	
-	static update_prefs = function() {
+function player_update_prefs(pinst) {
+	with pinst {
 		var cprefs = 0
 		
 		with UberCont {
@@ -152,8 +136,10 @@ function PlayerInstance(_index = 0) constructor {
 			// share
 		}
 	}
-	
-	static pref = function(name) {
+}
+
+function player_pref(pinst, name) {
+	with pinst {
 		var list = UberCont.cpref_list,
 			index = array_indexof(list, name)
 		
@@ -163,6 +149,24 @@ function PlayerInstance(_index = 0) constructor {
 		
 		return bit_check(self.cprefs, 1 << (index + 1))
 	}
+}
+
+function PlayerInstance(_index = 0) constructor {
+    index = _index
+	uid = -1
+	
+	name = "Player"
+	color = -1
+	
+    race = 0
+    skin = 0
+	
+    cwep = 1
+    hp = 0
+	cprefs = 0
+	randchar = 0
+	
+	latency = -1
 	
     static write = function(buff) {
         buffer_write(buff, buffer_u8, index)
@@ -194,12 +198,12 @@ function PlayerInstance(_index = 0) constructor {
 	playerinstances[$ index] = self
 }
 
-function playerinstance_add(index, inst) {
+function player_add(index, inst) {
 	playerinstances[$ index] = inst
 }
 
-function playerinstance_reset(index = global.index) {
-	var old = playerinstance_get(index),
+function player_reset(index = global.index) {
+	var old = player_get(index),
 		old_index = -1
 	
 	if old != undefined
@@ -208,12 +212,12 @@ function playerinstance_reset(index = global.index) {
 	var player = new PlayerInstance(index)
 	
 	if old != undefined && old_index == index
-		player.update_prefs()
+		player_update_prefs(player)
 	
 	return player
 }
 
-function playerinstance_set_struct(pinst, data, skip_index = false) {
+function player_set_struct(pinst, data, skip_index = false) {
 	var keys = struct_keys(data)
 	
 	for(var k = 0; k < array_length(keys); k ++) {
@@ -234,17 +238,13 @@ function playerinstances_set_struct_list(pinstlist) {
 		var p = pinstlist[$ pinstkeys[i]],
 			pinst = new PlayerInstance(p.index)
 		
-		print(p.index, "playerinstance data", p)
-		
-		playerinstance_set_struct(pinst, p)
-		
-		print(p.index, "playerinstance written", pinst)
+		player_set_struct(pinst, p)
 		
 		playerinstances[$ p.index] = pinst
 	}
 }
 
-function playerinstance_remove(index) {
+function player_remove(index) {
     playerinstances[$ string(index)] = undefined
     playerinstances = struct_clone(playerinstances, false)
 
@@ -253,7 +253,7 @@ function playerinstance_remove(index) {
 
 
 function draw_playerinstance(index, x, y, width = 160, halign = fa_left) {
-	var inst = playerinstance_get(index)
+	var inst = player_get(index)
 	
 	if inst == undefined
 		exit

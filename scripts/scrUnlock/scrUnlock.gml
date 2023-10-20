@@ -196,9 +196,9 @@ function scrUnlock() {
 	
 	if loops >= 3 && !UberCont.opt_cheats {
 		save_set_value("cheats", "unlocked", true)
-		opt_cheats = true
+		UberCont.opt_cheats = true
 		
-		show_unlock_popup("@wCHEATS UNLOCKED#@sCHECK OUT MENU SETTINGS")
+		show_unlock_popup("@wCHEATS UNLOCKED#@sCHECK OUT MAIN MENU SETTINGS")
 		
 		scrSave()
 	}
@@ -223,7 +223,7 @@ function scrGoldenWeaponStoring(p) {
 		}
 		
 		if store != -1 {
-			var pinst = playerinstance_get()
+			var pinst = player_get()
 			
             snd_play(sndGoldWeaponLock)
 			scrAchievement(24)

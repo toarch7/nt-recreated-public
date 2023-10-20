@@ -1,7 +1,7 @@
 
 scrInit() // this is not right but not as bad how it was
 
-var secretchars = UberCont.cgot[13] + UberCont.cgot[14] + UberCont.cgot[15],
+var secretchars = (UberCont.cgot[13] > 0) + (UberCont.cgot[14] > 0) + (UberCont.cgot[15] > 0),
 	_x = secretchars < 3 ? 16 : 10
 
 crowngot = UberCont.crowngot

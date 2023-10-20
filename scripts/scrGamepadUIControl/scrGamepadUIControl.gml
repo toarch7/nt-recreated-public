@@ -143,8 +143,12 @@ function scrGamepadUIConrolSkillIcon(object) {
 	}
 	else gamepad_sel = 0
 	
-    if gamepad_sel < 0 || gamepad_sel >= instance_number(object) {
-        gamepad_sel = gamepad_h ? 0 : (instance_number(object) - 1)
+    if gamepad_sel < 0 or gamepad_sel >= instance_number(object) {
+		if UberCont.opt_griller && instance_exists(SkillIcon) {
+			with LevCont
+				grillpadchange = other.gamepad_h
+		}
+		else gamepad_sel = gamepad_h ? 0 : (instance_number(object) - 1)
     }
 	
     var button = instance_find(object, gamepad_sel)

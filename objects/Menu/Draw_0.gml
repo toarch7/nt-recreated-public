@@ -3,7 +3,7 @@ if lockstep_stop
 
 scrDrawSpiral()
 
-var inst = playerinstance_get(global.index),
+var inst = player_get(global.index),
 	yoff = dailylistfavor
 
 if inst == undefined
@@ -14,7 +14,7 @@ if global.coop {
         n = 0
 	
     for (var i = array_length(picks) - 1; i >= 0; i--) {
-        var _inst = playerinstance_get(picks[i])
+        var _inst = player_get(picks[i])
 
         if _inst.index == global.index or _inst.race == 0
             continue

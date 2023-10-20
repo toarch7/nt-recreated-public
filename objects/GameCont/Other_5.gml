@@ -131,8 +131,11 @@ if (instance_exists(WeaponChest) or instance_exists(BigWeaponChest)) and !(area 
     nochest++
 }
 
-if instance_exists(Player) && (instance_exists(RadChest) or instance_exists(RadChestBig)) && !(area == 1 && subarea == 1) {
-    noradch++
+if instance_exists(Player) && !(area == 1 && subarea == 1) {
+	if instance_exists(RadChest) or instance_exists(RadChestBig) or instance_exists(RadMaggotChest) {
+		noradch ++
+	}
+	else noradch = 0
 }
 
 if global.hardmode && race == 9 && area == 2 && !UberCont.cskingot[9] {

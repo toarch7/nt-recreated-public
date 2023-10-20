@@ -33,7 +33,7 @@ if spr != -1 {
 
 with Player {
     if visible {
-		var pinst = playerinstance_get(index),
+		var pinst = player_get(index),
 			col = c_white
 		
 		if pinst != undefined

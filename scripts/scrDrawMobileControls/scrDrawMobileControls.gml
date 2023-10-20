@@ -141,7 +141,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 			
             draw_sprite_ext(sprMobileControlAbility, 0, x, y, scale * 0.75, scale * 0.75, 0, c, 1)
 
-            if instance_exists(plr) && plr.race == 12 && plr.pref("rogue") {
+            if instance_exists(plr) && plr.race == 12 && player_pref(plr, "rogue") {
                 draw_set_halign(fa_center)
                 draw_set_valign(fa_center)
 				

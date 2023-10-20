@@ -51,7 +51,7 @@ if !instance_exists(CoopMenu) {
 	scrDrawAlignCenter()
 	
     if !global.is_server {
-		var host = playerinstance_get(0)
+		var host = player_get(0)
 		
 		if host != undefined
 			draw_text_shadow(w / 2, 4, string(round(host.latency)) + "ms")

@@ -28,7 +28,7 @@ if mode == 1 {
     draw_set_halign(fa_center)
     draw_set_valign(fa_center)
     draw_set_color(c_white)
-    draw_text_nt(view_xview + view_width / 2, view_yview + view_height / 2, "@sMADE IN GAMEMAKER STUDO")
+    draw_text_nt(view_xview + view_width / 2, view_yview + view_height / 2, "@sMADE IN GAMEMAKER STUDIO")
 }
 
 if mode == 2 {

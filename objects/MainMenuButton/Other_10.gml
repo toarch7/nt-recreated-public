@@ -32,7 +32,7 @@ switch image_index {
                 daily_run = 0
                 weekly_run = 0
 				
-				playerinstance_reset()
+				player_reset()
             }
         }
 
@@ -54,7 +54,7 @@ switch image_index {
         }
 		
         if n <= 1 {
-			playerinstance_reset()
+			player_reset()
 			
             with MainMenuButton
 				instance_destroy()

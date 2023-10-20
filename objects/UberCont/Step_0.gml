@@ -37,7 +37,7 @@ for (var i = 0; i < KeyCont.players; i++) {
                 }
 
                 with Player {
-                    playerinstance_get(index).hp = hp
+                    player_get(index).hp = hp
                 }
 
                 KeyCont.press_paus[i] = 0
@@ -61,7 +61,7 @@ KeyCont.press_paus[index] =
 		   keyboard_check_pressed(vk_escape)
 		or keyboard_check_pressed(vk_backspace)
 		or gamepad_button_check_pressed(0, gp_start)
-		or (opt_autopause && !paused && !want_pause && (global.desktop ? !window_has_focus() : os_is_paused()))
+		or (!paused && !want_pause && ((opt_autopause && global.desktop && !window_has_focus()) or os_is_paused()))
 
 if global.console_active
 	KeyCont.press_paus[index] = 0
@@ -93,6 +93,8 @@ if want_restart && !lockstep_stop {
 	    with MusCont {
 			instance_destroy()
 		}
+		
+		audio_stop_all()
 		
 	    instance_create(0, 0, MusCont)
 		
@@ -229,4 +231,4 @@ if instance_exists(CoopController) {
 		event_user(0)
 }
 
-playerinstance = playerinstance_get(index)
+playerinstance = player_get(index)

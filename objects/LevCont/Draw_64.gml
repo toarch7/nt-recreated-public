@@ -18,7 +18,7 @@ draw_set_valign(fa_top)
 
 if UberCont.opt_griller && !instance_exists(CrownIcon) && !instance_exists(UltraIcon) && !overgrilled {
 	var press = mouse_ui_clicked(),
-		change = input_ui_horizontal_pressed(),
+		change = keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left),
 		
 		mx = device_mouse_x_to_gui(0),
 		my = device_mouse_y_to_gui(0),
@@ -29,6 +29,11 @@ if UberCont.opt_griller && !instance_exists(CrownIcon) && !instance_exists(Ultra
 	
 	if grillpage == -1
 		change = 1
+	
+	if grillpadchange != 0 && change == 0
+		change = grillpadchange
+	
+	grillpadchange = 0
 	
 	if press {
 		if point_in_circle(mx, my, 16, view_height - 18, 20) {
@@ -76,6 +81,9 @@ if UberCont.opt_griller && !instance_exists(CrownIcon) && !instance_exists(Ultra
 				if skill < 0 {
 					skill = mut_heavy_heart + skill
 				}
+				
+				if skill < 0 or skill > mut_heavy_heart
+					instance_destroy()
 				
 				num = i
 			}

@@ -63,7 +63,7 @@ try {
 				freeid = network_get_free_id(),
 				pinst = new PlayerInstance(freeid)
 			
-			playerinstance_set_struct(pinst, pinst_data, true)
+			player_set_struct(pinst, pinst_data, true)
 			
 			array_push(playerindexes, freeid)
 			
@@ -71,7 +71,7 @@ try {
 			
 			socketindexes[$ _socket] = freeid
 			
-			playerinstance_add(freeid, pinst)
+			player_add(freeid, pinst)
 			
             buffer_seek(global.buffer, buffer_seek_start, 0)
 			
@@ -104,7 +104,7 @@ try {
 				
 				playerinstances_set_struct_list(_playerinstances)
 				
-				playerinstance = playerinstance_get()
+				playerinstance = player_get()
 				
 	            global.index = _index
 	            index = _index
@@ -118,7 +118,7 @@ try {
 				
 	            alarm[1] = -1
 			}
-			else playerinstance_add(_index, _pinst)
+			else player_add(_index, _pinst)
 			
             share = false
 			
@@ -179,7 +179,7 @@ try {
 					_inst = new PlayerInstance(_ind)
 				
 				if _ind == global.index
-					_inst.update_prefs()
+					player_update_prefs(_inst)
             }
 			
             global.seed = buffer_read(data, buffer_u32)
@@ -214,7 +214,7 @@ try {
         case event.update_playerinstance:
             var _index = buffer_read(data, buffer_u8)
 			
-            var inst = playerinstance_get(_index)
+            var inst = player_get(_index)
 			
             var _skin = inst.skin,
                 _race = inst.race
@@ -274,7 +274,7 @@ try {
 				var _index = socketindexes[$ _socket]
 				
 				if _index != undefined {
-					var inst = playerinstance_get(_index)
+					var inst = player_get(_index)
 					
 					if inst != undefined {
 						inst.latency = _latency
@@ -305,7 +305,7 @@ try {
 			if _index == index
 				_index = 0
 				
-			var inst = playerinstance_get(_index)
+			var inst = player_get(_index)
 				
 			if inst != undefined
 				inst.latency = _latency

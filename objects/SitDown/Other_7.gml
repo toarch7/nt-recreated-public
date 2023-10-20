@@ -23,7 +23,7 @@ if (sprite_index && sprite_index != spr_sit) or alarm[2] {
     }
 
     with GameCont {
-        var pinst = playerinstance_get(global.index)
+        var pinst = player_get(global.index)
         var _race = pinst.race
 
         if !UberCont.crowngot[_race, crown] && crown > 1 {

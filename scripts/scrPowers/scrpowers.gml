@@ -417,7 +417,7 @@ function scrPowers() {
     }
 	
     // Rogue
-    if race == 12 && KeyCont.press_spec[index] && (!is_mobile(index) or !playerinstance.pref("rogue")) {
+    if race == 12 && KeyCont.press_spec[index] && (!is_mobile(index) or player_pref(playerinstance, "rogue")) {
         var px = mouse_x,
             py = mouse_y
 

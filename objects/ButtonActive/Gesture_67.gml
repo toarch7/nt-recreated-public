@@ -24,7 +24,7 @@ if point_distance(0, 0, event_data[? "diffX"], event_data[? "diffY"]) > 12 && my
 		if index != global.index
 			continue
 		
-		if race == 12 && playerinstance.pref("rogue") && !instance_exists_var(PortalStrike, "creator", id) {
+		if race == 12 && player_pref(playerinstance, "rogue") && !instance_exists_var(PortalStrike, "creator", id) {
             if rogue_ammo {
 				KeyCont.activeforever[global.index] = true
 				

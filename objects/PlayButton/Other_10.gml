@@ -9,7 +9,7 @@ with UberCont {
     daily_run = 0
     weekly_run = 0
 	
-	playerinstance_reset()
+	player_reset()
 }
 
 if image_index == 1 or image_index == 2 {
@@ -17,7 +17,8 @@ if image_index == 1 or image_index == 2 {
 		digits = string_length(string_digits(name)),
 		a = "Seeker", b = "Throneseeker"
 	
-	if name != "unknown" && !((string_starts(name, a) or string_starts(name, b)) && digits == 3)
+	if name != "unknown" && name != "null" && name != "undefined"
+	&& !((string_starts(name, a) or string_starts(name, b)) && digits == 3)
 		save_set_value("etc", "suggestnickname", true)
 	
 	if !save_get_value("etc", "suggestnickname", false) {

@@ -111,7 +111,7 @@ function scrOptionsUpdate() {
 			opt_nickname = "null"
 		}
 		
-		if file_exists(game_directory + "/icheat.txt")
+		if file_exists(game_directory + "icheat.txt")
 			opt_cheats = true
 		
 		if !opt_cheats {
@@ -161,7 +161,7 @@ function scrOptionsUpdate() {
 		scrOptionsLoadKeymaps()
 		
 		if is_struct(playerinstance)
-			playerinstance.update_prefs()
+			player_update_prefs(playerinstance)
 		
 		try {
 			opt_remote_port = real(opt_remote_port)

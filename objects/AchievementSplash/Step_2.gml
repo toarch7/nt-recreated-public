@@ -18,7 +18,9 @@ if ok {
 
             if !index index = 0
         }
-    } else if index < 4 {
+    }
+	else if index < 4 {
         index = lerp(index, 4, 0.8)
     }
-} else alarm[0] = 300
+}
+else alarm[0] = 300

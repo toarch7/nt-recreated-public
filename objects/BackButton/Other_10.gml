@@ -61,7 +61,7 @@ else if instance_exists(Menu) && net_isme() {
 	    UberCont.daily_run = 0
 	    UberCont.weekly_run = 0
 		
-		playerinstance_reset(global.index)
+		player_reset(global.index)
 		
 	    with MusCont {
 	        snd_stop(song)

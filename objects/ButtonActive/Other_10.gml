@@ -3,7 +3,7 @@ event_inherited()
 index = get_nearest_touch(rad)
 
 var player = noone,
-	pinst = playerinstance_get(),
+	pinst = player_get(),
 	_index = global.index
 
 with Player {
@@ -65,20 +65,20 @@ if forever {
 		if index != _index
 			continue
 		
-		if (race == 14 && pinst.pref("skeleton"))
-		or (race == 6  && pinst.pref("yv") && scrYVCanPop(wep)) {
+		if (race == 14 && player_pref(pinst, "skeleton"))
+		or (race == 6  && player_pref(pinst, "yv") && scrYVCanPop(wep)) {
 			KeyCont.press_spec[index] = KeyCont.press_fire[index]
 				
 			KeyCont.hold_fire[index] = false
 			KeyCont.press_fire[index] = false
 		}
-		else if race == 11 && !pinst.pref("horror") {
+		else if race == 11 && !player_pref(pinst, "horror") {
 			KeyCont.press_fire[index] = false
 			KeyCont.hold_fire[index] = false
 		}
 	}
 }
-else if (!can_forever && (is_mobile() or !(player.race == 7 && pinst.pref("steroids")))) {
+else if (!can_forever && (is_mobile() or !(player.race == 7 && player_pref(pinst, "steroids")))) {
     KeyCont.hold_spec[_index] = (do_thing == 2) or (index != -1 && device_mouse_check_button(index, mb_left))
     KeyCont.press_spec[_index] = (do_thing == 1) or (index != -1 && device_mouse_check_button_pressed(index, mb_left))
     KeyCont.release_spec[_index] = (do_thing == -1) or (index != -1 && device_mouse_check_button_released(index, mb_left))

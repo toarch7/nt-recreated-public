@@ -103,13 +103,14 @@ if rp_warning {
 	if back_pressed
 		rp_warning = 0
 	
+	mx = device_mouse_x_to_gui(0)
+	my = device_mouse_y_to_gui(0)
+	
     draw_text_nt(view_width / 2, view_height / 2 - 44, loc("@yWARNING"))
 
     // resourcepack warning
-	draw_set_font(fntSmall)
-    draw_text_nt(view_width / 2, view_height / 2 + disclaimer_pop - 16, loc("@sRESOURCEPACKS ARE ONLY UNIQUE TO THIS RECREATION.#THESE ARE COLLECTION OF CUSTOM SPRITES, SOUNDS AND LANGUAGES#MADE BY COMMUNITY TO ADD NEW COLORS TO YOUR GAME.##THIS MAY AFFECT YOUR GAMING EXPERIENCE#IN A NOT INTENDED WAY."))
-    draw_set_font(fntM1)
-
+    draw_text_nt(view_width / 2, view_height / 2 + disclaimer_pop - 16, loc("@sRESOURCEPACKS ARE ONLY UNIQUE TO THIS RECREATION.#THESE ARE COLLECTION OF CUSTOM SPRITES, SOUNDS AND LANGUAGES#MADE BY COMMUNITY TO ADD NEW COLORS TO YOUR GAME.##THIS MAY AFFECT YOUR GAMING EXPERIENCE#IN A NOT INTENDED WAY."), 0.67)
+    
     if rp_warning < 90 {
         draw_text_nt(view_width / 2, view_height / 2 + 16 - disclaimer_pop, "@sOK (" + string(ceil((90 - rp_warning) / 30)) + "S.)")
     }
@@ -135,6 +136,10 @@ if rp_warning {
 if erasing_progress {
 	// 1 - reset SAVEFILE
 	// 2 - reset OPTIONS
+	
+	mx = device_mouse_x_to_gui(0)
+	my = device_mouse_y_to_gui(0)
+	
     if self[$ "funnysound"] != undefined or alarm[1] {
         with MusCont {
             if alarm[0] < 5 {

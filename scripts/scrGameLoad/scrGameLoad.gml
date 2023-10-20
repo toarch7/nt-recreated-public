@@ -40,7 +40,7 @@ function scrGameLoad() {
 		
 		playerinstances_set_struct_list(pinstlist)
 		
-		playerinstance = playerinstance_get()
+		playerinstance = player_get()
 		
         var a = json_parse(buffer_read(b, buffer_string)) // player
 

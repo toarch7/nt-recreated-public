@@ -53,8 +53,8 @@ with UberCont {
     playerinstances = {}
 	
 	var inst = new PlayerInstance()
-	playerinstance_add(global.index, inst)
-	inst.update_prefs()
+	player_add(global.index, inst)
+	player_update_prefs(inst)
 	
 	playerinstance = inst
 }

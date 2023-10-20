@@ -261,7 +261,7 @@ weekly = 0
 
 if UberCont.weekly_run {
     if !is_undefined(UberCont.weekly_data) {
-        var inst = playerinstance_get(global.index)
+        var inst = player_get(global.index)
 		
         inst.race = UberCont.weekly_data[? "char"] ?? 1
         inst.cwep = UberCont.weekly_data[? "startwep"] ?? 1
@@ -284,10 +284,6 @@ if UberCont.weekly_run {
 }
 
 hint = ""
-
-with CampChar {
-    instance_create(x, y, PortalClear)
-}
 
 if !instance_exists(MusCont)
 	instance_create(0, 0, MusCont)

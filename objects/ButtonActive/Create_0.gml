@@ -19,13 +19,13 @@ can_forever = function (player) {
 	if !instance_exists(player)
 		return false
 	
-	var pinst = playerinstance_get()
+	var pinst = player_get()
 	
-	return (player.race == 3 && pinst.pref("eyes"))
-		or (player.race == 4 && pinst.pref("melting"))
-		or (player.race == 6 && pinst.pref("yv"))
-		or (player.race == 14 && pinst.pref("skeleton"))
-		or (player.race == 7 && pinst.pref("steroids"))
-		or (player.race == 12 && !pinst.pref("rogue"))
+	return (player.race == 3 && player_pref(pinst, "eyes"))
+		or (player.race == 4 && player_pref(pinst, "melting"))
+		or (player.race == 6 && player_pref(pinst, "yv"))
+		or (player.race == 14 && player_pref(pinst, "skeleton"))
+		or (player.race == 7 && player_pref(pinst, "steroids"))
+		or (player.race == 12 && !player_pref(pinst, "rogue"))
 		or (player.race == 11)
 }

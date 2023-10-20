@@ -1,5 +1,5 @@
 #macro GAME_VERSION "b2.6.1"
-#macro GAME_BUILD 2610
+#macro GAME_BUILD 2612
 #macro BETA true
 
 
@@ -175,18 +175,21 @@ var all_have_weps = 1
 
 for (var i = 1; i <= 12; i++) {
     if cwep[i] == race_swep[i] {
-        all_have_weps = 0
-        continue
+        all_have_weps = false
     }
 
-    if string_copy(wep_name[cwep[i]], 1, 4) == "GOLD" {
+    if wep_gold[cwep[i]] {
         scrAchievement(24)
     }
 	else all_have_weps = 0
 
-    if cwep[i] == 122 or cwep[i] == 123 {
+    if cwep[i] == wep_golden_nuke_launcher or cwep[i] == wep_golden_disc_gun {
         scrAchievement(25)
     }
+	
+	if cbst_loop[i] >= 3 && !opt_cheats {
+		opt_cheats = save_set_value("cheats", "unlocked", true)
+	}
 }
 
 if all_have_weps scrAchievement(15)

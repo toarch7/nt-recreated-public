@@ -151,7 +151,7 @@ disconnect = function(_socket, _silent = false) {
 		instance_deactivate_object(Revive)
 	}
 	
-	playerinstance_remove(_index)
+	player_remove(_index)
 	
 	if global.is_server {
 		if _index != global.index {
@@ -185,7 +185,7 @@ event_handlers[$ "crown"] = function(_index, _data) {
 event_handlers[$ "playerinstance"] = function(_index, _data) {
 	var pinst = _data[2]
 	
-	playerinstance_set_struct(playerinstances[$ _index], pinst, true)
+	player_set_struct(playerinstances[$ _index], pinst, true)
 	
 	if instance_exists(Menu) {
 		var _is_me = net_isme()

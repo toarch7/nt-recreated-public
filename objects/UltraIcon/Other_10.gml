@@ -97,7 +97,7 @@ if !instance_exists(CoopController) {
             hp = min(max_hp, hp)
             lsthealth = hp
 
-            playerinstance_get(index).race = 4
+            player_get(index).race = 4
         }
     }
 } else {

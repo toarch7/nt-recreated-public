@@ -2482,7 +2482,7 @@
     {"id":{"name":"sndSteroidsUltraB","path":"sounds/sndSteroidsUltraB/sndSteroidsUltraB.yy",},"order":27,},
     {"id":{"name":"sndThroneBeamWarn","path":"sounds/sndThroneBeamWarn/sndThroneBeamWarn.yy",},"order":111,},
     {"id":{"name":"sndThroneDead","path":"sounds/sndThroneDead/sndThroneDead.yy",},"order":112,},
-    {"id":{"name":"save_set_option","path":"scripts/save_set_option/save_set_option.yy",},"order":4,},
+    {"id":{"name":"save_get_option","path":"scripts/save_get_option/save_get_option.yy",},"order":4,},
     {"id":{"name":"input_binding_get_name","path":"scripts/input_binding_get_name/input_binding_get_name.yy",},"order":2,},
     {"id":{"name":"sndThroneDeath","path":"sounds/sndThroneDeath/sndThroneDeath.yy",},"order":113,},
     {"id":{"name":"sndThroneHalfHP","path":"sounds/sndThroneHalfHP/sndThroneHalfHP.yy",},"order":114,},

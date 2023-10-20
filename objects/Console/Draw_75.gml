@@ -62,10 +62,7 @@ if (flags & 8) == 8 {
 	draw_text_shadow(dx, 48, str)
 }
 
-var scale = 1
-
-if global.desktop
-	scale = 0.67
+var scale = 0.67
 
 if global.console_active {
 

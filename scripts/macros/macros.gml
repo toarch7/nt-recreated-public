@@ -416,8 +416,12 @@ function scrHandleInputsGeneral(index) {
 				}
 			}
 			
-			event_user(0)
+			if object_index != ButtonActive
+				event_user(0)
 		}
+		
+		with ButtonActive // run final
+			event_user(0)
 		
 		// for global touches
 	    for (var i = 0; i < array_length(touch_duration); i++) {

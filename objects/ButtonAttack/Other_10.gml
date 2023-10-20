@@ -1,8 +1,3 @@
-event_inherited()
-
-if instance_exists(MenuOptions) or UberCont.opt_keyboard or UberCont.opt_gamepad
-	exit
-
 var i = get_nearest_touch(rad)
 
 KeyCont.hold_fire[global.index] = 0

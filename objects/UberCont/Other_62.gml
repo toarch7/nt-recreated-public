@@ -6,7 +6,9 @@ if async_load[? "id"] == update_request {
 			var vname = BETA ? "versionBeta": "version"
 			
             if result[? vname] > GAME_BUILD {
-                update_message = show_question_async("Update " + string(result[? "versionName"]) + " b" + string(result[? vname]) + " available.\n Open download page?")
+				var str = loc_sfmt("New game build #% is now available.\nOpen download page?", string(result[? vname]))
+				
+                update_message = show_question_async(str)
             }
             
 			leaderboards_allowed = result[? "leaderboardsAllowed"] ?? false

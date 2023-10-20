@@ -11,12 +11,12 @@ image_speed = 0.4
 recontinues = 0
 
 pref = function(name) {
-	var p = playerinstance_get(index)
+	var p = player_get(index)
 	
 	if p == undefined
 		exit
 	
-	return p.pref(name)
+	return player_pref(p, name)
 }
 
 crosshair_x = x

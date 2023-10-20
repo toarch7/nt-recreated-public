@@ -32,7 +32,7 @@ function rng_init() {
         global.seed = irandom(rng_m)
     }
 
-    global.custom_seed = 0
+    global.custom_seed = false
 
     if UberCont.daily_run {
         if UberCont.weekly_run {

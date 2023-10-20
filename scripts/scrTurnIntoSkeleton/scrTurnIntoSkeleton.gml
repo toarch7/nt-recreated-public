@@ -36,7 +36,7 @@ function scrTurnIntoSkeleton() {
         lsthealth = hp
     }
 
-    playerinstance_get(index).race = 14
+    player_get(index).race = 14
 
     ultra = 0
     inframes = 10

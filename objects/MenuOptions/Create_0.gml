@@ -641,7 +641,7 @@ option_category_begin(OptionCategory.Game_Profile)
 option_elements_create(
 	{ type: "button", name: "ID", key: "general_uid",
 		value_get: function(opt) {
-			var value = opt.value,
+			var value = scrGetUid(),
 				copied = opt[$ "__copied"]
 			
 			if copied == undefined {
@@ -656,6 +656,8 @@ option_elements_create(
 		},
 		
 		click: function(opt) {
+			opt.value = scrGetUid()
+			
 			if global.desktop {
 				clipboard_set_text(opt.value)
 			}

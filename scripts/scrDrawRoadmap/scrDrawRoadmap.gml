@@ -100,7 +100,7 @@ function scrDrawRoadmap(_x, _y, _pos, cont = GameCont) {
 	var count = min(4, variable_struct_names_count(playerinstances))
 	
     for (var i = 0; i < count; i++) {
-        var pinst = playerinstance_get(names[i])
+        var pinst = player_get(names[i])
 
         if is_undefined(pinst) continue
 

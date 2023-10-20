@@ -16,7 +16,7 @@ if instance_exists(DailyList) or net_event(ev_mouse, ev_left_press)
 	exit
 
 var is_me = net_isme(),
-	inst = playerinstance_get(),
+	inst = player_get(),
 	race = num
 
 if instance_exists(CoopController)

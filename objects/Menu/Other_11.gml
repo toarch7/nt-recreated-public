@@ -1,6 +1,6 @@
 /// @description Draw loadout
 
-var inst = playerinstance_get(global.index),
+var inst = player_get(global.index),
 	yoff = dailylistfavor,
 	press = false,
 	

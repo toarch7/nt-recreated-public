@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-var inst = playerinstance_get(),
+var inst = player_get(),
 	yoff = dailylistfavor
 
 race = inst.race
