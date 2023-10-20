@@ -12,6 +12,12 @@ if async_load[? "id"] == update_request {
 			leaderboards_allowed = result[? "leaderboardsAllowed"] ?? false
 			
             update_info = result
+			
+			daily_request = tb_api("daily")
+			weekly_request = tb_api("weekly")
+			
+			daily_grill = result[? "dailyGriller"] ?? false
+			weekly_grill = result[? "weeklyGriller"] ?? false
         }
     }
 }

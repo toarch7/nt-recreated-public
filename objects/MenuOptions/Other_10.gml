@@ -599,8 +599,10 @@ for (var i = 0; i < item_count; i++) {
 				if opt.name_get != undefined
 					name = method_execute(opt.name_get, opt)
 				
+				var s = 1 //min(1, 140 / string_width(string_hash_to_newline(loc(name))))
+				
 				if name != undefined
-					draw_text_nt(drawx, drawy, loc(name))
+					draw_text_nt(drawx, drawy, loc(name), s)
 				
 				drawx += opt.width / 2
 				

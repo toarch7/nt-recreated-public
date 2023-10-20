@@ -62,7 +62,7 @@ with Player {
 				if index != global.index
 					a *= 0.5
 				
-	            draw_sprite_ext(sprCrosshair, KeyCont.crosshair[index], crosshair_x, crosshair_y, 1, 1, 0, col, a)
+	            draw_sprite_ext(sprCrosshair, KeyCont.crosshair[index], crosshair_x, crosshair_y, 1, 1, 0, col ? col : c_white, a)
 	        }
 		}
 		

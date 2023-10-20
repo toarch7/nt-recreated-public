@@ -237,8 +237,6 @@ with ProtoStatue {
 }
 
 with prop {
-	print("DIS", distance_to_point(10016, 10016))
-	
 	if distance_to_point(10016, 10016) < 96 && object_index != IceFlower
 		instance_destroy(id, 0)
 }

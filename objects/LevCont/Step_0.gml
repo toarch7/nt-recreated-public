@@ -6,7 +6,7 @@ var objects = [ SkillIcon, CrownIcon, UltraIcon ]
 
 for(var i = 0; i < array_length(objects); i ++) {
 	var obj = objects[i],
-		step = 34, xx
+		step = 32, xx, a = false
 	
 	if !instance_exists(obj)
 		continue
@@ -14,7 +14,10 @@ for(var i = 0; i < array_length(objects); i ++) {
 	do {
 		xx = view_width / 2 + (step * max(0, instance_number(obj) - 1) * 0.5)
 		
-		step -= 2
+		if a
+			step -= 2
+		
+		a = true
 	}
 	until xx < view_width
 	

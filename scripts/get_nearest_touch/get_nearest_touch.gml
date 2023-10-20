@@ -40,8 +40,9 @@ function get_touch_radius(rad) {
 	if instance_exists(MenuOptions)
 		return rad
 	
-	if object_index == JoystickMove or object_index == JoystickAttack
+	if object_index == JoystickMove or object_index == JoystickAttack {
 		rad *= 1.75
+	}
 	
 	rad *= UberCont.opt_controls_scale + 0.5
 	

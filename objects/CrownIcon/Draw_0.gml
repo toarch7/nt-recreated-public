@@ -4,7 +4,7 @@ if lockstep_stop
 if !isset("appeary") {
     appeary = num * 32
 } else if appeary {
-    appeary = lerp(appeary, 0, .7)
+    appeary = max(0, appeary - 32)
 
     if !appeary {
         appeary = 0

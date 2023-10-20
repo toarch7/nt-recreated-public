@@ -9,6 +9,11 @@ function scrStickRegions(touch) {
 	else if object_index == JoystickAttack
 		exit
 	
+	var border = 20
+	
+	if mx < border or mx > gui_w - border
+		exit
+	
 	if device_mouse_check_button_pressed(touch, mb_left) {
 		with MobileUI {
 			if get_nearest_touch(rad) == touch

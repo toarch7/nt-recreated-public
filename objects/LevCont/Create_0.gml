@@ -4,6 +4,8 @@ for (var i = 0; i <= 15; i++) {
     mutseed[i] = irandom(999999)
 }
 
+scrSkills()
+
 random_set_seed(mutseed[(GameCont.level - GameCont.skillpoints)] + GameCont.wasskeleton * 10203 + ((GameCont.crown == 8) * 1000))
 
 camera_set_pos(0, 0)
@@ -73,8 +75,6 @@ if GameCont.crownpoints > 0 {
     creator = other.id
 }
 else if GameCont.skillpoints {
-    scrSkills()
-
     var maxskills = 4
 
     if GameCont.crown == 8 {
@@ -195,44 +195,12 @@ with SkillText
 	y -= 40
 
 
-
-
-
-
-
+grillpage = 0
+overgrilled = false
 
 if UberCont.opt_griller && instance_exists(SkillIcon) {
 	with SkillIcon
 		instance_destroy()
 	
-	var dx = view_xview + view_width / 2,
-		dy = view_yview + view_height - 20
-	
-	var xx = dx,
-		yy = dy,
-		_num = 0
-	
-	for(var i = 1; i <= maxskill; i ++) {
-		if skill_get(i)
-			continue
-		
-		if xx >= view_width - 32 {
-			xx = dx
-			
-			with SkillIcon
-				y -= 32
-		}
-		
-		with SkillIcon
-			if y == yy x -= 12
-		
-		with instance_create(xx, yy, SkillIcon) {
-			num = (_num ++)
-			skill = i
-		}
-		
-		xx += 12
-	}
+	grillpage = -1
 }
-
-

@@ -123,7 +123,7 @@ function option_element_create(params) {
 		exit
 	
 	if params[$ "desktop_only"] && !global.desktop exit
-	if params[$ "mobile_only"] && global.desktop exit
+	//if params[$ "mobile_only"] && global.desktop exit
 	
 	if params[$ "ingame"] != undefined && params.ingame != ingame {
 		if option_number != OptionCategory.Main

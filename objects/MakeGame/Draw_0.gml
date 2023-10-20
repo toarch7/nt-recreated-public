@@ -98,7 +98,6 @@ if loading {
             if point_in_circle(mx, my, xx + 48, yy + 28, 16) or p == -1 {
                 // yesn't
                 file_delete("gamestate.dat")
-
                 game_restart()
             }
 			else if point_in_circle(mx, my, xx - 48, yy + 28, 16) or p == 1 {

@@ -102,13 +102,15 @@ namereq = -1
 
 daily_run = 0
 weekly_run = 0
+daily_grill = false
+weekly_grill = false
 daily_time = 0
 weekly_data = undefined
 get_daily_times = 0
 
 daily_seed = -1
-daily_request = tb_api("daily")
-weekly_request = tb_api("weekly")
+daily_request = -1
+weekly_request = -1
 
 can_daily = false
 can_weekly = false

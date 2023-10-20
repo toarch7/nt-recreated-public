@@ -16,6 +16,9 @@ do_thing = 0
 rogue_touch = -1
 
 can_forever = function (player) {
+	if !instance_exists(player)
+		return false
+	
 	var pinst = playerinstance_get()
 	
 	return (player.race == 3 && pinst.pref("eyes"))

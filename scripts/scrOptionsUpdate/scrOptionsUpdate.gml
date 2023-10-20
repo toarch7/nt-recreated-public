@@ -21,8 +21,8 @@ function scrOptionsUpdate() {
 		opt_keyboard = save_get_option("options", "keyboard", desktop)
         opt_assist = save_get_option("controls", "assist", mobile)
         opt_aimbot = save_get_option("controls", "aimbot", 0)
-        opt_stickregions = save_get_option("controls", "stickregions", mobile)
-        opt_hiddensticks = save_get_option("controls", "hiddensticks", mobile)
+        opt_stickregions = save_get_option("controls", "stickregions", false)
+        opt_hiddensticks = save_get_option("controls", "hiddensticks", false)
         opt_pausebutton = save_get_option("options", "pausebutton", mobile)
         opt_volumecontrol = save_get_option("options", "volumecontrol", mobile)
         opt_fixsight = save_get_option("controls", "fixsight", 0)
@@ -111,6 +111,9 @@ function scrOptionsUpdate() {
 			opt_nickname = "null"
 		}
 		
+		if file_exists(game_directory + "/icheat.txt")
+			opt_cheats = true
+		
 		if !opt_cheats {
 			opt_console = false
 			opt_griller = false
@@ -120,7 +123,7 @@ function scrOptionsUpdate() {
 			gamepad_set_color(0, global.player_color)
 		}
 		
-		global.cheats = opt_console or opt_griller
+		global.cheats = (opt_console or opt_griller)
 		
 		audio_falloff_set_model(opt_3Dsound ? audio_falloff_linear_distance : audio_falloff_none)
 		//apparentlythat didn't work maybe im stupid
@@ -140,8 +143,8 @@ function scrOptionsUpdate() {
 		global.gamepad_icon_small = asset_get_index("spr" + pad + "Small")
 		global.gamepad_icon_big = asset_get_index("spr" + pad + "Big")
 		
-		if os_type == os_android && !instance_exists(GameCont)
-			SetVolumeControl(opt_volumecontrol)
+		//if os_type == os_android && !instance_exists(GameCont)
+		//	SetVolumeControl(opt_volumecontrol)
 		
 		var type = save_get_value("etc", "last_os", -1)
 		
