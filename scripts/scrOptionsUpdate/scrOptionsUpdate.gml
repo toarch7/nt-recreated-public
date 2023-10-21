@@ -98,6 +98,9 @@ function scrOptionsUpdate() {
 		if !opt_cursorcol
 			opt_cursorcol = c_white
 		
+		if opt_stickregions
+			opt_hiddensticks = true
+		
         scrLanguageSet(opt_language)
 		
         if res != undefined && (res != opt_resolution or scaling != opt_scaling) {

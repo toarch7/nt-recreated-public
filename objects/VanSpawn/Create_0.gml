@@ -1,26 +1,47 @@
 var player = instance_random(Player)
 
-if GameCont.area == 100 || (GameCont.area == 7 && GameCont.subarea == 3) instance_destroy()
+if GameCont.area == 100 or (GameCont.area == 7 && GameCont.subarea == 3) {
+	instance_destroy(); exit
+}
 
 if instance_exists(player) {
-    dir = 0
+    var dir = 0,
+		fine = false
 
     do {
-        dir += 1
-        x = player.x
+        dir ++
+        
+		x = player.x
         y = player.y
-        flip = choose(1, - 1)
-        x = (player.x + ((120 + random(96)) * flip))
-        y = ((player.y + random(120)) - 60)
-        dir = instance_nearest(x, y, Floor)
-        x = (dir.x + 16)
-        y = (dir.y + 16)
-    } until ((point_distance(x, y, player.x, player.y) > 96) || ((dir > 250) && (place_free(x, y) && ((!place_meeting(x, y, Portal)) && (place_meeting(x, y, Floor) && ((!place_meeting(x, y, Van)) && (collision_point(x, y, VanSpawn, 0, 1) < 0)))))));
+        
+		flip = choose(1, -1)
+        
+		x = player.x + random_spread(96, 120) * flip
+        y = player.y + orandom(60)
+		
+		var flor = instance_nearest(x, y, Floor)
+        
+		x = flor.x + 16
+        y = flor.y + 16
+		
+		if place_free(x, y) or !place_meeting(x, y, Floor) or place_meeting(x, y, Van)
+		or place_meeting(x, y, Portal) or collision_point(x, y, VanSpawn, false, true)
+			continue
+		
+		if (distance_to_object(player) > 96 or dir > 250) {
+			fine = true
+			break
+		}
+    }
+	until fine
 }
 
 instance_create(x, y, PortalClear)
+
 image_speed = 0.4
 alarm[0] = 40 + instance_number(VanSpawn) * 10
 
-if GameCont.area == 101 snd_play(sndOasisPopo)
+if GameCont.area == 101
+	snd_play(sndOasisPopo)
+
 else snd_play(sndVanWarning)

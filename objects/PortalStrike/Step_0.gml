@@ -22,7 +22,10 @@ if instance_exists(creator) {
 		}
 	}
 	else {
-		direction = point_direction(x, y, cx, cy)
+		if !instance_exists(CoopController) && is_keyboard(index) {
+			direction = point_direction(x, y, mouse_x, mouse_y)
+		}
+		else direction = creator.gunangle//point_direction(x, y, cx, cy)
 		
 		if !KeyCont.hold_spec[index] {
 			KeyCont.activeforever[index] = 0

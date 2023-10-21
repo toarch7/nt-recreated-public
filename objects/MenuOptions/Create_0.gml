@@ -25,6 +25,7 @@ enum OptionCategory {
 	Controls_Remapping,
 	Controls_Remapping_Keys,
 	Controls_Preferences,
+	Controls_Experimental,
 	
 	Coop_Menu,
 	
@@ -317,6 +318,7 @@ option_elements_create
 	{ type: "category", name: "REMAPPING", category: OptionCategory.Controls_Remapping, visible: false },
 	{ type: "category", name: "REMAPPING", category: OptionCategory.Controls_Remapping_Keys, visible: false },
 	{ type: "category", name: "CHAR PREFS", category: OptionCategory.Controls_Preferences, visible: false },
+	{ type: "category", name: "EXPERIMENTAL OPTIONS", category: OptionCategory.Controls_Experimental, visible: false },
 	
 	{ type: "category", name: "CO-OP", category: OptionCategory.Coop_Menu, visible: false },
 )
@@ -762,9 +764,6 @@ option_elements_create(
 	{ type: "switch", name: "360 AIMBOT",       key: "controls_aimbot",       mobile_only: true },
 	{ type: "switch", name: "VOLUME CONTROLS",  key: "options_volumecontrol", mobile_only: true },
 	{ type: "switch", name: "SPLIT AIM & FIRE", key: "controls_splitfire",    mobile_only: true },
-	{ type: "switch", name: "WEAPON-STICKS",    key: "controls_wepstick",     mobile_only: true },
-	{ type: "switch", name: "STICK REGIONS",    key: "controls_stickregions"},//     mobile_only: true },
-	{ type: "switch", name: "HIDE JOYSTICKS",   key: "controls_hiddensticks"},//     mobile_only: true },
 	{ type: "switch", name: "FIXED SIGHT",      key: "controls_fixsight"},//     mobile_only: true },
 	
 	{ type: "slider", name: "SIZE SCALE", key: "controls_scale", mobile_only: true },
@@ -799,7 +798,9 @@ option_elements_create(
 		}
 	},
 	
-	{ type: "category", name: "CHARACTER PREFERENCES", category: OptionCategory.Controls_Preferences } // mobile_only: true }
+	{ type: "category", name: "CHARACTER PREFERENCES", category: OptionCategory.Controls_Preferences }, // mobile_only: true }
+	
+	{ type: "category", name: "EXPERIMENTAL OPTIONS", category: OptionCategory.Controls_Experimental }
 )
 
 option_category_end()
@@ -912,6 +913,30 @@ option_elements_create(
 
 
 #endregion Controls_Preferences
+#region Controls_Experimental
+
+option_category_begin(OptionCategory.Controls_Experimental)
+
+option_elements_create(
+	{ type: "switch", name: "WEAPON-STICKS",    key: "controls_wepstick" },
+	
+	{ type: "switch", name: "STICK REGIONS",    key: "controls_stickregions" },
+	
+	{ type: "switch", name: "HIDE JOYSTICKS",   key: "controls_hiddensticks",
+		value_get: function(opt) {
+			if UberCont.opt_stickregions
+				return true
+			
+			return opt.value
+		},
+		
+		condition: function(opt) {
+			return !UberCont.opt_stickregions
+		}
+	},
+)
+
+#endregion Controls_Experimental
 #region Resourcepacks
 option_category_begin(OptionCategory.Resourcepacks)
 

@@ -25,18 +25,17 @@ if distance_to_object(Player) <= 2 {
 
 if do_thing {
     if !sit {
-        if UberCont.daily_run {
-            scrSendDailyData()
-        }
-
-        GameCont.win = 1
-
+        GameCont.win = true
+		
+		if UberCont.daily_run
+			scrSendDailyData()
+		
         sit = 1
 
         with Player {
             visible = 0
             canwalk = 0
-
+			
             if is_me {
                 other.spr_gosit = spr_gosit
                 other.spr_sit = spr_sit

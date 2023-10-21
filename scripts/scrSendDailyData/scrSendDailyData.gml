@@ -177,9 +177,9 @@ function scrSendDailyData() {
             }
 
             var hook = URL_DAILY_WEBHOOK
-            if UberCont.weekly_run {
+			
+            if UberCont.weekly_run
                 hook = URL_WEEKLY_WEBHOOK
-            }
 			
 			#region save local entry
 			
@@ -195,8 +195,8 @@ function scrSendDailyData() {
 				area: GameCont.area,
 				subarea: GameCont.subarea,
 				loops: GameCont.loops,
-				wep: other.wep,
-				bwep: other.bwep,
+				wep: wep,
+				bwep: bwep,
 				win: GameCont.win,
 				kills: GameCont.kills,
 				ultra: GameCont.ultra,

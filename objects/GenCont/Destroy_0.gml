@@ -68,12 +68,25 @@ if GameCont.area == 5 && GameCont.subarea == 1 && skill_get(18) {
     }
 }
 
+with enemy {
+	if place_meeting(x, y, Wall) {
+		var f = instance_nearest(x, y, Floor)
+		
+		if instance_exists(f) {
+			with f {
+				other.x = bbox_center_x
+				other.y = bbox_center_y
+			}
+		}
+		else if instance_number(enemy) > 1
+			instance_destroy(id, 0)
+	}
+}
 
 if (GameCont.area == 7 && GameCont.subarea == 3) or GameCont.area == 0 or GameCont.area == 107 {
     with Wall {
-        if place_meeting(x, y, Floor) {
+        if place_meeting(x, y, Floor)
             instance_destroy()
-        }
     }
 
     with chestprop {

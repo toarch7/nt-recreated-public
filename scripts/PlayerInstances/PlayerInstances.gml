@@ -139,16 +139,14 @@ function player_update_prefs(pinst) {
 }
 
 function player_pref(pinst, name) {
-	with pinst {
-		var list = UberCont.cpref_list,
-			index = array_indexof(list, name)
-		
-		// todo: uncrutch
-		if index == -1 or (name == "rogue" && instance_exists(CoopController))
-			return false
-		
-		return bit_check(self.cprefs, 1 << (index + 1))
-	}
+	var list = UberCont.cpref_list,
+		index = array_indexof(list, name)
+	
+	// todo: uncrutch
+	if index == -1 or (name == "rogue" && instance_exists(CoopController))
+		return false
+	
+	return bit_check(pinst.cprefs, 1 << (index + 1))
 }
 
 function PlayerInstance(_index = 0) constructor {

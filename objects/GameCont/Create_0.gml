@@ -84,7 +84,7 @@ if global.hardmode {
 gocrib = 0
 openminds = 0
 
-win = 0
+win = false
 
 level_end = 0
 
