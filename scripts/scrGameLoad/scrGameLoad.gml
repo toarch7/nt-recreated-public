@@ -83,6 +83,8 @@ function scrGameLoad() {
                 }
             }
         }
+		
+		scrWeapons()
 
         rng_reset()
 

@@ -24,9 +24,13 @@ if instance_exists(player) {
 		x = flor.x + 16
         y = flor.y + 16
 		
-		if place_free(x, y) or !place_meeting(x, y, Floor) or place_meeting(x, y, Van)
-		or place_meeting(x, y, Portal) or collision_point(x, y, VanSpawn, false, true)
+		//print(place_free(x, y), !place_meeting(x, y, Floor), place_meeting(x, y, Van), place_meeting(x, y, Portal), distance_to_object(VanSpawn))
+		
+		if position_empty(x, y) or !place_meeting(x, y, Floor) or place_meeting(x, y, Van)
+		or place_meeting(x, y, Portal) or distance_to_object(VanSpawn) < 8
 			continue
+		
+		print(distance_to_object(player), dir)
 		
 		if (distance_to_object(player) > 96 or dir > 250) {
 			fine = true

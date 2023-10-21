@@ -78,7 +78,8 @@ scrUltras()
 alarm[10] = 30
 
 if global.hardmode {
-    loops++hard = 13
+    loops ++
+	hard = 13
 }
 
 gocrib = 0
