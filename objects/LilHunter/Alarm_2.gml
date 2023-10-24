@@ -5,13 +5,16 @@ if instance_exists(Player) {
 
     if !p.speed {
         alarm[2] = 2
-    } else {
+    }
+	else {
         sprite_index = sprLilHunterLiftStart
         image_index = 0
+		
         instance_change(LilHunterFly, 0)
         snd_play(sndLilHunterLaunch)
     }
-} else {
+}
+else {
     sprite_index = sprLilHunterLiftStart
     image_index = 0
     instance_change(LilHunterFly, 0)

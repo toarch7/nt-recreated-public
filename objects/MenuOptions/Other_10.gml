@@ -171,7 +171,7 @@ if erasing_progress {
     if erasing_progress == 2 {
         draw_text_nt(view_width / 2 + _x, view_height / 2 - 64 + disclaimer_pop + _y, loc("@wWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET#ALL OF YOUR PREFERENCES.###ARE YOU SURE?@w"))
     }
-	else draw_text_nt(view_width / 2 + _x, view_height / 2 - 64 + disclaimer_pop + _y, loc("@rWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET ALL OF YOUR#CHARACTERS, UNLOCKS, STATS, ACHIEVEMENTS AND#IT IS UNDOABLE.###ARE YOU SURE?@w"))
+	else draw_text_nt(view_width / 2 + _x, view_height / 2 - 64 + disclaimer_pop + _y, loc("@rWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET ALL OF YOUR#CHARACTERS, UNLOCKS, STATS, ACHIEVEMENTS AND#IT IS NOT UNDOABLE.###ARE YOU SURE?@w"))
 
     draw_text_nt(view_width / 2, view_height / 2 - disclaimer_pop + o, (wait ? "@d" : "@w") + loc("YES") + (erasing_progress == 1 ? " (" + string(5 - self.press) + ")" : ""))
     draw_text_nt(view_width / 2, view_height / 2 - disclaimer_pop + o + 16, (wait ? "@d" : "@w") + loc("NO"))

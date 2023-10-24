@@ -15,15 +15,8 @@ function load_resourcepacks_from(loadpath) {
     file_find_close()
 	
     for (var i = 0; i < array_length(list); i++) {
-        var local = 0,
-            status = 0
-		
-		if !global.console_active {
-			global.log_output = []
-	        global.log_color = []
-		}
-		
-        var _name = list[i]
+        var _name = list[i],
+			local = false
 		
         print("Loading pack \"" + _name + "\"")
 
@@ -79,9 +72,32 @@ function load_resourcepacks_from(loadpath) {
 		
 		pack.hasIcon = file_exists(packdir + "icon.png")
 		
+		pack.loaded = false
+		
         var active = !file_exists(packdir + "disable.d")
 		
         pack[$ "active"] = active
+		
+		array_push(Resourcepacks, pack)
+	}
+	
+	
+	resourcepack_priority_sort(Resourcepacks)
+	
+	
+	
+	
+	for(var i = 0; i < array_length(Resourcepacks); i ++) {
+		var pack = Resourcepacks[i],
+			local = !pack.external,
+            status = 0
+		
+        var packdir = loadpath + _name + "/"
+		
+		if !global.console_active {
+			global.log_output = []
+	        global.log_color = []
+		}
 		
         if active {
             if directory_exists(packdir + "usersprites")
@@ -100,8 +116,6 @@ function load_resourcepacks_from(loadpath) {
 				status += load_custom_shadow_colors(packdir + "shadowcolors.json")
         }
 		
-        array_push(Resourcepacks, pack)
-		
         if local && status > 0 {
             var str = "Something went wrong:\n\n"
 			
@@ -116,5 +130,7 @@ function load_resourcepacks_from(loadpath) {
 			}
 			else show_message_async(str)
         }
+		
+		pack.loaded = true
     }
 }

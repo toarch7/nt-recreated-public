@@ -1,13 +1,19 @@
 function scrGameContDrawGUI() {
-    if UberCont.opt_timer && !instance_exists(Menu) && !instance_exists(PauseButton) && (!instance_exists(Credits) or (instance_exists(Credits) && !Credits.visible)) {
-        draw_set_color(c_white)
-        draw_set_halign(fa_right)
-        draw_set_valign(fa_top)
-        time = scrAddZero(minutes, 1) + ":" + scrAddZero(seconds, 1) + "." + scrAddZero(round(timer / 30 * 100), 1)
-        draw_text_shadow(view_width - 1, view_height - 10, time)
-        draw_set_halign(fa_left)
-    }
-
+	if UberCont.opt_timer {
+		var won = instance_exists(GameOver) && GameCont.win && room == romGame
+		
+		if !instance_exists(Menu) && !instance_exists(PauseButton) && !won &&
+		(!instance_exists(Credits) or (instance_exists(Credits) && !Credits.visible)) {
+	        draw_set_color(c_white)
+	        draw_set_halign(fa_right)
+	        draw_set_valign(fa_top)
+			
+			draw_text_shadow(view_width - 1, view_height - 10, time)
+			
+	        draw_set_halign(fa_left)
+	    }
+	}
+	
     if instance_exists(GameOver) or instance_exists(Player) or UberCont.paused or room == romInit {
         dir = 1
         dix = 0

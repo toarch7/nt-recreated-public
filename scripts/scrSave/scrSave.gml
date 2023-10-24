@@ -1,10 +1,11 @@
 function scrSave() {
     with UberCont {
 		var stats = true,
-			save = saveData
+			save = saveData,
+			savepath = game_directory + "NuclearThrone.sav"
 		
-        if global.cheats {
-			var f = file_text_open_read(game_directory + "NuclearThrone.sav")
+        if global.cheats && file_exists(savepath) {
+			var f = file_text_open_read(savepath)
 			
 	        var raw = file_text_read_string(f)
 	        
@@ -88,8 +89,9 @@ function scrSave() {
 		
 		var json = json_encode(save)
 		
+		file_write(savepath, json)
+		
 		file_write("NuclearThrone.sav", json)
-		file_write(game_directory + "NuclearThrone.sav", json)
 		
     }
 }

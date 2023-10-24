@@ -20,6 +20,9 @@ if async_load[? "id"] == update_request {
 			
 			daily_grill = result[? "dailyGriller"] ?? false
 			weekly_grill = result[? "weeklyGriller"] ?? false
+			
+			if is_string(result[? "updateURL"])
+				update_url = result[? "updateURL"]
         }
     }
 }

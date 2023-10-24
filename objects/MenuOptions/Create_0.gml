@@ -454,6 +454,7 @@ option_elements_create(
 	{ type: "list",     name: "LANGUAGE",          key: "etc_language", list: languages },
 	
 	{ type: "switch",   name: "BOSS INTROS",       key: "visual_bossintro" },
+	{ type: "switch",   name: "DYNAMIC CAMERA",    key: "visual_camera" },
 	{ type: "switch",   name: "PLAY TUTORIAL",     key: "game_tutorial",  ingame: false },
 	{ type: "switch",   name: "TIMER",             key: "visual_timer"     },
 	{

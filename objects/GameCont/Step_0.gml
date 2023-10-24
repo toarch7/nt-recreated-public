@@ -1,7 +1,9 @@
 if lockstep_stop
 	exit
 
-if !instance_exists(GenCont) && instance_exists(Player) && !instance_exists(SitDown) && !instance_exists(Credits) {
+if !instance_exists(GenCont) && instance_exists(Player) &&
+!instance_exists(SitDown) && !instance_exists(Credits) &&
+!instance_exists(Cinematic) && !instance_exists(GameOver) {
 	tottimer ++
     timer ++
 }
@@ -20,6 +22,8 @@ if area != 106 && area != 100 && area != 102 {
     hqarea = area
     hqsubarea = subarea
 }
+
+time = scrAddZero(minutes, 1) + ":" + scrAddZero(seconds, 1) + "." + scrAddZero(round(timer / 30 * 100), 1)
 
 max_rad = (GameCont.level * 60) * ((race == 11 && ultra == 3) + 1)
 

@@ -36,26 +36,25 @@ styleb = 0
 
 material = 2
 
+instance_create(x - 32, y, Top)
+instance_create(x, y - 32, Top)
+instance_create(x + 32, y, Top)
+instance_create(x, y + 32, Top)
+
+instance_create(x - 32, y + 32, Top)
+instance_create(x + 32, y - 32, Top)
+
+instance_create(x - 32, y - 32, Top)
+instance_create(x + 32, y + 32, Top)
+
 with Wall {
     if object_index == InvisiWall
-    continue
+		continue
 
     if distance_to_object(other) <= 64 {
         if position_meeting(x, y, FloorExplo) {
             instance_destroy() continue
         }
-
-        if position_empty(x + 16, y) instance_create(x + 16, y, TopSmall)
-        if position_empty(x - 16, y) instance_create(x - 16, y, TopSmall)
-
-        if position_empty(x, y + 16) instance_create(x, y + 16, TopSmall)
-        if position_empty(x, y - 16) instance_create(x, y - 16, TopSmall)
-
-        if position_empty(x + 16, y + 16) instance_create(x + 16, y + 16, TopSmall)
-        if position_empty(x - 16, y - 16) instance_create(x - 16, y - 16, TopSmall)
-
-        if position_empty(x + 16, y - 16) instance_create(x + 16, y - 16, TopSmall)
-        if position_empty(x - 16, y + 16) instance_create(x - 16, y + 16, TopSmall)
 
         visible = place_meeting(x, y + 16, Floor)
 

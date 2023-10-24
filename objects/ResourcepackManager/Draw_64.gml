@@ -75,9 +75,6 @@ if max_height > 0 && !show_details && !downloading {
 				
 				ypos = max_height * clamp(pos / pos_max, 0, 1)
 				
-				//if ypos != _ypos
-				//	sound_play_pitchvol(sndHover, 1.1 + random(0.1), 0.3)
-				
 				if !dragging {
 					snd_play(sndSlider)
 					dragging = true

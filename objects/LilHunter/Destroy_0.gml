@@ -1,19 +1,29 @@
-if hp > 0 exit
+if hp > 0
+	exit
 
 scrDrop(200, 0)
 
-with MusCont {
-    alarm[1] = 1
+corpse = false
+
+event_inherited()
+
+instance_create(x, y, PortalClear)
+
+with instance_create(x, y, LilHunterDie) {
+    hit_id = sprLilHunterHurt
+    team = other.team
 }
 
-with instance_create(x, y, Explosion) {
-    hit_id = other.hit_id
-}
+with MusCont alarm[1] = 1
+
+with instance_create(x, y, Explosion)
+	hit_id = other.hit_id
 
 var firang = random_angle
 
 repeat 80 {
     firang += 4.5
+	
     with instance_create(x, y, TrapFire) {
         hit_id = other.spr_idle
         sprite_index = sprFireLilHunter
@@ -25,57 +35,18 @@ repeat 80 {
     }
 }
 
-instance_create(x, y, PortalClear)
-
-with instance_create(x, y, LilHunterDie) {
-    hit_id = sprLilHunterHurt
-    team = other.team
-}
-
-GameCont.kills += 1
-
 if instance_exists(Player) {
-    var p = noone
-    with Player
-    if is_me {
-        p = id
-    }
-
-    UberCont.ctot_kill[p.race] += 1
-
     with Player {
-        if race == 4 {
-            other.raddrop += 1
-        }
-    }
-}
-
-snd_play(snd_dead)
-
-do {
-    if raddrop > 15 {
-        with instance_create(x, y, BigRad) {
-            motion_add(other.direction, other.speed)
-            motion_add(random_angle, random(other.raddrop / 2) + 2)
-
-            repeat speed {
-                speed *= 0.9
-            }
-        }
-
-        raddrop -= 10
-    }
-} until raddrop <= 15
-
-repeat raddrop {
-    with instance_create(x, y, Rad) {
-        motion_add(other.direction, other.speed)
-        motion_add(random_angle, random(other.raddrop / 2) + 2)
-
-        repeat speed {
-            speed *= 0.9
-        }
-    }
+	    if is_me {
+	        UberCont.ctot_kill[race] ++
+			
+			if race == 12
+				UberCont.ctot_uniq[race] ++
+		}
+		
+		if race == 4
+			other.raddrop ++
+	}
 }
 
 scrAchievement(32)

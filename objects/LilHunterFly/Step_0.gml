@@ -10,13 +10,17 @@ if sprite_index == sprLilHunterLift {
             y = target.y
 			
             if random(3) < 1 {
-                ang = random_angle
-                dir = instance_nearest(x + 16 + lengthdir_x(120, ang), y + 16 + lengthdir_y(120, ang), Floor)
+                var ang = random_angle
+				
+                var dir = instance_nearest(x + 16 + ldrx(120, ang), y + 16 + ldry(120, ang), Floor)
                 
 				x = dir.x + random(32)
                 y = dir.y + random(32)
             }
-        }
+			
+			xprevious = x
+			yprevious = y
+		}
 		
         sprite_index = sprLilHunterLand
     }

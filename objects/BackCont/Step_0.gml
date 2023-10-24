@@ -37,35 +37,37 @@ if !instance_exists(LevCont) && !instance_exists(CrownIcon) && !(instance_exists
     if index == global.index {
         if wep_type[wep] == 0 viewdist = 8
         if wep_type[wep] == 3 viewdist = 3
-
-        if instance_exists(o) {
-            var i = instance_nearest(x, y, o)
-            dis = point_distance(x, y, i.x, i.y) / 6
-            dir = point_direction(x, y, i.x, i.y)
-
-            if o == Portal {
-                dis = min(dis, 96)
-            }
-        }
-
-        if !UberCont.localcoop {
-            dir2 = KeyCont.dir_fire[index]
-
-            if UberCont.opt_gamepad {
-                var gpx = gamepad_axis_value(0, gp_axisrh)
-                var gpy = gamepad_axis_value(0, gp_axisrv)
-                dis2 = (point_distance(0, 0, gpx, gpy) * 72) / viewdist
-            }
-			else if UberCont.opt_keyboard {
-                dis2 = point_distance(x, y, mouse_x, mouse_y) / viewdist
-            }
-			else if instance_exists(JoystickAttack) {
-                if !save_get_value("contorls", "aimbot", 0) {
-                    dir2 = KeyCont.dir_fire[global.index]
-                    dis2 = JoystickAttack.vdis / viewdist
-                }
-            }
-        }
+		
+		if UberCont.opt_camera {
+	        if instance_exists(o) {
+	            var i = instance_nearest(x, y, o)
+	            dis = point_distance(x, y, i.x, i.y) / 6
+	            dir = point_direction(x, y, i.x, i.y)
+				
+	            if o == Portal or instance_is(o, WeaponChest) {
+	                dis = min(dis, 72)
+	            }
+	        }
+			
+	        if !UberCont.localcoop {
+	            dir2 = KeyCont.dir_fire[index]
+				
+	            if UberCont.opt_gamepad {
+	                var gpx = gamepad_axis_value(0, gp_axisrh)
+	                var gpy = gamepad_axis_value(0, gp_axisrv)
+	                dis2 = (point_distance(0, 0, gpx, gpy) * 72) / viewdist
+	            }
+				else if UberCont.opt_keyboard {
+	                dis2 = point_distance(x, y, mouse_x, mouse_y) / viewdist
+	            }
+				else if instance_exists(JoystickAttack) {
+	                if !save_get_value("contorls", "aimbot", 0) {
+	                    dir2 = KeyCont.dir_fire[global.index]
+	                    dis2 = JoystickAttack.vdis / viewdist
+	                }
+	            }
+	        }
+		}
 
         if !bleed {
             view_xview = lerp(view_xview, (x - view_width / 2 + other.viewx2 + (random(other.shake) - other.shake / 2) * UberCont.opt_shake) + lengthdir_x(dis, dir) + lengthdir_x(dis2, dir2), 0.4)

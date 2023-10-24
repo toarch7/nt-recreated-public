@@ -2,13 +2,15 @@ if !hp exit
 
 alarm[1] = (20 + random(6))
 scrTarget()
+
 if instance_exists(target) {
-    if random(30) < 1 || (point_distance(x, y, target.x, target.y) < 64 && random(3) < 2) || (point_distance(x, y, target.x, target.y) > 160) && (random(16) < 1) {
+    if random(30) < 1 or (point_distance(x, y, target.x, target.y) < 64 && random(3) < 2) or (point_distance(x, y, target.x, target.y) > 160) && (random(16) < 1) {
         image_index = 0
         sprite_index = sprLilHunterLiftStart
         instance_change(LilHunterFly, Player)
         snd_play(sndLilHunterLaunch)
-    } else {
+    }
+	else {
         if !collision_line(x, y, target.x, target.y, Wall, 0, 0) {
             if random(4) < 3 {
                 if point_distance(x, y, target.x, target.y) < 140 {
@@ -16,8 +18,12 @@ if instance_exists(target) {
                     snd_play_hit_big(sndLilHunterBouncer, 0.2)
                     wkick = 8
                     addang = -50 - GameCont.loops * 10
+					
                     alarm[1] /= (1 + GameCont.loops * 2)
-
+					
+					if alarm[1] < 1
+						alarm[1] = 1
+					
                     repeat 11 + GameCont.loops {
                         with instance_create(x, y, LHBouncer) {
                             hit_id = other.hit_id
@@ -47,16 +53,18 @@ if instance_exists(target) {
                         }
                     }
                 }
-            } else {
+            }
+			else {
                 direction = point_direction(target.x, target.y, x, y) + random(20) - 10
                 speed = 0.4
                 walk = 8 + random(4)
                 alarm[1] = walk
                 gunangle = target_direction
             }
-        } else if random(2) < 1 && spawns > 0 && (hp / max_hp) < spawns / 6 {
+        }
+		else if random(2) < 1 && spawns > 0 && (hp / max_hp) < spawns / 6 {
             snd_play_hit_big(sndLilHunterSummon, 0.1)
-            walk = 0
+            walk = 0	
 
             repeat 30 {
                 with instance_create(x + random(96) - 48, y + random(96) - 48, IDPDPortalCharge) {
@@ -65,7 +73,7 @@ if instance_exists(target) {
                 }
             }
 
-            spawns--
+            spawns --
 
             repeat 1 + max(0, (GameCont.loops - 1)) {
                 instance_create(x, y, IDPDSpawn)
@@ -86,7 +94,8 @@ if instance_exists(target) {
             right = 1
         }
     }
-} else if random(10) < 1 {
+}
+else if random(10) < 1 {
     motion_add(random_angle, 0.4)
     walk = 8 + random(4)
     alarm[1] = walk + 10 + random(30)
@@ -94,7 +103,8 @@ if instance_exists(target) {
 
     if hspeed > 0 {
         right = 1
-    } else if hspeed < 0 {
+    }
+	else if hspeed < 0 {
         right = -1
     }
 }

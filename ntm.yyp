@@ -2564,6 +2564,7 @@
     {"id":{"name":"load_custom_shadow_colors","path":"scripts/load_custom_shadow_colors/load_custom_shadow_colors.yy",},"order":148,},
     {"id":{"name":"sndGammaProc","path":"sounds/sndGammaProc/sndGammaProc.yy",},"order":169,},
     {"id":{"name":"sndInspectorHurt","path":"sounds/sndInspectorHurt/sndInspectorHurt.yy",},"order":500,},
+    {"id":{"name":"resourcepack_priority_sort","path":"scripts/resourcepack_priority_sort/resourcepack_priority_sort.yy",},"order":4,},
     {"id":{"name":"sndUseVan","path":"sounds/sndUseVan/sndUseVan.yy",},"order":170,},
     {"id":{"name":"sndVanHurt","path":"sounds/sndVanHurt/sndVanHurt.yy",},"order":171,},
     {"id":{"name":"sndVanOpen","path":"sounds/sndVanOpen/sndVanOpen.yy",},"order":172,},

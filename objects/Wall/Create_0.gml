@@ -1,5 +1,9 @@
 var area = 0
 
+//if !instance_exists(GenCont) && (place_meeting(x, y, Explosion) or place_meeting(x, y, PortalClear)) {
+//	instance_destroy(); exit
+//}
+
 if !instance_exists(MenuGen) && !instance_exists(Menu) {
     area = GameCont.area
 }
@@ -19,7 +23,7 @@ if !place_meeting(x, y + 16, Floor) visible = 0
 
 with Wall {
     if object_index == InvisiWall
-    continue
+		continue
 
     if distance_to_object(other) <= 64 or id == other.id {
         visible = place_meeting(x, y + 16, Floor)

@@ -47,5 +47,8 @@ repeat 4 {
 }
 
 
+circle_active = false
+drawx = view_width / 2
+drawy = view_height / 2
 
 wave = 0

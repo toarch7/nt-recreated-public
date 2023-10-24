@@ -331,7 +331,7 @@
 	"FREEZE FRAMES": "КАДРЫ ОСТАНОВКИ",
 	"AUTO RESOLUTION": "АВТО РАЗРЕШЕНИЕ",
 	"FULLSCREEN": "ПОЛНЫЙ ЭКРАН",
-	"DYNAMIC CAMERA": "ПОДВИЖНАЯ#КАМЕРА",
+	"DYNAMIC CAMERA": "ПОДВИЖНАЯ КАМЕРА",
 	"PARTICLES": "ЧАСТИЦЫ",
 	"WALL FIX": "ПОЧИНКА СТЕН",
 	"HIDE HUD": "СКРЫТЬ HUD",
@@ -481,7 +481,7 @@
 	"ERASE PROGRESS": "СТЕРЕТЬ ПРОГРЕСС",
 	"DELETE IN": "УДАЛЕНИЕ ЧЕРЕЗ",
 	"@wWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET#ALL OF YOUR PREFERENCES.###ARE YOU SURE?@w": "@wВНИМАНИЕ!!!##@sЭТО ДЕЙСТВИЕ БЕЗВОЗВРАТНО СБРОСИТ#ВСЕ ВАШИ НАСТРОЙКИ###ПРОДОЛЖИТЬ?@w",
-	"@rWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET ALL OF YOUR#CHARACTERS, UNLOCKS, STATS, ACHIEVEMENTS AND#IT IS UNDOABLE.###ARE YOU SURE?@w": "@rВНИМАНИЕ!!!##@sЭТО ДЕЙСТВИЕ БЕЗВОЗВРАТНО СБРОСИТ#ВЕСЬ ВАШ ПРОГРЕСС:#ПЕРСОНАЖИ, СТАТИСТИКА, НАСТРОЙКИ,#ДОСТИЖЕНИЯ, ПРОЧЕЕ...###ВЫ УВЕРЕНЫ?@w",
+	"@rWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET ALL OF YOUR#CHARACTERS, UNLOCKS, STATS, ACHIEVEMENTS AND#IT IS NOT UNDOABLE.###ARE YOU SURE?@w": "@rВНИМАНИЕ!!!##@sЭТО ДЕЙСТВИЕ БЕЗВОЗВРАТНО СБРОСИТ#ВЕСЬ ВАШ ПРОГРЕСС:#ПЕРСОНАЖИ, СТАТИСТИКА, НАСТРОЙКИ,#ДОСТИЖЕНИЯ, ПРОЧЕЕ...###ВЫ УВЕРЕНЫ?@w",
 	"YES": "ДА",
 	"NO": "НЕТ",
 	
@@ -665,6 +665,7 @@
 	"THE STRUGGLE CONTINUES": "БИТВА ПРОДОЛЖАЕТСЯ",
 	"THE STRUGGLE IS OVER": "БИТВА ОКОНЧЕНА",
 	"KILLED BY": "УБИЙЦА",
+	"COMPLETION TIME": "ВРЕМЯ ЗАВЕРШЕНИЯ",
 	
 	"#@sSTORED": "#@sСОХРАНЕНО",
 	

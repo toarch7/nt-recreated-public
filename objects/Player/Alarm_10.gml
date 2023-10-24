@@ -9,17 +9,29 @@ try {
     if race == 11 && ultra == 2 && !instance_exists(GenCont) && !instance_exists(Portal) {
         var _enemy_hp = 0
 
-        with enemy
-        if object_index != Van {
-            _enemy_hp += hp
-        }
-
+        with enemy {
+	        if object_index != Van
+	            _enemy_hp += hp
+		}
+		
         if _enemy_hp <= 150 {
-            with enemy hp = 0
+            with enemy
+				hp = 0
         }
     }
 	
-
+	if instance_exists(Floor) {
+		with enemy {
+			if object_index == Nothing2 or object_index == LilHunter
+				continue
+		
+			if !position_meeting(x, y, Floor) {
+				hp = 0
+				instance_destroy()
+			}
+		}
+	}
+	
     if UberCont.opt_walls {
         var _l = global.lis_walls_visible
 

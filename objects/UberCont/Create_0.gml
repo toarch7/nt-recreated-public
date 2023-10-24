@@ -1,5 +1,5 @@
 #macro GAME_VERSION "b2.6.1"
-#macro GAME_BUILD 2614
+#macro GAME_BUILD 2615
 #macro BETA true
 
 
@@ -174,18 +174,14 @@ if cskingot[12] scrAchievement(21)
 var all_have_weps = 1
 
 for (var i = 1; i <= 12; i++) {
-    if cwep[i] == race_swep[i] {
+    if cwep[i] == race_swep[i]
         all_have_weps = false
-    }
 
-    if wep_gold[cwep[i]] {
+    if !(cwep[i] == wep_golden_revolver && i == 6) && wep_gold[cwep[i]]
         scrAchievement(24)
-    }
-	else all_have_weps = 0
 
-    if cwep[i] == wep_golden_nuke_launcher or cwep[i] == wep_golden_disc_gun {
+    if cwep[i] == wep_golden_nuke_launcher or cwep[i] == wep_golden_disc_gun
         scrAchievement(25)
-    }
 	
 	if cbst_loop[i] >= 3 && !opt_cheats {
 		opt_cheats = save_set_value("cheats", "unlocked", true)
@@ -210,6 +206,7 @@ else update_request = -1
 
 update_info = undefined
 update_message = -1
+update_url = "https://toncho.itch.io/nuclear-throne-mobile"
 
 audio_falloff_set_model(audio_falloff_linear_distance_clamped)
 

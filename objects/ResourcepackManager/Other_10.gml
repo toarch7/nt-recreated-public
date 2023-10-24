@@ -25,12 +25,4 @@ loaded = true
 
 max_height = max(0, array_length(items) * 40 - 160)
 
-array_sort(items, function(a, b) {
-	if a.priority == b.priority
-		return sign(b.installtime - a.installtime)
-	
-	if b.priority > a.priority
-		return 1
-	
-	return -1
-})
+resourcepack_priority_sort(items)

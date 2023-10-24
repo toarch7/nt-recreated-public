@@ -63,33 +63,55 @@ if !instance_exists(Portal) {
 
 draw_set_color(c_lime)
 
-if !global.desktop && !UberCont.opt_gamepad {
-    switch pos {
-        case 0:
-            with JoystickMove {
-                draw_circle_part(x, y, rad * 1.25 + sin(other.wave) * 4, 2, 1)
-            }
-            break
-
+if !is_keyboard() && !is_gamepad() {
+	var obj = noone
+	
+	print(pos)
+	
+	switch pos {
+		case 0: obj = JoystickMove break
+		
         case 1:
-            with ButtonAct {
-                draw_circle_part(x, y, rad * 1.25 + sin(other.wave) * 4, 2, 1)
-                alpha += 0.4
-            }
-            break
-
-        case 2:
-            with ButtonSwap {
-                draw_circle_part(x, y, rad * 1.25 + sin(other.wave) * 4, 2, 1)
-            }
-            break
-
-        case 3:
-            with ButtonActive {
-                draw_circle_part(x, y, rad * 1.25 + sin(other.wave) * 4, 2, 1)
-            }
-            break
+			with ButtonAct if alpha > 0
+				obj = ButtonAct
+			
+			break
+        
+        case 2: obj = ButtonSwap break
+        case 3: obj = ButtonActive break
     }
+	
+	var w = sin(wave) * 4
+	
+	if instance_exists(obj) {
+		if circle_active {
+			drawx = lerp(drawx, obj.x, 0.4)
+			drawy = lerp(drawy, obj.y, 0.4)
+		}
+		else {
+			drawx = obj.x
+			drawy = obj.y
+		}
+		
+		draw_circle_part(drawx, drawy, obj.rad * 1.25 + w, 2, 1)
+		
+		circle_active = true
+	}
+	else if pos == 1 {
+		draw_set_color(c_red)
+		
+		with WepPickup {
+			other.drawx = lerp(other.drawx, x - view_xview, 0.4)
+			other.drawy = lerp(other.drawy, y - view_yview, 0.4)
+		}
+		
+		with WeaponChest {
+			other.drawx = lerp(other.drawx, x - view_xview, 0.4)
+			other.drawy = lerp(other.drawy, y - view_yview, 0.4)
+		}
+		
+		draw_circle_part(drawx, drawy, 16 + w, 1, 1)
+	}
 }
 
 wave += 0.1

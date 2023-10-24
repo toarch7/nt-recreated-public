@@ -5,7 +5,8 @@ index = get_nearest_touch(rad)
 if active {
     alpha = 1.1
     active = 0
-} else if alpha > 0 {
+}
+else if alpha > 0 {
     alpha -= 0.1
 }
 
