@@ -3,6 +3,26 @@
 if index == -1 or instance_exists(CoopMenu)
     exit
 
+if !ready {
+	for(var i = 0; i < array_length(clients_ready); i ++) {
+		if !clients_ready[i]
+			exit
+	}
+	
+	ready = true
+	
+	instance_create(0, 0, GameCont)
+	instance_create(0, 0, MenuGen)
+	
+	with SpiralCont
+		instance_destroy()
+	
+	snd_play(sndMenuCharSelect)
+	
+	with UberCont
+		gamepad_sel = 0
+}
+
 if frame <= netframe + max(1, delay) {
 	var _inputs = scrInputBitmask(),
 		
@@ -104,6 +124,8 @@ var stop = false,
 		KeyCont.dir_fire[i] = _dir_fire
 		KeyCont.dis_fire[i] = _dis_fire
 		
+		// global.random_state = global.seed + netframe
+		
 		if _event != "[]" {
 			var _data = json_parse(_event)
 			
@@ -131,7 +153,6 @@ var stop = false,
 		}
 	}
 	
-	global.random_state = global.seed + netframe
 //
 
 if netwait >= 900 { // connection terminated

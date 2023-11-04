@@ -5,7 +5,9 @@ var str = "seed: " +string(random_get_seed()) + "\n" +
 		  "frame: " + string(frame) + "\n" +
 		  //"enemies: " + string(instance_number(enemy)) + "\n" +
 		  "checksum: " + string(checksum) + "\n" +
-		  "net(" + string(delay) + "): " + string(netframe) + "\n"
+		  "net(" + string(delay) + "): " + string(netframe) + "\n" +
+		  "clients: " + string(ready) + " " + string(started) + " " + string(clients_ready) + "\n" +
+		  "instances: " + string(instance_count) + "\n"
 
 // str += last_frame + "\n" + string(floor(netframe / 10) * 10) + "\n"
 
@@ -74,7 +76,7 @@ draw_set_halign(fa_left)
 var dx = view_width / 2,
 	dy = view_height / 2 + 72
 
-// "Go" button & run start
+
 if global.is_server {
     gpu_set_fog(1, c_black, 0, 1)
     
@@ -86,43 +88,19 @@ if global.is_server {
     draw_sprite(sprGoButton, 0, dx, dy)
 	
     if mouse_check_button_pressed(mb_left) && point_in_rectangle(mx, my, dx - 48, dy - 12, dx + 48, dy + 12) {
-        instance_create(0, 0, GameCont)
-		
-        global.seed = randomize()
-        random_set_seed(global.seed)
-		global.random_state = global.seed
-		
-		global.time = 0
-		
-        for (var i = 0; i <= 12; i++) {
-			global.rng_state[i] = global.seed
-		}
-		
-        with SpiralCont {
+		with CoopMenu
 			instance_destroy()
-		}
-		
-        UberCont.daily_run = 0
-        UberCont.weekly_run = 0
-
-        instance_create(0, 0, MenuGen)
-
-        with CoopMenu {
-            instance_destroy()
-        }
 		
 		started = true
 		
+		clients_ready = array_create(network_clientcount() + 1)
+		
+		clients_ready[index] = true
+		
         packet_begin(event.start)
-        packet_write(buffer_string, json_stringify(playerindexes))
-        packet_write(buffer_u32, global.seed)
+		packet_write(buffer_u8, index)
         packet_send()
 		
-		snd_play(sndPortalOld)
-		
 		network_lock()
-		
-		//if network_clientcount() > 0
-		//	network_lock()
 	}
 }

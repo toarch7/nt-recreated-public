@@ -18,6 +18,9 @@ netframe = 0 // network inputs (synced)
 last_frame = "" // last frame w/o inputs (debug)
 
 started = false
+ready = false
+
+clients_ready = [ false, false, false, false ]
 
 global.coop = 1
 
@@ -95,6 +98,7 @@ enum event {
 
     update_playerinstance,
 
+	ready_state,
     run_start,
 	
 	brutesync

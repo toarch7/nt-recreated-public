@@ -53,7 +53,7 @@ try {
 			var version = buffer_read(data, buffer_string)
 			
 			if version != string(GAME_BUILD) {
-				self.refuse(_socket, "Version mismatch.#Server version: " + string(GAME_BUILD) + "#Provided: " + string(version))
+				self.refuse(_socket, "Version mismatch.#Server version: " + string(GAME_BUILD) + "#Yours: " + string(version))
 				
 				break
 			}
@@ -80,6 +80,7 @@ try {
 			packet_write(buffer_string, user_signature)
 			packet_write(buffer_string, json_stringify(pinst))
 			packet_write(buffer_string, json_stringify(playerinstances))
+			packet_write(buffer_u32, random_get_seed())
 			packet_send()
 			
             snd_play(sndRestart)
@@ -98,7 +99,8 @@ try {
 				_pinst = json_parse(buffer_read(data, buffer_string))
 			
 			if _user_signature == scrGetUid() { // is that for me??
-				var _playerinstances = json_parse(buffer_read(data, buffer_string))
+				var _playerinstances = json_parse(buffer_read(data, buffer_string)),
+					_seed = buffer_read(data, buffer_u32)
 				
 				playerinstances = {}
 				
@@ -115,6 +117,8 @@ try {
 	                CoopMenu.connected = true
 				
 	            loading_text = ""
+				
+				random_set_seed(_seed)
 				
 	            alarm[1] = -1
 			}
@@ -159,58 +163,39 @@ try {
 			
 			break
 		
-        case event.start:
+		case event.start:
+			var _index = buffer_read(data, buffer_u8)
+			
 			share = false
 			
 			if global.is_server
-				break;
+				break
+			
+			clients_ready = array_create(network_clientcount() + 1)
+			
+			clients_ready[_index] = true
+			clients_ready[self.index] = true
 			
 			started = true
 			
-            var _indexes = buffer_read(data, buffer_string)
-            playerindexes = json_parse(_indexes)
-			
-            instance_create(0, 0, GameCont)
-			
-			var host = new PlayerInstance(0) // host
-			
-            for (var i = 0; i < array_length(playerindexes); i ++) {
-                var _ind = playerindexes[i],
-					_inst = new PlayerInstance(_ind)
-				
-				if _ind == global.index
-					player_update_prefs(_inst)
-            }
-			
-            global.seed = buffer_read(data, buffer_u32)
-            random_set_seed(global.seed)
-			global.random_state = global.seed
-			
-			global.time = 0
-			
-            for (var i = 0; i <= 12; i ++) {
-                global.rng_state[i] = global.seed
-            }
-			
-            with SpiralCont instance_destroy()
-			
-            UberCont.daily_run = 0
-            UberCont.weekly_run = 0
-			
-            instance_create(0, 0, MenuGen)
-			
-            with CoopMenu {
-                server = -1
-				
-                instance_destroy()
-            }
-			
-			snd_play(sndPortalOld)
+			with CoopMenu
+				instance_destroy()
 			
 			network_lock()
 			
+			packet_begin(event.ready_state)
+			packet_write(buffer_u8, global.index)
+			packet_send()
+			
             break
 		
+		case event.ready_state:
+			
+			var _index = buffer_read(data, buffer_u8)
+			clients_ready[_index] = true
+			
+			break
+        
         case event.update_playerinstance:
             var _index = buffer_read(data, buffer_u8)
 			
