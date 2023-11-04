@@ -20,9 +20,10 @@ try {
         }
     }
 	
-	if instance_exists(Floor) {
+	if instance_exists(Floor) && id == instance_find(Player, 0) {
 		with enemy {
 			if object_index == Nothing2 or object_index == LilHunter
+			or mask_index   == mskNone  or object_index == BanditBoss
 				continue
 		
 			if !position_meeting(x, y, Floor) {
