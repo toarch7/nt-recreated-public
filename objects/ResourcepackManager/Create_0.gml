@@ -140,7 +140,7 @@ load_screenshots = function() {
 }
 
 sprites_cleanup = function() {
-	var m = 20
+	var m = 100
 	
 	if array_length(sprites) < m
 		exit
