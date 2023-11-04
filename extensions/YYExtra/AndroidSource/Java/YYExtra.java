@@ -149,8 +149,16 @@ public class YYExtra extends ExtensionBase {
 
 			while ((zipEntry = zipInputStream.getNextEntry()) != null) {
 				String entryName = zipEntry.getName();
-				File entryFile = new File(destinationFolderPath, entryName);
+				String entryFilename = entryName.substring(entryName.lastIndexOf("/") + 1);
 
+				if (entryFilename.startsWith(".")) {
+					zipInputStream.closeEntry();
+					continue;
+				}
+
+
+				File entryFile = new File(destinationFolderPath, entryName);
+				
 				if (YYExtra.unzipFirstEntry.equals(""))
 					YYExtra.unzipFirstEntry = entryFile.getPath();
 
@@ -164,14 +172,14 @@ public class YYExtra extends ExtensionBase {
 					
 					outputStream.close();
 				}
-				else entryFile.mkdirs();
+				else {
+					entryFile.mkdirs();
+				}
 
 				if (entryFile.getName().endsWith(".zip")) {
 					String dest = entryFile.getName().replace(".zip", "");
 					String src = entryFile.getPath().replace(entryFile.getName(), "");
 
-					Log.i("yoyo", "Zip Entry : " + src + " " + dest);
-				
 					File destFile = new File(src + dest);
 
 					if (!destFile.exists())
@@ -181,6 +189,7 @@ public class YYExtra extends ExtensionBase {
 
 					entryFile.delete();
 				}
+
 
 				zipInputStream.closeEntry();
 			}

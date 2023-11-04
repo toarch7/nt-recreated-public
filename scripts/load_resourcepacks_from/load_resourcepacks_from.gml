@@ -18,7 +18,7 @@ function load_resourcepacks_from(loadpath) {
         var _name = list[i],
 			local = false
 		
-        print("Loading pack \"" + _name + "\"")
+        print("Found pack \"" + _name + "\"")
 
         var packdir = loadpath + _name + "/",
 			metafile = packdir + "meta.json",
@@ -86,11 +86,13 @@ function load_resourcepacks_from(loadpath) {
 	
 	
 	
-	
 	for(var i = 0; i < array_length(Resourcepacks); i ++) {
 		var pack = Resourcepacks[i],
 			local = !pack.external,
-            status = 0
+            status = 0,
+			_name = pack.id
+		
+		print("Loading pack \"" + _name + "\"")
 		
         var packdir = loadpath + _name + "/"
 		
@@ -99,7 +101,7 @@ function load_resourcepacks_from(loadpath) {
 	        global.log_color = []
 		}
 		
-        if active {
+        if pack.active {
             if directory_exists(packdir + "usersprites")
 				status += load_custom_sprites(packdir + "usersprites/")
 
