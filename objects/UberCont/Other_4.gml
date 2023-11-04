@@ -10,10 +10,8 @@ else if os_type == os_android {
 
 scrOptionsUpdate()
 
-if daily_run {
-	if weekly_run && weekly_grill {
-		opt_griller = true
-	}
-	else if daily_grill
-		opt_griller = true
+if daily_run && !want_menu {
+	
+	opt_griller = weekly_run ? weekly_grill : daily_grill
+	
 }
