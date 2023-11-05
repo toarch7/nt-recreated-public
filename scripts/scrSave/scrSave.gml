@@ -14,7 +14,7 @@ function scrSave() {
 	        var data = json_decode(raw)
 			
 			var options = [
-				"cheats_console", "cheats_griller", "options_gamepad", "options_keyboard",
+				"cheats_console", "cheats_griller", "cheats_practice", "options_gamepad", "options_keyboard",
 				"etc_nickname", "visual_resolution", "visual_fullscreen"
 			]
 			

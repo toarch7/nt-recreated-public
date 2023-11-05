@@ -5,9 +5,14 @@ var numfloors = 0
 var d = safedir
 
 if safespawn {
+	var safedis = 96
+	
+	if !GameCont.loops
+		safedis = 64
+	
     if !instance_exists(FloorMaker) {
         with Floor {
-            if distance_to_point(10016, 10016) <= 96
+            if distance_to_point(10016, 10016) <= safedis
                 numfloors ++
         }
 

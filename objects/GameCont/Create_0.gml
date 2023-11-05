@@ -19,6 +19,7 @@ skillpoints = 0
 crownpoints = 0
 kills = 0
 crownvisits = 0
+junglevisits = 0
 ultrapoints = 0
 last_hit = -1
 rad = 0

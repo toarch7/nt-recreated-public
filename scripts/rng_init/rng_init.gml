@@ -28,37 +28,42 @@ enum RNGSlot {
 }
 
 function rng_init() {
-    if !global.coop {
+	if global.custom_seed {
+		global.seed = global.custom_seed
+	}
+    else if !global.coop
         global.seed = irandom(rng_m)
-    }
-
-    global.custom_seed = false
-
+	
     if UberCont.daily_run {
         if UberCont.weekly_run {
             global.seed = scrReal(UberCont.weekly_data[? "seed"])
         }
         else global.seed = UberCont.daily_seed
+		
+		global.custom_seed = false
     }
     else {
-        if file_exists(game_directory + "seed.txt") {
-            global.custom_seed = 1
+		if UberCont.opt_practice && global.custom_seed > 0 {
+			global.seed = global.custom_seed
+		}
+        else if file_exists(game_directory + "seed.txt") {
+            global.custom_seed = true
 
             var file = file_text_open_read(game_directory + "seed.txt")
-            global.seed = file_text_read_real(file)
+            global.seed = scrGenerateUID(file_text_read_string(file), true)
+			
             file_text_close(file)
 
             show_debug_message("Custom seed: " + string(global.seed))
         }
         else if instance_exists(Console) && Console.seed != undefined {
-            global.seed = scrReal(Console.seed)
-            global.custom_seed = 1
+            global.seed = scrGenerateUID(Console.seed, true)
+            global.custom_seed = true
         }
+		else global.custom_seed = false
     }
-
-    for (var i = 0; i <= 12; i ++) {
-		global.rng_state[i] = global.seed
-	}
 	
     random_set_seed(global.seed)
+
+	rng_reset()
 }

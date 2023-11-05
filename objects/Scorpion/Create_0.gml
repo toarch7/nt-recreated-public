@@ -22,12 +22,12 @@ walk = 0
 gunangle = random_angle
 alarm[1] = 30 + random(90)
 
-var chance = 30
+var rand = 30
 
 if GameCont.crown == 7
-    chance *= 0.7
+    rand *= 0.7
 
-if random(chance) < (1 + GameCont.loops * 5) && GameCont.subarea > 1 {
+if random(rand) < (1 + GameCont.loops * 5) && GameCont.subarea > 1 {
     instance_create(x, y, GoldScorpion)
     instance_destroy(id, 0)
 }

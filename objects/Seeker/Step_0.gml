@@ -4,8 +4,9 @@ if lockstep_stop
 if instance_exists(enemy) && speed > 0 {
     target = instance_nearest(x, y, enemy)
 
-    if target && !collision_line(x, y, target.x, target.y, Wall, 1, 1) {
-        motion_add(target_direction, 1 + boost)
+    if target && distance_to_object(target) <= 32 {
+		if !collision_line(x, y, target.x, target.y, Wall, 1, 1)
+			motion_add(target_direction, 1 + boost)
     }
 }
 

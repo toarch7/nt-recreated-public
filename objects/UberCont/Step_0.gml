@@ -75,8 +75,8 @@ if want_restart && !lockstep_stop {
 		instance_activate_all()
 		draw_enable_drawevent(true)
 		
-		random_set_seed(global.seed)
-	    global.seed = irandom(rng_m)
+		//random_set_seed(global.seed)
+	    //global.seed = irandom(rng_m)
 		
 	    continued_run = 0
 	    file_delete("gamestate.dat")
@@ -129,6 +129,8 @@ if want_menu && !lockstep_stop {
 		
 	    file_delete("gamestate.dat")
 	    continued_run = 0
+		
+		global.custom_seed = 0
 		
 		room_restart()
 		

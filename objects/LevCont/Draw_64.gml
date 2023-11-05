@@ -88,6 +88,13 @@ if UberCont.opt_griller && !instance_exists(CrownIcon) && !instance_exists(Ultra
 				num = i
 			}
 		}
+		
+		if change > 0 {
+			print("Change!", change)
+			
+			with SkillIcon
+				num = -- i
+		}
 	}
 	
 	if !instance_exists(SkillIcon) {

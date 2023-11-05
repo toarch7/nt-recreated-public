@@ -1,23 +1,45 @@
 function scrGameContDrawGUI() {
-	if UberCont.opt_timer {
-		var won = instance_exists(GameOver) && GameCont.win && room == romGame
+	var cscale = 0.67,
+	
+		cx = 16 * cscale,
+		cy = view_height - cx
+	
+	var won = instance_exists(GameOver) && GameCont.win
+	
+	if !instance_exists(Menu) && !instance_exists(PauseButton) && !won
+	&& (!instance_exists(Credits) or (instance_exists(Credits) && !Credits.visible)) {
+		if UberCont.opt_timer {
+		    draw_set_color(c_white)
+		    draw_set_halign(fa_right)
+		    draw_set_valign(fa_top)
 		
-		if !instance_exists(Menu) && !instance_exists(PauseButton) && !won &&
-		(!instance_exists(Credits) or (instance_exists(Credits) && !Credits.visible)) {
-	        draw_set_color(c_white)
-	        draw_set_halign(fa_right)
-	        draw_set_valign(fa_top)
-			
 			draw_text_shadow(view_width - 1, view_height - 10, time)
-			
-	        draw_set_halign(fa_left)
-	    }
+		
+		    draw_set_halign(fa_left)
+		
+			cy -= 10
+		}
+	
+		if global.cheats {
+			var cheats;
+		
+			with UberCont
+				cheats = [ opt_griller, opt_practice ]
+		
+			for(var i = 0; i < array_length(cheats); i ++) {
+				if cheats[i] {
+					draw_sprite_ext(sprCheatIndicatorHUD, i, view_width - cx, cy, cscale, cscale, 0, c_white, 1)
+				
+					cx += 16 * cscale
+				}
+			}
+		}
 	}
 	
     if instance_exists(GameOver) or instance_exists(Player) or UberCont.paused or room == romInit {
-        dir = 1
-        dix = 0
-
+		var dir = 1,
+			dix = 0
+		
         if coopultra {
             draw_sprite(sprUltraIconCoopHUD, coopultra - 1, view_width - 12 - 16 * dix, 13)
             dix ++

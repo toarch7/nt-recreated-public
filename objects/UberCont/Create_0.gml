@@ -1,5 +1,5 @@
 #macro GAME_VERSION "b2.6.1"
-#macro GAME_BUILD 2615
+#macro GAME_BUILD 2616
 #macro BETA true
 
 
@@ -234,3 +234,5 @@ show_crosshair = true
 
 if MultiplayerConfig
 	open_two_windows(true)
+
+print("Special number:", scrGenerateUID("jopa!!", true))

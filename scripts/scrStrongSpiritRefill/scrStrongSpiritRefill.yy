@@ -6,7 +6,7 @@
     "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "generate_uid",
+  "name": "scrStrongSpiritRefill",
   "tags": [],
   "resourceType": "GMScript",
 }

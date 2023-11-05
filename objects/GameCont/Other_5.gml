@@ -164,8 +164,6 @@ if !UberCont.hardgot && loops >= 2 {
 
 snd_stop(sndSalamanderFire)
 
-rng_reset()
-
 if !instance_exists(CoopController) && !UberCont.opt_console {
     var p = UberCont.paused
 	

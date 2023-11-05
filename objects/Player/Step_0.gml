@@ -39,6 +39,57 @@ else if skill_get(27) && spirit_index < 8 {
     spirit_index += 0.4
 }
 
+if fainted {
+	fainted --
+	
+	sprite_index = spr_hurt
+	image_alpha = 0.5
+	
+	if hp > 1
+		hp = 1
+	
+	if !fainted {
+		if skill_get(mut_strong_spirit)
+			scrStrongSpiritRefill()
+		
+		repeat 24 {
+			var ang = random_angle
+			
+			with instance_create(x, y, Dust) {
+				motion_add(ang, random(4) + 6)
+			}
+		}
+		
+		with enemy {
+			if distance_to_object(other) <= 64 {
+				projectile_hit_self(40)
+				
+				motion_add(point_direction(other.x, other.y, x, y), 12)
+				
+				if speed > 16
+					speed = 16
+			}
+		}
+		
+		snd_play(snd_hurt)
+		snd_play(snd_lowh)
+		drawlowhp = 30
+		
+		mask_index = mskPlayer
+		
+		if race == 13
+			mask_index = mskScrapBoss
+		
+		image_alpha = 1
+		
+		inframes = max(30, inframes)
+		
+		hp = 1
+	}
+	
+	exit
+}
+
 if (instance_exists(GenCont)
 or (instance_exists(SitDown) && SitDown.sit)
 or instance_exists(Cinematic)
@@ -164,7 +215,8 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
             snd_play(sndStrongSpiritLose)
             inframes = 30
             spirit = 0
-        } else if race = 9 && bleed < 150 && visible {
+        }
+		else if race == 9 && bleed < 150 && visible {
             if bleed = 0 {
                 snd_play(sndChickenLoseHead)
                 snd_loop(sndChickenHeadlessLoop)
@@ -216,12 +268,19 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
                 bleed += 1
             }
 
-            UberCont.ctot_uniq[9]++
-        } else if can_die {
-            if race == 4 && place_meeting(x, y, ReviveCircle) && !instance_exists(CoopController) {
+            UberCont.ctot_uniq[9] ++
+        }
+		else if can_die {
+			if race == 4 && place_meeting(x, y, ReviveCircle) && !instance_exists(CoopController) {
                 hp = 1
                 scrTurnIntoSkeleton()
-            } else if KeyCont.players > 1 {
+            }
+			else if UberCont.opt_practice {
+				mask_index = mskNone
+				fainted = PRACTICE_FAINTED_TIME
+				snd_play(snd_dead)
+			}
+            else if KeyCont.players > 1 {
                 instance_change(Revive, 1)
                 image_speed = 0.4
                 sprite_index = spr_hurt
@@ -245,11 +304,13 @@ if !instance_exists(GenCont) && !instance_exists(LevCont) && visible {
 
                     if speed > 16 speed = 16
                 }
-            } else {
+            }
+			else {
                 UberCont.ctot_strk[race] = 0
                 instance_destroy()
             }
-        } else hp = 1
+        }
+		else hp = 1
     }
 
     //SHOOTING!! AWW YEAH
@@ -491,18 +552,8 @@ if sprite_index != spr_hurt && lsthealth > hp {
     lsthealth -= 0.5
 }
 
-if can_spirit && !spirit && hp >= max_hp && max_hp > 1 {
-    with instance_create(x, y, StrongSpiritRefill) {
-        depth = other.depth - 1
-        creator = other.id
-    }
-
-    spirit = 1
-
-    snd_play(sndStrongSpiritRecover)
-    spirit_index = 0
-    can_spirit = 0
-}
+if can_spirit && !spirit && hp >= max_hp && max_hp > 1
+   scrStrongSpiritRefill()
 
 if speed > maxspeed speed = maxspeed
 

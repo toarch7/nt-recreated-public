@@ -16,7 +16,7 @@
 global.random_state = 1
 
 function randomize_wrapper() {
-	var _seed = 1//__randomize()
+	var _seed = __randomize()
 	
 	global.random_state = _seed
 	random_set_seed(_seed)
@@ -26,12 +26,14 @@ function randomize_wrapper() {
 
 function random_set_seed_wrapper(_seed) {
 	_seed = real(_seed)
+	
 	global.random_state = _seed
+	
 	__random_set_seed(_seed)
 }
 
 function rng_next() {
-	global.random_state = (global.random_state * 48271) mod rng_m;
+	global.random_state = (global.random_state * 48271 + RNG_SECRET) mod rng_m;
 	return global.random_state;
 }
 
@@ -43,7 +45,7 @@ function random_range_wrapper(a, b) {
 }
 
 function irandom_wrapper(val) {
-	return floor((rng_next() / rng_m) * ceil(val))
+	return floor((rng_next() / rng_m) * (ceil(val) + 1))
 }
 
 function irandom_range_wrapper(a, b) {

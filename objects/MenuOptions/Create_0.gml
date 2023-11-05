@@ -1014,7 +1014,8 @@ option_category_begin(OptionCategory.Cheats)
 
 option_elements_create(
 	{ type: "switch", name: "CONSOLE", key: "cheats_console" },
-	{ type: "switch", name: "GRILLER MODE", key: "cheats_griller" }
+	{ type: "switch", name: "GRILLER MODE", key: "cheats_griller" },
+	{ type: "switch", name: "PRACTICE", key: "cheats_practice" }
 )
 
 #endregion Cheats

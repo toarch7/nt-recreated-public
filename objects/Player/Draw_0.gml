@@ -1,6 +1,10 @@
 if lockstep_stop
 	exit
 
+if fainted {
+	draw_self(); exit
+}
+
 wave += 0.4
 
 if wave > 6.2
@@ -28,7 +32,7 @@ if bwep != 0 and race != 7 draw_sprite_ext(wep_sprt[bwep], 0, x - right * 2, y, 
 
 var shielding = false
 
-if race == 2 && instance_exists(CrystalShield) {
+if race == 2 && !fainted && instance_exists(CrystalShield) {
 	with CrystalShield {
 		if creator == other.id && sprite_index != spr_disappear {
 			shielding = true; break
@@ -42,9 +46,12 @@ if wep_type[wep] == 3 && is_me && !shielding && wep != 18 {
     lasd = 0
 
     do {
-        lasd++lasx += lengthdir_x(2, gunangle)
+        lasd ++
+		
+		lasx += lengthdir_x(2, gunangle)
         lasy += lengthdir_y(2, gunangle)
-    } until position_meeting(lasx, lasy, Wall) or lasd > 1000
+    }
+	until position_meeting(lasx, lasy, Wall) or lasd > 1000
 
     draw_sprite_ext(sprLaserSightPlayer, - 1, x, y, point_distance(x, y, lasx, lasy) / 2 + 2, 1, gunangle, c_white, 1)
 }

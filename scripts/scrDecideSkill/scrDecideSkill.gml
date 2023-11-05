@@ -1,13 +1,13 @@
 function scrDecideSkill() {
     var iter = 0
     var skill = -1
-
+	
     do {
         var fine = 1
 
         skill = irandom(GameCont.maxskill)
         iter++
-
+		
         with SkillIcon {
             if self.skill == skill {
                 fine = 0
@@ -26,7 +26,8 @@ function scrDecideSkill() {
         if !skill or skill_get(skill) or (skill == 18 && GameCont.crown == 8 && !horrorexists) {
             fine = 0
         }
-    } until fine && iter < 100
+    }
+	until fine && iter < 100
 
     return skill
 }

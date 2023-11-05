@@ -45,15 +45,7 @@ instance_create(0, 0, UberCont)
 
 //
 	var info = os_get_info(),
-		sha = sha1_string_utf8(info[? "udid"]),
-		udid = ""
-	
-	for(var i = 1; i <= string_length(sha); i += 8) {
-		var seed = base_convert(string_copy(sha, i, 8), 16, 10)
-		
-		random_set_seed(seed)
-		udid += generate_uid(3)
-	}
+		udid = scrGenerateUID(info[? "udid"])
 	
 	save_set_value("general", "uid", udid)
 	
@@ -90,6 +82,8 @@ if loading {
             hp = d.hp
             ammo = d.ammo
             spirit = d.spirit
+			
+			self[$ "fainted"] ??= 0
         }
 		
         pos = max(cont.waypoints - 15, 0)

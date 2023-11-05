@@ -154,12 +154,14 @@ function scrPopulate() {
     }
 
     if GameCont.area != 0 && (GameCont.area < 5 or GameCont.area >= 100) && GameCont.area != 106 && GameCont.area != 107 {
-        with WeaponChest
-        instance_create(x, y, Bandit)
-        with RadChest
-        instance_create(x, y, Bandit)
+        with instance_find(WeaponChest, 0)
+			instance_create(x, y, Bandit)
+        
+		with RadChest
+			instance_create(x, y, Bandit)
+		
         with AmmoChest
-        instance_create(x, y, Bandit)
+			instance_create(x, y, Bandit)
     }
 
     //populate pizza sewers

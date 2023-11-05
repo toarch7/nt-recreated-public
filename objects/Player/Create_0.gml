@@ -23,3 +23,6 @@ crosshair_x = x
 crosshair_y = y
 
 crosshair_alpha = 0
+
+#macro PRACTICE_FAINTED_TIME (45 * 30)
+fainted = false

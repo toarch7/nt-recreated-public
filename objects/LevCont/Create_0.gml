@@ -21,11 +21,12 @@ if GameCont.patiencepick {
 }
 
 if GameCont.area == 105 && GameCont.skillpoints == 1 {
-    for (i = 0; i <= 12; i++) {
-        global.rng_state[i] = global.seed + 15000
-    }
-
-    random_set_seed(global.seed + 15000)
+	var _seed = global.seed + junglevisits * 100
+	
+    for (i = 0; i <= 12; i++)
+        global.rng_state[i] = _seed
+	
+    random_set_seed(_seed)
 }
 
 if GameCont.crownpoints > 0 {
@@ -124,7 +125,7 @@ else if GameCont.ultrapoints {
     with instance_create(view_xview + view_width / 2 + 20, view_yview + view_height - 20, UltraIcon)
     num = 2
 
-    if GameCont.crown == 8 {
+    if GameCont.crown == 8 && !UberCont.opt_griller {
         with instance_random(UltraIcon)
             instance_destroy()
 		

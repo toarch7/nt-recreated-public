@@ -1,4 +1,3 @@
-var chance;
 raddrop = 22
 max_hp = 45
 meleedamage = 20
@@ -16,10 +15,10 @@ ammo = 4
 gunangle = random_angle
 alarm[1] = (50 + random(90))
 explode = 0
-chance = 25
+var rand = 25
 /*if (GameCont.crown == 7)
-    chance *= 0.7
-if ((random(chance) < (1 + (GameCont.loops * 5))) && (GameCont.subarea > 1))
+    rand *= 0.7
+if ((random(rand) < (1 + (GameCont.loops * 5))) && (GameCont.subarea > 1))
 {
     instance_destroy()
     instance_create(x, y, LightningCrystal)

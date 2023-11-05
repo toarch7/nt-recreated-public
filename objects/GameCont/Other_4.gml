@@ -1,3 +1,5 @@
+rng_reset()
+
 if !loops or (area == 7 && subarea == 3) or
 area == 100 or
 area == 0 or (area == 106 && subarea == 3) or
@@ -7,6 +9,10 @@ area == 107 {
 
 if area == 100 {
     GameCont.crownvisits ++
+}
+
+if area == 105 {
+	GameCont.junglevisits ++
 }
 
 underwater = (area == area_oasis)

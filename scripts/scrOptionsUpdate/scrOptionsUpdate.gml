@@ -63,6 +63,7 @@ function scrOptionsUpdate() {
 		opt_cheats = save_get_option("cheats", "unlocked", 0)
 		opt_console = save_get_option("cheats", "console", 0)
 		opt_griller = save_get_option("cheats", "griller", 0)
+		opt_practice = save_get_option("cheats", "practice", 0)
 		
 		opt_remote_ip = save_get_option("coop", "lastip", "127.0.0.1")
 		opt_remote_port = save_get_option("coop", "lastport", 25256)
@@ -121,13 +122,14 @@ function scrOptionsUpdate() {
 		if !opt_cheats {
 			opt_console = false
 			opt_griller = false
+			opt_practice = false
 		}
 		
 		if opt_gamepad {
 			gamepad_set_color(0, global.player_color)
 		}
 		
-		global.cheats = (opt_console or opt_griller)
+		global.cheats = (opt_console or opt_griller or opt_practice)
 		
 		audio_falloff_set_model(opt_3Dsound ? audio_falloff_linear_distance : audio_falloff_none)
 		//apparentlythat didn't work maybe im stupid

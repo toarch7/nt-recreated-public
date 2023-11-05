@@ -36,14 +36,15 @@ if !instance_exists(Player) && room == romGame {
     draw_set_halign(fa_left)
     draw_set_font(fntM1)
 }
-else if global.custom_seed {
+else if global.custom_seed or opt_practice {
     draw_set_valign(fa_center)
-    draw_set_color(c_ltgray)
+    draw_set_color(c_white)
     draw_set_font(fntSmall)
 
-    if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(CharSelect) && !instance_exists(LevCont) && !instance_exists(UnlockScreen) && !bossintro {
+    if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(CharSelect)
+	&& !instance_exists(LevCont) && !instance_exists(UnlockScreen) && !bossintro && room == romGame {
         draw_set_halign(fa_left)
-        draw_text_shadow(4, view_height - string_height("Aa"), "[seed " + string(global.seed) + "]")
+        draw_text_shadow(1, view_height - string_height("Aa"), string(global.seed))
     }
 
     draw_set_valign(fa_top)

@@ -36,11 +36,21 @@ function scrDrawHUD(plr = noone) {
 
     if is_struct(plr) or instance_exists(plr) {
         draw_sprite(sprHealthBar, 2, 20, 4)
-
-        if !plr.bleed {
+		
+		if plr.fainted {
+			var color = merge_color(c_black, c_red, 0.5 + sin(current_time / 250) * 0.3)
+			
+			draw_sprite_ext(sprBleedHUD, 2, 22, 7, 84 - max(0, 84 * (1 - plr.fainted / PRACTICE_FAINTED_TIME)), 1, 0, color, 1)
+			
+			draw_set_color(c_white)
+            draw_set_halign(fa_center)
+			draw_text_nt(23 + 44, 7, "FAINTED")
+		}
+        else if !plr.bleed {
             draw_sprite_ext(sprHealthFill, 2, 22, 7, max(0, 84 * (plr.lsthealth / max_hp)), 1, 0, UberCont.opt_healthcol, 1)
             draw_sprite_ext(sprHealthFill, 1, 22, 7, max(0, 84 * (hp / max_hp)), 1, 0, UberCont.opt_healthcol, 1)
-            if race == 12 {
+            
+			if race == 12 {
                 if ultra == 1 {
                     draw_sprite(sprRogueAmmoHUDUltra, plr.rogue_ammo, 110, 11)
                 } else draw_sprite(sprRogueAmmoHUD, plr.rogue_ammo, 106, 11)
@@ -66,7 +76,7 @@ function scrDrawHUD(plr = noone) {
 		else {
             draw_sprite_ext(sprBleedHUD, 2, 22, 7, 84 - max(0, 84 * (plr.bleed / 150)), 1, 0, c_gray, 1)
             draw_set_halign(fa_center)
-
+			
             draw_set_color(c_black)
             draw_text(23 + 44, 8, (string(hp) + "/" + string(max_hp)))
             draw_text(23 + 45, 8, (string(hp) + "/" + string(max_hp)))

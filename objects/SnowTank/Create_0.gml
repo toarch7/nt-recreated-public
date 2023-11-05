@@ -24,7 +24,13 @@ wave = 0
 spr_shadow = shd32
 spr_shadow_y = 3
 
-if GameCont.subarea > 1 && !random(40 - GameCont.hard) {
+
+var rand = 40
+
+if GameCont.crown == 7
+    rand *= 0.7
+
+if random(rand) < (1 + GameCont.loops * 5) && GameCont.subarea > 1 {
     instance_create(x, y, GoldSnowTank)
     instance_destroy(id, 0)
 }
