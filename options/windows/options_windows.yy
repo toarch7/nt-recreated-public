@@ -1,4 +1,7 @@
 {
+  "ConfigValues": {
+    "MultiplayerTesting": {"option_windows_start_fullscreen":"false",},
+  },
   "option_windows_display_name": "Nuclear Throne Recreated",
   "option_windows_executable_name": "nuclearthrone",
   "option_windows_version": "2.6.1.0",

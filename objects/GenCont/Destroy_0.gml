@@ -33,7 +33,7 @@ if instance_exists(Player) {
 			var i = 0
 			
             repeat 2 {
-                with instance_create(10016, 10016, Ally) {
+                with instance_create(10016 + orandom(1), 10016 + orandom(1), Ally) {
 					alarm[5 + i] = 5 + i * 15
                     creator = other.id
                 }
@@ -49,7 +49,12 @@ if instance_exists(Player) {
                 hammerheads = 100
             }
         }
-
+		
+		if race == 12 && is_me {
+			if player_pref(playerinstance, "rogue") && !save_get_value("etc", "rogue_tutorial", false)
+				instance_create(x, y, SwipeBombingTutorial)
+		}
+		
         if !instance_exists(Cinematic) {
             view_xview = x - view_width / 2
             view_yview = y - view_height / 2

@@ -87,6 +87,3 @@ if GameCont.area == 106 {
 if GameCont.area == 107 {
     material = 1
 }
-
-//if x != (x div 32) * 32 or y != (y div 32) * 32
-//	show_debug_message("incorrect floor alignment: " + string([x % 32, y % 32]))

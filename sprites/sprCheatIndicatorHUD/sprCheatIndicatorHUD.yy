@@ -73,8 +73,8 @@
   ],
   "nineSlice": null,
   "parent": {
-    "name": "ntm",
-    "path": "ntm.yyp",
+    "name": "UIs",
+    "path": "folders/Sprites/UIs.yy",
   },
   "resourceVersion": "1.0",
   "name": "sprCheatIndicatorHUD",

@@ -66,8 +66,6 @@ draw_set_color(c_lime)
 if !is_keyboard() && !is_gamepad() {
 	var obj = noone
 	
-	print(pos)
-	
 	switch pos {
 		case 0: obj = JoystickMove break
 		

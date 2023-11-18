@@ -235,4 +235,4 @@ show_crosshair = true
 if MultiplayerConfig
 	open_two_windows(true)
 
-print("Special number:", scrGenerateUID("jopa!!", true))
+global.seed = random_get_seed()

@@ -822,6 +822,12 @@ function scrFire(wep, useAmmo = true) {
             longarms = 0
             if instance_exists(Player) longarms = skill_get(13) * 2
             motion_add(other.gunangle, 1 + longarms)
+			
+			if longarms {
+				x += ldrx(direction, 12)
+				y += ldry(direction, 12)
+			}
+			
             image_angle = direction
             team = other.team;
             creator = other.id

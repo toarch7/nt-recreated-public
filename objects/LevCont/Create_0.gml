@@ -21,7 +21,7 @@ if GameCont.patiencepick {
 }
 
 if GameCont.area == 105 && GameCont.skillpoints == 1 {
-	var _seed = global.seed + junglevisits * 100
+	var _seed = global.seed + GameCont.junglevisits * 100
 	
     for (i = 0; i <= 12; i++)
         global.rng_state[i] = _seed

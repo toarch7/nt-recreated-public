@@ -1,5 +1,9 @@
 if lockstep_stop
 	exit
 
-motion_add(point_direction(other.x, other.y, x, y), 2)
-if (speed > 16) speed = 16
+if speed < 4 {
+	motion_add(point_direction(other.x + orandom(1), other.y + orandom(1), x, y), 1)
+	
+	if speed > 4
+		speed = 16
+}

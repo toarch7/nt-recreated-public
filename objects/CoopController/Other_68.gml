@@ -118,6 +118,7 @@ try {
 				
 	            loading_text = ""
 				
+				global.seed = _seed
 				random_set_seed(_seed)
 				
 	            alarm[1] = -1
@@ -305,6 +306,7 @@ try {
 			
 			window_set_caption(_seed)
 			
+			global.seed = _seed
 			random_set_seed(_seed)
 			
 			var _hitmes = buffer_read(data, buffer_u32)

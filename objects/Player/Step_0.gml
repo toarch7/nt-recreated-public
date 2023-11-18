@@ -71,6 +71,11 @@ if fainted {
 			}
 		}
 		
+		with projectile {
+			if team != other.team && distance_to_object(other) <= 96
+				instance_destroy(id, 0)
+		}
+		
 		snd_play(snd_hurt)
 		snd_play(snd_lowh)
 		drawlowhp = 30

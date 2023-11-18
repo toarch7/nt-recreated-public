@@ -1,0 +1,1 @@
+save_set_value("etc", "rogue_tutorial", true)

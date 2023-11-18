@@ -61,7 +61,7 @@ KeyCont.press_paus[index] =
 		   keyboard_check_pressed(vk_escape)
 		or keyboard_check_pressed(vk_backspace)
 		or gamepad_button_check_pressed(0, gp_start)
-		or (!paused && !want_pause && ((opt_autopause && global.desktop && !window_has_focus()) or os_is_paused()))
+		or (!paused && !want_pause && ((opt_autopause && !instance_exists(CoopController) && global.desktop && !window_has_focus()) or os_is_paused()))
 
 if global.console_active
 	KeyCont.press_paus[index] = 0
@@ -209,28 +209,14 @@ if opt_gamepad
 if !paused && !want_pause && !instance_exists(PauseButton)
 	scrHandleInputsGeneral(global.index)
 
-if lockstep_stop {
-	with all {
-		if speed > 0 {
-			x -= hspeed
-			y -= vspeed
-			
-			speed += friction
-		}
-		
-		if image_speed > 0 && image_number > 1
-			image_index -= image_speed
-		
-		for(var i = 0; i < 12; i ++) {
-			if alarm[i] > -1
-				alarm[i] ++
-		}
-	}
-}
+playerinstance = player_get(index)
 
 if instance_exists(CoopController) {
 	with CoopController
 		event_user(0)
 }
+
+if lockstep_stop
+	network_keep_instances_locked()
 
 playerinstance = player_get(index)

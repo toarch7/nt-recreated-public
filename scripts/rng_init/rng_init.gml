@@ -6,7 +6,7 @@
 // to be honest this thing should be undone
 
 global.custom_seed = 0
-global.seed = 0
+global.seed = 1
 
 #macro rng_m 2147483647
 #macro rng_a 1103515245

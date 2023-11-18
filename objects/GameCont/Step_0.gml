@@ -25,7 +25,10 @@ if area != 106 && area != 100 && area != 102 {
 
 time = scrAddZero(minutes, 1) + ":" + scrAddZero(seconds, 1) + "." + scrAddZero(round(timer / 30 * 100), 1)
 
-max_rad = (GameCont.level * 60) * ((race == 11 && ultra == 3) + 1)
+max_rad = GameCont.level * 60
+
+if race == 11 && ultra == 3
+	max_rad *= 2
 
 if rad > max_rad {
 	if level < 10 {

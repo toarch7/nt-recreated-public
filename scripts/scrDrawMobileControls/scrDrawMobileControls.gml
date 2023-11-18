@@ -119,44 +119,50 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
     var crystaltb = instance_exists(plr) && plr.race == 2 && skill_get(5)
 
     with ButtonActive {
-        if !crystaltb {
-            var d = self[$ "do_thing"],
-                c = c_white,
-				forever = KeyCont.activeforever[global.index]
+        if crystaltb {
+			draw_sprite_ext(sprSkillIconHUD, 5, x, y, scale, scale, 0, c_white, 0.5)
+			continue
+		}
+		
+        var d = self[$ "do_thing"],
+            c = c_white, _alpha = min(1, rogue_hide / 60)
+			forever = KeyCont.activeforever[global.index]
 			
-			if forever {
-				c = c_lime
+		if forever {
+			c = c_lime
+		}
+		else {
+			if d == -1 {
+				c = c_yellow
 			}
-			else {
-				if d == -1 {
-					c = c_yellow
-				}
-	            else if d == 2 {
-					c = c_ultra
-				}
+	        else if d == 2 {
+				c = c_ultra
+			}
 				
-				if index != -1
-					c = merge_color(c, c_gray, 0.5)
-			}
+			if index != -1
+				c = merge_color(c, c_gray, 0.5)
+		}
 			
-            draw_sprite_ext(sprMobileControlAbility, 0, x, y, scale * 0.75, scale * 0.75, 0, c, 1)
+        draw_sprite_ext(sprMobileControlAbility, 0, x, y, scale * 0.75, scale * 0.75, 0, c, _alpha)
 
-            if instance_exists(plr) && plr.race == 12 && plr.pref("rogue") {
-                draw_set_halign(fa_center)
-                draw_set_valign(fa_center)
-				
-                draw_text_shadow(x, y, "SCREEN#SWIPE")
-                
-				draw_set_halign(fa_left)
-                draw_set_valign(fa_top)
-            }
+        if instance_exists(plr) && plr.race == 12 && plr.pref("rogue") {
+            draw_set_halign(fa_center)
+            draw_set_valign(fa_center)
+			
+			draw_set_alpha(_alpha * 1.25)
+            draw_text_shadow(x, y, loc("SCREEN#SWIPE"))
+			
+			draw_set_alpha(1)
+            
+			draw_set_halign(fa_left)
+            draw_set_valign(fa_top)
         }
-		else draw_sprite_ext(sprSkillIconHUD, 5, x, y, scale, scale, 0, c_white, 0.5)
     }
 
 
     with ButtonAct {
-        if !plr alpha = 1
+        if !plr
+			alpha = 1
 
         var d = self[$ "do_thing"],
             c = (d == 1 ? c_lime : (d == -1 ? c_yellow : (d == 2 ? c_gray : c_white)))
@@ -164,8 +170,10 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
         if simplify {
             draw_set_color(c)
             draw_set_alpha(alpha)
+			
             draw_circle_width(x, y, rad * m, width)
-            draw_set_alpha(1)
+            
+			draw_set_alpha(1)
             draw_set_color(c_white)
         }
 		else {

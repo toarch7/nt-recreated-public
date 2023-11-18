@@ -14,6 +14,7 @@ time = 0
 do_thing = 0
 
 rogue_touch = -1
+rogue_hide = 180
 
 can_forever = function (player) {
 	if !instance_exists(player)

@@ -36,7 +36,7 @@ if !instance_exists(Player) && room == romGame {
     draw_set_halign(fa_left)
     draw_set_font(fntM1)
 }
-else if global.custom_seed or opt_practice {
+else if MultiplayerConfig or (global.custom_seed or opt_practice) {
     draw_set_valign(fa_center)
     draw_set_color(c_white)
     draw_set_font(fntSmall)
@@ -57,9 +57,8 @@ if instance_exists(Player) && opt_pausebutton && !instance_exists(Credits) {
 
     for (var touch = 0; touch <= 4; touch ++) {
         if device_mouse_check_button_released(touch, mb_left) {
-            if point_in_circle(device_mouse_x_to_gui(touch), device_mouse_y_to_gui(touch), view_width - 18, 18, 16) {
-                KeyCont.press_paus[global.index] = 1
-            }
+            if point_in_circle(device_mouse_x_to_gui(touch), device_mouse_y_to_gui(touch), view_width - 18, 18, 16)
+                KeyCont.press_paus[global.index] = true
         }
     }
 }

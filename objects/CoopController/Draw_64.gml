@@ -6,7 +6,8 @@ var str = "seed: " +string(random_get_seed()) + "\n" +
 		  //"enemies: " + string(instance_number(enemy)) + "\n" +
 		  "checksum: " + string(checksum) + "\n" +
 		  "net(" + string(delay) + "): " + string(netframe) + "\n" +
-		  "clients: " + string(ready) + " " + string(started) + " " + string(clients_ready) + "\n" +
+		  "index: " + string(index) + " " + string(started) + "\n" +
+		  //"clients: " + string(ready) + " " + string(started) + " " + string(clients_ready) + "\n" +
 		  "instances: " + string(instance_count) + "\n"
 
 // str += last_frame + "\n" + string(floor(netframe / 10) * 10) + "\n"

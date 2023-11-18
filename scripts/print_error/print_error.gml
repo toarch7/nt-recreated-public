@@ -1,6 +1,6 @@
 function print_error(text, a = 0) {
     if a or self[$ "_printerror"] == undefined {
-        KeyCont.press_paus[global.index] = 1
+        KeyCont.press_paus[global.index] = true
 
         show_message_async("Exception handled:\n\n" + text)
         show_debug_message(text)

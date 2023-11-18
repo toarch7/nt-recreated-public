@@ -6,17 +6,17 @@ with instance_create(x, y, ChestOpen)
 
 instance_create(x, y, FXChestOpen)
 
-var _spr = sprPopoAlert
+//var _spr = sprPopoAlert
 
 repeat 6 {
 	with instance_create(x, y, IDPDSpawn) {
-		if freak {
+		/*if freak {
 			_spr = sprPopoFreakAlert
 		}
 		else if elite {
 			_spr = sprPopoEliteAlert
-		}
+		}*/
 	}
 }
 
-scrAlert(x, y, _spr, AlertType.Popo)
+//scrAlert(x, y, _spr, AlertType.Popo)

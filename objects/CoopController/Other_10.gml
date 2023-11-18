@@ -3,26 +3,6 @@
 if index == -1 or instance_exists(CoopMenu)
     exit
 
-if !ready {
-	for(var i = 0; i < array_length(clients_ready); i ++) {
-		if !clients_ready[i]
-			exit
-	}
-	
-	ready = true
-	
-	instance_create(0, 0, GameCont)
-	instance_create(0, 0, MenuGen)
-	
-	with SpiralCont
-		instance_destroy()
-	
-	snd_play(sndMenuCharSelect)
-	
-	with UberCont
-		gamepad_sel = 0
-}
-
 if frame <= netframe + max(1, delay) {
 	var _inputs = scrInputBitmask(),
 		
@@ -82,6 +62,29 @@ else {
 		}
 	}
 }*/
+
+if !ready {
+	for(var i = 0; i < array_length(clients_ready); i ++) {
+		if !clients_ready[i]
+			exit
+	}
+	
+	ready = true
+	
+	if network_is_locked()
+		network_unlock()
+	
+	instance_create(0, 0, GameCont)
+	instance_create(0, 0, MenuGen)
+	
+	with SpiralCont
+		instance_destroy()
+	
+	snd_play(sndMenuCharSelect)
+	
+	with UberCont
+		gamepad_sel = 0
+}
 
 // read inputs
 

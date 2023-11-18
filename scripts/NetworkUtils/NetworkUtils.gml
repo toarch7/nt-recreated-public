@@ -59,12 +59,17 @@ function network_lock() {
 	lockstep_stop = true
 	draw_enable_drawevent(false)
 	
+	with all {
+		__net_xprevious = xprevious
+		__net_yprevious = yprevious
+		
+		__net_speed = speed
+		__net_image_index = image_index
+	}
+	
 	if instance_exists(CoopController)
 		print("network locked", CoopController.netframe)
 	
-	//instance_deactivate_all(false)
-	//instance_activate_object(CoopController)
-	//instance_activate_object(UberCont)
 }
 
 function network_unlock() {
@@ -87,6 +92,21 @@ function network_unlock() {
 		instance_activate_object(Console)
 	}
 	else instance_activate_all()*/
+}
+
+function network_keep_instances_locked() {
+	with all {
+		x = __net_xprevious
+		y = __net_xprevious
+		
+		speed = __net_xprevious
+		image_index = __net_image_index
+		
+		for(var i = 0; i < 12; i ++) {
+			if alarm[i] > -1
+				alarm[i] ++
+		}
+	}
 }
 
 function network_is_locked() {
