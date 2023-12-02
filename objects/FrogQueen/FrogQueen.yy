@@ -43,7 +43,7 @@
     "path": "folders/Objects/Enemies.yy",
   },
   "resourceVersion": "1.0",
-  "name": "BallMum",
+  "name": "FrogQueen",
   "tags": [],
   "resourceType": "GMObject",
 }

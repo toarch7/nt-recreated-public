@@ -34,7 +34,7 @@
     "path": "folders/Objects/Enemies.yy",
   },
   "resourceVersion": "1.0",
-  "name": "BallMumDeath",
+  "name": "FrogQueenDeath",
   "tags": [],
   "resourceType": "GMObject",
 }
