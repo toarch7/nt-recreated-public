@@ -1,6 +1,10 @@
 if lockstep_stop
 	exit
 
-draw_sprite(sprite_index, - 1, x, y)
+sprite_index = spr_idle
+
+draw_sprite(sprite_index, drawimg, x, y)
 draw_sprite(sprNothingSkeleton, deadanim, x, y - 22)
-if deadanim < 5 deadanim += 0.4
+
+if deadanim < 5
+	deadanim += 0.4

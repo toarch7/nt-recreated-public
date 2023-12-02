@@ -1,2 +1,2 @@
-image_speed = .4
+image_speed = 0.4
 snd_play(sndNothingRise)

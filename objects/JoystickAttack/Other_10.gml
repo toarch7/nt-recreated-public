@@ -12,9 +12,8 @@ if UberCont.opt_aimbot {
         if instance_exists(NothingInactive) {
             aim_target = instance_nearest(x, y, NothingInactive)
 
-            if !aim_target[$ "hitable"] {
+            if !aim_target[$ "active"]
                 aim_target = noone
-            }
         }
 		else if instance_exists(LastIntro) {
             aim_target = instance_nearest(x, y, LastIntro)

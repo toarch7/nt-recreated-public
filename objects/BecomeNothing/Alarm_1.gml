@@ -2,7 +2,7 @@ with MusCont {
     alarm[2] = 1
 }
 
-image_index += 1
+drawimg += 1
 alarm[6] = 90
 BackCont.shake += 7
 

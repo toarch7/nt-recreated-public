@@ -9,7 +9,7 @@ if instance_exists(enemy) or instance_exists(NothingInactive) {
     }
 
     with NothingInactive {
-	    if hitable {
+	    if active {
 			with instance_create(x, y, BECOMETARGET)
 				creator = other.id
 	    }

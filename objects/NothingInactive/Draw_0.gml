@@ -1,7 +1,10 @@
 if lockstep_stop
 	exit
 
+sprite_index = spr_idle
+
 draw_self()
+
 draw_sprite(sprNothingSkeleton, 0, x, y - 22)
 
 if flame != -1 {
@@ -12,11 +15,11 @@ if flame != -1 {
 
     if flameanim < 3 {
         flameanim += 0.4
-    } else {
+    }
+	else {
         flameanim = 0
 
-        if flame == sprThroneFlameEnd {
+        if flame == sprThroneFlameEnd
             flame = -1
-        }
     }
 }

@@ -1,4 +1,5 @@
-sprite_index = sprNothingActivate
-image_index = 0
+spr_idle = sprNothingActivate
+drawimg = 0
+
 alarm[1] = 99
 alarm[3] = 69
