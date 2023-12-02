@@ -824,8 +824,8 @@ function scrFire(wep, useAmmo = true) {
             motion_add(other.gunangle, 1 + longarms)
 			
 			if longarms {
-				x += ldrx(direction, 12)
-				y += ldry(direction, 12)
+				x += ldrx(12, direction)
+				y += ldry(12, direction)
 			}
 			
             image_angle = direction
