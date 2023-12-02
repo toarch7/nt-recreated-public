@@ -12,7 +12,7 @@ with instance_create(x, y, EnemySlash) {
     image_angle = other.gunangle
     motion_add(other.gunangle, 2)
     team = other.team
-    damage = 5
+    damage = 8
 }
 
 alarm[1] = 15 + random(5)
