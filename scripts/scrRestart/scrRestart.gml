@@ -22,14 +22,16 @@ function scrUnpause() {
 
     KeyCont.press_fire[global.index] = 0
 
-    if instance_exists(ButtonAttack) {
-        with ButtonAttack {
+	if instance_exists(MobileUI) {
+		with MobileUI
+			index = -1
+		
+        with JoystickAttack {
             event_perform(ev_create, 0)
             pause = 5
         }
-    }
-	else if instance_exists(JoystickAttack) {
-        with JoystickAttack {
+		
+		with ButtonAttack {
             event_perform(ev_create, 0)
             pause = 5
         }
