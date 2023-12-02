@@ -1,3 +1,6 @@
+if instance_exists(MenuOptions)
+	exit
+
 var i = get_nearest_touch(rad)
 
 KeyCont.hold_fire[global.index] = 0
