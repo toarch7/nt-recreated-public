@@ -35,7 +35,7 @@ if (!instance_exists(Player) or instance_exists(GenCont)) && room == romGame {
 		draw_set_halign(fa_right)
 		
 	    draw_set_color(c_uidark)
-        draw_text_shadow(view_width - off, view_height - 9, "v" + string(GAME_BUILD))
+        draw_text_shadow(view_width - off, view_height - 8, "v" + string(GAME_BUILD))
 	    
 		draw_set_halign(fa_left)
 		draw_set_font(fntM1)
