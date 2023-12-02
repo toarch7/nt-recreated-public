@@ -4,17 +4,15 @@ function scrGameContDrawGUI() {
 		cx = 16 * cscale,
 		cy = view_height - cx
 	
-	var won = instance_exists(GameOver) && GameCont.win
-	
-	if !instance_exists(Menu) && !instance_exists(PauseButton) && !won
+	if !instance_exists(Menu) && !(instance_exists(GameOver) && GameCont.win)
 	&& (!instance_exists(Credits) or (instance_exists(Credits) && !Credits.visible)) {
 		if UberCont.opt_timer {
 		    draw_set_color(c_white)
 		    draw_set_halign(fa_right)
 		    draw_set_valign(fa_top)
-		
+			
 			draw_text_shadow(view_width - 1, view_height - 10, time)
-		
+			
 		    draw_set_halign(fa_left)
 		
 			cy -= 10

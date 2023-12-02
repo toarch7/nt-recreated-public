@@ -20,21 +20,26 @@ if draw_unlock {
     draw_set_halign(fa_left)
 }
 
-if !instance_exists(Player) && room == romGame {
-    draw_set_valign(fa_center)
-    draw_set_color(c_uidark)
-    draw_set_font(fntSmall)
-
+if (!instance_exists(Player) or instance_exists(GenCont)) && room == romGame {
+	var menu_credits = instance_exists(Credits) && !instance_exists(GameCont)
+	
     if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(Vlambeer)
 	&& !instance_exists(StatChar) && !instance_exists(CharSelect) && !instance_exists(LevCont)
-	&& !instance_exists(UnlockScreen) && !bossintro && !(instance_exists(Credits) && !instance_exists(GameCont)) {
-        draw_set_halign(fa_right)
-        draw_text_shadow(view_width - 4, view_height - 4, "v" + string(GAME_BUILD))
+	&& !instance_exists(UnlockScreen) && !bossintro && !menu_credits {
+		var off = 4
+		
+		if instance_exists(GameCont) && UberCont.opt_timer
+			off = string_width(GameCont.time) + 3
+		
+		draw_set_font(fntSmall)
+		draw_set_halign(fa_right)
+		
+	    draw_set_color(c_uidark)
+        draw_text_shadow(view_width - off, view_height - 9, "v" + string(GAME_BUILD))
+	    
+		draw_set_halign(fa_left)
+		draw_set_font(fntM1)
     }
-
-    draw_set_valign(fa_top)
-    draw_set_halign(fa_left)
-    draw_set_font(fntM1)
 }
 else if MultiplayerConfig or (global.custom_seed or opt_practice) {
     draw_set_valign(fa_center)
