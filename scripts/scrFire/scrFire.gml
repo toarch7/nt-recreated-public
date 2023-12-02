@@ -2016,7 +2016,7 @@ function scrFire(wep, useAmmo = true) {
 
         with instance_create(x, y, UltraGrenade) {
             sticky = 0
-            motion_add(other.gunangle + (random(6) - 3) * other.accuracy, 16)
+            motion_add(other.gunangle + (random(6) - 3) * other.accuracy, 12)
             image_angle = direction
             team = other.team;
             creator = other.id

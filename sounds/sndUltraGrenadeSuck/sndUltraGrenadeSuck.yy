@@ -12,7 +12,7 @@
     "path": "audiogroups/audiogroup_default",
   },
   "soundFile": "sndUltraGrenadeSuck.wav",
-  "duration": 1.579781,
+  "duration": 1.574781,
   "parent": {
     "name": "Weapon Sounds",
     "path": "folders/Sounds/Weapon Sounds.yy",
