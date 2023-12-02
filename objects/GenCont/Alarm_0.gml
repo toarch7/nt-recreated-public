@@ -135,7 +135,7 @@ if GameCont.area == 5 && GameCont.subarea == 3 instance_create(flor.x + 16, flor
 
 if (GameCont.area == 4 or GameCont.area == 104) && GameCont.loops instance_create(flor.x + 16, flor.y + 16, HyperCrystal)
 
-if GameCont.area == 2 && GameCont.loops instance_create(flor.x + 16, flor.y + 16, BallMum)
+if GameCont.area == 2 && GameCont.loops instance_create(flor.x + 16, flor.y + 16, FrogQueen)
 
 with Floor {
     instance_create(x - 32, y, Top)

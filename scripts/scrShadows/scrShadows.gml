@@ -61,7 +61,14 @@ function scrShadows() {
         with LilHunterFly {
             draw_sprite(spr_shadow, 0, x - view_xview + spr_shadow_x, y - view_yview + spr_shadow_y)
         }
-
+		
+		with Yeti {
+			if sprite_index != sprYetiBurrowed
+			&& (sprite_index != sprYetiAppear or image_index >= 5)
+			&& (sprite_index != sprYetiDisappear or image_index < 3)
+				draw_sprite(shd48, 0, x - view_xview, y - view_yview)
+		}
+		
         with RavenFly
         if isset("spr_shadow_y") {
             draw_sprite(spr_shadow, 0, x - view_xview + spr_shadow_x, y - view_yview + spr_shadow_y)

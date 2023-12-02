@@ -60,6 +60,15 @@ if instance_exists(Player) {
             view_yview = y - view_height / 2
         }
     }
+	
+	if UberCont.xmas && GameCont.area == 5 && (GameCont.loops - global.hardmode) == 0 {
+		with instance_nearest(10016, 10016, enemy) {
+			if distance_to_point(10016, 10016) < 160 && !irandom(100) {
+				instance_create(x,	y, Yeti)
+				instance_destroy(id, 0)
+			}
+		}
+	}
 }
 
 if GameCont.area == 5 && GameCont.subarea == 1 && skill_get(18) {

@@ -3,11 +3,11 @@ max_hp = ceil(490 * (1 + GameCont.loops / 3))
 meleedamage = 10
 size = 3
 
-spr_idle = sprBallMumIdle
-spr_walk = sprBallMumWalk
-spr_hurt = sprBallMumHurt
-spr_dead = sprBallMumDead
-spr_fire = sprBallMumFire
+spr_idle = sprFrogQueenIdle
+spr_walk = sprFrogQueenWalk
+spr_hurt = sprFrogQueenHurt
+spr_dead = sprFrogQueenDead
+spr_fire = sprFrogQueenFire
 
 hit_id = spr_idle
 

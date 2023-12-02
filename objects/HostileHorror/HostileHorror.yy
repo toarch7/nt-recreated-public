@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sprHostileHorrorIdle",
-    "path": "sprites/sprHostileHorrorIdle/sprHostileHorrorIdle.yy",
+    "name": "sprEnemyHorrorIdle",
+    "path": "sprites/sprEnemyHorrorIdle/sprEnemyHorrorIdle.yy",
   },
   "solid": false,
   "visible": true,

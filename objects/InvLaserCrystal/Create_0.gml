@@ -7,7 +7,7 @@ spr_idle = sprInvLaserCrystalIdle
 spr_walk = sprInvLaserCrystalIdle
 spr_hurt = sprInvLaserCrystalHurt
 spr_dead = sprInvLaserCrystalDead
-spr_fire = sprLaserCrystalFire
+spr_fire = sprInvLaserCrystalFire
 
 event_inherited()
 

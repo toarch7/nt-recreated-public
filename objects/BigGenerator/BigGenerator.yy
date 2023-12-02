@@ -1,11 +1,10 @@
 {
   "spriteId": {
-    "name": "sprNothingGenerator",
-    "path": "sprites/sprNothingGenerator/sprNothingGenerator.yy",
+    "name": "sprBigGenerator",
+    "path": "sprites/sprBigGenerator/sprBigGenerator.yy",
   },
   "solid": false,
   "visible": true,
-  "managed": true,
   "spriteMaskId": null,
   "persistent": false,
   "parentObjectId": {

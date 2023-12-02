@@ -3,10 +3,10 @@ max_hp = 40
 meleedamage = 5
 size = 1
 
-spr_idle = sprFlyIdle
-spr_walk = sprFlyWalk
-spr_hurt = sprFlyHurt
-spr_dead = sprFlyDead
+spr_idle = sprJungleFlyIdle
+spr_walk = sprJungleFlyWalk
+spr_hurt = sprJungleFlyHurt
+spr_dead = sprJungleFlyDead
 
 event_inherited()
 

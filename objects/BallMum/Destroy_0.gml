@@ -21,7 +21,7 @@ with Player {
 
 event_inherited()
 
-with instance_create(x, y, BallMumDeath) {
+with instance_create(x, y, FrogQueenDeath) {
     image_xscale = other.right
 }
 

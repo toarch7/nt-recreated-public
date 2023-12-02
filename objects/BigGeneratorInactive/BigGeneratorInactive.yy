@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sprNothingGeneratorInactive",
-    "path": "sprites/sprNothingGeneratorInactive/sprNothingGeneratorInactive.yy",
+    "name": "sprBigGeneratorInactive",
+    "path": "sprites/sprBigGeneratorInactive/sprBigGeneratorInactive.yy",
   },
   "solid": false,
   "visible": true,

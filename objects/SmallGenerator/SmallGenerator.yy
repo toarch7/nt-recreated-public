@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sprGeneratorIdle",
-    "path": "sprites/sprGeneratorIdle/sprGeneratorIdle.yy",
+    "name": "sprSmallGeneratorIdle",
+    "path": "sprites/sprSmallGeneratorIdle/sprSmallGeneratorIdle.yy",
   },
   "solid": false,
   "visible": true,

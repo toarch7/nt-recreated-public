@@ -1,11 +1,10 @@
 {
   "spriteId": {
-    "name": "sprSlug",
-    "path": "sprites/sprSlug/sprSlug.yy",
+    "name": "sprSlugBullet",
+    "path": "sprites/sprSlugBullet/sprSlugBullet.yy",
   },
   "solid": false,
   "visible": true,
-  "managed": true,
   "spriteMaskId": {
     "name": "mskBullet2",
     "path": "sprites/mskBullet2/mskBullet2.yy",

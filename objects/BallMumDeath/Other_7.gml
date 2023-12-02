@@ -1,4 +1,4 @@
-if sprite_index == sprBallMumDying {
+if sprite_index == sprFrogQueenDying {
     var ang = random_angle
     team = 1
 
@@ -7,7 +7,7 @@ if sprite_index == sprBallMumDying {
             motion_add(ang, 4)
             image_angle = direction
             team = other.team
-            hit_id = sprBallMumIdle
+            hit_id = sprFrogQueenIdle
         }
 
         with instance_create(x, y, AcidStreak) {
@@ -25,7 +25,7 @@ if sprite_index == sprBallMumDying {
     snd_play_hit_big(sndBallMamaDead2, 0.1)
 
     with instance_create(x, y, Corpse) {
-        sprite_index = sprBallMumDead
+        sprite_index = sprFrogQueenDead
         mask_index = sprite_index
         image_xscale = other.image_xscale
         size = 2

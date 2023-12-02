@@ -3,10 +3,10 @@ max_hp = 60
 meleedamage = 4
 size = 5
 alarm[3] = 10
-spr_idle = sprHostileHorrorIdle
-spr_walk = sprHostileHorrorWalk
-spr_hurt = sprHostileHorrorHurt
-spr_dead = sprHostileHorrorDead
+spr_idle = sprEnemyHorrorIdle
+spr_walk = sprEnemyHorrorWalk
+spr_hurt = sprEnemyHorrorHurt
+spr_dead = sprEnemyHorrorDead
 event_inherited()
 snd_hurt = sndMutant11Hurt
 snd_dead = sndMutant11Dead

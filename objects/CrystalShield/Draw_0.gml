@@ -15,15 +15,15 @@ if instance_exists(creator) && sprite_index != spr_disappear {
     if creator.ultra == 2 {
         if creator.bskin {
             if !creator.speed {
-                draw_sprite_ext(sprShieldBIdleBack, walk, x, y + 6, shieldright, 1, 0, c_white, 1)
+                draw_sprite_ext(sprCrystalShieldBIdleBack, walk, x, y + 6, shieldright, 1, 0, c_white, 1)
             } else {
-                draw_sprite_ext(sprShieldBWalkBack, walk, x, y + 6, shieldright, 1, 0, c_white, 1)
+                draw_sprite_ext(sprCrystalShieldBWalkBack, walk, x, y + 6, shieldright, 1, 0, c_white, 1)
                 walk += 0.4
             }
         } else if !creator.speed {
-            draw_sprite_ext(sprShieldIdleBack, walk, x, y + 6, shieldright, 1, 0, c_white, 1)
+            draw_sprite_ext(sprCrystalShieldIdleBack, walk, x, y + 6, shieldright, 1, 0, c_white, 1)
         } else {
-            draw_sprite_ext(sprShieldWalkBack, walk, x, y + 6, shieldright, 1, 0, c_white, 1)
+            draw_sprite_ext(sprCrystalShieldWalkBack, walk, x, y + 6, shieldright, 1, 0, c_white, 1)
             walk += 0.4
         }
     }
@@ -39,14 +39,14 @@ if instance_exists(creator) && creator.index == global.index {
     if creator.ultra == 2 && sprite_index != spr_disappear {
         if creator.bskin {
             if !creator.speed {
-                draw_sprite_ext(sprShieldBIdleFront, walk, x, y + 4, shieldright, 1, 0, c_white, 1)
+                draw_sprite_ext(sprCrystalShieldBIdleFront, walk, x, y + 4, shieldright, 1, 0, c_white, 1)
             } else {
-                draw_sprite_ext(sprShieldBWalkFront, walk, x, y + 4, shieldright, 1, 0, c_white, 1)
+                draw_sprite_ext(sprCrystalShieldBWalkFront, walk, x, y + 4, shieldright, 1, 0, c_white, 1)
             }
         } else if !creator.speed {
-            draw_sprite_ext(sprShieldIdleFront, walk, x, y + 4, shieldright, 1, 0, c_white, 1)
+            draw_sprite_ext(sprCrystalShieldIdleFront, walk, x, y + 4, shieldright, 1, 0, c_white, 1)
         } else {
-            draw_sprite_ext(sprShieldWalkFront, walk, x, y + 4, shieldright, 1, 0, c_white, 1)
+            draw_sprite_ext(sprCrystalShieldWalkFront, walk, x, y + 4, shieldright, 1, 0, c_white, 1)
         }
     }
 

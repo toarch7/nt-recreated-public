@@ -26,7 +26,7 @@ if GameCont.crown == 7 {
 }
 
 //CROWN OF LUCK
-if GameCont.crown == 10 && random(1) <= 0.1 && object_index != BanditBoss && object_index != ScrapBoss && object_index != LilHunter && object_index != Nothing && object_index != Nothing2 && object_index != BallMum && object_index != HyperCrystal && object_index != TechnoMancer && object_index != Last {
+if GameCont.crown == 10 && random(1) <= 0.1 && object_index != BanditBoss && object_index != ScrapBoss && object_index != LilHunter && object_index != Nothing && object_index != Nothing2 && object_index != FrogQueen && object_index != HyperCrystal && object_index != TechnoMancer && object_index != Last {
     hp = 1
 }
 

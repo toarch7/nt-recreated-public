@@ -1,11 +1,10 @@
 {
   "spriteId": {
-    "name": "sprBallMumDying",
-    "path": "sprites/sprBallMumDying/sprBallMumDying.yy",
+    "name": "sprFrogQueenDying",
+    "path": "sprites/sprFrogQueenDying/sprFrogQueenDying.yy",
   },
   "solid": false,
   "visible": true,
-  "managed": true,
   "spriteMaskId": {
     "name": "mskBanditBoss",
     "path": "sprites/mskBanditBoss/mskBanditBoss.yy",

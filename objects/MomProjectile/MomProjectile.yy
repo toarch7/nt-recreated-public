@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sprBallMumBall",
-    "path": "sprites/sprBallMumBall/sprBallMumBall.yy",
+    "name": "sprFrogQueenBall",
+    "path": "sprites/sprFrogQueenBall/sprFrogQueenBall.yy",
   },
   "solid": false,
   "visible": true,

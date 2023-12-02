@@ -1,7 +1,7 @@
 {
   "spriteId": {
-    "name": "sprFlyIdle",
-    "path": "sprites/sprFlyIdle/sprFlyIdle.yy",
+    "name": "sprJungleFlyIdle",
+    "path": "sprites/sprJungleFlyIdle/sprJungleFlyIdle.yy",
   },
   "solid": false,
   "visible": true,

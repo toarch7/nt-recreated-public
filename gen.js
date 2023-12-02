@@ -65,10 +65,6 @@ function funny() {
 }
 
 
-funny();
-
-return;
-
 fs.readdir("objects", function(err, dirs) {
 	dirs.forEach(function(dir) {
 		if (objectblacklist.indexOf(dir) != -1) {
@@ -83,8 +79,8 @@ fs.readdir("objects", function(err, dirs) {
 			let ev = events[i];
 			
 			fs.exists(path + ev, exists => {
-				if(exists)
-					doTheThing(path + ev);
+				//if(exists)
+				//	doTheThing(path + ev);
 			});
 		}
 		

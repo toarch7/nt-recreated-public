@@ -1,5 +1,11 @@
 max_hp = 230
-if GameCont.loops max_hp = 50 spr_idle = sprNothingGenerator spr_hurt = sprNothingGeneratorHurt spr_dead = sprNothingGeneratorDead
+
+if GameCont.loops
+	max_hp = 50
+
+spr_idle = sprBigGenerator
+spr_hurt = sprBigGeneratorHurt
+spr_dead = sprBigGeneratorDead
 
 size = 1
 
