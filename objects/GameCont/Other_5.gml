@@ -163,6 +163,7 @@ if !UberCont.hardgot && loops >= 2 {
 }
 
 snd_stop(sndSalamanderFire)
+snd_stop(sndLightningCannonLoop)
 
 if !instance_exists(CoopController) && !UberCont.opt_console {
     var p = UberCont.paused
