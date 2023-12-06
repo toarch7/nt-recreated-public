@@ -700,13 +700,29 @@ option_elements_create(
 	},
 	
 	{
+		type: "button", name: "AUTHORIZE WITH DISCORD", ingame: false,
+		
+		click: function(opt) {
+			if auth_discord_logged
+				return scrAuthorizationDeauth()
+			
+			with UberCont
+				event_user(10)
+		},
+		
+		name_get: function(opt) {
+			return (auth_discord_logged ? $"DEAUTHORIZE @s({string_upper(auth_discord_username)})" : opt.name)
+		}
+	},
+	
+	{
 		type: "category", name: "DATA", category: OptionCategory.Game_Data, ingame: false,
 		
 		awake: function(opt) {
 			if instance_exists(NicknameInput)
 				opt.visible = false
 		}
-	}
+	},
 )
 
 #endregion

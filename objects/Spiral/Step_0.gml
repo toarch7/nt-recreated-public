@@ -2,11 +2,11 @@ if lockstep_stop
 	exit
 
 //grow = ((grow+1)*1.00005)-1
-grow += 0.0004
+grow += 0.0003
 image_xscale += grow
 image_yscale += grow
 
-grow = ((grow + 1) * (1 + 0.0005 * image_xscale)) - 1
+grow = ((grow + 1) * (1 + 0.0004 * image_xscale)) - 1
 
 if !instance_exists(SpiralCont) {
     if grow <= .0004 {

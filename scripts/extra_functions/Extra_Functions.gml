@@ -110,7 +110,8 @@ function struct_secure_load(path) {
         buffer_delete(buff2)
 
         return json_parse(data)
-    } catch (e) {
+    }
+	catch (e) {
         print("Failed to load " + path, e.message)
     }
 

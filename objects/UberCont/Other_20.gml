@@ -1,10 +1,10 @@
 /// @description Start Discord auth
 
-print("Start discord auth")
+print("Start Discord auth", server)
 
 if server == -1 {
-	print("TCP Server server started", server)
 	server = network_create_server_raw(network_socket_tcp, 53134, 32)
+	print("TCP Server server started", server)
 }
 
 if server != -1 {
@@ -12,7 +12,7 @@ if server != -1 {
 
 	url_open(url)
 
-	auth_discord_login = false
+	auth_discord_logged = false
 
 	if sprite_exists(auth_discord_picture)
 		sprite_delete(auth_discord_picture)

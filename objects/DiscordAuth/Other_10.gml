@@ -3,7 +3,7 @@ if instance_exists(Logo) or !available
 
 snd_play(sndClick)
 
-if !auth_discord_login && !active {
+if !auth_discord_logged && !active {
 	with UberCont
 		event_user(10)
 }

@@ -1,6 +1,6 @@
-globalvar auth_discord_token, auth_discord_login, auth_discord_username, auth_discord_picture, auth_discord_id;
+globalvar auth_discord_token, auth_discord_logged, auth_discord_username, auth_discord_picture, auth_discord_id;
 
-auth_discord_login = false
+auth_discord_logged = false
 auth_discord_username = ""
 auth_discord_picture = -1
 auth_discord_id = -1
@@ -8,8 +8,6 @@ auth_discord_id = -1
 auth_discord_token = undefined
 
 function scrAuthorizationInit() {
-	print("Auth init call")
-	
 	server = -1
 	server_connections = {}
 
@@ -19,9 +17,20 @@ function scrAuthorizationInit() {
 	auth_discord_token = save_get_value("etc", "auth_discord_token")
 
 	if is_string(auth_discord_token)
-		auth_discord_login = true
+		auth_discord_logged = true
+}
+
+function scrAuthorizationDeauth() {
+	auth_discord_logged = false
 	
-	print(">", auth_discord_login, auth_discord_token)
+	if sprite_exists(auth_discord_picture)
+		sprite_delete(auth_discord_picture)
+
+	auth_discord_picture = -1
+	
+	ds_map_delete(UberCont.saveData, "etc_auth_discord_token")
+	
+	scrSave()
 }
 
 function auth_discord_api_request(api, _method = "GET", body = undefined) {

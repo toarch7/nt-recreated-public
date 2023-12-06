@@ -5,8 +5,8 @@ var spr = auth_discord_picture,
 
 	s = 1,
 
-	xs = 36 / sprite_get_width(spr),
-	ys = 36 / sprite_get_height(spr)
+	xs = 34 / sprite_get_width(spr),
+	ys = 34 / sprite_get_height(spr)
 
 if instance_exists(GameCont) {
 	s = 0.5
@@ -15,7 +15,7 @@ if instance_exists(GameCont) {
 	ys *= s
 }
 
-draw_sprite_ext(spr, 0, 0, view_height + 2, xs, ys, 0, c_white, 1)
+draw_sprite_ext(spr, 0, 2, view_height, xs, ys, 0, c_white, 1)
 
 draw_set_font(fntSmall)
 

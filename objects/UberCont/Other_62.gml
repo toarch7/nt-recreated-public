@@ -68,25 +68,20 @@ if async_load[? "id"] == weekly_request {
 }
 
 if async_load[? "id"] == auth_discord_request_post {
-	print("AUTH REQUEST")
-	
 	var result = json_decode(async_load[? "result"])
 
-	print("POST RES", async_load[? "result"])
-
 	auth_discord_token = result[? "access_token"]
-	auth_discord_login = true
+	auth_discord_logged = true
 
 	save_set_value("etc", "auth_discord_token", auth_discord_token)
+	
+	if server != -1
+		network_destroy(server)
 
 	scrSave()
 }
 
 if async_load[? "id"] == auth_discord_request_api {
-	print("API REQUEST")
-	
-	print("RES", async_load[? "result"])
-
 	if async_load[? "http_status"] == 200 {
 		var result = json_decode(async_load[? "result"])
 

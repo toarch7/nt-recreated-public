@@ -413,8 +413,8 @@
 	"GAMBLE SWITCH": "АВТО. РУЛЕТКА",
 	
 	"OPEN CONSOLE": "ОТКРЫТЬ КОНСОЛЬ",
-	"AUTHORIZE USING DISCORD": "АВТОРИЗОВАТЬСЯ ЧЕРЕЗ DISCORD",
-	"UNAUTHORIZE DISCORD": "УБРАТЬ АВТОРИЗАЦИЮ",
+	"AUTHORIZE WITH DISCORD": "АВТОРИЗОВАТЬСЯ ЧЕРЕЗ DISCORD",
+	"DEAUTHORIZE": "ДЕАВТОРИЗОВАТЬСЯ",
 	
 	
 	"CONSOLE": "КОНСОЛЬ",

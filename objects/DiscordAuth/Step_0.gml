@@ -6,7 +6,7 @@ if !active {
 }
 else visible = true
 
-if auth_discord_login && auth_discord_picture != -1 {
+if auth_discord_logged && auth_discord_picture != -1 {
 	if sprite_get_width(auth_discord_picture) > 1 && !active {
 		sprite_index = mskNone
 		active = true

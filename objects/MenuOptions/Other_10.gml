@@ -597,12 +597,13 @@ for (var i = 0; i < item_count; i++) {
 		else {
 			var has_value = (opt.value != undefined && opt.value != "" && opt.type != "category") or opt.type == "keybind"
 			
+			var name = opt.name
+			
+			if opt.name_get != undefined
+				name = method_execute(opt.name_get, opt)
+			
 			if has_value {
 				drawx -= opt.width / 2
-				var name = opt.name
-				
-				if opt.name_get != undefined
-					name = method_execute(opt.name_get, opt)
 				
 				var s = 1 //min(1, 140 / string_width(string_hash_to_newline(loc(name))))
 				
@@ -685,7 +686,7 @@ for (var i = 0; i < item_count; i++) {
 				
 				drawx -= _size
 			}
-			else draw_text_nt(drawx, drawy, loc(opt.name))
+			else draw_text_nt(drawx, drawy, loc(name))
 		}
 		
 		method_execute(element_functions[$ opt.type + "_draw"], opt)

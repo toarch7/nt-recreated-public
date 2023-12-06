@@ -27,7 +27,7 @@ draw_set_valign(fa_middle)
 
 var str = "LINK ACCOUNT"
 
-if auth_discord_login && auth_discord_picture == -1
+if auth_discord_logged && auth_discord_picture == -1
 	str = "LOADING" + string_repeat(".", (get_timer() / 333333) % 4)
 
 draw_text_shadow(x + 24, y, str)
