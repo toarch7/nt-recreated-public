@@ -22,6 +22,7 @@ if want_pause {
 	    instance_activate_object(MusCont)
 	    instance_activate_object(Console)
 		instance_activate_object(PauseImage)
+		instance_activate_object(DiscordAuth)
 	}
 }
 

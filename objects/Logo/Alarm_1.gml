@@ -17,6 +17,7 @@ for (var i = 0; i <= 4; i++) {
 snd_stop(sndLogoLoop)
 
 instance_create(0, 0, ButtonDiscord)
+instance_create(0, 0, DiscordAuth)
 instance_create(0, 0, ButtonAchievements)
 
 instance_destroy()

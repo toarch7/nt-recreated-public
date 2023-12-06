@@ -94,6 +94,9 @@ if paused && !want_pause && !instance_exists(CoopController) {
 		
 	    instance_deactivate_object(Player)
 	}
+	
+	with DiscordAuth
+		event_perform(ev_draw, ev_gui)
 }
 
 

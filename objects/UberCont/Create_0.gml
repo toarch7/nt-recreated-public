@@ -106,7 +106,7 @@ daily_grill = false
 weekly_grill = false
 daily_time = 0
 weekly_data = undefined
-get_daily_times = 0
+thronebutt_api_failures = 0
 
 daily_seed = -1
 daily_request = -1
@@ -231,8 +231,9 @@ load_resourcepacks()
 
 show_crosshair = true
 
-
 if MultiplayerConfig
 	open_two_windows(true)
 
 global.seed = random_get_seed()
+
+scrAuthorizationInit()

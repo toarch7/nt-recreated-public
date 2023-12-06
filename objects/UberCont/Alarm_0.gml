@@ -1,7 +1,7 @@
 alarm[0] = 30
 
 //time stats
-tot_time++
+tot_time ++
 
 if instance_exists(Player) {
     with Player {
@@ -12,6 +12,12 @@ if instance_exists(Player) {
     }
 }
 
-if daily_time {
-    daily_time--
+if daily_time
+    daily_time --
+
+if auth_discord_login {
+	if auth_discord_picture == -1 && auth_discord_request_api == -1 {
+		auth_discord_request_api = auth_discord_api_request("users/@me")
+		print("Request sent", auth_discord_request_api)
+	}
 }

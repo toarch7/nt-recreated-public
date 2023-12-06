@@ -15,7 +15,7 @@ function scrSave() {
 			
 			var options = [
 				"cheats_console", "cheats_griller", "cheats_practice", "options_gamepad", "options_keyboard",
-				"etc_nickname", "visual_resolution", "visual_fullscreen"
+				"etc_nickname", "visual_resolution", "visual_fullscreen", "etc_auth_discord_token"
 			]
 			
 			for(var i = 0; i < array_length(cpref_list); i ++)

@@ -1,3 +1,7 @@
+if async_load[? "http_status"] != 200
+or !is_string(async_load[? "result"])
+	exit
+
 if async_load[? "id"] == update_request {
     if !is_undefined(async_load[? "result"]) && async_load[? "result"] != -1 {
         var result = json_decode(async_load[? "result"])
@@ -27,84 +31,68 @@ if async_load[? "id"] == update_request {
     }
 }
 
-if async_load[? "id"] == daily_request && get_daily_times++ < 5 {
-    if is_undefined(async_load[? "result"]) {
-        daily_request = tb_api("daily")
-        exit
-    }
-
-    if async_load[? "result"] == -1 {
-        exit
-    }
-
-    result = json_decode(async_load[? "result"])
-
-    if is_undefined(result) {
-        daily_request = tb_api("daily")
-        exit
-    }
-
-    if !is_undefined(result) {
-        var text = json_decode(result)
-
-        if is_undefined(text) exit
-
-        if !is_undefined(text[? "default"]) {
-            text = text[? "default"]
-        }
-
-        daily_seed = scrReal(text[? "seed"])
-        daily_time = scrReal(text[? "time"])
-
-        can_daily = daily_seed > 0 && save_get_value("etc", "seed", "-1") != daily_seed
-    }
+if async_load[? "id"] == daily_request {
+	result = json_decode(async_load[? "result"])
+	
+	if !is_undefined(result) {
+	    daily_seed = scrReal(result[? "seed"])
+	    daily_time = scrReal(result[? "time"])
+		
+	    can_daily = daily_seed > 0 && save_get_value("etc", "seed", "-1") != daily_seed
+	}
 	else daily_request = -1
 }
 
-if async_load[? "id"] == weekly_request && async_load[? "result"] != -1 && get_daily_times < 5 {
-    if is_undefined(async_load[? "result"]) {
-        weekly_request = tb_api("weekly")
-        exit
-    }
-
-    result = json_decode(async_load[? "result"])
-
-    if is_undefined(result) {
-        weekly_request = tb_api("weekly")
-        exit
-    }
-
-    if !is_undefined(result) {
-        weekly_data = result
+if async_load[? "id"] == weekly_request {
+	result = json_decode(async_load[? "result"])
+	
+	if is_undefined(result) {
+	    weekly_request = tb_api("weekly")
+	    exit
+	}
+	
+	if !is_undefined(result) {
+	    weekly_data = result
 		
 		if weekly_data[? "seed"] != undefined {
-	        can_weekly = 1
-			
-	        random_set_seed(real(weekly_data[? "seed"]))
-			
-	        weekly_data[? "week"] = date_get_week(date_current_datetime())
-			
-	        if weekly_data[? "char"] > 15 {
-	            weekly_data[? "char"] = irandom(11) + 1
-	        }
-			
-	        if weekly_data[? "bskin"] > 1 {
-	            weekly_data[? "bskin"] = choose(0, 1)
-	        }
-			
-	        if weekly_data[? "wep"] > 125 {
-	            weekly_data[? "wep"] = choose(irandom_range(2, 36), irandom_range(47, 55), irandom_range(57, 97), irandom_range(104, 125))
-	        }
-			
-	        if weekly_data[? "crown"] > 13 {
-	            weekly_data[? "crown"] = irandom_range(2, 13)
-	        }
+			scrValidateWeeklyLoadout(weekly_data)
+		    can_weekly = 1
 		}
 		else {
 			can_weekly = 0
 			weekly_data = undefined
 			print("Failed to retrieve weeklydata")
 		}
-    }
+	}
 	else weekly_request = -1
+}
+
+if async_load[? "id"] == auth_discord_request_post {
+	print("AUTH REQUEST")
+	
+	var result = json_decode(async_load[? "result"])
+
+	print("POST RES", async_load[? "result"])
+
+	auth_discord_token = result[? "access_token"]
+	auth_discord_login = true
+
+	save_set_value("etc", "auth_discord_token", auth_discord_token)
+
+	scrSave()
+}
+
+if async_load[? "id"] == auth_discord_request_api {
+	print("API REQUEST")
+	
+	print("RES", async_load[? "result"])
+
+	if async_load[? "http_status"] == 200 {
+		var result = json_decode(async_load[? "result"])
+
+		auth_discord_username = result[? "username"]
+		auth_discord_id = result[? "id"]
+
+		auth_discord_picture = sprite_add("https://cdn.discordapp.com/avatars/" + auth_discord_id + "/" + result[? "avatar"], 1, 0, 0, 0, 0)
+	}
 }
