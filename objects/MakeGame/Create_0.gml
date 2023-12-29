@@ -5,12 +5,17 @@ global.desktop = ((os_type == os_windows) or (os_type == os_linux) or (os_type =
 if global.desktop
 	window_set_cursor(cr_none)
 
+firstry = false
 
-firstry = 0
-
-if os_check_permission("android.permission.WRITE_EXTERNAL_STORAGE") != os_permission_granted { //!file_exists("permcheck") {
-    firstry = 1
+if IsVersionR() {
+	if android_check_any_local_files() && !file_exists(".permissionlock")
+		firstry = true
 }
+else if !android_check_storage_permission()
+    firstry = true
+
+
+alarm[0] = 1
 
 loading = 0
 cont = undefined
@@ -29,8 +34,6 @@ b = -1
 if file_exists("gamestate.dat") {
     loading = 1
 }
-
-alarm[0] = 1
 
 game_directory = "/files/"
 

@@ -202,6 +202,7 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Loadout","folderPath":"folders/Sprites/Weapons/Loadout.yy",},
   ],
   "IncludedFiles": [
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"auth.html","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"controllerblacklist.csv","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"controllertypes.csv","CopyToMask":153157610357391598,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"diff.loc","CopyToMask":-1,"filePath":"datafiles",},
@@ -215,7 +216,6 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"pt.loc","CopyToMask":-1,"filePath":"datafiles/localizations",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"ru.loc","CopyToMask":-1,"filePath":"datafiles/localizations",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"ua.loc","CopyToMask":-1,"filePath":"datafiles/localizations",},
-    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"auth.html","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"out.txt","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"sdl2.txt","CopyToMask":9042383626830062,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"sdl2license.txt","CopyToMask":-1,"filePath":"datafiles",},
@@ -224,7 +224,7 @@
   "isEcma": false,
   "LibraryEmitters": [],
   "MetaData": {
-    "IDEVersion": "2023.8.2.108",
+    "IDEVersion": "2023.11.1.129",
   },
   "resources": [
     {"id":{"name":"sprite1337","path":"sprites/sprite1337/sprite1337.yy",},},
@@ -380,6 +380,7 @@
     {"id":{"name":"sprUltraLaserPistol","path":"sprites/sprUltraLaserPistol/sprUltraLaserPistol.yy",},},
     {"id":{"name":"sprUltraShovel","path":"sprites/sprUltraShovel/sprUltraShovel.yy",},},
     {"id":{"name":"sprLightningCannon","path":"sprites/sprLightningCannon/sprLightningCannon.yy",},},
+    {"id":{"name":"Android","path":"scripts/Android/Android.yy",},},
     {"id":{"name":"sprHeavySlugger","path":"sprites/sprHeavySlugger/sprHeavySlugger.yy",},},
     {"id":{"name":"sprClusterNader","path":"sprites/sprClusterNader/sprClusterNader.yy",},},
     {"id":{"name":"sprHeavySplinterGun","path":"sprites/sprHeavySplinterGun/sprHeavySplinterGun.yy",},},

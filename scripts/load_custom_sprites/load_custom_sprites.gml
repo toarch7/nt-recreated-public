@@ -123,8 +123,8 @@ function load_custom_sprites(path) {
     var keys = struct_keys(replace_frames)
 	
     for (var j = 0; j < array_length(keys); j++) {
-        var f = replace_frames[$ keys[j]]
-        var asset = real(keys[j])
+        var f = replace_frames[$ keys[j]],
+			asset = keys[j]
 		
         sprite_replace_frames(asset, f)
     }

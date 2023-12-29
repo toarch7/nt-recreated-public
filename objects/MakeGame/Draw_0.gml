@@ -1,6 +1,3 @@
-if lockstep_stop
-	exit
-
 if disclaimer {
 	
 	draw_set_halign(fa_center)

@@ -153,6 +153,7 @@
     {"name":"sprUltraLaserPistol","order":235,"path":"sprites/sprUltraLaserPistol/sprUltraLaserPistol.yy",},
     {"name":"sprUltraShovel","order":237,"path":"sprites/sprUltraShovel/sprUltraShovel.yy",},
     {"name":"sprLightningCannon","order":239,"path":"sprites/sprLightningCannon/sprLightningCannon.yy",},
+    {"name":"Android","order":208,"path":"scripts/Android/Android.yy",},
     {"name":"sprHeavySlugger","order":241,"path":"sprites/sprHeavySlugger/sprHeavySlugger.yy",},
     {"name":"sprClusterNader","order":243,"path":"sprites/sprClusterNader/sprClusterNader.yy",},
     {"name":"sprHeavySplinterGun","order":245,"path":"sprites/sprHeavySplinterGun/sprHeavySplinterGun.yy",},

@@ -1,4 +1,8 @@
 if async_load[? "id"] == message {
-    os_request_permission("android.permission.WRITE_EXTERNAL_STORAGE")
-    alarm[0] = 1
+    if !IsVersionR() {
+		os_request_permission("android.permission.WRITE_EXTERNAL_STORAGE")
+	}
+	else RequestPermission()
+	
+	alarm[0] = 1
 }

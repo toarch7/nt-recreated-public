@@ -7,7 +7,11 @@
   "androidcodeinjection": "",
   "androidinject": "",
   "androidmanifestinject": "",
-  "androidPermissions": [],
+  "androidPermissions": [
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "android.permission.MANAGE_EXTERNAL_STORAGE",
+  ],
   "androidProps": true,
   "androidsourcedir": "",
   "author": "",
@@ -18,14 +22,12 @@
   "exportToGame": true,
   "extensionVersion": "0.0.1",
   "files": [
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":8,"filename":"YYExtra.ext","final":"","functions":[
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"YYExtra.ext","constants":[],"copyToTargets":8,"filename":"YYExtra.ext","final":"","functions":[
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"IsKitKat","argCount":0,"args":[],"documentation":"","externalName":"IsKitKat","help":"IsKitKat()","hidden":false,"kind":4,"returnType":2,},
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"SetVolumeControl","argCount":0,"args":[
             2,
           ],"documentation":"","externalName":"SetVolumeControl","help":"SetVolumeControl(val)","hidden":false,"kind":4,"returnType":2,},
-        {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"URLOpen","argCount":0,"args":[
-            1,
-          ],"documentation":"","externalName":"URLOpen","help":"URLOpen(url)","hidden":false,"kind":4,"returnType":2,},
+        {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"IsVersionR","argCount":0,"args":[],"documentation":"","externalName":"IsVersionR","help":"IsVersionR()","hidden":false,"kind":4,"returnType":2,},
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"ResourcepackInstall","argCount":0,"args":[
             1,
             1,
@@ -33,14 +35,18 @@
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"SetClipboard","argCount":0,"args":[
             1,
           ],"documentation":"","externalName":"SetClipboard","help":"SetClipboard(what)","hidden":false,"kind":4,"returnType":2,},
+        {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"CheckPermission","argCount":0,"args":[],"documentation":"","externalName":"CheckPermission","help":"CheckPermission()","hidden":false,"kind":4,"returnType":2,},
+        {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"RequestPermission","argCount":0,"args":[],"documentation":"","externalName":"RequestPermission","help":"RequestPermission()","hidden":false,"kind":4,"returnType":2,},
+        {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"OpenDirectoryTree","argCount":0,"args":[],"documentation":"","externalName":"OpenDirectoryTree","help":"OpenDirectoryTree()","hidden":false,"kind":4,"returnType":2,},
       ],"init":"","kind":4,"order":[
-        {"name":"IsKitKat","path":"extensions/YYExtra/YYExtra.yy",},
         {"name":"SetVolumeControl","path":"extensions/YYExtra/YYExtra.yy",},
-        {"name":"URLOpen","path":"extensions/YYExtra/YYExtra.yy",},
         {"name":"ResourcepackInstall","path":"extensions/YYExtra/YYExtra.yy",},
         {"name":"SetClipboard","path":"extensions/YYExtra/YYExtra.yy",},
+        {"name":"IsKitKat","path":"extensions/YYExtra/YYExtra.yy",},
+        {"name":"IsVersionR","path":"extensions/YYExtra/YYExtra.yy",},
+        {"name":"CheckPermission","path":"extensions/YYExtra/YYExtra.yy",},
       ],"origname":"","ProxyFiles":[],"uncompress":false,"usesRunnerInterface":false,},
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":-1,"filename":"YYExtra.gml","final":"","functions":[
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"YYExtra.gml","constants":[],"copyToTargets":-1,"filename":"YYExtra.gml","final":"","functions":[
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"GetPickedFile","argCount":0,"args":[],"documentation":"","externalName":"_GetPickedFile","help":"GetPickedFile()","hidden":false,"kind":2,"returnType":2,},
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"FilePickerCleanup","argCount":0,"args":[],"documentation":"","externalName":"_FilePickerCleanup","help":"","hidden":true,"kind":2,"returnType":2,},
       ],"init":"","kind":2,"order":[

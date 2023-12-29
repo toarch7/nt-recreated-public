@@ -18,7 +18,7 @@
   "exportToGame": true,
   "extensionVersion": "1.0.0",
   "files": [
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":9223372036854775807,"filename":"native_cursor.dll","final":"","functions":[
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"native_cursor.dll","constants":[],"copyToTargets":9223372036854775807,"filename":"native_cursor.dll","final":"","functions":[
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"native_cursor_create_from_buffer_raw","argCount":2,"args":[
             1,
             2,
@@ -96,7 +96,7 @@
       ],"origname":"extensions\\native_cursor.dll","ProxyFiles":[
         {"resourceType":"GMProxyFile","resourceVersion":"1.0","name":"native_cursor_x64.dll","TargetMask":6,},
       ],"uncompress":false,"usesRunnerInterface":false,},
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":9223372036854775807,"filename":"native_cursor.gml","final":"","functions":[
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"native_cursor.gml","constants":[],"copyToTargets":9223372036854775807,"filename":"native_cursor.gml","final":"","functions":[
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"native_cursor_prepare_buffer","argCount":1,"args":[
             2,
           ],"documentation":"","externalName":"native_cursor_prepare_buffer","help":"","hidden":true,"kind":11,"returnType":2,},
@@ -141,7 +141,7 @@
         {"name":"native_cursor_add_from_surface","path":"extensions/native_cursor/native_cursor.yy",},
         {"name":"native_cursor_resolve_full_path","path":"extensions/native_cursor/native_cursor.yy",},
       ],"origname":"extensions\\gml.gml","ProxyFiles":[],"uncompress":false,"usesRunnerInterface":false,},
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":-1,"filename":"autogen.gml","final":"","functions":[
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"autogen.gml","constants":[],"copyToTargets":-1,"filename":"autogen.gml","final":"","functions":[
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"native_cursor_create_from_buffer","argCount":-1,"args":[],"documentation":"","externalName":"native_cursor_create_from_buffer","help":"native_cursor_create_from_buffer(buf:buffer, width:int, height:int, hotspot_x:int, hotspot_y:int, fps:number = 30)->","hidden":false,"kind":2,"returnType":2,},
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"native_cursor_add_from_buffer","argCount":6,"args":[
             2,

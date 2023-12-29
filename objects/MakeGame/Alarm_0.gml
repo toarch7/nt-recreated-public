@@ -8,12 +8,14 @@ if instance_exists(UberCont) {
     exit
 }
 
-var check = 0
+var check = false
 
 if os_type == os_android {
-    check = os_check_permission("android.permission.WRITE_EXTERNAL_STORAGE")
+    check = android_check_storage_permission()
+	
+	show_message_async($"Permission status: {check} {firstry}")
 
-    if check == os_permission_denied or firstry {
+    if !check xor firstry {
         if os_get_language() == "ru" { //ah yes, haяdcoded localisations
             message = show_message_async("Игра требует доступ к чтению и записи файлов для кастомизации и сохранения прогресса.\nВы можете отозвать разрешение в настройках системы при возникновении неполадок с игровыми данными.")
         }
@@ -22,23 +24,23 @@ if os_type == os_android {
         }
 
         alarm[0] = -1
-        firstry = 0
+        firstry = false
 
         exit
     }
 }
 
-if alarm[0] > 0 {
+if alarm[0] > 0
     exit
-}
 
-if os_type == os_android && check == os_permission_granted {
+if os_type == os_android && check {
     game_directory = "/sdcard/games/com.toncho.nuclearthrone/files/"
 
     if !directory_exists(game_directory) {
         directory_create(game_directory)
     }
-} else game_directory = ""
+}
+else game_directory = ""
 
 playerinstance = undefined
 instance_create(0, 0, UberCont)

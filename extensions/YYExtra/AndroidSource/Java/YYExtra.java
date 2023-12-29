@@ -3,8 +3,8 @@ package ${YYAndroidPackageName};
 // Basic imports
 import java.lang.String;
 import java.lang.Object;
+// Unzip
 import java.io.*;
-import java.io.File;
 import java.nio.file.*;
 
 // Android
@@ -25,10 +25,6 @@ import ${YYAndroidPackageName}.R;
 import ${YYAndroidPackageName}.RunnerActivity;
 import com.yoyogames.runner.RunnerJNILib;
 
-// Unzip
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -42,6 +38,13 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.text.ClipboardManager;
+import androidx.core.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import android.provider.Settings;
+import android.content.pm.PackageManager;
+import android.content.ContentResolver;
+
+
 
 
 public class YYExtra extends ExtensionBase {
@@ -49,6 +52,11 @@ public class YYExtra extends ExtensionBase {
 	private static final int FILE_SELECT_CODE = 42;
 	public static String unzipFirstEntry = "";
 	public double volumeControl = 0.0;
+	Context ctx;
+
+	public void onStart() {
+		ctx = RunnerActivity.CurrentActivity.getBaseContext();
+	}
 	
 	public double SetVolumeControl( double val ) {
 		Log.i("yoyo", "Set volume control to " + val);
@@ -103,10 +111,16 @@ public class YYExtra extends ExtensionBase {
 	}
 
 	public double IsKitKat() {
-		if (android.os.Build.VERSION.SDK_INT >= 19) {
+		if (android.os.Build.VERSION.SDK_INT >= 19)
 			return 1.0;
-		}
 		
+		return 0.0;
+	}
+
+	public double IsVersionR() {
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R)
+			return 1.0;
+
 		return 0.0;
 	}
 	
@@ -119,13 +133,97 @@ public class YYExtra extends ExtensionBase {
 		return 0.0;
 	}
 	
+	public double CheckPermission() {
+		if (IsVersionR() > 0.0) {
+			if (Environment.isExternalStorageManager())
+				return 1.0;
+		}
+		else {
+			int result = ContextCompat.checkSelfPermission(ctx, "READ_EXTERNAL_STORAGE");
+			int result1 = ContextCompat.checkSelfPermission(ctx, "WRITE_EXTERNAL_STORAGE");
+
+			if (result == PackageManager.PERMISSION_GRANTED && result1 == PackageManager.PERMISSION_GRANTED)
+				return 1.0;
+		}
+
+		return 0.0;
+	}
 	
+	public double RequestPermission() {
+		if (IsVersionR() > 0.0) {
+			try {
+				Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+				intent.addCategory("android.intent.category.DEFAULT");
+				intent.setData(Uri.parse(String.format("package:%s", ctx.getPackageName())));
+
+				RunnerActivity.CurrentActivity.startActivityForResult(intent, 2296);
+			}
+			catch (Exception e) {
+				Intent intent = new Intent();
+				intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+
+				RunnerActivity.CurrentActivity.startActivityForResult(intent, 2296);
+			}
+		}
+
+		return 0.0;
+	}
 	
-	
-	
-	
-	
-	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == 2296) {
+			if (IsVersionR() > 0.0) {
+				int dsMapIndex = RunnerJNILib.jCreateDsMap(null, null, null);
+
+				RunnerJNILib.DsMapAddString( dsMapIndex, "type", "permissionStatus" );
+				RunnerJNILib.DsMapAddDouble( dsMapIndex, "resultCode", resultCode );
+				
+				if (Environment.isExternalStorageManager()) {
+					RunnerJNILib.DsMapAddDouble( dsMapIndex, "success", 1.0 );
+				}
+				else RunnerJNILib.DsMapAddDouble( dsMapIndex, "success", 0.0 );
+
+				RunnerJNILib.CreateAsynEventWithDSMap(dsMapIndex, EVENT_OTHER_SOCIAL);
+			}
+		}
+		else if (requestCode == 48) {
+			ContentResolver contentResolver = ctx.getContentResolver();
+
+			int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
+			Uri uri = data.getData();
+
+			int dsMapIndex = RunnerJNILib.jCreateDsMap(null, null, null);
+
+			RunnerJNILib.DsMapAddString( dsMapIndex, "type", "documentTreeIntent" );
+			RunnerJNILib.DsMapAddString( dsMapIndex, "path", uri.getPath().split(":")[1] );
+
+			try {
+				contentResolver.takePersistableUriPermission(uri, flags);
+				RunnerJNILib.DsMapAddDouble( dsMapIndex, "permitted", 1.0 );
+			}
+			catch(Exception e) {
+				RunnerJNILib.DsMapAddDouble( dsMapIndex, "permitted", 0.0 );
+			}
+			
+			RunnerJNILib.CreateAsynEventWithDSMap(dsMapIndex, EVENT_OTHER_SOCIAL);
+		}
+	}
+
+	public double OpenDirectoryTree() {
+		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+		intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+
+		RunnerActivity.CurrentActivity.startActivityForResult(intent, 48);
+
+		return 0.0;
+	}
+
+
+
+
+
+
 
 	public double ResourcepackInstall(String path, String dest) {
 		YYExtra.unzipFirstEntry = "";

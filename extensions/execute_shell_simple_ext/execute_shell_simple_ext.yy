@@ -18,7 +18,7 @@
   "exportToGame": true,
   "extensionVersion": "1.0.0",
   "files": [
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":9223372036854775807,"filename":"execute_shell_simple_ext.dll","final":"","functions":[
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"execute_shell_simple_ext.dll","constants":[],"copyToTargets":9223372036854775807,"filename":"execute_shell_simple_ext.dll","final":"","functions":[
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"execute_shell_simple_raw","argCount":4,"args":[
             1,
             1,
@@ -30,12 +30,12 @@
       ],"origname":"extensions\\execute_shell_simple_ext.dll","ProxyFiles":[
         {"resourceType":"GMProxyFile","resourceVersion":"1.0","name":"execute_shell_simple_ext_x64.dll","TargetMask":6,},
       ],"uncompress":false,"usesRunnerInterface":false,},
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":9223372036854775807,"filename":"execute_shell_simple_ext.gml","final":"","functions":[
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"execute_shell_simple_ext.gml","constants":[],"copyToTargets":9223372036854775807,"filename":"execute_shell_simple_ext.gml","final":"","functions":[
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"execute_shell_simple","argCount":-1,"args":[],"documentation":"","externalName":"execute_shell_simple","help":"execute_shell_simple(path, args = \"\", action = \"open\", showCmd = 5/*SW_OPEN*/)","hidden":false,"kind":2,"returnType":2,},
       ],"init":"","kind":2,"order":[
         {"name":"execute_shell_simple","path":"extensions/execute_shell_simple_ext/execute_shell_simple_ext.yy",},
       ],"origname":"extensions\\gml.gml","ProxyFiles":[],"uncompress":false,"usesRunnerInterface":false,},
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":-1,"filename":"autogen.gml","final":"","functions":[],"init":"","kind":2,"order":[],"origname":"extensions\\autogen.gml","ProxyFiles":[],"uncompress":false,"usesRunnerInterface":false,},
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"autogen.gml","constants":[],"copyToTargets":-1,"filename":"autogen.gml","final":"","functions":[],"init":"","kind":2,"order":[],"origname":"extensions\\autogen.gml","ProxyFiles":[],"uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject": "",
   "hasConvertedCodeInjection": true,
