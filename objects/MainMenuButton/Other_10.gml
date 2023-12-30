@@ -101,6 +101,7 @@ switch image_index {
         UberCont.checksettings = 1
         save_set_value("etc", "checksettings", 1)
 		
+		snd_play(sndClick)
 		snd_play(sndMenuOptions)
 		
         break

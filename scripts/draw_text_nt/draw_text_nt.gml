@@ -2,9 +2,8 @@ globalvar __draw_text_nt_cache;
 		  __draw_text_nt_cache = {}
 
 function draw_text_nt(_x, _y, _text, scale = 1) {
-	if !string_count("@", _text) {
-		return draw_text_shadow(_x, _y, string_upper(_text))
-	}
+	if !string_count("@", _text)
+		return draw_text_shadow(_x, _y, _text)
 	
 	var _sx = _x,
 		_sy = _y,
@@ -31,8 +30,6 @@ function draw_text_nt(_x, _y, _text, scale = 1) {
 			if c == "@" or c == "#" or c == "\n" or (i >= l && str != "") {
 				if i >= l
 					str += c
-				
-				str = string_upper(str)
 				
 				array_push(d[0], str, string_width(str), string_height(str))
 				
