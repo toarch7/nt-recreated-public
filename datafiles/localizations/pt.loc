@@ -2,6 +2,13 @@
 	"DISCLAIMER": "DISCLAIMER",
 	"@w###THIS IS AN UNOFFICIAL FAN-MADE RECREATION,#NOT AFFILIATED WITH @yVLAMBEER@w.##IT IS DISTRIBUTED FREELY ON ITCH.IO#AND IS OPEN SOURCE ON GITHUB.##IF YOU PAID OR SEE ADS, IT'S RECOMMENDED TO#UNINSTALL THE APPLICATION FOR YOUR OWN SAFETY.": "@w###ISTO É UMA RECREAÇÃO FEITA POR FÃS NÃO OFICIAL,#NÃO AFILIADA À @yVLAMBEER@w.##ELA É DISTRIBUÍDA GRATUITAMENTE NO ITCH.IO#E É DE CÓDIGO ABERTO NO GITHUB.##SE VOCÊ PAGOU OU VÊ ANÚNCIOS, É RECOMENDADO#DESINSTALAR O APLICATIVO PARA SUA PRÓPRIA SEGURANÇA.",
 	"CLICK TO CONTINUE": "CLIQUE PARA CONTINUAR",
+	
+	"The game requires access to read and write files for customization and to save your progress.\nYou can revoke this permission in the System Preferences if you experience problems with your game data.":
+	"O jogo requer acesso a arquivos de leitura e gravação para personalização e para salvar seu progresso.\nVocê pode revogar essa permissão nas Preferências do sistema se tiver problemas com os dados do jogo.",
+	
+	"A previous installation of the game has been detected. Due to recent internal API migrations, you must grant the application permission to access the file system in order to preserve the progress of the save file.\n\nYou can do this now and revoke permission later, and all your data will be retained.":
+	"Foi detectada uma instalação anterior do jogo. Devido às recentes migrações internas da API, você deve conceder permissão ao aplicativo para acessar o sistema de arquivos a fim de preservar o progresso do arquivo salvo.\n\nVocê pode fazer isso agora e revogar a permissão mais tarde, e todos os seus dados serão mantidos.",
+	
 	"LEVEL %!": "NÍVEL %!",
 	"LEVEL ULTRA!": "NÍVEL ULTRA!",
 	"SELECT % @gMUTATION": "SELECIONE % @gMUTAÇÃO",

@@ -1,5 +1,8 @@
-if c != -1 buffer_delete(c)
+if gamestatebuffer_c != -1
+	buffer_delete(gamestatebuffer_c)
 
-if b != -1 buffer_delete(b)
+if gamestatebuffer != -1
+	buffer_delete(gamestatebuffer)
 
-if skills != -1 ds_list_destroy(skills)
+if skills != -1
+	ds_list_destroy(skills)
