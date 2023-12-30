@@ -500,7 +500,7 @@ function month_name_short(month) {
         case 11:
             return "NOV"
         case 12:
-            return "JAN"
+            return "DEC"
     }
 
     return "??"

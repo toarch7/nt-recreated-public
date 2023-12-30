@@ -1,5 +1,5 @@
 function load_custom_sprites(path) {
-    var status = false
+	var status = false
 
     if !file_exists(path + ".nomedia") {
         var f = file_text_open_write(path + ".nomedia")
@@ -46,11 +46,10 @@ function load_custom_sprites(path) {
                                 var s = sprite_add(path + find, 1, 0, 0, 0, 0)
 
                                 if sprite_exists(s) {
-                                    var a = string(asset)
+                                    var a = sprite_get_name(asset)
 									
-                                    if replace_frames[$ a] == undefined {
+                                    if replace_frames[$ a] == undefined
                                         replace_frames[$ a] = []
-                                    }
 									
                                     replace_frames[$ a][real(frame)] = s
 									
@@ -124,7 +123,7 @@ function load_custom_sprites(path) {
 	
     for (var j = 0; j < array_length(keys); j++) {
         var f = replace_frames[$ keys[j]],
-			asset = keys[j]
+			asset = asset_get_index(keys[j])
 		
         sprite_replace_frames(asset, f)
     }

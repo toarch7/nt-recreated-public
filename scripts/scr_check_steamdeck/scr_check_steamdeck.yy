@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "sprite_replace_frame",
+  "name": "scr_check_steamdeck",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

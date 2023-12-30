@@ -1,11 +1,12 @@
 function sprite_replace_frames(spr, frames) {
-    var n = sprite_get_number(spr)
-    var w = sprite_get_width(spr)
-    var h = sprite_get_height(spr)
+    var n = sprite_get_number(spr),
+		w = sprite_get_width(spr),
+		h = sprite_get_height(spr)
 
     var path = "./replacedsprites/repl" + string(spr) + ".png"
 
-    if !(w or h or n) return undefined
+    if !(w or h or n)
+		return undefined
 
     sprite_strip_save(spr, "replacedsprites/" + string(spr) + ".png")
     array_push(global.customSprites, spr)

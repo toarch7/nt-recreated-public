@@ -351,5 +351,6 @@ if gpadmode {
 	UberCont.show_crosshair = false
 }
 else {
-	UberCont.show_crosshair = true
+	if !global.steamdeck
+		UberCont.show_crosshair = true
 }

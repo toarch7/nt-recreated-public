@@ -35,8 +35,6 @@ want_pause = false
 quit_pause = false
 alarm[0] = 30
 
-scrLoadLocalizations()
-
 saving = 0
 saving_index = 0
 
@@ -230,6 +228,9 @@ resourcepack_temp_cleanup()
 load_resourcepacks()
 
 show_crosshair = true
+
+if global.steamdeck
+	show_crosshair = false
 
 if MultiplayerConfig
 	open_two_windows(true)

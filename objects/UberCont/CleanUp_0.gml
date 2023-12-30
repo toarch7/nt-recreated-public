@@ -1,6 +1,5 @@
-if pausespr {
+if pausespr
     sprite_delete(pausespr)
-}
 
 discard_custom_sounds()
 discard_custom_sprites()

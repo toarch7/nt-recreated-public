@@ -609,6 +609,7 @@ function scrFire(wep, useAmmo = true) {
     //HYPER RIFLE
     if wep == 26 {
         snd_play_gun(sndHyperRifle)
+		
         with instance_create(x, y, Burst) {
             creator = other.id
             ammo = 6

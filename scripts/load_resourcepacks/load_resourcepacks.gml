@@ -1,5 +1,5 @@
 function load_resourcepacks() {
-    globalvar Resourcepacks;
+	globalvar Resourcepacks;
     Resourcepacks = []
 
     global.customSounds = {}

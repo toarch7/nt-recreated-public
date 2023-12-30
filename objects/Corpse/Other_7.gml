@@ -3,7 +3,7 @@ image_speed = 0
 
 if !scr_check_enemies() {
     with Corpse
-    alarm[0] = -1
+		alarm[0] = -1
 
     alarm[0] = 30
 }

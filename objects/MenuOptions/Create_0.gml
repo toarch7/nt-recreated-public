@@ -119,12 +119,19 @@ function option_category_end() {
 	option_number = -1
 }
 
+debug = GM_build_type == "run"
+
 function option_element_create(params) {
 	if option_list == undefined
 		exit
 	
-	if params[$ "desktop_only"] && !global.desktop exit
-	//if params[$ "mobile_only"] && global.desktop exit
+	if debug {
+		if params[$ "desktop_only"] && !global.desktop
+			exit
+		
+		if params[$ "mobile_only"] && global.desktop
+			exit
+	}
 	
 	if params[$ "ingame"] != undefined && params.ingame != ingame {
 		if option_number != OptionCategory.Main
@@ -410,8 +417,6 @@ option_elements_create(
 				with debris
 					alarm[0] = 2
 			}
-			
-			// todo: ingame subpixel demo
 		}
 	},
 	
@@ -466,17 +471,7 @@ option_elements_create(
 		}
 	},
 	
-	{
-		type: "switch", name: "MOUSELOCK", desktop_only: true,
-		key: "options_mouselock",
-		
-		value_get: function(opt) {
-			if option_selected
-				return "NOT WORKING UNTIL#GAMEMAKER 2023.8"
-			
-			return opt.value
-		}
-	},
+	{ type: "switch",   name: "MOUSELOCK",          key: "options_mouselock", desktop_only: true },
 	
 	{ type: "switch",   name: "PAUSE BUTTON",       key: "options_pausebutton", mobile_only: true },
 	
@@ -775,13 +770,11 @@ option_elements_create(
 		}
 	},
 	
-	// { type: "switch", name: "KEYBOARD MODE", key: "options_keyboard", mobile_only: true },
-	
 	{ type: "switch", name: "AIM ASSIST",       key: "controls_assist",       mobile_only: true },
 	{ type: "switch", name: "360 AIMBOT",       key: "controls_aimbot",       mobile_only: true },
 	{ type: "switch", name: "VOLUME CONTROLS",  key: "options_volumecontrol", mobile_only: true },
 	{ type: "switch", name: "SPLIT AIM & FIRE", key: "controls_splitfire",    mobile_only: true },
-	{ type: "switch", name: "FIXED SIGHT",      key: "controls_fixsight"},//     mobile_only: true },
+	{ type: "switch", name: "FIXED SIGHT",      key: "controls_fixsight",     mobile_only: true },
 	
 	{ type: "slider", name: "SIZE SCALE", key: "controls_scale", mobile_only: true },
 	
@@ -935,6 +928,8 @@ option_elements_create(
 option_category_begin(OptionCategory.Controls_Experimental)
 
 option_elements_create(
+	{ type: "switch", name: "KEYBOARD MODE",    key: "options_keyboard" },
+	
 	{ type: "switch", name: "WEAPON-STICKS",    key: "controls_wepstick" },
 	
 	{ type: "switch", name: "STICK REGIONS",    key: "controls_stickregions" },

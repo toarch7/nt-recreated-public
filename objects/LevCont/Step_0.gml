@@ -2,7 +2,7 @@ view_xview = 0
 view_yview = 0
 
 // align
-var objects = [ SkillIcon, CrownIcon, UltraIcon ]
+var objects = [ SkillIcon, CrownIcon ]
 
 for(var i = 0; i < array_length(objects); i ++) {
 	var obj = objects[i],

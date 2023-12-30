@@ -123,18 +123,7 @@ load_screenshots = function() {
 	if cdn == -1
 		return -1
 	
-	var spr = sprite_add(cdn, 1, 0, 0, 0, 0)
-	
-	if !browsing { // todo: remove after engine upgrade
-		
-		var map = ds_map_create()
-		
-		map[? "id"] = spr
-		map[? "http_status"] = 200
-		
-		event_perform_async(ev_async_web_image_load, map)
-		
-	}
+	var spr = sprite_add_ext(cdn, 1, 0, 0, false)
 	
 	return spr
 }

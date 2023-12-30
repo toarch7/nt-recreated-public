@@ -1,29 +1,27 @@
 globalvar race_string_ids, race_numeric_ids;
 
 // todo: remove parse after engine update
-race_string_ids = json_parse(@'
-	{
-		"0": "random",
-		"1": "fish",
-		"2": "crystal",
-		"3": "eyes",
-		"4": "melting",
-		"5": "plant",
-		"6": "skeleton",
-		"7": "steroids",
-		"8": "robot",
-		"9": "chicken",
-		"10": "rebel",
-		"11": "horror",
-		"12": "rogue",
-		"13": "bigdog",
-		"14": "skeleton",
-		"15": "frog",
-		"16": "cuz",
-		"17": "reserved",
-		"18": "reserved",
-	}
-')
+race_string_ids = {}
+
+race_string_ids[$ "0"] = "random"
+race_string_ids[$ "1"] = "fish"
+race_string_ids[$ "2"] = "crystal"
+race_string_ids[$ "3"] =  "eyes"
+race_string_ids[$ "4"] = "melting"
+race_string_ids[$ "5"] =  "plant"
+race_string_ids[$ "6"] = "skeleton"
+race_string_ids[$ "7"] = "steroids"
+race_string_ids[$ "8"] = "robot"
+race_string_ids[$ "9"] = "chicken"
+race_string_ids[$ "10"] = "rebel"
+race_string_ids[$ "11"] = "horror"
+race_string_ids[$ "12"] = "rogue"
+race_string_ids[$ "13"] = "bigdog"
+race_string_ids[$ "14"] = "skeleton"
+race_string_ids[$ "15"] = "frog"
+race_string_ids[$ "16"] = "cuz"
+race_string_ids[$ "17"] = "reserved"
+race_string_ids[$ "18"] = "reserved"
 
 var keys = struct_keys(race_string_ids)
 

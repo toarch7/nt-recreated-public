@@ -9,8 +9,12 @@ function scrUnpause() {
 	instance_activate_all()
 	
     with UberCont {
-        surface_free(pauseimg)
-        sprite_delete(pausespr)
+		if surface_exists(pauseimg)
+			surface_free(pauseimg)
+		
+		if sprite_exists(pausespr)
+			sprite_delete(pausespr)
+		
         pausespr = -1
         paused = 0
 		

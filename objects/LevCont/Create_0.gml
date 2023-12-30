@@ -142,9 +142,8 @@ else if GameCont.ultrapoints {
 			with instance_create(view_xview + view_width / 2 + 40, view_yview + view_height - 20, UltraIcon) {
                 num = 3
 
-                if GameCont.crown == 8 {
+                if GameCont.crown == 8
                     x -= 20
-                }
             }
         }
     } else {
