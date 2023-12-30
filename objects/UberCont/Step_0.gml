@@ -1,5 +1,8 @@
 var index = global.index
 
+if native_cursor_inst != -1
+	native_cursor_update()
+
 input_tick()
 
 if splat_index < 3 && paused

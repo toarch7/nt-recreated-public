@@ -125,7 +125,7 @@ function option_element_create(params) {
 	if option_list == undefined
 		exit
 	
-	if debug {
+	if !debug {
 		if params[$ "desktop_only"] && !global.desktop
 			exit
 		
@@ -471,7 +471,7 @@ option_elements_create(
 		}
 	},
 	
-	{ type: "switch",   name: "MOUSELOCK",          key: "options_mouselock", desktop_only: true },
+	//{ type: "switch",   name: "MOUSELOCK",          key: "options_mouselock", desktop_only: true },
 	
 	{ type: "switch",   name: "PAUSE BUTTON",       key: "options_pausebutton", mobile_only: true },
 	

@@ -1,5 +1,5 @@
-#macro GAME_VERSION "b2.6.1"
-#macro GAME_BUILD 2617
+#macro GAME_VERSION "b2.6.2"
+#macro GAME_BUILD 2620
 #macro BETA true
 
 
@@ -7,6 +7,8 @@ opt_fulscrn = 1
 opt_fitscrn = 1
 opt_mousecp = 1
 opt_bksides = 0
+
+native_cursor_inst = -1
 
 //show_debug_overlay(1)
 

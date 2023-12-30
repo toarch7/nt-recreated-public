@@ -3,6 +3,8 @@ function scrOptionsUpdate() {
     with UberCont {
         var res = self[$ "opt_resolution"],
 			scaling = self[$ "opt_scaling"],
+			cursor = self[$ "opt_cursor"],
+			crosshair = self[$ "opt_crosshair"]
 			vsync = self[$ "opt_vsync"]
 		
 		var mobile = !global.desktop,
@@ -162,6 +164,9 @@ function scrOptionsUpdate() {
 		
 		save_set_value("etc", "last_os", os_type)
 		
+		if global.desktop && (opt_cursor != cursor or opt_crosshair != crosshair)
+			scrOptionsUpdateNativeCursor()
+		
 		scrKeymapsSetup()
 		
 		scrOptionsLoadKeymaps()
@@ -176,4 +181,24 @@ function scrOptionsUpdate() {
 			opt_remote_port = NETWORK_PORT
 		}
     }
+}
+
+function scrOptionsUpdateNativeCursor() {
+	if !global.desktop
+		exit
+	
+	with UberCont {
+		if native_cursor_inst != -1 {
+			native_cursor_destroy(native_cursor_inst)
+			native_cursor_inst = -1
+		}
+		
+		if opt_cursor {
+			native_cursor_inst = native_cursor_create_from_sprite_ext(sprCrosshair, opt_crosshair % sprite_get_number(sprCrosshair), 4, 4, opt_cursorcol, 1)
+			native_cursor_set(native_cursor_inst)
+			
+			window_set_cursor(cr_arrow)
+		}
+		else window_set_cursor(cr_none)
+	}
 }

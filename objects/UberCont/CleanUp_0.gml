@@ -12,3 +12,6 @@ scrBignameSurfaceCleanup()
 
 if server != -1
 	network_destroy(server)
+
+if native_cursor_inst != -1
+	native_cursor_destroy(native_cursor_inst)
