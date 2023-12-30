@@ -21,7 +21,7 @@ if disclaimer {
 		
 		draw_text_nt(view_width / 2, view_height - 56 + (disclaimer == 90) * 2, str)
 		
-		if mouse_ui_clicked() or keyboard_check_pressed(vk_anykey) {
+		if mouse_ui_clicked() or keyboard_anykey() or scrGamepadAnykey() != -1 {
 			save_set_value("etc", "disclaimer", 1)
 			event_perform(ev_alarm, 0)
 		}

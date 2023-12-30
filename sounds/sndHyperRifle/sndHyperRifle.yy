@@ -17,7 +17,7 @@
   },
   "preload": true,
   "sampleRate": 44100,
-  "soundFile": "sndHyperRifle",
+  "soundFile": "sndHyperRifle.wav",
   "type": 1,
-  "volume": 0.6,
+  "volume": 1.0,
 }
