@@ -2214,7 +2214,6 @@
     {"name":"sndMutant5LowA","order":15,"path":"sounds/sndMutant5LowA/sndMutant5LowA.yy",},
     {"name":"TopDecalCity","order":38,"path":"objects/TopDecalCity/TopDecalCity.yy",},
     {"name":"sndMutant5Valt","order":17,"path":"sounds/sndMutant5Valt/sndMutant5Valt.yy",},
-    {"name":"printc","order":142,"path":"scripts/printc/printc.yy",},
     {"name":"sndMutant5Slct","order":19,"path":"sounds/sndMutant5Slct/sndMutant5Slct.yy",},
     {"name":"sndMutant5Chst","order":21,"path":"sounds/sndMutant5Chst/sndMutant5Chst.yy",},
     {"name":"sndMutant5LowH","order":23,"path":"sounds/sndMutant5LowH/sndMutant5LowH.yy",},

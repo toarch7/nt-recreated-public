@@ -1,5 +1,25 @@
 #macro CONSOLE_MAX_CAPACITY 40
 
+function scr_log_push(msg, color) {
+	if string_count("\n", msg) > 0 {
+		var list = string_split(msg, "\n", true),
+			count = array_length(list)
+		
+		repeat count
+			scr_log_push(list[-- count], color)
+		
+		exit
+	}
+	
+	array_insert(global.log_output, 0, msg)
+	array_insert(global.log_color, 0, color)
+	
+	if array_length(global.log_output) >= CONSOLE_MAX_CAPACITY {
+		array_delete(global.log_output, CONSOLE_MAX_CAPACITY, 1)
+		array_delete(global.log_color, CONSOLE_MAX_CAPACITY, 1)
+	}
+}
+
 function print() {
     var str = string(argument[0])
 
@@ -7,17 +27,11 @@ function print() {
         str += " " + string(argument[__arg])
     }
 
-    with UberCont {
-        array_push(global.log_output, str)
-        array_push(global.log_color, c_white)
-
-        if array_length(global.log_output) >= CONSOLE_MAX_CAPACITY {
-            array_delete(global.log_output, 0, 1)
-            array_delete(global.log_color, 0, 1)
-        }
-    }
+    scr_log_push(str, c_white)
 
     show_debug_message(str)
+}
 
-    return str
+function printc(text, col) {
+	scr_log_push(text, col)
 }
