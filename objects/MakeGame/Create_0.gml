@@ -45,3 +45,6 @@ message = -1
 date_set_timezone(timezone_utc)
 
 scrLoadLocalizations()
+
+display_set_timing_method(tm_sleep)
+display_set_sleep_margin(33)
