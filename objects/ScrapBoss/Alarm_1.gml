@@ -5,8 +5,16 @@ if ammo > 0 {
     alarm[1] = 5
     sprite_index = spr_fire
     walk = 0
-    scrTarget()
-    if instance_exists(target) motion_add(target_direction + turn * 80, 0.3) repeat(6) {
+    
+	scrTarget()
+    
+	if instance_exists(target)
+		motion_add(target_direction + turn * 80, 0.3)
+	
+	var count = 6 + GameCont.loops,
+		step = 360 / count
+	
+	repeat count {
         with instance_create(x + lengthdir_x(24, gunangle), y + lengthdir_y(16, gunangle), EnemyBullet1) {
             hit_id = other.spr_idle
             creator = other.id
@@ -14,11 +22,13 @@ if ammo > 0 {
             image_angle = direction
             team = other.team
         }
-        gunangle += 360 / 6
+		
+        gunangle += step
     }
 
     gunangle += 4 * turn
-} else {
+}
+else {
     spr_hurt = sprScrapBossHurt
     spr_idle = sprScrapBossStop
     image_index = 0
