@@ -10,7 +10,7 @@ if async_load[? "id"] == update_request {
 			var vname = BETA ? "versionBeta": "version"
 			
             if result[? vname] > GAME_BUILD {
-				var str = loc_sfmt("New game build #% is now available.\nOpen download page?", string(result[? vname]))
+				var str = loc_sfmt("A Build version #% is now available.\nOpen the download page?", string(result[? vname]))
 				
                 update_message = show_question_async(str)
             }

@@ -19,8 +19,8 @@ try {
 
 		if code != "" && code != "/oauth2" {
 			var postfields = {
-				client_id: "1139936421755494450",
-				client_secret: "x34rxSHAQql1u791kOgOKv_cFy9ky-XG",
+				client_id: DISCORD_APP_CLIENT_ID,
+				client_secret: DISCORD_APP_CLIENT_SECRET,
 				grant_type: "authorization_code",
 				redirect_uri: "http://localhost:53134/oauth2",
 				scope: "identify"
