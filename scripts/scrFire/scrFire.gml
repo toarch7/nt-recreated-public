@@ -820,9 +820,9 @@ function scrFire(wep, useAmmo = true) {
         instance_create(x, y, Dust)
 
         with instance_create(x, y, EnergyHammerSlash) {
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle, 1 + longarms)
+			longarms = skill_get(13) * 2
+			
+			motion_add(other.gunangle, 1 + longarms)
 			
 			if longarms {
 				x += ldrx(12, direction)

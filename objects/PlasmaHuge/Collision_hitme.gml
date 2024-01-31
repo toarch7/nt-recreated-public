@@ -1,24 +1,28 @@
 if lockstep_stop
 	exit
 
-if other.team != team && !other.inframes && hit_id > 0 {
-    other.last_hit = hit_id
-}
-
-if other.team != team and other.hp > 0 {
+if other.team != team && other.hp > 0 {
     with other {
-        hp -= floor(other.dmg * other.image_xscale)
-        image_index = 0
+        hp -= round(other.dmg * other.image_xscale)
+        
+		image_index = 0
         sprite_index = spr_hurt
-        motion_add(other.direction, 1)
-        if speed > 16 speed = 16
-    }
+		
+        motion_add(other.direction, 4)
 
-    if other.hp > 0 {
-        image_xscale -= .1
-        x -= hspeed
-        y -= vspeed
+        if speed > 16 {
+            speed = 16
+        }
     }
+	
+	scrShake(6)
+	
+    image_xscale -= 0.1
+	
+    x -= hspeed
+    y -= vspeed
 
-    snd_play_hit(other.snd_hurt, .2)
+    snd_play_hit(other.snd_hurt, 0.2)
+	
+	instance_create(x, y, BulletHit)
 }

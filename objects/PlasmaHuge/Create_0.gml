@@ -10,12 +10,10 @@ typ = 1 //0 = normal, 1 = deflectable, 2 = destructable, 3 = deflectable
 
 dmg = 25
 
-if instance_exists(Player) {
-    if skill_get(17) image_xscale += .2
+if skill_get(17) {
+	image_xscale += 0.2
+	image_yscale += 0.2
 }
 
 image_speed = 0.5
 sleep(100)
-
-/* */
-/*  */
