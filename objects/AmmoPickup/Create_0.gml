@@ -1,7 +1,7 @@
 friction = 0.2
 
 blink = 30
-alarm[0] = 200 + random(30)
+alarm[0] = (200 + random(30)) / ((5 + GameCont.loops) / 5)
 
 
 //RUSH CROWN

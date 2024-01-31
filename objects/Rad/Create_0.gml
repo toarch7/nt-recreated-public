@@ -3,7 +3,8 @@ image_angle = random_angle
 
 
 blink = 30
-alarm[0] = 150 + random(30)
+
+alarm[0] = (150 + random(30)) / ((4 + GameCont.loops) / 4)
 
 //RUSH CROWN
 if instance_exists(Player) {
