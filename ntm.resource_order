@@ -3055,7 +3055,7 @@
     {"name":"see_object","order":69,"path":"scripts/see_object/see_object.yy",},
     {"name":"isset","order":70,"path":"scripts/isset/isset.yy",},
     {"name":"Extra_Functions","order":71,"path":"scripts/Extra_Functions/Extra_Functions.yy",},
-    {"name":"string_split","order":72,"path":"scripts/string_split/string_split.yy",},
+    {"name":"string_split_list","order":72,"path":"scripts/string_split_list/string_split_list.yy",},
     {"name":"string_split_nodel","order":73,"path":"scripts/string_split_nodel/string_split_nodel.yy",},
     {"name":"draw_text_nt","order":1,"path":"scripts/draw_text_nt/draw_text_nt.yy",},
     {"name":"string_extract","order":2,"path":"scripts/string_extract/string_extract.yy",},

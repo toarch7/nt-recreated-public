@@ -3326,7 +3326,7 @@
     {"id":{"name":"see_object","path":"scripts/see_object/see_object.yy",},},
     {"id":{"name":"isset","path":"scripts/isset/isset.yy",},},
     {"id":{"name":"Extra_Functions","path":"scripts/Extra_Functions/Extra_Functions.yy",},},
-    {"id":{"name":"string_split","path":"scripts/string_split/string_split.yy",},},
+    {"id":{"name":"string_split_list","path":"scripts/string_split_list/string_split_list.yy",},},
     {"id":{"name":"string_split_nodel","path":"scripts/string_split_nodel/string_split_nodel.yy",},},
     {"id":{"name":"draw_text_shadow","path":"scripts/draw_text_shadow/draw_text_shadow.yy",},},
     {"id":{"name":"draw_text_nt","path":"scripts/draw_text_nt/draw_text_nt.yy",},},

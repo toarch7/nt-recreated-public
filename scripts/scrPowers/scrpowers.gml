@@ -8,7 +8,7 @@ function scrPowers() {
         speed = 4
 
         if is_me {
-            UberCont.ctot_uniq[1]++
+            UberCont.ctot_uniq[1] ++
         }
 
         if !skill_get(5) {
@@ -271,7 +271,7 @@ function scrPowers() {
             breload = 0
             instance_create(x, y, Smoke)
 
-            UberCont.ctot_uniq[8]++
+            UberCont.ctot_uniq[8] ++
         }
     }
 

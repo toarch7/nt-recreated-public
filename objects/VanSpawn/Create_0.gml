@@ -16,7 +16,7 @@ if instance_exists(player) {
         
 		flip = choose(1, -1)
         
-		x = player.x + random_spread(96, 120) * flip
+		x = player.x + random_range(96, 120) * flip
         y = player.y + orandom(60)
 		
 		var flor = instance_nearest(x, y, Floor)
@@ -24,13 +24,9 @@ if instance_exists(player) {
 		x = flor.x + 16
         y = flor.y + 16
 		
-		//print(place_free(x, y), !place_meeting(x, y, Floor), place_meeting(x, y, Van), place_meeting(x, y, Portal), distance_to_object(VanSpawn))
-		
 		if position_empty(x, y) or !place_meeting(x, y, Floor) or place_meeting(x, y, Van)
 		or place_meeting(x, y, Portal) or distance_to_object(VanSpawn) < 8
 			continue
-		
-		print(distance_to_object(player), dir)
 		
 		if (distance_to_object(player) > 96 or dir > 250) {
 			fine = true
