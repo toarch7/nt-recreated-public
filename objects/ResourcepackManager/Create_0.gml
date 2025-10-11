@@ -57,7 +57,7 @@ scroll = 0
 
 friction = 0.4
 
-if global.desktop
+if is_desktop
 	friction = 1
 
 depth = 1000

@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndMaggotBite",
+  "$GMSound": "",
+  "%Name": "sndMaggotBite",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
   "duration": 0.15017,
+  "name": "sndMaggotBite",
   "parent": {
     "name": "Sounds",
-    "path": "folders/Sounds.yy",
+    "path": "folders/Sounds.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndMaggotBite",
+  "soundFile": "sndMaggotBite.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

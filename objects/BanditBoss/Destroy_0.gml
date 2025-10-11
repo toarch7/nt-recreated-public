@@ -25,4 +25,4 @@ if instance_exists(CanOasis) {
     GameCont.subarea = 0
 }
 
-scrAchievement(30)
+scrAchievementUnlock(30)

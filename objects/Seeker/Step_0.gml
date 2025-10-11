@@ -6,7 +6,7 @@ if instance_exists(enemy) && speed > 0 {
 
     if target && distance_to_object(target) <= 32 {
 		if !collision_line(x, y, target.x, target.y, Wall, 1, 1)
-			motion_add(target_direction, 1 + boost)
+			motion_add(mcr_target_direction, 1 + boost)
     }
 }
 

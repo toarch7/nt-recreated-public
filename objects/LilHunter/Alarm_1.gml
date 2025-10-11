@@ -14,7 +14,7 @@ if instance_exists(target) {
         if !collision_line(x, y, target.x, target.y, Wall, 0, 0) {
             if random(4) < 3 {
                 if point_distance(x, y, target.x, target.y) < 140 {
-                    gunangle = target_direction + random(50) - 25
+                    gunangle = mcr_target_direction + random(50) - 25
                     snd_play_hit_big(sndLilHunterBouncer, 0.2)
                     wkick = 8
                     addang = -50 - GameCont.loops * 10
@@ -38,10 +38,10 @@ if instance_exists(target) {
                     direction = point_direction(target.x, target.y, x, y) + (random(20) - 10)
                     speed = 0.4
                     walk = 20
-                    gunangle = target_direction
+                    gunangle = mcr_target_direction
                 } else {
                     alarm[1] = 5 + random(6)
-                    gunangle = target_direction + random(30) - 15
+                    gunangle = mcr_target_direction + random(30) - 15
                     snd_play_hit_big(sndLilHunterSniper, 0.2)
                     wkick = 8
                     repeat 10 + GameCont.loops * 2 {
@@ -59,7 +59,7 @@ if instance_exists(target) {
                 speed = 0.4
                 walk = 8 + random(4)
                 alarm[1] = walk
-                gunangle = target_direction
+                gunangle = mcr_target_direction
             }
         }
 		else if random(2) < 1 && spawns > 0 && (hp / max_hp) < spawns / 6 {
@@ -84,7 +84,7 @@ if instance_exists(target) {
             direction = point_direction(target.x, target.y, x, y) + random(20) - 10
             speed = 0.4
             walk = 40 + random(10)
-            gunangle = target_direction
+            gunangle = mcr_target_direction
             alarm[1] /= 3
         }
 

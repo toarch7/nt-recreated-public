@@ -3,10 +3,10 @@ max_hp = 8
 meleedamage = 2
 size = 1
 
-spr_idle = sprBoneFishIdle
-spr_walk = sprBoneFishWalk
-spr_hurt = sprBoneFishHurt
-spr_dead = sprBoneFishDead
+spr_idle = sprBoneFish1Idle
+spr_walk = sprBoneFish1Walk
+spr_hurt = sprBoneFish1Hurt
+spr_dead = sprBoneFish1Dead
 
 event_inherited()
 

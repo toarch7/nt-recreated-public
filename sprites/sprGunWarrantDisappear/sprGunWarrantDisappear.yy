@@ -1,84 +1,295 @@
 {
-  "resourceType": "GMSprite",
-  "resourceVersion": "1.0",
-  "name": "sprGunWarrantDisappear",
+  "$GMSprite": "",
+  "%Name": "sprGunWarrantDisappear",
+  "bboxMode": 0,
   "bbox_bottom": 46,
   "bbox_left": 0,
   "bbox_right": 51,
   "bbox_top": 0,
-  "bboxMode": 0,
-  "collisionKind": 0,
+  "collisionKind": 1,
   "collisionTolerance": 0,
   "DynamicTexturePage": false,
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"566b34eb-581e-40d0-847f-e179b767b261",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"bcfb7723-7313-4e9b-a828-befef51e2c7e",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"8402cd04-944d-4ae6-bd5d-e5abd0832747",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"2ed7c2fd-7af8-4398-8172-fad5e64b8531",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"0f613760-759c-42e1-aeef-9b7b91bab509",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"86293971-d70b-460e-a4d7-fbedd0a0fd7d",},
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "566b34eb-581e-40d0-847f-e179b767b261",
+      "name": "566b34eb-581e-40d0-847f-e179b767b261",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "bcfb7723-7313-4e9b-a828-befef51e2c7e",
+      "name": "bcfb7723-7313-4e9b-a828-befef51e2c7e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "8402cd04-944d-4ae6-bd5d-e5abd0832747",
+      "name": "8402cd04-944d-4ae6-bd5d-e5abd0832747",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "2ed7c2fd-7af8-4398-8172-fad5e64b8531",
+      "name": "2ed7c2fd-7af8-4398-8172-fad5e64b8531",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "0f613760-759c-42e1-aeef-9b7b91bab509",
+      "name": "0f613760-759c-42e1-aeef-9b7b91bab509",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "86293971-d70b-460e-a4d7-fbedd0a0fd7d",
+      "name": "86293971-d70b-460e-a4d7-fbedd0a0fd7d",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    }
   ],
   "gridX": 0,
   "gridY": 0,
   "height": 62,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"2101f191-1c06-4da7-a41c-ded07dddb6c9","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {
+      "$GMImageLayer": "",
+      "%Name": "2101f191-1c06-4da7-a41c-ded07dddb6c9",
+      "blendMode": 0,
+      "displayName": "default",
+      "isLocked": false,
+      "name": "2101f191-1c06-4da7-a41c-ded07dddb6c9",
+      "opacity": 100,
+      "resourceType": "GMImageLayer",
+      "resourceVersion": "2.0",
+      "visible": true
+    }
   ],
+  "name": "sprGunWarrantDisappear",
   "nineSlice": null,
   "origin": 4,
   "parent": {
     "name": "Player",
-    "path": "folders/Sprites/Player.yy",
+    "path": "folders/Sprites/Player.yy"
   },
   "preMultiplyAlpha": false,
+  "resourceType": "GMSprite",
+  "resourceVersion": "2.0",
   "sequence": {
-    "resourceType": "GMSequence",
-    "resourceVersion": "1.4",
-    "name": "",
+    "$GMSequence": "v1",
+    "%Name": "",
     "autoRecord": true,
     "backdropHeight": 1080,
     "backdropImageOpacity": 0.5,
     "backdropImagePath": "",
     "backdropWidth": 1920,
-    "backdropXOffset": 0.0,
-    "backdropYOffset": 0.0,
-    "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "events": {
+      "$KeyframeStore<MessageEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 6.0,
+    "length": 6,
     "lockOrigin": false,
-    "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "moments": {
+      "$KeyframeStore<MomentsEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "name": "",
     "playback": 1,
-    "playbackSpeed": 1.0,
+    "playbackSpeed": 1,
     "playbackSpeedType": 1,
+    "resourceType": "GMSequence",
+    "resourceVersion": "2.0",
     "showBackdrop": true,
     "showBackdropImage": false,
     "timeUnits": 1,
     "tracks": [
-      {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"566b34eb-581e-40d0-847f-e179b767b261","path":"sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy",},},},"Disabled":false,"id":"410bc703-f9a2-4ce3-923b-4cd2303d5966","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"bcfb7723-7313-4e9b-a828-befef51e2c7e","path":"sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy",},},},"Disabled":false,"id":"2a319433-70a7-47b3-ad45-86c431abb7a7","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"8402cd04-944d-4ae6-bd5d-e5abd0832747","path":"sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy",},},},"Disabled":false,"id":"a9feed01-2a5f-4c9c-a104-35e178b3d5ee","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"2ed7c2fd-7af8-4398-8172-fad5e64b8531","path":"sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy",},},},"Disabled":false,"id":"b19c1448-d37c-4e41-b263-56b735304a63","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"0f613760-759c-42e1-aeef-9b7b91bab509","path":"sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy",},},},"Disabled":false,"id":"e17822df-0cd6-4264-b329-8a4ea6efbd77","IsCreationKey":false,"Key":4.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"86293971-d70b-460e-a4d7-fbedd0a0fd7d","path":"sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy",},},},"Disabled":false,"id":"05b6a3e3-0945-4d87-8d68-bd4445d62a6a","IsCreationKey":false,"Key":5.0,"Length":1.0,"Stretch":false,},
-          ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
+      {
+        "$GMSpriteFramesTrack": "",
+        "builtinName": 0,
+        "events": [],
+        "inheritsTrackColour": true,
+        "interpolation": 1,
+        "isCreationTrack": false,
+        "keyframes": {
+          "$KeyframeStore<SpriteFrameKeyframe>": "",
+          "Keyframes": [
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "566b34eb-581e-40d0-847f-e179b767b261",
+                    "path": "sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "410bc703-f9a2-4ce3-923b-4cd2303d5966",
+              "IsCreationKey": false,
+              "Key": 0,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "bcfb7723-7313-4e9b-a828-befef51e2c7e",
+                    "path": "sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "2a319433-70a7-47b3-ad45-86c431abb7a7",
+              "IsCreationKey": false,
+              "Key": 1,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "8402cd04-944d-4ae6-bd5d-e5abd0832747",
+                    "path": "sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "a9feed01-2a5f-4c9c-a104-35e178b3d5ee",
+              "IsCreationKey": false,
+              "Key": 2,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2ed7c2fd-7af8-4398-8172-fad5e64b8531",
+                    "path": "sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "b19c1448-d37c-4e41-b263-56b735304a63",
+              "IsCreationKey": false,
+              "Key": 3,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0f613760-759c-42e1-aeef-9b7b91bab509",
+                    "path": "sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "e17822df-0cd6-4264-b329-8a4ea6efbd77",
+              "IsCreationKey": false,
+              "Key": 4,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "86293971-d70b-460e-a4d7-fbedd0a0fd7d",
+                    "path": "sprites/sprGunWarrantDisappear/sprGunWarrantDisappear.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "05b6a3e3-0945-4d87-8d68-bd4445d62a6a",
+              "IsCreationKey": false,
+              "Key": 5,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            }
+          ],
+          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
+          "resourceVersion": "2.0"
+        },
+        "modifiers": [],
+        "name": "frames",
+        "resourceType": "GMSpriteFramesTrack",
+        "resourceVersion": "2.0",
+        "spriteId": null,
+        "trackColour": 0,
+        "tracks": [],
+        "traits": 0
+      }
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
-    "volume": 1.0,
+    "visibleRange": {
+      "x": 0,
+      "y": 0
+    },
+    "volume": 1,
     "xorigin": 31,
-    "yorigin": 31,
+    "yorigin": 31
   },
   "swatchColours": null,
   "swfPrecision": 2.525,
   "textureGroupId": {
     "name": "Default",
-    "path": "texturegroups/Default",
+    "path": "texturegroups/Default"
   },
   "type": 0,
   "VTile": false,
-  "width": 62,
+  "width": 62
 }

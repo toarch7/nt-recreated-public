@@ -1,7 +1,7 @@
 raddrop = 30
 max_hp = ceil(100 * (1 + GameCont.loops / 3))
-if KeyCont.players > 1 {
-    max_hp = round(max_hp * (1 + KeyCont.players / 2))
+if player_count > 1 {
+    max_hp = round(max_hp * (1 + player_count / 2))
 }
 
 meleedamage = 0
@@ -31,7 +31,7 @@ intro = 0
 wkick = 0
 
 scrTarget()
-if target != -1 gunangle = target_direction
+if target != -1 gunangle = mcr_target_direction
 
 sndhalfhp = 0
 sndtaunt = 0

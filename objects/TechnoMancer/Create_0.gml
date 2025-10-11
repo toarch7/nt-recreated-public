@@ -1,4 +1,4 @@
-max_hp = (350 * ((KeyCont.players / 2) + 0.5))
+max_hp = (350 * ((player_count / 2) + 0.5))
 max_hp *= (1 + (GameCont.loops / 3))
 raddrop = 50
 meleedamage = 0

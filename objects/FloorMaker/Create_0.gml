@@ -1,6 +1,6 @@
 direction = rng_choose(0, 0, 90, 180, 270)
 
-styleb = !rng_random(0, 6 - (GameCont.area == 104 * 4))
+styleb = !rng_float(RNGStates.Generation, 6 - (GameCont.area == 104 * 4))
 if GameCont.area == 100 styleb = 0
 
 goal = 110

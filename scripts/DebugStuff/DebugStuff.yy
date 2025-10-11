@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "DebugStuff",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "WickedStuff",
-    "path": "folders/Objects/WickedStuff.yy",
+  "$GMScript":"v1",
+  "%Name":"DebugStuff",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"DebugStuff",
+  "parent":{
+    "name":"WickedStuff",
+    "path":"folders/Objects/WickedStuff.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

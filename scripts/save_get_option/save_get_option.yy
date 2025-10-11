@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "save_get_option",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "INI",
-    "path": "folders/Scripts/INI.yy",
+  "$GMScript":"v1",
+  "%Name":"save_get_option",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"save_get_option",
+  "parent":{
+    "name":"Savedata",
+    "path":"folders/Scripts/Savedata.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

@@ -10,7 +10,7 @@ max_hp = 20
 event_inherited()
 image_speed = 0
 
-spr_idle = sprRadChestBigIdle
+spr_idle = sprRadChestBig
 spr_hurt = sprRadChestBigHurt
 spr_dead = sprRadChestBigDead
 

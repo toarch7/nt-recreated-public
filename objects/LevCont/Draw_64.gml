@@ -5,7 +5,7 @@ if instance_exists(Player) && !instance_exists(Cinematic)
     scrDrawHUD()
 
 draw_set_halign(fa_center)
-draw_set_valign(fa_center)
+draw_set_valign(fa_middle)
 
 with SkillText {
     if !disappear or disappear % 2 == 0 {
@@ -18,7 +18,7 @@ draw_set_valign(fa_top)
 
 if UberCont.opt_griller && !instance_exists(CrownIcon) && !instance_exists(UltraIcon) && !overgrilled {
 	var press = mouse_ui_clicked(),
-		change = keyboard_check_pressed(vk_right) - keyboard_check_pressed(vk_left),
+		change = scr_keyboard_check_pressed(vk_right) - scr_keyboard_check_pressed(vk_left),
 		
 		mx = device_mouse_x_to_gui(0),
 		my = device_mouse_y_to_gui(0),
@@ -44,8 +44,8 @@ if UberCont.opt_griller && !instance_exists(CrownIcon) && !instance_exists(Ultra
 		}
 	}
 	
-	draw_sprite_ext(sprDailyListArrow, 0,              24, view_height - 18, 1, 1, 0, c_ultra, 1)
-	draw_sprite_ext(sprDailyListArrow, 1, view_width - 24, view_height - 18, 1, 1, 0, c_ultra, 1)
+	draw_sprite_ext(sprDailyArrow, 0,              24, view_height - 18, 1, 1, 0, c_ultra, 1)
+	draw_sprite_ext(sprDailyArrow, 1, view_width - 24, view_height - 18, 1, 1, 0, c_ultra, 1)
 	
 	if change != 0 {
 		with SkillIcon

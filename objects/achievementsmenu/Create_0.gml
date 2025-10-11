@@ -12,17 +12,16 @@ max_height = 0
 unlocks = 0
 anim = []
 
-for(var i = 0; i < array_length(chiev_name); i ++) {
+for(var i = 0; i <= achievementmax; i ++) {
 	chiev_name[i] = loc(chiev_name[i])
 	chiev_text[i] = loc(chiev_text[i])
 	
-	if chiev_have[i] {
+	if scrAchievementIsUnlocked(i) {
         unlocks ++
     }
-    
-	anim[i] = -120
 	
 	max_height += 40
+	anim[i] = -120
 }
 
 max_height -= 40 * 4 + 7

@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndEliteGruntRocketFire",
+  "$GMSound": "",
+  "%Name": "sndEliteGruntRocketFire",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
   "duration": 0.769469,
+  "name": "sndEliteGruntRocketFire",
   "parent": {
     "name": "EliteGrunt",
-    "path": "folders/Sounds/Enemies/EliteGrunt.yy",
+    "path": "folders/Sounds/Enemies/IDPD/EliteGrunt.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndelitegruntrocketfire.wav",
+  "soundFile": "sndEliteGruntRocketFire.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

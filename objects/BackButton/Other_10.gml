@@ -1,6 +1,6 @@
 /// @description click!
 
-if net_event(ev_other, ev_user0)
+if scr_network_handle_event(ev_other, ev_user0)
 	exit
 
 if instance_exists(Leaderboards) && !instance_exists(DailyList) {
@@ -38,7 +38,7 @@ if instance_exists(Credits) && !instance_exists(GameCont) {
 		instance_destroy()
 	
 	with instance_create(0, 0, MenuOptions)
-		self.category_set(OptionCategory.Game)
+		scrOptionsMenuChangeCategory(OptionCategory.Game)
 }
 
 
@@ -46,14 +46,14 @@ if instance_exists(DailyList) {
     with DailyList
 		instance_destroy()
 }
-else if instance_exists(Menu) && net_isme() {
-	if !Menu.loadout {
+else if instance_exists(Menu) && scr_is_authority() {
+	if !Menu.loadout_open {
 	    with all {
 	        if object_index != MusCont && object_index != UberCont && object_index != Console
 				instance_destroy(id, 0)
 	    }
 		
-		camera_set_pos(0, 0)
+		scr_camera_set_position(0, 0)
 		
 	    with instance_create(0, 0, Logo)
 			event_perform(ev_alarm, 1)
@@ -61,7 +61,7 @@ else if instance_exists(Menu) && net_isme() {
 	    UberCont.daily_run = 0
 	    UberCont.weekly_run = 0
 		
-		player_reset(global.index)
+		scr_playerinstance_reset(global.index)
 		
 	    with MusCont {
 	        snd_stop(song)
@@ -76,7 +76,7 @@ else if instance_exists(Menu) && net_isme() {
 	}
 	else {
 		with Menu {
-			loadout = false
+			loadout_open = false
 			gpadmode = false
 		}
 	}
@@ -85,7 +85,7 @@ else if instance_exists(ResourcepackManager) {
 	if !ResourcepackManager.show_details or ResourcepackManager.error != "" {
 		with MenuOptions {
 			wait = true
-			self.category_set(OptionCategory.Resourcepacks)
+			scrOptionsMenuChangeCategory(OptionCategory.Resourcepacks)
 		}
 		
 	    with ResourcepackManager
@@ -104,7 +104,7 @@ else if instance_exists(ResourcepackManager) {
 				pack_download = -1
 				downloaded = 0
 				
-				sound_play_pitch(sndCrownRandom, 0.7 + random(0.3))
+				snd_play(sndCrownRandom, 0.7 + random(0.3))
 				
 				break
 			}

@@ -6,6 +6,5 @@ if !instance_exists(Player) && !instance_exists(Menu) {
 	snd_stop(song)
     snd_stop(amb)
 	
-    song = musThemeA
-    song = custom_sound_check(song)
+    song = custom_sound_check(musThemeA)
 }

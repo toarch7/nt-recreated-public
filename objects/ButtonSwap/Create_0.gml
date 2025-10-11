@@ -9,4 +9,4 @@ rot = 0
 
 button_name = "SWAP WEAPONS#BUTTON"
 
-do_thing = 0
+volume_control_command = 0

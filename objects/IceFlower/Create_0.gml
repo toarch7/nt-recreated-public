@@ -1,8 +1,8 @@
 max_hp = 450
 
-spr_idle = sprJungleFlowerIdle
-spr_hurt = sprJungleFlowerHurt
-spr_dead = sprJungleFlowerDead
+spr_idle = sprIceFlowerIdle
+spr_hurt = sprIceFlowerHurt
+spr_dead = sprIceFlowerDead
 
 size = 1
 

@@ -2,7 +2,7 @@ scrTarget()
 alarm[1] = 20 + random(20)
 if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
-        if rage = 0 rage = 1 direction = target_direction + random(60) - 30
+        if rage = 0 rage = 1 direction = mcr_target_direction + random(60) - 30
     } else {
         if hp < max_hp and random(2) < 1 {
             image_index = 0

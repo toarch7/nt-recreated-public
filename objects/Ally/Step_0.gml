@@ -6,7 +6,7 @@ if (wkick != -1) {
     if (wkick > 0) wkick -= 1
     if (wkick < 0) wkick += 1
 }
-if (spr_idle != sprAllyAppear) {
+if (spr_idle != sprAllyappear) {
     if (spr_chrg != -1) {
         if ((sprite_index != spr_hurt) && (sprite_index != spr_chrg)) sprite_index = spr_idle
         if ((sprite_index == spr_hurt) || (sprite_index == spr_chrg)) {
@@ -35,7 +35,7 @@ if (walk > 0) {
     walk -= 1
     motion_add(direction, 0.8)
 }
-if (instance_exists(creator) && (spr_idle != sprAllyAppear)) {
+if (instance_exists(creator) && (spr_idle != sprAllyappear)) {
     if (point_distance(x, y, creator.x, creator.y) > 52) mp_potential_step(creator.x, creator.y, 1, 0)
 }
 if (speed > 4.5) speed = 4.5

@@ -17,8 +17,9 @@ var start = ypos div 40,
 	count = min(array_length(items), start + 5)
 
 if last_min < start or last_max > count {
-	if !dragging
-		sound_play_pitchvol(sndHover, 1.1 + random(0.1), 0.3)
+	if !dragging {
+		snd_play(sndHover, 1.1 + random(0.1), 0.3)
+	}
 	
 	last_min = start
 	last_max = count

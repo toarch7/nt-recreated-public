@@ -20,7 +20,7 @@ text[4] = "COOL, WE'RE DONE HERE!"
 
 letterbox = 0
 
-doin = 0
+step_complete = 0
 
 var w = choose(3, 4),
 	h = choose(3, 4)

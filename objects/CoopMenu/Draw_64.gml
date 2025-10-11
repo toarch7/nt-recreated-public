@@ -2,14 +2,10 @@ if local_wait
 	local_wait --
 
 if UberCont.showtutorial {
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
-	
+	draw_align(fa_center, fa_middle)
     draw_text_shadow(view_width / 2, view_height / 2, "YOU HAVEN'T COMPLETED TUTORIAL LEVEL YET")
-    
-	draw_set_halign(fa_top)
-    draw_set_valign(fa_left)
-    
+    draw_align()
+	
 	exit
 }
 
@@ -19,27 +15,25 @@ if !instance_exists(CoopController) {
 	    with UberCont
 			localcoop = 1
 		
-	    var ind = 0
+	    var _index = 0
 		
 	    repeat 2 {
-	        var inst = new PlayerInstance(ind)
+	        var _pint = new PlayerInstance(_index),
+				_race_id = irandom_range(1, racemax),
+				_max_skins = scrRaceGetMaxSkinCount(_race_id)
 			
-			inst.race = irandom(11) + 1
-			inst.bskin = !irandom(2)
+			_pint.race = _race_id
+			_pint.bskin = irandom(_max_skins)
 			
-	        inst.cwep = UberCont.race_swep[inst.race]
+	        _pint.cwep = scrRaceGetStarterWeapon(_race_id)
 			
-			ind ++
+			_index ++
 	    }
-		
-	    with SpiralCont
-			instance_destroy()
 		
 	    instance_create(0, 0, GameCont)
 	    instance_create(0, 0, MenuGen)
-		
-	    with CoopMenu
-	        instance_destroy()
+		instance_destroy(SpiralCont)
+		instance_destroy(CoopMenu)
 	}
 }
 
@@ -50,29 +44,31 @@ if refresh
 	refresh --
 
 if menu == noone {
-	menu = instance_create(x, y, MenuOptions)
+	with instance_create(x, y, MenuOptions) {
+		dispose_on_empty = true
+		other.menu = id
+	}
 	
-	menu.dispose_on_empty = true
-	menu.category_set(OptionCategory.Coop_Menu, false)
+	scrOptionsMenuChangeCategory(OptionCategory.Coop_Menu, false)
 }
 else if !instance_exists(menu) {
-	var players = struct_keys(playerinstances)
+	var _player_instances = struct_keys(global.__playerinstance_list)
 	
 	if connected {
-		var dy = view_height / 2,
-			len = array_length(players)
+		var _dy = view_height / 2,
+			_length = array_length(_player_instances)
 		
-		array_sort(players, true)
+		array_sort(_player_instances, true)
 		
-		dy -= len * 14
+		_dy -= _length * 14
 		
-		for(var i = 0; i < len; i ++) {
-			var ind = players[i],
-				player = playerinstances[$ ind]
+		for(var i = 0; i < _length; i ++) {
+			var _index = _player_instances[i],
+				_pinst = global.__playerinstance_list[$ _index]
 			
-			draw_playerinstance(player.index, view_width / 2, dy, 160, fa_center)
+			scr_draw_multiplayer_player_card(_pinst.index, view_width / 2, _dy, 160, fa_center)
 			
-			dy += 28
+			_dy += 28
 		}
 		
 		draw_set_halign(fa_left)

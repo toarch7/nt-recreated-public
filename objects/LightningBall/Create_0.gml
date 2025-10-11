@@ -3,7 +3,7 @@ typ = 1
 dmg = 40
 hit_id = -1
 snd = sndLightningCannonLoop
-snd_loop(snd)
+snd_play_loop(snd)
 if instance_exists(Player) {
     if skill_get(17) dmg = 50
 }

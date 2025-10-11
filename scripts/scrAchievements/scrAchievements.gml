@@ -1,257 +1,202 @@
+globalvar achievementmax, chiev_name, chiev_text, chiev_hide, chiev_type;
+
+enum Achievement {
+	 // Chars
+	MELTING_UNLOCKED = 0,
+	EYES_UNLOCKED = 1,
+	PLANT_UNLOCKED = 2,
+	Y_V_UNLOCKED = 3,
+	STEROIDS_UNLOCKED = 4,
+	ROBOT_UNLOCKED = 5,
+	CHICKEN_UNLOCKED = 6,
+	REBEL_UNLOCKED = 7,
+	HORROR_UNLOCKED = 8,
+	ROGUE_UNLOCKED = 9,
+	
+	 // Skins
+	FISH_BSKIN = 10,
+	CRYSTAL_BSKIN = 11,
+	MELTING_BSKIN = 12,
+	PLANT_BSKIN = 13,
+	EYES_BSKIN = 14,
+	Y_V_BSKIN = 15,
+	STEROIDS_BSKIN = 16,
+	ROBOT_BSKIN = 17,
+	CHICKEN_BSKIN = 18,
+	REBEL_BSKIN = 19,
+	HORROR_BSKIN = 20,
+	ROGUE_BSKIN = 21,
+	
+	 // Progress activities
+	CROWN_LIFE = 22,
+	ULTRA_TIME = 23,
+	GOOD_FIND = 24,
+	GOOD_RIDDANCE = 25,
+	UNSTOPPABLE = 26,
+	FROG_ZONE = 27,
+	IMPOSSIBLE = 28,
+	SINCERE_APPOLOGIES = 29,
+	
+	 // Bosses
+	BOSS_BIGBANDIT = 30,
+	BOSS_BIGDOG = 31,
+	BOSS_LILHUNTER = 32,
+	BOSS_THRONE = 33,
+	BOSS_THRONE2 = 34,
+	BOSS_MOM = 35,
+	BOSS_HYPERCRYSTAL = 36,
+	BOSS_TECHNOMANCER = 37,
+	
+	 // Gaming
+	VAULT_RAIDER = 38,
+	GO_HARD = 39,
+	NOT_BAD = 40,
+	GAME_LOOPED = 41,
+	BOSS_CAPTAIN = 42,
+	ULTRA_MUTANT = 43
+}
+
+/// @function scrAchievementCreate
+/// @param {Enum.Achievement} id
+/// @param is_hidden
+/// @param type
+/// @param name
+/// @param text
+function scrAchievementCreate(_id, _is_hidden, _type, _name, _text) {
+	chiev_name[_id] = string_upper(string(_name))
+	chiev_text[_id] = string_upper(string(_text))
+	chiev_hide[_id] = _is_hidden
+	chiev_type[_id] = _type
+}
+
 function scrAchievements() {
-	chiev_name[0] = "Melting Unlocked"
-	chiev_text[0] = "Die"
-	chiev_hide[0] = 0
-	chiev_type[0] = 0
-
-	chiev_name[1] = "Eyes Unlocked"
-	chiev_text[1] = "Reach 2-1"
-	chiev_hide[1] = 0
-	chiev_type[1] = 0
-
-	chiev_name[2] = "Plant Unlocked"
-	chiev_text[2] = "Reach 3-1"
-	chiev_hide[2] = 0
-	chiev_type[2] = 0
-
-	chiev_name[3] = "Y.V. Unlocked"
-	chiev_text[3] = "Reach 3-?"
-	chiev_hide[3] = 0
-	chiev_type[3] = 0
-
-	chiev_name[4] = "Steroids Unlocked"
-	chiev_text[4] = "Reach 6-1"
-	chiev_hide[4] = 0
-	chiev_type[4] = 0
-
-	chiev_name[5] = "Robot Unlocked"
-	chiev_text[5] = "Reach 5-1"
-	chiev_hide[5] = 0
-	chiev_type[5] = 0
-
-	chiev_name[6] = "Chicken Unlocked"
-	chiev_text[6] = "Reach 5-?"
-	chiev_hide[6] = 0
-	chiev_type[6] = 0
-
-	chiev_name[7] = "Rebel Unlocked"
-	chiev_text[7] = "Loop past#the Nuclear Throne"
-	chiev_hide[7] = 1
-	chiev_type[7] = 0
-
-	chiev_name[8] = "Horror Unlocked"
-	chiev_text[8] = "Defeat Horror"
-	chiev_hide[8] = 1
-	chiev_type[8] = 0
-
-	chiev_name[9] = "Rogue Unlocked"
-	chiev_text[9] = "Reach the Nuclear Throne"
-	chiev_hide[9] = 0
-	chiev_type[9] = 0
-
-	chiev_name[10] = "Fish Can Roll"
-	chiev_text[10] = "Loop as every character"
-	chiev_hide[10] = 1
-	chiev_type[10] = 0
-
-	chiev_name[11] = "Crystal Can Shield"
-	chiev_text[11] = "Reach 4-? as Crystal"
-	chiev_hide[11] = 0
-	chiev_type[11] = 0
+	scrAchievementCreate(Achievement.MELTING_UNLOCKED,   false,   0, "Melting Unlocked",       "Die")
+	scrAchievementCreate(Achievement.EYES_UNLOCKED,      false,   0, "Eyes Unlocked",          "Reach 2-1")
+	scrAchievementCreate(Achievement.PLANT_UNLOCKED,     false,   0, "Plant Unlocked",         "Reach 3-1")
+	scrAchievementCreate(Achievement.Y_V_UNLOCKED,       false,   0, "Y.V. Unlocked",          "Reach 3-?")
+	scrAchievementCreate(Achievement.STEROIDS_UNLOCKED,  false,   0, "Steroids Unlocked",      "Reach 6-1")
+	scrAchievementCreate(Achievement.ROBOT_UNLOCKED,     false,   0, "Robot Unlocked",         "Reach 5-1")
+	scrAchievementCreate(Achievement.CHICKEN_UNLOCKED,   false,   0, "Chicken Unlocked",       "Reach 5-?")
+	scrAchievementCreate(Achievement.REBEL_UNLOCKED,     true,    0, "Rebel Unlocked",         "Loop past\nthe Nuclear Throne")
+	scrAchievementCreate(Achievement.HORROR_UNLOCKED,    true,    0, "Horror Unlocked",        "Defeat Horror")
+	scrAchievementCreate(Achievement.ROGUE_UNLOCKED,     false,   0, "Rogue Unlocked",         "Reach the Nuclear Throne")
+	scrAchievementCreate(Achievement.FISH_BSKIN,         true,    0, "Fish Can Roll",          "Loop as every character")
+	scrAchievementCreate(Achievement.CRYSTAL_BSKIN,      false,   0, "Crystal Can Shield",     "Reach 4-? as Crystal")
+	scrAchievementCreate(Achievement.MELTING_BSKIN,      false,   0, "Everything Hurts",       "As Melting, Reach the Nuclear Throne\nwithout Rhino Skin and Strong Spirit")
+	scrAchievementCreate(Achievement.PLANT_BSKIN,        false,   0, "MMMMMMHMMM!",            "Reach 2-? as Eyes")
+	scrAchievementCreate(Achievement.EYES_BSKIN,         false,   0, "Blood Blood Blood",      "Reach the Nuclear Throne\nin under 10 minutes as Plant")
+	scrAchievementCreate(Achievement.Y_V_BSKIN,          false,   0, "Verified",               "Unlock a Golden Weapon\nfor every character")
+	scrAchievementCreate(Achievement.STEROIDS_BSKIN,     true,    0, "Science",                "Defeat the Technomancer as Steroids")
+	scrAchievementCreate(Achievement.ROBOT_BSKIN,        true,    0, "6e 69 63 65",            "Eat a Hyper Weapon as Robot")
+	scrAchievementCreate(Achievement.CHICKEN_BSKIN,      true,    0, "Way Of The Chicken",     "Reach 2-1 on Hard Mode as Chicken")
+	scrAchievementCreate(Achievement.REBEL_BSKIN,        true,    0, "Forget The Old Days",    "Defeat Mom as Rebel")
+	scrAchievementCreate(Achievement.HORROR_BSKIN,       true,    0, "Thriller",               "Defeat Hyper Crystal as Horror")
+	scrAchievementCreate(Achievement.ROGUE_BSKIN,        true,    0, "Never Look Back",        "Defeat Captain as Rogue")
+	scrAchievementCreate(Achievement.CROWN_LIFE,         false,   0, "Crown Life",             "Unlock a Crown as any character")
+	scrAchievementCreate(Achievement.ULTRA_TIME,         false,   0, "Ultra Time",             "Reach Level Ultra as any character")
+	scrAchievementCreate(Achievement.GOOD_FIND,          false,   0, "Good Find",              "Unlock a Golden Weapon\nas any character")
+	scrAchievementCreate(Achievement.GOOD_RIDDANCE,      true,    0, "Good Riddance",          "Unlock a Golden Disc Gun\nor Golden Nuke Launcher")
+	scrAchievementCreate(Achievement.UNSTOPPABLE,        true,    0, "Unstoppable",            "Reach Level Ultra as Skeleton")
+	scrAchievementCreate(Achievement.FROG_ZONE,          true,    0, "Frog Zone",              "Play as Frog")
+	scrAchievementCreate(Achievement.IMPOSSIBLE,         true,    0, "Impossible",             "Sit on the Nuclear Throne\nas headless Chicken")
+	scrAchievementCreate(Achievement.SINCERE_APPOLOGIES, true,    0, "Sincere Apologies",      "Kill yourself with a Disc Gun")
+	scrAchievementCreate(Achievement.BOSS_BIGBANDIT,     false,   1, "Bandit Stopper",         "Defeat Big Bandit")
+	scrAchievementCreate(Achievement.BOSS_BIGDOG,        false,   1, "Dog Owner",              "Defeat Big Dog")
+	scrAchievementCreate(Achievement.BOSS_LILHUNTER,     false,   1, "Hunter Killer",          "Defeat Lil Hunter")
+	scrAchievementCreate(Achievement.BOSS_THRONE,        true,    1, "Throne Sitter",          "Defeat the Nuclear Throne")
+	scrAchievementCreate(Achievement.BOSS_THRONE2,       true,    1, "Advanced Sitter",        "Defeat Throne II")
+	scrAchievementCreate(Achievement.BOSS_MOM,           true,    1, "Frog Slayer",            "Defeat Mom")
+	scrAchievementCreate(Achievement.BOSS_HYPERCRYSTAL,  true,    1, "Crystal Smasher",        "Defeat Hyper Crystal")
+	scrAchievementCreate(Achievement.BOSS_TECHNOMANCER,  true,    1, "Techno Killer",          "Defeat Technomancer")
+	scrAchievementCreate(Achievement.VAULT_RAIDER,       false,   1, "Vault Raider",           "Unlock all Crowns\nas any character")
+	scrAchievementCreate(Achievement.GO_HARD,            true,    1, "Go Hard",                "Unlock Hard Mode")
+	scrAchievementCreate(Achievement.NOT_BAD,            false,   2, "Not Bad",                "Reach 7-3 in Daily Run")
+	scrAchievementCreate(Achievement.GAME_LOOPED,        false,   2, "The Struggle Continues", "Loop the game")
+	scrAchievementCreate(Achievement.BOSS_CAPTAIN,       true,    2, "The Struggle Is Over",   "Defeat Captain")
+	scrAchievementCreate(Achievement.ULTRA_MUTANT,       false,   2, "Ultra Mutant",           "Get 100% of the unlocks")
 	
-	chiev_name[12] = "Everything Hurts"
-	chiev_text[12] = "As Melting, Reach the Nuclear Throne#without Rhino Skin and Strong Spirit"
-	chiev_hide[12] = 0
-	chiev_type[12] = 0
-
-	chiev_name[13] = "MMMMMMHMMM!"
-	chiev_text[13] = "Reach 2-? as Eyes"
-	chiev_hide[13] = 0
-	chiev_type[13] = 0
-
-	chiev_name[14] = "Blood Blood Blood"
-	chiev_text[14] = "Reach the Nuclear Throne#in under 10 minutes as Plant"
-	chiev_hide[14] = 0
-	chiev_type[14] = 0
-
-	chiev_name[15] = "Verified"
-	chiev_text[15] = "Unlock a Golden Weapon#for every character"
-	chiev_hide[15] = 0
-	chiev_type[15] = 0
-
-	chiev_name[16] = "Science"
-	chiev_text[16] = "Defeat the Technomancer as Steroids"
-	chiev_hide[16] = 1
-	chiev_type[16] = 0
-
-	chiev_name[17] = "6e 69 63 65"
-	chiev_text[17] = "Eat a Hyper Weapon as Robot"
-	chiev_hide[17] = 1
-	chiev_type[17] = 0
-
-	chiev_name[18] = "Way Of The Chicken"
-	chiev_text[18] = "Reach 2-1 on Hard Mode as Chicken"
-	chiev_hide[18] = 1
-	chiev_type[18] = 0
-
-	chiev_name[19] = "Forget The Old Days"
-	chiev_text[19] = "Defeat Mom as Rebel"
-	chiev_hide[19] = 1
-	chiev_type[19] = 0
-
-	chiev_name[20] = "Thriller"
-	chiev_text[20] = "Defeat Hyper Crystal as Horror"
-	chiev_hide[20] = 1
-	chiev_type[20] = 0
-
-	chiev_name[21] = "Never Look Back"
-	chiev_text[21] = "Defeat Captain as Rogue"
-	chiev_hide[21] = 1
-	chiev_type[21] = 0
-
-	chiev_name[22] = "Crown Life"
-	chiev_text[22] = "Unlock a Crown as any character"
-	chiev_hide[22] = 0
-	chiev_type[22] = 0
-
-	chiev_name[23] = "Ultra Time"
-	chiev_text[23] = "Reach Level Ultra as any character"
-	chiev_hide[23] = 0
-	chiev_type[23] = 0
-
-	chiev_name[24] = "Good Find"
-	chiev_text[24] = "Unlock a Golden Weapon#as any character"
-	chiev_hide[24] = 0
-	chiev_type[24] = 0
-
-	chiev_name[25] = "Good Riddance"
-	chiev_text[25] = "Unlock a Golden Disc Gun#or Golden Nuke Launcher"
-	chiev_hide[25] = 1
-	chiev_type[25] = 0
-
-	chiev_name[26] = "Unstoppable"
-	chiev_text[26] = "Reach Level Ultra as Skeleton"
-	chiev_hide[26] = 1
-	chiev_type[26] = 0
-
-	chiev_name[27] = "Frog Zone"
-	chiev_text[27] = "Play as Frog"
-	chiev_hide[27] = 1
-	chiev_type[27] = 0
-
-	chiev_name[28] = "Impossible"
-	chiev_text[28] = "Sit on the Nuclear Throne#as headless Chicken"
-	chiev_hide[28] = 1
-	chiev_type[28] = 0
-
-	chiev_name[29] = "Sincere Apologies"
-	chiev_text[29] = "Kill yourself with a Disc Gun"
-	chiev_hide[29] = 1
-	chiev_type[29] = 0
-
-	chiev_name[30] = "Bandit Stopper"
-	chiev_text[30] = "Defeat Big Bandit"
-	chiev_hide[30] = 0
-	chiev_type[30] = 1
-
-	chiev_name[31] = "Dog Owner"
-	chiev_text[31] = "Defeat Big Dog"
-	chiev_hide[31] = 0
-	chiev_type[31] = 1
-
-	chiev_name[32] = "Hunter Killer"
-	chiev_text[32] = "Defeat Lil Hunter"
-	chiev_hide[32] = 0
-	chiev_type[32] = 1
-
-	chiev_name[33] = "Throne Sitter"
-	chiev_text[33] = "Defeat the Nuclear Throne"
-	chiev_hide[33] = 1
-	chiev_type[33] = 1
-
-	chiev_name[34] = "Advanced Sitter"
-	chiev_text[34] = "Defeat Throne II"
-	chiev_hide[34] = 1
-	chiev_type[34] = 1
-
-	chiev_name[35] = "Frog Slayer"
-	chiev_text[35] = "Defeat Mom"
-	chiev_hide[35] = 1
-	chiev_type[35] = 1
-
-	chiev_name[36] = "Crystal Smasher"
-	chiev_text[36] = "Defeat Hyper Crystal"
-	chiev_hide[36] = 1
-	chiev_type[36] = 1
-
-	chiev_name[37] = "Techno Killer"
-	chiev_text[37] = "Defeat Technomancer"
-	chiev_hide[37] = 1
-	chiev_type[37] = 1
-
-	chiev_name[38] = "Vault Raider"
-	chiev_text[38] = "Unlock all Crowns#as any character"
-	chiev_hide[38] = 0
-	chiev_type[38] = 1
-
-	chiev_name[39] = "Go Hard"
-	chiev_text[39] = "Unlock Hard Mode"
-	chiev_hide[39] = 1
-	chiev_type[39] = 1
+	achievementmax = array_length(chiev_name) - 1
 	
-	chiev_name[40] = "Not Bad"
-	chiev_text[40] = "Reach 7-3 in Daily Run"
-	chiev_hide[40] = 0
-	chiev_type[40] = 2
-	
-	chiev_name[41] = "The Struggle Continues"
-	chiev_text[41] = "Loop the game"
-	chiev_hide[41] = 0
-	chiev_type[41] = 2
-	
-	chiev_name[42] = "The Struggle Is Over"
-	chiev_text[42] = "Defeat Captain"
-	chiev_hide[42] = 1
-	chiev_type[42] = 2
-
-	chiev_name[43] = "Ultra Mutant"
-	chiev_text[43] = "Get 100% of the unlocks"
-	chiev_hide[43] = 0
-	chiev_type[43] = 2
-	
-	max_achieves = array_length(chiev_name) - 1
-
-	for(var i = 0; i <= max_achieves; i ++) {
-		chiev_name[i] = string_upper(chiev_name[i])
-		chiev_text[i] = string_upper(chiev_text[i])
+	if scrAchievementIsUnlocked(Achievement.BOSS_THRONE) {
+		var _turn_visible = [
+				Achievement.REBEL_UNLOCKED,
+				Achievement.FISH_BSKIN,
+				Achievement.STEROIDS_BSKIN,
+				Achievement.ROBOT_BSKIN,
+				Achievement.CHICKEN_BSKIN,
+				Achievement.REBEL_BSKIN,
+				Achievement.HORROR_BSKIN,
+				Achievement.ROGUE_BSKIN,
+				Achievement.BOSS_MOM,
+				Achievement.BOSS_HYPERCRYSTAL,
+				Achievement.BOSS_TECHNOMANCER,
+				Achievement.GO_HARD
+			]
 		
-	    chiev_have[i] = save_get_value("achievement", string(i), 0)
-	}
-	
-	if chiev_have[33] {
-		var turnvisible = [
-			7, 10, 16, 17, 18, 19, 20, 21, 35, 36, 37, 39
-		]
+		var _all_chars = true
 		
-		var allchars = 1
-		for(var i = 1; i <= 12; i ++) {
-			if !UberCont.cgot[i] {
-				allchars = 0 break
+		for(var _race_id = Race.Fish; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
+			if !scr_race_is_unlocked(_race_id) && !scrRaceIsHidden(_race_id) {
+				_all_chars = false
+				break
 			}
 		}
 		
-		if allchars {
-			array_push(turnvisible, 26, 27)
+		if _all_chars {
+			array_push(_turn_visible, Achievement.UNSTOPPABLE, Achievement.FROG_ZONE)
 		}
 		
 		if UberCont.hardgot {
-			array_push(turnvisible, 25)
+			array_push(_turn_visible, Achievement.GOOD_RIDDANCE)
 		}
 		
-		for(var i = 0; i < array_length(turnvisible); i ++) {
-			chiev_hide[turnvisible[i]] = 0
+		var _count = array_length(_turn_visible)
+		for(var i = 0; i < _count; ++i) {
+			chiev_hide[_turn_visible[i]] = 0
 		}
 	}
 }
 
+/// @function scrRaceGetUnlockAchievement
+/// @param {Real|Enum.RaceType} race_id
+function scrRaceGetUnlockAchievement(_race) {
+	switch _race {
+        case Race.Eyes: return Achievement.EYES_UNLOCKED
+        case Race.Melting: return Achievement.MELTING_UNLOCKED
+        case Race.Plant: return Achievement.PLANT_UNLOCKED
+        case Race.Venuz: return Achievement.Y_V_UNLOCKED
+        case Race.Steroids: return Achievement.STEROIDS_UNLOCKED
+        case Race.Robot: return Achievement.ROBOT_UNLOCKED
+        case Race.Chicken: return Achievement.CHICKEN_UNLOCKED
+        case Race.Rebel: return Achievement.REBEL_UNLOCKED
+        case Race.Horror: return Achievement.HORROR_UNLOCKED
+        case Race.Rogue: return Achievement.ROGUE_UNLOCKED
+        case Race.Skeleton: return Achievement.UNSTOPPABLE
+        case Race.Frog: return Achievement.FROG_ZONE
+        case Race.Cuz: return -1 /* TODO */
+    }
+	
+	return -1
+}
 
+/// @function scrRaceGetSkinUnlockAchievement
+/// @param {Real|Enum.RaceType} race_id
+/// @param skin_id
+function scrRaceGetSkinUnlockAchievement(_race, _skin_id) {
+    switch _race {
+        case Race.Fish: return Achievement.FISH_BSKIN
+        case Race.Crystal: return Achievement.CRYSTAL_BSKIN
+        case Race.Eyes: return Achievement.EYES_BSKIN
+        case Race.Melting: return Achievement.MELTING_BSKIN
+        case Race.Plant: return Achievement.PLANT_BSKIN
+        case Race.Venuz: return Achievement.Y_V_BSKIN
+        case Race.Steroids: return Achievement.STEROIDS_BSKIN
+        case Race.Robot: return Achievement.ROBOT_BSKIN
+        case Race.Chicken: return Achievement.CHICKEN_BSKIN
+        case Race.Rebel: return Achievement.REBEL_BSKIN
+        case Race.Horror: return Achievement.HORROR_BSKIN
+        case Race.Rogue: return Achievement.ROGUE_BSKIN
+    }
+	
+	return "NONE"
+}

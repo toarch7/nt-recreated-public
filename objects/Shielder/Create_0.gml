@@ -11,8 +11,8 @@ spr_dead = sprShielderDead
 
 event_inherited()
 
-snd_hurt = sndShielderHurt
-snd_dead = sndShielderDead
+snd_hurt = sndShielderHurtM
+snd_dead = sndShielderDeadM
 
 male = 1
 if irandom(1) {
@@ -20,8 +20,9 @@ if irandom(1) {
     snd_dead = sndShielderDeadF
     snd_play_hit_big(sndShielderEnterF, 0.2)
     male = 0
-} else {
-    snd_play_hit_big(sndShielderEnter, 0.2)
+}
+else {
+    snd_play_hit_big(sndShielderEnterM, 0.2)
 }
 
 if GameCont.area == 101 {

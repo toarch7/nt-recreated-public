@@ -18,5 +18,5 @@ if team != other.team {
         instance_destroy()
     }
 
-    snd_play(sndCrystalDeflect)
+    snd_play_pitch(sndShielderDeflect)
 }

@@ -1,94 +1,410 @@
 {
-  "resourceType": "GMSprite",
-  "resourceVersion": "1.0",
-  "name": "sprInvLaserCrystalDead",
-  "bbox_bottom": 47,
-  "bbox_left": 0,
-  "bbox_right": 47,
-  "bbox_top": 0,
-  "bboxMode": 1,
-  "collisionKind": 0,
+  "$GMSprite": "",
+  "%Name": "sprInvLaserCrystalDead",
+  "bboxMode": 0,
+  "bbox_bottom": 42,
+  "bbox_left": 12,
+  "bbox_right": 32,
+  "bbox_top": 8,
+  "collisionKind": 1,
   "collisionTolerance": 0,
   "DynamicTexturePage": false,
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"1828048b-5051-493f-8b19-cfed372db922",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"dde3690d-7694-4d97-bee5-6465ce2229a6",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"fe09ec4e-50df-4c52-a914-ad3743aafc71",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"6a67c822-0659-4711-8804-17ad35d2ccd9",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"6aba968d-1c77-41a4-adc3-0c546d6cb0d6",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"1e822cd0-baa7-4ba2-8040-521805a1bf42",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"bb287467-92d1-4515-a5da-e60e421c0632",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"a8e653e0-7b08-4367-bfd8-a5b3c335658e",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"9bf43ea6-55b7-49a2-a8f1-00b469eeb72c",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"706d0186-c509-42f8-8529-dd7408ab5410",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"ce40f439-9333-49dd-b0ef-e94b255aba48",},
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "86702c5e-b3e7-43f9-bda9-2e22bf0625c4",
+      "name": "86702c5e-b3e7-43f9-bda9-2e22bf0625c4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "3bf280b2-e0f4-43e9-a047-1a174e5f3960",
+      "name": "3bf280b2-e0f4-43e9-a047-1a174e5f3960",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "0c8233d7-1c65-4570-a986-d692055ed2e4",
+      "name": "0c8233d7-1c65-4570-a986-d692055ed2e4",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "2bba07a8-b437-4c8e-b2d8-695b8f1995fa",
+      "name": "2bba07a8-b437-4c8e-b2d8-695b8f1995fa",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "40752d2f-6bc1-4589-b028-723956e6a842",
+      "name": "40752d2f-6bc1-4589-b028-723956e6a842",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "e0bdb998-2771-4663-a8f8-e1664435a1cb",
+      "name": "e0bdb998-2771-4663-a8f8-e1664435a1cb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "a175ef74-f5b0-4e49-a0a1-4f591c91f771",
+      "name": "a175ef74-f5b0-4e49-a0a1-4f591c91f771",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "757fff68-b56c-4967-a7b4-3dac4079607e",
+      "name": "757fff68-b56c-4967-a7b4-3dac4079607e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "603564be-3ef0-41a3-888c-7335ed1cd303",
+      "name": "603564be-3ef0-41a3-888c-7335ed1cd303",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "a26b32ee-7b65-4ec9-a729-958889d8a9d9",
+      "name": "a26b32ee-7b65-4ec9-a729-958889d8a9d9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    }
   ],
   "gridX": 0,
   "gridY": 0,
   "height": 48,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"280c198c-0264-4abc-8e2a-35ad97be4c36","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {
+      "$GMImageLayer": "",
+      "%Name": "aa058e58-3470-4de4-8bf2-fea7c948942c",
+      "blendMode": 0,
+      "displayName": "default",
+      "isLocked": false,
+      "name": "aa058e58-3470-4de4-8bf2-fea7c948942c",
+      "opacity": 100,
+      "resourceType": "GMImageLayer",
+      "resourceVersion": "2.0",
+      "visible": true
+    }
   ],
+  "name": "sprInvLaserCrystalDead",
   "nineSlice": null,
   "origin": 4,
   "parent": {
     "name": "Laser Crystal",
-    "path": "folders/Sprites/Enemies/Laser Crystal.yy",
+    "path": "folders/Sprites/Enemies/Laser Crystal.yy"
   },
   "preMultiplyAlpha": false,
+  "resourceType": "GMSprite",
+  "resourceVersion": "2.0",
   "sequence": {
-    "resourceType": "GMSequence",
-    "resourceVersion": "1.4",
-    "name": "",
+    "$GMSequence": "v1",
+    "%Name": "",
     "autoRecord": true,
     "backdropHeight": 1080,
     "backdropImageOpacity": 0.5,
     "backdropImagePath": "",
     "backdropWidth": 1920,
-    "backdropXOffset": 0.0,
-    "backdropYOffset": 0.0,
-    "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "events": {
+      "$KeyframeStore<MessageEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 11.0,
+    "length": 10,
     "lockOrigin": false,
-    "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "moments": {
+      "$KeyframeStore<MomentsEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "name": "",
     "playback": 1,
-    "playbackSpeed": 1.0,
+    "playbackSpeed": 1,
     "playbackSpeedType": 1,
+    "resourceType": "GMSequence",
+    "resourceVersion": "2.0",
+    "seqHeight": 48,
+    "seqWidth": 48,
     "showBackdrop": true,
     "showBackdropImage": false,
     "timeUnits": 1,
     "tracks": [
-      {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"1828048b-5051-493f-8b19-cfed372db922","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"37a32200-0f00-48ec-a666-44de682b7756","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"dde3690d-7694-4d97-bee5-6465ce2229a6","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"463ecd12-e74a-4a7b-a488-4b6355f8c8f6","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"fe09ec4e-50df-4c52-a914-ad3743aafc71","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"9052da10-18ec-45b5-a3c4-13e70699228f","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"6a67c822-0659-4711-8804-17ad35d2ccd9","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"dbf9adba-9748-4aa3-ad92-88bdee306e26","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"6aba968d-1c77-41a4-adc3-0c546d6cb0d6","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"8e6655eb-83c4-4cb7-a975-9262c8b2757c","IsCreationKey":false,"Key":4.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"1e822cd0-baa7-4ba2-8040-521805a1bf42","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"02d024b1-d4f0-4113-ba5b-9dcb20805c75","IsCreationKey":false,"Key":5.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"bb287467-92d1-4515-a5da-e60e421c0632","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"307d0a27-03cc-41b8-8ebc-77ee39c35fee","IsCreationKey":false,"Key":6.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a8e653e0-7b08-4367-bfd8-a5b3c335658e","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"7124e05e-265e-41ea-ae20-2e22f196f788","IsCreationKey":false,"Key":7.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"9bf43ea6-55b7-49a2-a8f1-00b469eeb72c","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"8e91dc7a-2c50-48d7-a886-17d0fced43cf","IsCreationKey":false,"Key":8.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"706d0186-c509-42f8-8529-dd7408ab5410","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"69082938-61f8-43fe-9985-c481cae9fcd1","IsCreationKey":false,"Key":9.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ce40f439-9333-49dd-b0ef-e94b255aba48","path":"sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy",},},},"Disabled":false,"id":"7a8301fc-a260-4054-bd72-df152a9cf85d","IsCreationKey":false,"Key":10.0,"Length":1.0,"Stretch":false,},
-          ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
+      {
+        "$GMSpriteFramesTrack": "",
+        "builtinName": 0,
+        "events": [],
+        "inheritsTrackColour": true,
+        "interpolation": 1,
+        "isCreationTrack": false,
+        "keyframes": {
+          "$KeyframeStore<SpriteFrameKeyframe>": "",
+          "Keyframes": [
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "86702c5e-b3e7-43f9-bda9-2e22bf0625c4",
+                    "path": "sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "bc04fcb4-6e40-4a20-be69-5027ae46e8fa",
+              "IsCreationKey": false,
+              "Key": 0,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3bf280b2-e0f4-43e9-a047-1a174e5f3960",
+                    "path": "sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "0bdc42af-caef-44de-b2d7-1e55ba2d3ad6",
+              "IsCreationKey": false,
+              "Key": 1,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0c8233d7-1c65-4570-a986-d692055ed2e4",
+                    "path": "sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "1986befc-138b-4991-8cb4-9a1a21211680",
+              "IsCreationKey": false,
+              "Key": 2,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2bba07a8-b437-4c8e-b2d8-695b8f1995fa",
+                    "path": "sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "61adf5c8-6b8f-4ae7-8ee2-e4d60aa05769",
+              "IsCreationKey": false,
+              "Key": 3,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "40752d2f-6bc1-4589-b028-723956e6a842",
+                    "path": "sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "b969584c-93b5-4cb7-97d4-2dfafbef72b0",
+              "IsCreationKey": false,
+              "Key": 4,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e0bdb998-2771-4663-a8f8-e1664435a1cb",
+                    "path": "sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "8145367e-1676-4f9c-9974-a80c075f1eaa",
+              "IsCreationKey": false,
+              "Key": 5,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a175ef74-f5b0-4e49-a0a1-4f591c91f771",
+                    "path": "sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "52ecf6a3-c05f-43cb-8886-1e4f336b5135",
+              "IsCreationKey": false,
+              "Key": 6,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "757fff68-b56c-4967-a7b4-3dac4079607e",
+                    "path": "sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "5b301c59-9b3f-4a3d-9f21-38043ee2054a",
+              "IsCreationKey": false,
+              "Key": 7,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "603564be-3ef0-41a3-888c-7335ed1cd303",
+                    "path": "sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "1dbef9d7-7d9a-4f34-8144-0faeb86d8f69",
+              "IsCreationKey": false,
+              "Key": 8,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a26b32ee-7b65-4ec9-a729-958889d8a9d9",
+                    "path": "sprites/sprInvLaserCrystalDead/sprInvLaserCrystalDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "68292427-be48-49d5-9932-348f5dec4fed",
+              "IsCreationKey": false,
+              "Key": 9,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            }
+          ],
+          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
+          "resourceVersion": "2.0"
+        },
+        "modifiers": [],
+        "name": "frames",
+        "resourceType": "GMSpriteFramesTrack",
+        "resourceVersion": "2.0",
+        "spriteId": null,
+        "trackColour": 0,
+        "tracks": [],
+        "traits": 0
+      }
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
-    "volume": 1.0,
+    "visibleRange": null,
+    "volume": 1,
     "xorigin": 24,
-    "yorigin": 24,
+    "yorigin": 24
   },
   "swatchColours": null,
   "swfPrecision": 2.525,
   "textureGroupId": {
     "name": "Default",
-    "path": "texturegroups/Default",
+    "path": "texturegroups/Default"
   },
   "type": 0,
   "VTile": false,
-  "width": 48,
+  "width": 48
 }

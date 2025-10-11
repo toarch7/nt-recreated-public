@@ -45,10 +45,13 @@ if os_type == os_android && check {
         directory_create(game_directory)
     }
 }
-else game_directory = ""
+else {
+	game_directory = string_replace_all(game_save_id, "//", "/")
+}
 
-playerinstance = undefined
-instance_create(0, 0, UberCont)
+my_player = undefined
+
+with instance_create(0, 0, UberCont) scrInitPostGamestart()
 
 //
 	var info = os_get_info(),
@@ -82,7 +85,7 @@ if loading {
 
         cont = json_parse(buffer_read(buff, buffer_string)) // gamecont
 
-        playerinstances = json_parse(buffer_read(buff, buffer_string)) // playerinstances
+        global.__playerinstance_list = json_parse(buffer_read(buff, buffer_string)) // global.__playerinstance_list
 
         player = json_parse(buffer_read(buff, buffer_string)) // player
 
@@ -100,7 +103,7 @@ if loading {
         skills = ds_list_create()
         ds_list_read(skills, cont.skills)
 
-        KeyCont.players = 1
+        player_count = 1
 
         instance_create(0, 0, SpiralCont)
 		

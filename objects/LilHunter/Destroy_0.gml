@@ -49,4 +49,4 @@ if instance_exists(Player) {
 	}
 }
 
-scrAchievement(32)
+scrAchievementUnlock(32)

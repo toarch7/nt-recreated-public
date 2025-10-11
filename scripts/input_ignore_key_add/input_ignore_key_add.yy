@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "input_ignore_key_add",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Other",
-    "path": "folders/Extensions/Input/Other.yy",
+  "$GMScript":"v1",
+  "%Name":"input_ignore_key_add",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"input_ignore_key_add",
+  "parent":{
+    "name":"Other",
+    "path":"folders/Extensions/Input/Other.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

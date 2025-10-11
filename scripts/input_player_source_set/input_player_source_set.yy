@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "input_player_source_set",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Players",
-    "path": "folders/Extensions/Input/Players.yy",
+  "$GMScript":"v1",
+  "%Name":"input_player_source_set",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"input_player_source_set",
+  "parent":{
+    "name":"Players",
+    "path":"folders/Extensions/Input/Players.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

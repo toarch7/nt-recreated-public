@@ -1,88 +1,353 @@
 {
-  "resourceType": "GMSprite",
-  "resourceVersion": "1.0",
-  "name": "sprWaterPlantDead",
+  "$GMSprite": "",
+  "%Name": "sprWaterPlantDead",
+  "bboxMode": 0,
   "bbox_bottom": 19,
   "bbox_left": 4,
   "bbox_right": 17,
   "bbox_top": 0,
-  "bboxMode": 0,
-  "collisionKind": 0,
+  "collisionKind": 1,
   "collisionTolerance": 0,
   "DynamicTexturePage": false,
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"cba5392c-25b0-4d9d-90cb-b821a38f76db",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"722b8017-a366-43bf-a2b6-c63965c52f4e",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"0f8ac500-069f-4d0a-8d7c-56cb00b45873",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"113da4cd-9191-4fc1-a8e0-8fd2b6df47ff",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"d09f8ada-e8d6-49c1-bd2f-b3de3748880f",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"a3aa408a-73c2-4a22-b0e1-d7e2bf3cf343",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"27645f25-0cfd-4c27-be76-4df13a233ec2",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"945f33ab-9780-49de-a1d4-fc1d840a83e9",},
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "cba5392c-25b0-4d9d-90cb-b821a38f76db",
+      "name": "cba5392c-25b0-4d9d-90cb-b821a38f76db",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "722b8017-a366-43bf-a2b6-c63965c52f4e",
+      "name": "722b8017-a366-43bf-a2b6-c63965c52f4e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "0f8ac500-069f-4d0a-8d7c-56cb00b45873",
+      "name": "0f8ac500-069f-4d0a-8d7c-56cb00b45873",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "113da4cd-9191-4fc1-a8e0-8fd2b6df47ff",
+      "name": "113da4cd-9191-4fc1-a8e0-8fd2b6df47ff",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "d09f8ada-e8d6-49c1-bd2f-b3de3748880f",
+      "name": "d09f8ada-e8d6-49c1-bd2f-b3de3748880f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "a3aa408a-73c2-4a22-b0e1-d7e2bf3cf343",
+      "name": "a3aa408a-73c2-4a22-b0e1-d7e2bf3cf343",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "27645f25-0cfd-4c27-be76-4df13a233ec2",
+      "name": "27645f25-0cfd-4c27-be76-4df13a233ec2",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "945f33ab-9780-49de-a1d4-fc1d840a83e9",
+      "name": "945f33ab-9780-49de-a1d4-fc1d840a83e9",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    }
   ],
   "gridX": 0,
   "gridY": 0,
   "height": 24,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"43311ee0-95c3-442a-a240-c63c9543ed3c","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {
+      "$GMImageLayer": "",
+      "%Name": "43311ee0-95c3-442a-a240-c63c9543ed3c",
+      "blendMode": 0,
+      "displayName": "default",
+      "isLocked": false,
+      "name": "43311ee0-95c3-442a-a240-c63c9543ed3c",
+      "opacity": 100,
+      "resourceType": "GMImageLayer",
+      "resourceVersion": "2.0",
+      "visible": true
+    }
   ],
+  "name": "sprWaterPlantDead",
   "nineSlice": null,
   "origin": 4,
   "parent": {
     "name": "Prop",
-    "path": "folders/Sprites/Prop.yy",
+    "path": "folders/Sprites/Prop.yy"
   },
   "preMultiplyAlpha": false,
+  "resourceType": "GMSprite",
+  "resourceVersion": "2.0",
   "sequence": {
-    "resourceType": "GMSequence",
-    "resourceVersion": "1.4",
-    "name": "",
+    "$GMSequence": "v1",
+    "%Name": "",
     "autoRecord": true,
     "backdropHeight": 1080,
     "backdropImageOpacity": 0.5,
     "backdropImagePath": "",
     "backdropWidth": 1920,
-    "backdropXOffset": 0.0,
-    "backdropYOffset": 0.0,
-    "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "events": {
+      "$KeyframeStore<MessageEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 8.0,
+    "length": 8,
     "lockOrigin": false,
-    "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "moments": {
+      "$KeyframeStore<MomentsEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "name": "",
     "playback": 1,
-    "playbackSpeed": 1.0,
+    "playbackSpeed": 1,
     "playbackSpeedType": 1,
+    "resourceType": "GMSequence",
+    "resourceVersion": "2.0",
     "showBackdrop": true,
     "showBackdropImage": false,
     "timeUnits": 1,
     "tracks": [
-      {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"cba5392c-25b0-4d9d-90cb-b821a38f76db","path":"sprites/sprWaterPlantDead/sprWaterPlantDead.yy",},},},"Disabled":false,"id":"950b6ea1-66d7-4d7d-9568-ac244e166a36","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"722b8017-a366-43bf-a2b6-c63965c52f4e","path":"sprites/sprWaterPlantDead/sprWaterPlantDead.yy",},},},"Disabled":false,"id":"cae489fe-92f2-464c-9356-8bfe6d8c12a6","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"0f8ac500-069f-4d0a-8d7c-56cb00b45873","path":"sprites/sprWaterPlantDead/sprWaterPlantDead.yy",},},},"Disabled":false,"id":"18693fa1-c820-4714-9859-5dfecab856ee","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"113da4cd-9191-4fc1-a8e0-8fd2b6df47ff","path":"sprites/sprWaterPlantDead/sprWaterPlantDead.yy",},},},"Disabled":false,"id":"d13278e0-b9fc-4ac2-9c8f-c6da80a6201a","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"d09f8ada-e8d6-49c1-bd2f-b3de3748880f","path":"sprites/sprWaterPlantDead/sprWaterPlantDead.yy",},},},"Disabled":false,"id":"cec9ea8f-2074-4b8b-9957-72f9ba0c1e4c","IsCreationKey":false,"Key":4.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"a3aa408a-73c2-4a22-b0e1-d7e2bf3cf343","path":"sprites/sprWaterPlantDead/sprWaterPlantDead.yy",},},},"Disabled":false,"id":"9395db8a-26bb-4f42-b0c2-122233a7b685","IsCreationKey":false,"Key":5.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"27645f25-0cfd-4c27-be76-4df13a233ec2","path":"sprites/sprWaterPlantDead/sprWaterPlantDead.yy",},},},"Disabled":false,"id":"cb2b857c-2e99-4885-8b59-a86666bfc805","IsCreationKey":false,"Key":6.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"945f33ab-9780-49de-a1d4-fc1d840a83e9","path":"sprites/sprWaterPlantDead/sprWaterPlantDead.yy",},},},"Disabled":false,"id":"79fae0d6-e9c6-4c66-bc47-cb9297cb86bf","IsCreationKey":false,"Key":7.0,"Length":1.0,"Stretch":false,},
-          ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
+      {
+        "$GMSpriteFramesTrack": "",
+        "builtinName": 0,
+        "events": [],
+        "inheritsTrackColour": true,
+        "interpolation": 1,
+        "isCreationTrack": false,
+        "keyframes": {
+          "$KeyframeStore<SpriteFrameKeyframe>": "",
+          "Keyframes": [
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "cba5392c-25b0-4d9d-90cb-b821a38f76db",
+                    "path": "sprites/sprWaterPlantDead/sprWaterPlantDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "950b6ea1-66d7-4d7d-9568-ac244e166a36",
+              "IsCreationKey": false,
+              "Key": 0,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "722b8017-a366-43bf-a2b6-c63965c52f4e",
+                    "path": "sprites/sprWaterPlantDead/sprWaterPlantDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "cae489fe-92f2-464c-9356-8bfe6d8c12a6",
+              "IsCreationKey": false,
+              "Key": 1,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "0f8ac500-069f-4d0a-8d7c-56cb00b45873",
+                    "path": "sprites/sprWaterPlantDead/sprWaterPlantDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "18693fa1-c820-4714-9859-5dfecab856ee",
+              "IsCreationKey": false,
+              "Key": 2,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "113da4cd-9191-4fc1-a8e0-8fd2b6df47ff",
+                    "path": "sprites/sprWaterPlantDead/sprWaterPlantDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "d13278e0-b9fc-4ac2-9c8f-c6da80a6201a",
+              "IsCreationKey": false,
+              "Key": 3,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d09f8ada-e8d6-49c1-bd2f-b3de3748880f",
+                    "path": "sprites/sprWaterPlantDead/sprWaterPlantDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "cec9ea8f-2074-4b8b-9957-72f9ba0c1e4c",
+              "IsCreationKey": false,
+              "Key": 4,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "a3aa408a-73c2-4a22-b0e1-d7e2bf3cf343",
+                    "path": "sprites/sprWaterPlantDead/sprWaterPlantDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "9395db8a-26bb-4f42-b0c2-122233a7b685",
+              "IsCreationKey": false,
+              "Key": 5,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "27645f25-0cfd-4c27-be76-4df13a233ec2",
+                    "path": "sprites/sprWaterPlantDead/sprWaterPlantDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "cb2b857c-2e99-4885-8b59-a86666bfc805",
+              "IsCreationKey": false,
+              "Key": 6,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "945f33ab-9780-49de-a1d4-fc1d840a83e9",
+                    "path": "sprites/sprWaterPlantDead/sprWaterPlantDead.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "79fae0d6-e9c6-4c66-bc47-cb9297cb86bf",
+              "IsCreationKey": false,
+              "Key": 7,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            }
+          ],
+          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
+          "resourceVersion": "2.0"
+        },
+        "modifiers": [],
+        "name": "frames",
+        "resourceType": "GMSpriteFramesTrack",
+        "resourceVersion": "2.0",
+        "spriteId": null,
+        "trackColour": 0,
+        "tracks": [],
+        "traits": 0
+      }
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
-    "volume": 1.0,
+    "visibleRange": {
+      "x": 0,
+      "y": 0
+    },
+    "volume": 1,
     "xorigin": 12,
-    "yorigin": 12,
+    "yorigin": 12
   },
   "swatchColours": null,
   "swfPrecision": 2.525,
   "textureGroupId": {
     "name": "Default",
-    "path": "texturegroups/Default",
+    "path": "texturegroups/Default"
   },
   "type": 0,
   "VTile": false,
-  "width": 24,
+  "width": 24
 }

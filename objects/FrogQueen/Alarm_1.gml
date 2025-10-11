@@ -5,7 +5,7 @@ scrTarget()
 
 if instance_exists(target) && instance_exists(target) {
     if !collision_line(x, y, target.x, target.y, Wall, 0, 0) {
-        direction = ((target_direction + random(20)) - 10)
+        direction = ((mcr_target_direction + random(20)) - 10)
     } else direction = random_angle
 
     if random(4) < 1 {

@@ -1,4 +1,4 @@
-if global.desktop
+if is_desktop
 	exit
 
 var mx = device_mouse_x_to_gui(event_data[? "touch"])

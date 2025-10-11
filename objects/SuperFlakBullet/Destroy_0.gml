@@ -9,8 +9,10 @@ repeat 5 {
     ang += 72
 }
 
-with instance_create(x, y, BulletHit)
-sprite_index = sprSuperFlakDestroy
+with instance_create(x, y, BulletHit) {
+	sprite_index = other.sprite_index
+	image_index = 2
+}
 
 repeat(6) {
     with instance_create(x, y, Smoke)

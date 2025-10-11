@@ -1,9 +1,9 @@
 max_hp = 1000
 canbreak = 0
 
-spr_idle = sprNothingPillar
-spr_hurt = sprNothingPillar
-spr_dead = sprNothingPillarDead
+spr_idle = sprThroneStatue
+spr_hurt = sprThroneStatue
+spr_dead = sprThroneStatueDead
 
 size = 1
 

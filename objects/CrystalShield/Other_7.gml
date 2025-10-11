@@ -3,10 +3,10 @@ if sprite_index == spr_disappear {
         with creator {
             repeat 6 + irandom(3) {
                 with instance_create(x, y, AnimParticle) {
-                    sprite_index = sprCrystalTBTrail
+                    sprite_index = sprCrystTrail
 
                     if other.bskin {
-                        sprite_index = sprCrystalBTBTrail
+                        sprite_index = sprCrystTrailB
                     }
 
                     image_speed = 0.4

@@ -10,7 +10,7 @@ function load_custom_area_colors(path) {
         }
     }
 	catch (e) {
-        printc("[!!!] Failed to load custom background colors: " + e.message, c_red)
+        scr_log_push("[!!!] Failed to load custom background colors: " + e.message, c_red)
         status = 1
     }
 

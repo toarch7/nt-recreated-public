@@ -45,4 +45,4 @@ if (ypos <= 0 or ypos >= max_height) && speed > 0
 x = 0
 y = 0
 
-camera_set_pos(0, 0)
+scr_camera_set_position(0, 0)

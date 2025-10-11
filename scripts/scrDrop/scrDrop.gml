@@ -7,7 +7,7 @@ function scrDrop(argument0, argument1) {
     if !instance_exists(player) or !instance_exists(id) exit
 	
     //roll
-	var seed = self[$ "dropseed"] ?? rng_next_int(RNGSlot.Pickups)
+	var seed = self[$ "dropseed"] ?? rng_next_int(RNGStates.Pickups)
 	
     random_set_seed(seed)
 	

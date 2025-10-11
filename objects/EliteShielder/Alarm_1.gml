@@ -3,7 +3,7 @@ scrTarget()
 
 if instance_exists(target) {
     if !collision_line(x, y, target.x, target.y, Wall, 0, 0) {
-        gunangle = target_direction
+        gunangle = mcr_target_direction
         scrRight(1)
 
         if (random(4) < 3) && ((freeze > 40) && (point_distance(x, y, target.x, target.y) < 150)) {
@@ -23,8 +23,8 @@ if instance_exists(target) {
             walk = 10 + random(10)
             if freeze < 40 alarm[1] += random(30)
 
-            if point_distance(x, y, target.x, target.y > 64) direction = target_direction + random_range(-25, 25)
-            else direction = target_direction + 180 + random_range(-45, 45)
+            if point_distance(x, y, target.x, target.y > 64) direction = mcr_target_direction + random_range(-25, 25)
+            else direction = mcr_target_direction + 180 + random_range(-45, 45)
         }
     } else if random(3) < 1 {
         gunangle = random_angle

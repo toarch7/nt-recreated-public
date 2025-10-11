@@ -10,8 +10,8 @@ spr_dead = sprGruntDead
 
 event_inherited()
 
-snd_hurt = sndGruntHurt
-snd_dead = sndGruntDead
+snd_hurt = sndGruntHurtM
+snd_dead = sndGruntDeadM
 
 male = 1
 
@@ -21,7 +21,7 @@ if irandom(1) {
     snd_play_hit_big(sndGruntEnterF, 0.2)
     male = 0
 } else {
-    snd_play_hit_big(sndGruntEnter, 0.2)
+    snd_play_hit_big(sndGruntEnterM, 0.2)
 }
 
 if GameCont.area == 101 {

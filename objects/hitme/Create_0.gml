@@ -16,4 +16,4 @@ if !isset("spr_fire") spr_fire = -1
 if !isset("index") index = -1
 
 if BruteSync
-	net_index = irandom(UINT_MAX)
+	netid = irandom(UINT_MAX)

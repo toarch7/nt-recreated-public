@@ -1,3 +1,5 @@
+/// @description Post-generation cleanup
+
 if instance_exists(CharSelect) {
     with RadChest instance_destroy(id, 0)
 }

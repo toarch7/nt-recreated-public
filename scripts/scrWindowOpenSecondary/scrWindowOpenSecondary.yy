@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrWindowOpenSecondary",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrWindowOpenSecondary",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

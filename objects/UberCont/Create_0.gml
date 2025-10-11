@@ -1,7 +1,6 @@
-#macro GAME_VERSION "b2.6.2"
-#macro GAME_BUILD 2620
+#macro GAME_VERSION "beta-3.0.0"
+#macro GAME_BUILD 3000
 #macro BETA true
-
 
 opt_fulscrn = 1
 opt_fitscrn = 1
@@ -16,17 +15,15 @@ font = fntM1
 big_font = fntBig
 
 draw_set_font(font)
-
+device_mouse_dbclick_enable(0)
+mp_potential_settings(90, 5, 5, 0)
 
 global.string_split_list = ds_list_create()
+
 pauseimg = -1
-
-//VERSION STUFF ETC.
 version = GAME_VERSION
+public = true
 
-public = !global.desktop
-
-//DEBUG STUFF
 scrn = 0
 scrn_take = 0
 
@@ -43,14 +40,16 @@ saving_index = 0
 mainsound = audio_emitter_create()
 mainvol = 1
 
+// non-public when running through GameMaker IDE
+if GM_build_type == "run" {
+	public = false
+}
+
 audio_emitter_falloff(mainsound, 100, 300, 1)
 
-if !is_struct(playerinstance)
-	playerinstance = new PlayerInstance()
+if is_undefined(my_player) scr_playerinstances_reset_all()
 
 scrInit()
-
-scrWeapons()
 
 tot_time = save_get_value("data", "tot_time", 0)
 checksettings = save_get_value("etc", "checksettings", 0)
@@ -61,15 +60,7 @@ halloween = 0
 april_fools = 0
 birthday = 0
 
-ideal_width = view_width
-ideal_height = 240
-
-max_view_width = round(240 * (display_get_width() / display_get_height()))
-
-//set view size
 scrSetViewSize()
-
-cgot[0] = 1
 
 draw_unlock = 0
 unlock_text = ""
@@ -117,7 +108,7 @@ can_weekly = false
 
 leaderboards_allowed = false
 
-splat_index = 0
+splatindex = 0
 
 pausespr = -1
 
@@ -131,13 +122,20 @@ global.hardmode = 0
 
 dont_save = 0
 
+// restart countdown variable
 want_restart = 0
+// quit to menu countdown variable
 want_menu = 0
-want_menu2 = 0
-show_results = 0
+// quit to menu flag that tells the game to quit from the session
+// for more detail see `Vlambeer - Create` event
+want_quit_to_menu = false
+// if the leaderboards needs be shown after the run's end
+show_leaderboards_menu = false
+// indicates if the shown leaderboard will be for weeklies
+show_weekly_results_menu = false
 
 global.lis_walls_visible = ds_list_create()
-global.floor_screen = ds_list_create()
+global.list_floors_visible = ds_list_create()
 
 boss = 0
 bossintro = 0
@@ -146,53 +144,8 @@ bossx = 0
 insound = 0
 outsound = 0
 
-if cgot[3] scrAchievement(0)
-if cgot[4] scrAchievement(1)
-if cgot[5] scrAchievement(2)
-if cgot[6] scrAchievement(3)
-if cgot[7] scrAchievement(4)
-if cgot[8] scrAchievement(5)
-if cgot[9] scrAchievement(6)
-if cgot[10] scrAchievement(7)
-if cgot[11] scrAchievement(8)
-if cgot[12] scrAchievement(9)
-if cgot[14] scrAchievement(26)
-
-if cskingot[1] scrAchievement(10)
-if cskingot[2] scrAchievement(11)
-if cskingot[3] scrAchievement(13)
-if cskingot[4] scrAchievement(12)
-if cskingot[5] scrAchievement(14)
-if cskingot[6] scrAchievement(15)
-if cskingot[7] scrAchievement(16)
-if cskingot[8] scrAchievement(17)
-if cskingot[9] scrAchievement(18)
-if cskingot[10] scrAchievement(19)
-if cskingot[11] scrAchievement(20)
-if cskingot[12] scrAchievement(21)
-
-var all_have_weps = 1
-
-for (var i = 1; i <= 12; i++) {
-    if cwep[i] == race_swep[i]
-        all_have_weps = false
-
-    if !(cwep[i] == wep_golden_revolver && i == 6) && wep_gold[cwep[i]]
-        scrAchievement(24)
-
-    if cwep[i] == wep_golden_nuke_launcher or cwep[i] == wep_golden_disc_gun
-        scrAchievement(25)
-	
-	if cbst_loop[i] >= 3 && !opt_cheats {
-		opt_cheats = save_set_value("cheats", "unlocked", true)
-	}
-}
-
-if all_have_weps scrAchievement(15)
-
-if hardgot {
-    scrAchievement(39)
-}
+// check for potential achievement sync-up
+scrUnlocksCharacterStats()
 
 gamepad_set_axis_deadzone(0, 0.1)
 
@@ -214,7 +167,7 @@ lastinputframe = 0
 touch_duration = [0, 0, 0, 0]
 volqueue = -1
 
-global.time = 0
+current_frame = 0
 
 global.crownpick = 1
 
@@ -231,12 +184,10 @@ load_resourcepacks()
 
 show_crosshair = true
 
-if global.steamdeck
+if is_steamdeck
 	show_crosshair = false
 
 if MultiplayerConfig
-	open_two_windows(true)
+	scrWindowOpenSecondary(true)
 
 global.seed = random_get_seed()
-
-scrAuthorizationInit()

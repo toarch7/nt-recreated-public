@@ -1,10 +1,11 @@
-if !instance_exists(Player)
-	scrGamemodePlaybuttons()
+if instance_exists(DailyList) exit
 
+if !instance_exists(Player) scrDrawGameModeIndication()
 
-// loadout
+// render loadout
 event_user(1)
 
+//
 if UberCont.opt_practice {
 	var py = 48
 	
@@ -15,7 +16,7 @@ if UberCont.opt_practice {
 	
 	draw_set_color(seed_pointed ? c_white : c_uigray)
 	
-	draw_set_valign(fa_center)
+	draw_set_valign(fa_middle)
 	
 	draw_text_shadow(4, py + 4 + seed_pointed, "CUSTOM SEED")
 	
@@ -31,32 +32,38 @@ if UberCont.opt_practice {
 			seed_prompt = get_string_async("Change seed", seed_text != "random" ? seed_text : "")
 		}
 		
-		if !seed_pointed
+		if !seed_pointed {
 			snd_play(sndHover)
+		}
 		
 		seed_pointed = true
 	}
 	else seed_pointed = false
 	
-	if seed_splat < (sprite_get_number(sprBossNameSplat) - 1)
+	if seed_splat < (sprite_get_number(sprBossNameSplat) - 1) {
 		seed_splat ++
+	}
 }
-// hint
-if hint != "" {
-    var txt = string_hash_to_newline(loc(string_upper(hint)))
+
+//
+if string_length(unlock_hint) {
+    var _message = string_hash_to_newline(loc(string_upper(unlock_hint)))
 	
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
-    
-	var w = string_width(txt) / 2 + 8,
-		h = string_height(txt) / 2 + 8
+	draw_align(fa_center, fa_middle)
+	
+	var _width = string_width(_message) / 2 + 8 + unlock_hint_pop,
+		_height = string_height(_message) / 2 + 8,
+		_xpos = gui_w div 2, _ypos = gui_h - 30
 	
     draw_set_colour(c_tooltip)
-    draw_roundrect_ext(view_width / 2 + w, view_height - 30 + h, view_width / 2 - w, view_height - 30 - h, 4, 4, 0)
-    
+    draw_roundrect_ext(
+		_xpos - _width, _ypos - _height,
+		_xpos + _width, _ypos + _height, 4, 4, 0)
+	
 	draw_set_color(c_white)
-	draw_text_shadow(view_width / 2, view_height - 30, txt)
-
-    draw_set_valign(fa_top)
-    draw_set_halign(fa_left)
+	draw_text_nt(_xpos, _ypos + unlock_hint_pop, _message)
+	
+	draw_align(fa_center, fa_middle)
+	
+	unlock_hint_pop = approach(unlock_hint_pop, 0, timescale)
 }

@@ -1,6 +1,6 @@
 function scrMenuButtonName(spr = sprite_index, img = image_index) {
     switch spr {
-        case sprMenuButton:
+        case sprMainMenuButtons:
             switch img {
                 case 0:
                     return "PLAY"
@@ -30,7 +30,7 @@ function scrMenuButtonName(spr = sprite_index, img = image_index) {
             }
             break
 
-        case sprBigNames:
+        case sprBigName:
         case sprBigNameCentered:
         case sprBigNameCenteredB:
             switch img {
@@ -71,7 +71,7 @@ function scrMenuButtonName(spr = sprite_index, img = image_index) {
             }
             break
 
-        case sprPauseButtons:
+        case sprPauseButton:
             switch img {
                 case 0:
                     return "MENU"
@@ -92,7 +92,7 @@ function scrMenuButtonName(spr = sprite_index, img = image_index) {
             }
             break
 
-        case sprOptionButtons:
+        case sprOptionsButtons:
             switch img {
                 case 0:
                     return "AUDIO"
@@ -139,16 +139,16 @@ function scrMenuButtonName(spr = sprite_index, img = image_index) {
 			
 			break
 		
-		case sprGameOverResults:
+		case sprGameOverResult:
 			return "RESULTS"
 		
-		case sprTextLevel:
+		case sprLevelUpText:
 			return "LEVEL UP"
 		
-		case sprTextCrown:
+		case sprPickCrownText:
 			return "PICK A CROWN"
 		
-		case sprTextUltra:
+		case sprLevelUltraText:
 			return "LEVEL ULTRA"
     }
 

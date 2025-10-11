@@ -1,22 +1,3 @@
-# Ignore all resources except ones unique to recreation
-
-*.png
-
-sounds/*/*
-!sounds/*/*.yy
-
-!sprites/sprMobileControlAbility/*
-!sprites/sprMobileControlCorners/*
-!sprites/sprMobileControlCornersSmaller/*
-!sprites/sprMobileControlCrosshair/*
-!sprites/sprMobileVolumeControl/*
-!sprites/sprMobileVolumeControlRU/*
-!sprites/sprButtonDiscord/*
-!sprites/sprbuttonachievements/*
-!sprites/sprite1337/*
 
 scripts/SECRETS/SECRETS.gml
-
-*.dll
-
-merge-tool.js
+tmp

@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if KeyCont.press_spec[p] = 1 {
+if KeyCont.press_spec[index] = 1 {
 
     if instance_exists(creator) {
         x = creator.x

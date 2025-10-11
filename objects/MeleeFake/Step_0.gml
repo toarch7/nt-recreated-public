@@ -1,75 +1,22 @@
 if lockstep_stop
 	exit
 
+
 scrTarget()
-if instance_exists(target) {
-    if point_distance(x, y, target.x, target.y) < 64 and !instance_exists(Portal) and collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
-        raddrop = 8
-        meleedamage = 0
-        size = 1
-        image_speed = 0.4
 
-        spr_idle = sprMeleeIdle
-        spr_walk = sprMeleeWalk
-        spr_hurt = sprMeleeHurt
-        spr_dead = sprMeleeDead
+var _wakeup_call;
 
-        if GameCont.area == 105 {
-            spr_idle = sprJungleAssassinIdle
-            spr_hurt = sprJungleAssassinHurt
-            spr_dead = sprJungleAssassinDead
-            spr_walk = sprJungleAssassinWalk
-        }
+if hp < max_hp || !instance_number(enemy) || (instance_exists(target) && scrTargetVisible(target, 64, true) && !instance_exists(Portal)) {
+	_wakeup_call = true
+}
+else _wakeup_call = false
 
-        //behavior
-        walk = 0
-        gunangle = random_angle
-        alarm[1] = 90 + random(90)
-        wepangle = choose(-140, 140)
-        wepflip = 1
-        wkick = 0
-        instance_change(MeleeBandit, false)
-        snd_hurt = sndAssassinHit
-        snd_dead = sndAssassinDie
-    }
+if _wakeup_call {
+	var _object = self.__get_spawn_enemy_object()
+	snd_play(sndAssassinGetUp)
+	instance_create(x, y, _object)
+	instance_destroy(id, false)
+	exit
 }
 
-if image_index < 1 {
-    image_index += random(0.02)
-} else {
-    image_index += 0.4
-}
-
-if instance_number(enemy) = 0 or hp < max_hp {
-    raddrop = 8
-    meleedamage = 0
-    size = 1
-    image_speed = 0.4
-
-    spr_idle = sprMeleeIdle
-    spr_walk = sprMeleeWalk
-    spr_hurt = sprMeleeHurt
-    spr_dead = sprMeleeDead
-
-    if GameCont.area == 105 {
-        spr_idle = sprJungleAssassinIdle
-        spr_hurt = sprJungleAssassinHurt
-        spr_dead = sprJungleAssassinDead
-        spr_walk = sprJungleAssassinWalk
-    }
-
-    wkick = 0
-
-    //behavior
-    walk = 0
-    gunangle = random_angle
-    alarm[1] = 90 + random(90)
-    wepangle = choose(-140, 140)
-    wepflip = 1
-    wkick = 0
-    instance_change(MeleeBandit, false)
-    snd_hurt = sndAssassinHit
-    snd_dead = sndAssassinDie
-}
-
-if object_index != MeleeFake snd_play(sndAssassinGetUp)
+scrFirstFrameAnim(0.4)

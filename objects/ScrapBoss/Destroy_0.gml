@@ -9,9 +9,9 @@ event_inherited()
 with instance_nearest(x, y, Corpse)
 instance_destroy()
 
-scrAchievement(31)
+scrAchievementUnlock(31)
 
 if UberCont.april_fools {
     UberCont.cgot[13] = 1
-    show_unlock_popup("@wBIG DOG UNLOCKED@s#FOR BEATING BIG DOG")
+    scrShowUnlockPopup("@wBIG DOG UNLOCKED@s#FOR BEATING BIG DOG")
 }

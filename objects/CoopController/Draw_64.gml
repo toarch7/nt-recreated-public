@@ -20,7 +20,7 @@ str += string(inputs[1][$ netframe]) + "\n"
 draw_set_font(fntSmall)
 draw_set_halign(fa_left)
 
-draw_text_shadow(72, 24, str)
+draw_text_shadow(72, 10, str)
 
 if desynced {
 	draw_set_color(c_red)
@@ -54,7 +54,7 @@ if !instance_exists(CoopMenu) {
 	scrDrawAlignCenter()
 	
     if !global.is_server {
-		var host = player_get(0)
+		var host = scr_playerinstance_find(0)
 		
 		if host != undefined
 			draw_text_shadow(w / 2, 4, string(round(host.latency)) + "ms")
@@ -102,6 +102,6 @@ if global.is_server {
 		packet_write(buffer_u8, index)
         packet_send()
 		
-		network_lock()
+		scrGameLockstep()
 	}
 }

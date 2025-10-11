@@ -1,9 +1,6 @@
-/// @description rng_next_int(slot)
-/// @param slot
-function rng_next_int(argument0) {
-    global.rng_state[argument0] = (rng_a * global.rng_state[argument0] + rng_c) % rng_m;
-    return global.rng_state[argument0]
-
-
-
+/// @description rng_next_int
+/// @param {Enum.RNGStates} state
+function rng_next_int(_state) {
+    global.rng_state[_state] = (rng_a * global.rng_state[_state] + rng_c) % rng_m;
+    return global.rng_state[_state]
 }

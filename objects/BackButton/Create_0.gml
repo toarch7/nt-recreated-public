@@ -1,3 +1,3 @@
 hover = 0
-
-netindex_set()
+image_speed = 0
+scr_network_instance()

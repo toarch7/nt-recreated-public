@@ -1,184 +1,142 @@
+var _area = GameCont.area,
+	_subarea = GameCont.subarea,
+	_loops = GameCont.loops,
+	_actual_loops = global.hardmode ? (_loops - 1) : _loops,
+	_is_throne_arena = (_area == area_palace && _subarea == 3)
+
 scrCreateMobileControls()
 
-with MusCont
-	alarm[11] = 2
+with MusCont alarm[11] = 2
+with SubTopCont alarm[0] = 1
 
-random_set_seed(global.seed)
-
-with SubTopCont {
-    alarm[0] = 1
-}
-
-with Player {
-	if is_me {
-	    with MobileUI {
-	        player = other.id
-	    }
-		
-	    if GameCont.area == 7 && GameCont.subarea != 3 {
-	        repeat 4 {
-	            instance_create(x, y, IDPDSpawn)
-	        }
-	    }
-	}
-}
+random_set_seed(GameCont.levseed)
 
 if instance_exists(Player) {
     with Player {
-        if race == 1 && ultra_get(2) { //GUN WARRANT
-            infammo = 210
-        }
-
-        if race == 10 && ultra_get(1) { // PERSONAL GUARD
-			var i = 0
+		if is_me {
+			with MobileUI player = other.id
+		}
+		
+		if race == Race.Fish {
+			var _gunwarrant = scrUltraCheck(race, UltraSkill.GunWarrant)
+			if _gunwarrant infammo = 7 * _gunwarrant * 30
+		}
+		
+        if race == Race.Rebel {
+			var _personal_guard = scrUltraCheck(race, UltraSkill.PersonalGuard)
 			
-            repeat 2 {
-                with instance_create(10016 + orandom(1), 10016 + orandom(1), Ally) {
-					alarm[5 + i] = 5 + i * 15
-                    creator = other.id
-                }
+			if _personal_guard {
+				var _index = 0
 				
-				i ++
-            }
+	            repeat (2 * _personal_guard) {
+	                with instance_create(x, y, Ally) {
+						motion_add(random_angle, 1)
+						creator = other.id
+					
+						if _index < 2 {
+							alarm[5 + _index] = 10 + _index * 15
+						}
+	                }
+				
+					_index ++
+	            }
+			}
         }
 
-        if skill_get(26) {
-            hammerheads = 25
+        if skill_get(mut_hammerhead) {
+            hammerhead_charges = 25
 
-            if race == 13 {
-                hammerheads = 100
+            if race == Race.BigDog {
+                hammerhead_charges = 100
             }
         }
 		
-		if race == 12 && is_me {
-			if player_pref(playerinstance, "rogue") && !save_get_value("etc", "rogue_tutorial", false)
+		if race == Race.Rogue && is_me {
+			if scr_player_pref(my_player, "rogue") && !save_get_value("etc", "rogue_tutorial", false)
 				instance_create(x, y, SwipeBombingTutorial)
 		}
 		
+		if _area == area_palace && _subarea != 3 && random(2) < 1 {
+	        repeat (4) instance_create(x, y, IDPDSpawn)
+	    }
+		
         if !instance_exists(Cinematic) {
-            view_xview = x - view_width / 2
-            view_yview = y - view_height / 2
+			scr_camera_set_position(x, y, fa_center, fa_middle)
         }
     }
 	
-	if UberCont.xmas && GameCont.area == 5 && (GameCont.loops - global.hardmode) == 0 {
+	if UberCont.xmas && _area == 5 && _actual_loops == 0 {
 		with instance_nearest(10016, 10016, enemy) {
 			if distance_to_point(10016, 10016) < 160 && !irandom(100) {
-				instance_create(x,	y, Yeti)
+				instance_create(x, y, Yeti)
 				instance_destroy(id, 0)
 			}
 		}
 	}
 }
 
-if GameCont.area == 5 && GameCont.subarea == 1 && skill_get(18) {
+if _area == 5 && _subarea == 1 && skill_get(mut_last_wish) {
     if instance_exists(prop) {
         with instance_furthest(10016, 10016, prop) {
             instance_change(IceFlower, 1)
         }
-    } else with instance_random(enemy) {
-        instance_create(x, y, IceFlower)
-        instance_destroy(id, 0)
     }
-}
-
-with enemy {
-	if place_meeting(x, y, Wall) {
-		var f = instance_nearest(x, y, Floor)
-		
-		if instance_exists(f) {
-			with f {
-				other.x = bbox_center_x
-				other.y = bbox_center_y
-			}
-		}
-		else if instance_number(enemy) > 1
-			instance_destroy(id, 0)
+	else {
+		with instance_random(enemy) {
+	        instance_create(x, y, IceFlower)
+	        instance_destroy(id, 0)
+	    }
 	}
 }
 
-if (GameCont.area == 7 && GameCont.subarea == 3) or GameCont.area == 0 or GameCont.area == 107 {
+if (_area == area_palace && _subarea == 3) || _area == area_campfire || _area == area_crib {
     with Wall {
-        if place_meeting(x, y, Floor)
-            instance_destroy()
+        if (place_meeting(x, y, Floor)) instance_destroy()
     }
 
     with chestprop {
         if object_index != GiantWeaponChest && object_index != GiantAmmoChest {
-            instance_destroy(id, 0)
+            instance_destroy(id, false)
         }
     }
 
-    with RadChest instance_destroy(id, 0)
-    with RadChestBig instance_destroy(id, 0)
+    instance_destroy(RadChest, false)
+    instance_destroy(RadChestBig, false)
+    instance_destroy(enemy, false)
 
-    if GameCont.area == 7 && GameCont.subarea == 3 {
+    if _area == area_palace && _subarea == 3 {
+		with UberCont {
+			if daily_run && !weekly_run {
+		        scrAchievementUnlock(Achievement.NOT_BAD)
+		    }
+		}
+		
         instance_create(10016, 8592, Carpet)
         instance_create(10016 - 32, 9984, WeaponChest)
         instance_create(10016 + 32, 9984, AmmoChest)
 		
-        if skill_get(28) {
-            instance_create(10016, 10016 - 32, choose(WeaponChest, RadChest, AmmoChest))
-        }
+        if skill_get(mut_open_mind) {
+			repeat GameCont.openminds {
+	            instance_create(10016, 10016 - 32, choose(WeaponChest, RadChest, AmmoChest))
+	        }
+		}
 		
-		with chestprop
-			speed = 0
-		
-        /*
-        instance_create(10016, 8592, NothingInactive)
-        instance_create(9856, 8912, BigGeneratorInactive)
-        instance_create(9856, 9072, BigGeneratorInactive)
-        instance_create(10176, 8912, BigGeneratorInactive)
-        instance_create(10176, 9072, BigGeneratorInactive)
-        
-        
-        for(yy = 9648; yy >= 9008; yy -= 160) {
-            instance_create(10112, yy, ThroneStatue)
-            instance_create(9920, yy, ThroneStatue)
-        }
-        */
-    }
-
-    with enemy
-    instance_destroy(id, 0)
-}
-
-if GameCont.area == 0 && instance_exists(Player) && (GameCont.loops - global.hardmode) == 1 {
-    var isfish = 0
-
-    with Player {
-        if race == 1 {
-            isfish = 1
-        }
-    }
-
-    if isfish {
-        with instance_create(10016, 10016, WepPickup) {
-            ammo = 0
-            wep = 115
-            curse = 0
-            name = wep_name[wep]
-            type = wep_type[wep]
-            sprite_index = wep_sprt[wep]
-            image_angle = random_angle
-        }
+		with (chestprop) speed = 0
     }
 }
 
-if GameCont.area == 1 && (GameCont.loops - global.hardmode) > 0 {
-    if GameCont.blacksword {
-        with instance_create(10016, 10016, WepPickup) {
-            ammo = 0
-            wep = 121
-            curse = 0
-            name = wep_name[wep]
-            type = wep_type[wep]
-            sprite_index = wep_sprt[wep]
-            image_angle = random_angle
-        }
-
-        GameCont.blacksword = 0
+if _area == area_campfire && instance_exists(Player) && _actual_loops == 1 {
+    repeat scrPlayerCountRace(Race.Fish) {
+		scrWeaponPickupCreate(10016, 10016, wep_guitar)
     }
+}
+
+if _area == area_desert && _actual_loops > 0 && GameCont.give_blacksword {
+	repeat GameCont.give_blacksword {
+		scrWeaponPickupCreate(10016, 10016, wep_black_sword)
+	}
+	
+	GameCont.give_blacksword = 0
 }
 
 with WepPickup {
@@ -186,12 +144,8 @@ with WepPickup {
     y = 10016
 }
 
-with ChestOpen
-instance_destroy()
-
-with SpiralCont {
-    instance_destroy()
-}
+instance_destroy(ChestOpen)
+instance_destroy(SpiralCont)
 
 while instance_number(IDPDSpawn) > 5 + GameCont.loops {
     with instance_nearest(10016 + orandom(480), 10016 + orandom(480), IDPDSpawn) {
@@ -199,77 +153,50 @@ while instance_number(IDPDSpawn) > 5 + GameCont.loops {
     }
 }
 
+// Unstuck enemies, I guess
+with enemy {
+	if place_meeting(x, y, Floor) continue
+	
+	var _floor = instance_nearest(bbox_center_x, bbox_center_y, Floor)
+		
+	if instance_exists(_floor) {
+		with _floor {
+			other.x = bbox_center_x
+			other.y = bbox_center_y
+		}
+	}
+	else if instance_number(enemy) > 1 {
+		instance_destroy(id, false)
+	}
+}
+
 with GameCont {
     enemies = instance_number(enemy)
 }
 
-with Wall {
-    if GameCont.area == 106 && GameCont.subarea != 3 {
-        if place_meeting(x, y, Floor) {
-            instance_destroy()
-        }
-    }
+if _area == area_hq && _subarea != 3 {
+	with Wall {
+	    if place_meeting(x, y, Floor) {
+	        instance_destroy()
+	    }
+	}
 }
 
-
-
-if GameCont.area == 0 && GameCont.loops {
-    with instance_create(10016, 10016, CampfireOff) {
-        if GameCont.race != 1 with instance_create(x, y - 36, Corpse) {
-            sprite_index = sprMutant1Dead
-            image_index = 5
-        }
-
-        if GameCont.race != 2 with instance_create(x, y + 36, Corpse) {
-            sprite_index = sprMutant2Dead
-            image_index = 5
-        }
-
-        if GameCont.race != 3 && UberCont.cgot[3] {
-            with instance_create(x + 42, y, Corpse) {
-                sprite_index = sprMutant3Dead
-                image_index = 5
-            }
-        }
-
-        if GameCont.race != 4 && UberCont.cgot[4] {
-            with instance_create(x - 42, y, Corpse) {
-                sprite_index = sprMutant4Dead
-                image_index = 5
-            }
-        }
-
-        for (var i = 5; i <= UberCont.racemax; i++) {
-            if !UberCont.cgot[i] or i == 6 or i == GameCont.race
-            continue
-
-            direction = random_angle
-
-            with instance_create(x, y, Corpse) {
-                sprite_index = asset_get_index("sprMutant" + string(i) + "Dead")
-                image_index = 5
-
-                move_contact_solid(other.direction, 48 + random(72))
-            }
-        }
-    }
+if _area == area_campfire && GameCont.loops > 0 {
+	scrCampfireMenuCreate(true)
 }
 
-if UberCont.halloween && GameCont.subarea == 1 && instance_exists(Bandit) {
+if UberCont.halloween && _subarea == area_desert && instance_exists(Bandit) {
     snd_play_hit_big(sndHalloweenWolf, 0.2)
 }
 
-with ProtoStatue {
-    if UberCont.weekly_run instance_destroy()
+if UberCont.weekly_run {
+	instance_destroy(ProtoStatue)
 }
 
+// Destroy clingy props
 with prop {
-	if distance_to_point(10016, 10016) < 96 && object_index != IceFlower
+	if distance_to_point(10016, 10016) <= 96 && object_index != IceFlower {
 		instance_destroy(id, 0)
-}
-
-if GameCont.area == 7 && GameCont.subarea == 3 {
-    if UberCont.daily_run && !UberCont.weekly_run {
-        scrAchievement(40)
-    }
+	}
 }

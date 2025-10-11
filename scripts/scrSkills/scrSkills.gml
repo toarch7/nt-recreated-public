@@ -26,22 +26,7 @@ function scrSkills() {
 
     skill_name[5] = "THRONE BUTT"
     skill_text[5] = "UPGRADES YOUR @wSPECIAL ABILITY"
-
-    if instance_exists(Player) && instance_exists(GameCont) {
-        var _tb = ""
-
-        if instance_exists(CoopController) {
-            with Player {
-                if _tb != ""
-                _tb += "#"
-                _tb += loc(race_name[race]) + " - " + loc(race_butt[race])
-            }
-        } else with Player _tb = loc(race_butt[race])
-
-        skill_text[5] = _tb
-    }
-
-    skill_msnd[5] = sndMutThroneButt
+	skill_msnd[5] = sndMutThroneButt
     skill_tips[5] = "sit on the throne"
 
     skill_name[6] = "LUCKY SHOT"
@@ -146,7 +131,7 @@ function scrSkills() {
 
     skill_name[26] = "HAMMER HEAD"
     skill_text[26] = "BREAK TROUGH LIMITED AMOUNT OF WALLS"
-    skill_msnd[26] = sndMutHammerHead
+    skill_msnd[26] = sndMutHammerhead
     skill_tips[26] = ""
 
     skill_name[27] = "STRONG SPIRIT"
@@ -165,4 +150,25 @@ function scrSkills() {
     skill_tips[29] = ""
 
     maxskill = 28
+	
+	if instance_exists(Player) && instance_exists(GameCont) {
+        var _thronebutt_text = ""
+		
+        if instance_exists(CoopController) {
+			with Player {
+				var _race_name = loc(scrRaceGetName(race)),
+					_butt_text = loc(scrRaceGetThroneButtDescription(race))
+				
+				_thronebutt_text = _race_name + " - " + _butt_text + "\n"
+			}
+			_thronebutt_text = string_trim_end(_thronebutt_text)
+        }
+		else {
+			with Player {
+				_thronebutt_text = loc(scrRaceGetThroneButtDescription(race))
+			}
+		}
+		
+        skill_text[mut_throne_butt] = _thronebutt_text
+    }
 }

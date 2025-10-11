@@ -37,9 +37,9 @@ function scrSwapWeps() {
 	
     drawempty = 30
 
-    if instance_exists(TutCont) && TutCont.pos == 2 && !TutCont.doin {
+    if instance_exists(TutCont) && TutCont.pos == 2 && !TutCont.step_complete {
         TutCont.alarm[0] = 30
-        TutCont.doin = 1
+        TutCont.step_complete = 1
     }
 	
 	if instance_exists(WepstickAttack) && index == global.index {

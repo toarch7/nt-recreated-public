@@ -1,20 +1,15 @@
-if lockstep_stop
-	exit
+/// @description Drawing
 
-var c = c_gray
+var _color = selected ? c_white : c_gray
 
-if selected
-	c = c_white
+can = scr_race_is_unlocked(race) || UberCont.weekly_run
 
-draw_sprite_ext(sprite_index, num, x, y + 48 - Menu.widescreen, 1, 1, 0, c, 1)
+draw_sprite_ext(can ? sprite_index : sprCharSelectLocked, race, x, y, 1, 1, 0, _color, 1)
 
-if !UberCont.cgot[num] && !UberCont.weekly_run {
-    sprite_index = sprCharSelectLocked
-    //draw_sprite_ext(sprCharSelectLocked,num,x,y+48 - Menu.widescreen, 1, 1, 0, c_gray, 1)
-    can = 0
+if can && race && !UberCont.ctot_dead[race] {
+    draw_sprite(sprNew, - 1, x - 5, y)
 }
-else can = 1
 
-if UberCont.cgot[num] && !UberCont.ctot_dead[num] && num != 0 {
-    draw_sprite(sprNew, - 1, x - 5, y + 40 - Menu.widescreen)
+if instance_exists(Menu) {
+	depth = Menu.depth - 1
 }

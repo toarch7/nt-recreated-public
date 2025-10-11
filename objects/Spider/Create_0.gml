@@ -10,7 +10,9 @@ spr_dead = sprSpiderDead
 
 event_inherited()
 
-snd_hurt = sndHitRock
+snd_hurt = sndSpiderHurt
+snd_dead = sndSpiderDead
+snd_mele = sndSpiderMelee
 
 //behavior
 walk = 0

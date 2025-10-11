@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndMutStrongSpirit",
+  "$GMSound": "",
+  "%Name": "sndMutStrongSpirit",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 2,
   "conversionMode": 0,
   "duration": 1.971,
+  "name": "sndMutStrongSpirit",
   "parent": {
     "name": "Sounds",
-    "path": "folders/Sounds.yy",
+    "path": "folders/Sounds.yy"
   },
   "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndMutStrongSpirit",
+  "soundFile": "sndMutStrongSpirit.ogg",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

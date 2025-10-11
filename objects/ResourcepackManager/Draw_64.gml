@@ -12,7 +12,7 @@ if error != "" {
 	var str = loc(error)
 	
 	if !error_active {
-		sound_play_pitch(sndCrownRandom, 0.6 + random(0.3))
+		snd_play(sndCrownRandom, 0.6 + random(0.3))
 		
 		error_active = true
 		time = 0
@@ -100,7 +100,7 @@ draw_set_color(c_white)
 
 if loaded {
 	if show_details && !downloading {
-		var num = sprite_get_number(sprLoadout) - 1
+		var num = sprite_get_number(sprLoadoutOpen) - 1
 		
 		if splat < num {
 			splat += 0.67
@@ -127,7 +127,7 @@ if loaded {
 		
 		draw_set_color(c_white)
 		
-		draw_sprite_ext(sprLoadout, splat, view_width / 3, view_height - 36, -1, 1, 0, c_white, 1)
+		draw_sprite_ext(sprLoadoutOpen, splat, view_width / 3, view_height - 36, -1, 1, 0, c_white, 1)
 		
 		event_user(2)
 	}
@@ -141,7 +141,7 @@ scrDrawAlignCenter()
 if downloading {
 	var side = " ~ "
 	
-	if global.time % 60 > 30
+	if current_frame % 60 > 30
 		side = "   "
 	
 	if downloaded {
@@ -184,7 +184,7 @@ if downloading {
 		}
 	}
 }
-else draw_bigname(view_width / 2 - (48 * browsing), 24, loc("RESOURCEPACKS"), c_uigray)
+else draw_text_bigname(view_width / 2 - (48 * browsing), 24, loc("RESOURCEPACKS"), c_uigray)
 
 if show_details {
 	if screenshot_view {

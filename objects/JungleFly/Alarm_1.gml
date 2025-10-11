@@ -11,13 +11,13 @@ if target {
             alarm[1] = 30
             rage = 0
 
-            gunangle = target_direction + random(6) - 3
+            gunangle = mcr_target_direction + random(6) - 3
         } else {
             if !rage {
                 rage = 1
             }
 
-            direction = target_direction + random(60) - 30
+            direction = mcr_target_direction + random(60) - 30
         }
     } else {
         rage = 0

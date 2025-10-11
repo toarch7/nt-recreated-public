@@ -11,4 +11,4 @@ snd_play_hit_big(sndNothing2DeadStart, 0.2)
 repeat 2
 scrDrop(100, 0)
 
-scrAchievement(34)
+scrAchievementUnlock(34)

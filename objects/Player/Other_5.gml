@@ -1,21 +1,23 @@
-if skill_get(27) && !can_spirit && !spirit {
-    can_spirit = 1
+if skill_get(mut_strong_spirit) {
+	if !can_spirit && !spirit {
+		can_spirit = true
+	}
 }
 
-snd_stop(sndCarLoop)
-
-with(JoystickMove) instance_destroy()
-with(JoystickAttack) instance_destroy()
-with(ButtonSwap) instance_destroy()
-with(ButtonActive) instance_destroy()
-with(ButtonAct) instance_destroy()
-
-if skill_get(25) && !GameCont.patient {
-    GameCont.skillpoints++
+if skill_get(mut_patience) && !GameCont.patient {
+    GameCont.skillpoints ++
 }
 
-if race == 15 {
-    frogcharge = 0
+if race == Race.Frog {
     snd_stop(sndFrogLoopButt)
     snd_stop(sndFrogLoop)
+    frogcharge = 0
 }
+
+instance_destroy(JoystickMove)
+instance_destroy(JoystickAttack)
+instance_destroy(ButtonSwap)
+instance_destroy(ButtonActive)
+instance_destroy(ButtonAct)
+
+snd_stop(sndCarLoop)

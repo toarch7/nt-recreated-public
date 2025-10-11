@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "rng_float",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "general seeding",
-    "path": "folders/Scripts/rng/general seeding.yy",
+  "$GMScript":"v1",
+  "%Name":"rng_float",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"rng_float",
+  "parent":{
+    "name":"RNG",
+    "path":"folders/Scripts/RNG.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

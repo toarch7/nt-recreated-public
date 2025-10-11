@@ -11,7 +11,8 @@ size = 1
 
 event_inherited()
 
-snd_hurt = sndHitRock
+snd_hurt = sndBigGeneratorHurt
+snd_dead = sndBigGeneratorBreak
 
 team = 1
 raddrop = 35

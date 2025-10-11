@@ -14,7 +14,7 @@ spr_walk = sprSaplingIdle
 spr_hurt = sprSaplingHurt
 spr_dead = sprSaplingHurt
 
-target = -1
+target = noone
 size = 1
 
 snd_hurt = sndHitFlesh
@@ -23,3 +23,5 @@ snd_mele = sndMaggotBite
 
 walk = 0
 alarm[0] = 30
+
+snd_play_hit(sndSaplingSpawn, 0.2)

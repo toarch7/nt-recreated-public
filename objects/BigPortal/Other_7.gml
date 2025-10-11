@@ -13,7 +13,7 @@ if sprite_index = sprBigPortalDisappear {
         bcurse = 0
     }
 
-    GameCont.level_end = 1
+    GameCont.is_level_ended = 1
 
     snd_stop(sndPortalLoop)
 

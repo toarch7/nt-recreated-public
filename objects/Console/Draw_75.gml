@@ -119,7 +119,7 @@ if os_type == os_android && (!read or global.console_active) {
     draw_set_alpha(1)
 
     draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
+    draw_set_valign(fa_middle)
     draw_text_shadow(view_width - 26, 28 + 12, "~")
     draw_set_halign(fa_left)
     draw_set_valign(fa_top)

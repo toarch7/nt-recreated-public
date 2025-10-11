@@ -16,7 +16,7 @@ if dodge {
 if instance_exists(Player) {
     if random(90) < 1 && instance_exists(target) {
         if point_distance(x, y, target.x, target.y) <= 64 {
-            direction = target_direction
+            direction = mcr_target_direction
         }
 
         dodge = 4

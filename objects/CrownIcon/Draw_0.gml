@@ -14,12 +14,15 @@ if !isset("appeary") {
 
 draw_set_color(c_uidark)
 
-draw_sprite_ext(sprite_index, crown, x, y + appeary - sign(selected), 1, 1, 0, qm(selected, c_white, c_gray), 1)
+draw_sprite_ext(sprite_index,
+	crown, x, y + appeary - sign(selected),
+1, 1, 0, selected ? c_white : c_gray, 1)
 
-draw_set_valign(fa_center)
 draw_set_halign(fa_center)
+draw_set_valign(fa_middle)
 
-txt2 = string("@w" + string(loc(crown_name[crown]))) + "#@s" + string(loc(crown_text[crown]))
+var txt2 = string("@w" + string(loc(crown_name[crown]))) + "#@s" + string(loc(crown_text[crown]))
+
 if selected && !appeary {
     draw_text_nt(view_width / 2 + 1, view_height - 61 - selected, txt2)
 }

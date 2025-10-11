@@ -7,12 +7,12 @@ if !visible
 if instance_exists(creator) {
 	var index = creator.index,
 		
-		inst = player_get(index),
+		inst = scr_playerinstance_find(index),
 		
 		cx = creator.x + ldrx(view_width * KeyCont.dis_fire[index], KeyCont.dir_fire[index]),
 		cy = creator.y + ldry(view_height * KeyCont.dis_fire[index], KeyCont.dir_fire[index])
 	
-	if is_mobile(index) && player_pref(inst, "rogue") {
+	if is_mobile(index) && scr_player_pref(inst, "rogue") {
 		if !KeyCont.activeforever[index] {
 			event_user(0)
 			KeyCont.activeforever[index] = false

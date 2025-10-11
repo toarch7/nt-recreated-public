@@ -1,45 +1,51 @@
 if lockstep_stop
 	exit
 
-var col = hover ? c_white : c_uigray,
-	name = scrMenuButtonName()
+var _color = hover ? c_white : c_uigray,
+	_button_name = scrMenuButtonName(),
+	_dx = x, _dy = y + appear
 
-y -= appear
-
-if loc_exists(name) {
-	var a = 0
+if appear != 2 {
+	if loc_exists(_button_name) {
+		// currently unused
+		var _angle = 0
+		
+		draw_set_halign(fa_center)
+		
+		draw_text_bigname(
+			_dx + sign(_angle) * 8,
+			_dy - 8,
+			loc(_button_name),
+			_color, _angle, 0.65)
+		
+		draw_set_halign(fa_left)
+	}
+	else {
+		// backdrop
+		draw_sprite_ext(sprite_index, image_index, _dx, _dy + 1, 1, 1, 0, c_black, 1)
+		draw_sprite_ext(sprite_index, image_index, _dx + 1, _dy + 1, 1, 1, 0, c_black, 1)
+		draw_sprite_ext(sprite_index, image_index, _dx + 1, _dy, 1, 1, 0, c_black, 1)
 	
-	/*if sprite_index == sprPauseButtons {
-		if image_index == 0 or image_index == 1 or image_index == 4 or image_index == 7 {
-			a = 3
-		}
-		else if image_index == 2 or image_index == 3 or image_index == 5 or image_index == 6 {
-			a = -3
-		}
-	}*/
-	
-	draw_set_halign(fa_center)
-	
-	draw_bigname(x + sign(a) * 8, y - 8, loc(name), col, 0.65, a)
-	
-	draw_set_halign(fa_left)
+		//
+		draw_sprite_ext(sprite_index, image_index, _dx, _dy, 1, 1, 0, _color, 1)
+	}
 }
-else {
-	draw_sprite_ext(sprite_index, image_index, x,     y + 1, 1, 1, 0, c_black, 1)
-	draw_sprite_ext(sprite_index, image_index, x + 1, y + 1, 1, 1, 0, c_black, 1)
-	draw_sprite_ext(sprite_index, image_index, x,     y    , 1, 1, 0, col, 1)
-}
 
-y += appear
-
+// draw the `Quit` option hint
 if image_index == 5 && !instance_exists(CoopController) && !save_get_value("etc", "saving_tip", 0) {
-    draw_set_valign(fa_center)
-    draw_set_halign(fa_center)
+    draw_align(fa_center, fa_bottom)
+	
+	if appear >= 2 draw_set_color(c_gray)
+	else if appear == 1 draw_set_color(c_dkgray)
+    else draw_set_color(#3b3e43)
+	
+	draw_text_shadow(view_xview_center, view_yview + view_height + appear - 12,
+		loc("CLOSING THE GAME WITHOUT QUITTING TO MAIN MENU#ALLOWS YOU TO SAVE AND CONTINUE LATER"))
+	
+	draw_set_color(c_white)
+	draw_align()
+}
 
-    draw_set_color(make_color_rgb(59, 62, 67))
-    draw_text_shadow(view_xview + view_width / 2, view_yview + view_height - 16, loc("QUIT WITHOUT EXITING THROUGH MAIN MENU#TO SAVE AND CONTINUE LATER"))
-    draw_set_color(c_white)
-
-    draw_set_valign(fa_top)
-    draw_set_halign(fa_left)
+if appear {
+	appear --
 }

@@ -7,6 +7,6 @@ image_speed = 0
 
 //motion_add(random_angle, 2)
 
-dropseed = rng_next_int(RNGSlot.Drops)
+dropseed = rng_next_int(RNGStates.Drops)
 
 spr_dead = -1

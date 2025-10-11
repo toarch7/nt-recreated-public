@@ -1,69 +1,26 @@
 if lockstep_stop
 	exit
 
-if !instance_exists(GenCont) {
-	if scrChestOpened()
-		exit
+if instance_exists(GenCont) exit
+
+var _player = instance_nearest(x, y, Player)
+if !instance_exists(_player) exit
+
+if scrChestOpened() exit
 	
-	var p = instance_nearest(x, y, Player), dir, type
-	
-	if !p
-		exit
-	
-	var m = p.ammo
-	
-	if p.race == 7 && p.ultra == 2 {
-		for(var i = 1; i <= 5; i ++) {
-			type = i
-			
-			var a = typ_ammo[type]
-			
-			m[type] += a * 2
-			
-			if m[type] > typ_amax[type]
-				m[type] = typ_amax[type]
-			
-			dir = instance_create(x, y, PopupText)
-			
-			dir.mytext = "+" + string(a * 2) + " " + string(loc(typ_name[type]))
-			
-			if m[type] >= typ_amax[type]
-				dir.mytext = loc_sfmt("MAX %", loc(typ_name[type]))
-		}
-		
-		p.ammo = m
-		
-		instance_destroy()
-		
-		exit
+// Get Loaded
+if _player.race == Race.Steroids && scrUltraCheck(_player.race, 2) {
+	for(var _ammo_type = Ammo.Bullets; _ammo_type < Ammo.NUM_AMMO_TYPES; _ammo_type ++) {
+		scrPlayerGiveAmmo(_player, _ammo_type, typ_ammo[_ammo_type], true)
 	}
+}
+else {
+	var _ammo_type = scrAmmoDecideType(_player, true),
+		_give_amount = typ_ammo[_ammo_type] * 2
 	
-	if wep_type[other.wep] == 0 or m[wep_type[other.wep]] >= typ_amax[wep_type[other.wep]]
-		type = irandom(4) + 1
-	else
-		type = wep_type[other.wep]
-
-	m[type] += typ_ammo[type] * 2
-	
-	if m[type] > typ_amax[type]
-		m[type] = typ_amax[type]
-
-	dir = instance_create(x, y, PopupText)
-	
-	dir.mytext = "+" + string(typ_ammo[type] * 2) + " " + string(loc(typ_name[type]))
-	
-	if m[type] = typ_amax[type]
-		dir.mytext = loc_sfmt("MAX %", loc(typ_name[type]))
-	
-	
-	
-	if GameCont.underwater
-		snd_play(sndOasisChest)
-	else
-		snd_play(sndAmmoChest)
-	
-	p.ammo = m
-	
-	instance_destroy()
+	scrPlayerGiveAmmo(_player, _ammo_type, _give_amount, true)
 }
 
+snd_play(GameCont.underwater ? sndOasisChest : sndAmmoChest)
+
+instance_destroy()

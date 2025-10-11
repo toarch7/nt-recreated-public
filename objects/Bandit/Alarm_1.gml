@@ -15,20 +15,20 @@ if instance_exists(target) {
                     team = other.team
                     hit_id = other.spr_idle
                 }
-                gunangle = target_direction
+                gunangle = mcr_target_direction
                 alarm[1] = 20 + random(5)
             } else {
-                direction = target_direction + random(180) - 90
+                direction = mcr_target_direction + random(180) - 90
                 speed = 0.4
                 walk = 10 + random(10)
-                gunangle = target_direction
+                gunangle = mcr_target_direction
             }
 
         } else {
             direction = point_direction(target.x, target.y, x, y) + random(20) - 10
             speed = 0.4
             walk = 40 + random(10)
-            gunangle = target_direction
+            gunangle = mcr_target_direction
         }
 
         if target.x < x right = -1

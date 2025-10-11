@@ -124,7 +124,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 			continue
 		}
 		
-        var d = self[$ "do_thing"],
+        var d = self[$ "volume_control_command"],
             c = c_white, _alpha = min(1, rogue_hide / 60)
 			forever = KeyCont.activeforever[global.index]
 			
@@ -147,7 +147,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 
         if instance_exists(plr) && plr.race == 12 && plr.pref("rogue") {
             draw_set_halign(fa_center)
-            draw_set_valign(fa_center)
+            draw_set_valign(fa_middle)
 			
 			draw_set_alpha(_alpha * 1.25)
             draw_text_shadow(x, y, loc("SCREEN#SWIPE"))
@@ -164,7 +164,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
         if !plr
 			alpha = 1
 
-        var d = self[$ "do_thing"],
+        var d = self[$ "volume_control_command"],
             c = (d == 1 ? c_lime : (d == -1 ? c_yellow : (d == 2 ? c_gray : c_white)))
 		
         if simplify {
@@ -210,7 +210,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
     with ButtonSwap {
         draw_set_alpha(0.7)
 
-        var d = self[$ "do_thing"],
+        var d = self[$ "volume_control_command"],
             c = (d == 1 ? c_lime : (d == -1 ? c_yellow : (d == 2 ? c_gray : c_white)))
             draw_set_color(c)
 
@@ -250,7 +250,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
         }
 
         with MobileUI {
-            if self[$ "do_thing"] != undefined {
+            if self[$ "volume_control_command"] != undefined {
                 var o = rad / 2 + 4
 
                 if object_index == ButtonAct

@@ -11,8 +11,8 @@ spr_dead = sprBuffGatorDead
 event_inherited()
 
 
-snd_hurt = sndGatorHit
-snd_dead = sndGatorDie
+snd_hurt = sndBuffGatorHit
+snd_dead = sndBuffGatorDie
 
 //behavior
 walk = 0

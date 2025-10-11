@@ -3,7 +3,7 @@ scrSetViewSize(false)
 x = view_width / 2
 y = view_height / 2
 
-camera_set_pos(0, 0)
+scr_camera_set_position(0, 0)
 
 if !instance_exists(GameCont) && file_exists("gamestate.dat") {
     instance_create(0, 0, GameCont)
@@ -43,25 +43,27 @@ if !instance_exists(GameCont) && file_exists("gamestate.dat") {
 	scrGameSave()
 }
 
-if UberCont.want_menu2 {
+if UberCont.want_quit_to_menu {
     if !instance_exists(CoopController) {
-		if UberCont.show_results {
+		if UberCont.show_leaderboards_menu {
 			with instance_create(x, y, Leaderboards) {
-				if UberCont.show_results == 2
+				if UberCont.show_weekly_results_menu {
 					type = "weekly"
+				}
 			}
-        
+			
+	        UberCont.show_leaderboards_menu = false
 			instance_create(x, y, BackButton)
-		
-	        UberCont.show_results = 0
 	    }
 		else {
-	        with instance_create(x, y, Logo)
-	            event_perform(ev_alarm, 1)
+			with instance_create(x, y, Logo) {
+				event_perform(ev_alarm, 1)
+			}
 	    }
 		
-		if !instance_exists(Cinematic)
+		if !instance_exists(Cinematic) {
 			instance_create(x, y, SpiralCont)
+		}
 	}
 	else {
 		if !instance_exists(GameCont)
@@ -75,22 +77,19 @@ if UberCont.want_menu2 {
 		snd_play(sndMenuCharSelect)
 	}
 	
-    UberCont.want_menu2 = 0
+    UberCont.want_quit_to_menu = false
 
-    if instance_exists(MusCont) {
-		with MusCont
-			instance_destroy()
-	}
-
-    instance_create(x, y, MusCont)
-
+	instance_destroy(MusCont)
+	instance_create(x, y, MusCont)
     instance_destroy()
-
+	
     exit
 }
 else if instance_exists(GameCont) {
-    if !instance_exists(Cinematic) instance_create(x, y, SpiralCont)
-
+    if !instance_exists(Cinematic) {
+		instance_create(x, y, SpiralCont)
+	}
+	
     if !instance_exists(Cinematic) && (GameCont.skillpoints > 0 or GameCont.crownpoints > 0 or GameCont.ultrapoints > 0) {
         instance_create(0, 0, BackCont)
         instance_create(x, y, LevCont)

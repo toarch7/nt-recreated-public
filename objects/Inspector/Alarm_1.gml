@@ -8,7 +8,7 @@ if instance_exists(target) {
         control = 1
     } else {
         if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
-            gunangle = target_direction
+            gunangle = mcr_target_direction
             if target.x < x right = -1
             else if target.x > x right = 1 lastx = target.x lasty = target.y
             //SEE PLAYER AND FAR ENOUGH AND NOT SHOUTING "FREEZE MOTHERFUCKER"
@@ -28,8 +28,8 @@ if instance_exists(target) {
                 alarm[1] = 20 + random(10)
             } else {
                 //DONT FIRE
-                if point_distance(x, y, target.x, target.y) > 48 direction = target_direction + random(50) - 25
-                else direction = target_direction + 180 + random(50) - 25
+                if point_distance(x, y, target.x, target.y) > 48 direction = mcr_target_direction + random(50) - 25
+                else direction = mcr_target_direction + 180 + random(50) - 25
                 speed = 0.4
                 walk = 10 + random(10)
                 if freeze < 40 alarm[1] += random(30)
@@ -48,7 +48,7 @@ if instance_exists(target) {
                 grenades -= 1
                 //GRENADE
                 gunangle = point_direction(x, y, lastx, lasty)
-                snd_play(male ? sndGruntThrowNade : sndGruntThrowNadeF)
+                snd_play(male ? sndGruntThrowNadeM : sndGruntThrowNadeF)
                 wkick = 8
                 with instance_create(x, y, PopoNade) {
                     motion_add(other.gunangle + random(20) - 10, 10)
@@ -71,7 +71,7 @@ if instance_exists(target) {
 }
 
 if !control && _control {
-    snd_play(male ? sndInspectorEnd : sndInspectorEndF)
+    snd_play(male ? sndInspectorEndM : sndInspectorEndF)
 } else if control && !_control {
-    snd_play(male ? sndInspectorStart : sndInspectorStartF)
+    snd_play(male ? sndInspectorStartM : sndInspectorStartF)
 }

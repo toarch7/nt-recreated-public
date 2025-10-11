@@ -13,7 +13,7 @@ if instance_exists(target) {
             if random(3) < 2 {
                 snd_play(sndBigBanditStartShoot)
                 ammo = 10
-                if GameCont.loops ammo += 5 alarm[2] = 1 gunangle = target_direction alarm[1] = 70 + random(5)
+                if GameCont.loops ammo += 5 alarm[2] = 1 gunangle = mcr_target_direction alarm[1] = 70 + random(5)
             }
         } else if shot = 1 or hp < max_hp or intro = 0 {
             //CHARGE HERE

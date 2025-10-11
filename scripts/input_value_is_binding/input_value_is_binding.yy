@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "input_value_is_binding",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Binding Management",
-    "path": "folders/Extensions/Input/Binding Management.yy",
+  "$GMScript":"v1",
+  "%Name":"input_value_is_binding",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"input_value_is_binding",
+  "parent":{
+    "name":"Binding Management",
+    "path":"folders/Extensions/Input/Binding Management.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

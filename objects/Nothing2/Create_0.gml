@@ -1,6 +1,6 @@
 BackCont.shake += 10
 raddrop = 70
-max_hp = (600 * ((KeyCont.players / 2) + 0.5))
+max_hp = (600 * ((player_count / 2) + 0.5))
 max_hp *= (1 + (GameCont.loops / 3))
 with(MusCont)
 alarm[5] = 1
@@ -20,7 +20,6 @@ with(Wall) {
 with(Bones)
 instance_destroy()
 event_inherited()
-hit_id = sprKilledByThrone2
 walk = 0
 right = 1
 scrTarget()

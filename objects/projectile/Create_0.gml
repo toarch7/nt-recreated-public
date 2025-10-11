@@ -5,4 +5,4 @@ creator = noone
 
 
 if BruteSync
-	net_index = irandom(UINT_MAX)
+	netid = irandom(UINT_MAX)

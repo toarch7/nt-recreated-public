@@ -75,7 +75,7 @@ try {
                 gpu_set_blendmode(bm_normal)
             }
 
-            if hammerheads && hammerhead {
+            if hammerhead_charges && hammerhead {
                 draw_sprite(sprHammerHead, - 1, x, y)
             }
         }

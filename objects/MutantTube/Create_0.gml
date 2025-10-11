@@ -8,3 +8,4 @@ spr_dead = sprMutantTubeDead
 event_inherited()
 
 snd_hurt = sndHitMetal
+snd_dead = sndLabsMutantTubeBreak

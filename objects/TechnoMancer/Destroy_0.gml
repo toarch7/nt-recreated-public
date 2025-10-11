@@ -5,20 +5,8 @@ if instance_number(TechnoMancer) <= 1 {
     alarm[1] = 1
 
     if instance_exists(Player) {
-        if GameCont.race == 7 && !UberCont.cskingot[7] {
-            show_unlock_popup("@wSTEROIDS B-SKIN UNLOCKED@s#FOR DEFEATING THE TECHNOMANCER")
-			
-            with instance_create(0, 0, UnlockScreen) {
-                race = 7
-                skin = 1
-            }
-			
-			scrAchievement(AchievID.STEROIDS_BSKIN)
-			
-            UberCont.cskingot[7] = 1
-        }
-
-        scrAchievement(AchievID.BOSS_TECHNOMANCER)
+        scrAchievementUnlock(Achievement.BOSS_TECHNOMANCER)
+		scrRaceUnlockSkin(Race.Steroids, 1)
     }
 
     spr_dead = sprTechnoMancerDead

@@ -1,10 +1,14 @@
-/// https://gist.github.com/ellraiser/308eff835695e39c10e2d13eed9b9490
 function scr_check_steamdeck() {
+	// a simple and effective way
+	if (environment_get_variable("SteamDeck") == "1") return true
+	
+	
+	// https://gist.github.com/ellraiser/308eff835695e39c10e2d13eed9b9490
 	// get device info
 	var info = os_get_info();
 	
 	if is_undefined(info[? "gl_vendor_string"])
-	or is_undefined(info[? "gl_version_string"]) {
+	|| is_undefined(info[? "gl_version_string"]) {
 		ds_map_destroy(info)
 		return false
 	}
@@ -12,7 +16,7 @@ function scr_check_steamdeck() {
 	var vendor = info[? "gl_vendor_string"] + " " + info[? "gl_version_string"]; 
 	var renderer = info[? "gl_renderer_string"];
 	var gamepad_index = -1;
-	var is_steamdeck = false;
+	var _is_steamdeck = false;
   
 	// find the device for the deck
 	var devices = gamepad_get_device_count();
@@ -33,16 +37,16 @@ function scr_check_steamdeck() {
 	if (string_pos("AMD", vendor) != 0 && string_pos("Mesa", vendor) != 0 &&
 	string_pos("AMD", renderer) != 0 && string_pos("valve", renderer) != 0 &&
 	gamepad_index >= 0) {
-		is_steamdeck = true;
+		_is_steamdeck = true;
 	}
 	
 	ds_map_destroy(info)
     
 	// return vals
-	return is_steamdeck
+	return _is_steamdeck
 	/*
 	return {
-		is_steamdeck,
+		_is_steamdeck,
 		gamepad_index
 	}*/
 }

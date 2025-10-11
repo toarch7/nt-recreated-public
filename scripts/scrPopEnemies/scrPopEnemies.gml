@@ -1,7 +1,8 @@
 function scrPopEnemies() {
-    if distance_to_point(10016, 10016) < 160 or place_meeting(x, y, Wall) return undefined
+    // this script is being executed from within Floor object context...
+	if distance_to_point(10016, 10016) < 160 || place_meeting(x, y, Wall) exit
 
-    random_set_seed(rng_next_int(1))
+    random_set_seed(rng_next_int(RNGStates.Enemies))
 
     if ((spawnarea == 1) && !instance_exists(TutCont)) {
         if (random(2) < random(GameCont.loops)) instance_create(x + 16, y + 16, choose(Scorpion, Scorpion, Bandit, Bandit, Maggot, JungleFly, JungleFly, MeleeBandit, Sniper))
@@ -37,7 +38,7 @@ function scrPopEnemies() {
     }
     if ((spawnarea == 104) && (random(5) < 4)) instance_create(x + 16, y + 16, choose(InvSpider, InvSpider, InvSpider, InvSpider, InvLaserCrystal, InvLaserCrystal))
     if (spawnarea == 5) {
-        if (random(2) < random(GameCont.loops)) instance_create(x + 16, y + 16, choose(SnowTank, SnowTank, DogGuardian, Exploguardian, SnowBot, SnowBot, SnowBot, Wolf, Necromancer))
+        if (random(2) < random(GameCont.loops)) instance_create(x + 16, y + 16, choose(SnowTank, SnowTank, DogGuardian, ExploGuardian, SnowBot, SnowBot, SnowBot, Wolf, Necromancer))
         //else if ((UberCont.xmas == 1) && (random(1000) < 1))
         //    instance_create(x + 16, y + 16, PotentialYeti)
         else if (random(3) < 2) instance_create(x + 16, y + 16, choose(SnowBot, SnowBot, SnowBot, SnowTank, Wolf, Wolf))
@@ -50,8 +51,8 @@ function scrPopEnemies() {
         } else if (random(8) < 1) instance_create(x + 16, y + 16, choose(Necromancer, Necromancer, Necromancer, ExploFreak, RhinoFreak, Necromancer, Necromancer, BecomeTurret, BecomeTurret, BecomeTurret, Necromancer))
     }
     if ((spawnarea == 7) && ((GameCont.subarea != 3) && (random(2) < 1))) {
-        if (random(2) < random(GameCont.loops)) instance_create(x + 16, y + 16, choose(Exploguardian, DogGuardian, Sniper, DogGuardian, Exploguardian, ExploFreak, JungleBandit, JungleBandit))
-        else if (random(4) < 1) instance_create(x + 16, y + 16, choose(Exploguardian, DogGuardian, Guardian, Guardian, Guardian, Guardian))
+        if (random(2) < random(GameCont.loops)) instance_create(x + 16, y + 16, choose(ExploGuardian, DogGuardian, Sniper, DogGuardian, ExploGuardian, ExploFreak, JungleBandit, JungleBandit))
+        else if (random(4) < 1) instance_create(x + 16, y + 16, choose(ExploGuardian, DogGuardian, Guardian, Guardian, Guardian, Guardian))
         else if (random(16) < 1) instance_create(x + 16, y + 16, IDPDSpawn)
     }
     if (spawnarea == 102) instance_create(x + 16, y + 16, Turtle)

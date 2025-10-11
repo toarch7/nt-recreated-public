@@ -1,36 +1,27 @@
 if lockstep_stop
 	exit
 
-var inst = player_get(),
-	yoff = dailylistfavor
-
-race = inst.race
-
-var _char = char[0]
-
-if array_length(char) > race
-    _char = char[race]
-
-if instance_exists(_char) {
-	with _char {
-	    view_xview = (lerp(view_xview, x - view_width / 2, 0.1))
-	    view_yview = (lerp(view_yview, y - view_height / 2, 0.1))
+#region Camera focus on selected characters:
+	
+	var _pinst = scr_playerinstance_find()
+	
+	race = _pinst.race
+	
+	var _char = char[0]
+	
+	if array_length(char) > race {
+	    _char = char[race]
 	}
-}
-
-camera_set_pos(view_xview, view_yview)
-
-if instance_exists(DailyList) {
-    if dailylistfavor < 48 {
-        dailylistfavor += 16
-    }
-}
-else if dailylistfavor {
-    dailylistfavor -= 24
-
-    if dailylistfavor < 0 {
-        dailylistfavor = 0
-    }
-}
+	
+	if instance_exists(_char) {
+		with _char {
+		    view_xview = t_lerp(view_xview, x - view_width / 2, 0.1)
+		    view_yview = t_lerp(view_yview, y - view_height / 2, 0.1)
+		}
+	}
+	
+	scr_camera_set_position(view_xview, view_yview)
+	
+#endregion
 
 depth = UberCont.depth + 1

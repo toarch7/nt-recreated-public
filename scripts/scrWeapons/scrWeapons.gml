@@ -1,13 +1,54 @@
-globalvar wep_name, wep_type, wep_auto, wep_cost, wep_area, wep_sprt, wep_gold,
-			wep_text, wep_rads, wep_lout, wep_load, wep_swap, wep_mele,
-			typ_ammo, typ_amax, typ_name, maxwep;
+// TODO: proper weapon registery
 
-wep_mele = -1
-wep_gold = -1
+globalvar wep_name, wep_type, wep_auto, wep_cost, wep_area, wep_sprt, wep_gold,
+		  wep_text, wep_rads, wep_lout, wep_load, wep_swap, wep_mele, wep_naim,
+		  typ_ammo, typ_amax, typ_name, maxwep;
+
+wep_gold = undefined
+wep_mele = undefined
+wep_naim = undefined
+
+enum Ammo {
+	None,
+	Bullets,
+	Shells,
+	Bolts,
+	Explosives,
+	Energy,
+	NUM_AMMO_TYPES
+}
 
 function scrWeapons() {
-    //WEAPONS
-    wep_name[0] = ""
+	/* Memo:
+		wep_name - weapon name
+		wep_type - weapon ammo type
+		wep_auto - if the weapon is automatic
+		wep_cost - weapon ammo usage
+		wep_area - the starting difficulty from which the weapon can drop
+		wep_sprt - weapon regular sprite
+		wep_gold - the weapon is golden
+		wep_rads - if the weapon requires rads to shoot
+		wep_lout - weapon loadout sprite
+		wep_swap - weapon swap sound
+		wep_mele - if weapon should flip like a meele after swing
+		wep_naim - if aim assist should be ignored when using this weapon
+	*/
+    
+    maxwep = 126
+    wep_name = array_create(maxwep, "")
+    wep_type = array_create(maxwep, Ammo.None)
+    wep_auto = array_create(maxwep, false)
+    wep_cost = array_create(maxwep, 0)
+    wep_area = array_create(maxwep, -1)
+    wep_sprt = array_create(maxwep, sprDefault)
+    wep_gold = array_create(maxwep, false)
+    wep_rads = array_create(maxwep, 0)
+    wep_lout = array_create(maxwep, -1)
+    wep_swap = array_create(maxwep, -1)
+    wep_mele = array_create(maxwep, false)
+    wep_naim = array_create(maxwep, true)
+    
+	wep_name[0] = ""
     wep_type[0] = 0
     wep_auto[0] = 0
     wep_load[0] = 1
@@ -15,7 +56,7 @@ function scrWeapons() {
     wep_sprt[0] = mskNone
     wep_area[0] = -1
     wep_text[0] = ""
-
+	
     wep_name[1] = "REVOLVER"
     wep_type[1] = 1
     wep_cost[1] = 1
@@ -24,6 +65,7 @@ function scrWeapons() {
     wep_auto[1] = false
     wep_load[1] = 6
     wep_text[1] = "trusty old @wrevolver@s"
+    wep_lout[1] = sprRevolverLoadout
 
     wep_name[2] = "TRIPLE MACHINEGUN"
     wep_type[2] = 1
@@ -33,7 +75,8 @@ function scrWeapons() {
     wep_auto[2] = true
     wep_load[2] = 4
     wep_text[2] = "@wtriple machinegun@s, so much fun"
-
+	wep_naim[2] = true
+	
     wep_name[3] = "WRENCH"
     wep_type[3] = 0
     wep_cost[3] = 0
@@ -366,6 +409,8 @@ function scrWeapons() {
     wep_auto[39] = false
     wep_load[39] = 5
     wep_text[39] = "@yB-)"
+    wep_lout[39] = sprGoldRevolverLoadout
+    wep_gold[39] = true
 
     wep_name[40] = "GOLDEN WRENCH"
     wep_type[40] = 0
@@ -375,6 +420,8 @@ function scrWeapons() {
     wep_auto[40] = false
     wep_load[40] = 18
     wep_text[40] = "shiny @ywrench@s"
+    wep_lout[40] = sprGoldWrenchLoadout
+    wep_gold[40] = true
 
     wep_name[41] = "GOLDEN MACHINEGUN"
     wep_type[41] = 1
@@ -384,6 +431,8 @@ function scrWeapons() {
     wep_auto[41] = true
     wep_load[41] = 5
     wep_text[41] = "expensive @ymachinegun@s"
+    wep_lout[41] = sprGoldMachinegunLoadout
+    wep_gold[41] = true
 
     wep_name[42] = "GOLDEN SHOTGUN"
     wep_type[42] = 2
@@ -393,6 +442,8 @@ function scrWeapons() {
     wep_auto[42] = false
     wep_load[42] = 17
     wep_text[42] = "beautiful @yshotgun@s"
+    wep_lout[42] = sprGoldShotgunLoadout
+    wep_gold[42] = true
 
     wep_name[43] = "GOLDEN CROSSBOW"
     wep_type[43] = 3
@@ -402,6 +453,8 @@ function scrWeapons() {
     wep_auto[43] = false
     wep_load[43] = 23
     wep_text[43] = "@yvelvet handles"
+    wep_lout[43] = sprGoldCrossbowLoadout
+    wep_gold[43] = true
 
     wep_name[44] = "GOLDEN GRENADE LAUNCHER"
     wep_type[44] = 4
@@ -411,6 +464,8 @@ function scrWeapons() {
     wep_auto[44] = false
     wep_load[44] = 20
     wep_text[44] = "even the @wgrenades@s are @ygold@s"
+    wep_lout[44] = sprGoldGrenadeLauncherLoadout
+    wep_gold[44] = true
 
     wep_name[45] = "GOLDEN LASER PISTOL"
     wep_type[45] = 5
@@ -420,6 +475,8 @@ function scrWeapons() {
     wep_auto[45] = false
     wep_load[45] = 8
     wep_text[45] = "@ythis thing gets hot"
+    wep_lout[45] = sprGoldLaserPistolLoadout
+    wep_gold[45] = true
 
     wep_name[46] = "CHICKEN SWORD"
     wep_type[46] = 0
@@ -429,6 +486,7 @@ function scrWeapons() {
     wep_auto[46] = false
     wep_load[46] = 18
     wep_text[46] = "chicken loves her @wsword@s"
+    wep_lout[46] = sprChickenSwordLoadout
 
     wep_name[47] = "NUKE LAUNCHER"
     wep_type[47] = 4
@@ -519,6 +577,7 @@ function scrWeapons() {
     wep_auto[56] = false
     wep_load[56] = 7
     wep_text[56] = "rusty old @wrevolver@s"
+    wep_lout[56] = sprRustyRevolverLoadout
 
     wep_name[57] = "LIGHTNING PISTOL"
     wep_type[57] = 5
@@ -559,7 +618,7 @@ function scrWeapons() {
     wep_name[61] = "SAWED-OFF SHOTGUN"
     wep_type[61] = 2
     wep_cost[61] = 2
-    wep_sprt[61] = sprSawedOffShotgun
+    wep_sprt[61] = sprSawnOffShotgun
     wep_area[61] = 6
     wep_auto[61] = false
     wep_load[61] = 28
@@ -658,7 +717,7 @@ function scrWeapons() {
     wep_name[72] = "TOXIC LAUNCHER"
     wep_type[72] = 4
     wep_cost[72] = 1
-    wep_sprt[72] = sprToxicLauncher
+    wep_sprt[72] = sprToxicNader
     wep_area[72] = 5
     wep_auto[72] = false
     wep_load[72] = 16
@@ -721,7 +780,7 @@ function scrWeapons() {
     wep_name[79] = "GRENADE SHOTGUN"
     wep_type[79] = 4
     wep_cost[79] = 1
-    wep_sprt[79] = sprGrenadeShotgun
+    wep_sprt[79] = sprNadeShotgun
     wep_area[79] = 7
     wep_auto[79] = false
     wep_load[79] = 16
@@ -730,7 +789,7 @@ function scrWeapons() {
     wep_name[80] = "GRENADE RIFLE"
     wep_type[80] = 4
     wep_cost[80] = 1
-    wep_sprt[80] = sprGrenadeRifle
+    wep_sprt[80] = sprNadeRifle
     wep_area[80] = 9
     wep_auto[80] = false
     wep_load[80] = 10
@@ -744,6 +803,7 @@ function scrWeapons() {
     wep_auto[81] = false
     wep_load[81] = 6
     wep_text[81] = "loose cannon"
+    wep_lout[81] = sprRogueRifleLoadout
 
     wep_name[82] = "PARTY GUN"
     wep_type[82] = 4
@@ -775,7 +835,7 @@ function scrWeapons() {
     wep_name[85] = "AUTO GRENADE SHOTGUN"
     wep_type[85] = 4
     wep_cost[85] = 1
-    wep_sprt[85] = sprAutoGrenadeShotgun
+    wep_sprt[85] = sprAutoNadeShotgun
     wep_area[85] = 14
     wep_auto[85] = true
     wep_load[85] = 8
@@ -789,16 +849,18 @@ function scrWeapons() {
     wep_auto[86] = true
     wep_load[86] = 4
     wep_text[86] = "feeling @gultra@s"
+    wep_rads[86] = 4
 
     wep_name[87] = "ULTRA LASER PISTOL"
     wep_type[87] = 5
     wep_cost[87] = 3
-    wep_sprt[87] = sprUltraLaserPistol
+    wep_sprt[87] = sprUltraLaserGun
     wep_area[87] = 21
     wep_auto[87] = false
     wep_load[87] = 8
     wep_text[87] = "unstoppable"
-
+    wep_rads[87] = 14
+    
     wep_name[88] = "SLEDGEHAMMER"
     wep_type[88] = 0
     wep_cost[88] = 0
@@ -843,6 +905,7 @@ function scrWeapons() {
     wep_auto[92] = false
     wep_load[92] = 15
     wep_text[92] = "perfection"
+    wep_rads[92] = 16
 
     wep_name[93] = "ULTRA SHOTGUN"
     wep_type[93] = 2
@@ -852,6 +915,7 @@ function scrWeapons() {
     wep_auto[93] = false
     wep_load[93] = 12
     wep_text[93] = "no chance"
+    wep_rads[93] = 14
 
     wep_name[94] = "ULTRA CROSSBOW"
     wep_type[94] = 3
@@ -861,15 +925,17 @@ function scrWeapons() {
     wep_auto[94] = false
     wep_load[94] = 11
     wep_text[94] = "nowhere to hide"
+    wep_rads[94] = 12
 
     wep_name[95] = "ULTRA GRENADE LAUNCHER"
     wep_type[95] = 4
     wep_cost[95] = 1
-    wep_sprt[95] = sprUltraGrenadeLauncher
+    wep_sprt[95] = sprUltraNader
     wep_area[95] = 21
     wep_auto[95] = false
     wep_load[95] = 16
     wep_text[95] = "they'll come"
+    wep_rads[95] = 16
 
     wep_name[96] = "PLASMA MINIGUN"
     wep_type[96] = 5
@@ -897,6 +963,8 @@ function scrWeapons() {
     wep_auto[98] = true
     wep_load[98] = 16
     wep_text[98] = "@ybeautiful alloys"
+    wep_lout[98] = sprGoldPlasmaGunLoadout
+    wep_gold[98] = true
 
     wep_name[99] = "GOLDEN SLUGGER"
     wep_type[99] = 2
@@ -906,6 +974,8 @@ function scrWeapons() {
     wep_auto[99] = false
     wep_load[99] = 20
     wep_text[99] = "@ypriceless hardwood"
+    wep_lout[99] = sprGoldSluggerLoadout
+    wep_gold[99] = true
 
     wep_name[100] = "GOLDEN SPLINTER GUN"
     wep_type[100] = 3
@@ -915,6 +985,8 @@ function scrWeapons() {
     wep_auto[100] = false
     wep_load[100] = 19
     wep_text[100] = "even the @yammo@s is expensive"
+    wep_lout[100] = sprGoldSplintergunLoadout
+    wep_gold[100] = true
 
     wep_name[101] = "GOLDEN SCREWDRIVER"
     wep_type[101] = 0
@@ -924,6 +996,8 @@ function scrWeapons() {
     wep_auto[101] = false
     wep_load[101] = 9
     wep_text[101] = "@yivory handle"
+    wep_lout[101] = sprGoldScrewdriverLoadout
+    wep_gold[101] = true
 
     wep_name[102] = "GOLDEN BAZOOKA"
     wep_type[102] = 4
@@ -933,15 +1007,19 @@ function scrWeapons() {
     wep_auto[102] = false
     wep_load[102] = 28
     wep_text[102] = "worth its weight in @ygold"
+    wep_lout[102] = sprGoldBazookaLoadout
+    wep_gold[102] = true
 
     wep_name[103] = "GOLDEN ASSAULT RIFLE"
     wep_type[103] = 1
     wep_cost[103] = 3
-    wep_sprt[103] = sprGoldAssaultRifle
+    wep_sprt[103] = sprGoldARifle
     wep_area[103] = 20
     wep_auto[103] = false
     wep_load[103] = 9
     wep_text[103] = "bursts of @ygold"
+    wep_lout[103] = sprGoldAssaultRifleLoadout
+    wep_gold[103] = true
 
     wep_name[104] = "SUPER DISC GUN"
     wep_type[104] = 3
@@ -955,7 +1033,7 @@ function scrWeapons() {
     wep_name[105] = "HEAVY AUTO CROSSBOW"
     wep_type[105] = 3
     wep_cost[105] = 2
-    wep_sprt[105] = sprAutoHeavyCrossbow
+    wep_sprt[105] = sprHeavyAutoCrossbow
     wep_area[105] = 16
     wep_auto[105] = true
     wep_load[105] = 13
@@ -964,7 +1042,7 @@ function scrWeapons() {
     wep_name[106] = "HEAVY ASSAULT RIFLE"
     wep_type[106] = 1
     wep_cost[106] = 6
-    wep_sprt[106] = sprHeavyAssaultRifle
+    wep_sprt[106] = sprHeavyARifle
     wep_area[106] = 13
     wep_auto[106] = false
     wep_load[106] = 9
@@ -987,6 +1065,7 @@ function scrWeapons() {
     wep_auto[108] = false
     wep_load[108] = 120
     wep_text[108] = ""
+    wep_lout[108] = mskNone
 
     wep_name[109] = "DOG MISSILE"
     wep_type[109] = 4
@@ -996,6 +1075,7 @@ function scrWeapons() {
     wep_auto[109] = false
     wep_load[109] = 1
     wep_text[109] = ""
+    wep_lout[109] = mskNone
 
     wep_name[110] = "INCINERATOR"
     wep_type[110] = 1
@@ -1113,7 +1193,9 @@ function scrWeapons() {
     wep_auto[122] = false
     wep_load[122] = 40
     wep_text[122] = "@yexcessive"
-
+    wep_lout[122] = sprGoldNukeLauncherLoadout
+    wep_gold[122] = true
+    
     wep_name[123] = "GOLDEN DISC GUN"
     wep_type[123] = 3
     wep_cost[123] = 1
@@ -1122,11 +1204,13 @@ function scrWeapons() {
     wep_auto[123] = true
     wep_load[123] = 8
     wep_text[123] = "@ygo in style"
+    wep_lout[123] = sprGoldDiscgunLoadout
+    wep_gold[123] = true
 
     wep_name[124] = "HEAVY GRENADE LAUNCHER"
     wep_type[124] = 4
     wep_cost[124] = 2
-    wep_sprt[124] = sprHeavyGrenadeLauncher
+    wep_sprt[124] = sprHeavyNader
     wep_area[124] = 8
     wep_auto[124] = false
     wep_load[124] = 26
@@ -1140,49 +1224,18 @@ function scrWeapons() {
     wep_auto[125] = false
     wep_load[125] = 90
     wep_text[125] = "make it"
-
-    maxwep = 125
-
-    wep_lout[1] = sprRevolverLoadout
-    wep_lout[39] = sprGoldRevolverLoadout
-    wep_lout[40] = sprGoldHammerLoadout
-    wep_lout[41] = sprGoldMachinegunLoadout
-    wep_lout[42] = sprGoldShotgunLoadout
-    wep_lout[43] = sprGoldCrossbowLoadout
-    wep_lout[44] = sprGoldNaderLoadout
-    wep_lout[45] = sprGoldLaserPistolLoadout
-    wep_lout[46] = sprChickenSwordLoadout
-    wep_lout[56] = sprRustyRevolverLoadout
-    wep_lout[81] = sprRogueRifleLoadout
-    wep_lout[98] = sprGoldPlasmaGunLoadout
-    wep_lout[99] = sprGoldSluggerLoadout
-    wep_lout[100] = sprGoldSplinterGunLoadout
-    wep_lout[101] = sprGoldScrewdriverLoadout
-    wep_lout[102] = sprGoldBazookaLoadout
-    wep_lout[103] = sprGoldAssaultRifleLoadout
-    wep_lout[108] = mskNone
-    wep_lout[109] = mskNone
-    wep_lout[122] = sprGoldNukeLauncherLoadout
-    wep_lout[123] = sprGoldDiscgunLoadout
-
-    wep_rads[86] = 4
-    wep_rads[87] = 14
-    wep_rads[93] = 14
-    wep_rads[94] = 12
-    wep_rads[95] = 16
-    wep_rads[92] = 16
-
-    wep_name[255] = "GOLDEN FROG PISTOL"
-    wep_type[255] = 1
-    wep_auto[255] = 0
-    wep_load[255] = 6
-    wep_cost[255] = 1
-    wep_sprt[255] = sprGoldFrogBlaster
-    wep_area[255] = -1
-    wep_text[255] = "ALWAYS BELIEVE IN YOUR SOUL"
-    wep_lout[255] = sprGoldToxicGunLoadout
-    wep_rads[255] = 0
-
+	
+    wep_name[126] = "GOLDEN FROG PISTOL"
+    wep_type[126] = 1
+    wep_auto[126] = 0
+    wep_load[126] = 6
+    wep_cost[126] = 1
+    wep_sprt[126] = sprGoldFrogBlaster
+    wep_area[126] = -1
+    wep_text[126] = "ALWAYS BELIEVE IN YOUR SOUL"
+    wep_lout[126] = sprGoldToxicGunLoadout
+    wep_gold[126] = true
+	
     wep_swap[0] = sndSwapPistol
     wep_swap[1] = sndSwapPistol
     wep_swap[2] = sndSwapMachinegun
@@ -1311,40 +1364,89 @@ function scrWeapons() {
     wep_swap[125] = sndSwapEnergy
     wep_swap[126] = sndSwapPistol
     wep_swap[127] = sndSwapPistol
-
-    wep_swap[255] = sndSwapPistol
-
-    // 0 - melee, 1 - bullets, 2 - shells, 3 - bolts, 4 - explosives, 5 - energy
-    typ_ammo = [0, 32, 8, 7, 6, 10]
 	
-	if wep_mele	== -1 or wep_gold == -1 {
-		wep_mele = []
-		wep_gold = []
-		
-		for(var i = 0; i < array_length(wep_name); i ++) {
-			wep_gold[i] = string_copy(wep_name[i], 1, 4) == "GOLD"
-			
-			wep_mele[i] = wep_type[i] == 0 or i == wep_energy_sword or i == wep_energy_screwdriver or i == wep_energy_hammer
-		}
+	wep_naim[2] = true
+	wep_naim[8] = true
+	wep_naim[12] = true
+	wep_naim[25] = true
+	wep_naim[32] = true
+	wep_naim[35] = true
+	wep_naim[37] = true
+	wep_naim[36] = true
+	wep_naim[48] = true
+	wep_naim[49] = true
+	wep_naim[51] = true
+	wep_naim[60] = true
+	wep_naim[63] = true
+	wep_naim[65] = true
+	wep_naim[68] = true
+	wep_naim[76] = true
+	wep_naim[110] = true
+	wep_naim[113] = true
+	wep_naim[119] = true
+	wep_naim[122] = true
+	wep_naim[125] = true
+	wep_naim[111] = true
+	
+    wep_swap[255] = sndSwapPistol
+    wep_naim[255] = false
+
+    typ_name = array_create(Ammo.NUM_AMMO_TYPES, "N/A")
+    typ_ammo = array_create(Ammo.NUM_AMMO_TYPES, 0)
+    typ_amax = array_create(Ammo.NUM_AMMO_TYPES, 0)
+	
+	typ_name[Ammo.None] = "NONE"
+	typ_name[Ammo.Bullets] = "BULLETS"
+	typ_name[Ammo.Shells] = "SHELLS"
+	typ_name[Ammo.Bolts] = "BOLTS"
+	typ_name[Ammo.Explosives] = "EXPLOSIVES"
+	typ_name[Ammo.Energy] = "ENERGY"
+	
+	typ_ammo[Ammo.Bullets] = 32
+	typ_ammo[Ammo.Shells] = 8
+	typ_ammo[Ammo.Bolts] = 7
+	typ_ammo[Ammo.Explosives] = 6
+	typ_ammo[Ammo.Energy] = 10
+	
+	typ_amax[Ammo.None] = 1000
+	typ_amax[Ammo.Bullets] = 255
+	typ_amax[Ammo.Shells] = 55
+	typ_amax[Ammo.Bolts] = 55
+	typ_amax[Ammo.Explosives] = 55
+	typ_amax[Ammo.Energy] = 55
+	
+	for(var _weapon_id = 1; _weapon_id <= maxwep; _weapon_id ++) {
+		wep_mele[_weapon_id] = wep_type[_weapon_id] == 0
+                    || _weapon_id == wep_energy_sword
+                    || _weapon_id == wep_energy_screwdriver
+                    || _weapon_id == wep_energy_hammer
 	}
-
-    with Player {
-        if race == 1 {
-            typ_ammo[1] += 8
-            typ_ammo[2] += 2
-            typ_ammo[3] += 2
-            typ_ammo[4] += 2
-            typ_ammo[5] += 3
+	
+	if instance_exists(Player) {
+        var _fish_players = scrPlayerCountRace(Race.Fish)
+        if _fish_players > 0 {
+            typ_ammo[Ammo.Bullets] += 8 * _fish_players
+            typ_ammo[Ammo.Shells] += 2 * _fish_players
+            typ_ammo[Ammo.Bolts] += 2 * _fish_players
+            typ_ammo[Ammo.Explosives] += 2 * _fish_players
+            typ_ammo[Ammo.Energy] += 3 * _fish_players
         }
+		
+        var _back_muscle = skill_get(mut_back_muscle)
+		if _back_muscle != 0 {
+			typ_amax[Ammo.Bullets] += 300 * _back_muscle
+			for(var i = Ammo.Shells; i < Ammo.NUM_AMMO_TYPES; ++i) {
+				typ_amax[i] += 44 * _back_muscle
+			}
+		}
     }
-
-    typ_amax = [
-    1000,
-    255 + skill_get(10) * 300,
-    55 + skill_get(10) * 44,
-    55 + skill_get(10) * 44,
-    55 + skill_get(10) * 44,
-    55 + skill_get(10) * 44]
-
-    typ_name = ["MELEE", "BULLETS", "SHELLS", "BOLTS", "EXPLOSIVES", "ENERGY"]
 }
+
+
+
+
+
+
+
+
+

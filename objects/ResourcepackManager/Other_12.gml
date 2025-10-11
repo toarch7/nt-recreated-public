@@ -7,7 +7,7 @@ var mx = device_mouse_x_to_gui(0),
 var item = clicked_item,
 	owner = string(item.owner),
 	meta = browsing ? item.meta : item,
-	off = (1 - splat / (sprite_get_number(sprLoadout) - 1)) * 5,
+	off = (1 - splat / (sprite_get_number(sprLoadoutOpen) - 1)) * 5,
 	xoff = off * 90,
 	scale = off / 30
 
@@ -192,7 +192,7 @@ var dx = view_width - 26,
 if browsing && item.external	
 	draw_sprite_ext(sprResourcepackDownload, 0, dx - width - 32, dy - 2 - download_pointed, 0.75, 0.75, 0, draw_get_color(), 1)
 
-draw_bigname(dx + 26, dy - download_pointed, str)
+draw_text_bigname(dx + 26, dy - download_pointed, str)
 
 if !screenshot_view && point_in_rectangle(mx, my, dx - width - 32, dy, view_width, dy + 18) {
 	if !download_pointed {

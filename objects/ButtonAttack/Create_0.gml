@@ -10,8 +10,6 @@ dir = 0
 
 clicked = 0
 
-pause = 0
-
 button_name = "SHOOT BUTTON"
 
 hold = 0

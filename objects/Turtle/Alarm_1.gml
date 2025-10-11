@@ -6,7 +6,7 @@ if instance_exists(target) {
     //GOT TARGET
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 and point_distance(x, y, target.x, target.y) < 320 {
         //CAN SEE
-        direction = target_direction + random(60) - 30
+        direction = mcr_target_direction + random(60) - 30
 
         if random(3) < 2 walk = 50
         else alarm[1] /= 2

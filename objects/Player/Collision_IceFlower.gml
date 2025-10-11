@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if KeyCont.press_pick[p] {
+if KeyCont.press_pick[index] {
     dir = random_angle
     repeat 2 + random(3) {
         with instance_create(x, y, BloodStreak) {
@@ -15,6 +15,6 @@ if KeyCont.press_pick[p] {
     hp--inframes = 5
     sprite_index = spr_hurt
     snd_play_hit(snd_hurt, 0.2)
-    last_hit = sprJungleFlowerIdle
+    last_hit = sprIceFlowerIdle
     other.feed++
 }

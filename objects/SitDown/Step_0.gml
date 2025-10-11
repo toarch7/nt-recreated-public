@@ -17,7 +17,7 @@ if distance_to_object(Player) <= 2 {
         roll = 0
         view_xview = x - view_width / 2
         view_yview = y - view_height / 2
-        scrUnlock()
+        scrUnlocksArea()
     }
 
     do_thing = 1

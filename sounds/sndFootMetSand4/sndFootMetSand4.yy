@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndFootMetSand4",
+  "$GMSound": "",
+  "%Name": "sndFootMetSand4",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 1,
   "conversionMode": 0,
   "duration": 0.159313,
+  "name": "sndFootMetSand4",
   "parent": {
     "name": "Foot Steps",
-    "path": "folders/Sounds/Foot Steps.yy",
+    "path": "folders/Sounds/Foot Steps.yy"
   },
   "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndFootMetSand4",
+  "soundFile": "sndFootMetSand4.wav",
   "type": 1,
-  "volume": 0.3,
+  "volume": 0.3
 }

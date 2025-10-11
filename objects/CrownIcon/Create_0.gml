@@ -1,5 +1,3 @@
-scrCrowns()
-p = 0
-selected = 0
-
-netindex_set()
+selected = false
+crown = Crown.None
+scr_network_instance()

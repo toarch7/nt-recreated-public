@@ -1,21 +1,20 @@
-if !weekly {
-    var instances = playerinstances,
-		keys = struct_keys(instances)
+/// @description Update icon statuses
+if weekly exit
+
+var _instances = global.__playerinstance_list
+
+for (var i = 0; i < player_count; i++) {
+    var _pinst = _instances[i]
 	
-    for (var i = 0; i < array_length(keys); i++) {
-        var inst = variable_struct_get(instances, keys[i])
-		
-		if instance_exists(CoopController) {
-			inst.race = 0
-			inst.skin = 0
-			
-			continue
+	if instance_exists(CoopController) {
+		_pinst.reset_loadout()
+		continue
+	}
+	
+    with CharSelect {
+	    if race && race == _pinst.race {
+	        event_perform(ev_mouse, ev_left_press)
+			break
 		}
-		
-        with CharSelect {
-	        if num != 0 && num == inst.race {
-	            event_perform(ev_mouse, ev_left_press); break
-			}
-        }
     }
 }

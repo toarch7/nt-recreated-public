@@ -28,10 +28,10 @@ if !place_free(x, y + vspeed) {
     }
 }
 
-if hammerheads && hammerhead >= 12 {
+if hammerhead_charges && hammerhead >= 12 {
     with other {
 		with instance_create(x, y, AnimParticle) {
-			sprite_index = sprHammerHeadBreak
+			sprite_index = sprHammerHead
 			depth = other.depth - 1
 			
 			image_speed = 0.4
@@ -41,11 +41,12 @@ if hammerheads && hammerhead >= 12 {
         instance_destroy()
     }
     
-    hammerheads --
+    hammerhead_charges --
     
-    if !hammerheads {
+    if !hammerhead_charges {
         snd_play(sndHammerHeadEnd)
-    } else {
+    }
+	else {
         snd_play(sndHammerHeadProc)
     }
 }

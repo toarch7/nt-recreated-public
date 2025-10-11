@@ -12,6 +12,7 @@ event_inherited()
 
 snd_hurt = sndFlyHurt
 snd_dead = sndFlyDead
+snd_mele = sndFlyMelee
 
 //behavior
 walk = 0

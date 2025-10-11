@@ -20,7 +20,8 @@ function scrDrawHUD(plr = noone) {
 		race = plr.race,
 		wep = plr.wep,
 		bwep = plr.bwep,
-		ultra = plr.ultra,
+		// TODO: refactor to support multiple ultras
+		ultra = 0,
 		hp = plr.hp,
 		max_hp = plr.max_hp,
 		wave = plr.wave
@@ -40,7 +41,7 @@ function scrDrawHUD(plr = noone) {
 		if plr.fainted {
 			var color = merge_color(c_black, c_red, 0.5 + sin(current_time / 250) * 0.3)
 			
-			draw_sprite_ext(sprBleedHUD, 2, 22, 7, 84 - max(0, 84 * (1 - plr.fainted / PRACTICE_FAINTED_TIME)), 1, 0, color, 1)
+			draw_sprite_ext(sprBleedHUD, 2, 22, 7, 84 - max(0, 84 * (1 - plr.fainted / CHEAT_PRACTICE_FAINTED_TIME)), 1, 0, color, 1)
 			
 			draw_set_color(c_white)
             draw_set_halign(fa_center)
@@ -286,7 +287,7 @@ function scrDrawHUD(plr = noone) {
                 if !UberCont.opt_keyboard && !UberCont.opt_gamepad {
                     with ButtonAct {
                         draw_sprite_ext(other.sprite_index, other.image_index, x, y, 2, 2, other.image_angle, c_white, 1)
-                        draw_set_valign(fa_center)
+                        draw_set_valign(fa_middle)
                         draw_text_shadow(x, y + 36, loc("PICK UP"))
                         draw_set_valign(fa_left)
 

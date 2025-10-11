@@ -6,12 +6,12 @@ if instance_exists(target) {
             ammo = 4
             alarm[2] = 30
             snd_play(sndLaserCrystalCharge)
-            gunangle = target_direction
+            gunangle = mcr_target_direction
             sprite_index = spr_fire
             alarm[1] = 90 + random(10)
         } else {
-            if random(3) < 1 direction = target_direction
-            else direction = choose(direction, target_direction + 90 + random(180))
+            if random(3) < 1 direction = mcr_target_direction
+            else direction = choose(direction, mcr_target_direction + 90 + random(180))
         }
     } else if random(3) < 1 direction = random_angle
 

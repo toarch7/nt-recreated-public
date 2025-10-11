@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "amb1",
+  "$GMSound": "",
+  "%Name": "amb1",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 3,
   "conversionMode": 0,
   "duration": 30.005,
+  "name": "amb1",
   "parent": {
     "name": "Music",
-    "path": "folders/Sounds/Music.yy",
+    "path": "folders/Sounds/Music.yy"
   },
   "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "amb1",
+  "soundFile": "amb1.ogg",
   "type": 1,
-  "volume": 0.5,
+  "volume": 0.5
 }

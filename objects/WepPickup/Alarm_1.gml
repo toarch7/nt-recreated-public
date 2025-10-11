@@ -26,3 +26,5 @@ with creator {
         instance_destroy(other.id, 1)
     }
 }
+
+snd_play(sndChickenReturn)

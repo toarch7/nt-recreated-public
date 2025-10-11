@@ -2,7 +2,7 @@ if (ammo > 0) {
     if (ammo == 45) {
         snd_play_hit_big(sndSalamanderFire, 0.2)
         myloop = sndSalamanderFireLoop
-        snd_loop(myloop)
+        snd_play_loop(myloop)
     }
     walk = 0
     ammo -= 1

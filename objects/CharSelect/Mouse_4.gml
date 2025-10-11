@@ -1,73 +1,42 @@
 if lockstep_stop
 	exit
 
-if !UberCont.cgot[num] && !UberCont.weekly_run {
+var _race = race
+
+if !can {
 	with Menu {
-        hint = race_lock[other.num]
+        unlock_hint = scrRaceGetUnlockDescription(_race)
+		unlock_hint_pop = 2
         alarm[11] = 90
     }
 	
-	snd_play(sndClickBack)
-	
+	snd_play(sndNoSelect)
 	exit
 }
 
-if instance_exists(DailyList) or net_event(ev_mouse, ev_left_press)
+if instance_exists(DailyList) || scr_network_handle_event(event_type, event_number)
 	exit
 
-var is_me = net_isme(),
-	inst = player_get(),
-	race = num
+var _is_me = scr_is_authority(),
+	_pinst = scr_playerinstance_find()
 
-if instance_exists(CoopController)
-	inst = struct_clone(inst)
-
-if inst.race != race {
-    if is_me {
+if _pinst.race != _race {
+    if _is_me {
 	    with CharSelect {
-	        selected = 0
+	        selected = false
 		}
 		
-		selected = 1
+		selected = true
 	}
 	
-    inst.race = race
-    inst.skin = save_get_value("cskin", string(race), 0)
+	scrCampfireMenuSelectionChange(_pinst.index, _race)
 	
-    if !UberCont.daily_run {
-        inst.cwep = save_get_value("cswep", string(race), 0) ? UberCont.cwep[race] : UberCont.race_swep[race]
-    }
-	else if !UberCont.weekly_run {
-        inst.cwep = race_swep[race]
-    }
-	
-    with GoButton {
-        image_speed = 0.4
-        image_index = 0
-    }
-	
-    snd_slct = asset_get_index("sndMutant" + string(race) + "Slct")
-	
-    if num == 13 {
-        snd_slct = sndBigDogIntro
-    }
-	
-	if instance_exists(CoopController) {
-		if is_me {
-			net_add_data("other", "playerinstance", inst)
-		}
-	}
-	else {
-		with Menu {
-			port_x = 150
-			
-			if race >= 13 && race <= 15
-				loadout = 0
-			
-			appear = 2
-		}
+	if instance_exists(CoopController) && _is_me {
+		scr_network_attach_event_data("other", "my_player", _pinst)
 	}
 	
-    snd_play(snd_slct)
+    snd_play(scr_race_get_sound(_race, "Slct"))
 }
-else scrRunStart()
+else {
+	scrRunStart()
+}

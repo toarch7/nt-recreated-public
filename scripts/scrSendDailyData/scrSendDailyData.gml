@@ -83,8 +83,8 @@ function scrSendDailyData() {
 
         var map = ds_map_create();
         map[? "Content-type"] = "application/json";
-        var date = scrAddZero(UberCont.date_day, 1) + "." + scrAddZero(UberCont.date_month, 1) + "." + string(UberCont.date_year)
-        var time = scrAddZero(GameCont.minutes, 1) + ":" + scrAddZero(GameCont.seconds, 1)
+        var date = string_pad_zeroes(UberCont.date_day, 1) + "." + string_pad_zeroes(UberCont.date_month, 1) + "." + string(UberCont.date_year)
+        var time = string_pad_zeroes(GameCont.minutes, 1) + ":" + string_pad_zeroes(GameCont.seconds, 1)
 
         var name = save_get_value("etc", "name", "unnamed")
         name = string_replace_all(name, "?", "_")
@@ -102,7 +102,7 @@ function scrSendDailyData() {
             var mut_list = "",
 				runId = base_convert(global.seed, 10, 16)
 
-            scrDiscordIcons()
+            scrWebhookEmoteIDs()
 
             for (var i = 0; i < ds_list_size(GameCont.skills); i++) {
                 mut_list += muticon[GameCont.skills[| i]] + " "
@@ -203,7 +203,7 @@ function scrSendDailyData() {
 				skills: _skills,
 				crown: GameCont.crown,
 				version: UberCont.version,
-				uid: scrGetUid()
+				uid: scrSavedatascrGetUID()
 			}
 			
 			my_entry.runId = runId

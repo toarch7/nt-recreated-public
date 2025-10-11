@@ -1,17 +1,18 @@
-if pausespr
-    sprite_delete(pausespr)
+if sprite_exists(pausespr) {
+	sprite_delete(pausespr)
+}
 
 discard_custom_sounds()
 discard_custom_sprites()
 
-if volqueue != -1 ds_queue_destroy(volqueue)
+if ds_exists(volqueue, ds_type_queue) {
+	ds_queue_destroy(volqueue)
+}
 
 resourcepack_temp_cleanup()
 
 scrBignameSurfaceCleanup()
 
-if server != -1
-	network_destroy(server)
-
-if native_cursor_inst != -1
+if native_cursor_inst != -1 {
 	native_cursor_destroy(native_cursor_inst)
+}

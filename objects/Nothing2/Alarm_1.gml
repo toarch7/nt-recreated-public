@@ -5,8 +5,8 @@ if instance_exists(target) {
     if attack == 1 {
         shots += 1
 
-        snd_play_hit_big(sndBigballFire, 0.1)
-        aimdir = target_direction + ((30 + random(10)) * side)
+        snd_play_hit_big(sndBigBallFire, 0.1)
+        aimdir = mcr_target_direction + ((30 + random(10)) * side)
 
         with instance_create(x, y, BigGuardianBullet) {
             hit_id = other.spr_idle
@@ -24,8 +24,8 @@ if instance_exists(target) {
     }
     if (attack == 2) {
         if instance_exists(target) {
-            x += lengthdir_x(1.5, target_direction)
-            y += lengthdir_y(1.5, target_direction)
+            x += lengthdir_x(1.5, mcr_target_direction)
+            y += lengthdir_y(1.5, mcr_target_direction)
         }
         repeat(10 + GameCont.loops) {
             with(instance_create(x, y, GuardianBullet)) {

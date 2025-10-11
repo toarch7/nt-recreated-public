@@ -11,8 +11,8 @@ appear = 2
 image_speed = 0
 depth = -9000
 
-start = global.time
+start = current_frame
 
 wait = 3
 
-netindex_set()
+scr_network_instance()

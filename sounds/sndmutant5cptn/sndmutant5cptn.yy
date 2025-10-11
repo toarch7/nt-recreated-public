@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndMutant5Cptn",
+  "$GMSound": "",
+  "%Name": "sndMutant5Cptn",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 2,
   "conversionMode": 0,
   "duration": 4.224031,
+  "name": "sndMutant5Cptn",
   "parent": {
-    "name": "Speeches",
-    "path": "folders/Sounds/Mutant/Speeches.yy",
+    "name": "Speech",
+    "path": "folders/Sounds/Mutant/Speech.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndmutant5cptn.wav",
+  "soundFile": "sndMutant5Cptn.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

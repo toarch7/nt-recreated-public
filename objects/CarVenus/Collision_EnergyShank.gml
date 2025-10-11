@@ -4,6 +4,6 @@ if lockstep_stop
 //MAGIC REPAIR
 hp = 1000
 instance_create(x, y, CarVenusFixed)
-snd_loop(sndCarLoop)
+snd_play_loop(sndCarLoop)
 screwed = 1
 instance_destroy(id, 0)

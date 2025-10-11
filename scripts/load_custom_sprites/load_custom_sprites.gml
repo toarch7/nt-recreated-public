@@ -57,13 +57,13 @@ function load_custom_sprites(path) {
                                     handled = true
                                 }
 								else if !b {
-                                    printc("[!!!] Failed to load frame " + find + " to replace", c_red)
+                                    scr_log_push("[!!!] Failed to load frame " + find + " to replace", c_red)
                                     status = true
                                 }
 								else handled = true
                             }
 							catch (e) {
-                                printc("[!!!] Failed to parse framecount of sprite " + sprite_get_name(find), c_red)
+                                scr_log_push("[!!!] Failed to parse framecount of sprite " + sprite_get_name(find), c_red)
                                 status = true
                             }
                         }
@@ -92,7 +92,7 @@ function load_custom_sprites(path) {
                         if sprite_replace(asset, path + find, sprite_get_number(asset), 0, 0, sprite_get_xoffset(asset), sprite_get_yoffset(asset)) {
                             // ok
                         } else {
-                            printc("[!!!] Failed to replace sprite " + find, c_red);
+                            scr_log_push("[!!!] Failed to replace sprite " + find, c_red);
                             status = true
                         }
                     } else {
@@ -100,7 +100,7 @@ function load_custom_sprites(path) {
                         sprite_get_width(asset), "x", string(sprite_get_height(asset)) + ",", "got",
                         sprite_get_width(sprite), "x", sprite_get_height(sprite))
 
-                        printc("^^^ " + find + " is not being replaced", c_red)
+                        scr_log_push("^^^ " + find + " is not being replaced", c_red)
 
                         status = true
                         sprite_flush(sprite)
@@ -108,12 +108,12 @@ function load_custom_sprites(path) {
                     }
                 }
 				else {
-                    printc("[!!!] Unable to create sprite for " + find, c_red);
+                    scr_log_push("[!!!] Unable to create sprite for " + find, c_red);
                     status = true
                 }
             }
 			else if !b {
-                printc("[!] Unable to find sprite named " + find, c_yellow);
+                scr_log_push("[!] Unable to find sprite named " + find, c_yellow);
                 status = true
             }
         }

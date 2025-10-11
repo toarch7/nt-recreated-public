@@ -5,7 +5,7 @@ if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 and random(3) < 1 {
         ammo = choose(3, 4, 5)
         alarm[2] = 1
-        gunangle = target_direction
+        gunangle = mcr_target_direction
         snd_play(sndRatKingVomit)
         alarm[1] = 30 + random(5)
         walk = 40 + random(10)

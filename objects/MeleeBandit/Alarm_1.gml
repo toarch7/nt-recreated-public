@@ -7,7 +7,7 @@ if instance_exists(target) {
             snd_play(sndAssassinAttack)
             wepangle = -wepangle
             motion_add(gunangle, 6)
-            gunangle = target_direction
+            gunangle = mcr_target_direction
 
             alarm[2] = 10
             instance_create(x, y - 16, HitWarning)
@@ -16,7 +16,7 @@ if instance_exists(target) {
             direction = point_direction(target.x, target.y, x, y) + random(20) - 10
             speed = 0.4
             walk = 40 + random(10)
-            gunangle = target_direction
+            gunangle = mcr_target_direction
         }
 
         if target.x < x right = -1

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrWebhookEmoteIDs",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrWebhookEmoteIDs",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

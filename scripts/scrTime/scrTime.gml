@@ -11,7 +11,7 @@ function scrTime(secs) {
         mins++
     }
 
-    return scrAddZero(hors, 1) + ":" + scrAddZero(mins, 1) + ":" + scrAddZero(secs, 1)
+    return string_pad_zeroes(hors, 1) + ":" + string_pad_zeroes(mins, 1) + ":" + string_pad_zeroes(secs, 1)
 }
 
 function scrTimeSpeedrun(frames) {
@@ -28,5 +28,5 @@ function scrTimeSpeedrun(frames) {
 		secs -= 60
     }
 
-    return scrAddZero(mins, 1) + ":" + scrAddZero(secs, 1) + "." + scrAddZero(round(frames / 30 * 100), 1)
+    return string_pad_zeroes(mins, 1) + ":" + string_pad_zeroes(secs, 1) + "." + string_pad_zeroes(round(frames / 30 * 100), 1)
 }

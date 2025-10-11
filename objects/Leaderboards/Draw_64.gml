@@ -8,7 +8,7 @@ if loaded {
 else {
 	event_user(0)
 	
-	draw_sprite(sprDailyLoad, global.time * 0.4, view_width / 2, 18)
+	draw_sprite(sprDailyLoad, current_frame * 0.4, view_width / 2, 18)
 	
 	exit
 }
@@ -26,8 +26,9 @@ if !full {
 }
 
 if last_min != start or last_max != count {
-	if !dragging
-		sound_play_pitchvol(sndHover, 1.1 + random(0.1), 0.3)
+	if !dragging {
+		snd_play(sndHover, 1.1 + random(0.1), 0.3)
+	}
 	
 	for(var i = last_min; i < last_max; i ++) {
 		if i < start or i > count {
@@ -65,10 +66,10 @@ for(var i = start; i < count; i ++) {
 	draw_set_color(c_uigray)
 	
 	if item == my_entry {
-		var splat_num = sprite_get_number(sprLeaderboardSplat)
+		var splat_num = sprite_get_number(sprDailySplat)
 		splat = lerp(splat, splat_num, 0.4)
 		
-		draw_sprite(sprLeaderboardSplat, splat, 24 + xoff, yy)
+		draw_sprite(sprDailySplat, splat, 24 + xoff, yy)
 		
 		draw_set_color(c_white)
 	}
@@ -81,7 +82,7 @@ for(var i = start; i < count; i ++) {
 	if gap < 260
 		name = string_copy(name, 1, 12)
 	
-	name = "@(" + string(item.skin ? sprPlayerMapIconSkin : sprPlayerMapIcon) + ":" + string(item.char) + ")  " + name
+	name = "@(" + string(item.skin ? sprPlayerMapIconSkin : sprMapIcon) + ":" + string(item.char) + ")  " + name
 	
 	draw_set_halign(fa_left)
 	
@@ -100,5 +101,5 @@ draw_set_valign(fa_top)
 event_user(0)
 
 scrDrawAlignCenter()
-draw_bigname(view_width / 2, 18, loc("LEADERBOARDS"), c_uigray)
+draw_text_bigname(view_width / 2, 18, loc("LEADERBOARDS"), c_uigray)
 scrDrawAlignDefault()

@@ -1,9 +1,15 @@
-function scrLoadLocalizations() {
-    var p = "localizations/",
-		_find = file_find_first(p + "*.loc", 0),
-		failed = ""
+global.language_list = {
+	en: {}
+}
+
+global.language_current = {}
+
+function scrLanguagesLoad() {
+    var _path = "localizations/",
+		_find = file_find_first(_path + "*.loc", 0),
+		_error_log = ""
 	
-	localizations_list = { en: {} }
+	global.language_list = { en: {} }
 	
     while _find != "" {
         if _find == "default.loc" {
@@ -12,16 +18,16 @@ function scrLoadLocalizations() {
 			continue
 		}
 		
-		var _file = file_text_open_read(p + _find),
+		var _file = file_text_open_read(_path + _find),
 			_data = ""
 		
-        while !file_text_eof(_file) {
+		while !file_text_eof(_file) {
             _data += file_text_read_string(_file)
             file_text_readln(_file)
         }
-
+		
         try {
-            localizations_list[$ string_replace(_find, ".loc", "")] = json_parse(_data);
+            global.language_list[$ string_replace(_find, ".loc", "")] = json_parse(_data);
         }
 		catch (e) {
             show_debug_message([_find, e.message])
@@ -31,8 +37,8 @@ function scrLoadLocalizations() {
 
         _find = file_find_next()
     }
-		
-	print("Languages", struct_keys(localizations_list))
-
+	
+	print("Loaded languages:", struct_keys(global.language_list))
+	
     file_find_close()
 }

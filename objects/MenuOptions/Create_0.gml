@@ -1,10 +1,9 @@
-#macro UI_SLIDER_OFFSET 20
-#macro SWITCH_STATE_ON "ON"
-#macro SWITCH_STATE_OFF "OFF"
+#macro OPTION_ON "ON"
+#macro OPTION_OFF "OFF"
 
-netindex_set()
+scr_network_instance()
 
-languages = struct_keys(global.localizations_list)
+languages = struct_keys(global.language_list)
 
 enum OptionCategory {
 	Main,
@@ -93,190 +92,29 @@ option_number = -1
 
 last_change = 0
 
-native_cursor_dll = dll_check("native_cursor")
+//native_cursor_dll_status = dll_check("native_cursor")
 
+debug = GM_build_type == "run"
 ingame = instance_exists(GameCont)
 default_viewx = view_xview // o, the burden of legacy crutches
 default_viewy = view_yview
-
 depth = -9999
 
-function option_category_begin(num) {
-	if option_number != -1
-		option_category_end()
-	
-	option_list = []
-	option_number = num
-}
-
-function option_category_end() {
-	if option_number == -1
-		exit
-	
-	options[option_number] = option_list
-	
-	option_list = undefined
-	option_number = -1
-}
-
-debug = GM_build_type == "run"
-
-function option_element_create(params) {
-	if option_list == undefined
-		exit
-	
-	if !debug {
-		if params[$ "desktop_only"] && !global.desktop
-			exit
+colorpicker_update_scales = function(_color) {
+	var _r = color_get_red(_color),
+		_g = color_get_green(_color),
+		_b = color_get_blue(_color),
 		
-		if params[$ "mobile_only"] && global.desktop
-			exit
-	}
+		_color_controls = options[OptionCategory.Game_Color]
 	
-	if params[$ "ingame"] != undefined && params.ingame != ingame {
-		if option_number != OptionCategory.Main
-			exit
-		
-		params[$ "available"] = false
-		params[$ "condition"] = undefined
-	}
-	
-	params[$ "type"] ??= "button"
-	params[$ "name"] ??= "BUTTON"
-	params[$ "visible"] ??= true
-	params[$ "available"] ??= true
-	params[$ "skip"] ??= false
-	
-	params[$ "value"] ??= undefined
-	params[$ "category"] ??= undefined
-	
-	if params.type == "switch"
-		params[$ "states"] ??= [ SWITCH_STATE_OFF, SWITCH_STATE_ON ]
-	
-	if params.type == "input" {
-		params[$ "previous"] = undefined
-		params[$ "validate"] ??= undefined
-	}
-	
-	params[$ "draw"] ??= undefined
-	params[$ "click"] ??= undefined
-	params[$ "name_get"] ??= undefined
-	params[$ "value_get"] ??= undefined
-	params[$ "condition"] ??= undefined
-	
-	params[$ "sprite"] ??= undefined
-	
-	params[$ "key"] ??= undefined
-	
-	params[$ "width"] ??= 240
-	params[$ "height"] ??= string_height(string_hash_to_newline(params.name))
-	
-	params[$ "anim"] = 0
-	params[$ "splat"] = 0
-	
-	if params.type == "category" or is_undefined(params.key) {
-		params[$ "halign"] ??= fa_center
-	}
-	
-	params[$ "halign"] ??= fa_left
-	params[$ "valign"] ??= fa_center
-	
-	if params.type == "list" {
-		params[$ "list"] ??= []
-		
-		params.list_kind = "numeric"
-		
-		for(var i = 0; i < array_length(params.list); i ++) {
-			if !is_numeric(params.list[i]) {
-				params.list_kind = "collection"; break
-			}
-		}
-	}
-	
-	if !is_undefined(params.sprite)
-		params.height = max(params.height, sprite_get_height(params.sprite[0]))
-	
-	if params.key != undefined && params.value == undefined
-		params.value = UberCont.saveData[? params.key]
-	
-	array_push(option_list, params)
-}
-
-function option_elements_create() {
-	for(var i = 0; i < argument_count; i ++) {
-		if !is_undefined(argument[i])
-			option_element_create(argument[i])
-	}
-}
-
-category_set = function (_category, _queue = true) {
-	if _category >= array_length(options) {
-		print("Can't change category to", _category, ", ID number exceeded", array_length(options))
-		exit
-	}
-	
-	if category != _category && _queue
-		ds_stack_push(category_stack, category)
-	
-	category = _category
-	
-	var items = options[_category]
-	
-	last_change = global.time + 2
-	pointed_item = -1
-	item_count = -1
-	
-	for(var i = 0; i < array_length(items); i ++) {
-		var item = items[i]
-		
-		item.appear = 0
-		
-		if item[$ "awake"] != undefined
-			method_execute(item.awake, item)
-		
-		if item.type == "keybind" {
-			if item.condition != undefined
-				item.available = method_execute(item.condition, item)
-			
-			if !item.available {
-				item.visible = false
-			}
-			else item.visible = true
-		}
-	}
-	
-	if !global.desktop {
-		mousex = -1000
-		mousey = -1000
-	}
-	
-	snd_play(_category == OptionCategory.Main ? sndMenuOptions : sndClick)
-}
-
-category_get = function(_category) {
-	if _category >= array_length(options)
-		exit
-	
-	return options[_category]
-}
-
-colorpicker_update_scales = function(color) {
-	var r = color_get_red(color),
-		g = color_get_green(color),
-		b = color_get_blue(color)
-	
-	var col = category_get(OptionCategory.Game_Color)
-	
-	col[1].value = r / 255
-	col[2].value = g / 255
-	col[3].value = b / 255
+	_color_controls[1].value = _r / 255
+	_color_controls[2].value = _g / 255
+	_color_controls[3].value = _b / 255
 }
 
 colorpicker_update_options = function(color) {
 	var val = base_convert(real(color), 10, 16)
-	
 	UberCont.saveData[? "options_color"] = val
-	
 	scrOptionsUpdate()
 }
 
@@ -290,20 +128,20 @@ draw_inline_switch = function(opt) {
 
 #region Main
 
-option_category_begin(OptionCategory.Main)
+scrOptionsMenuCategoryBegin(OptionCategory.Main)
 
-option_elements_create
+scrOptionsMenuCreateElements
 (
-	{ type: "category", name: "AUDIO",    category: OptionCategory.Audio,    sprite: [ sprOptionButtons, 0 ] },
-	{ type: "category", name: "VIDEO",    category: OptionCategory.Video,    sprite: [ sprOptionButtons, 1 ] },
-	{ type: "category", name: "GAME",     category: OptionCategory.Game,     sprite: [ sprOptionButtons, 2 ] },
-	{ type: "category", name: "CONTROLS", category: OptionCategory.Controls, sprite: [ sprOptionButtons, 3 ] },
+	{ type: "category", name: "AUDIO",    category: OptionCategory.Audio,    sprite: [ sprOptionsButtons, 0 ] },
+	{ type: "category", name: "VIDEO",    category: OptionCategory.Video,    sprite: [ sprOptionsButtons, 1 ] },
+	{ type: "category", name: "GAME",     category: OptionCategory.Game,     sprite: [ sprOptionsButtons, 2 ] },
+	{ type: "category", name: "CONTROLS", category: OptionCategory.Controls, sprite: [ sprOptionsButtons, 3 ] },
 	
 	{
 		type: "button", name: "RESOURCEPACKS", ingame: false,
 		
 		click: function() {
-			self.category_set(OptionCategory.Resourcepacks)
+			scrOptionsMenuChangeCategory(OptionCategory.Resourcepacks)
 			
 			if !save_get_value("etc", "rp_warning", 0)
 				rp_warning = true
@@ -330,14 +168,14 @@ option_elements_create
 	{ type: "category", name: "CO-OP", category: OptionCategory.Coop_Menu, visible: false },
 )
 
-option_category_end()
+scrOptionsMenuCategoryEnd()
 
 #endregion
 #region Audio
 
-option_category_begin(OptionCategory.Audio)
+scrOptionsMenuCategoryBegin(OptionCategory.Audio)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "slider",  name: "MASTER VOLUME",   key: "volume_master"       },
 	{ type: "slider",  name: "MUSIC VOLUME",    key: "volume_music"        },
 	{ type: "slider",  name: "AMBIENT VOLUME",  key: "volume_ambient"      },
@@ -349,9 +187,9 @@ option_elements_create(
 #endregion
 #region Video
 
-option_category_begin(OptionCategory.Video)
+scrOptionsMenuCategoryBegin(OptionCategory.Video)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "switch",  name: "FULLSCREEN",   key: "visual_resolution", mobile_only: true },
 	
 	{
@@ -392,9 +230,9 @@ option_elements_create(
 	{ type: "slider",  name: "FREEZE FRAMES",    key: "visual_freezeframes" },
 	
 	{ type: "switch",  name: "WALL FIX",         key: "visual_walls"        },
-	{ type: "switch",  name: "PARTICLES",        key: "visual_particles",   states: [ SWITCH_STATE_ON, SWITCH_STATE_OFF ] },
+	{ type: "switch",  name: "PARTICLES",        key: "visual_particles",   states: [ OPTION_ON, OPTION_OFF ] },
 	{ type: "switch",  name: "BLOOM",            key: "visual_bloom"        },
-	{ type: "switch",  name: "HIDE HUD",         key: "visual_hud",         states: [ SWITCH_STATE_ON, SWITCH_STATE_OFF ] },
+	{ type: "switch",  name: "HIDE HUD",         key: "visual_hud",         states: [ OPTION_ON, OPTION_OFF ] },
 	
 	{
 		type: "list", name: "PIXEL MODE", key: "visual_scaling", list: range(1, 4),
@@ -425,14 +263,14 @@ option_elements_create(
 
 #endregion
 #region Video_Display
-option_category_begin(OptionCategory.Video_Display)
+scrOptionsMenuCategoryBegin(OptionCategory.Video_Display)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "switch",  name: "FULL RESOLUTION",   key: "visual_resolution"   },
 	{ type: "switch",  name: "FULLSCREEN",        key: "options_fullscreen",
 		click: function (opt) {
 			opt.value = !window_get_fullscreen()
-			window_set_fullscreen(opt.value)
+			scr_window_set_fullscreen(opt.value)
 			
 			scrSetViewSize(true)
 			
@@ -453,23 +291,23 @@ option_elements_create(
 #endregion
 #region Game
 
-option_category_begin(OptionCategory.Game)
+scrOptionsMenuCategoryBegin(OptionCategory.Game)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "list",     name: "LANGUAGE",          key: "etc_language", list: languages },
 	
 	{ type: "switch",   name: "BOSS INTROS",       key: "visual_bossintro" },
 	{ type: "switch",   name: "DYNAMIC CAMERA",    key: "visual_camera" },
 	{ type: "switch",   name: "PLAY TUTORIAL",     key: "game_tutorial",  ingame: false },
 	{ type: "switch",   name: "TIMER",             key: "visual_timer"     },
-	{
-		type: "switch", name: "CURSOR", desktop_only: true,
-		states: [ "DEFAULT", "NATIVE" ], key: "options_cursor",
+	//{
+	//	type: "switch", name: "CURSOR", desktop_only: true,
+	//	states: [ "DEFAULT", "NATIVE" ], key: "options_cursor",
 		
-		condition: function(opt) {
-			return native_cursor_dll
-		}
-	},
+	//	condition: function(opt) {
+	//		return native_cursor_dll_status
+	//	}
+	//},
 	
 	//{ type: "switch",   name: "MOUSELOCK",          key: "options_mouselock", desktop_only: true },
 	
@@ -496,9 +334,9 @@ option_elements_create(
 #endregion
 #region Game_Color
 
-option_category_begin(OptionCategory.Game_Color)
+scrOptionsMenuCategoryBegin(OptionCategory.Game_Color)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{
 		type: "input", name: "EDIT HEX", key: undefined, halign: fa_left,
 		
@@ -634,12 +472,12 @@ option_elements_create(
 #endregion
 #region Game_Profile
 
-option_category_begin(OptionCategory.Game_Profile)
+scrOptionsMenuCategoryBegin(OptionCategory.Game_Profile)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "button", name: "ID", key: "general_uid",
 		value_get: function(opt) {
-			var value = scrGetUid(),
+			var value = scrSavedatascrGetUID(),
 				copied = opt[$ "__copied"]
 			
 			if copied == undefined {
@@ -647,16 +485,16 @@ option_elements_create(
 					return string_copy(value, 1, 5) + "..."
 			}
 			
-			if copied - global.time > 0
+			if copied - current_frame > 0
 				return "@g[COPIED]"
 			
 			return value
 		},
 		
 		click: function(opt) {
-			opt.value = scrGetUid()
+			opt.value = scrSavedatascrGetUID()
 			
-			if global.desktop {
+			if is_desktop {
 				clipboard_set_text(opt.value)
 			}
 			else if os_type == os_android {
@@ -664,7 +502,7 @@ option_elements_create(
 			}
 			else return;
 			
-			opt[$ "__copied"] = global.time + 15
+			opt[$ "__copied"] = current_frame + 15
 		}
 	},
 	
@@ -681,7 +519,7 @@ option_elements_create(
 	{ type: "button", name: "COLOR", key: "options_color", ingame: false,
 		click: function () {
 			option_can_change = false
-			self.category_set(OptionCategory.Game_Color)
+			scrOptionsMenuChangeCategory(OptionCategory.Game_Color)
 		},
 		
 		value_get: function(opt) {
@@ -691,22 +529,6 @@ option_elements_create(
 			draw_set_color(global.player_color)
 			
 			return "[" + string(UberCont.opt_color) + "]"
-		}
-	},
-	
-	{
-		type: "button", name: "AUTHORIZE WITH DISCORD", ingame: false,
-		
-		click: function(opt) {
-			if auth_discord_logged
-				return scrAuthorizationDeauth()
-			
-			with UberCont
-				event_user(10)
-		},
-		
-		name_get: function(opt) {
-			return (auth_discord_logged ? $"DEAUTHORIZE @s({string_upper(auth_discord_username)})" : opt.name)
 		}
 	},
 	
@@ -723,9 +545,9 @@ option_elements_create(
 #endregion
 #region Game_Data
 
-option_category_begin(OptionCategory.Game_Data)
+scrOptionsMenuCategoryBegin(OptionCategory.Game_Data)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{
 		type: "button", name: "RESET OPTIONS",
 		
@@ -748,9 +570,9 @@ option_elements_create(
 #endregion
 #region Controls
 
-option_category_begin(OptionCategory.Controls)
+scrOptionsMenuCategoryBegin(OptionCategory.Controls)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "switch", name: "GAMEPAD", key: "options_gamepad" },
 	
 	{ type: "list", name: "GAMEPAD STYLE", key: "options_gamepad_type", list: range(0, array_length(gamepad_types) - 1),
@@ -785,7 +607,7 @@ option_elements_create(
 			if is_gamepad()
 				return str + " " + loc("(GAMEPAD)")
 			
-			if is_keyboard() && !global.desktop
+			if is_keyboard() && !is_desktop
 				return str + " " + loc("(KEYBOARD)")
 			
 			return str
@@ -793,7 +615,7 @@ option_elements_create(
 		
 		click: function() {
 			if is_gamepad() or is_keyboard() {
-				self.category_set(OptionCategory.Controls_Remapping_Keys)
+				scrOptionsMenuChangeCategory(OptionCategory.Controls_Remapping_Keys)
 				
 				exit
 			}
@@ -804,7 +626,7 @@ option_elements_create(
 	        if !UberCont.opt_gamepad
 	            scrCreateMobileControls()
 			
-			self.category_set(OptionCategory.Controls_Remapping, false)
+			scrOptionsMenuChangeCategory(OptionCategory.Controls_Remapping, false)
 		}
 	},
 	
@@ -813,12 +635,12 @@ option_elements_create(
 	{ type: "category", name: "EXPERIMENTAL OPTIONS", category: OptionCategory.Controls_Experimental }
 )
 
-option_category_end()
+scrOptionsMenuCategoryEnd()
 #endregion Controls
 #region Controls_Remapping
-option_category_begin(OptionCategory.Controls_Remapping)
+scrOptionsMenuCategoryBegin(OptionCategory.Controls_Remapping)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "button", name: "DEFAULT PRESET",
 		click: function() {
 			var saveData = UberCont.saveData
@@ -852,12 +674,12 @@ option_elements_create(
 )
 #endregion Controls_Remapping
 #region Controls_Remapping_Keys
-option_category_begin(OptionCategory.Controls_Remapping_Keys)
+scrOptionsMenuCategoryBegin(OptionCategory.Controls_Remapping_Keys)
 
 condition_keyboard = function() { return (is_keyboard() && !is_gamepad()) }
 condition_gamepad = function() { return is_gamepad() }
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "keybind", name: "FIRE", key: "fire" },
 	{ type: "keybind", name: "ACTIVE", key: "spec" },
 	{ type: "keybind", name: "SWAP", key: "swap" },
@@ -890,12 +712,12 @@ option_elements_create(
 
 #endregion Controls_Remapping_Keys
 #region Controls_Preferences
-option_category_begin(OptionCategory.Controls_Preferences)
+scrOptionsMenuCategoryBegin(OptionCategory.Controls_Preferences)
 
 cpref_condition = function(opt) { return UberCont.ctot_time[opt.char] > 0 }
 cpref_name = function(opt) { return (!UberCont.ctot_time[opt.char]) ? "@d- LOCKED -" : "@(sprPlayerMapIcon:" + string(opt.char) + ")  " + loc(opt.name) }
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "switch", name: "AUTO TELEKINESIS",      key: "cprefs_eyes", char: 3,
 			condition: cpref_condition, name_get: cpref_name },
 		
@@ -925,9 +747,9 @@ option_elements_create(
 #endregion Controls_Preferences
 #region Controls_Experimental
 
-option_category_begin(OptionCategory.Controls_Experimental)
+scrOptionsMenuCategoryBegin(OptionCategory.Controls_Experimental)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "switch", name: "KEYBOARD MODE",    key: "options_keyboard" },
 	
 	{ type: "switch", name: "WEAPON-STICKS",    key: "controls_wepstick" },
@@ -950,9 +772,9 @@ option_elements_create(
 
 #endregion Controls_Experimental
 #region Resourcepacks
-option_category_begin(OptionCategory.Resourcepacks)
+scrOptionsMenuCategoryBegin(OptionCategory.Resourcepacks)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{
 		type: "button", name: "VIEW INSTALLED", ingame: false,
 		
@@ -982,7 +804,7 @@ option_elements_create(
 			if confirm {
 				var a = "https://github.com/"
 				
-				if string_starts(str, a)
+				if string_starts_with(str, a)
 					str = string_delete(str, 1, string_length(a))
 				
 				if string_char_at(str, string_length(str)) == "/"
@@ -1021,9 +843,9 @@ option_elements_create(
 
 #endregion Resourcepacks
 #region Cheats
-option_category_begin(OptionCategory.Cheats)
+scrOptionsMenuCategoryBegin(OptionCategory.Cheats)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "switch", name: "CONSOLE", key: "cheats_console" },
 	{ type: "switch", name: "GRILLER MODE", key: "cheats_griller" },
 	{ type: "switch", name: "PRACTICE", key: "cheats_practice" }
@@ -1032,9 +854,9 @@ option_elements_create(
 #endregion Cheats
 
 #region Coop_Menu
-option_category_begin(OptionCategory.Coop_Menu)
+scrOptionsMenuCategoryBegin(OptionCategory.Coop_Menu)
 
-option_elements_create(
+scrOptionsMenuCreateElements(
 	{ type: "category", name: "PROFILE", category: OptionCategory.Game_Profile },
 	
 	{
@@ -1082,9 +904,6 @@ option_elements_create(
 	{ type: "button", name: "REFRESH LOCAL",
 		condition: function (opt) {
 			with CoopMenu {
-				local_count = 0
-				local_games = {}
-				
 				if local_wait
 					return false
 			}
@@ -1099,6 +918,8 @@ option_elements_create(
 				
 				snd_play(sndClick)
 			}
+			
+			scrOptionsMenuRemoveLocalGames()
 		}
 	}
 )
@@ -1109,20 +930,29 @@ local_game_template = {
 	ip: UberCont.opt_remote_ip,
 	port: UberCont.opt_remote_port,
 	
+	__multiplayer_game: true,
+	
 	click: function(opt) {
 		CoopMenu.join_remote(opt.ip, opt.port)
+	},
+	
+	draw: function(opt) {
+		draw_set_color(option_selected ? #00a3e3 : #005f85)
+		draw_text_shadow(drawx, drawy, opt.name)
+		
+		return true
 	}
 }
 
 #endregion
-option_category_end()
+scrOptionsMenuCategoryEnd()
 #endregion
 
 
 element_functions = {}
 
 element_functions[$ "category"] = function(opt) {
-	self.category_set(opt.category)
+	scrOptionsMenuChangeCategory(opt.category)
 	wait = 1
 }
 

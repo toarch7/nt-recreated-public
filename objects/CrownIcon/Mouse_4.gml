@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if net_event(ev_mouse, ev_left_press)
+if scr_network_handle_event(ev_mouse, ev_left_press)
 	exit
 
 if isset("appeary") && appeary exit

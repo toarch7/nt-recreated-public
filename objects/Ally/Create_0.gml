@@ -13,7 +13,7 @@ if instance_exists(Player) && ultra_get(2) {
 
 meleedamage = 0
 size = 3
-spr_idle = sprAllyAppear
+spr_idle = sprAllyappear
 spr_walk = sprAllyWalk
 spr_hurt = sprAllyHurt
 spr_dead = sprAllyDead
@@ -21,7 +21,7 @@ image_speed = 0.4
 friction = 0.4
 right = choose(1, - 1)
 hp = max_hp
-target = -1
+target = noone
 team = 2
 snd_hurt = sndAllyHurt
 snd_dead = sndAllyDead

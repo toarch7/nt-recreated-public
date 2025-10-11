@@ -7,13 +7,13 @@ if instance_exists(target) {
                 //FIRE
                 alarm[2] = 1
                 ammo = 3
-                gunangle = target_direction
+                gunangle = mcr_target_direction
                 alarm[1] = 20 + random(5)
             } else {
-                if random(4) < 1 snd_play(sndRavenScreech) direction = target_direction + random(90) - 45
+                if random(4) < 1 snd_play(sndRavenScreech) direction = mcr_target_direction + random(90) - 45
                 speed = 0.4
                 walk = 20 + random(10)
-                gunangle = target_direction
+                gunangle = mcr_target_direction
 
                 scrTarget()
                 if random(5) < 1 and instance_exists(target) {
@@ -30,7 +30,7 @@ if instance_exists(target) {
             direction = point_direction(target.x, target.y, x, y) + random(20) - 10
             speed = 0.4
             walk = 40 + random(10)
-            gunangle = target_direction
+            gunangle = mcr_target_direction
         }
 
         if target.x < x right = -1

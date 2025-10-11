@@ -6,7 +6,7 @@ if other.object_index == Van
 
 with other {
     hp -= 6
-    snd_play(sndGammaProc)
+    snd_play(sndGammaGutsProc)
     sprite_index = spr_hurt
     image_index = 0
     motion_addm(point_direction(other.x, other.y, x, y), 3)
@@ -26,5 +26,5 @@ if other.hp <= 0 {
     }
 
     image_alpha = 0.2
-    snd_play(sndGammaKill)
+    snd_play(sndGammaGutsKill)
 }

@@ -1,4 +1,9 @@
 if lockstep_stop
 	exit
 
-motion_add(point_direction(other.x, other.y, x, y), other.size * 0.5)
+if visible && !scrGameIsLockState() {
+	var _x = other.x + orandom(1),
+		_y = other.y + orandom(1)
+	
+	motion_add(point_direction(_x, _y, x, y), other.size * 0.5)
+}

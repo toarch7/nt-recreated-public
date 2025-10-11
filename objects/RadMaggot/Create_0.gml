@@ -10,6 +10,8 @@ spr_dead = sprRadMaggotDead
 
 event_inherited()
 
+snd_dead = sndRadMaggotDie
+	
 //behavior
 alarm[1] = 10 + random(10)
 

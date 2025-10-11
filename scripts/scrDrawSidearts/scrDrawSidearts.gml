@@ -1,6 +1,6 @@
 function scrDrawSidearts() {
 	with UberCont {
-		var n = max_view_width / 64,
+		var n = global.view_width_max / 64,
 			nh = ceil(view_height / 64) + 1
 		
 		// hori

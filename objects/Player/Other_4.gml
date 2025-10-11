@@ -13,7 +13,7 @@ if is_me {
 	GameCont.bskin = bskin
 	
 	if !UberCont.want_menu && !UberCont.want_restart
-		scrUnlock()
+		scrUnlocksArea()
 }
 
 reload = 0
@@ -25,15 +25,15 @@ bcan_shoot = 1
 frogcharge = 0
 froggas = 0
 
-if !instance_exists(Crown) && GameCont.crown > 1 {
-    with instance_create(x, y, Crown) {
+if !instance_exists(CrownObject) && GameCont.crown > 1 {
+    with instance_create(x, y, CrownObject) {
         if (GameCont.area > 1) or (GameCont.subarea > 1) or ((GameCont.loops - global.hardmode) > 0) {
             is_new = 0
         }
     }
 }
 
-with Crown {
+with CrownObject {
     x = other.x
     y = other.y
 
@@ -41,23 +41,10 @@ with Crown {
     spr_walk = asset_get_index("sprCrown" + string(GameCont.crown) + "Walk")
 }
 
-if GameCont.crown == 10 {
-    hp = 1
-}
+if scrCrownCheck(Crown.Luck) hp = 1
 
-if race == 15 && is_me && !UberCont.weekly_run {
-    if !UberCont.cgot[15] {
-        UberCont.cgot[15] = 1
-
-        show_unlock_popup("@wFROG UNLOCKED@s#PLAYING THE FROG")
-
-        with instance_create(x, y, UnlockScreen) {
-            race = 15
-            skin = 0
-        }
-    }
-
-    scrAchievement(27)
+if race == Race.Frog && is_me && !UberCont.weekly_run {
+    scrRaceUnlock(Race.Frog)
 }
 
 view_xview = x + view_width / 2

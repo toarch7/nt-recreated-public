@@ -1,7 +1,7 @@
 if !instance_exists(target) exit
 
 snd_play(sndFlakCannon)
-gunangle = target_direction
+gunangle = mcr_target_direction
 alarm[0] += 45
 with instance_create(x, y, EnemyFlak) {
     motion_add(other.gunangle + (random(50) - 25), 8 + random(2))

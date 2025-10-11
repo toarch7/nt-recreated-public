@@ -22,17 +22,17 @@ if instance_exists(Menu) {
 else {
     draw_set_halign(fa_center)
     draw_set_valign(fa_middle)
-    draw_bigname(view_width / 2, 18, loc(string_upper(viewtype)), c_uigray)
+    draw_text_bigname(view_width / 2, 18, loc(string_upper(viewtype)), c_uigray)
     draw_set_halign(fa_left)
     draw_set_valign(fa_top)
 }
 
 draw_set_halign(fa_left)
-draw_set_valign(fa_center)
+draw_set_valign(fa_middle)
 
 if !array_length(keys) {
     draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
+    draw_set_valign(fa_middle)
     draw_text_nt(view_width / 2, view_height / 2, loc("@wNOTHING TO SHOW... YET"))
     draw_set_halign(fa_left)
     draw_set_valign(fa_top)
@@ -61,8 +61,8 @@ if maxpages > 1 {
     var mx = device_mouse_x_to_gui(0)
     var my = device_mouse_y_to_gui(0)
 
-    draw_sprite_ext(sprDailyListArrow, 0, view_width / 2 - 96, view_height - 16, 1, 1, 0, c_white, 1)
-    draw_sprite_ext(sprDailyListArrow, 1, view_width / 2 + 96, view_height - 16, 1, 1, 0, c_white, 1)
+    draw_sprite_ext(sprDailyArrow, 0, view_width / 2 - 96, view_height - 16, 1, 1, 0, c_white, 1)
+    draw_sprite_ext(sprDailyArrow, 1, view_width / 2 + 96, view_height - 16, 1, 1, 0, c_white, 1)
 
     if mouse_check_button_pressed(mb_left) {
         if point_in_circle(mx, my, view_width / 2 - 96, view_height - 16, 16) {
@@ -75,7 +75,7 @@ if maxpages > 1 {
         }
     }
 
-    if touchr or gamepad_button_check_pressed(0, gp_padr) or keyboard_check_pressed(vk_right) {
+    if touchr or gamepad_button_check_pressed(0, gp_padr) or scr_keyboard_check_pressed(vk_right) {
         page ++
 		
 		snd_play(sndClick)
@@ -85,7 +85,7 @@ if maxpages > 1 {
             page = 0
         }
     }
-	else if touchl or gamepad_button_check_pressed(0, gp_padl) or keyboard_check_pressed(vk_left) {
+	else if touchl or gamepad_button_check_pressed(0, gp_padl) or scr_keyboard_check_pressed(vk_left) {
         page --
 		
 		snd_play(sndClick)
@@ -116,9 +116,9 @@ for (var i = pg; i < maxpg; i++) {
 	var run_id = keys[i],
 		run = typehistory[$ run_id]
 	
-    var str = month_name_short(run.month) + ". " + scrAddZero(run.day, 1) + " " + area_get_name(run.area, run.subarea, run.loop)
+    var str = month_name_short(run.month) + ". " + string_pad_zeroes(run.day, 1) + " " + area_get_name(run.area, run.subarea, run.loop)
 	
-    draw_sprite(sprDailySplat, anim, view_width / 2, yy + 3)
+    draw_sprite(sprDailyHistorySplat, anim, view_width / 2, yy + 3)
 	
 	if anim >= 1
 		draw_text_nt(27, yy + 2 - 6 * (array_length(run.skills) > 0), str)
@@ -154,7 +154,7 @@ for (var i = pg; i < maxpg; i++) {
 	        draw_sprite(wep_sprt[run.wep], 0, view_width / 2 + 10, yy + 3)
 	    }
 		
-	    draw_sprite(run.skin ? sprPlayerMapIconSkin : sprPlayerMapIcon, run.race, 14, yy + 4)
+	    draw_sprite(run.skin ? sprPlayerMapIconSkin : sprMapIcon, run.race, 14, yy + 4)
 	}
 	
 	if anim >= 3 {

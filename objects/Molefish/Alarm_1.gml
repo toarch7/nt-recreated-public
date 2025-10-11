@@ -5,7 +5,7 @@ if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         if point_distance(target.x, target.y, x, y) > 96 {
             if random(4) < 1 {
-                gunangle = target_direction
+                gunangle = mcr_target_direction
                 snd_play(sndEnemyFire)
                 wkick = 4
                 with instance_create(x, y, EnemyBullet1) {
@@ -18,17 +18,17 @@ if instance_exists(target) {
                 snd_play(sndMolefishFire)
                 alarm[1] = 20 + random(5)
             } else {
-                direction = target_direction + (45 + random(90)) * choose(1, - 1)
+                direction = mcr_target_direction + (45 + random(90)) * choose(1, - 1)
                 speed = 0.4
                 walk = 10 + random(10)
-                gunangle = target_direction
+                gunangle = mcr_target_direction
             }
 
         } else {
             direction = point_direction(target.x, target.y, x, y) + random(20) - 10
             speed = 0.4
             walk = 20 + random(10)
-            gunangle = target_direction
+            gunangle = mcr_target_direction
         }
 
         if target.x < x right = -1

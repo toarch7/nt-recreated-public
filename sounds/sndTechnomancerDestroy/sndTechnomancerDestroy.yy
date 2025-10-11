@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndTechnomancerDestroy",
+  "$GMSound": "",
+  "%Name": "sndTechnomancerDestroy",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
   "duration": 3.661531,
+  "name": "sndTechnomancerDestroy",
   "parent": {
     "name": "Sounds",
-    "path": "folders/Sounds.yy",
+    "path": "folders/Sounds.yy"
   },
   "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndTechnomancerDestroy",
+  "soundFile": "sndTechnomancerDestroy.wav",
   "type": 1,
-  "volume": 0.94,
+  "volume": 0.94
 }

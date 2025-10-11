@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"rng_orandom",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"rng_orandom",
+  "parent":{
+    "name":"RNG",
+    "path":"folders/Scripts/RNG.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

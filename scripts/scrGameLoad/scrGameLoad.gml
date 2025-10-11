@@ -36,24 +36,24 @@ function scrGameLoad() {
 		
 		var pinstlist = json_parse(buffer_read(b, buffer_string))
 		
-        playerinstances = {} // playerinstances
+        global.__playerinstance_list = {} // global.__playerinstance_list
 		
-		playerinstances_set_struct_list(pinstlist)
+		scr_playerinstances_load_from_list(pinstlist)
 		
-		playerinstance = player_get()
+		my_player = scr_playerinstance_find()
 		
         var a = json_parse(buffer_read(b, buffer_string)) // player
 
         var keys = struct_keys(a)
 
-        KeyCont.players = 0
+        player_count = 0
 
         with Player {
             for (var i = 0; i < array_length(keys); i++) {
                 self[$ keys[i]] = a[$ keys[i]]
             }
 
-            KeyCont.players++
+            player_count++
 
             hp = d.hp
             ammo = d.ammo
@@ -86,7 +86,7 @@ function scrGameLoad() {
 		
 		scrWeapons()
 
-        rng_reset()
+        scrRngStatesReset()
 
         buffer_delete(c)
         buffer_delete(b)

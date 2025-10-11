@@ -15,7 +15,7 @@ if instance_exists(target) {
     }
 
     if !collision_line(x, y, target.x, target.y, Wall, 0, 0) {
-        gunangle = target_direction
+        gunangle = mcr_target_direction
         scrRight(0)
 
         lastx = target.x
@@ -28,7 +28,7 @@ if instance_exists(target) {
             snd_play_hit_big(sndEliteInspectorAlarmed, 0.2)
             walk = 0
         } else {
-            direction = target_direction + orandom(20)
+            direction = mcr_target_direction + orandom(20)
             speed = 0.4
             walk = 30 + random(10)
             alarm[1] /= 2

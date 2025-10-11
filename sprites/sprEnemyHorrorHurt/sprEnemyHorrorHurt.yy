@@ -1,78 +1,208 @@
 {
-  "resourceType": "GMSprite",
-  "resourceVersion": "1.0",
-  "name": "sprEnemyHorrorHurt",
+  "$GMSprite": "",
+  "%Name": "sprEnemyHorrorHurt",
+  "bboxMode": 0,
   "bbox_bottom": 32,
   "bbox_left": 7,
   "bbox_right": 33,
   "bbox_top": 10,
-  "bboxMode": 0,
   "collisionKind": 1,
   "collisionTolerance": 0,
   "DynamicTexturePage": false,
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"52e0d7fc-3508-4d9a-81b4-2f03ea7b18ca",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"c1dc7e08-91c9-411e-849a-604620de4b2b",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"db7c640d-c7b1-4133-bd16-1db977ab57f7",},
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "52e0d7fc-3508-4d9a-81b4-2f03ea7b18ca",
+      "name": "52e0d7fc-3508-4d9a-81b4-2f03ea7b18ca",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "c1dc7e08-91c9-411e-849a-604620de4b2b",
+      "name": "c1dc7e08-91c9-411e-849a-604620de4b2b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "db7c640d-c7b1-4133-bd16-1db977ab57f7",
+      "name": "db7c640d-c7b1-4133-bd16-1db977ab57f7",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    }
   ],
   "gridX": 0,
   "gridY": 0,
-  "height": 49,
+  "height": 48,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"6666fc50-78e5-4765-ad92-55efa2cce4a0","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {
+      "$GMImageLayer": "",
+      "%Name": "6666fc50-78e5-4765-ad92-55efa2cce4a0",
+      "blendMode": 0,
+      "displayName": "default",
+      "isLocked": false,
+      "name": "6666fc50-78e5-4765-ad92-55efa2cce4a0",
+      "opacity": 100,
+      "resourceType": "GMImageLayer",
+      "resourceVersion": "2.0",
+      "visible": true
+    }
   ],
+  "name": "sprEnemyHorrorHurt",
   "nineSlice": null,
   "origin": 4,
   "parent": {
     "name": "HostileHorror",
-    "path": "folders/Sprites/Enemies/HostileHorror.yy",
+    "path": "folders/Sprites/Enemies/HostileHorror.yy"
   },
   "preMultiplyAlpha": false,
+  "resourceType": "GMSprite",
+  "resourceVersion": "2.0",
   "sequence": {
-    "resourceType": "GMSequence",
-    "resourceVersion": "1.4",
-    "name": "sprEnemyHorrorHurt",
+    "$GMSequence": "v1",
+    "%Name": "sprEnemyHorrorHurt",
     "autoRecord": true,
     "backdropHeight": 1080,
     "backdropImageOpacity": 0.5,
     "backdropImagePath": "",
     "backdropWidth": 1920,
-    "backdropXOffset": 0.0,
-    "backdropYOffset": 0.0,
-    "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "events": {
+      "$KeyframeStore<MessageEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 3.0,
+    "length": 3,
     "lockOrigin": false,
-    "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "moments": {
+      "$KeyframeStore<MomentsEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "name": "sprEnemyHorrorHurt",
     "playback": 1,
-    "playbackSpeed": 1.0,
+    "playbackSpeed": 1,
     "playbackSpeedType": 1,
+    "resourceType": "GMSequence",
+    "resourceVersion": "2.0",
     "showBackdrop": true,
     "showBackdropImage": false,
     "timeUnits": 1,
     "tracks": [
-      {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"52e0d7fc-3508-4d9a-81b4-2f03ea7b18ca","path":"sprites/sprEnemyHorrorHurt/sprEnemyHorrorHurt.yy",},},},"Disabled":false,"id":"190e0a9c-b383-490f-b58f-92eb4cb7c0f1","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"c1dc7e08-91c9-411e-849a-604620de4b2b","path":"sprites/sprEnemyHorrorHurt/sprEnemyHorrorHurt.yy",},},},"Disabled":false,"id":"1d4492d2-e7fe-4895-9e2e-1f83a277dcde","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"db7c640d-c7b1-4133-bd16-1db977ab57f7","path":"sprites/sprEnemyHorrorHurt/sprEnemyHorrorHurt.yy",},},},"Disabled":false,"id":"4d619e35-bc79-4e27-b3eb-7c8f10814f5c","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
-          ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
+      {
+        "$GMSpriteFramesTrack": "",
+        "builtinName": 0,
+        "events": [],
+        "inheritsTrackColour": true,
+        "interpolation": 1,
+        "isCreationTrack": false,
+        "keyframes": {
+          "$KeyframeStore<SpriteFrameKeyframe>": "",
+          "Keyframes": [
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "52e0d7fc-3508-4d9a-81b4-2f03ea7b18ca",
+                    "path": "sprites/sprEnemyHorrorHurt/sprEnemyHorrorHurt.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "190e0a9c-b383-490f-b58f-92eb4cb7c0f1",
+              "IsCreationKey": false,
+              "Key": 0,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c1dc7e08-91c9-411e-849a-604620de4b2b",
+                    "path": "sprites/sprEnemyHorrorHurt/sprEnemyHorrorHurt.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "1d4492d2-e7fe-4895-9e2e-1f83a277dcde",
+              "IsCreationKey": false,
+              "Key": 1,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "db7c640d-c7b1-4133-bd16-1db977ab57f7",
+                    "path": "sprites/sprEnemyHorrorHurt/sprEnemyHorrorHurt.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "4d619e35-bc79-4e27-b3eb-7c8f10814f5c",
+              "IsCreationKey": false,
+              "Key": 2,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            }
+          ],
+          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
+          "resourceVersion": "2.0"
+        },
+        "modifiers": [],
+        "name": "frames",
+        "resourceType": "GMSpriteFramesTrack",
+        "resourceVersion": "2.0",
+        "spriteId": null,
+        "trackColour": 0,
+        "tracks": [],
+        "traits": 0
+      }
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
-    "volume": 1.0,
+    "visibleRange": {
+      "x": 0,
+      "y": 0
+    },
+    "volume": 1,
     "xorigin": 24,
-    "yorigin": 24,
+    "yorigin": 24
   },
   "swatchColours": null,
   "swfPrecision": 2.525,
   "textureGroupId": {
     "name": "Default",
-    "path": "texturegroups/Default",
+    "path": "texturegroups/Default"
   },
   "type": 0,
   "VTile": false,
-  "width": 48,
+  "width": 48
 }

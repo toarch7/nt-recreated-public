@@ -1,1 +1,0 @@
-selected = 0

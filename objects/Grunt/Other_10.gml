@@ -9,7 +9,7 @@ if roll = 0 {
     if speed > 3 speed = 3
 
     if instance_exists(target) {
-        if target.speed > 0 or hp < max_hp {
+        if target.speed > 0 || hp < max_hp {
 			freeze += 1
 		}
 		
@@ -17,8 +17,9 @@ if roll = 0 {
 			freeze += 3
 		}
 	}
-} else {
-    //rolling
+}
+else {
+    // Rolling
     speed = 5
     angle += 40 * right
     instance_create(x + random(6) - 3, y + random(6), Dust)

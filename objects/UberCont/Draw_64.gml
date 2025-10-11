@@ -6,14 +6,14 @@ if draw_unlock {
         exit
     }
 
-    if splat_index != 3 splat_index++
+    if splatindex != 3 splatindex++
 
-    draw_sprite(sprUnlockPopupSplat, splat_index, view_width, view_height)
+    draw_sprite(sprUnlockPopupSplat, splatindex, view_width, view_height)
 
     draw_set_halign(fa_right)
     draw_set_valign(fa_top)
 
-    if splat_index == 3 {
+    if splatindex == 3 {
         draw_text_nt(view_width - 2, view_height - 24, unlock_text)
     }
 
@@ -59,7 +59,7 @@ else if MultiplayerConfig or (global.custom_seed or opt_practice) {
 }
 
 if instance_exists(Player) && opt_pausebutton && !instance_exists(Credits) {
-    draw_sprite_ext(sprPauseButton, 0, view_width - 18, 18, 0.7, 0.7, 0, c_white, 0.5)
+    draw_sprite_ext(sprMobilePauseButton, 0, view_width - 18, 18, 0.7, 0.7, 0, c_white, 0.5)
 
     for (var touch = 0; touch <= 4; touch ++) {
         if device_mouse_check_button_released(touch, mb_left) {
@@ -95,9 +95,6 @@ if paused && !want_pause && !instance_exists(CoopController) {
 		
 	    instance_deactivate_object(Player)
 	}
-	
-	with DiscordAuth
-		event_perform(ev_draw, ev_gui)
 }
 
 
@@ -107,7 +104,7 @@ if MultiplayerConfig && false {
 	
 	draw_set_color(c_gray)
 	
-	draw_text_shadow(8, 72, struct_trace(playerinstance))
+	draw_text_shadow(8, 72, struct_trace(my_player))
 	//draw_text_shadow(24, 96, string(global.index) + "\n" + global.inputs_current)
 	
 	draw_set_color(c_white)

@@ -1,11 +1,5 @@
-#macro game_directory global.gamepath
-
-global.desktop = ((os_type == os_windows) or (os_type == os_linux) or (os_type == os_macosx))
-
-global.steamdeck = scr_check_steamdeck()
-
-if global.desktop
-	window_set_cursor(cr_none)
+globalvar game_directory;
+game_directory = ""
 
 legacy = false
 request_perm = false
@@ -44,7 +38,7 @@ message = -1
 
 date_set_timezone(timezone_utc)
 
-scrLoadLocalizations()
+scrLanguagesLoad()
 
 display_set_timing_method(tm_sleep)
 display_set_sleep_margin(33)

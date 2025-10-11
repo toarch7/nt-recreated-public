@@ -3,7 +3,7 @@ if lockstep_stop
 
 if !can_pick or !other.visible exit
 
-if KeyCont.press_pick[p] && other.id == instance_nearest(x, y, WepPickup) {
+if KeyCont.press_pick[index] && other.id == instance_nearest(x, y, WepPickup) {
     if !curse or (curse && other.curse) or !bwep {
         instance_create(x, y, WepSwap)
 
@@ -16,9 +16,9 @@ if KeyCont.press_pick[p] && other.id == instance_nearest(x, y, WepPickup) {
             else snd_play(sndWeaponPickup)
         }
 
-        if instance_exists(TutCont) && TutCont.pos == 1 && !TutCont.doin {
+        if instance_exists(TutCont) && TutCont.pos == 1 && !TutCont.step_complete {
             TutCont.alarm[0] = 30
-            TutCont.doin = 1
+            TutCont.step_complete = 1
         }
 
         if !bwep {

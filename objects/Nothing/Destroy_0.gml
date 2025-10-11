@@ -5,7 +5,7 @@ with MusCont {
 }
 
 snd_play(sndNothingDeath1)
-scrAchievement(33)
+scrAchievementUnlock(33)
 audio_stop_sound(sndNothingBeamLoop)
 
 with enemy {

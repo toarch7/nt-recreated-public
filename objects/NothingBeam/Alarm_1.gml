@@ -1,6 +1,6 @@
 charge = 0
 snd_play_gun(sndNothingBeamStart, 0)
-snd_loop(sndNothingBeamLoop)
+snd_play_loop(sndNothingBeamLoop)
 BackCont.shake += 7
 
 with NothingBeamChargeParticle {

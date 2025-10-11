@@ -71,9 +71,11 @@ if enemy_test && instance_exists(GameCont) {
 
 if key_check("console", keystate_press) or open {
 	
-	if global.console_active or UberCont.opt_console
+	if global.console_active or UberCont.opt_console {
 		global.console_active = !global.console_active
-
+		show_debug_overlay(global.console_active, true)
+	}
+	
     event_user(0)
 
     keyboard_string = ""
@@ -81,9 +83,9 @@ if key_check("console", keystate_press) or open {
     open = false
 }
 
-if keyboard_check_pressed(vk_escape)
-or (os_type == os_android && keyboard_check_pressed(vk_backspace))
-or (keyboard_string == "" && keyboard_check_pressed(vk_enter))
+if scr_keyboard_check_pressed(vk_escape)
+or (os_type == os_android && scr_keyboard_check_pressed(vk_backspace))
+or (keyboard_string == "" && scr_keyboard_check_pressed(vk_enter))
 {
     global.console_active = false
     event_user(0)
@@ -96,7 +98,7 @@ if !UberCont.opt_console
 	exit
 
 if bound_command != "" {
-    if keyboard_check_pressed(ord("P")) {
+    if scr_keyboard_check_pressed(ord("P")) {
         handle_console_command(bound_command)
     }
 
@@ -123,7 +125,7 @@ if (flags & 2) == 2 && instance_exists(GenCont) {
 if !global.console_active exit
 
 if array_length(history) {
-    if keyboard_check_pressed(vk_up) {
+    if scr_keyboard_check_pressed(vk_up) {
         historypos--
 
         if historypos < 0 {
@@ -132,7 +134,7 @@ if array_length(history) {
 
         keyboard_string = history[historypos]
     }
-	else if keyboard_check_pressed(vk_down) {
+	else if scr_keyboard_check_pressed(vk_down) {
         historypos++
 
         if historypos >= array_length(history) {
@@ -143,20 +145,20 @@ if array_length(history) {
     }
 }
 
-if keyboard_check(vk_control) && keyboard_check_pressed(ord("V")) {
+if scr_keyboard_check_held(vk_control) && scr_keyboard_check_pressed(ord("V")) {
     keyboard_string += clipboard_get_text()
 }
 
-if keyboard_check_pressed(vk_enter) && string_length(keyboard_string) {
+if scr_keyboard_check_pressed(vk_enter) && string_length(keyboard_string) {
     if laststr != keyboard_string {
         array_push(history, keyboard_string)
         laststr = keyboard_string
     }
 
     if handle_console_command(keyboard_string) {
-        printc(keyboard_string, c_gray)
+        scr_log_push(keyboard_string, c_gray)
     }
-	else printc(keyboard_string, c_white - 1)
+	else scr_log_push(keyboard_string, c_white - 1)
 
     keyboard_string = ""
 

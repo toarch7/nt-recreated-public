@@ -7,29 +7,29 @@ sprite_index = asset_get_index("sprFloor" + string(area) + "Explo")
 image_speed = 0
 image_index = choose(1, 2, 3, 4)
 
-if !position_meeting(x - 16, y, Floor) && !position_meeting(x - 16, y, Wall) ds_list_add(global.lis_walls_visible, instance_create(x - 16, y, Wall))
+var _list = global.lis_walls_visible
 
-if !position_meeting(x + 16, y, Floor) && !position_meeting(x + 16, y, Wall) ds_list_add(global.lis_walls_visible, instance_create(x + 16, y, Wall))
+if !position_meeting(x - 16, y, Floor) && !position_meeting(x - 16, y, Wall) ds_list_add(_list, instance_create(x - 16, y, Wall))
 
-if !position_meeting(x, y + 16, Floor) && !position_meeting(x, y + 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x, y + 16, Wall))
+if !position_meeting(x + 16, y, Floor) && !position_meeting(x + 16, y, Wall) ds_list_add(_list, instance_create(x + 16, y, Wall))
 
-if !position_meeting(x, y - 16, Floor) && !position_meeting(x, y - 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x, y - 16, Wall))
+if !position_meeting(x, y + 16, Floor) && !position_meeting(x, y + 16, Wall) ds_list_add(_list, instance_create(x, y + 16, Wall))
 
-if !position_meeting(x - 16, y + 16, Floor) && !position_meeting(x - 16, y + 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x - 16, y + 16, Wall))
+if !position_meeting(x, y - 16, Floor) && !position_meeting(x, y - 16, Wall) ds_list_add(_list, instance_create(x, y - 16, Wall))
 
-if !position_meeting(x + 16, y - 16, Floor) && !position_meeting(x + 16, y - 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x + 16, y - 16, Wall))
+if !position_meeting(x - 16, y + 16, Floor) && !position_meeting(x - 16, y + 16, Wall) ds_list_add(_list, instance_create(x - 16, y + 16, Wall))
 
-if !position_meeting(x + 16, y + 16, Floor) && !position_meeting(x + 16, y + 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x + 16, y + 16, Wall))
+if !position_meeting(x + 16, y - 16, Floor) && !position_meeting(x + 16, y - 16, Wall) ds_list_add(_list, instance_create(x + 16, y - 16, Wall))
 
-if !position_meeting(x - 16, y - 16, Floor) && !position_meeting(x - 16, y - 16, Wall) ds_list_add(global.lis_walls_visible, instance_create(x - 16, y - 16, Wall))
+if !position_meeting(x + 16, y + 16, Floor) && !position_meeting(x + 16, y + 16, Wall) ds_list_add(_list, instance_create(x + 16, y + 16, Wall))
 
-with BackCont {
-    shake += 2
-}
+if !position_meeting(x - 16, y - 16, Floor) && !position_meeting(x - 16, y - 16, Wall) ds_list_add(_list, instance_create(x - 16, y - 16, Wall))
+
+scr_screenshake(2)
 
 if !instance_exists(GenCont) && !instance_exists(MenuGen) {
     instance_create(x + 8 + random(8) - 4, y + 8 + random(8) - 4, Debris)
-    snd_play_hit(sndWallBreak, 0.2)
+	scrWallBreakSound()
 }
 
 styleb = 0

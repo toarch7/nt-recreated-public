@@ -25,7 +25,7 @@ hit_id = sprKilledByThrone
 hp = max_hp
 
 snd_hurt = sndNothingHurtHigh
-snd_dead = sndThroneDeath
+snd_dead = sndNothingDeath2
 
 walk = 0
 footstep = 0

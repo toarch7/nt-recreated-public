@@ -1,5 +1,5 @@
 function scrPopChests() {
-    random_set_seed(rng_next_int(RNGSlot.Chest))
+    random_set_seed(rng_next_int(RNGStates.Chest))
 
     var dir = 0
     var gol = 1
@@ -21,7 +21,7 @@ function scrPopChests() {
     }
 
     if GameCont.area == 100 {
-        if instance_exists(Crown) {
+        if instance_exists(CrownObject) {
             with instance_furthest(10016, 10016, WeaponChest) {
                 instance_create(x, y, ProtoChest)
                 instance_destroy(id, 0)
@@ -120,12 +120,12 @@ function scrPopChests() {
 		
 		var p = instance_random(Player)
 		
-	    if p.hp < p.max_hp / 2 && rng_random(6, 2) < 1 {
+	    if p.hp < p.max_hp / 2 && rng_float(6, 2) < 1 {
 	        instance_create(x, y, HealthChest)
 	        instance_destroy(id, 0)
 	    }
 	
-	    if instance_nearest(x - 16, y - 16, Floor).styleb == 1 && GameCont.area == 1 && rng_random(6, 3) < 1 {
+	    if instance_nearest(x - 16, y - 16, Floor).styleb == 1 && GameCont.area == 1 && rng_float(6, 3) < 1 {
 			instance_change(RadMaggotChest, true)
 		}
 	}

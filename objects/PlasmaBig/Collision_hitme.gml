@@ -15,7 +15,7 @@ if other.team != team && other.hp > 0 {
         }
     }
 	
-	scrShake(4)
+	scr_screenshake(4)
 	
     image_xscale -= 0.1
 	

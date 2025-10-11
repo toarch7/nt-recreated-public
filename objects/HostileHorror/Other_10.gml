@@ -11,7 +11,7 @@ if speed > 4.5 {
 
 if ammo {
     if instance_exists(target) {
-        gunangle = target_direction + gunoffset
+        gunangle = mcr_target_direction + gunoffset
     }
 
     if raddrop >= round(charge + 1) {

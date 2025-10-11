@@ -1,7 +1,7 @@
 if async_load[? "id"] == seed_prompt {
 	var str = async_load[? "result"]
 	
-	if str == "" or str == "0" or (string_starts(str, "-") && string_is_real(str)) or string_lower(str) == "random" {
+	if str == "" or str == "0" or (string_starts_with(str, "-") && string_is_real(str)) or string_lower(str) == "random" {
 		global.custom_seed = 0
 		seed_text = "random"
 		snd_play(sndMutant0Cnfm)
@@ -19,6 +19,6 @@ if async_load[? "id"] == seed_prompt {
 	
 	snd_play(sndMutant0Slct)
 	
-	rng_reset()
+	scrRngStatesReset()
 	
 }

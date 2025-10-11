@@ -10,7 +10,7 @@ event_inherited()
 
 
 snd_hurt = sndHitMetal
-
+snd_hurt = sndStreetLightBreak
 
 move_contact_solid(choose(0, 90, - 90, 180), 320)
 move_contact_solid(90, 8)

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrRngStatesReset",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrRngStatesReset",
+  "parent":{
+    "name":"RNG",
+    "path":"folders/Scripts/RNG.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

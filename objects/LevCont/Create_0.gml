@@ -8,7 +8,7 @@ scrSkills()
 
 random_set_seed(mutseed[(GameCont.level - GameCont.skillpoints)] + GameCont.wasskeleton * 10203 + ((GameCont.crown == 8) * 1000))
 
-camera_set_pos(0, 0)
+scr_camera_set_position(0, 0)
 
 wave = 0
 

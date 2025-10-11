@@ -36,5 +36,5 @@ function sprite_replace_frames(spr, frames) {
 
     if sprite_replace(spr, path, n, 0, 0, sprite_get_xoffset(spr), sprite_get_yoffset(spr)) {
 
-    } else printc("[!!!] Failed to replace sprite " + sprite_get_name(spr), c_red)
+    } else scr_log_push("[!!!] Failed to replace sprite " + sprite_get_name(spr), c_red)
 }

@@ -1,9 +1,11 @@
 instance_create(x, y, MeatExplosion)
 
-ang = random_angle
+var _ang = random_angle
 
-instance_create(x + lengthdir_x(24, ang), y + lengthdir_y(24, ang), MeatExplosion)
-instance_create(x + lengthdir_x(24, ang + 120), y + lengthdir_y(24, ang + 120), MeatExplosion)
-instance_create(x + lengthdir_x(24, ang + 240), y + lengthdir_y(24, ang + 240), MeatExplosion)
+snd_play_hit(sndSaplingDead, 0.2)
+
+instance_create(x + lengthdir_x(24, _ang), y + lengthdir_y(24, _ang), MeatExplosion)
+instance_create(x + lengthdir_x(24, _ang + 120), y + lengthdir_y(24, _ang + 120), MeatExplosion)
+instance_create(x + lengthdir_x(24, _ang + 240), y + lengthdir_y(24, _ang + 240), MeatExplosion)
 
 instance_create(x, y, Scorchmark)

@@ -16,48 +16,62 @@ function scrInitStats() {
 	maxprogress = 0
 	maxraceprogress = 15
 	
-	race_prog = array_create(16, 0)
+	#region Count progress
 	
-    for (var c = 1; c <= 12; c++) {
-	    all_kill += ctot_kill[c]
-	    all_dead += ctot_dead[c]
-	    all_time += ctot_time[c]
-	    all_loop += ctot_loop[c]
+	race_prog = array_create(Race.NUM_ALL_RACE_TYPES, 0)
+	
+    for (var _race_id = 1; _race_id < Race.NUM_ALL_RACE_TYPES; _race_id ++) {
+		if scrRaceIsHidden(_race_id, false) continue
 		
-	    for (var i = 1; i <= crownmax; i++) {
-	        maxprogress++
-
-	        if crowngot[c, i] {
-	            race_prog[c]++
+		var _is_kinda_secret = scrRaceIsHidden(_race_id)
+		
+	    all_kill += ctot_kill[_race_id]
+	    all_dead += ctot_dead[_race_id]
+	    all_time += ctot_time[_race_id]
+	    all_loop += ctot_loop[_race_id]
+		
+		if !_is_kinda_secret {
+		    for (var i = 1; i <= crownmax; i++) {
+		        maxprogress++
+				
+		        if crowngot[_race_id, i] {
+		            race_prog[_race_id]++
+					progress ++
+		        }
+		    }
+			
+		    if cwep[_race_id] != scrRaceGetStarterWeapon(_race_id) {
+		        race_prog[_race_id] ++
+		    }
+		}
+		
+	    maxprogress ++
+		
+	    if scr_race_is_unlocked(_race_id) {
+			progress ++
+		}
+		
+		var _max_skins = scrRaceGetMaxSkinCount(_race_id)
+		
+		for(var _skin_id = 1; _skin_id < _max_skins; ++_skin_id) {
+			maxprogress ++
+			
+		    if scr_race_is_skin_unlocked(_race_id, _skin_id) {
+		        race_prog[_race_id] ++
 				progress ++
-	        }
-	    }
-		
-	    if cwep[c] != race_swep[c] {
-	        race_prog[c] ++
-	    }
-		
-	    maxprogress ++
-		
-	    if cgot[c]
-			progress ++
-		
-	    maxprogress ++
-		
-	    if cskingot[c] {
-	        race_prog[c] ++
-			progress ++
-	    }
+		    }
+		}
     }
 	
-	maxprogress += 2
-	
-	progress += UberCont.cgot[14] + UberCont.cgot[15]
-	
-	maxprogress ++
+	// Hardmode
+		maxprogress ++
 
-	if UberCont.hardgot
-	    progress ++
+		if UberCont.hardgot {
+		    progress ++
+		}
+	//
+	
+	#endregion
 	
 	time = scrTime(UberCont.tot_time)
 	ftime = 0
@@ -84,6 +98,7 @@ function scrInitStats() {
 	    baked_fastest[i] = scrTimeSpeedrun(UberCont.cbst_fast[i])
 	}
 	
-    if progress >= maxprogress
-        scrAchievement(43)
+    if progress >= maxprogress {
+        scrAchievementUnlock(Achievement.ULTRA_MUTANT)
+	}
 }

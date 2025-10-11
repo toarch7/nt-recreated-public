@@ -20,7 +20,7 @@ if file_exists(file) {
 		if UberCont.weekly_run
 			_seed = scrReal(UberCont.weekly_data[? "seed"])
 		
-		local_entry.name = scrGetUsername()
+		local_entry.name = scrSavedataGetUsername()
 		
 		if local_entry.runId != base_convert(_seed, 10, 16)
 			local_entry = undefined

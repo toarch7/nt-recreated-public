@@ -19,7 +19,7 @@ if !speed {
     }
 
     if target {
-        direction = target_direction
+        direction = mcr_target_direction
         mp_potential_step(target.x, target.y, 12, 0)
     }
 

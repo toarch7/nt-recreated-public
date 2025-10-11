@@ -1,4 +1,9 @@
+/// TODO: ideally this savedata should be made full compatible with base NT
 function scrInit() {
+	var _fix_inconsistent_weapon_ids = false,
+		_fix_binary_skin_system = false
+	
+	#region Load savedata file
     saveData = undefined
 
     if file_exists(game_directory + "NuclearThrone.sav") {
@@ -9,13 +14,13 @@ function scrInit() {
         saveData = json_decode(raw)
 	}
 	else saveData = ds_map_create()
-
-    if saveData < 0 or is_undefined(saveData) {
+	
+    if saveData < 0 || is_undefined(saveData) {
         show_message_async("Your save data has corrupted. Please do not close the game while saving icon is on-screen.")
         saveData = ds_map_create()
     }
 
-    //If there's some PC savefile fields, convert it to mobile
+    // If there's some PC savefile fields, try to convert it into NTM's supported formated
     if !is_undefined(saveData[? "VLAMBEER DRM 2013-NOW"]) && !is_undefined(saveData[? "stats"]) {
         var pcSave = saveData
         saveData = ds_map_create()
@@ -95,116 +100,167 @@ function scrInit() {
 
         ds_map_destroy(pcSave)
 
-        show_message_async("Everything but settings is converted successfully.")
+        show_message_async("All of your Nuclear Throne progress was converted successfully!")
     }
-
-    //Load
 	
-    scrRaces()
-    scrCrowns()
-
+	#endregion
+	
+	#region Also load auxiliary configuration files
+	
     ini_open(game_directory + "configs.ini")
-	
     opt_online = ini_read_real("Options", "OnlineFeatures", 1)
     opt_updates = ini_read_real("Options", "UpdateChecker", 1)
-	
     ini_write_real("Options", "OnlineFeatures", opt_online)
     ini_write_real("Options", "UpdateChecker", opt_updates)
-
-   
-
     ini_close()
-
+	
     if file_exists("temp") {
         var f = file_text_open_read("temp")
         save_set_value("etc", "seed", file_text_read_string(f))
         file_text_close(f)
     }
 	
+	#endregion
+	
+	#region Register some of the content
+	
+    scrRaces()
+    scrCrowns()
+	scrWeapons()
+	scrUltras()
+	
+	#endregion
+	
+	#region Setup conversion flags
+	
+	var _last_loaded_version = save_get_value("etc", "versioncheck", GAME_BUILD)
+	
+	if _last_loaded_version != GAME_BUILD {
+		// Build 3000 - major game code refactoring
+		if _last_loaded_version < 3000 {
+			_fix_inconsistent_weapon_ids = true
+			_fix_binary_skin_system = true
+		}
+	}
+	
+	#endregion
+	
     protowep = save_get_value("etc", "protowep", 56)
 	
+	if _fix_inconsistent_weapon_ids && protowep == 255 {
+		save_set_value("etc", "protowep", wep_golden_frog_pistol)
+		protowep = wep_golden_frog_pistol
+	}
 	
-	
-    save_set_value("cgot", "0", 1)
-    save_set_value("cgot", "1", 1)
-    save_set_value("cgot", "2", 1)
+    save_set_value("cgot", Race.Random, true)
+    save_set_value("cgot", Race.Fish, true)
+    save_set_value("cgot", Race.Crystal, true)
 
-    if save_get_value("etc", "name", "unnamed") == "unnamed" {
-        save_set_value("etc", "name", "Seeker" + string(scrAddZero(irandom(999), 2)))
+    if save_get_value("etc", "name") == "unnamed" {
+        save_set_value("etc", "name", "Seeker" + string(string_pad_zeroes(irandom(999), 2)))
     }
-
-    cgot = array_create(16, 0)
-
-    cgot[0] = 1
-
+	
+    cgot = array_create(Race.NUM_ALL_RACE_TYPES, 0)
+	
     tot_time = save_get_value("data", "tot_time", 0)
     tot_kill_daily = 0
     tot_kill_weekly = 0
-
-    for (var i = 1; i < array_length(race_name); i++) {
-        cgot[i] = save_get_value("cgot", string(i), 0)
-        cskin[i] = save_get_value("cskin", string(i), 0)
-        cskingot[i] = save_get_value("cskingot", string(i), 0)
-        ctot_kill[i] = save_get_value("ctotkill", string(i), 0)
-        ctot_dead[i] = save_get_value("ctotdead", string(i), 0)
-        ctot_loop[i] = save_get_value("ctotloop", string(i), 0)
-        ctot_time[i] = save_get_value("ctottime", string(i), 0)
-        ctot_wins[i] = save_get_value("ctotwins", string(i), 0)
-        ctot_uniq[i] = save_get_value("ctotuniq", string(i), 0)
-        ctot_runs[i] = save_get_value("ctotruns", string(i), 0)
-        ctot_wins[i] = save_get_value("ctotwins", string(i), 0)
-        ctot_days[i] = save_get_value("ctotdays", string(i), 0)
-        ctot_hard[i] = save_get_value("ctothard", string(i), 0)
-        ctot_strk[i] = save_get_value("ctotstrk", string(i), 0)
-        cbst_kill[i] = save_get_value("cbstkill", string(i), 0)
-        cbst_diff[i] = save_get_value("cbstdiff", string(i), 0)
-        cbst_loop[i] = save_get_value("cbstloop", string(i), 0)
-        cbst_time[i] = save_get_value("cbsttime", string(i), 0)
-        cbst_area[i] = save_get_value("cbstarea", string(i), 0)
-        cbst_suba[i] = save_get_value("cbstsuba", string(i), 0)
-        cbst_race[i] = save_get_value("cbstrace", string(i), 0)
-        cbst_strk[i] = save_get_value("cbststrk", string(i), 0)
-        cbst_fast[i] = save_get_value("cbstfast", string(i), 0)
-        hbst_kill[i] = save_get_value("hbstkill", string(i), 0)
-        hbst_area[i] = save_get_value("hbstarea", string(i), 0)
-        hbst_suba[i] = save_get_value("hbstsuba", string(i), 0)
-        hbst_loop[i] = save_get_value("hbstloop", string(i), 0)
-        hbst_race[i] = save_get_value("hbstrace", string(i), 0)
-        dbst_kill[i] = save_get_value("dbstkill", string(i), 0)
-        dbst_area[i] = save_get_value("dbstarea", string(i), 0)
-        dbst_suba[i] = save_get_value("dbstsuba", string(i), 0)
-        dbst_loop[i] = save_get_value("dbstloop", string(i), 0)
-        dbst_race[i] = save_get_value("dbstrace", string(i), 0)
-
-        cwep[i] = save_get_value("cwep", string(i), race_swep[i])
-        //cbgt[i] = save_get_value("cbgt", string(i), 0)
-        //cgld[i] = save_get_value("cgld", string(i), 0)
-        for (var c = 1; c <= crownmax; c++) {
-            crowngot[i, c] = save_get_value("crowngot" + string(i), string(c), 0)
+	
+    /* Memo:
+		$"cgot_{RACE_ID}"               - character unlocked
+		$"cwep_{RACE_ID}"               - secondary (golden) sweapon
+		$"crowngot{RACE_ID}_{CROWN_ID}" - is the crown unlocked for character;
+		$"ccrown_{RACE_ID}"             - character's choosen crown
+		$"cskingot{RACE_ID}_{SKIN_ID}"  - is b-skin (or c-skin) unlocked
+		$"cskin_{RACE_ID}"              - character's choosen skin
+	*/
+	
+    for (var _race_id = Race.Random; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
+		var _race_str = string(_race_id)
+		
+		if _fix_binary_skin_system {
+			var _got_bskin = save_get_value("cskingot", _race_str, false)
+			save_set_value("cskingot" + _race_str, 1, _got_bskin)
+			save_delete_value("cskingot", _race_str)
+		}
+		
+        cgot[_race_id] = save_get_value("cgot", _race_str, false)
+		cskin[_race_id] = save_get_value("cskin", _race_str, false)
+        ctot_kill[_race_id] = save_get_value("ctotkill", _race_str, 0)
+        ctot_dead[_race_id] = save_get_value("ctotdead", _race_str, 0)
+        ctot_loop[_race_id] = save_get_value("ctotloop", _race_str, 0)
+        ctot_time[_race_id] = save_get_value("ctottime", _race_str, 0)
+        ctot_wins[_race_id] = save_get_value("ctotwins", _race_str, 0)
+        ctot_uniq[_race_id] = save_get_value("ctotuniq", _race_str, 0)
+        ctot_runs[_race_id] = save_get_value("ctotruns", _race_str, 0)
+        ctot_wins[_race_id] = save_get_value("ctotwins", _race_str, 0)
+        ctot_days[_race_id] = save_get_value("ctotdays", _race_str, 0)
+        ctot_hard[_race_id] = save_get_value("ctothard", _race_str, 0)
+        ctot_strk[_race_id] = save_get_value("ctotstrk", _race_str, 0)
+        cbst_kill[_race_id] = save_get_value("cbstkill", _race_str, 0)
+        cbst_diff[_race_id] = save_get_value("cbstdiff", _race_str, 0)
+        cbst_loop[_race_id] = save_get_value("cbstloop", _race_str, 0)
+        cbst_time[_race_id] = save_get_value("cbsttime", _race_str, 0)
+        cbst_area[_race_id] = save_get_value("cbstarea", _race_str, 0)
+        cbst_suba[_race_id] = save_get_value("cbstsuba", _race_str, 0)
+        cbst_race[_race_id] = save_get_value("cbstrace", _race_str, 0)
+        cbst_strk[_race_id] = save_get_value("cbststrk", _race_str, 0)
+        cbst_fast[_race_id] = save_get_value("cbstfast", _race_str, 0)
+        hbst_kill[_race_id] = save_get_value("hbstkill", _race_str, 0)
+        hbst_area[_race_id] = save_get_value("hbstarea", _race_str, 0)
+        hbst_suba[_race_id] = save_get_value("hbstsuba", _race_str, 0)
+        hbst_loop[_race_id] = save_get_value("hbstloop", _race_str, 0)
+        hbst_race[_race_id] = save_get_value("hbstrace", _race_str, 0)
+        dbst_kill[_race_id] = save_get_value("dbstkill", _race_str, 0)
+        dbst_area[_race_id] = save_get_value("dbstarea", _race_str, 0)
+        dbst_suba[_race_id] = save_get_value("dbstsuba", _race_str, 0)
+        dbst_loop[_race_id] = save_get_value("dbstloop", _race_str, 0)
+        dbst_race[_race_id] = save_get_value("dbstrace", _race_str, 0)
+		
+        cwep[_race_id] = save_get_value("cwep", _race_str, scrRaceGetStarterWeapon(_race_id))
+		
+		if cwep[_race_id] == 255 && _fix_inconsistent_weapon_ids {
+			save_set_value("cwep", _race_str, wep_golden_frog_pistol)
+			cwep[_race_id] = wep_golden_frog_pistol
+		}
+		
+		var _max_skins = scrRaceGetMaxSkinCount(_race_id)
+		for(var _skin_id = 0; _skin_id < _max_skins; ++_skin_id) {
+			var _cskingot_key = "cskingot" + _race_str
+			
+			cskingot[_race_id, _skin_id] = save_get_value(_cskingot_key, _skin_id, (_skin_id == 0))
+		}
+		
+		var _max_crowns = crownmax + 1
+        for (var _crown_id = 1; _crown_id < _max_crowns; ++_crown_id) {
+			var _crowngot_key = "crowngot" + _race_str
+            crowngot[_race_id, _crown_id] = save_get_value(_crowngot_key, _crown_id, false)
         }
 
-        crowngot[i, 0] = 1
-        crowngot[i, 1] = 1
+        crowngot[_race_id, crwn_random] = true
+        crowngot[_race_id, crwn_none] = true
     }
 	
     hardgot = save_get_value("etc", "hard", 0)
 	
-    /*
-	
-	cwep - second sweapon
-	ccrown - character's choosen crown
-	crowngot - is crown unlocked for character
-	cskin - character's choosen skin
-	cskingot - is character's b-skin unlocked
-	
-	*/
-	
 	scrOptionsUpdate()
 	
+    scrAchievements()
+	
+    scrInitStats()
+	
+    scrLoadoutMenuInit()
+}
+
+function scrInitPostGamestart() {
+	
 	with UberCont {
-		if global.desktop {
-			if window_get_fullscreen() != opt_fullscreen
-				window_set_fullscreen(opt_fullscreen)
+		if is_desktop {
+			call_after(5, function() {
+				if window_get_fullscreen() != opt_fullscreen {
+					scr_window_set_fullscreen(opt_fullscreen)
+				}
+			})
 			
 			display_reset(0, opt_vsync)
 			
@@ -214,10 +270,4 @@ function scrInit() {
 			display_reset(0, 0)
 		}
 	}
-	
-    scrAchievements()
-    scrLoadLoadout()
-	
-    scrInitStats()
-	
 }

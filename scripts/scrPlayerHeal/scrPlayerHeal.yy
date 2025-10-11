@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrPlayerHeal",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrPlayerHeal",
+  "parent":{
+    "name":"Resources",
+    "path":"folders/Scripts/Gameplay/Resources.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

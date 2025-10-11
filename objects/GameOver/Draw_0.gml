@@ -16,7 +16,7 @@ scrDrawRoadmap(xx - 48, yy - offsety, round(death_pos))
 ///
 
 draw_set_halign(fa_center)
-draw_set_valign(fa_center)
+draw_set_valign(fa_middle)
 
 
 draw_sprite(sprScoreSplat, 2, xx + 86, yy - offsety - 25)

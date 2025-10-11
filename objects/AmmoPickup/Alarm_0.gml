@@ -1,6 +1,6 @@
 if blink < 0 {
     instance_create(x, y, SmallChestFade)
-    snd_play(sndPickupFade)
+    snd_play(sndPickupDisappear)
 	
     instance_destroy()
 }

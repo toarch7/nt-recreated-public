@@ -27,7 +27,7 @@ intro = 0
 scrTarget()
 
 if target != -1 {
-    gunangle = target_direction
+    gunangle = mcr_target_direction
 }
 
 sndlowhp = 0

@@ -20,8 +20,6 @@ aim_target = noone
 
 crosshair = save_get_value("visual", "crosshair", 0)
 
-pause = 0
-
 followmove = 1
 
 image_angle = 0

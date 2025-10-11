@@ -9,7 +9,7 @@ visible = 0
 
 if alarm[0] == 10 y -= 75
 
-with Crown
+with CrownObject
 instance_destroy()
 
 with IDPDSpawn

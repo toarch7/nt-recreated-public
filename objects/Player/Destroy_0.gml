@@ -56,16 +56,6 @@ if instance_number(Player) > 1 exit
 audio_stop_sound(sndFrogLoop)
 audio_stop_sound(sndFrogLoopButt)
 
-if race == 14 && is_me && !UberCont.cgot[14] && GameCont.level >= 10 {
-    UberCont.cgot[14] = 1
-    show_unlock_popup("@wSKELETON UNLOCKED@s#FOR REACHING LEVEL ULTRA")
-    with instance_create(x, y, UnlockScreen) {
-        race = 14;
-        skin = 0
-    }
-    scrAchievement(26)
-}
-
 if race == 15 {
     var ang = random_angle
 
@@ -108,10 +98,10 @@ if race != 13 {
 
 with MusCont {
     snd_stop(song)
-    snd_loop(amb)
+    snd_play_loop(amb)
 }
 
-with Crown {
+with CrownObject {
     persistent = 0
 }
 
@@ -152,7 +142,7 @@ if !global.hardmode {
 UberCont.ctot_kill[race] += GameCont.kills
 
 if !UberCont.want_menu && !UberCont.want_restart
-	scrUnlock()
+	scrUnlocksArea()
 
 if !GameCont.win scrSendDailyData()
 

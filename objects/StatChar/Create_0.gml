@@ -1,6 +1,5 @@
-scrRaces()
-
 selected = 0
-start = global.time
-
+start = current_frame
 anim = 0
+
+depth = -150

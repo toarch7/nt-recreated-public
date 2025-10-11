@@ -1,5 +1,5 @@
 #macro Key global.KeyBindings_val
-#macro vk_tidle 192
+#macro vk_tilde 192
 
 function scrKeymapsSetup() {
 	Key = {
@@ -16,7 +16,7 @@ function scrKeymapsSetup() {
 		south: [ ord("S") ],
 		west: [ ord("A") ],
 		east: [ ord("D") ],
-		console: [ vk_tidle ]
+		console: [ vk_tilde ]
 	}
 }
 
@@ -63,32 +63,42 @@ function scrOptionsSaveKeymaps() {
 function key_check(name, state = keystate_hold) {
 	var v = keymap_get(name)
 	
-	if v == -1 or (name != "console" && global.console_active)
+	if v == -1 || (name != "console" && global.console_active) {
 		return 0
+	}
 	
 	if UberCont.opt_gamepad && !keymap_ret_nogamepad {
 		
-		if state == keystate_hold
+		if state == keystate_hold {
 			return input_gamepad_check(global.index, v)
-		
-		else if state == keystate_press
+		}
+		else if state == keystate_press {
 			return input_gamepad_check_pressed(global.index, v)
-		
-		else if state == keystate_release
+		}
+		else if state == keystate_release {
 			return input_gamepad_check_released(global.index, v)
+		}
 		
 		return 0
 	}
 	
+	// is mouse input and mouse is over debug overlay
+	if v <= __mouse_button_max && is_mouse_over_debug_overlay() {
+		return 0
+	}
 	
-	if state == keystate_hold
-		return (v > __mouse_button_max && keyboard_check(v)) or (v <= __mouse_button_max && mouse_check_button(v))
-	
-	else if state == keystate_press
-		return (v > __mouse_button_max && keyboard_check_pressed(v)) or (v <= __mouse_button_max && mouse_check_button_pressed(v))
-	
-	else if state == keystate_release
-		return (v > __mouse_button_max && keyboard_check_released(v)) or (v <= __mouse_button_max && mouse_check_button_released(v))
+	if state == keystate_hold {
+		return (v > __mouse_button_max && scr_keyboard_check_held(v))
+			|| (v <= __mouse_button_max && mouse_check_button(v))
+	}
+	else if state == keystate_press {
+		return (v > __mouse_button_max && scr_keyboard_check_pressed(v))
+			|| (v <= __mouse_button_max && mouse_check_button_pressed(v))
+	}
+	else if state == keystate_release {
+		return (v > __mouse_button_max && keyboard_check_released(v))
+			|| (v <= __mouse_button_max && mouse_check_button_released(v))
+	}
 	
 	return 0
 }
@@ -96,8 +106,7 @@ function key_check(name, state = keystate_hold) {
 #macro keymap_ret_nogamepad global.keymap_get_noconsole_val
 
 function keymap_get(name) {
-	var k = Key[$ name],
-		p = UberCont.opt_gamepad
+	var k = Key[$ name], p = UberCont.opt_gamepad
 	
 	if k == undefined
 		return -1

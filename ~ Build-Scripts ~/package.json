@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "pngjs": "^7.0.0"
+  },
+  "name": "ntm-install",
+  "version": "1.0.0",
+  "main": "ntm-install.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node regen.js --dryrun --include-wad u99r1.win && node regen.js --dryrun --include-wad v100.win",
+    "regen": "node regen.js"
+  },
+  "author": "toarch7",
+  "license": "GPL-3.0",
+  "description": ""
+}

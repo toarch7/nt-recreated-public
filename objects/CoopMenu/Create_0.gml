@@ -5,7 +5,11 @@ global.port = UberCont.opt_remote_port
 
 text = ""
 
-server = network_create_server(network_socket_udp, global.port + 1, 1)
+var _listner_port = NETWORK_PORT
+
+server = network_create_server(network_socket_udp, _listner_port, 1)
+
+print($"Local game listener ({server}) started at {_listner_port}")
 
 network_set_config(network_config_use_non_blocking_socket, 1)
 
@@ -26,6 +30,8 @@ host_game = function() {
     instance_destroy(menu, true)
 	
     global.is_server = true
+	
+	print("Listener destroyed", server)
 	
     network_destroy(server)
     

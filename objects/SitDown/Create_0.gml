@@ -12,7 +12,7 @@ with Player {
 weapon = mskNone
 bweapon = mskNone
 
-do_thing = 0
+volume_control_command = 0
 
 debug = 0
 

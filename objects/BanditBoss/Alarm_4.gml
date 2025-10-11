@@ -8,7 +8,7 @@ if charge = 0 {
     scrTarget()
 
     if instance_exists(target) {
-        gunangle = target_direction
+        gunangle = mcr_target_direction
         motion_add(gunangle, 10)
     }
 } else {

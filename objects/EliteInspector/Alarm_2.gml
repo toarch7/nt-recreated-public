@@ -1,7 +1,7 @@
 alarm[0] = 10
 
 wepangle *= -1
-if instance_exists(target) gunangle = target_direction
+if instance_exists(target) gunangle = mcr_target_direction
 
 motion_add(gunangle, 6)
 snd_play_hit_big(sndEliteInspectorFire, 0.2)

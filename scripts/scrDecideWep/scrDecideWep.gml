@@ -4,7 +4,7 @@ function scrDecideWep(extra) {
             __cursed = 0,
             target
 		
-		var seed = self[$ "dropseed"] ?? rng_next_int(RNGSlot.Drops)
+		var seed = self[$ "dropseed"] ?? rng_next_int(RNGStates.Drops)
 		
 		random_set_seed(seed)
 		
@@ -47,7 +47,7 @@ function scrDecideWep(extra) {
             if !global.hardmode && (wep == wep_golden_disc_gun or wep == wep_golden_nuke_launcher)
                 continue
 
-            if wep == wep_gun_gun && crown_current != crwn_guns
+            if wep == wep_gun_gun && !scrCrownCheck(crwn_guns)
                 continue
 
             fine = true

@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndSnowTankAim",
+  "$GMSound": "",
+  "%Name": "sndSnowTankAim",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
   "duration": 2.277018,
+  "name": "sndSnowTankAim",
   "parent": {
     "name": "SnowTank",
-    "path": "folders/Sounds/SnowTank.yy",
+    "path": "folders/Sounds/SnowTank.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndSnowTankAim",
+  "soundFile": "sndSnowTankAim.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

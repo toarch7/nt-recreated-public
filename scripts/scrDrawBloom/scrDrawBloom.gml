@@ -107,8 +107,8 @@ function scrDrawBloom() {
         draw_sprite_ext(sprEnemyLaserEnd, img, x, y, 3, 3, image_angle, c_white, 0.1)
     }
 
-    for (var i = 0; i < ds_list_size(global.floor_screen); i++) {
-        with(global.floor_screen[| i]) {
+    for (var i = 0; i < ds_list_size(global.list_floors_visible); i++) {
+        with(global.list_floors_visible[| i]) {
             if (sprite_index == sprFloor2B) draw_sprite_ext(sprFloor2BBloom, image_index, x, y, 1, 1, image_angle, c_white, 0.1)
             if (sprite_index == sprFloor102B) draw_sprite_ext(sprFloor102BBloom, image_index, x, y, 1, 1, image_angle, c_white, 0.1)
         }

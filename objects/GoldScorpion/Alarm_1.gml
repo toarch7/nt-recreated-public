@@ -6,7 +6,7 @@ if instance_exists(target) {
         walk = 0
         alarm[2] = 1
         snd_play(sndGoldScorpionFire)
-        gunangle = target_direction
+        gunangle = mcr_target_direction
         alarm[1] = 20 + random(5)
     }
     direction = point_direction(target.x, target.y, x, y) + random(120) - 60
@@ -18,7 +18,7 @@ if instance_exists(target) {
 
     if target.x < x right = -1
     else if target.x > x right = 1
-    if ammo = 0 motion_add(target_direction, 0.3)
+    if ammo = 0 motion_add(mcr_target_direction, 0.3)
 } else if random(10) < 1 {
     motion_add(random_angle, 0.4)
     walk = 10 + random(10)

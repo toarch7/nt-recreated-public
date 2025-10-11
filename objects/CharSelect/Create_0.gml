@@ -1,7 +1,6 @@
-scrRaces()
+slot_index = 0
+selected = false
+race = Race.Fish
+can = false
 
-selected = 0
-
-num = 0
-
-netindex_set()
+scr_network_instance()

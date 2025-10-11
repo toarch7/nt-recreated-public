@@ -1,16 +1,20 @@
 if lockstep_stop
 	exit
 
-if !UberCont.cgot[num]
-	sprite_index = sprCharSelectLocked
+var _race = num,
+	_unlocked = scr_race_is_unlocked(_race),
+	_pop_frame = start + floor(pos * 0.5),
+	_color = selected ? c_white : c_gray
 
-var f = start + floor(pos / 2)
+if current_frame >= _pop_frame {
+	if current_frame == _pop_frame {
+		anim = 1
+	}
+	
+	sprite_index = _unlocked ? sprCharSelect : sprCharSelectLocked
+	draw_sprite_ext(sprite_index, _race, x, y + anim, 1, 1, 0, _color, 1)
+}
 
-if global.time == f
-	anim = 1
-
-if global.time >= f
-	draw_sprite_ext(sprite_index, num, x, y + 16 + anim, 1, 1, 0, qm(selected, c_white, c_gray), 1)
-
-if anim > 0
-	anim --
+if anim > 0 {
+	anim -= timescale
+}

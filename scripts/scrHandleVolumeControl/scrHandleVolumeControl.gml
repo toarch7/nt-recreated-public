@@ -2,11 +2,11 @@ function scrHandleVolumeControl(type, val) {
     if type == "volumeButtonPressed" {
         if val == "down" {
             with ButtonActive {
-                if do_thing == 0 do_thing = 1
+                if volume_control_command == 0 volume_control_command = 1
             }
         } else {
             with ButtonSwap {
-                if do_thing == 0 do_thing = 1
+                if volume_control_command == 0 volume_control_command = 1
             }
         }
     }
@@ -14,11 +14,11 @@ function scrHandleVolumeControl(type, val) {
     else if type == "volumeButtonReleased" {
         if val == "down" {
             with ButtonActive {
-                if do_thing != 0 do_thing = -1
+                if volume_control_command != 0 volume_control_command = -1
             }
         } else {
             with ButtonSwap {
-                if do_thing != 0 do_thing = -1
+                if volume_control_command != 0 volume_control_command = -1
             }
         }
     }

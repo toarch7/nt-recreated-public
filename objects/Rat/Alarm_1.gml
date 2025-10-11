@@ -2,7 +2,7 @@ scrTarget()
 alarm[1] = 10 + random(30)
 if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
-        direction = target_direction + rng_spread(11, 10)
+        direction = mcr_target_direction + rng_orandom(11, 10)
         speed = 0.4
         walk = 40 + random(10)
         alarm[1] = walk

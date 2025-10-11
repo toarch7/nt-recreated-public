@@ -16,7 +16,7 @@ with Floor {
 }
 /*
 if !instance_exists(Player)
-scrSpawnPlayer(global.coop ? global.index : 0, GameCont.race)
+scrPlayerCreate(global.coop ? global.index : 0, GameCont.race)
 */
 if instance_exists(Player) {
     with Player {
@@ -55,7 +55,7 @@ if instance_exists(Player) {
     view_xview = 10016 - view_width / 2
     view_yview = 10016 - view_height / 2
 
-    with Crown {
+    with CrownObject {
         x = 10016
         y = 10016
         alarm[2] = 1
@@ -97,7 +97,7 @@ if !(GameCont.area == 7 && GameCont.subarea == 3) && !(GameCont.area == 106 && G
 	}
 
     with Floor {
-        if GameCont.area == 0 && instance_exists(Player) && (rng_random(1, 10 + GameCont.hard) > GameCont.hard or !instance_exists(IDPDSpawn)) {
+        if GameCont.area == 0 && instance_exists(Player) && (rng_float(RNGStates.Enemies, 10 + GameCont.hard) > GameCont.hard or !instance_exists(IDPDSpawn)) {
             if instance_number(IDPDSpawn) < 5 + GameCont.loops instance_create(x + 16, y + 16, IDPDSpawn)
         }
     }

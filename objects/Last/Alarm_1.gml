@@ -16,7 +16,7 @@ if ((target) && instance_exists(target)) {
         attacktype = choose(0, 1)
         if (attacktype == 0) snd_play_hit_big(sndLastPattern1, 0)
         else snd_play_hit_big(sndLastPattern2, 0)
-        gunangle = (target_direction + (choose(1, - 1) * (10 + random(15))))
+        gunangle = (mcr_target_direction + (choose(1, - 1) * (10 + random(15))))
         drawspr = sprLastSpin
         drawimg = 0
         alarm[5] = 47

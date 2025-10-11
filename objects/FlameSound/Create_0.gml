@@ -1,3 +1,3 @@
 snd_play(sndFlamerStart)
-snd_loop(sndFlamerLoop)
+snd_play_loop(sndFlamerLoop)
 timeout = 0

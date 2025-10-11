@@ -8,10 +8,10 @@ scrTarget()
 if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         if point_distance(target.x, target.y, x, y) > 96 {
-            gunangle = target_direction
+            gunangle = mcr_target_direction
             if random(8 - ammo) < 1 and ammo > 0 {
                 ammo -= 1
-                snd_play(sndEnemyFire)
+                snd_play_gun_big(sndJockFire)
                 image_index = 0
                 sprite_index = spr_fire
                 wkick = 4
@@ -23,17 +23,17 @@ if instance_exists(target) {
                 }
                 alarm[1] = 8
             } else if random(3) < 2 {
-                direction = target_direction + random(80) - 40
+                direction = mcr_target_direction + random(80) - 40
                 speed = 0.4
                 walk = 10 + random(10)
-                gunangle = target_direction
+                gunangle = mcr_target_direction
             }
 
         } else {
-            direction = target_direction + random(10) - 5
+            direction = mcr_target_direction + random(10) - 5
             speed = 0.4
             walk = 40 + random(10)
-            gunangle = target_direction
+            gunangle = mcr_target_direction
         }
 
         if target.x < x right = -1

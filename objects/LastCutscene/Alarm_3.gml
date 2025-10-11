@@ -4,7 +4,7 @@
     spr_idle = sprBigTVOn
     sprite_index = spr_idle
 }
-with (Crown)
+with (CrownObject)
     visible = 0
 instance_create((x + 1), (y - 107), PlayerSit)
 with (Player)

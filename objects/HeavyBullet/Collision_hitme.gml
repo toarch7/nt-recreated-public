@@ -33,7 +33,7 @@ if other.team != team && other.hp > 0 {
                 motion_add(image_angle, 1 + random(1))
             }
 
-            snd_play(sndRecycleGlands)
+            snd_play(sndRecGlandProc)
         }
     }
 

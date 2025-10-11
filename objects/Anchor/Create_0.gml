@@ -1,7 +1,7 @@
 max_hp = 50
 size = 2
 
-spr_idle = sprAnchorIdle
+spr_idle = sprAnchor
 spr_hurt = sprAnchorHurt
 spr_dead = sprAnchorDead
 

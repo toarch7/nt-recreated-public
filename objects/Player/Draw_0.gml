@@ -2,13 +2,15 @@ if lockstep_stop
 	exit
 
 if fainted {
-	draw_self(); exit
+	draw_self()
+	exit
 }
 
 wave += 0.4
 
-if wave > 6.2
+if wave > 6.2 {
 	wave -= 6.2
+}
 
 if race == 3 {
 	var img = GameCont.tottimer * 0.4
@@ -21,26 +23,31 @@ if race == 3 {
 	}
 }
 
-if wep_type[wep] = 0
+if wep_type[wep] == 0 {
 	wepright = wepflip
+}
 else wepright = right
 
-if wep_type[bwep] = 0 bwepright = bwepflip
+if wep_type[bwep] == 0 {
+	bwepright = bwepflip
+}
 else bwepright = right
 
-if bwep != 0 and race != 7 draw_sprite_ext(wep_sprt[bwep], 0, x - right * 2, y, 1, bwepright, 90 + 15 * right, c_silver, 1)
+if bwep != 0 && race != 7 {
+	draw_sprite_ext(wep_sprt[bwep], 0, x - right * 2, y, 1, bwepright, 90 + 15 * right, c_silver, 1)
+}
 
-var shielding = false
+var _is_shielding = false
 
 if race == 2 && !fainted && instance_exists(CrystalShield) {
 	with CrystalShield {
 		if creator == other.id && sprite_index != spr_disappear {
-			shielding = true; break
+			_is_shielding = true; break
 		}
 	}
 }
 
-if wep_type[wep] == 3 && is_me && !shielding && wep != 18 {
+if wep_type[wep] == 3 && is_me && !_is_shielding && wep != 18 {
     lasx = x
     lasy = y
     lasd = 0
@@ -76,10 +83,17 @@ if race == 7 && bwep != 0 && is_me {
 
 //DRAW DA GUNZ
 
-if back = 1 && !shielding && wep draw_sprite_ext(wep_sprt[wep], max(0, fingers), x + lengthdir_x(-wkick, gunangle + (wepangle * (1 - wkick / 20))), y + lengthdir_y(-wkick, gunangle + (wepangle * (1 - wkick / 20))), 1, wepright, gunangle + (wepangle * (1 - wkick / 20)), c_white, 1)
+var _shining_finger = trigger_fingers_shine
+
+if back && !_is_shielding && wep {
+	draw_sprite_ext(wep_sprt[wep], max(0, _shining_finger),
+		x + lengthdir_x(-wkick, gunangle + (wepangle * (1 - wkick / 20))),
+		y + lengthdir_y(-wkick, gunangle + (wepangle * (1 - wkick / 20))),
+	1, wepright, gunangle + (wepangle * (1 - wkick / 20)), c_white, 1)
+}
 
 if instance_exists(CoopController) && UberCont.opt_outlines {
-	var pinst = player_get(index)
+	var pinst = scr_playerinstance_find(index)
 	
 	if pinst {
 		gpu_set_fog(true, pinst.color, 0, 0)
@@ -95,13 +109,15 @@ if instance_exists(CoopController) && UberCont.opt_outlines {
 
 draw_sprite_ext(sprite_index, - 1, x, y, right, 1, angle, c_white, 1)
 
-if back = -1 && !shielding && wep draw_sprite_ext(wep_sprt[wep], max(0, fingers), x + lengthdir_x(-wkick, gunangle + (wepangle * (1 - wkick / 20))), y + lengthdir_y(-wkick, gunangle + (wepangle * (1 - wkick / 20))), 1, wepright, gunangle + (wepangle * (1 - wkick / 20)), c_white, 1)
+if !back && !_is_shielding && wep {
+	draw_sprite_ext(wep_sprt[wep], max(0, trigger_fingers_shine),
+		x + lengthdir_x(-wkick, gunangle + (wepangle * (1 - wkick / 20))),
+		y + lengthdir_y(-wkick, gunangle + (wepangle * (1 - wkick / 20))),
+	1, wepright, gunangle + (wepangle * (1 - wkick / 20)), c_white, 1)
+}
 
-if wkick > 0
-	wkick --
-
-if wkick < 0
-	wkick ++
+if wkick > 0 wkick --
+if wkick < 0 wkick ++
 
 if race = 7 {
     if bwkick > 0

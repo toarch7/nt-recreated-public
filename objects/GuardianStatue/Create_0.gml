@@ -1,7 +1,7 @@
 max_hp = 1
 size = 1
 
-spr_idle = sprGuardianStatue
+spr_idle = sprOldGuardianStatue
 spr_hurt = sprTorchHurt
 spr_dead = sprTorchDead
 

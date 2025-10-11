@@ -33,7 +33,7 @@ if spr != -1 {
 
 with Player {
     if visible {
-		var pinst = player_get(index),
+		var pinst = scr_playerinstance_find(index),
 			col = c_white
 		
 		if pinst != undefined
@@ -66,17 +66,17 @@ with Player {
 	        }
 		}
 		
-        if KeyCont.players > 1 {
+        if player_count > 1 {
 			var _x = clamp(x, view_xview + 8, view_xview + view_width - 8),
 				_y = clamp(y - 8, view_yview + 16, view_yview + view_height - 4)
 			
-            draw_sprite_ext(sprPlayerIndicatorB, index, _x, _y, 1, 1, 0, col, 1)
+            draw_sprite_ext(sprPlayerIndicator, index + 1, _x, _y, 1, 1, 0, col, 1)
         }
     }
 }
 
 if darkness && !instance_exists(PauseImage) {
-	if global.time % 5 == 0 && surface_exists(dark) &&
+	if current_frame % 5 == 0 && surface_exists(dark) &&
 	(surface_get_width(dark) != view_width or surface_get_height(dark) != view_height) {
 		surface_resize(dark, view_width, view_height)
 	}
@@ -100,7 +100,7 @@ if instance_exists(Player) {
 		
 	    draw_sprite(sprFaintedBar, 0, _x, _y)
 		
-	    _x -= 16
+		    _x -= 16
 	    _y -= 5
 		
 	    if alarm[4] {
@@ -120,7 +120,7 @@ if instance_exists(Player) {
 }
 
 
-if !instance_exists(MenuGen) {
+if !scrGameIsGenerationScreen() {
     if !instance_exists(NothingSpiral) {
 		with Spiral {
 	        draw_sprite_ext(sprite_index, - 1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_white, 1)
@@ -129,7 +129,7 @@ if !instance_exists(MenuGen) {
 	}
 	
     draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
+    draw_set_valign(fa_middle)
 
     with PopupText {
         if !visible

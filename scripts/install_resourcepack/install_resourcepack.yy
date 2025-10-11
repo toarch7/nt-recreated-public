@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "install_resourcepack",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "resourcepacks",
-    "path": "folders/Scripts/resourcepacks.yy",
+  "$GMScript":"v1",
+  "%Name":"install_resourcepack",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"install_resourcepack",
+  "parent":{
+    "name":"Resourcepacks",
+    "path":"folders/Scripts/Resourcepacks.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

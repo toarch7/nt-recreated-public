@@ -1,27 +1,28 @@
 function scrPlayerFiring() {
 	var enoughrads = scrCheckRads(wep),
-		enoughammo = scrCheckAmmo(wep),
+		enoughammo = scrCheckAmmo(wep)
 	
     if infammo > 0 {
 		enoughrads = true
 		enoughammo = true
 	}
 	
-    if KeyCont.press_fire[p] && race != 7 && !wep_auto[wep] && ((wep_type[wep] == 0 or wep_type[wep] == 1) or can_shoot) && reload < 10
+    if KeyCont.press_fire[index] && race != Race.Steroids && !wep_auto[wep] && ((wep_type[wep] == 0 or wep_type[wep] == 1) or can_shoot) && reload < 10
         clicked = true
 	
 	if KeyCont.press_fire[index] && (!enoughammo or !enoughrads) {
 		if !enoughammo {
 			if wep == wep_blood_launcher or wep == wep_blood_cannon {
 				scrBloodAmmoRefill(wep)
+				snd_play_hit_big(sndBloodHurt, 0.2)
 		        last_hit = wep_sprt[wep]
-				
 		        sleep(40)
 		    }
 			else scrEmpty()
 		}
-		else if !enoughrads
+		else if !enoughrads {
 			scrEmptyRads()
+		}
 		
 		clicked = false
 	}

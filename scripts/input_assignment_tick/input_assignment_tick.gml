@@ -147,7 +147,7 @@ function __input_assignment_tick_input(_player_index)
     
     if (global.__input_keyboard_valid
     &&  __input_source_is_available(INPUT_SOURCE.KEYBOARD_AND_MOUSE)
-    &&  keyboard_check_pressed(vk_anykey)
+    &&  scr_keyboard_check_pressed(vk_anykey)
     &&  !__input_key_is_ignored(keyboard_key)) //Ensure that this key isn't one we're trying to ignore
     {
         return { source : INPUT_SOURCE.KEYBOARD_AND_MOUSE, gamepad : undefined };

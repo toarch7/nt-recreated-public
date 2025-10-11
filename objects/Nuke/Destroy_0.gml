@@ -1,6 +1,6 @@
 snd_stop(snd)
 
-snd_play_hit_big(sndExplosionXL, 0.2)
+snd_play_hit_big(sndNukeExplosion, 0.2)
 
 ang = random_angle
 repeat(8) {

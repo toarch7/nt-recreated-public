@@ -2,6 +2,7 @@ dist = random(135) + 10
 angle = random_angle
 turnspeed = random(8) - 4
 rotspeed = random(16) - 8
+sound = false
 
 image_index = random(image_number)
 image_speed = 0

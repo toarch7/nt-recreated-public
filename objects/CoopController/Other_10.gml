@@ -71,8 +71,8 @@ if !ready {
 	
 	ready = true
 	
-	if network_is_locked()
-		network_unlock()
+	if scrGameIsLockstep()
+		scrGameUnlockstep()
 	
 	instance_create(0, 0, GameCont)
 	instance_create(0, 0, MenuGen)
@@ -143,7 +143,7 @@ var stop = false,
 			}
 			else { // perform events
 				with _data[1] {
-					if net_index == _data[0] {
+					if netid == _data[0] {
 						event_perform(_data[2], _data[3])
 						
 						break
@@ -159,8 +159,8 @@ var stop = false,
 //
 
 if netwait >= 900 { // connection terminated
-	if network_is_locked()
-		network_unlock()
+	if scrGameIsLockstep()
+		scrGameUnlockstep()
 	
 	instance_destroy()
 	
@@ -168,14 +168,14 @@ if netwait >= 900 { // connection terminated
 }
 
 if stop {
-	if !network_is_locked()
-		network_lock()
+	if !scrGameIsLockstep()
+		scrGameLockstep()
 	
 	netwait ++
 }
 else {
-	if network_is_locked()
-		network_unlock()
+	if scrGameIsLockstep()
+		scrGameUnlockstep()
 	
 	for(var i = 0; i < playercount; i ++)
 		delete inputs[i][$ netframe]
@@ -204,7 +204,7 @@ if global.is_server && BruteSync {
 	packet_write(buffer_u32, instance_number(hitme))
 	
 	with hitme {
-		packet_write(buffer_u32, net_index)
+		packet_write(buffer_u32, netid)
 		
 		packet_write(buffer_f32, x)
 		packet_write(buffer_f32, y)

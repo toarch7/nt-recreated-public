@@ -17,7 +17,7 @@ if speed > 0 and other.team != team {
         }
 
         with instance_create(x, y, BoltStick) {
-            sprite_index = sprHeavyBoltStick
+            sprite_index = other.sprite_index
             image_angle = other.image_angle
             target = other.id
         }

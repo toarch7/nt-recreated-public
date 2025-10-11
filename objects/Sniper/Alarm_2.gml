@@ -21,6 +21,6 @@ with instance_create(x, y, EnemyBullet4) {
     creator = other.id
     image_angle = direction
 }
-if instance_exists(target) gunangle = target_direction
+if instance_exists(target) gunangle = mcr_target_direction
 alarm[1] = 40 + random(5)
 gonnafire = 0

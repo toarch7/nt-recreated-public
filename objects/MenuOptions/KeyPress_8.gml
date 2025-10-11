@@ -1,4 +1,4 @@
-if net_event(ev_keypress, vk_backspace)
+if scr_network_handle_event(ev_keypress, vk_backspace)
 	exit
 
 if instance_exists(ResourcepackManager) or global.console_active
@@ -10,7 +10,7 @@ if !editing_mode {
         event_user(2)
     }
 	else {
-		self.category_set(
+		scrOptionsMenuChangeCategory(
 			!ds_stack_empty(category_stack)
 				? ds_stack_pop(category_stack)
 				: OptionCategory.Main
@@ -25,7 +25,7 @@ else {
 	
     editing_mode = false
 	
-	self.category_set(OptionCategory.Controls, false)
+	scrOptionsMenuChangeCategory(OptionCategory.Controls, false)
 
     scrSave()
 

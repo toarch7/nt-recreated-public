@@ -29,7 +29,7 @@ if instance_exists(Player) {
 
 team = 1
 wkick = 0
-target = -1
+target = noone
 givekill = 1
 
 snd_hurt = sndGatorHit

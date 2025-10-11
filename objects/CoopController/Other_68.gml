@@ -39,8 +39,8 @@ try {
 			packet_begin(event.tcp_connect)
 			
 			packet_write(buffer_string, string(GAME_BUILD))
-			packet_write(buffer_string, scrGetUid())
-			packet_write(buffer_string, json_stringify(playerinstance))
+			packet_write(buffer_string, scrSavedatascrGetUID())
+			packet_write(buffer_string, json_stringify(my_player))
 			
 			packet_send()
 		break
@@ -71,15 +71,15 @@ try {
 			
 			socketindexes[$ _socket] = freeid
 			
-			player_add(freeid, pinst)
+			scr_playerinstance_add(freeid, pinst)
 			
-            buffer_seek(global.buffer, buffer_seek_start, 0)
+            buffer_seek(global.mpbuffer, buffer_seek_start, 0)
 			
 			packet_begin(event.player_connect)
 			packet_write(buffer_u8, freeid)
 			packet_write(buffer_string, user_signature)
 			packet_write(buffer_string, json_stringify(pinst))
-			packet_write(buffer_string, json_stringify(playerinstances))
+			packet_write(buffer_string, json_stringify(global.__playerinstance_list))
 			packet_write(buffer_u32, random_get_seed())
 			packet_send()
 			
@@ -98,15 +98,15 @@ try {
 				_user_signature = buffer_read(data, buffer_string),
 				_pinst = json_parse(buffer_read(data, buffer_string))
 			
-			if _user_signature == scrGetUid() { // is that for me??
+			if _user_signature == scrSavedatascrGetUID() { // is that for me??
 				var _playerinstances = json_parse(buffer_read(data, buffer_string)),
 					_seed = buffer_read(data, buffer_u32)
 				
-				playerinstances = {}
+				global.__playerinstance_list = {}
 				
-				playerinstances_set_struct_list(_playerinstances)
+				scr_playerinstances_load_from_list(_playerinstances)
 				
-				playerinstance = player_get()
+				my_player = scr_playerinstance_find()
 				
 	            global.index = _index
 	            index = _index
@@ -123,7 +123,7 @@ try {
 				
 	            alarm[1] = -1
 			}
-			else player_add(_index, _pinst)
+			else scr_playerinstance_add(_index, _pinst)
 			
             share = false
 			
@@ -160,7 +160,7 @@ try {
 			}
 			else self.disconnect(_socket)
 			
-			KeyCont.players = variable_struct_names_count(playerinstances)
+			player_count = variable_struct_names_count(global.__playerinstance_list)
 			
 			break
 		
@@ -182,7 +182,7 @@ try {
 			with CoopMenu
 				instance_destroy()
 			
-			network_lock()
+			scrGameLockstep()
 			
 			packet_begin(event.ready_state)
 			packet_write(buffer_u8, global.index)
@@ -200,7 +200,7 @@ try {
         case event.update_playerinstance:
             var _index = buffer_read(data, buffer_u8)
 			
-            var inst = player_get(_index)
+            var inst = scr_playerinstance_find(_index)
 			
             var _skin = inst.skin,
                 _race = inst.race
@@ -218,7 +218,7 @@ try {
                     snd_slct = sndBigDogIntro
                 }
 				
-                snd_play(snd_slct)
+				snd_play(audio_exists(snd_slct) ? snd_slct : sndMutant0Slct)
             }
             break
 		
@@ -260,7 +260,7 @@ try {
 				var _index = socketindexes[$ _socket]
 				
 				if _index != undefined {
-					var inst = player_get(_index)
+					var inst = scr_playerinstance_find(_index)
 					
 					if inst != undefined {
 						inst.latency = _latency
@@ -291,7 +291,7 @@ try {
 			if _index == index
 				_index = 0
 				
-			var inst = player_get(_index)
+			var inst = scr_playerinstance_find(_index)
 				
 			if inst != undefined
 				inst.latency = _latency
@@ -312,9 +312,9 @@ try {
 			var _hitmes = buffer_read(data, buffer_u32)
 			
 			repeat _hitmes {
-				var _net_index = buffer_read(data, buffer_u32)
+				var _netid = buffer_read(data, buffer_u32)
 				
-				with hitme if net_index == _net_index {
+				with hitme if netid == _netid {
 					x = buffer_read(data, buffer_f32)
 					y = buffer_read(data, buffer_f32)
 					

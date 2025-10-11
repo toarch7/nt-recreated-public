@@ -8,12 +8,13 @@ spr_dead = sprServerDead
 
 event_inherited()
 
-
 snd_hurt = sndHitMetal
+snd_dead = sndServerBreak
 
 if random(10) < 1 {
     max_hp = 6
     hp = 6
+	
     spr_idle = sprTerminal
     spr_hurt = sprTerminalHurt
     spr_dead = sprTerminalDead

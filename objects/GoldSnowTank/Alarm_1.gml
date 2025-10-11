@@ -8,13 +8,13 @@ if instance_exists(target) {
             scrTarget()
 
             if instance_exists(target) {
-                gunangle = target_direction
+                gunangle = mcr_target_direction
             }
 
             alarm[2] = 10
             ammo = 16
         }
 
-        direction = target_direction + 70 + random(40) * choose(1, - 1)
+        direction = mcr_target_direction + 70 + random(40) * choose(1, - 1)
     } else motion_add(random_angle, .5)
 } else motion_add(random_angle, .5)

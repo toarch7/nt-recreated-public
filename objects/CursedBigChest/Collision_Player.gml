@@ -26,9 +26,7 @@ if !instance_exists(GenCont)
 		}
 	}
 
-	sound_play_pitch(sndCursedChest, 0.5)
-	
-	snd_play(sndBigWeaponChest)
+	snd_play_hit_big(sndBigCursedChest)
 	
 	snd_play(p.snd_chst)
 	

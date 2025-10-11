@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "musBoss6B",
+  "$GMSound": "",
+  "%Name": "musBoss6B",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 3,
   "conversionMode": 0,
   "duration": 96.005,
+  "name": "musBoss6B",
   "parent": {
     "name": "Music",
-    "path": "folders/Sounds/Music.yy",
+    "path": "folders/Sounds/Music.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
   "soundFile": "musBoss6B.ogg",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

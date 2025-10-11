@@ -1,6 +1,6 @@
 /// @description Open profile category (to set nickname/color)
 
-self.category_set(OptionCategory.Game_Profile, false)
+scrOptionsMenuChangeCategory(OptionCategory.Game_Profile, false)
 
 var items = options[category]
 

@@ -1,133 +1,86 @@
-if net_event(ev_other, ev_user0)
+if scr_network_handle_event(ev_other, ev_user0)
 	exit
 
 if instance_exists(MenuOptions)
 	exit
 
-if sprite_index == sprGameOverResults {
-    scrUnpause()
+image_index = floor(image_index)
+
+// quit to leaderboards
+if sprite_index == sprGameOverResult {
+    with UberCont {
+		scrGameQuitToMenu(true)
+	}
 	
-	with MobileUI
-		instance_destroy()
-	
-    UberCont.want_menu = 2
-    UberCont.show_results = 1 + UberCont.weekly_run
-	
-	draw_enable_drawevent(false)
+	exit
 }
-else switch image_index {
-    case 0:
-        //MENU
-        if instance_exists(GameOver) {
-            image_index = 5
-			draw_enable_drawevent(false)
 
-            event_user(0)
-
-            break
-        }
-
-        with object_index
-			instance_destroy()
-
-        with instance_create(view_xview + 52, view_yview + view_height - 48, PauseButton) {
-            image_index = 4
-        }
-
-        with instance_create(view_xview + view_width - 52, view_yview + view_height - 48, PauseButton) {
-            image_index = 5
-        }
-
-        // -1 means tip is seen
-        if !save_get_value("etc", "saving_tip", 0)
-            save_set_value("etc", "saving_tip", -1)
-		
-        break
-
-    case 5:
-        //QUIT
-		scrUnpause()
-		
-        audio_stop_all()
-        UberCont.want_menu = 2
-		
-		with MobileUI
-			instance_destroy()
-		
-		draw_enable_drawevent(false)
-		
-        break
-
-    case 1:
-        // RESTART
-        if instance_exists(GameOver) {
-			draw_enable_drawevent(false)
-            image_index = 6
-
-            event_user(0)
-
-            break
-        }
-
-        with object_index
-			instance_destroy()
-		
-        with instance_create(view_xview + 52, view_yview + view_height - 48, PauseButton) {
-            image_index = 4
-        }
-		
-        with instance_create(view_xview + view_width - 56, view_yview + view_height - 48, PauseButton) {
-            image_index = 6
-        }
-        break
-
-    case 6:
-        //RESTART
-		scrUnpause()
-		
-        UberCont.want_restart = 2
-		
-		with MobileUI
-			instance_destroy()
-		
-        break
-
-
-    case 2:
-        //OPTIONS
-        with instance_create(0, 0, MenuOptions)
-			self.category_set(OptionCategory.Main)
-		
-        with object_index
-			instance_destroy()
-		
-        break
+// confirmation for `Menu` and `Retry` options
+if image_index == 0 || image_index == 1 {
+	var _confirm_index = (image_index == 1) ? 6 : 5
 	
-    case 3:
-		// CONTINUE
-        scrUnpause()
+	if !instance_exists(GameOver) {
+		var _left = view_xview + 52,
+			_right = view_xview + view_width - 52,
+			_bottom = view_yview + view_height - 48
 		
-        with PauseButton
-			instance_destroy()
+	    instance_destroy(PauseButton)
 		
-        with BackButton
-			instance_destroy()
+	    with instance_create(_right, _bottom, PauseButton) image_index = _confirm_index
+		with instance_create(_left, _bottom, PauseButton) image_index = 4 /* Back */
 		
-		with MenuOptions
-			event_user(2)
+	    // setting flag to -1 marks it as seen
+	    if save_get_value("etc", "saving_tip", 0) != -1 {
+	        save_set_value("etc", "saving_tip", -1)
+		}
+	}
+	// needs no confirmation if it's gameover screen
+	else {
+		image_index = _confirm_index
+	}
+}
+
+// `Quit` & `Retry`
+if image_index == 5 || image_index == 6 {
+	with UberCont {
+		scrGameUnpause()
 		
-        exit
-        break
+		if other.image_index == 5 {
+			show_leaderboards_menu = scrGameIsEventRun()
+			show_weekly_results_menu = scrGameIsWeeklyRun()
+			want_menu = 1
+		}
+		else {
+			want_restart = 1
+		}
+	}
 	
-    case 4:
-        // BACK
-        with PauseButton
-        instance_destroy()
+	instance_destroy(PauseButton)
+}
 
-        scrMakePauseButtons()
-        break
+// `Options`
+if image_index == 2 {
+	with instance_create(0, 0, MenuOptions) {
+		scrOptionsMenuChangeCategory(OptionCategory.Main)
+	}
+	
+	instance_destroy(PauseButton)
+}
 
-    default:
-        show_message_async("Not finished yet.")
-        break
+// `Continue`
+if image_index == 3 {
+	instance_destroy(PauseButton)
+	instance_destroy(BackButton)
+	
+	with MenuOptions {
+		event_user(2)
+	}
+	
+	scrGameUnpause()
+}
+
+// `Back`
+if image_index == 4 {
+	instance_destroy(PauseButton)
+	scrMakePauseButtons()
 }

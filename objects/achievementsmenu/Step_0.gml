@@ -34,8 +34,9 @@ if mouse_wheel_down() vspeed = 24
 var p = ypos div 40
 
 if p != least {
-	if !dragging
-		sound_play_pitchvol(sndHover, 1.1 + random(0.1), 0.3)
+	if !dragging {
+		snd_play(sndHover, 1.1 + random(0.1), 0.3)
+	}
 	
 	least = p
 	
@@ -53,4 +54,4 @@ if (ypos <= 0 or ypos >= max_height) && speed > 0 {
     speed = 0
 }
 
-camera_set_pos(0, 0)
+scr_camera_set_position(0, 0)

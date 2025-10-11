@@ -1,84 +1,295 @@
 {
-  "resourceType": "GMSprite",
-  "resourceVersion": "1.0",
-  "name": "sprMolefishWalk",
-  "bbox_bottom": 23,
-  "bbox_left": 0,
-  "bbox_right": 23,
-  "bbox_top": 0,
-  "bboxMode": 1,
+  "$GMSprite": "",
+  "%Name": "sprMolefishWalk",
+  "bboxMode": 0,
+  "bbox_bottom": 20,
+  "bbox_left": 5,
+  "bbox_right": 21,
+  "bbox_top": 4,
   "collisionKind": 0,
   "collisionTolerance": 0,
   "DynamicTexturePage": false,
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"999ef32f-d275-4d28-bf33-3fcee6898413",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"9d37e2a1-8235-454d-a49c-3e85ed504dee",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"4fb244d5-e00f-4659-9217-7ecf721ceb3e",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"e233277a-fbf1-48ba-b24b-420b2fb0e49c",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"7dd08088-61b6-4da7-8743-dc76fbcb6a68",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"c79ee052-9251-4b13-ade4-6fb9e2ef4d74",},
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "999ef32f-d275-4d28-bf33-3fcee6898413",
+      "name": "999ef32f-d275-4d28-bf33-3fcee6898413",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "9d37e2a1-8235-454d-a49c-3e85ed504dee",
+      "name": "9d37e2a1-8235-454d-a49c-3e85ed504dee",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "4fb244d5-e00f-4659-9217-7ecf721ceb3e",
+      "name": "4fb244d5-e00f-4659-9217-7ecf721ceb3e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "e233277a-fbf1-48ba-b24b-420b2fb0e49c",
+      "name": "e233277a-fbf1-48ba-b24b-420b2fb0e49c",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "7dd08088-61b6-4da7-8743-dc76fbcb6a68",
+      "name": "7dd08088-61b6-4da7-8743-dc76fbcb6a68",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "c79ee052-9251-4b13-ade4-6fb9e2ef4d74",
+      "name": "c79ee052-9251-4b13-ade4-6fb9e2ef4d74",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    }
   ],
   "gridX": 0,
   "gridY": 0,
   "height": 24,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"a42f7685-1d47-4110-be9a-cd2f70c3a2ba","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {
+      "$GMImageLayer": "",
+      "%Name": "a42f7685-1d47-4110-be9a-cd2f70c3a2ba",
+      "blendMode": 0,
+      "displayName": "default",
+      "isLocked": false,
+      "name": "a42f7685-1d47-4110-be9a-cd2f70c3a2ba",
+      "opacity": 100,
+      "resourceType": "GMImageLayer",
+      "resourceVersion": "2.0",
+      "visible": true
+    }
   ],
+  "name": "sprMolefishWalk",
   "nineSlice": null,
   "origin": 4,
   "parent": {
     "name": "Molefish",
-    "path": "folders/Sprites/Enemies/Molefish.yy",
+    "path": "folders/Sprites/Enemies/Molefish.yy"
   },
   "preMultiplyAlpha": false,
+  "resourceType": "GMSprite",
+  "resourceVersion": "2.0",
   "sequence": {
-    "resourceType": "GMSequence",
-    "resourceVersion": "1.4",
-    "name": "",
+    "$GMSequence": "v1",
+    "%Name": "",
     "autoRecord": true,
     "backdropHeight": 1080,
     "backdropImageOpacity": 0.5,
     "backdropImagePath": "",
     "backdropWidth": 1920,
-    "backdropXOffset": 0.0,
-    "backdropYOffset": 0.0,
-    "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "events": {
+      "$KeyframeStore<MessageEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 6.0,
+    "length": 6,
     "lockOrigin": false,
-    "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "moments": {
+      "$KeyframeStore<MomentsEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "name": "",
     "playback": 1,
-    "playbackSpeed": 1.0,
+    "playbackSpeed": 1,
     "playbackSpeedType": 1,
+    "resourceType": "GMSequence",
+    "resourceVersion": "2.0",
     "showBackdrop": true,
     "showBackdropImage": false,
     "timeUnits": 1,
     "tracks": [
-      {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"999ef32f-d275-4d28-bf33-3fcee6898413","path":"sprites/sprMolefishWalk/sprMolefishWalk.yy",},},},"Disabled":false,"id":"d1748527-ab0a-4868-9f0b-aca245c16f59","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"9d37e2a1-8235-454d-a49c-3e85ed504dee","path":"sprites/sprMolefishWalk/sprMolefishWalk.yy",},},},"Disabled":false,"id":"53ad3fdc-524c-488a-ada3-688c0fb71438","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"4fb244d5-e00f-4659-9217-7ecf721ceb3e","path":"sprites/sprMolefishWalk/sprMolefishWalk.yy",},},},"Disabled":false,"id":"261ea77e-dfe5-44de-9d8e-e86f10c4cc74","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"e233277a-fbf1-48ba-b24b-420b2fb0e49c","path":"sprites/sprMolefishWalk/sprMolefishWalk.yy",},},},"Disabled":false,"id":"6f55fe01-8256-4b1d-bae6-40ddaa2bc9ca","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"7dd08088-61b6-4da7-8743-dc76fbcb6a68","path":"sprites/sprMolefishWalk/sprMolefishWalk.yy",},},},"Disabled":false,"id":"61e077a6-1c6a-490b-a792-8e39c9751c0d","IsCreationKey":false,"Key":4.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"c79ee052-9251-4b13-ade4-6fb9e2ef4d74","path":"sprites/sprMolefishWalk/sprMolefishWalk.yy",},},},"Disabled":false,"id":"6d1ede1c-2050-48ac-960f-c57511e41a7c","IsCreationKey":false,"Key":5.0,"Length":1.0,"Stretch":false,},
-          ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
+      {
+        "$GMSpriteFramesTrack": "",
+        "builtinName": 0,
+        "events": [],
+        "inheritsTrackColour": true,
+        "interpolation": 1,
+        "isCreationTrack": false,
+        "keyframes": {
+          "$KeyframeStore<SpriteFrameKeyframe>": "",
+          "Keyframes": [
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "999ef32f-d275-4d28-bf33-3fcee6898413",
+                    "path": "sprites/sprMolefishWalk/sprMolefishWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "d1748527-ab0a-4868-9f0b-aca245c16f59",
+              "IsCreationKey": false,
+              "Key": 0,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9d37e2a1-8235-454d-a49c-3e85ed504dee",
+                    "path": "sprites/sprMolefishWalk/sprMolefishWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "53ad3fdc-524c-488a-ada3-688c0fb71438",
+              "IsCreationKey": false,
+              "Key": 1,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "4fb244d5-e00f-4659-9217-7ecf721ceb3e",
+                    "path": "sprites/sprMolefishWalk/sprMolefishWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "261ea77e-dfe5-44de-9d8e-e86f10c4cc74",
+              "IsCreationKey": false,
+              "Key": 2,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e233277a-fbf1-48ba-b24b-420b2fb0e49c",
+                    "path": "sprites/sprMolefishWalk/sprMolefishWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "6f55fe01-8256-4b1d-bae6-40ddaa2bc9ca",
+              "IsCreationKey": false,
+              "Key": 3,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "7dd08088-61b6-4da7-8743-dc76fbcb6a68",
+                    "path": "sprites/sprMolefishWalk/sprMolefishWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "61e077a6-1c6a-490b-a792-8e39c9751c0d",
+              "IsCreationKey": false,
+              "Key": 4,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c79ee052-9251-4b13-ade4-6fb9e2ef4d74",
+                    "path": "sprites/sprMolefishWalk/sprMolefishWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "6d1ede1c-2050-48ac-960f-c57511e41a7c",
+              "IsCreationKey": false,
+              "Key": 5,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            }
+          ],
+          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
+          "resourceVersion": "2.0"
+        },
+        "modifiers": [],
+        "name": "frames",
+        "resourceType": "GMSpriteFramesTrack",
+        "resourceVersion": "2.0",
+        "spriteId": null,
+        "trackColour": 0,
+        "tracks": [],
+        "traits": 0
+      }
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
-    "volume": 1.0,
+    "visibleRange": {
+      "x": 0,
+      "y": 0
+    },
+    "volume": 1,
     "xorigin": 12,
-    "yorigin": 12,
+    "yorigin": 12
   },
   "swatchColours": null,
   "swfPrecision": 2.525,
   "textureGroupId": {
     "name": "Default",
-    "path": "texturegroups/Default",
+    "path": "texturegroups/Default"
   },
   "type": 0,
   "VTile": false,
-  "width": 24,
+  "width": 24
 }

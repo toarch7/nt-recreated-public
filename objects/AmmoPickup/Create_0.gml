@@ -5,8 +5,8 @@ alarm[0] = (200 + random(30)) / ((5 + GameCont.loops) / 5)
 
 
 //RUSH CROWN
-if instance_exists(Player) {
-    if GameCont.crown = 4 alarm[0] /= 3
+if scrCrownCheck(crwn_haste) {
+	alarm[0] /= 3
 }
 
 image_speed = 0

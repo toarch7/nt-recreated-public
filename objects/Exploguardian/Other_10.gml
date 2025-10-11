@@ -4,9 +4,9 @@ if sprite_index != spr_hurt && sprite_index != spr_chrg && sprite_index != spr_f
 
 if sprite_index == spr_hurt or sprite_index == spr_chrg or sprite_index == spr_fire {
     if image_index >= sprite_get_number(sprite_index) - 1 {
-        if sprite_index == sprExploguardianFire {
-            spr_idle = sprExploguardianIdle
-            spr_hurt = sprExploguardianHurt
+        if sprite_index == sprExploGuardianFire {
+            spr_idle = sprExploGuardianIdle
+            spr_hurt = sprExploGuardianHurt
             charge = 0
         }
 

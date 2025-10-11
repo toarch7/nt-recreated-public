@@ -10,7 +10,7 @@ num = 2
 if skill_get(9)
 	num = 4
 
-if crown_current == crwn_haste {
+if scrCrownCheck(crwn_haste) {
 	alarm[0] /= 3
 	num ++
 }

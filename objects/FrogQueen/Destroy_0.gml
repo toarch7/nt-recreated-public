@@ -1,16 +1,13 @@
-repeat 2 {
+repeat (2) {
     scrDrop(200, 0)
 }
 
-scrAchievement(35)
-
 with Player {
-    if string_copy(wep_name[wep], 0, 4) == "GOLD"
-    or string_copy(wep_name[bwep], 0, 4) == "GOLD" {
+    if scr_weapon_is_golden(wep) || scr_weapon_is_golden(bwep) {
         with instance_create(other.x, other.y, WepPickup) {
             ammo = 0
-            wep = 120
             curse = 0
+            wep = wep_frog_pistol
             name = wep_name[wep]
             type = wep_type[wep]
             sprite_index = wep_sprt[wep]
@@ -26,22 +23,11 @@ with instance_create(x, y, FrogQueenDeath) {
 }
 
 if instance_exists(Player) {
-    if GameCont.race == 10 {
-        if !UberCont.cskingot[10] {
-            show_unlock_popup("@wREBEL B-SKIN UNLOCKED#@sFOR DEFEATING BALL MUM")
-            
-			with instance_create(0, 0, UnlockScreen) {
-                race = 10;
-                skin = 1
-            }
-		
-	        scrAchievement(AchievID.REBEL_BSKIN)
-			
-            UberCont.cskingot[10] = 1
-        }
-		
-		scrAchievement(AchievID.BOSS_FROG)
-    }
+	scrAchievementUnlock(Achievement.BOSS_MOM)
+	
+	if scrPlayerCountRace(Race.Rebel, true) {
+		scrRaceUnlockSkin(Race.Rebel, 1)
+	}
 }
 
 with MusCont {

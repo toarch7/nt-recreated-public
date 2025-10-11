@@ -35,22 +35,29 @@ function scrRadDrop(raddrop) {
 }
 
 function scrStalkerProc() {
-	var drop = id
+	var _x = x, _y = y, _direction = direction
 	
 	with Player {
-		if race != 11 or !ultra_get(1)
-			continue
+		if race != Race.Horror continue
 		
-		with instance_create(drop.x, drop.y, HorrorBullet) {
-			creator = other.id
-			direction = drop.direction
-				
-			if other.bskin
-				sprite_index = sprHorrorBullet2
-				
-			speed = 9
-			image_angle = direction
+		var _stalker = scrUltraCheck(race, UltraSkill.Stalker)
+		
+		if _stalker <= 0 break
+		
+		with instance_create(_x, _y, HorrorBullet) {
 			team = other.team
+			creator = other.id
+			
+			direction = _direction
+			speed = 9
+			
+			if other.bskin {
+				sprite_index = sprHorrorBBullet
+			}
+			
+			image_angle = _direction
 		}
+			
+		snd_play_hit(sndHorrorA)
 	}
 }

@@ -46,7 +46,7 @@ if instance_exists(target) {
             creator = other.id
         }
 
-        snd_play(male ? sndShielderShield : sndShielderShieldF)
+        snd_play(male ? sndShielderShieldM : sndShielderShieldF)
 
         alarm[1] = 75
         speed = 0

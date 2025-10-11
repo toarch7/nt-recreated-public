@@ -8,12 +8,12 @@ if team != other.team {
         other.image_angle = other.direction
         with instance_create(other.x, other.y, Deflect)
         image_angle = other.direction
-        snd_play(sndCrystalDeflect)
+        snd_play(sndCrystalRicochet)
     }
     if other.typ = 2 {
         with other
         instance_destroy()
-        snd_play(sndCrystalDeflect)
+        snd_play(sndCrystalRicochet)
     }
 
     UberCont.ctot_uniq[2]++

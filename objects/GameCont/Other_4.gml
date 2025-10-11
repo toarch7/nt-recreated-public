@@ -1,18 +1,13 @@
-rng_reset()
+scrRngStatesReset()
 
-if !loops or (area == 7 && subarea == 3) or
-area == 100 or
-area == 0 or (area == 106 && subarea == 3) or
-area == 107 {
-    novans = 1
-} else novans = 0
-
-if area == 100 {
-    GameCont.crownvisits ++
+novans = false
+	
+if (area == area_palace && subarea == 3) || (area == area_hq && subarea == 3)
+|| loops == 0 || area == area_vault || area == area_campfire || area == area_crib {
+	novans = true
 }
 
-if area == 105 {
-	GameCont.junglevisits ++
-}
+if area == area_vault crownvisits ++
+if area == area_jungle junglevisits ++
 
 underwater = (area == area_oasis)

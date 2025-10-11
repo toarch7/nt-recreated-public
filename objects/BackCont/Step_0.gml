@@ -33,10 +33,13 @@ if !instance_exists(LevCont) && !instance_exists(CrownIcon) && !(instance_exists
 	if instance_exists(TutCont) && instance_exists(WeaponChest)
 		o = WeaponChest
 
-    with Player
-    if index == global.index {
-        if wep_type[wep] == 0 viewdist = 8
-        if wep_type[wep] == 3 viewdist = 3
+    with Player if index == global.index {
+        if scr_weapon_is_melee(wep) {
+			viewdist = 8
+		}
+		else if scr_weapon_get_type(wep) == Ammo.Bolts {
+			viewdist = 3
+		}
 		
 		if UberCont.opt_camera {
 	        if instance_exists(o) {
@@ -44,7 +47,7 @@ if !instance_exists(LevCont) && !instance_exists(CrownIcon) && !(instance_exists
 	            dis = point_distance(x, y, i.x, i.y) / 6
 	            dir = point_direction(x, y, i.x, i.y)
 				
-	            if o == Portal or instance_is(o, WeaponChest) {
+	            if o == Portal || instance_is(o, WeaponChest) {
 	                dis = min(dis, 72)
 	            }
 	        }
@@ -58,11 +61,12 @@ if !instance_exists(LevCont) && !instance_exists(CrownIcon) && !(instance_exists
 	                dis2 = (point_distance(0, 0, gpx, gpy) * 72) / viewdist
 	            }
 				else if UberCont.opt_keyboard {
-	                dis2 = point_distance(x, y, mouse_x, mouse_y) / viewdist
+	                //dis2 = point_distance(x, y, mouse_x, mouse_y) / viewdist
+					dis2 = KeyCont.dis_fire[index] / viewdist
 	            }
 				else if instance_exists(JoystickAttack) {
 	                if !save_get_value("contorls", "aimbot", 0) {
-	                    dir2 = KeyCont.dir_fire[global.index]
+	                    dir2 = KeyCont.dir_fire[index]
 	                    dis2 = JoystickAttack.vdis / viewdist
 	                }
 	            }

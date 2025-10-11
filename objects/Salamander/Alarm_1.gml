@@ -6,14 +6,14 @@ if (target > Player) {
         ammo = 45
         alarm[2] = 5
         snd_play_hit_big(sndSalamanderCharge, 0.2)
-        gunangle = ((target_direction + random(40)) - 20)
+        gunangle = ((mcr_target_direction + random(40)) - 20)
     } else if (random(20) < 1) {
         ammo = 45
         alarm[2] = 5
         snd_play_hit_big(sndSalamanderCharge, 0.2)
         gunangle = random_angle
     } else {
-        direction = ((target_direction + random(100)) - 50)
+        direction = ((mcr_target_direction + random(100)) - 50)
         speed = 0.4
         walk = (40 + random(10))
         alarm[1] += 40

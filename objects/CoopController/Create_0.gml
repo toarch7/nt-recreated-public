@@ -25,6 +25,7 @@ clients_ready = [ false, false, false, false ]
 global.coop = 1
 
 socket = -1
+broadcast_socket = -1
 
 ip = global.ip
 
@@ -33,7 +34,7 @@ index = -1
 global.netfreeid = 1
 global.netidstack = ds_stack_create()
 
-global.buffer = buffer_create(1, buffer_grow, 1)
+global.mpbuffer = buffer_create(1, buffer_grow, 1)
 inputsbuffer = buffer_create(128, buffer_grow, 1)
 broadcast_buffer = -1
 pingbuffer = -1
@@ -43,11 +44,18 @@ buffer_write(pingbuffer, buffer_u8, event.ping)
 
 if global.is_server {
     socket = network_create_server(network_socket_tcp, global.port, 3)
-
+	
+	broadcast_socket = network_create_socket_ext(network_socket_udp, NETWORK_PORT + 1)
+	
     broadcast_buffer = buffer_create(24, buffer_grow, 1)
+	
+	var name = string_copy(save_get_value("etc", "name", "username"), 1, 10)
+	
     buffer_write(broadcast_buffer, buffer_u8, event.broadcast)
-    buffer_write(broadcast_buffer, buffer_string, string_copy(save_get_value("etc", "name", "username"), 1, 10))
-
+    buffer_write(broadcast_buffer, buffer_string, name + "'s GAME")
+	
+	print("SOCKET", broadcast_socket)
+	
     global.index = 0
     index = 0
 
@@ -155,7 +163,7 @@ disconnect = function(_socket, _silent = false) {
 		instance_deactivate_object(Revive)
 	}
 	
-	player_remove(_index)
+	scr_playerinstance_destroy(_index)
 	
 	if global.is_server {
 		if _index != global.index {
@@ -186,13 +194,13 @@ event_handlers[$ "crown"] = function(_index, _data) {
 }
 
 // PlayerInstance update
-event_handlers[$ "playerinstance"] = function(_index, _data) {
+event_handlers[$ "my_player"] = function(_index, _data) {
 	var pinst = _data[2]
 	
-	player_set_struct(playerinstances[$ _index], pinst, true)
+	player_set_struct(global.__playerinstance_list[$ _index], pinst, true)
 	
 	if instance_exists(Menu) {
-		var _is_me = net_isme()
+		var _is_me = scr_is_authority()
 		
 		with Menu {
 			if _is_me {

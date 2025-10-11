@@ -3,9 +3,10 @@ scrTarget()
 if instance_exists(target) {
     if point_distance(x, y, target.x, target.y) < 100 {
         //charge
-        walk = 40 + random(10)
+		snd_play(sndRatkingCharge)
+		walk = 40 + random(10)
 
-        mydir = target_direction + random(20) - 10
+        mydir = mcr_target_direction + random(20) - 10
         meleedamage = 4
         speed = 0.4
 

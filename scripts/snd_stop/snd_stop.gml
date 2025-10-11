@@ -1,6 +1,3 @@
-function snd_stop(argument0) {
-    audio_stop_sound(argument0)
-
-
-
+function snd_stop(_sound) {
+    audio_stop_sound(_sound)
 }

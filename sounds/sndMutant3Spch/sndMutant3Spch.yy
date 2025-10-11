@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndMutant3Spch",
+  "$GMSound": "",
+  "%Name": "sndMutant3Spch",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 3,
   "conversionMode": 0,
   "duration": 8.544014,
+  "name": "sndMutant3Spch",
   "parent": {
-    "name": "Speeches",
-    "path": "folders/Sounds/Mutant/Speeches.yy",
+    "name": "Speech",
+    "path": "folders/Sounds/Mutant/Speech.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndmutant3spch.ogg",
+  "soundFile": "sndMutant3Spch.ogg",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

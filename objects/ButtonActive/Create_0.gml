@@ -11,7 +11,7 @@ button_name = "ABILTIY BUTTON"
 
 time = 0
 
-do_thing = 0
+volume_control_command = 0
 
 rogue_touch = -1
 rogue_hide = 180
@@ -20,13 +20,13 @@ can_forever = function (player) {
 	if !instance_exists(player)
 		return false
 	
-	var pinst = player_get()
+	var pinst = scr_playerinstance_find()
 	
-	return (player.race == 3 && player_pref(pinst, "eyes"))
-		or (player.race == 4 && player_pref(pinst, "melting"))
-		or (player.race == 6 && player_pref(pinst, "yv"))
-		or (player.race == 14 && player_pref(pinst, "skeleton"))
-		or (player.race == 7 && player_pref(pinst, "steroids"))
-		or (player.race == 12 && !player_pref(pinst, "rogue"))
+	return (player.race == 3 && scr_player_pref(pinst, "eyes"))
+		or (player.race == 4 && scr_player_pref(pinst, "melting"))
+		or (player.race == 6 && scr_player_pref(pinst, "yv"))
+		or (player.race == 14 && scr_player_pref(pinst, "skeleton"))
+		or (player.race == 7 && scr_player_pref(pinst, "steroids"))
+		or (player.race == 12 && !scr_player_pref(pinst, "rogue"))
 		or (player.race == 11)
 }

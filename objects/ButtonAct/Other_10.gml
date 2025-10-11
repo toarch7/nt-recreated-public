@@ -15,10 +15,10 @@ if instance_exists(MenuOptions) or UberCont.opt_keyboard or UberCont.opt_gamepad
 var mx = device_mouse_x(index)
 var my = device_mouse_y(index)
 
-KeyCont.press_pick[global.index] = /*(do_thing == 1) or */
+KeyCont.press_pick[global.index] = /*(volume_control_command == 1) or */
 (index != -1 && device_mouse_check_button_pressed(index, mb_left))
 
-/*if do_thing {
-	do_thing = 2
+/*if volume_control_command {
+	volume_control_command = 2
 }
-else do_thing = 0*/
+else volume_control_command = 0*/

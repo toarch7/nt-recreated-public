@@ -4,7 +4,7 @@ if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 && distance_to_object(target) <= 96 and random(2) < 1 {
         ammo = 10
         alarm[2] = 1
-        gunangle = target_direction - 30
+        gunangle = mcr_target_direction - 30
         alarm[1] = 30 + random(5)
     }
     direction = point_direction(target.x, target.y, x, y) + random(30) - 15

@@ -9,7 +9,7 @@ function load_custom_shadow_colors(path) {
             global.customshadowcolors[$ keys[i]] = data[$ keys[i]]
         }
     } catch (e) {
-        printc("[!!!] Failed to load custom background colors: " + e.message, c_red)
+        scr_log_push("[!!!] Failed to load custom background colors: " + e.message, c_red)
         status = 1
     }
 

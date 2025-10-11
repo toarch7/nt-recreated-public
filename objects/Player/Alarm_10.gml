@@ -1,23 +1,22 @@
 alarm[10] = 10
 
 try {
-
-    /* if !instance_exists(Cinematic) {
-		scrDisableWallTop()
-	} */
-
     if race == 11 && ultra == 2 && !instance_exists(GenCont) && !instance_exists(Portal) {
         var _enemy_hp = 0
 
         with enemy {
-	        if object_index != Van
-	            _enemy_hp += hp
+	        if object_index != Van {
+				_enemy_hp += hp
+			}
 		}
 		
         if _enemy_hp <= 150 {
-            with enemy
+            snd_play_hit_big(sndHorrorPortal)
+			
+			with enemy {
 				hp = 0
-        }
+			}
+		}
     }
 	
 	if instance_exists(Floor) && id == instance_find(Player, 0) {
@@ -66,10 +65,4 @@ try {
     }
 } catch (e) {
     print(e.message)
-}
-
-if string_count("GOLD", wep_name[wep]) && !irandom(2) {
-    with instance_create(x + orandom(10), y + orandom(10), CaveSparkle) {
-        if irandom(1) depth = other.depth - 1
-    }
 }

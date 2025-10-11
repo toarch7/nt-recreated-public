@@ -5,7 +5,7 @@ if (spr_idle == sprGuardianAppear) {
 
 if (spr_idle == sprGuardianDisappear) {
     meleedamage = 0
-    snd_play(sndGuardianAppear)
+    snd_play(sndCrownGuardianAppear)
     spr_idle = sprGuardianAppear
     if (instance_exists(target)) {
         dist = (64 + random(120))

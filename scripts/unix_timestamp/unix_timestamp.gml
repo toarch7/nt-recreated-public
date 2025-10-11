@@ -8,5 +8,5 @@ function unix_to_datatime(seconds) {
 }
 
 function date_ddmmYY_string(date) {
-	return scrAddZero(date_get_day(date), 1) + "/" + scrAddZero(date_get_month(date), 1) + "/" + string(date_get_year(date))
+	return string_pad_zeroes(date_get_day(date), 1) + "/" + string_pad_zeroes(date_get_month(date), 1) + "/" + string(date_get_year(date))
 }

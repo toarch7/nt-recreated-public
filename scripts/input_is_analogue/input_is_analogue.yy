@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "input_is_analogue",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Checkers",
-    "path": "folders/Extensions/Input/Checkers.yy",
+  "$GMScript":"v1",
+  "%Name":"input_is_analogue",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"input_is_analogue",
+  "parent":{
+    "name":"Checkers",
+    "path":"folders/Extensions/Input/Checkers.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

@@ -1,3 +1,47 @@
+enum UltraSkill {
+	// Ultra A
+	GunBond = 1,
+	Confiscate = 1,
+	Fortress = 1,
+	ProjectileStyle = 1,
+	BrainCapacity = 1,
+	Trapper = 1,
+	ImaGunGod = 1,
+	Ambidextrous = 1,
+	RefinedTaste = 1,
+	HarderToKill = 1,
+	PersonalGuard = 1,
+	Stalker = 1,
+	SuperPortalStrike = 1,
+	UltraSpin = 1,
+	Redemption = 1,
+	Distance = 1,
+	GameGod = 1,
+
+	// Ultra B
+	BloodBond = 2,
+	GunWarrant = 2,
+	Juggernaut = 2,
+	MonsterStyle = 2,
+	Detachment = 2,
+	Killer = 2,
+	Back2Bizniz = 2,
+	GetLoaded = 2,
+	Regurgitate = 2,
+	Determination = 2,
+	Riot = 2,
+	Anomaly = 2,
+	SuperBlastArmor = 2,
+	UltraMissiles = 2,
+	Damnation = 2,
+	Intimacy = 2,
+	CarGod = 2,
+
+	// Ultra C
+	Meltdown = 3
+}
+
+
 function scrUltras() {
     //COOP
     ultr_name[0, 1] = "GUN BOND"

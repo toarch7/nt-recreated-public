@@ -6,6 +6,11 @@ function scrFire(wep, useAmmo = true) {
 		oldviewy2 = BackCont.viewy2,
 		oldshake = BackCont.shake
 	
+	var _aim_direction = gunangle,
+		
+		_long_arms = skill_get(mut_long_arms),
+		_laser_brain = skill_get(mut_laser_brain)
+	
     if race == 7 && skill_get(mut_throne_butt) && (random(typ_ammo[wep_type[wep]]) < wep_cost[wep]) && ((random(2) < 1 or !bcan_shoot) && random(3) < 2) {
 		var typ = wep_type[bwep]
 		
@@ -368,16 +373,24 @@ function scrFire(wep, useAmmo = true) {
     }
 
     //BAZOOKA
-    if wep == 14 or wep == 102 or wep == 84 {
-        snd_play_gun(sndRocket)
-
+    if wep == wep_bazooka || wep == wep_golden_bazooka || wep == wep_gatling_bazooka {
+		var _speed = 2
+		if wep == wep_golden_bazooka {
+			snd_play_gun(sndGoldRocket)
+			_speed = 3
+		}
+        else snd_play_gun(sndRocket)
+		
         with instance_create(x, y, Rocket) {
-            motion_add(other.gunangle + (random(4) - 2) * other.accuracy, 2)
+            motion_add(other.gunangle + (random(4) - 2) * other.accuracy, _speed)
             image_angle = direction
-            team = other.team;
+            team = other.team
             creator = other.id
-            if other.wep == 102 sprite_index = sprGoldRocket
-        }
+            
+			if wep == wep_golden_bazooka {
+				sprite_index = sprGoldRocket
+			}
+		}
 
         BackCont.viewx2 += lengthdir_x(30, gunangle + 180) * UberCont.opt_shake
         BackCont.viewy2 += lengthdir_y(30, gunangle + 180) * UberCont.opt_shake
@@ -494,11 +507,16 @@ function scrFire(wep, useAmmo = true) {
 
 
     //SLUGGER
-    if wep == 21 or wep == 99 {
-        snd_play_gun(sndSlugger)
+    if wep == wep_slugger || wep == wep_golden_slugger {
+		var _speed = 16
+        if wep == wep_golden_slugger {
+			snd_play_gun(sndGoldSlugger)
+			_speed += 2
+		}
+		else snd_play_gun(sndSlugger)
 
         with instance_create(x, y, Slug) {
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 16)
+            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, _speed)
             image_angle = direction
             team = other.team;
             creator = other.id
@@ -542,8 +560,8 @@ function scrFire(wep, useAmmo = true) {
     //ENERGY SWORD
     if wep == 24 {
 
-        if skill_get(17) snd_play_gun(sndLaserSwordUpg)
-        else snd_play_gun(sndLaserSword)
+        if skill_get(17) snd_play_gun(sndEnergySwordUpg)
+        else snd_play_gun(sndEnergySword)
         instance_create(x, y, Dust)
 
         with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), EnergySlash) {
@@ -639,8 +657,11 @@ function scrFire(wep, useAmmo = true) {
 	}*/
 
     //SCREWDRIVER
-    if wep == 27 or wep == 101 {
-        snd_play_gun(sndScrewdriver)
+    if wep == wep_screwdriver || wep == wep_golden_screwdriver {
+		if wep == wep_golden_screwdriver {
+			snd_play_gun(sndGoldScrewdriver)
+		}
+        else snd_play_gun(sndScrewdriver)
 
         instance_create(x, y, Dust)
 
@@ -764,6 +785,8 @@ function scrFire(wep, useAmmo = true) {
 
     //WAVE GUN
     if wep == 33 {
+		snd_play_gun(sndWaveGun)
+		
         with instance_create(x, y, WaveBurst) {
             creator = other.id
             ammo = 7
@@ -772,15 +795,25 @@ function scrFire(wep, useAmmo = true) {
             creator = other.id
             event_perform(ev_alarm, 0)
         }
+		
+		scr_weapon_post(_aim_direction, 5, 5, 5)
+		motion_add(_aim_direction + 180, 3)
     }
 
     //PLASMA GUN
-    if wep == 34 or wep == 98 {
-        if skill_get(17) snd_play_gun(sndPlasmaUpg)
-        else snd_play_gun(sndPlasma)
-
+    if wep == wep_plasma_gun || wep == wep_golden_plasma_gun {
+		var _speed = 2
+		
+		if wep == wep_golden_plasma_gun {
+			snd_play_gun(_laser_brain ? sndGoldPlasmaUpg : sndGoldPlasma)
+			_speed = 3
+		}
+		else {
+			snd_play_gun(_laser_brain ? sndPlasmaUpg : sndPlasma)
+		}
+		
         with instance_create(x, y, PlasmaBall) {
-            motion_add(other.gunangle + (random(8) - 4) * other.accuracy, 2)
+            motion_add(other.gunangle + (random(8) - 4) * other.accuracy, _speed)
             image_angle = direction
             team = other.team;
             creator = other.id
@@ -1042,7 +1075,7 @@ function scrFire(wep, useAmmo = true) {
 
     //NUKE LAUNCHER
     if wep == 47 {
-        snd_play_gun(sndNuke)
+        snd_play_gun(sndNukeFire)
 
         with instance_create(x, y, Nuke) {
             motion_add(other.gunangle + (random(4) - 2) * other.accuracy, 2)
@@ -1079,7 +1112,7 @@ function scrFire(wep, useAmmo = true) {
 
     //QUADRUPLE MACHINEGUN
     if wep == 49 {
-        snd_play_gun(sndTripleMachinegun)
+        snd_play_gun(sndQuadMachinegun)
 
         repeat(4) {
             with instance_create(x, y, Shell)
@@ -1425,7 +1458,7 @@ function scrFire(wep, useAmmo = true) {
 
     //Double Minigun
     if wep == 83 {
-        snd_play_gun_big(sndMinigun, 0.2)
+        snd_play_gun_big(sndDoubleMinigun, 0.2)
         repeat 2 {
             with instance_create(x, y, Bullet1) {
                 motion_add(other.gunangle + random_range(-20, 20) * other.accuracy, 16)
@@ -1454,7 +1487,7 @@ function scrFire(wep, useAmmo = true) {
         with instance_create(x, y, Shell)
         motion_add(other.gunangle + other.right * 100 + random(80) - 40, 3 + random(2))
 
-        weapon_post(gunangle, 0, 2, 4)
+        scr_weapon_post(gunangle, 0, 2, 4)
     }
 
     //Pop Rifle
@@ -1562,12 +1595,12 @@ function scrFire(wep, useAmmo = true) {
 
         motion_add(other.gunangle + 180, 0.6)
 		
-		weapon_post(gunangle, 12, 10, 5)
+		scr_weapon_post(gunangle, 12, 10, 5)
     }
 
     //SPLINTER PISTOL
     if wep == 62 {
-        snd_play_gun(sndSplinterGun)
+        snd_play_gun(sndSplinterPistol)
 
         repeat 4 {
             with instance_create(x, y, Splinter) {
@@ -1696,7 +1729,7 @@ function scrFire(wep, useAmmo = true) {
 
     //HEAVY REVOLVER
     if wep == 89 {
-        snd_play_gun(sndHeavyRevoler)
+        snd_play_gun(sndHeavyRevolver)
 
         with instance_create(x, y, Shell)
         motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
@@ -2300,7 +2333,7 @@ function scrFire(wep, useAmmo = true) {
 
     //CLUSTER LAUNCHER
     if wep == 78 {
-        snd_play_gun(sndCluster)
+        snd_play_gun(sndClusterLauncher)
 
         with instance_create(x, y, ClusterNade) {
             motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 8)
@@ -2352,7 +2385,7 @@ function scrFire(wep, useAmmo = true) {
 
     //GOLDEN NUKE LAUNCHER
     if wep == 122 {
-        snd_play_gun(sndNuke)
+        snd_play_gun(sndGoldNukeFire)
 
         with instance_create(x, y, Nuke) {
             motion_add(other.gunangle + (random(2) - 1) * other.accuracy, 4)
@@ -2370,7 +2403,7 @@ function scrFire(wep, useAmmo = true) {
 
     //GOLDEN DISC GUN
     if wep == 123 {
-        snd_play_gun(sndDiscgun)
+        snd_play_gun(sndGoldFrogPistol)
 
         with instance_create(x, y, Disc) {
             motion_add(other.gunangle + (random(5) - 2.5) * other.accuracy, 6)

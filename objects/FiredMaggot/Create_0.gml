@@ -3,9 +3,9 @@ max_hp = 1
 meleedamage = 1
 size = 0
 
-spr_idle = sprMaggotFly
-spr_walk = sprMaggotFly
-spr_hurt = sprMaggotFly
+spr_idle = sprFiredMaggot
+spr_walk = sprFiredMaggot
+spr_hurt = sprFiredMaggot
 spr_dead = sprMaggotDead
 
 event_inherited()

@@ -21,7 +21,7 @@ if (timeout > 15) {
     angle = ((point_direction(x, y, dir.x, dir.y) + random(60)) - 30)
     with(instance_create(x, y, IDPDPortalCharge)) {
         move_contact_solid(random_angle, (16 + random(32)))
-        sprite_index = sprBeamParticles
+        sprite_index = sprNothingBeamParticle
         alarm[0] = 10
         motion_add(point_direction(x, y, xstart, ystart), (point_distance(x, y, xstart, ystart) / 20))
         image_angle = direction

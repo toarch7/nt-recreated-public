@@ -9,7 +9,7 @@ if ammo > 0 {
 	scrTarget()
     
 	if instance_exists(target)
-		motion_add(target_direction + turn * 80, 0.3)
+		motion_add(mcr_target_direction + turn * 80, 0.3)
 	
 	var count = 6 + GameCont.loops,
 		step = 360 / count

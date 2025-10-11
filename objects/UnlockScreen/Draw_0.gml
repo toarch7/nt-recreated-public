@@ -11,7 +11,8 @@ draw_rectangle(view_xview, view_yview, (view_xview + view_width), (view_yview + 
 draw_set_alpha(1)
 
 if splatimg > 1 {
-    draw_sprite(skin ? sprBigPortraitSkin : sprBigPortrait, race, ((view_xview + (view_width / 2)) - 60), (view_yview + view_height) - 48 + addy)
+	var _img = scr_race_get_skin_subimage(race, skin)
+    draw_sprite(sprBigPortrait, _img, ((view_xview + (view_width / 2)) - 60), (view_yview + view_height) - 48 + addy)
     if addy < 2 addy++
 }
 
@@ -20,7 +21,7 @@ draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + _w,
 draw_rectangle(view_xview, view_yview + view_height, view_xview + view_width, view_yview + view_height - _w, 0)
 draw_set_color(c_white)
 
-draw_sprite(sprSkillSplat, splatimg, (view_xview + (view_width / 2)), ((view_yview + view_height) - 20))
+draw_sprite(sprMutationSplat, splatimg, (view_xview + (view_width / 2)), ((view_yview + view_height) - 20))
 
 var sprt = skin ? sprBigNameCenteredB : sprBigNameCentered
 
@@ -35,9 +36,9 @@ if addy > 0 {
 		}
 		
 		draw_set_halign(fa_center)
-		draw_set_valign(fa_center)
+		draw_set_valign(fa_middle)
 		
-		draw_bigname(view_xview + view_width / 2, view_yview + view_height - 62 - addy, name, c_white, 1)
+		draw_text_bigname(view_xview + view_width / 2, view_yview + view_height - 62 - addy, name, c_white, 1, 1)
 		
 		draw_set_halign(fa_left)
 		draw_set_valign(fa_top)
@@ -53,9 +54,9 @@ if addy > 0 {
 if addy > 1 {
 	if loc_exists("UNLOCKED!") {
 		draw_set_halign(fa_center)
-		draw_set_valign(fa_center)
+		draw_set_valign(fa_middle)
 		
-		draw_bigname(view_xview + view_width / 2, view_yview + view_height - 24 - addy, loc("UNLOCKED!"), c_white, 1)
+		draw_text_bigname(view_xview + view_width / 2, view_yview + view_height - 24 - addy, loc("UNLOCKED!"), c_white, 1)
 		
 		draw_set_halign(fa_left)
 		draw_set_valign(fa_top)

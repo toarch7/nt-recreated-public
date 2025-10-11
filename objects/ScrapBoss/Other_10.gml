@@ -8,7 +8,7 @@ if walk {
     walk--motion_add(direction, 0.5)
 
     if target {
-        motion_add(target_direction, 0.5)
+        motion_add(mcr_target_direction, 0.5)
 
         if sprite_index != spr_hurt sprite_index = spr_walk
     }

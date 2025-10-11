@@ -30,5 +30,5 @@ if team != other.team {
         }
     }
 
-    snd_play(sndCrystalDeflect)
+    snd_play_pitch(sndShielderDeflect)
 }

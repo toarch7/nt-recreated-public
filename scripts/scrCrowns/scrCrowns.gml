@@ -1,3 +1,22 @@
+globalvar crownmax;
+
+enum Crown {
+    Random = 0,
+    None = 1,
+    Death = 2,
+    Life = 3,
+    Haste = 4,
+    Guns = 5,
+    Hatred = 6,
+    Blood = 7,
+    Destiny = 8,
+    Love = 9,
+    Luck = 10,
+    Curses = 11,
+    Risk = 12,
+    Protection = 13
+}
+
 function scrCrowns() {
     crown_name[0] = "RANDOM"
     crown_text[0] = "???"
@@ -9,7 +28,7 @@ function scrCrowns() {
     crown_text[1] = "A BARE HEAD#IS A FAIR HEAD"
     crown_have[1] = 1
     crown_tips[1] = ""
-    crown_sond[1] = sndCrownNone
+    crown_sond[1] = sndCrownNo
 
     crown_name[2] = "CROWN OF DEATH"
     crown_text[2] = "BIGGER @wEXPLOSIONS#@s-1 @rMAX HP@s"
@@ -69,7 +88,7 @@ function scrCrowns() {
     crown_text[11] = "A LOT MORE @pCURSED CHESTS@s"
     crown_have[11] = 1
     crown_tips[11] = "why"
-    crown_sond[11] = sndCrownCurse
+    crown_sond[11] = sndCrownCurses
 
     crown_name[12] = "CROWN OF RISK"
     crown_text[12] = "MORE @wDROPS@s WHEN AT FULL @rHP@s#LESS @wDROPS@s WHEN NOT"
@@ -85,3 +104,57 @@ function scrCrowns() {
 
     crownmax = 13
 }
+
+/// @function scrCrownApplyEquipEffect
+/// @param {Real|Enum.Crown} crown_id
+/// @pram is_equipped
+function scrCrownApplyEquipEffect(_crown_id, _is_equipped) {
+	var _m = _is_equipped ? 1 : -1
+	
+	with GameCont {
+		// on-equip and on-unequip effects
+		switch _crown_id {
+			case Crown.Death:
+				with Player {
+					max_hp -= _m
+					hp = max(1, hp - _m)
+					lsthealth = hp
+				}
+				break
+		}
+		
+		// only on-equip effects
+		if _is_equipped {
+			switch _crown_id {
+				case Crown.Destiny:
+					if !destiny {
+						skillpoints += 1
+						destiny = true
+						
+						if instance_exists(LevCont) {
+							scrGameSave()
+						}
+					}
+					break
+			}
+		}
+	}
+}
+
+/// @function scr_loadout_race_unlock_crown
+/// @param {Real|Enum.Race} race_id
+/// @param {Real|Enum.Crown} crown_id
+function scrCrownUnlock(_race_id, _crown_id) {
+	if (scr_loadout_race_is_crown_unlocked(_race_id, _crown_id)
+	|| !scr_loadout_is_available_for_race(_race_id))
+		return false
+	
+	scr_loadout_race_unlock_crown(_race_id, _crown_id)
+	
+    scrShowUnlockPopup(loc_sfmt("@w%@s UNLOCKED#FOR @w%",
+		loc(crown_name[_crown_id]), loc(scrRaceGetName(_race_id))))
+    
+	return true
+}
+
+

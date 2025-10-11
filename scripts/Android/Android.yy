@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "Android",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+  "$GMScript":"v1",
+  "%Name":"Android",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Android",
+  "parent":{
+    "name":"System",
+    "path":"folders/Scripts/System.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

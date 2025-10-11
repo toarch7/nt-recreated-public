@@ -1,6 +1,6 @@
 
 letterbox = 0
-doin = 0
+step_complete = 0
 
 pos ++
 

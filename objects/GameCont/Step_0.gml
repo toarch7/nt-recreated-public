@@ -23,23 +23,26 @@ if area != 106 && area != 100 && area != 102 {
     hqsubarea = subarea
 }
 
-time = scrAddZero(minutes, 1) + ":" + scrAddZero(seconds, 1) + "." + scrAddZero(round(timer / 30 * 100), 1)
+time = string_pad_zeroes(minutes, 1)
+	+ ":" + string_pad_zeroes(seconds, 1)
+	+ "." + string_pad_zeroes(round(timer / 30 * 100), 1)
 
-max_rad = GameCont.level * 60
+max_rad = level * 60
 
-if race == 11 && ultra == 3
+if race == 11 && ultra == 3 {
 	max_rad *= 2
+}
 
 if rad > max_rad {
-	if level < 10 {
-		level ++
+	if level < PLAYER_LEVEL_MAX {
+		var _level = ++level
 		
 		rad -= max_rad
 		
 		with Player {
 			with instance_create(x, y, PopupText) {
-				if GameCont.level < 10 {
-					mytext = string_replace(loc("LEVEL %!"), "%", GameCont.level)
+				if _level < PLAYER_LEVEL_MAX {
+					mytext = string_replace(loc("LEVEL %!"), "%", _level)
 				}
 				else mytext = loc("LEVEL ULTRA!")
 			}
@@ -48,24 +51,16 @@ if rad > max_rad {
 				creator = other.id
 		}
 		
-		if level >= 10 {
+		if _level >= PLAYER_LEVEL_MAX {
 			ultrapoints ++
 			snd_play(sndLevelUltra)
 			
-			if race == 14 {
-				if !UberCont.cgot[14] {
-					show_unlock_popup("@wSKELETON UNLOCKED@s#FOR REACHING LEVEL ULTRA")
-					
-					with instance_create(x, y, UnlockScreen)
-	                    race = 14
-					
-					UberCont.cgot[14] = 1
-				}
-				
-				scrAchievement(26)
+			if race == Race.Skeleton {
+				scrAchievementUnlock(Achievement.UNSTOPPABLE)
+				scrRaceUnlock(Race.Skeleton)
 			}
 			
-			scrAchievement(23)
+			scrAchievementUnlock(Achievement.ULTRA_TIME)
 		}
 		else {
 			skillpoints ++

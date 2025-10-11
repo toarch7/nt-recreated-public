@@ -9,7 +9,7 @@ else {
 }
 
 var player = noone,
-	least = infinity,
+	least = infinity
 
 if instance_number(Player) > 1 {
 	with Player {

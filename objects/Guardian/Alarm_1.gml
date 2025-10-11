@@ -9,7 +9,7 @@ if (sprite_index == spr_fire) {
 if (instance_exists(target) && ((spr_idle != sprPalaceGuardianDisappear) && (spr_idle != sprPalaceGuardianAppear))) {
     if (target > Player) {
         if (collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0) {
-            direction = ((target_direction + random(180)) - 90)
+            direction = ((mcr_target_direction + random(180)) - 90)
             if ((((point_distance(x, y, target.x, target.y) > 96) && (random(3) < 2)) || (random(3) < 1)) && (justfired == 0)) {
                 sprite_index = spr_fire
                 alarm[1] = 12

@@ -1,7 +1,7 @@
 /// @description Exit
 
 if !ingame {
-    camera_set_pos(0, 0)
+    scr_camera_set_position(0, 0)
 	
 	var handled = false
 	
@@ -42,7 +42,7 @@ else {
     scrMakePauseButtons()
 	
 	with UberCont
-		splat_index = 0
+		splatindex = 0
 	
 	with BackButton
 		instance_destroy()

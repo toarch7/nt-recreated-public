@@ -29,7 +29,7 @@ wkick = 0
 scrTarget()
 
 if instance_exists(target) {
-    gunangle = target_direction
+    gunangle = mcr_target_direction
 }
 
 corpse = 0

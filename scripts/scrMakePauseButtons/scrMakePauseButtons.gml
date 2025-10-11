@@ -1,21 +1,33 @@
 function scrMakePauseButtons() {
-    with UberCont {
+	with UberCont {
+		var _left = view_xview,
+			_right = _left + view_width,
+			_bottom = view_yview + view_height,
+			_top_row = _bottom - 64,
+			_bottom_row = _bottom - 32
+		
 		// Settings
-        with instance_create(view_xview + view_width - 68, view_yview + view_height - 64, PauseButton)
+        with instance_create(_right - 68, _top_row, PauseButton) {
 			image_index = 2
-		
+			appear = 2
+		}
 		// Continue
-        with instance_create(view_xview + view_width - 78, view_yview + view_height - 32, PauseButton)
+        with instance_create(_right - 78, _bottom_row, PauseButton) {
 			image_index = 3
-		
+			appear = 1
+		}
 		// Menu
-        with instance_create(view_xview + 45, view_yview + view_height - 64, PauseButton)
+        with instance_create(_left + 45, _top_row, PauseButton) {
 			image_index = 0
+			appear = 2
+		}
 		
-		// Retry
-        if weekly_run or !daily_run {
-            with instance_create(view_xview + 60, view_yview + view_height - 32, PauseButton)
+        if weekly_run || !daily_run {
+			// Retry
+            with instance_create(_left + 60, _bottom_row, PauseButton) {
 				image_index = 1
-        }
+				appear = 1
+			}
+		}
     }
 }

@@ -3,17 +3,15 @@ if lockstep_stop
 
 if instance_exists(GenCont) exit
 
-if scrChestOpened()
-	exit
+var _player = instance_nearest(x, y, Player)
+if !instance_exists(_player) exit
 
-var p = instance_nearest(x, y, Player)
+if scrChestOpened() exit
 
-if !p
-	exit
+repeat (8) {
+	instance_create(_player.x, _player.y, AmmoPickup)
+}
 
-snd_play(sndAmmoChest)
-
-repeat 8
-	instance_create(p.x, p.y, AmmoPickup)
+snd_play(GameCont.underwater ? sndOasisChest : sndAmmoChest)
 
 instance_destroy()

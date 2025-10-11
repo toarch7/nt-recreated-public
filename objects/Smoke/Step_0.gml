@@ -10,5 +10,5 @@ image_angle += rot
 if image_xscale < 0 or instance_exists(Spiral)
 	instance_destroy()
 
-if global.time % 3 == 0 && position_meeting(x, y, Wall)
+if current_frame % 3 == 0 && position_meeting(x, y, Wall)
 	move_bounce_solid(true)

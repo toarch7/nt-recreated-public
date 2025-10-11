@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndMutant2Valt",
+  "$GMSound": "",
+  "%Name": "sndMutant2Valt",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 2,
   "conversionMode": 0,
   "duration": 3.505476,
+  "name": "sndMutant2Valt",
   "parent": {
     "name": "Crystal",
-    "path": "folders/Sounds/Mutant/Crystal.yy",
+    "path": "folders/Sounds/Mutant/Crystal.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndMutant2Valt",
+  "soundFile": "sndMutant2Valt.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

@@ -7,7 +7,7 @@ size = 8
 
 spr_idle = sprNothingOn
 spr_hurt = sprNothingHurt
-spr_dead = sprNothingDead
+spr_dead = sprNothingDeath
 
 drawimg = 0
 

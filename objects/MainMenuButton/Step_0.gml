@@ -1,11 +1,11 @@
 if lockstep_stop
 	exit
 
-if global.time < start
+if current_frame < start
 	exit
 
-if global.time == start {
-	snd_play_pitch(sndAppear, 0.7 + random(0.1))
+if current_frame == start {
+	snd_play(sndAppear, 0.7 + random(0.1))
 	
 	visible = 1
 	appear = 2

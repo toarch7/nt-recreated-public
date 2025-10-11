@@ -18,8 +18,8 @@ charge = 0
 alarm[1] = 8 / .4
 snd_play_hit(sndExploGuardianFire, .2)
 
-if instance_exists(target) motion_add(target_direction + random(40) - 20, 1.5)
+if instance_exists(target) motion_add(mcr_target_direction + random(40) - 20, 1.5)
 walk = 20
 
-spr_idle = sprExploguardianIdle
-spr_hurt = sprExploguardianHurt
+spr_idle = sprExploGuardianIdle
+spr_hurt = sprExploGuardianHurt

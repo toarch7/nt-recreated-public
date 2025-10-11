@@ -1,19 +1,30 @@
+#macro LETTERBOX_SIZE 36
+
 function scrDrawSpiral() {
 	try {
         draw_set_color(c_black)
 
-        var is_menu = object_index == Menu
+        var _is_menu;
 
-        if !is_menu {
-            draw_rectangle(view_xview, view_yview, (view_xview + view_width), (view_yview + view_height), 0)
-        }
-
+        if !instance_is(self, Menu) {
+			draw_clear(c_black)
+			_is_menu = false
+		}
+		else {
+			_is_menu = true
+		}
+		
         with Spiral {
-            if !is_menu && lanim > 0 && lanim < 6 {
+            if !_is_menu && lanim > 0 && lanim < 6 {
                 if lsound == 0 {
                     lsound = 1
-                    snd_play_pitch(choose(sndPortalLightning1, sndPortalLightning2, sndPortalLightning3, sndPortalLightning4, sndPortalLightning5, sndPortalLightning6, sndPortalLightning7, sndPortalLightning8), 0.2)
-                }
+					
+					var _sound_index = asset_get_index("sndPortalLightning" + string(1 + irandom(7)))
+					
+					if audio_exists(_sound_index) {
+						snd_play(_sound_index, 0.9 + random(0.2), 1)
+	                }
+				}
 
                 draw_sprite_ext(sprPortalLightning, lanim, view_xview + x, view_yview + y, image_xscale, image_yscale, (image_angle + langle), c_white, 1)
                 draw_sprite_ext(sprPortalLightning, lanim, view_xview + x, view_yview + y, image_xscale, image_yscale, (image_angle + langle), c_black, (0.4 - (image_xscale / 2)))
@@ -23,7 +34,7 @@ function scrDrawSpiral() {
             draw_sprite_ext(sprite_index, - 1, view_xview + x, view_yview + y, (image_xscale * 10), (image_yscale * 10), (image_angle + 45), c_black, (0.8 - image_xscale))
         }
 
-        if !is_menu {
+        if !_is_menu {
             with SpiralDebris {
                 if sprite_exists(sprite_index) {
                     draw_sprite_ext(sprite_index, - 1, view_xview + x, view_yview + y, image_xscale, image_yscale, image_angle, c_white, 1)
@@ -50,7 +61,7 @@ function scrDrawSpiral() {
                 }
 
                 if !instance_exists(Credits) {
-                    if instance_exists(Crown) {
+                    if instance_exists(CrownObject) {
                         spr_crwn = asset_get_index((("sprCrown" + string(GameCont.crown)) + "Idle"))
 
                         if sprite_exists(spr_crwn) {
@@ -72,18 +83,25 @@ function scrDrawSpiral() {
         }
 
         if !instance_exists(NothingSpiral) && !instance_exists(Credits) && (instance_exists(MainMenuButton) or instance_exists(Logo) or instance_exists(DailyList) or instance_exists(DrawStats) or instance_exists(AchievementsMenu) or instance_exists(MenuOptions) or instance_exists(CoopMenu) or instance_exists(Player) or instance_exists(PlayButton) or instance_exists(MakeGame)) {
-            var _w = 36
-
-            if instance_exists(ResourcepackManager) _w = 32
-
-            draw_set_color(c_black)
-            draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + _w, 0)
-            draw_rectangle(view_xview, view_yview + view_height, view_xview + view_width, view_yview + view_height - _w, 0)
-            draw_set_color(c_white)
-        }
+            scrDrawLetterbox()
+		}
 
         draw_set_color(c_white)
-    } catch (e) {
-        print(e.message)
     }
+	catch (e) {
+        print_error(e.message)
+    }
+}
+
+function scrDrawLetterbox(_size = LETTERBOX_SIZE) {
+	var _left = view_xview,
+		_top = view_yview,
+		_right = _left + view_width,
+		_bottom = _top + view_height
+	
+	// TODO: needs to be replaced with sprLetterbox
+    draw_set_color(c_black)
+    draw_rectangle(_left, _top, _right, _top + _size, 0)
+    draw_rectangle(_left, _bottom, _right, _bottom - _size, 0)
+    draw_set_color(c_white)
 }

@@ -16,4 +16,9 @@ event_inherited()
 
 
 snd_hurt = sndHitMetal
-if spr_idle = sprIcicle snd_hurt = sndHitRock
+snd_dead = sndHydrantBreak
+
+if spr_idle == sprIcicle {
+	snd_hurt = sndHitRock
+	snd_dead = sndIcicle
+}

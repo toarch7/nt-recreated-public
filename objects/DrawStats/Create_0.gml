@@ -5,33 +5,22 @@ var secretchars = (UberCont.cgot[13] > 0) + (UberCont.cgot[14] > 0) + (UberCont.
 	_x = secretchars < 3 ? 16 : 10
 
 crowngot = UberCont.crowngot
-
-widescreen = 32
-
 select = 0
 
-with instance_create(_x, view_height - 32, StatChar) {
-    num = 0
-    image_index = 0
-    pos = 0
-	
-    depth = -150
-}
+var _slot_index = 0
 
-for (var c = 1; c <= (12 + secretchars); c ++) {
-	if c == 13 && !UberCont.ctot_runs[13]
+for(var _race_id = Race.Fish; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
+	if scrRaceIsHidden(_race_id) && !UberCont.ctot_runs[_race_id] {
 		continue
-	
-    _x += 20
+	}
 	
     with instance_create(_x, view_height - 32, StatChar) {
-        num = c
-        
-		image_index = c
-        pos = c
-		
-        depth = -150
+        num = _race_id
+		image_index = _race_id
+        pos = _slot_index++
     }
+	
+    _x += 20
 }
 
-camera_set_pos(0, 0)
+scr_camera_set_position(0, 0)

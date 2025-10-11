@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndMutant2Thrn",
+  "$GMSound": "",
+  "%Name": "sndMutant2Thrn",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 3,
   "conversionMode": 0,
   "duration": 4.416009,
+  "name": "sndMutant2Thrn",
   "parent": {
-    "name": "Speeches",
-    "path": "folders/Sounds/Mutant/Speeches.yy",
+    "name": "Speech",
+    "path": "folders/Sounds/Mutant/Speech.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndmutant2thrn.ogg",
+  "soundFile": "sndMutant2Thrn.ogg",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

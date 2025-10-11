@@ -6,18 +6,28 @@ if instance_exists(Cinematic)
 
 scrDrawSpiral()
 
-var textgenerating = loc("GENERATING...") + " "
+var _text_generating;
 
-if GameCont.race == 6 && GameCont.level >= 10
-    textgenerating = loc("VERIFYING...") + " "
+if GameCont.race == Race.Venuz && GameCont.level >= 10 {
+    _text_generating = loc("VERIFYING...")
+}
+else {
+	_text_generating = loc("GENERATING...")
+}
 
-var gen = string(scrAddZero(round((instance_number(Floor) / goal) * 100), 2)) + "%"
+var _progress = instance_number(Floor) / goal,
+	_percentage = string_pad_zeroes(round(_progress * 100), 2) + "%"
 
-draw_set_color(make_color_rgb(125, 131, 141))
+draw_set_color(#7d838d)
 draw_set_halign(fa_center)
-draw_text_shadow(view_xview + view_width / 2, view_yview + view_height / 2 - 54, textgenerating + gen)
-draw_text_nt(view_xview + view_width / 2, view_yview + view_height / 2 + 24, "@s" + loc(string(tip)))
+
+var _cx = view_xview_center,
+	_cy = view_yview_center
+
+draw_text_nt(_cx, _cy - 54, $"{_text_generating} {_percentage}")
+draw_text_nt(_cx, _cy + 24, "@s" + loc(string(tip)))
+
 draw_set_halign(fa_left)
 draw_set_color(c_white)
 
-scrDrawRoadmap(view_xview + view_width / 2, view_yview + view_height / 2, GameCont.waypoints)
+scrDrawRoadmap(_cx, _cy, GameCont.waypoints)

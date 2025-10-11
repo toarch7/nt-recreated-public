@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if KeyCont.press_pick[p] = 1 && is_me && other.can_hq && other.drawspr = sprVanDeactivate {
+if KeyCont.press_pick[index] = 1 && is_me && other.can_hq && other.drawspr = sprVanDeactivate {
     if GameCont.triedhq {
         with other
         hp = 0

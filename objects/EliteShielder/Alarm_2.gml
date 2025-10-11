@@ -1,5 +1,5 @@
 if ammo > 0 {
-    snd_play_hit_big(sndEliteShielderPlasma, 0.2)
+    snd_play_hit_big(sndEliteShielderFire, 0.2)
     wkick = 8
     motion_add(gunangle + 180, 0.5)
 

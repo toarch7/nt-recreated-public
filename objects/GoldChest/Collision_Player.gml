@@ -17,6 +17,6 @@ with instance_create(x, y, WepPickup) {
 	sprite_index = wep_sprt[wep]
 }
 
-snd_play(sndWeaponChest)
+snd_play(sndGoldChest)
 
 instance_destroy()

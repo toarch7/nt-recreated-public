@@ -33,7 +33,7 @@ with UberCont {
 	
 	surface_reset_target()
 	
-	surface_save(srf, "paus.png")
+	//surface_save(srf, "paus.png")
 	
 	pausespr = sprite_create_from_surface(srf, 0, 0, view_width, view_height, 0, 0, 0, 0)
 	

@@ -69,8 +69,8 @@ function scrGameSave() {
         buffer_write(b, buffer_string, json_stringify(d))
     }
 
-    // Save playerinstances
-    buffer_write(b, buffer_string, json_stringify(playerinstances))
+    // Save global.__playerinstance_list
+    buffer_write(b, buffer_string, json_stringify(global.__playerinstance_list))
 
     // Save player
     with Player

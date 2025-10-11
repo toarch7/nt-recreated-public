@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "is_keyboard",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+  "$GMScript":"v1",
+  "%Name":"is_keyboard",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"is_keyboard",
+  "parent":{
+    "name":"Controls",
+    "path":"folders/Scripts/System/Controls.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

@@ -1,7 +1,5 @@
-/// @description rng_choose(slot, ...)
-/// @param slot
-/// @param  ...
+/// @description rng_choose
+/// @param {Enum.RNGStates} state_id
 function rng_choose() {
-    var ind = round(rng_rnd(argument[0], 1, argument_count - 1))
-    return argument[ind]
+    return argument[rng_next_int(argument[0]) % argument_count]
 }

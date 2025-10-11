@@ -15,6 +15,19 @@ if opt_gamepad && (instance_exists(MainMenuButton) or instance_exists(PlayButton
 	
 }
 
-if (opt_keyboard or global.desktop) && show_crosshair && native_cursor_inst == -1 {
+if (is_desktop ? (window_get_cursor() == cr_none) : opt_keyboard) && show_crosshair && native_cursor_inst == -1 {
     draw_sprite_ext(sprCrosshair, opt_crosshair, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), 1, 1, 0, opt_cursorcol, 1)
+}
+
+if DevelopmentMode {
+	var _str  = $"Camera width  ({camera_get_view_width(view_camera)}) (global = {view_width})\n"
+	    _str += $"Camera height ({camera_get_view_height(view_camera)}) (global = {view_height})\n\n"
+	    _str += $"Port     {view_wport[0]}/{view_hport[0]}\n"
+	    _str += $"Window   {window_get_width()}/{window_get_height()}\n"
+	    _str += $"Display  {scr_display_get_width()}/{scr_display_get_height()} ({scr_display_get_aspect_ratio()})\n\n"
+	    _str += $"Surface  {surface_exists(application_surface) ? surface_get_width(application_surface) : "NULL"}/{surface_exists(application_surface) ? surface_get_height(application_surface) : "NULL"}\n"
+		_str += $"GUI {gui_w} {gui_h}\nMouse {device_mouse_x(0)} {device_mouse_x(1)}\n\n"
+		_str += $"Camera\nX {view_xview} \nY {view_yview}"
+	
+	draw_text_transformed(0, 0, _str, 0.5, 0.5, 0)
 }

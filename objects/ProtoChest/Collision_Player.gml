@@ -14,15 +14,12 @@ if sprite_index != sprProtoChestOpen {
     
     instance_create(x, y, FXChestOpen)
     
-    if GameCont.crown == 6 {
+    if scrCrownCheck(Crown.Hatred) {
         with other {
-            hp -= 1
-            sprite_index = spr_hurt
-            image_index = 0
-            snd_play_hit(snd_hurt, .2)
+            projectile_hit_self(1)
 			last_hit = sprCrown6Idle
 			
-            repeat(16) {
+            repeat (16) {
                 with instance_create(x, y, Rad)
                 motion_add(random_angle, 2 + random(4))
             }

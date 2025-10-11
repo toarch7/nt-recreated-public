@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"draw_text_bigname",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"draw_text_bigname",
+  "parent":{
+    "name":"draw_text_custom",
+    "path":"folders/Scripts/draw_text_custom.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

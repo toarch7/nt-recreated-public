@@ -1,7 +1,7 @@
 max_hp = 70
 size = 1
 
-spr_idle = sprNuclearPillarIdle
+spr_idle = sprNuclearPillar
 spr_hurt = sprNuclearPillarHurt
 spr_dead = sprNuclearPillarDead
 

@@ -1,15 +1,20 @@
+/// @description Boss win jingle
 audio_stop_sound(song)
 
-var snd = sndBossWin
+var _snd = sndBossWin,
+	_amb = custom_sound_check(amb)
 
-if instance_exists(CrownPed)
-	snd = sndVaultBossWin
+if instance_exists(CrownPed) {
+	_snd = sndVaultBossWin
+}
 
-snd = custom_sound_check(snd)
-amb = custom_sound_check(amb)
+_snd = custom_sound_check(snd)
 
-snd_play_music(snd)
-snd_play_ambient(amb)
+snd_play_music(_snd)
+snd_play_ambience(_amb)
 
-if GameCont.area != 7 && GameCont.area != 0
+var _area = GameCont.area
+
+if _area != area_palace || _area != area_campfire {
 	alarm[3] = 180
+}

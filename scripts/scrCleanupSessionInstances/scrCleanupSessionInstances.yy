@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrCleanupSessionInstances",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrCleanupSessionInstances",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -10,9 +10,9 @@ if walk > 0 && instance_exists(Player) {
     footstep += 0.4
 
     if footstep > 2.75 {
-        BackCont.shake += 2
+		scr_screenshake(2)
+        snd_play(sndNothingFootstep, 1, 0.8)
         footstep -= 2.75
-        snd_play_pitchvol(sndNothingFootstep, 0, 0.8)
     }
 }
 

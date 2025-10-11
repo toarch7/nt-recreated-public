@@ -9,7 +9,7 @@ if instance_exists(target) {
         snd_play(sndSnowBotSlideStart)
         walk = 40
         alarm[1] = 40
-        gunangle = target_direction + random(30) - 15
+        gunangle = mcr_target_direction + random(30) - 15
         meleedamage = 4
         sprite_index = spr_fire
     } else if random(5) < 1 {

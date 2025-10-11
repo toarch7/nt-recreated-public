@@ -1,5 +1,5 @@
 raddrop = 150
-max_hp = (550 * ((KeyCont.players / 2) + 0.5))
+max_hp = (550 * ((player_count / 2) + 0.5))
 max_hp *= (1 + (GameCont.loops / 3))
 meleedamage = 200
 size = 4

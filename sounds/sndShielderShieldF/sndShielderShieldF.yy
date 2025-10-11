@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndShielderShieldF",
+  "$GMSound": "",
+  "%Name": "sndShielderShieldF",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
   "duration": 0.301938,
+  "name": "sndShielderShieldF",
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy",
+    "name": "Female",
+    "path": "folders/Sounds/Enemies/IDPD/Shielder/Female.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
   "soundFile": "sndShielderShieldF.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

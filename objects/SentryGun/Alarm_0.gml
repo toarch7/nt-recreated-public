@@ -29,7 +29,7 @@ if instance_exists(enemy) or instance_exists(NothingInactive) {
 		instance_destroy()
 
     if target {
-        gunangle = target_direction
+        gunangle = mcr_target_direction
 
         ammo--
 

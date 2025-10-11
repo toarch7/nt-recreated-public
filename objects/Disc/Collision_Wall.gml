@@ -4,6 +4,7 @@ if lockstep_stop
 move_bounce_solid(00)
 
 if dist > 50 {
+	snd_play(sndDiscDie)
     instance_create(x, y, DiscDisappear)
     instance_destroy()
 }

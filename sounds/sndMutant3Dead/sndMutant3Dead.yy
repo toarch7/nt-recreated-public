@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndMutant3Dead",
+  "$GMSound": "",
+  "%Name": "sndMutant3Dead",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 2,
   "conversionMode": 0,
   "duration": 1.557018,
+  "name": "sndMutant3Dead",
   "parent": {
     "name": "Eyes",
-    "path": "folders/Sounds/Mutant/Eyes.yy",
+    "path": "folders/Sounds/Mutant/Eyes.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndMutant3Dead",
+  "soundFile": "sndMutant3Dead.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

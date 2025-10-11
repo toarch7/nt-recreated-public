@@ -3,5 +3,5 @@ if lockstep_stop
 
 event_inherited()
 
-x = view_xview + view_width - 72
+x = view_xview + view_width - 76
 y = view_yview + view_height - 16

@@ -5,51 +5,53 @@ if native_cursor_inst != -1
 
 input_tick()
 
-if splat_index < 3 && paused
-    splat_index++
+#region Opening & closing debug overlay
+if !public && scr_keyboard_check_pressed(vk_tilde) {
+	show_debug_log(!is_debug_overlay_open())
+	keyboard_string = ""
+}
 
-for (var i = 0; i < KeyCont.players; i++) {
-	if want_pause
-		break
+if (is_debug_overlay_open()) {
+	if (keyboard_check_pressed(vk_escape)
+		|| (is_mobile && !keyboard_virtual_status() && keyboard_check_pressed(vk_backspace))
+	) {
+		if (is_desktop) {
+			keyboard_clear(vk_escape)
+		}
+		show_debug_log(false)
+	}
+}
+
+if is_desktop {
+	if (is_mouse_over_debug_overlay()) {
+		if window_get_cursor() == cr_none {
+			window_set_cursor(cr_default)
+		}
+	}
+	else if window_get_cursor() == cr_default {
+		window_set_cursor(cr_none)
+	}
+}
+#endregion
+
+if splatindex < 3 && paused
+    splatindex ++
+
+for (var i = 0; i < player_count; i++) {
+	if want_pause break
 	
     if KeyCont.press_paus[i] && !instance_exists(GenCont) && !instance_exists(Credits) && !instance_exists(Cinematic) {
-        if !paused {
+        if !scrGameIsPaused() {
             if instance_exists(Player) {
-                paused = true
-                want_pause = 2
-				
-				if os_type == os_android && opt_volumecontrol
-					SetVolumeControl(false)
-				
-				scrGetPauseImage()
-				
-                splat_index = 0
-				
-				if opt_pauseonpause
-					audio_pause_all()
-				
-				audio_resume_sound(sndMenuClick)
-				audio_resume_sound(sndHover)
-
-                with MusCont {
-                    if audio_exists(song)
-						audio_resume_sound(song)
-
-                    if audio_exists(amb)
-						audio_resume_sound(amb)
-                }
-
-                with Player {
-                    player_get(index).hp = hp
-                }
-
-                KeyCont.press_paus[i] = 0
+				KeyCont.press_paus[i] = false
+                scrGamePause()
             }
         }
 		else {
+			// Activate `Continue`
             with PauseButton {
                 if image_index == 3 {
-                    clicked = 1
+                    clicked = true
                     event_user(0)
                 }
             }
@@ -59,113 +61,47 @@ for (var i = 0; i < KeyCont.players; i++) {
     }
 }
 
-// uhhh
-KeyCont.press_paus[index] =
-		   keyboard_check_pressed(vk_escape)
-		or keyboard_check_pressed(vk_backspace)
-		or gamepad_button_check_pressed(0, gp_start)
-		or (!paused && !want_pause && ((opt_autopause && !instance_exists(CoopController) && global.desktop && !window_has_focus()) or os_is_paused()))
+KeyCont.press_paus[index] = scr_keyboard_check_pressed(vk_escape) || scr_keyboard_check_pressed(vk_backspace) || gamepad_button_check_pressed(0, gp_start)
+		|| (!paused && !want_pause && ((opt_autopause && !instance_exists(CoopController) && is_desktop && !window_has_focus()) || os_is_paused()))
 
-if global.console_active
-	KeyCont.press_paus[index] = 0
-
-if want_restart && !lockstep_stop {
-	want_restart --
-	
+if global.console_active {
 	KeyCont.press_paus[index] = false
-	
-	if !want_restart {
-		instance_activate_all()
-		draw_enable_drawevent(true)
-		
-		//random_set_seed(global.seed)
-	    //global.seed = irandom(rng_m)
-		
-	    continued_run = 0
-	    file_delete("gamestate.dat")
-		
-		scrInstancesCleanup()
-		
-	    instance_create(0, 0, GameCont)
-		
-	    GameCont.crown = global.crownpick
-	    GameCont.skillpoints = 0
-		
-	    scrSpawnPlayers(global.index)
-		
-	    with MusCont {
-			instance_destroy()
-		}
-		
-		audio_stop_all()
-		
-	    instance_create(0, 0, MusCont)
-		
-	    room_restart()
-		
-	    GameCont.area = 1
-	    GameCont.subarea = 0
-		
-	    with WepPickup
-			instance_destroy()
-		
-		instance_create(x, y, GenCont)
-		
-		paused = false
-		
-	    want_restart = 0
-	}
-}
-
-if want_menu && !lockstep_stop {
-	want_menu --
-	
-	KeyCont.press_paus[index] = false
-	
-	if !want_menu {
-		instance_activate_all()
-		draw_enable_drawevent(true)
-		
-		scrInstancesCleanup()
-		
-	    audio_stop_all()
-		
-	    file_delete("gamestate.dat")
-	    continued_run = 0
-		
-		global.custom_seed = 0
-		
-		room_restart()
-		
-	    want_menu = 0
-	    want_menu2 = 1
-	}
 }
 
 if !lockstep_stop && !paused {
-    ds_list_clear(global.lis_walls_visible)
-
-    with Wall {
-        if x > view_xview - 32 && y > view_yview - 32 && x < view_xview + view_width + 32 && y < view_yview + view_height + 32 {
-            ds_list_add(global.lis_walls_visible, id)
-        }
-    }
-
-    ds_list_clear(global.floor_screen)
-
-    with Floor {
-        if x > view_xview - 32 && y > view_yview - 32 && x < view_xview + view_width + 32 && y < view_yview + view_height + 32 {
-            ds_list_add(global.floor_screen, id)
-        }
-    }
-
-    if instance_exists(Cinematic) {
-        ds_list_clear(global.lis_walls_visible)
-
-        with Wall {
-            ds_list_add(global.lis_walls_visible, id)
-        }
-    }
+    var _left = view_xview - 32,
+		_right = view_xview + view_width + 32,
+		_top = view_yview - 32,
+		_bottom = view_yview + view_height + 32,
+		
+		_wall_list = global.lis_walls_visible,
+		_floor_list = global.list_floors_visible,
+		
+		_camera_boundaries_check = (!instance_exists(Cinematic))
+	
+    ds_list_clear(_wall_list)
+    ds_list_clear(_floor_list)
+	
+	if _camera_boundaries_check {
+	    with Wall {
+	        if bbox_right >= _left && bbox_bottom >= _top && bbox_left < _right && bbox_top < _bottom {
+	            ds_list_add(_wall_list, id)
+	        }
+	    }
+		with Floor {
+	        if bbox_right >= _left && bbox_bottom >= _top && bbox_left < _right && bbox_top < _bottom {
+	            ds_list_add(_floor_list, id)
+	        }
+	    }
+	}
+	else {
+		with Wall {
+			ds_list_add(_wall_list, id)
+		}
+		with Floor {
+			ds_list_add(_floor_list, id)
+		}
+	}
 	
 	if opt_console && !instance_exists(Console) {
 	    instance_create(0, 0, Console)
@@ -176,29 +112,28 @@ if mainvol < 1 {
     mainvol = lerp(mainvol, 1, 0.4)
 }
 
-audio_emitter_gain(mainsound, UberCont.opt_sndvol * mainvol)
+audio_emitter_gain(mainsound, opt_sndvol * mainvol)
+camera_set_view_pos(view_camera[0], view_xview, view_yview)
 
-camera_set_view_pos(view_camera, view_xview, view_yview)
-
-global.time ++
+current_frame ++
 
 if paused && !global.console_active && instance_exists(PauseButton) {
-	if keyboard_check_pressed(ord("R")) {
+	// Restart hotkey
+	if scr_keyboard_check_pressed(ord("R")) {
 		with PauseButton {
-			if image_index == 1 or image_index == 6 {
+			if image_index == 1 || image_index == 6 {
 				event_user(0)
-				
 				KeyCont.press_paus[index] = 0
 				break
 			}
 		}
 	}
 	
-	if keyboard_check_pressed(vk_escape) or keyboard_check_pressed(vk_backspace) {
+	// Quit hotkey
+	if scr_keyboard_check_pressed(vk_escape) || scr_keyboard_check_pressed(vk_backspace) {
 		with PauseButton {
 			if image_index == 3 {
 				event_user(0)
-				
 				KeyCont.press_paus[index] = 0
 				break
 			}
@@ -206,20 +141,21 @@ if paused && !global.console_active && instance_exists(PauseButton) {
 	}
 }
 
-if opt_gamepad
+if opt_gamepad {
 	scrGamepadUIControl()
+}
 
-if !paused && !want_pause && !instance_exists(PauseButton)
+if !paused && !want_pause && !instance_exists(PauseButton) {
 	scrHandleInputsGeneral(global.index)
-
-playerinstance = player_get(index)
+}
 
 if instance_exists(CoopController) {
 	with CoopController
 		event_user(0)
 }
 
-if lockstep_stop
-	network_keep_instances_locked()
-
-playerinstance = player_get(index)
+if is_desktop {
+	if window_has_focus() && scr_window_get_fullscreen() != global.__window_borderless_requested {
+		scr_window_set_fullscreen(global.__window_borderless_requested)
+	}
+}

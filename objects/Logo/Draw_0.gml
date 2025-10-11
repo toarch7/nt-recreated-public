@@ -36,7 +36,7 @@ if image_index == 7 {
 	
 	if wave % 6 > 3 && is_gamepad() {
 		draw_set_halign(fa_center)
-		draw_set_valign(fa_center)
+		draw_set_valign(fa_middle)
 		
 		draw_text_nt(view_xview + view_width / 2, view_yview + view_height - 48, loc("@sPRESS ANY BUTTON"))
 		

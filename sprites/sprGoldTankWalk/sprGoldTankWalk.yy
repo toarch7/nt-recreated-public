@@ -1,88 +1,353 @@
 {
-  "resourceType": "GMSprite",
-  "resourceVersion": "1.0",
-  "name": "sprGoldTankWalk",
+  "$GMSprite": "",
+  "%Name": "sprGoldTankWalk",
+  "bboxMode": 0,
   "bbox_bottom": 39,
   "bbox_left": 1,
   "bbox_right": 45,
   "bbox_top": 10,
-  "bboxMode": 0,
-  "collisionKind": 0,
+  "collisionKind": 1,
   "collisionTolerance": 0,
   "DynamicTexturePage": false,
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"bf585c60-3b3e-4844-bd25-b548e39cdf5a",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"41815c59-c22a-4d46-aa92-d8f16315e31f",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"c017629a-da4f-4ad1-a2dc-4859444c2944",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"e4cd795a-b2a1-4b7f-bc30-4fc78968d825",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"2451cf1e-887d-44b2-830f-4379e0138aba",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"73b4ced4-7b83-4169-b539-4f3fc068788f",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"ec59c46e-08f2-448b-9832-f5c6fa2f3c2f",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"dea5eef1-d66b-42e8-9801-7d9cdf291a8a",},
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "bf585c60-3b3e-4844-bd25-b548e39cdf5a",
+      "name": "bf585c60-3b3e-4844-bd25-b548e39cdf5a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "41815c59-c22a-4d46-aa92-d8f16315e31f",
+      "name": "41815c59-c22a-4d46-aa92-d8f16315e31f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "c017629a-da4f-4ad1-a2dc-4859444c2944",
+      "name": "c017629a-da4f-4ad1-a2dc-4859444c2944",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "e4cd795a-b2a1-4b7f-bc30-4fc78968d825",
+      "name": "e4cd795a-b2a1-4b7f-bc30-4fc78968d825",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "2451cf1e-887d-44b2-830f-4379e0138aba",
+      "name": "2451cf1e-887d-44b2-830f-4379e0138aba",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "73b4ced4-7b83-4169-b539-4f3fc068788f",
+      "name": "73b4ced4-7b83-4169-b539-4f3fc068788f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "ec59c46e-08f2-448b-9832-f5c6fa2f3c2f",
+      "name": "ec59c46e-08f2-448b-9832-f5c6fa2f3c2f",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "dea5eef1-d66b-42e8-9801-7d9cdf291a8a",
+      "name": "dea5eef1-d66b-42e8-9801-7d9cdf291a8a",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    }
   ],
   "gridX": 0,
   "gridY": 0,
   "height": 48,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"6dd42791-5b33-458d-bd88-dd798495047e","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {
+      "$GMImageLayer": "",
+      "%Name": "6dd42791-5b33-458d-bd88-dd798495047e",
+      "blendMode": 0,
+      "displayName": "default",
+      "isLocked": false,
+      "name": "6dd42791-5b33-458d-bd88-dd798495047e",
+      "opacity": 100,
+      "resourceType": "GMImageLayer",
+      "resourceVersion": "2.0",
+      "visible": true
+    }
   ],
+  "name": "sprGoldTankWalk",
   "nineSlice": null,
   "origin": 4,
   "parent": {
     "name": "Golden Tank",
-    "path": "folders/Sprites/Enemies/Golden Tank.yy",
+    "path": "folders/Sprites/Enemies/Golden Tank.yy"
   },
   "preMultiplyAlpha": false,
+  "resourceType": "GMSprite",
+  "resourceVersion": "2.0",
   "sequence": {
-    "resourceType": "GMSequence",
-    "resourceVersion": "1.4",
-    "name": "",
+    "$GMSequence": "v1",
+    "%Name": "",
     "autoRecord": true,
     "backdropHeight": 1080,
     "backdropImageOpacity": 0.5,
     "backdropImagePath": "",
     "backdropWidth": 1920,
-    "backdropXOffset": 0.0,
-    "backdropYOffset": 0.0,
-    "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "events": {
+      "$KeyframeStore<MessageEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 8.0,
+    "length": 8,
     "lockOrigin": false,
-    "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "moments": {
+      "$KeyframeStore<MomentsEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "name": "",
     "playback": 1,
-    "playbackSpeed": 1.0,
+    "playbackSpeed": 1,
     "playbackSpeedType": 1,
+    "resourceType": "GMSequence",
+    "resourceVersion": "2.0",
     "showBackdrop": true,
     "showBackdropImage": false,
     "timeUnits": 1,
     "tracks": [
-      {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"bf585c60-3b3e-4844-bd25-b548e39cdf5a","path":"sprites/sprGoldTankWalk/sprGoldTankWalk.yy",},},},"Disabled":false,"id":"c78dc337-53a8-4a54-a223-a9b974ecaaed","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"41815c59-c22a-4d46-aa92-d8f16315e31f","path":"sprites/sprGoldTankWalk/sprGoldTankWalk.yy",},},},"Disabled":false,"id":"7a540b68-2a9e-4c40-8930-2cea062cda07","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"c017629a-da4f-4ad1-a2dc-4859444c2944","path":"sprites/sprGoldTankWalk/sprGoldTankWalk.yy",},},},"Disabled":false,"id":"b6bcde93-96df-44c3-a5e7-443659c530ef","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"e4cd795a-b2a1-4b7f-bc30-4fc78968d825","path":"sprites/sprGoldTankWalk/sprGoldTankWalk.yy",},},},"Disabled":false,"id":"69cd9e8d-2d7a-4661-a475-fc17ee390558","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"2451cf1e-887d-44b2-830f-4379e0138aba","path":"sprites/sprGoldTankWalk/sprGoldTankWalk.yy",},},},"Disabled":false,"id":"d517932d-a927-438f-a9a8-f11f8875ef39","IsCreationKey":false,"Key":4.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"73b4ced4-7b83-4169-b539-4f3fc068788f","path":"sprites/sprGoldTankWalk/sprGoldTankWalk.yy",},},},"Disabled":false,"id":"0a55150b-2fb2-44b3-bc68-9a860d1493e5","IsCreationKey":false,"Key":5.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ec59c46e-08f2-448b-9832-f5c6fa2f3c2f","path":"sprites/sprGoldTankWalk/sprGoldTankWalk.yy",},},},"Disabled":false,"id":"4446ae8e-6226-4717-b275-18698894f547","IsCreationKey":false,"Key":6.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"dea5eef1-d66b-42e8-9801-7d9cdf291a8a","path":"sprites/sprGoldTankWalk/sprGoldTankWalk.yy",},},},"Disabled":false,"id":"0f79cf33-900e-4475-8b21-19c6aa3443d9","IsCreationKey":false,"Key":7.0,"Length":1.0,"Stretch":false,},
-          ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
+      {
+        "$GMSpriteFramesTrack": "",
+        "builtinName": 0,
+        "events": [],
+        "inheritsTrackColour": true,
+        "interpolation": 1,
+        "isCreationTrack": false,
+        "keyframes": {
+          "$KeyframeStore<SpriteFrameKeyframe>": "",
+          "Keyframes": [
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "bf585c60-3b3e-4844-bd25-b548e39cdf5a",
+                    "path": "sprites/sprGoldTankWalk/sprGoldTankWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "c78dc337-53a8-4a54-a223-a9b974ecaaed",
+              "IsCreationKey": false,
+              "Key": 0,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "41815c59-c22a-4d46-aa92-d8f16315e31f",
+                    "path": "sprites/sprGoldTankWalk/sprGoldTankWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "7a540b68-2a9e-4c40-8930-2cea062cda07",
+              "IsCreationKey": false,
+              "Key": 1,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "c017629a-da4f-4ad1-a2dc-4859444c2944",
+                    "path": "sprites/sprGoldTankWalk/sprGoldTankWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "b6bcde93-96df-44c3-a5e7-443659c530ef",
+              "IsCreationKey": false,
+              "Key": 2,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "e4cd795a-b2a1-4b7f-bc30-4fc78968d825",
+                    "path": "sprites/sprGoldTankWalk/sprGoldTankWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "69cd9e8d-2d7a-4661-a475-fc17ee390558",
+              "IsCreationKey": false,
+              "Key": 3,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "2451cf1e-887d-44b2-830f-4379e0138aba",
+                    "path": "sprites/sprGoldTankWalk/sprGoldTankWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "d517932d-a927-438f-a9a8-f11f8875ef39",
+              "IsCreationKey": false,
+              "Key": 4,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "73b4ced4-7b83-4169-b539-4f3fc068788f",
+                    "path": "sprites/sprGoldTankWalk/sprGoldTankWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "0a55150b-2fb2-44b3-bc68-9a860d1493e5",
+              "IsCreationKey": false,
+              "Key": 5,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ec59c46e-08f2-448b-9832-f5c6fa2f3c2f",
+                    "path": "sprites/sprGoldTankWalk/sprGoldTankWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "4446ae8e-6226-4717-b275-18698894f547",
+              "IsCreationKey": false,
+              "Key": 6,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "dea5eef1-d66b-42e8-9801-7d9cdf291a8a",
+                    "path": "sprites/sprGoldTankWalk/sprGoldTankWalk.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "0f79cf33-900e-4475-8b21-19c6aa3443d9",
+              "IsCreationKey": false,
+              "Key": 7,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            }
+          ],
+          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
+          "resourceVersion": "2.0"
+        },
+        "modifiers": [],
+        "name": "frames",
+        "resourceType": "GMSpriteFramesTrack",
+        "resourceVersion": "2.0",
+        "spriteId": null,
+        "trackColour": 0,
+        "tracks": [],
+        "traits": 0
+      }
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
-    "volume": 1.0,
+    "visibleRange": {
+      "x": 0,
+      "y": 0
+    },
+    "volume": 1,
     "xorigin": 24,
-    "yorigin": 24,
+    "yorigin": 24
   },
   "swatchColours": null,
   "swfPrecision": 2.525,
   "textureGroupId": {
     "name": "Default",
-    "path": "texturegroups/Default",
+    "path": "texturegroups/Default"
   },
   "type": 0,
   "VTile": false,
-  "width": 48,
+  "width": 48
 }

@@ -14,8 +14,8 @@ if !hp {
 	instance_create(x, y, BecomeNothing)
 	
 	snd_stop(sndBecomeNothingStartup)
-	snd_play(sndThroneHitAwake)
-	snd_stop(sndNothingSielence)
+	snd_play(sndBecomeNothingHurt)
+	snd_stop(sndBecomeNothingIdle)
 		
 	with MusCont {
 	    snd_stop(song)
@@ -46,7 +46,7 @@ if !active && distance_to_object(Player) <= 24 {
     image_speed = 0.4
 	
     snd_play(sndBecomeNothingStartup)
-    snd_loop(sndNothingSielence)
+    snd_play_loop(sndBecomeNothingIdle)
 
     flame = sprThroneFlameStart
     alarm[0] = 3 / image_speed

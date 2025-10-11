@@ -12,4 +12,4 @@ button_name = "ACT BUTTON"
 active = 0
 alpha = 3
 
-// do_thing = undefined
+// volume_control_command = undefined

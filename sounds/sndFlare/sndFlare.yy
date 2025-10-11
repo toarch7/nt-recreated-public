@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndFlare",
+  "$GMSound": "",
+  "%Name": "sndFlare",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
   "duration": 1.165351,
+  "name": "sndFlare",
   "parent": {
     "name": "Flare",
-    "path": "folders/Sounds/Flare.yy",
+    "path": "folders/Sounds/Flare.yy"
   },
   "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndFlare",
+  "soundFile": "sndFlare.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

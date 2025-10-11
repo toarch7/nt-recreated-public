@@ -19,16 +19,16 @@ if mode == 0 {
     da += 0.5
 
     draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
+    draw_set_valign(fa_middle)
     draw_set_color(c_white)
     draw_text_shadow(view_xview + view_width / 2, view_yview + view_height / 2 + 24, "DO NOT TURN OFF NUCLEAR THRONE\nWHILE THIS SAVING ICON IS DISPLAYED.")
 }
 
 if mode == 1 {
     draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
+    draw_set_valign(fa_middle)
     draw_set_color(c_white)
-    draw_text_nt(view_xview + view_width / 2, view_yview + view_height / 2, "@sMADE IN GAMEMAKER STUDIO")
+    draw_text_nt(view_xview + view_width / 2, view_yview + view_height / 2, "@sMADE IN GAMEMAKER")
 }
 
 if mode == 2 {
@@ -44,7 +44,7 @@ if mode == 2 {
 
 if mode == 3 {
     draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
+    draw_set_valign(fa_middle)
     draw_text_nt(view_xview + view_width / 2, view_yview + view_height / 2, "@yVLAMBEER@s#&#@wPAUL VEER#JUKIO KALLIO#JOONAS TURNER#JUSTIN CHAN@s##PRESENT###")
 }
 

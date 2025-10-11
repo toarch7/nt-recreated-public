@@ -109,17 +109,16 @@ safespawn = true
 safedir = irandom(3) * 90
 safefloors = 0
 
-if save_get_value("game", "tutorial", 1) {
+if save_get_value("game", "tutorial", true) {
 	safespawn = true
     goal = 5
 	
 	instance_create(x, y, TutCont)
 }
 
-if instance_exists(MenuGen)
-	goal = 110
+if instance_exists(MenuGen) goal = 110
 
-crown = save_get_value("ccrown", string(GameCont.crown), 1)
+crown = crwn_none
 splat = 0
 
 alarm[5] = 600

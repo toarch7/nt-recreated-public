@@ -32,8 +32,8 @@ else if history_pointed
 	history_pointed = false
 
 scrDrawAlignCenter()
-draw_bigname(view_width / 2, view_height - 18 - pointed, str, pointed ? c_white : c_uigray)
+draw_text_bigname(view_width / 2, view_height - 18 - pointed, str, pointed ? c_white : c_uigray)
 scrDrawAlignDefault()
 
-draw_sprite_ext(sprDailyListArrow, 0, 48 - pointed, view_height - 18 - pointed, 1, 1, 0, pointed ? c_white : c_uigray, 1)
-draw_sprite_ext(sprDailyListArrow, 1, view_width - 48 + pointed, view_height - 18 - pointed, 1, 1, 0, pointed ? c_white : c_uigray, 1)
+draw_sprite_ext(sprDailyArrow, 0, 48 - pointed, view_height - 18 - pointed, 1, 1, 0, pointed ? c_white : c_uigray, 1)
+draw_sprite_ext(sprDailyArrow, 1, view_width - 48 + pointed, view_height - 18 - pointed, 1, 1, 0, pointed ? c_white : c_uigray, 1)

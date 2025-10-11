@@ -1,6 +1,6 @@
 if ammo {
     if instance_number(Exploder) + instance_number(SuperFrog) * 2 < 8 {
-        instance_create(x, y, Egg)
+        instance_create(x, y, FrogEgg)
     }
 
     ammo--

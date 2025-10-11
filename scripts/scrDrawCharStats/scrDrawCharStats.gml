@@ -6,14 +6,14 @@ function scrDrawCharStats() {
         statx = view_xview + 110
         staty = view_yview + 52
         line = 0
-        draw_stat_header(UberCont.race_name[select])
+        draw_stat_header(scrRaceGetName(select))
         draw_stat("kills", string(UberCont.ctot_kill[select]))
         draw_stat("loops", string(UberCont.ctot_loop[select]))
         draw_stat("runs", string(UberCont.ctot_runs[select]))
         draw_stat("deaths", string(UberCont.ctot_dead[select]))
         draw_stat("wins", string(UberCont.ctot_wins[select]))
         draw_stat("time", baked_tottime[select])
-        draw_stat("unlocks", (scrAddZero(round(((unlock / unlockmax) * 100)), 2) + "%"))
+        draw_stat("unlocks", (string_pad_zeroes(round(((unlock / unlockmax) * 100)), 2) + "%"))
         if ((select == 1) && (UberCont.ctot_uniq[1] > 0)) draw_stat("ROLLS", string(UberCont.ctot_uniq[1]))
         else if ((select == 2) && (UberCont.ctot_uniq[2] > 0)) draw_stat("DEFLECTS", string(UberCont.ctot_uniq[2]))
         else if ((select == 3) && (UberCont.ctot_uniq[3] > 0)) draw_stat("TELEKINESIS", baked_telekinesis)

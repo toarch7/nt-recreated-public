@@ -13,9 +13,9 @@ if instance_exists(target) {
             image_index = 0
             speed = 0
             jumpdist = point_distance(x, y, target.x, target.y) * 1.1
-            jumpdir = target_direction + orandom(20)
+            jumpdir = mcr_target_direction + orandom(20)
             alarm[2] = 10
             alarm[1] = 300
-        } else motion_add(target_direction, 1.4)
+        } else motion_add(mcr_target_direction, 1.4)
     }
 } else motion_add(random_angle, 0.5)

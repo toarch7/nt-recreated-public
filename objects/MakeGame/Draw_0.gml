@@ -1,7 +1,7 @@
 if disclaimer {
 	
 	draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
+    draw_set_valign(fa_middle)
 	
 	var str = (get_timer() / 33333) % 60 > 30 ? "@r!!!" : "@s!!!"
 	
@@ -31,7 +31,7 @@ if disclaimer {
 }
 
 if loading {
-	camera_set_pos(0, 0)
+	scr_camera_set_position(0, 0)
 	
     try {
         var xx = view_width / 2

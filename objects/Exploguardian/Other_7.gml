@@ -1,5 +1,5 @@
-if sprite_index == sprExploguardianFire {
-    spr_idle = sprExploguardianIdle
-    spr_hurt = sprExploguardianHurt
+if sprite_index == sprExploGuardianFire {
+    spr_idle = sprExploGuardianIdle
+    spr_hurt = sprExploGuardianHurt
     charge = 0
 }

@@ -11,7 +11,7 @@ function scrMakeFloor() {
     // create actual floors:
     switch _area {
         case 1:
-            if rng_random(0, 2) < 1 {
+            if rng_float(RNGStates.Generation, 2) < 1 {
                 instance_create(x, y, Floor)
                 instance_create(x + 32, y, Floor)
                 instance_create(x + 32, y + 32, Floor)
@@ -21,7 +21,7 @@ function scrMakeFloor() {
 			
             break
         case 3:
-            if rng_random(0, 8) < 1 or GameCont.subarea == 3 {
+            if rng_float(RNGStates.Generation, 8) < 1 or GameCont.subarea == 3 {
                 if GameCont.subarea == 3 {
                     xoff = rng_choose(0, 32, 0, 0, -32)
                     yoff = rng_choose(0, 32, 0, 0, -32)
@@ -45,8 +45,8 @@ function scrMakeFloor() {
 			
             break
         case 5:
-            if rng_random(0, 11) < 1 {
-                if rng_random(0, 2) < 1 {
+            if rng_float(RNGStates.Generation, 11) < 1 {
+                if rng_float(RNGStates.Generation, 2) < 1 {
                     instance_create(x + 32, y, Floor)
                     instance_create(x + 32, y + 32, Floor)
                     instance_create(x, y + 32, Floor)
@@ -79,7 +79,7 @@ function scrMakeFloor() {
 			
             break
         case 7:
-            if rng_random(0, 16) < 1 {
+            if rng_float(RNGStates.Generation, 16) < 1 {
                 dix = -32
                 diy = -32
 				
@@ -103,7 +103,7 @@ function scrMakeFloor() {
             break
 		
         case 100:
-            if rng_random(0, 8) < 1 {
+            if rng_float(RNGStates.Generation, 8) < 1 {
                 dir = rng_choose(0, 1, 2)
 				
                 if dir == 1 {
@@ -163,7 +163,7 @@ function scrMakeFloor() {
                 instance_create(x + 32, y - 64, Floor)
                 x += ldrx(64, direction)
                 y += ldry(64, direction)
-            } else if rng_random(0, 3) < 1 {
+            } else if rng_float(RNGStates.Generation, 3) < 1 {
                 instance_create(x + 32, y, Floor)
                 instance_create(x + 32, y + 32, Floor)
                 instance_create(x, y + 32, Floor)
@@ -180,7 +180,7 @@ function scrMakeFloor() {
                     instance_create(x, y, Floor)
                     instance_create(x + 16, y + 16, AmmoChest)
                 }
-                if rng_random(0, 3) < 1 {
+                if rng_float(RNGStates.Generation, 3) < 1 {
                     instance_create(x + 32, y, Floor)
                     instance_create(x + 32, y + 32, Floor)
                     instance_create(x, y + 32, Floor)
@@ -195,7 +195,7 @@ function scrMakeFloor() {
         case 101:
             instance_create(x, y, Floor)
 			
-            if rng_random(0, 3) < 1 {
+            if rng_float(RNGStates.Generation, 3) < 1 {
                 instance_create(x - 32, y, Floor)
                 instance_create(x + 32, y, Floor)
                 instance_create(x, y - 32, Floor)
@@ -226,7 +226,7 @@ function scrMakeFloor() {
             instance_create(x, y - 32, Floor)
             break
         case 105:
-            if rng_random(0, 4) < 1 {
+            if rng_float(RNGStates.Generation, 4) < 1 {
                 instance_create(x, y, Floor)
                 instance_create(x + 32, y, Floor)
                 instance_create(x + 32, y + 32, Floor)
@@ -283,7 +283,7 @@ function scrMakeFloor() {
     }
     direction = (direction + trn) % 360
     //
-    if abs(trn) == 90 && _area == 6 && rng_random(0, 2) < 1 {
+    if abs(trn) == 90 && _area == 6 && rng_float(RNGStates.Generation, 2) < 1 {
         instance_create(x + 32, y, Floor)
         instance_create(x + 32, y + 32, Floor)
         instance_create(x, y + 32, Floor)
@@ -292,11 +292,11 @@ function scrMakeFloor() {
         instance_create(x + 32, y - 32, Floor)
         instance_create(x - 32, y - 32, Floor)
         instance_create(x - 32, y + 32, Floor)
-        if rng_random(0, 3) < 1 {
-            if rng_random(0, 4) < 3 instance_create(x - 16, y - 16, Server)
-            if rng_random(0, 4) < 3 instance_create(x - 16 + 64, y - 16, Server)
-            if rng_random(0, 4) < 3 instance_create(x - 16, y - 16 + 64, Server)
-            if rng_random(0, 4) < 3 instance_create(x - 16 + 64, y - 16 + 64, Server)
+        if rng_float(RNGStates.Generation, 3) < 1 {
+            if rng_float(RNGStates.Generation, 4) < 3 instance_create(x - 16, y - 16, Server)
+            if rng_float(RNGStates.Generation, 4) < 3 instance_create(x - 16 + 64, y - 16, Server)
+            if rng_float(RNGStates.Generation, 4) < 3 instance_create(x - 16, y - 16 + 64, Server)
+            if rng_float(RNGStates.Generation, 4) < 3 instance_create(x - 16 + 64, y - 16 + 64, Server)
         }
     }
     if (trn == 180 or abs(trn) == 90 && (_area == 3 or _area == 104)) && point_distance(x, y, 10016, 10016) > 48 {
@@ -306,17 +306,17 @@ function scrMakeFloor() {
     //
     switch _area {
         case 0:
-            if rng_random(0, 19 + instance_number(FloorMaker)) > 22 {
+            if rng_float(RNGStates.Generation, 19 + instance_number(FloorMaker)) > 22 {
                 instance_destroy()
                 if point_distance(x, y, 10016, 10016) > 48 {
                     //instance_create(x + 16, y + 16, AmmoChest)
                     instance_create(x, y, Floor)
                 }
             }
-            if rng_random(0, 4) < 1 instance_create(x, y, FloorMaker)
+            if rng_float(RNGStates.Generation, 4) < 1 instance_create(x, y, FloorMaker)
             break
         case 106:
-            if rng_random(0, 10) < 1 {
+            if rng_float(RNGStates.Generation, 10) < 1 {
                 if point_distance(x, y, 10016, 10016) > 48 {
                     instance_create(x + 16, y + 16, AmmoChest)
                     instance_create(x, y, Floor)
@@ -326,27 +326,27 @@ function scrMakeFloor() {
             break
         case 1:
         case 101:
-            if rng_random(0, 19 + instance_number(FloorMaker)) > 20 {
+            if rng_float(RNGStates.Generation, 19 + instance_number(FloorMaker)) > 20 {
                 instance_destroy()
                 if point_distance(x, y, 10016, 10016) > 48 {
                     instance_create(x + 16, y + 16, AmmoChest)
                     instance_create(x, y, Floor)
                 }
             }
-            if rng_random(0, 8) < 1 instance_create(x, y, FloorMaker)
+            if rng_float(RNGStates.Generation, 8) < 1 instance_create(x, y, FloorMaker)
             break
         case 2:
-            if rng_random(0, 14 + instance_number(FloorMaker)) > 15 {
+            if rng_float(RNGStates.Generation, 14 + instance_number(FloorMaker)) > 15 {
                 if point_distance(x, y, 10016, 10016) > 48 {
                     instance_create(x + 16, y + 16, AmmoChest)
                     instance_create(x, y, Floor)
                 }
                 instance_destroy()
             }
-            if rng_random(0, 15) < 1 instance_create(x, y, FloorMaker)
+            if rng_float(RNGStates.Generation, 15) < 1 instance_create(x, y, FloorMaker)
             break
         case 3:
-            if rng_random(0, 39 + instance_number(FloorMaker)) > 40 {
+            if rng_float(RNGStates.Generation, 39 + instance_number(FloorMaker)) > 40 {
                 if point_distance(x, y, 10016, 10016) > 48 {
                     instance_create(x + 16, y + 16, AmmoChest)
                     instance_create(x, y, Floor)
@@ -355,14 +355,14 @@ function scrMakeFloor() {
                 instance_destroy()
             }
 			
-            if rng_random(0, 25) < 1
+            if rng_float(RNGStates.Generation, 25) < 1
 				instance_create(x, y, FloorMaker)
             break
         case 4:
         case 104:
-            if (_area == 104 && rng_random(0, 4) >= 1) break
+            if (_area == 104 && rng_float(RNGStates.Generation, 4) >= 1) break
 			
-            if rng_random(0, 9 + instance_number(FloorMaker)) > 10 {
+            if rng_float(RNGStates.Generation, 9 + instance_number(FloorMaker)) > 10 {
                 instance_destroy()
                 if point_distance(x, y, 10016, 10016) > 48 {
                     instance_create(x + 16, y + 16, AmmoChest)
@@ -370,12 +370,12 @@ function scrMakeFloor() {
                 }
             }
 			
-            if rng_random(0, 4) < 1
+            if rng_float(RNGStates.Generation, 4) < 1
 				instance_create(x, y, FloorMaker)
 			
             break
         case 5:
-            if rng_random(0, 14 + instance_number(FloorMaker)) > 15 {
+            if rng_float(RNGStates.Generation, 14 + instance_number(FloorMaker)) > 15 {
                 instance_destroy()
                 if point_distance(x, y, 10016, 10016) > 48 {
                     instance_create(x, y, Floor)
@@ -383,12 +383,12 @@ function scrMakeFloor() {
                 }
             }
 			
-            if rng_random(0, 15) < 1
+            if rng_float(RNGStates.Generation, 15) < 1
 				instance_create(x, y, FloorMaker)
 			
             break
         case 6:
-            if rng_random(0, 21 + instance_number(FloorMaker)) > 22 {
+            if rng_float(RNGStates.Generation, 21 + instance_number(FloorMaker)) > 22 {
                 instance_destroy()
                 if point_distance(x, y, 10016, 10016) > 48 {
                     instance_create(x, y, Floor)
@@ -396,14 +396,14 @@ function scrMakeFloor() {
                 }
             }
 			
-            if rng_random(0, 20) < 1
+            if rng_float(RNGStates.Generation, 20) < 1
 				instance_create(x, y, FloorMaker)
 			
             break
         case 7:
         case 102:
             if _area == 7 {
-                if rng_random(0, 8 + instance_number(FloorMaker)) > 9 {
+                if rng_float(RNGStates.Generation, 8 + instance_number(FloorMaker)) > 9 {
                     instance_destroy()
 					
                     if point_distance(x, y, 10016, 10016) > 48 {
@@ -412,11 +412,11 @@ function scrMakeFloor() {
                     }
                 }
 				
-                if rng_random(0, 16) < 1
+                if rng_float(RNGStates.Generation, 16) < 1
 					instance_create(x, y, FloorMaker)
             }
             //
-            if rng_random(0, 9 + instance_number(FloorMaker)) > 10 {
+            if rng_float(RNGStates.Generation, 9 + instance_number(FloorMaker)) > 10 {
                 if point_distance(x, y, 10016, 10016) > 48 {
                     instance_create(x + 16, y + 16, AmmoChest)
                     instance_create(x, y, Floor)
@@ -424,12 +424,12 @@ function scrMakeFloor() {
                 instance_destroy()
             }
 			
-            if rng_random(0, 5) < 1
+            if rng_float(RNGStates.Generation, 5) < 1
 				instance_create(x, y, FloorMaker)
             break
         case 103:
         case 107:
-            if rng_random(0, 31 + instance_number(FloorMaker)) > 32 {
+            if rng_float(RNGStates.Generation, 31 + instance_number(FloorMaker)) > 32 {
                 instance_destroy()
                 if point_distance(x, y, 10016, 10016) > 48 {
                     instance_create(x, y, Floor)
@@ -437,13 +437,13 @@ function scrMakeFloor() {
                 }
             }
 			
-            if rng_random(0, 20) < 1
+            if rng_float(RNGStates.Generation, 20) < 1
 				instance_create(x, y, FloorMaker)
             break
     }
 	
     if _area == 101 or _area == 105 {
-        if rng_random(0, 19 + instance_number(FloorMaker)) > 20 {
+        if rng_float(RNGStates.Generation, 19 + instance_number(FloorMaker)) > 20 {
             instance_destroy()
             if point_distance(x, y, 10016, 10016) > 48 {
                 instance_create(x + 16, y + 16, AmmoChest)
@@ -451,7 +451,7 @@ function scrMakeFloor() {
             }
         }
 		
-        if rng_random(0, 14) < 1
+        if rng_float(RNGStates.Generation, 14) < 1
 			instance_create(x, y, FloorMaker)
     }
 }

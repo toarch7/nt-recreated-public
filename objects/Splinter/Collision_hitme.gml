@@ -21,7 +21,7 @@ if speed > 0 && other.team != team && other.hp > 0 {
     target = other.id
 
     with instance_create(x, y, BoltStick) {
-        sprite_index = sprSplinterStick
+        sprite_index = other.sprite_index
         image_angle = other.image_angle
         target = other.target
     }

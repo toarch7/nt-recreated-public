@@ -16,7 +16,7 @@ right = 1
 scrTarget()
 
 if instance_exists(target) {
-    gunangle = target_direction
+    gunangle = mcr_target_direction
 } else gunangle = 0
 
 alarm[0] = 30

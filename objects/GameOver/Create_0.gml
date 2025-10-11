@@ -25,7 +25,7 @@ repeat 2 {
 
 if UberCont.daily_run {
 	with instance_find(PauseButton, 1)
-		sprite_index = sprGameOverResults
+		sprite_index = sprGameOverResult
 	
 	if !UberCont.weekly_run {
 	    with instance_find(PauseButton, 0)

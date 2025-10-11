@@ -1,3 +1,9 @@
+globalvar lockstep_stop;
+lockstep_stop = false
+
+// Multiplayer PlayerInstance index
+global.index = 0
+
 function network_get_free_id() {
     if !ds_stack_empty(global.netidstack)
         return ds_stack_pop(global.netidstack)
@@ -10,33 +16,33 @@ function network_free_id(index) {
 }
 
 function packet_begin(_event) {
-	buffer_seek(global.buffer, buffer_seek_start, 0)
-	buffer_write(global.buffer, buffer_u8, _event)
+	buffer_seek(global.mpbuffer, buffer_seek_start, 0)
+	buffer_write(global.mpbuffer, buffer_u8, _event)
 }
 
 function packet_write(_type, _data) {
-	buffer_write(global.buffer, _type, _data)
+	buffer_write(global.mpbuffer, _type, _data)
 }
 
 function packet_read(_type) {
-	return buffer_read(global.buffer, _type)
+	return buffer_read(global.mpbuffer, _type)
 }
 
 function packet_send() {
 	with CoopController {
 		if global.is_server {
 			for(var i = 0; i < array_length(sockets); i ++) {
-				network_send_packet(sockets[i], global.buffer, buffer_tell(global.buffer))
+				network_send_packet(sockets[i], global.mpbuffer, buffer_tell(global.mpbuffer))
 			}
 		}
 		else {
-			network_send_packet(socket, global.buffer, buffer_tell(global.buffer))
+			network_send_packet(socket, global.mpbuffer, buffer_tell(global.mpbuffer))
 		}
 	}
 }
 
 function packet_send_to(_socket) {
-	network_send_packet(_socket, global.buffer, buffer_tell(global.buffer))
+	network_send_packet(_socket, global.mpbuffer, buffer_tell(global.mpbuffer))
 }
 
 function buffer_send(buffer) {
@@ -52,35 +58,54 @@ function buffer_send(buffer) {
     }
 }
 
-function network_lock() {
-	if lockstep_stop
-		exit
+function scrGameNetplayDisable() {
+	global.coop = false
+	global.is_server = true
 	
-	lockstep_stop = true
-	draw_enable_drawevent(false)
-	
-	with all {
-		__net_xprevious = xprevious
-		__net_yprevious = yprevious
-		
-		__net_speed = speed
-		__net_image_index = image_index
+	with GameCont {
+		if coopultra {
+			coopultra = 0
+			ultrapoints ++
+		}
 	}
 	
-	if instance_exists(CoopController)
-		print("network locked", CoopController.netframe)
+	with Player {
+		if scr_player_is_local(index) continue
+		
+		with instance_create(x, y, Corpse) {
+			speed = other.speed
+			direction = other.direction
+			sprite_index = other.spr_dead
+		}
+		
+		instance_destroy(id, false)
+	}
 	
+	with Revive {
+		if !scr_player_is_local(index) instance_destroy()
+	}
+	
+	scr_playerinstances_reset_all()
 }
 
-function network_unlock() {
-	if !lockstep_stop
-		exit
+function scrGameLockstep() {
+	if lockstep_stop exit
 	
-	lockstep_stop = false
-	draw_enable_drawevent(true)
+	with CoopController {
+		lockstep_stop = true
+		draw_enable_drawevent(false)
+		print("network locked", netframe)
+	}
+}
+
+function scrGameUnlockstep() {
+	if !lockstep_stop exit
 	
-	if instance_exists(CoopController)
-		print("network unlocked", CoopController.netframe)
+	with CoopController {
+		lockstep_stop = false
+		draw_enable_drawevent(true)
+		print("network unlocked", netframe)
+	}
 	
 	/*
 	if UberCont.paused {
@@ -92,6 +117,11 @@ function network_unlock() {
 		instance_activate_object(Console)
 	}
 	else instance_activate_all()*/
+}
+
+function scrGameIsLockstep() {
+	gml_pragma("forceinline")
+	return lockstep_stop
 }
 
 function network_keep_instances_locked() {
@@ -107,10 +137,6 @@ function network_keep_instances_locked() {
 				alarm[i] ++
 		}
 	}
-}
-
-function network_is_locked() {
-	return lockstep_stop
 }
 
 function network_clientcount() {

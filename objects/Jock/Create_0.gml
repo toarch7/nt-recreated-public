@@ -11,8 +11,8 @@ spr_fire = sprJockFire
 
 event_inherited()
 
-snd_hurt = sndBanditHit
-snd_dead = sndBanditDie
+snd_hurt = sndJockHurt
+snd_dead = sndJockDead
 
 spr_shadow = shd32
 

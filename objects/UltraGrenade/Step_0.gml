@@ -28,11 +28,11 @@ if alarm[0] > flash_at {
 		instance_create(xx, yy, Dust)
 }
 
-if global.time % 3 > 0 {
+if current_frame % 3 > 0 {
 	var cap = 6,
 		accel = 2,
 		dist = 32 + max(0, 90 - alarm[0]) / 2,
-		rotation = (global.time) % 360
+		rotation = (current_frame) % 360
 	
 	with Dust {
 		if speed < cap && distance_to_object(other) <= dist {

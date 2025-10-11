@@ -10,7 +10,7 @@ if !instance_exists(Portal) {
     draw_set_color(c_white)
 
     draw_set_halign(fa_center)
-    draw_set_valign(fa_center)
+    draw_set_valign(fa_middle)
 	
 	var str = text[pos],
 		sub = 0
@@ -26,7 +26,7 @@ if !instance_exists(Portal) {
 	
 	str = loc(str)
 	
-	if keyboard_check_pressed(ord("T")) && UberCont.opt_console && alarm[0] == -1
+	if scr_keyboard_check_pressed(ord("T")) && UberCont.opt_console && alarm[0] == -1
 		alarm[0] = 30
 	
 	if pos == 0 {

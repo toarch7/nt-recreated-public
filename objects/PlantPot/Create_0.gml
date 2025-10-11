@@ -8,3 +8,4 @@ spr_dead = sprPlantPotDead
 event_inherited()
 
 snd_hurt = sndHitPlant
+snd_dead = sndPlantPotBreak

@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "scrBoltTrail",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy",
+  "$GMScript":"v1",
+  "%Name":"scrBoltTrail",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrBoltTrail",
+  "parent":{
+    "name":"Gameplay",
+    "path":"folders/Scripts/Gameplay.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

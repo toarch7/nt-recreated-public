@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"save_delete_value",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"save_delete_value",
+  "parent":{
+    "name":"Savedata",
+    "path":"folders/Scripts/Savedata.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

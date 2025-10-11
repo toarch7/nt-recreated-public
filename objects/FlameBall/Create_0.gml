@@ -2,7 +2,7 @@ event_inherited()
 
 typ = 1
 snd = sndFlameCannonLoop
-snd_loop(snd)
+snd_play_loop(snd)
 dmg = 24
 hit_id = -1
 image_angle = random_angle

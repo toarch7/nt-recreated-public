@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndCrownBlood",
+  "$GMSound": "",
+  "%Name": "sndCrownBlood",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 1,
   "conversionMode": 0,
   "duration": 4.915,
+  "name": "sndCrownBlood",
   "parent": {
     "name": "Sounds",
-    "path": "folders/Sounds.yy",
+    "path": "folders/Sounds.yy"
   },
   "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndCrownBlood",
+  "soundFile": "sndCrownBlood.ogg",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

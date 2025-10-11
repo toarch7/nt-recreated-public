@@ -1,7 +1,7 @@
 if !instance_exists(id) exit
 
 if givekill && instance_exists(GameCont) {
-    GameCont.kills++
+    GameCont.kills ++
 }
 
 if instance_number(enemy) == 2 with Player snd_play_hit_big(sndLastEnemy, 0.2)
@@ -16,9 +16,7 @@ if corpse {
         image_xscale = other.right
 
         if instance_exists(Player) {
-            if skill_get(20) {
-                speed += 8
-            }
+            if skill_get(mut_impact_wrists) speed += 8
         }
 
         if speed > 16 speed = 16
@@ -35,7 +33,7 @@ sleep(20 + size * 15)
 
 if instance_exists(Player) {
     with Player {
-        if race == 4 {
+        if race == Race.Melting {
 			other.raddrop += 1
 		}
 	}
@@ -43,62 +41,56 @@ if instance_exists(Player) {
 
 scrRadDrop(raddrop)
 
-if !hp {
-    //SOME KILLS REGENERATE AMMO
-    with Player {
-        if race == 9 && ultra == 1 && hp <= 0 {
-            bleed = 1
-        }
 
-        if skill_get(6) && random(10) < 1 {
-            type = irandom(4) + 1
+if hp > 0 exit
 
-            ammo[type] += round(typ_ammo[type] / 2)
-
-            if ammo[type] > typ_amax[type] {
-                ammo[type] = typ_amax[type]
-            }
-
-            dir = instance_create(x, y, PopupText)
-			dir.mytext = "+" + string(round(typ_ammo[type] / 2)) + " " + loc(typ_name[type])
-			
-			if ammo[type] >= typ_amax[type] {
-				dir.mytext = loc_sfmt("MAX %", loc(typ_name[type]))
-			}
-        }
-
-        //SOME KILLS REGENERATE HEALTH
-        if skill_get(7) && random(15) < 1 {
-            num = 1
-            hp += num
-            if hp > max_hp {
-                hp = max_hp
-            }
-
-            dir = instance_create(x, y, PopupText)
-            dir.mytext = "+" + string(num) + " HP"
-
-            if hp >= max_hp {
-                dir.mytext = "MAX HP"
-            }
-
-            with instance_create(x, y, AnimParticle) {
-                sprite_index = sprBloodLust
-                image_speed = 0.4
-
-                creator = other.id
-            }
-
-            snd_play(sndBloodlustProc)
-        }
-
-        if skill_get(23) {
-            if reload reload = max(1, floor(reload * 0.6)) if breload breload = max(1, floor(breload * 0.6)) fingers = 6
-        }
+with Player {
+    //
+	if scrUltraCheckPlayerRace(id, Race.Chicken, UltraSkill.HarderToKill) {
+        if bleed > 0 bleed = 1
     }
-    if instance_exists(Player) && place_meeting(x, y, Tangle) {
-		if ultra_get(2, 5) {
-	        instance_create(x, y, Sapling)
-	    }
+
+	//
+	var _lucky_shot = skill_get(mut_lucky_shot)
+    
+	if _lucky_shot && random(10) < 1 {
+		var _ammo_type = irandom_range(Ammo.Bullets, Ammo.NUM_AMMO_TYPES - 1),
+			_ammo_give = round(scrAmmoGetTypeAmount(_ammo_type) / 2) * _lucky_shot
+		
+		scrPlayerGiveAmmo(id, _ammo_type, _ammo_give, true)
+    }
+
+    //
+	var _bloodlust = skill_get(mut_bloodlust)
+    
+	if _bloodlust && random(15) < 1 {
+        scrPlayerHeal(id, _bloodlust, true)
+
+        with instance_create(x, y, AnimParticle) {
+            sprite_index = sprBloodLust
+            image_speed = 0.4
+
+            creator = other.id
+        }
+
+        snd_play(sndBloodlustProc)
+    }
+		
+	//
+    if skill_get(mut_trigger_fingers) {
+		if reload > 0 {
+			reload = max(1, floor(reload * 0.6))
+			trigger_fingers_shine = 6
+		}
+		
+		if breload > 0 {
+			breload = max(1, floor(breload * 0.6))
+		}
+	}
+}
+
+if instance_exists(Player) && place_meeting(x, y, Tangle) {
+	repeat scrUltraCheck(Race.Plant, UltraSkill.Killer) {
+	    instance_create(x, y, Sapling)
 	}
 }

@@ -66,28 +66,3 @@ if async_load[? "id"] == weekly_request {
 	}
 	else weekly_request = -1
 }
-
-if async_load[? "id"] == auth_discord_request_post {
-	var result = json_decode(async_load[? "result"])
-
-	auth_discord_token = result[? "access_token"]
-	auth_discord_logged = true
-
-	save_set_value("etc", "auth_discord_token", auth_discord_token)
-	
-	if server != -1
-		network_destroy(server)
-
-	scrSave()
-}
-
-if async_load[? "id"] == auth_discord_request_api {
-	if async_load[? "http_status"] == 200 {
-		var result = json_decode(async_load[? "result"])
-
-		auth_discord_username = result[? "username"]
-		auth_discord_id = result[? "id"]
-
-		auth_discord_picture = sprite_add("https://cdn.discordapp.com/avatars/" + auth_discord_id + "/" + result[? "avatar"], 1, 0, 0, 0, 0)
-	}
-}

@@ -3,7 +3,7 @@ function scrControlAutoSnare(){
 		if index != global.index
 			continue
 		
-		if race == 5 && player_pref(playerinstance, "plant") && (KeyCont.release_fire[index] or KeyCont.press_fire[index]) {
+		if race == 5 && scr_player_pref(my_player, "plant") && (KeyCont.release_fire[index] or KeyCont.press_fire[index]) {
 			var _x = x + ldrx(426 / 2, gunangle),
 				_y = y + ldry(240 / 2, gunangle)
 			

@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndLastGrowl",
+  "$GMSound": "",
+  "%Name": "sndLastGrowl",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 1,
   "conversionMode": 0,
   "duration": 2.145844,
+  "name": "sndLastGrowl",
   "parent": {
     "name": "Sounds",
-    "path": "folders/Sounds.yy",
+    "path": "folders/Sounds.yy"
   },
   "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndLastGrowl",
+  "soundFile": "sndLastGrowl.wav",
   "type": 1,
-  "volume": 0.5,
+  "volume": 0.5
 }

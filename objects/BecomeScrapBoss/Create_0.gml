@@ -2,7 +2,7 @@ image_index = 0
 
 size = 3
 max_hp = 30
-target = -1
+target = noone
 spr_idle = sprScrapBossSleep
 spr_hurt = sprScrapBossSleepHurt
 spr_dead = sprScrapBossDead

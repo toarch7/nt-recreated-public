@@ -6,7 +6,7 @@ function scrStrongSpiritRefill() {
 
     spirit = 1
 
-    snd_play(sndStrongSpiritRecover)
+    snd_play(sndStrongSpiritGain)
     spirit_index = 0
     can_spirit = 0
 }

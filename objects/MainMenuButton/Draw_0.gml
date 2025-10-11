@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-draw_sprite(sprMenuButtonSplat, splat, x, y)
+draw_sprite(sprMainMenuSplat, splat, x, y)
 
 var col = (available ? (hover ? c_white : c_uigray) : c_uidark),
 	
@@ -18,9 +18,9 @@ if !loc_exists(name) {
 }
 else {
 	draw_set_halign(fa_center)
-	draw_set_valign(fa_center)
+	draw_set_valign(fa_middle)
 	
-	draw_bigname(x, y, string_upper(loc(name)), col)
+	draw_text_bigname(x, y, string_upper(loc(name)), col)
 	
 	draw_set_halign(fa_left)
 	draw_set_valign(fa_top)

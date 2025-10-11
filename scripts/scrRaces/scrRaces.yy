@@ -1,11 +1,13 @@
 {
-  "resourceType": "GMScript",
-  "resourceVersion": "1.0",
-  "name": "scrRaces",
-  "isCompatibility": false,
-  "isDnD": false,
-  "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+  "$GMScript":"v1",
+  "%Name":"scrRaces",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrRaces",
+  "parent":{
+    "name":"Content",
+    "path":"folders/Scripts/Content.yy",
   },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
 }

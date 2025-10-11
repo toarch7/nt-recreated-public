@@ -18,9 +18,10 @@ if other.team != team {
         }
 
         if !hp && object_index == Player && !spirit {
-            scrAchievement(29)
+            scrAchievementUnlock(29)
         }
     }
-
+	
+	snd_play(sndDiscHit)
     sleep(10)
 }

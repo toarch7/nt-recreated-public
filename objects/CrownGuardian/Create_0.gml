@@ -9,8 +9,8 @@ spr_hurt = sprGuardianHurt
 spr_dead = sprGuardianDead
 event_inherited()
 spr_fire = sprGuardianFire
-snd_hurt = sndGuardianHurt
-snd_dead = sndGuardianDead
+snd_hurt = sndCrownGuardianHurt
+snd_dead = sndCrownGuardianDead
 alarm[1] = (40 + random(10))
 
 spr_shadow = shd24

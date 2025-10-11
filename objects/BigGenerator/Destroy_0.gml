@@ -1,6 +1,9 @@
 speed = 0
 event_inherited()
-repeat 3 instance_create(x, y, Explosion)
+
+repeat (3) {
+	instance_create(x, y, Explosion)
+}
 
 if GameCont.crown == 5 scrDrop(0, 60) repeat 2
 scrDrop(100, 0)
@@ -40,5 +43,3 @@ if !GameCont.loops && instance_number(BigGenerator) <= 1 {
         hp = round(hp)
     }
 }
-
-snd_play_hit_big(sndExplosionXL, 0.2)

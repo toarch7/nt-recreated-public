@@ -4,15 +4,15 @@ scrTarget()
 if instance_exists(target) and roll = 0 {
     if random(hp / 2 + 2 + target.can_shoot * 3) < 1 and freeze > 40 {
         //ROLL
-        if point_distance(x, y, target.x, target.y) > 150 direction = target_direction + random(60) - 30
-        else direction = target_direction + (70 + random(60)) * choose(1, - 1)
+        if point_distance(x, y, target.x, target.y) > 150 direction = mcr_target_direction + random(60) - 30
+        else direction = mcr_target_direction + (70 + random(60)) * choose(1, - 1)
         speed = 4
         roll = 1
         snd_play(sndRoll)
         instance_create(x, y, Dust)
     } else {
         if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
-            gunangle = target_direction
+            gunangle = mcr_target_direction
             if target.x < x right = -1
             else if target.x > x right = 1 lastx = target.x lasty = target.y
             //SEE PLAYER AND FAR ENOUGH AND NOT SHOUTING "FREEZE MOTHERFUCKER"
@@ -30,8 +30,8 @@ if instance_exists(target) and roll = 0 {
                 alarm[1] = 3 + random(2)
             } else {
                 //DONT FIRE
-                if point_distance(x, y, target.x, target.y) > 48 direction = target_direction + random(50) - 25
-                else direction = target_direction + 180 + random(50) - 25
+                if point_distance(x, y, target.x, target.y) > 48 direction = mcr_target_direction + random(50) - 25
+                else direction = mcr_target_direction + 180 + random(50) - 25
                 speed = 0.4
                 walk = 10 + random(10)
                 if freeze < 40 alarm[1] += random(30)
@@ -52,7 +52,7 @@ if instance_exists(target) and roll = 0 {
                 gunangle = point_direction(x, y, lastx, lasty)
 
                 if male {
-                    snd_play(sndGruntThrowNade)
+                    snd_play(sndGruntThrowNadeM)
                 } else snd_play(sndGruntThrowNadeF)
 
                 wkick = 8

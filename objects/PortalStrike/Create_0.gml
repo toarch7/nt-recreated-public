@@ -13,6 +13,6 @@ snd = sndPortalStrikeFire
 if instance_exists(Player) && skill_get(5)
     snd = sndPortalStrikeFireButt
 
-snd_loop(sndPortalStrikeLoop)
+snd_play_loop(sndPortalStrikeLoop)
 
 touch = -1

@@ -1,23 +1,25 @@
 {
-  "resourceType": "GMSound",
-  "resourceVersion": "1.0",
-  "name": "sndExploFreakHurt",
+  "$GMSound": "",
+  "%Name": "sndExploFreakHurt",
   "audioGroupId": {
     "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
   "bitDepth": 1,
   "bitRate": 128,
   "compression": 0,
   "conversionMode": 0,
   "duration": 0.630034,
+  "name": "sndExploFreakHurt",
   "parent": {
     "name": "Freaks",
-    "path": "folders/Sounds/Freaks.yy",
+    "path": "folders/Sounds/Freaks.yy"
   },
   "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
   "sampleRate": 44100,
-  "soundFile": "sndExploFreakHurt",
+  "soundFile": "sndExploFreakHurt.wav",
   "type": 0,
-  "volume": 1.0,
+  "volume": 1
 }

@@ -22,7 +22,7 @@ if !instance_exists(Player) {
     var _y = view_height / 2 - 48
 	
 	if !instance_exists(Menu)
-		scrGamemodePlaybuttons()
+		scrDrawGameModeIndication()
 	
     if instance_exists(Menu) && UberCont.daily_run {
         var pointed = 0
@@ -34,7 +34,7 @@ if !instance_exists(Player) {
                         viewtype = UberCont.weekly_run ? "weekly" : "daily"
                     }
 
-                    snd_play(sndMenuClick)
+                    snd_play(sndClick)
                 }
 				else {
                     with DailyList

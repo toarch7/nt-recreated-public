@@ -7,8 +7,8 @@ function scrOptionsUpdate() {
 			crosshair = self[$ "opt_crosshair"]
 			vsync = self[$ "opt_vsync"]
 		
-		var mobile = !global.desktop,
-			desktop = global.desktop
+		var mobile = !is_desktop,
+			desktop = is_desktop
 		
         opt_volume = save_get_option("volume", "master", 1)
         opt_musvol = save_get_option("volume", "music", 1)
@@ -164,15 +164,16 @@ function scrOptionsUpdate() {
 		
 		save_set_value("etc", "last_os", os_type)
 		
-		if global.desktop && (opt_cursor != cursor or opt_crosshair != crosshair)
+		if is_desktop && (opt_cursor != cursor or opt_crosshair != crosshair)
 			scrOptionsUpdateNativeCursor()
 		
 		scrKeymapsSetup()
 		
 		scrOptionsLoadKeymaps()
 		
-		if is_struct(playerinstance)
-			player_update_prefs(playerinstance)
+		if is_struct(my_player) {
+			my_player.update_cprefs()
+		}
 		
 		try {
 			opt_remote_port = real(opt_remote_port)
@@ -184,7 +185,7 @@ function scrOptionsUpdate() {
 }
 
 function scrOptionsUpdateNativeCursor() {
-	if !global.desktop
+	if !is_desktop
 		exit
 	
 	with UberCont {

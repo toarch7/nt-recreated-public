@@ -12,7 +12,7 @@ if (charge == 0) {
         if (target.x < x) right = -1
         else right = 1
         drawspr = sprLastDashStart
-        gunangle = ((target_direction + random(30)) - 15)
+        gunangle = ((mcr_target_direction + random(30)) - 15)
         motion_add(gunangle, 10)
     }
 } else if (charge == 1) {

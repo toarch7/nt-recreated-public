@@ -6,7 +6,7 @@ if async_load[? "id"] == req {
 		var res = json_parse(async_load[? "result"]),
 			entries = res.entries,
 			keys = struct_keys(entries),
-			uid = scrGetUid()
+			uid = scrSavedatascrGetUID()
 		
 		items = []
 		

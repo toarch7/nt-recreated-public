@@ -84,12 +84,12 @@ function scrDrawStats() {
     draw_stat("deaths", string(dead))
     draw_stat("wins", string(wins))
     draw_stat("time", string(time))
-    draw_stat("unlocks", (scrAddZero(round(((unlock / unlockmax) * 100)), 2) + "%"))
+    draw_stat("unlocks", (string_pad_zeroes(round(((unlock / unlockmax) * 100)), 2) + "%"))
     draw_stat_header("")
     
 	if (runs > 0) {
         draw_stat_header("BEST RUN")
-        draw_stat(string(UberCont.race_name[brace]), area_get_name(barea, bsuba, bloop))
+        draw_stat(scrRaceGetName(brace), area_get_name(barea, bsuba, bloop))
         draw_stat("kills", string(bkill))
         draw_stat_header("")
     }
@@ -100,19 +100,19 @@ function scrDrawStats() {
 	
     if (runs > 0 && wins > 0) {
         draw_stat_header("BEST STREAK")
-        draw_stat(string(UberCont.race_name[cstrk]), string(bstrk))
+        draw_stat(scrRaceGetName(cstrk), string(bstrk))
         draw_stat_header("")
     }
 	
     if (wins > 0) {
         draw_stat_header("BEST TIME")
-        draw_stat(string(UberCont.race_name[frace]), scrTimeSpeedrun(baked_fastest[frace]))
+        draw_stat(scrRaceGetName(frace), scrTimeSpeedrun(baked_fastest[frace]))
         draw_stat_header("")
     }
 	
     if dailies > 0 {
         draw_stat_header("DAILY")
-        draw_stat(string(UberCont.race_name[drace]), area_get_name(darea, dsuba, dloop))
+        draw_stat(scrRaceGetName(drace), area_get_name(darea, dsuba, dloop))
         draw_stat("kills", string(dkill))
         draw_stat("runs", string(dailies))
         draw_stat_header("")
@@ -120,7 +120,7 @@ function scrDrawStats() {
 	
     if UberCont.hardgot && hard > 0 {
         draw_stat_header("HARD")
-        draw_stat(string(UberCont.race_name[hrace]), area_get_name_hard(harea, hsuba, hloop))
+        draw_stat(scrRaceGetName(hrace), area_get_name_hard(harea, hsuba, hloop))
         draw_stat("kills", string(hkill))
         draw_stat("runs", string(hard))
         draw_stat_header("")

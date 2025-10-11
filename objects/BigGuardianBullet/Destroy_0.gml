@@ -1,7 +1,7 @@
 with instance_create(x, y, EBulletHit)
 sprite_index = sprGuardianBulletHit
 
-snd_play(sndBigballBreak)
+snd_play(sndBigBallExplo)
 
 instance_create(x, y, PortalClear)
 

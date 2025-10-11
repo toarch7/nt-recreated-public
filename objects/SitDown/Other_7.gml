@@ -1,4 +1,4 @@
-if (sprite_index && sprite_index != spr_sit) or alarm[2] {
+if (sprite_index && sprite_index != spr_sit) || alarm[2] {
     sprite_index = spr_sit
     alarm[0] = 430
 
@@ -19,18 +19,19 @@ if (sprite_index && sprite_index != spr_sit) or alarm[2] {
     }
 
     if sprite_index == sprMutant9HeadlessSit {
-        scrAchievement(28)
+        scrAchievementUnlock(28)
     }
-
+	
+	// TODO: crown unlock refactoring
     with GameCont {
-        var pinst = player_get(global.index)
+        var pinst = scr_playerinstance_find(global.index)
         var _race = pinst.race
 
         if !UberCont.crowngot[_race, crown] && crown > 1 {
             UberCont.crowngot[_race, crown] = 1
             UberCont.race_crown[_race, crown] = 1
-            show_unlock_popup(crown_name[crown] + "#UNLOCKED FOR " + race_name[_race])
-            scrAchievement(22)
+            //scrShowUnlockPopup(crown_name[crown] + "#UNLOCKED FOR " + race_name[_race])
+            scrAchievementUnlock(22)
         }
     }
 

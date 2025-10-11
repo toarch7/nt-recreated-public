@@ -5,7 +5,7 @@ sprite_index = spr_idle
 
 draw_self()
 
-draw_sprite(sprNothingSkeleton, 0, x, y - 22)
+draw_sprite(sprThroneCorpseDead, 0, x, y - 22)
 
 if flame != -1 {
     draw_sprite(flame, flameanim, x - 81, y - 38)

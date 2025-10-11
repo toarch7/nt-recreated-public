@@ -1,1 +1,1 @@
-sprite_index = sprFlameDisappear
+sprite_index = sprGroundFlameDisappear

@@ -4,7 +4,7 @@ if random(3) < 1 roll = 0
 scrTarget()
 if instance_exists(target) {
     var dist = point_distance(x, y, target.x, target.y)
-    var dir = target_direction
+    var dir = mcr_target_direction
     if dist < 64 && random(4) < 3 {
         gunangle = dir
         roll = 0

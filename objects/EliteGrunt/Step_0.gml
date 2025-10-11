@@ -35,7 +35,7 @@ if fuel <= 0 {
     //with instance_create(x, y, EliteGruntFlame)
 }
 
-if instance_exists(target) motion_add(target_direction, 0.4)
+if instance_exists(target) motion_add(mcr_target_direction, 0.4)
 
 speed = 7
 angle = direction - 90

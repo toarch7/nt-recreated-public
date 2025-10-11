@@ -31,18 +31,18 @@ else {
 }
 
 if splat {
-    draw_sprite(sprSkillSplat, 0, view_width / 2, view_height - 31)
+    draw_sprite(sprMutationSplat, 0, view_width / 2, view_height - 31)
 }
 
-var spr = sprTextLevel,
+var spr = sprLevelUpText,
 	count = string(GameCont.skillpoints)
 
 if instance_exists(CrownIcon) {
-    spr = sprTextCrown
+    spr = sprPickCrownText
     count = ""
 }
 else if instance_exists(UltraIcon) {
-    spr = sprTextUltra
+    spr = sprLevelUltraText
     count = loc("@gULTRA")
 }
 
@@ -60,7 +60,7 @@ if !loc_exists(name) {
 	
 	draw_sprite(spr, img, _x, _y)
 }
-else draw_bigname(_x, _y, loc(name), img == 0 ? c_white : c_ultra)
+else draw_text_bigname(_x, _y, loc(name), img == 0 ? c_white : c_ultra)
 
 draw_text_nt(view_xview + view_width / 2 + 1, view_yview + 75 - appear, "@s" + loc_sfmt(txt2 + "%" + txt, count))
 

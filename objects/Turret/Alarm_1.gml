@@ -5,6 +5,6 @@ if (instance_exists(target)) {
         ammo = 10
         alarm[2] = 10
         offset = (random(10) - 5)
-        gunangle = (target_direction + offset)
+        gunangle = (mcr_target_direction + offset)
     }
 }

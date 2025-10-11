@@ -1,7 +1,7 @@
 function handle_console_command(str) {
 	if instance_exists(CoopController) && !CoopController.event_run {
 		
-		net_add_data("other", "console", str)
+		scr_network_attach_event_data("other", "console", str)
 		
 		exit
 	}
@@ -35,8 +35,8 @@ function handle_console_command(str) {
     }
 
     if command_binding {
-        printc("Bound \"" + str + "\" to \"P\"", c_yellow)
-        printc("Press RMB to discard bind", c_gray)
+        scr_log_push("Bound \"" + str + "\" to \"P\"", c_yellow)
+        scr_log_push("Press RMB to discard bind", c_gray)
 
         bound_command = str
         command_binding = false
@@ -47,7 +47,7 @@ function handle_console_command(str) {
     try {
         switch cmd[0] {
             case "help":
-                printc("All commands available:", c_yellow)
+                scr_log_push("All commands available:", c_yellow)
 
                 var names = struct_keys(commands)
                 array_sort(names, true)
@@ -66,13 +66,13 @@ function handle_console_command(str) {
                     var _x = 10016
                     var _y = 10016
 
-                    if global.desktop && !instance_exists(CoopController) {
+                    if is_desktop && !instance_exists(CoopController) {
                         _x = mouse_x
                         _y = mouse_y
                     }
 
                     if o == Player {
-                        with scrSpawnPlayer(global.index, c, GameCont.bskin) {
+                        with scrPlayerCreate(global.index, c, GameCont.bskin) {
                             x = 10016
                             y = 10016
 
@@ -86,7 +86,7 @@ function handle_console_command(str) {
                     repeat c {
                         instance_create(_x, _y, o)
                     }
-                } else printc("Cannot create given object", c_red)
+                } else scr_log_push("Cannot create given object", c_red)
                 break
 
             case "lvl":
@@ -110,10 +110,7 @@ function handle_console_command(str) {
 				break
 			
 			case "unlockscreen":
-				with instance_create(x, y, UnlockScreen) {
-		            race = irandom(15)
-		            skin = irandom(1)
-		        }
+				scrUnlockScreenCreate(irandom_range(1, 15), 1)
 				break
 			
             case "mut":
@@ -122,33 +119,26 @@ function handle_console_command(str) {
 
                 if s {
                     skill_set(s, !skill_get(s))
-                } else printc("Unknown mut given", c_red)
+                } else scr_log_push("Unknown mut given", c_red)
                 break
 
             case "killall":
-                with enemy
-                instance_destroy(id, 0)
-                with prop
-                instance_destroy(id, 0)
-                with projectile
-                instance_destroy(id, 0)
-                with Portal
-                instance_destroy(id, 0)
-				with IDPDSpawn
-                instance_destroy(id, 0)
-				with VanSpawn
-                instance_destroy(id, 0)
-
+                instance_destroy(enemy, false)
+                instance_destroy(prop, false)
+                instance_destroy(projectile, false)
+                instance_destroy(Portal, false)
+				instance_destroy(IDPDSpawn, false)
+				instance_destroy(VanSpawn, false)
+				
+				// restore player's sprite after killing the portal
                 with Player {
-                    if mask_index != mskPlayer {
-                        angle = 0
-
-                        sprite_index = spr_idle
-                        image_index = 0
-
-                        visible = 1
-                        mask_index = mskPlayer
-                    }
+                    if mask_index == mskPlayer continue
+					
+                    angle = 0
+                    mask_index = mskPlayer
+                    sprite_index = spr_idle
+                    image_index = 0
+                    visible = 1
                 }
                 break
 
@@ -322,7 +312,7 @@ function handle_console_command(str) {
                     print("Seed set to " + string(Console.seed))
                 }
                 catch (e) {
-                    printc("Bad value given.", c_red)
+                    scr_log_push("Bad value given.", c_red)
                 }
                 break
 
@@ -370,6 +360,6 @@ function handle_console_command(str) {
                 return 1
         }
     } catch (e) {
-        printc("Console exception: " + e.message, c_red) show_debug_message(e.longMessage)
+        scr_log_push("Console exception: " + e.message, c_red) show_debug_message(e.longMessage)
     }
 }

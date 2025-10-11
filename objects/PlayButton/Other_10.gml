@@ -1,100 +1,72 @@
 /// @description click
 
 global.index = 0
-global.hardmode = 0
-global.coop = 0
-global.is_server = 1
+global.hardmode = false
+global.is_server = true
+global.coop = false
 
 with UberCont {
-    daily_run = 0
-    weekly_run = 0
-	
-	player_reset()
+    daily_run = false
+    weekly_run = false
+	scr_playerinstance_reset()
 }
 
-if image_index == 1 or image_index == 2 {
-	var name = scrGetUsername(),
-		digits = string_length(string_digits(name)),
-		a = "Seeker", b = "Throneseeker"
+var _image = floor(image_index)
+
+// if chose either Daily or Weekly 
+if _image == 1 || _image == 2 {
+	var _name = scrSavedataGetUsername(),
+		_digits = string_length(string_digits(_name))
 	
-	if name != "unknown" && name != "null" && name != "undefined"
-	&& !((string_starts(name, a) or string_starts(name, b)) && digits == 3)
-		save_set_value("etc", "suggestnickname", true)
-	
-	if !save_get_value("etc", "suggestnickname", false) {
-		with instance_create(0, 0, MenuOptions)
-			event_user(3)
+	// see if the player has changed their username
+	if !(_name == "unknown" || _name == "null" || _name == "undefined")
+	&& !(_digits == 3 && (string_starts_with(_name, "Seeker") || string_starts_with(_name, "Throneseeker"))) {
 		
+		save_set_value("etc", "suggestnickname", true)
+	}
+	
+	// if not, suggest changing
+	if !save_get_value("etc", "suggestnickname", false) {
+		with instance_create(0, 0, MenuOptions) event_user(3)
 		save_get_value("etc", "suggestnickname", true)
 		
-		with PlayButton
-			instance_destroy()
-		
-		with instance_create(0, 0, NicknameInput)
-			image_index = other.image_index
-		
-		exit
+		with instance_create(0, 0, NicknameInput) {
+			image_index = _image
+		}
 	}
-}
-
-switch image_index {
-    case 1:
-        if !UberCont.can_daily {
-            with instance_create(0, 0, Leaderboards)
-				type = "daily"
-			
-			//instance_create(0, 0, DailyList)
-			snd_play(sndMenuScores)
-			
-            with object_index
-                instance_destroy()
-			
-            exit
-        }
-		
-        with UberCont
-            daily_run = 1
-		
-        break
-
-    case 2:
-		if !UberCont.can_weekly {
-            with instance_create(0, 0, Leaderboards)
-				type = "weekly"
-			
-			//instance_create(0, 0, DailyList)
-            snd_play(sndMenuScores)
-			
-            with object_index
-                instance_destroy()
-			
-            exit
-        }
-		
-		with UberCont {
-			weekly_run = 1
-            daily_run = 1
+	// otherwise if either daily or weekly is not avilable, show leaderboards instead
+	else if (_image == 1 && !UberCont.can_daily) || (_image == 2 && !UberCont.can_weekly) {
+		with instance_create(0, 0, Leaderboards) {
+			type = _image == 2 ? "weekly" : "daily"
 		}
 		
-        break
-
-    case 3:
-        global.hardmode = 1
-        break
+		snd_play(sndMenuScores)
+	}
+	// proceed to daily run menu
+	else {
+		UberCont.daily_run = true
+		
+		// mark it weekly if required
+		if _image == 3 {
+			UberCont.weekly_run = true
+		}
+	}
+}
+// enable hardmode
+else if _image == 3 {
+	global.hardmode = true
 }
 
+instance_destroy(PlayButton)
+instance_destroy(MainMenuButton)
+instance_destroy(SpiralCont)
 
-instance_create(0, 0, GameCont)
+if !(instance_exists(Leaderboards) || instance_exists(NicknameInput)) {
+	instance_create(0, 0, GameCont)
+	instance_create(0, 0, MenuGen)
+	snd_play(sndMenuCharSelect)
+}
 
-instance_create(0, 0, MenuGen)
-
-with MainMenuButton instance_destroy()
-with SpiralCont instance_destroy()
-
-with object_index
-	instance_destroy()
-
-snd_play(sndMenuCharSelect)
-
-with UberCont
+with UberCont {
 	gamepad_sel = 0
+}

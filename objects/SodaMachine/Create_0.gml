@@ -10,3 +10,4 @@ event_inherited()
 image_xscale = 1
 
 snd_hurt = sndHitMetal
+snd_dead = sndSodaMachineBreak

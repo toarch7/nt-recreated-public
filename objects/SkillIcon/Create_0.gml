@@ -4,7 +4,7 @@ selected = 0
 skill = -1
 txt2 = ""
 
-netindex_set()
+scr_network_instance()
 
 appeary = -1
 num = 0

@@ -1,11 +1,10 @@
-UberCont.race_skin[race] = UberCont.cskingot[race]
+//UberCont.race_skin[race] = UberCont.cskingot[race]
 
-fromcrib = 0
+fromcrib = false
 gonna_oasis = 0
 want_oasis = 0
 spawn_vans = 0
 vans = 0
-alarm[10] = -1
 
 if area < 100 {
     lastarea = area
@@ -13,9 +12,9 @@ if area < 100 {
 }
 else if subarea == 1 {
     if area == 107 {
-        fromcrib = 1
         area = hqarea
         subarea = hqsubarea
+        fromcrib = true
     }
 
     if area == 105 {
@@ -89,25 +88,23 @@ if subarea < 3 && !(area == 0 or area == 2 or area == 4 or area == 6) {
 				}
             }
         }
-    } else if area != 107 {
+    }
+	else if area != 107 {
         UberCont.ctot_loop[race] += 1
         loops += 1
 
-        scrAchievement(41)
-
-        if !UberCont.crowngot[race, crown] && crown > 1 && race != 13 && race != 14 && race != 15 {
-            UberCont.crowngot[race, crown] = 1
-            UberCont.race_crown[race, crown] = 1
-			
-            show_unlock_popup(loc_sfmt("@w%@s UNLOCKED#FOR @w%", crown_name[crown], race_name[race]))
-            
-			scrAchievement(22)
-			
+        scrAchievementUnlock(Achievement.GAME_LOOPED)
+		
+		// TODO: crown unlock functions
+        if crown > 1 && scrCrownUnlock(race, crown) {
+			scrAchievementUnlock(Achievement.CROWN_LIFE)
 			scrSave()
 		}
 
-        if loops > UberCont.cbst_loop[race] UberCont.cbst_loop[race] = loops
-
+        if loops > UberCont.cbst_loop[race] {
+			UberCont.cbst_loop[race] = loops
+		}
+		
         area = 0
     }
 
@@ -138,44 +135,31 @@ if instance_exists(Player) && !(area == 1 && subarea == 1) {
 	else noradch = 0
 }
 
-if global.hardmode && race == 9 && area == 2 && !UberCont.cskingot[9] {
-    UberCont.cskingot[9] = 1
-    
-	show_unlock_popup("@wCHICKEN B-SKIN UNLOCKED@s#FOR REACHING 2-1 IN HARDMODE")
-    
-	with instance_create(0, 0, UnlockScreen) {
-        race = 9;
-        skin = 1
-    }
-	
-    scrAchievement(18)
+if global.hardmode && race == Race.Chicken && area == area_sewers {
+    scrRaceUnlockSkin(Race.Chicken, 1)
 }
-
-if area == 1 && subarea < 3 alarm[0] = 10
-
-if loops && area > 0 && area != 100 alarm[10] = 30
 
 if !UberCont.hardgot && loops >= 2 {
     save_set_value("etc", "hard", 1)
-    UberCont.hardgot = 1
-    scrAchievement(39)
-    show_unlock_popup("@wHARDMODE UNLOCKED@s#FOR REACHING LOOP 2")
+    scrShowUnlockPopup("@wHARDMODE UNLOCKED@s#FOR REACHING LOOP 2")
+    scrAchievementUnlock(Achievement.GO_HARD)
+    UberCont.hardgot = true
 }
 
 snd_stop(sndSalamanderFire)
 snd_stop(sndLightningCannonLoop)
 
 if !instance_exists(CoopController) && !UberCont.opt_console {
-    var p = UberCont.paused
+    var _is_paused = scrGameIsPaused()
 	
-    if p {
+    if _is_paused {
 		instance_activate_object(Player)
 	}
 	
-    if level_end {
+    if is_level_ended {
 		global.recontinues --
 		
-        level_end = 0
+        is_level_ended = false
         scrGameSave()
     }
 
@@ -183,9 +167,9 @@ if !instance_exists(CoopController) && !UberCont.opt_console {
 		scrGameSaveInfo()
 	}
 	
-    if p {
+    if _is_paused {
 		instance_deactivate_object(Player)
 	}
 }
 
-level_end = 0
+is_level_ended = 0

@@ -1,23 +1,24 @@
-alarm[0] = -1
+/// @description Create main menu buttons
 
-var ypos = round(2 * 24)
-var _i = 0
+var _step_size = 24,
+	_button_index = 0,
+	_button_x = floor(view_xview_center),
+	_button_y = floor(view_yview_center - _step_size * 2)
 
-for (var i = 0; i <= 4; i++) {
-    _i ++
-
-    with instance_create(view_xview + view_width / 2, view_yview + view_height / 2 - ypos + i * 24, MainMenuButton) {
+for (var i = 0; i <= 4; ++i) {
+    with instance_create(_button_x, _button_y, MainMenuButton) {
         image_index = i
 		
-		if i == 1 && !MultiplayerConfig
-			available = 0
+		if _button_index == 1 {
+			available = MultiplayerConfig
+		}
     }
+	
+	_button_y += _step_size
+    _button_index ++
 }
 
-snd_stop(sndLogoLoop)
-
 instance_create(0, 0, ButtonDiscord)
-instance_create(0, 0, DiscordAuth)
 instance_create(0, 0, ButtonAchievements)
 
 instance_destroy()

@@ -36,10 +36,10 @@ function scrPowers() {
 
 
     //EYES
-    if race == 3 {
+    if race == Race.Eyes {
 		#region Mmmmmmwwwwhhhawwwmmmmhhhhaawwww
         if KeyCont.hold_spec[index] {
-            if skill_get(5) {
+            if skill_get(mut_throne_butt) {
                 if !snd_is_playing(sndEyesLoopUpg)
 					snd_play(sndEyesLoopUpg)
             }
@@ -47,7 +47,7 @@ function scrPowers() {
 				snd_play(sndEyesLoop)
         }
 		else {
-            if skill_get(5) {
+            if skill_get(mut_throne_butt) {
                 if snd_is_playing(sndEyesLoopUpg)
 					snd_stop(sndEyesLoopUpg)
             }
@@ -58,26 +58,32 @@ function scrPowers() {
 		
 		if KeyCont.hold_spec[index] {
 			// telekinesis
-			var bx1 = x - 213,
-				by1 = y - 120,
-				bx2 = x + 213,
-				by2 = y + 120
+			var _w = game_screen_width div 2,
+				_h = game_screen_height div 2,
+				
+				bx1 = x - _w,
+				by1 = y - _h,
+				
+				bx2 = x + _w,
+				by2 = y + _h
 			
-			if ultra == 1 {
+			if scrUltraCheck(race, UltraSkill.ProjectileStyle) {
+				var _px = x, _py = y
 			    with projectile {
-			        if self[$ "creator"] == other.id {
-			            x = lerp(x, other.x + lengthdir_x(16, direction), 0.8)
-			            y = lerp(y, other.y + lengthdir_y(16, direction), 0.8)
+			        if creator == other.id {
+			            x = lerp(x, _px + lengthdir_x(16, direction), 0.8)
+			            y = lerp(y, _py + lengthdir_y(16, direction), 0.8)
 						
-						if speed < 16
+						if speed < 16 {
 							speed += friction
+						}
 			        }
 			    }
 			}
 			
-			UberCont.ctot_uniq[3] ++
+			UberCont.ctot_uniq[race] ++
 			
-			var strength = 1 + skill_get(5), dir, lx, ly
+			var strength = 1 + skill_get(mut_throne_butt), dir, lx, ly
 		
 			#macro M_EYES_TELEKINESIS { if !(x > bx1 && y > by1 && x < bx2 && y < by2) continue dir = point_direction(x, y, other.x, other.y) lx = lengthdir_x(strength, dir) ly = lengthdir_y(strength, dir) if !place_meeting(x + lx, y, Wall) x += lx if !place_meeting(x, y + ly, Wall) y += ly }
 		
@@ -143,7 +149,9 @@ function scrPowers() {
 
         with TangleSeed
 			instance_destroy()
-
+		
+		snd_play_gun(skill_get(mut_throne_butt) ? sndPlantFireTB : sndPlantFire)
+		
         with instance_create(x, y, TangleSeed) {
             motion_add(other.gunangle, 12)
             image_angle = direction
@@ -153,8 +161,8 @@ function scrPowers() {
 
     //YUNG VENUZ
     if race == 6 && can_shoot && KeyCont.press_spec[index] {
-        if !scrYVCanPop(wep)
-			return snd_play(sndMutant6Melee)
+        if !scrYVCanPopPop(wep)
+			return snd_play(sndMutant6No)
 		
 		var shots = 2,
 			boost = skill_get(mut_throne_butt)
@@ -187,7 +195,7 @@ function scrPowers() {
 			
 			reload *= (2 + boost)
 			
-			weapon_post(gunangle, 8, 1, 0)
+			scr_weapon_post(gunangle, 8, 1, 0)
 			motion_add(gunangle + 180, 4)
 			
 			//if yvmobilepopping
@@ -207,32 +215,29 @@ function scrPowers() {
     //ROBOT
     if race == 8 && KeyCont.press_spec[index] {
         if bwep {
-            if string_copy(wep_name[wep], 0, 4) == "GOLD" {
+            if scr_weapon_is_golden(wep) {
                 repeat 4 {
                     if random(max_hp) > hp {
                         instance_create(x, y, HPPickup)
-                    } else instance_create(x, y, AmmoPickup)
-                }
+                    }
+					else {
+						instance_create(x, y, AmmoPickup)
+					}
+				}
             }
 
-            if string_copy(wep_name[wep], 0, 5) == "HYPER" && !UberCont.cskingot[8] {
-                UberCont.cskingot[8] = 1
-                show_unlock_popup(race_name[race] + " B-SKIN UNLOCKED#FOR EATING HYPER WEAPON")
-                with instance_create(0, 0, UnlockScreen) {
-                    race = 8;
-                    skin = 1
-                }
-                scrAchievement(17)
-            }
+            if string_starts_with(wep_name[wep], "HYPER") scrRaceUnlockSkin(Race.Robot, 1)
 
-            if ultra == 2 && random(1) <= .4 {
+            if ultra == 2 && random(1) <= 0.4 {
+				var _love_crown = scrCrownCheck(crwn_love)
+				
                 if random(max_hp) > hp and random(3) < 2 {
-                    if crown_current != crwn_love {
+                    if !_love_crown {
                         instance_create(x, y, HealthChest)
                     }
 					else instance_create(x, y, AmmoChest)
                 }
-				else if crown_current != crwn_love {
+				else if !_love_crown {
                     instance_create(x, y, choose(WeaponChest, AmmoChest))
                 }
 				else instance_create(x, y, AmmoChest)
@@ -249,14 +254,12 @@ function scrPowers() {
 			else instance_create(x, y, AmmoPickup)
 
             if curse {
-                curse = 0
-                hp -= 7
+                projectile_hit_self(7)
+				curse = false
 				
                 repeat 10 {
 					instance_create(x + random(16) - 8, y + random(16) - 8, Curse)
 				}
-				
-				snd_play_hit_big(snd_hurt)
 			}
 
             scrSwapWeps()
@@ -359,7 +362,7 @@ function scrPowers() {
                     image_angle = direction
 
                     if other.bskin {
-                        sprite_index = sprHorrorBullet2
+                        sprite_index = sprHorrorBBullet
                     }
 
                     var dir = random_angle
@@ -403,8 +406,8 @@ function scrPowers() {
 
             if is_me {
                 if skill_get(5) {
-                    if !snd_is_playing(sndHorrorLoopTB) snd_loop(sndHorrorLoopTB)
-                } else if !snd_is_playing(sndHorrorLoop) snd_loop(sndHorrorLoop)
+                    if !snd_is_playing(sndHorrorLoopTB) snd_play_loop(sndHorrorLoopTB)
+                } else if !snd_is_playing(sndHorrorLoop) snd_play_loop(sndHorrorLoop)
             }
         } else {
             horrortime = 0
@@ -417,7 +420,7 @@ function scrPowers() {
     }
 	
     // Rogue
-    if race == 12 && KeyCont.press_spec[index] && (!is_mobile(index) or player_pref(playerinstance, "rogue")) {
+    if race == 12 && KeyCont.press_spec[index] && (!is_mobile(index) or scr_player_pref(my_player, "rogue")) {
         var px = mouse_x,
             py = mouse_y
 
@@ -493,13 +496,13 @@ function scrPowers() {
 			if skeletongamble > UberCont.ctot_uniq[14]
 				UberCont.ctot_uniq[14] = skeletongamble
 
-            snd_play(sndBloodGamble)
+            snd_play(skill_get(5) ? sndGambleButt : sndBloodGamble)
         }
     }
 
-    if instance_exists(TutCont) && TutCont.pos == 3 && !TutCont.doin && KeyCont.press_spec[index] {
+    if instance_exists(TutCont) && TutCont.pos == 3 && !TutCont.step_complete && KeyCont.press_spec[index] {
         TutCont.alarm[0] = 30
-        TutCont.doin = 1
+        TutCont.step_complete = 1
     }
 }
 

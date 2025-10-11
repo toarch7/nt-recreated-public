@@ -1,86 +1,324 @@
 {
-  "resourceType": "GMSprite",
-  "resourceVersion": "1.0",
-  "name": "sprBloodNader",
-  "bbox_bottom": 11,
-  "bbox_left": 0,
-  "bbox_right": 19,
-  "bbox_top": 0,
-  "bboxMode": 1,
-  "collisionKind": 0,
+  "$GMSprite": "",
+  "%Name": "sprBloodNader",
+  "bboxMode": 0,
+  "bbox_bottom": 10,
+  "bbox_left": 1,
+  "bbox_right": 18,
+  "bbox_top": 1,
+  "collisionKind": 1,
   "collisionTolerance": 0,
   "DynamicTexturePage": false,
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"9d59e7d3-8c03-4163-8578-f148191ba8bb",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"5ebc1e45-173a-45cc-a841-153f43284e6e",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"ecdca94a-57a4-463d-8b69-92940eb22bab",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"3b1f031b-3dca-4d39-8055-9fcb7681e05b",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"d516cde0-ceb9-4363-9ec1-790bffd6babf",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"5154f948-bf1f-4bea-af63-6410609d7f92",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"94f22f08-89d9-4d49-9c11-17717b0f5d87",},
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "9d59e7d3-8c03-4163-8578-f148191ba8bb",
+      "name": "9d59e7d3-8c03-4163-8578-f148191ba8bb",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "5ebc1e45-173a-45cc-a841-153f43284e6e",
+      "name": "5ebc1e45-173a-45cc-a841-153f43284e6e",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "ecdca94a-57a4-463d-8b69-92940eb22bab",
+      "name": "ecdca94a-57a4-463d-8b69-92940eb22bab",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "3b1f031b-3dca-4d39-8055-9fcb7681e05b",
+      "name": "3b1f031b-3dca-4d39-8055-9fcb7681e05b",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "d516cde0-ceb9-4363-9ec1-790bffd6babf",
+      "name": "d516cde0-ceb9-4363-9ec1-790bffd6babf",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "5154f948-bf1f-4bea-af63-6410609d7f92",
+      "name": "5154f948-bf1f-4bea-af63-6410609d7f92",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    },
+    {
+      "$GMSpriteFrame": "",
+      "%Name": "94f22f08-89d9-4d49-9c11-17717b0f5d87",
+      "name": "94f22f08-89d9-4d49-9c11-17717b0f5d87",
+      "resourceType": "GMSpriteFrame",
+      "resourceVersion": "2.0"
+    }
   ],
   "gridX": 0,
   "gridY": 0,
   "height": 12,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"52f2acef-e2a1-4fcc-8e5e-2dbe223d23d6","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {
+      "$GMImageLayer": "",
+      "%Name": "52f2acef-e2a1-4fcc-8e5e-2dbe223d23d6",
+      "blendMode": 0,
+      "displayName": "default",
+      "isLocked": false,
+      "name": "52f2acef-e2a1-4fcc-8e5e-2dbe223d23d6",
+      "opacity": 100,
+      "resourceType": "GMImageLayer",
+      "resourceVersion": "2.0",
+      "visible": true
+    }
   ],
+  "name": "sprBloodNader",
   "nineSlice": null,
   "origin": 9,
   "parent": {
     "name": "Weapons",
-    "path": "folders/Sprites/Weapons.yy",
+    "path": "folders/Sprites/Weapons.yy"
   },
   "preMultiplyAlpha": false,
+  "resourceType": "GMSprite",
+  "resourceVersion": "2.0",
   "sequence": {
-    "resourceType": "GMSequence",
-    "resourceVersion": "1.4",
-    "name": "",
+    "$GMSequence": "v1",
+    "%Name": "",
     "autoRecord": true,
     "backdropHeight": 1080,
     "backdropImageOpacity": 0.5,
     "backdropImagePath": "",
     "backdropWidth": 1920,
-    "backdropXOffset": 0.0,
-    "backdropYOffset": 0.0,
-    "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "backdropXOffset": 0,
+    "backdropYOffset": 0,
+    "events": {
+      "$KeyframeStore<MessageEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 7.0,
+    "length": 7,
     "lockOrigin": false,
-    "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
+    "moments": {
+      "$KeyframeStore<MomentsEventKeyframe>": "",
+      "Keyframes": [],
+      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion": "2.0"
+    },
+    "name": "",
     "playback": 1,
-    "playbackSpeed": 1.0,
+    "playbackSpeed": 1,
     "playbackSpeedType": 1,
+    "resourceType": "GMSequence",
+    "resourceVersion": "2.0",
     "showBackdrop": true,
     "showBackdropImage": false,
     "timeUnits": 1,
     "tracks": [
-      {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"9d59e7d3-8c03-4163-8578-f148191ba8bb","path":"sprites/sprBloodNader/sprBloodNader.yy",},},},"Disabled":false,"id":"96651aca-31b1-46ea-8a0e-fd48c3f76936","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"5ebc1e45-173a-45cc-a841-153f43284e6e","path":"sprites/sprBloodNader/sprBloodNader.yy",},},},"Disabled":false,"id":"4595fc7f-fbe1-4356-a4ae-c9a8844cac3b","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"ecdca94a-57a4-463d-8b69-92940eb22bab","path":"sprites/sprBloodNader/sprBloodNader.yy",},},},"Disabled":false,"id":"5a1efe2b-8b46-46a2-b384-556a49def6bd","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"3b1f031b-3dca-4d39-8055-9fcb7681e05b","path":"sprites/sprBloodNader/sprBloodNader.yy",},},},"Disabled":false,"id":"d72fa37f-5a2a-4318-a753-ef859ac85bfb","IsCreationKey":false,"Key":3.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"d516cde0-ceb9-4363-9ec1-790bffd6babf","path":"sprites/sprBloodNader/sprBloodNader.yy",},},},"Disabled":false,"id":"e6cde483-df94-4311-8d60-1286c908785e","IsCreationKey":false,"Key":4.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"5154f948-bf1f-4bea-af63-6410609d7f92","path":"sprites/sprBloodNader/sprBloodNader.yy",},},},"Disabled":false,"id":"6192ab68-8c24-47a5-bdc2-a0c19b557534","IsCreationKey":false,"Key":5.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"94f22f08-89d9-4d49-9c11-17717b0f5d87","path":"sprites/sprBloodNader/sprBloodNader.yy",},},},"Disabled":false,"id":"51660009-1a44-4312-ae79-26f1d03959f4","IsCreationKey":false,"Key":6.0,"Length":1.0,"Stretch":false,},
-          ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
+      {
+        "$GMSpriteFramesTrack": "",
+        "builtinName": 0,
+        "events": [],
+        "inheritsTrackColour": true,
+        "interpolation": 1,
+        "isCreationTrack": false,
+        "keyframes": {
+          "$KeyframeStore<SpriteFrameKeyframe>": "",
+          "Keyframes": [
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "9d59e7d3-8c03-4163-8578-f148191ba8bb",
+                    "path": "sprites/sprBloodNader/sprBloodNader.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "96651aca-31b1-46ea-8a0e-fd48c3f76936",
+              "IsCreationKey": false,
+              "Key": 0,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5ebc1e45-173a-45cc-a841-153f43284e6e",
+                    "path": "sprites/sprBloodNader/sprBloodNader.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "4595fc7f-fbe1-4356-a4ae-c9a8844cac3b",
+              "IsCreationKey": false,
+              "Key": 1,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "ecdca94a-57a4-463d-8b69-92940eb22bab",
+                    "path": "sprites/sprBloodNader/sprBloodNader.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "5a1efe2b-8b46-46a2-b384-556a49def6bd",
+              "IsCreationKey": false,
+              "Key": 2,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "3b1f031b-3dca-4d39-8055-9fcb7681e05b",
+                    "path": "sprites/sprBloodNader/sprBloodNader.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "d72fa37f-5a2a-4318-a753-ef859ac85bfb",
+              "IsCreationKey": false,
+              "Key": 3,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "d516cde0-ceb9-4363-9ec1-790bffd6babf",
+                    "path": "sprites/sprBloodNader/sprBloodNader.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "e6cde483-df94-4311-8d60-1286c908785e",
+              "IsCreationKey": false,
+              "Key": 4,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "5154f948-bf1f-4bea-af63-6410609d7f92",
+                    "path": "sprites/sprBloodNader/sprBloodNader.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "6192ab68-8c24-47a5-bdc2-a0c19b557534",
+              "IsCreationKey": false,
+              "Key": 5,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            },
+            {
+              "$Keyframe<SpriteFrameKeyframe>": "",
+              "Channels": {
+                "0": {
+                  "$SpriteFrameKeyframe": "",
+                  "Id": {
+                    "name": "94f22f08-89d9-4d49-9c11-17717b0f5d87",
+                    "path": "sprites/sprBloodNader/sprBloodNader.yy"
+                  },
+                  "resourceType": "SpriteFrameKeyframe",
+                  "resourceVersion": "2.0"
+                }
+              },
+              "Disabled": false,
+              "id": "51660009-1a44-4312-ae79-26f1d03959f4",
+              "IsCreationKey": false,
+              "Key": 6,
+              "Length": 1,
+              "resourceType": "Keyframe<SpriteFrameKeyframe>",
+              "resourceVersion": "2.0",
+              "Stretch": false
+            }
+          ],
+          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
+          "resourceVersion": "2.0"
+        },
+        "modifiers": [],
+        "name": "frames",
+        "resourceType": "GMSpriteFramesTrack",
+        "resourceVersion": "2.0",
+        "spriteId": null,
+        "trackColour": 0,
+        "tracks": [],
+        "traits": 0
+      }
     ],
-    "visibleRange": {"x":0.0,"y":0.0,},
-    "volume": 1.0,
+    "visibleRange": {
+      "x": 0,
+      "y": 0
+    },
+    "volume": 1,
     "xorigin": 2,
-    "yorigin": 4,
+    "yorigin": 4
   },
   "swatchColours": null,
   "swfPrecision": 2.525,
   "textureGroupId": {
     "name": "Default",
-    "path": "texturegroups/Default",
+    "path": "texturegroups/Default"
   },
   "type": 0,
   "VTile": false,
-  "width": 20,
+  "width": 20
 }

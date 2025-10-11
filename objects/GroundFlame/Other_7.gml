@@ -1,1 +1,1 @@
-if sprite_index == sprFlameDisappear instance_destroy()
+if sprite_index == sprGroundFlameDisappear instance_destroy()

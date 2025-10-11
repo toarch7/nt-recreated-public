@@ -5,13 +5,13 @@ var xx = 56, yy = 48
 
 draw_set_valign(fa_top)
 
-for(var i = 0; i < array_length(chiev_name); i ++) {
+for(var i = 0; i <= achievementmax; i ++) {
 	if view_height - (yy - ypos) > 0 {
 		draw_sprite_stretched_ext(sprAchievementSplash, 0, 8, yy - ypos - 10, max(0, anim[i]), 38, c_black, 0.75)
 		
 		anim[i] = lerp(anim[i], view_width - 32, 0.4)
 		
-		if chiev_hide[i] && !chiev_have[i] {
+		if chiev_hide[i] && scrAchievementIsUnlocked(i) {
 			draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_black, 1)
 			draw_text_nt(xx, yy - ypos + 5, "@d" + loc("HIDDEN"))
 		}
@@ -22,7 +22,7 @@ for(var i = 0; i < array_length(chiev_name); i ++) {
 			
 			var c = "@s"
 			
-			if chiev_have[i] {
+			if scrAchievementIsUnlocked(i) {
 				draw_sprite(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos)
 				c = "@y"
 			}
