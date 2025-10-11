@@ -13,7 +13,7 @@ This rebuild is based on a decompiled source code of the Nuclear Throne Update #
 This project is built with the GameMaker engine, much so is the original game - therefore, an installation of GameMaker is required.
 
 ## Resource extraction
-> [!INFO]
+> [!NOTE]
 > These installation scripts currently only support Nuclear Throne versions `release u99r1`[(1)](#u99r1-footnote) and `ntt_development v100.030+`
 
 There's a set of tools available that would allow you to extract assets directly from your installation of the game. By default[(2)](#custom-install-footnote), these tools will look for game files in your Steam library, so no action is needed as long as your Steam library is installed conventionally.
