@@ -3,7 +3,7 @@
   "%Name": "sprBloodLust",
   "bboxMode": 0,
   "bbox_bottom": 19,
-  "bbox_left": 0,
+  "bbox_left": 4,
   "bbox_right": 18,
   "bbox_top": 0,
   "collisionKind": 1,

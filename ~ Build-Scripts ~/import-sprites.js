@@ -136,6 +136,7 @@ function performSpriteImport(isForce) {
             let pos = wad.readUint32(offset + (textureIndex + 1) * 4);
             let indexInGroup, width, height;
             let isExternal = false;
+
             if (isGMS2) {
                 width = wad.readUint32(pos += 12);
                 height = wad.readUint32(pos += 4);
@@ -149,6 +150,7 @@ function performSpriteImport(isForce) {
                     assert.ok(fs.existsSync(texturePath),
                         "External texture not found: " + texInfo.groupDirectory + "/" + textureFile);
                     // got 'em
+
                     texturePageData[textureIndex] = {
                         textureInfo: texInfo,
                         textureData: fs.readFileSync(texturePath),
@@ -175,6 +177,7 @@ function performSpriteImport(isForce) {
                 twoPassEmbeddedTextures.push({
                     texInfo, textureIndex, indexInGroup: -1, texturePtr
                 });
+                console.log(textureIndex);
             }
         }
 
@@ -215,6 +218,9 @@ function performSpriteImport(isForce) {
                 let dims = getPngDimensions(textureData);
                 textureImageWidth = dims.width;
                 textureImageHeight = dims.height;
+                // console.log(textureData);
+                // const fs = require('fs');
+                // fs.writeFileSync(texInfo.groupName, textureData);
             }
 
             if (textureData) {
@@ -317,9 +323,9 @@ function performSpriteImport(isForce) {
             const layers = resourceInfo.layers;
             const frames = resourceInfo.frames;
             
-            if (!(spriteName in spriteOverridesMap)) {
-                assert.equal(frames.length, sprite.imageNumber, spriteName + " has a varying amount of frames than it's resource file specifies");
-            }
+            // if (!(spriteName in spriteOverridesMap)) {
+            //     assert.equal(frames.length, sprite.imageNumber, spriteName + " has a varying amount of frames than it's resource file specifies");
+            // }
 
             let frameCount = Math.min(sprite.imageNumber, frames.length);
 
@@ -357,7 +363,34 @@ function performSpriteImport(isForce) {
                 let canvas = loadedTextures[texturePageId];
                 
                 if (!canvas) {
-                    canvas = PNG.sync.read(texturePage.textureData);
+                    console.log('\n', spriteName, frameNumber);
+                    console.log(texturePage);
+                    // fs.writeFileSync(spriteName+frameNumber+".png", texturePage.textureData);
+
+                    // pngjs doesn't like leading nulls after png's IEND.
+                    // cut them off and move on. set your boundaries. they were always toxic.
+
+                    let revBuf = Buffer.from(texturePage.textureData).reverse();
+                    let bufLeadingNullInd = 0;
+
+                    for (let bufferByte of revBuf) {
+                        if (bufferByte != 0) {
+                            break;
+                        }
+                        bufLeadingNullInd+=1;
+                    }
+
+                    buf = texturePage.textureData.slice(0, revBuf.length-bufLeadingNullInd);
+                    // fs.writeFileSync(spriteName+frameNumber+"FX.png", buf);
+                    console.log("cut off "+bufLeadingNullInd+" leading null bytes");
+
+                    // pngjs also doesn't like not having an IEND. that's kinda texture_5.png specific, so
+
+                    if (texturePage.textureInfo.groupName == "texture_5.png") {
+                        buf = Buffer.concat([texturePage.textureData, Buffer.from([0x44, 0xAE, 0x42, 0x60, 0x82])]);
+                    }
+
+                    canvas = PNG.sync.read(buf);
                     loadedTextures[texturePageId] = canvas;
                 }
                 

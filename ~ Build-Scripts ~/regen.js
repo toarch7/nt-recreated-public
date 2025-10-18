@@ -80,9 +80,12 @@ function parseProgramArguments() {
                 regenParameters.extractSounds = true;
                 break;
             case "--just-sprites":
-                disableAllExtractionModes();    
+                disableAllExtractionModes();
                 regenParameters.extractSprites = true;
                 break;
+            case "--no-extract":
+                disableAllExtractionModes();
+                break
         }
     }
 
