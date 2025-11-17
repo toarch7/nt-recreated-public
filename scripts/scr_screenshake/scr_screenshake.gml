@@ -12,8 +12,8 @@ function scr_screenshake(_amount) {
 function scr_weapon_post(_direction, _shift, _shake, _recoil = 0) {
     with BackCont {
 		var _screenshake_factor = UberCont.opt_shake
-		viewx2 += lengthdir_x(shift, _direction + 180) * _screenshake_factor
-		viewy2 += lengthdir_y(shift, _direction + 180) * _screenshake_factor
+		viewx2 += lengthdir_x(_shift, _direction + 180) * _screenshake_factor
+		viewy2 += lengthdir_y(_shift, _direction + 180) * _screenshake_factor
 		shake += _shake * _screenshake_factor
 	}
 	

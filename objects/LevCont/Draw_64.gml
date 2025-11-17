@@ -25,7 +25,7 @@ if UberCont.opt_griller && !instance_exists(CrownIcon) && !instance_exists(Ultra
 		
 		step = 32,
 		count = (view_width - (step * 2)) div 32,
-		pagemax = maxskill div count
+		pagemax = maxskills div count
 	
 	if grillpage == -1
 		change = 1

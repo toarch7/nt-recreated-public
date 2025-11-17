@@ -8,7 +8,7 @@ if instance_exists(CrownPed) {
 	_snd = sndVaultBossWin
 }
 
-_snd = custom_sound_check(snd)
+_snd = custom_sound_check(_snd)
 
 snd_play_music(_snd)
 snd_play_ambience(_amb)

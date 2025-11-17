@@ -228,11 +228,11 @@ function scrTips() {
 	        dir = 0
         
 	        do {
-	            dir = irandom(plr.maxskill)
+	            dir = irandom(GameCont.maxskill)
 	        }
 			until skill_get(dir)
         
-	        tip = plr.skill_tips[dir]
+	        tip = GameCont.skill_tips[dir]
 	    }
 	}
 
