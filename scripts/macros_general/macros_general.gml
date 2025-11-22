@@ -628,136 +628,137 @@ function t_lerp(a, b, amount) {
 
 #macro mcr_target_direction point_direction(x, y, target.x, target.y)
 
-#macro wep_none 0
-#macro wep_revolver 1
-#macro wep_triple_machinegun 2
-#macro wep_wrench 3
-#macro wep_machinegun 4
-#macro wep_shotgun 5
-#macro wep_crossbow 6
-#macro wep_grenade_launcher 7
-#macro wep_double_shotgun 8
-#macro wep_minigun 9
-#macro wep_auto_shotgun 10
-#macro wep_auto_crossbow 11
-#macro wep_super_crossbow 12
-#macro wep_shovel 13
-#macro wep_bazooka 14
-#macro wep_sticky_launcher 15
-#macro wep_smg 16
-#macro wep_assault_rifle 17
-#macro wep_disc_gun 18
-#macro wep_laser_pistol 19
-#macro wep_laser_rifle 20
-#macro wep_slugger 21
-#macro wep_gatling_slugger 22
-#macro wep_assault_slugger 23
-#macro wep_energy_sword 24
-#macro wep_super_slugger 25
-#macro wep_hyper_rifle 26
-#macro wep_screwdriver 27
-#macro wep_laser_minigun 28
-#macro wep_blood_launcher 29
-#macro wep_splinter_gun 30
-#macro wep_toxic_bow 31
-#macro wep_sentry_gun 32
-#macro wep_wave_gun 33
-#macro wep_plasma_gun 34
-#macro wep_plasma_cannon 35
-#macro wep_energy_hammer 36
-#macro wep_jackhammer 37
-#macro wep_flak_cannon 38
-#macro wep_golden_revolver 39
-#macro wep_golden_wrench 40
-#macro wep_golden_machinegun 41
-#macro wep_golden_shotgun 42
-#macro wep_golden_crossbow 43
-#macro wep_golden_grenade_launcher 44
-#macro wep_golden_laser_pistol 45
-#macro wep_chicken_sword 46
-#macro wep_nuke_launcher 47
-#macro wep_ion_cannon 48
-#macro wep_quadruple_machinegun 49
-#macro wep_flamethrower 50
-#macro wep_dragon 51
-#macro wep_flare_gun 52
-#macro wep_energy_screwdriver 53
-#macro wep_hyper_launcher 54
-#macro wep_laser_cannon 55
-#macro wep_rusty_revolver 56
-#macro wep_lightning_pistol 57
-#macro wep_lightning_rifle 58
-#macro wep_lightning_shotgun 59
-#macro wep_super_flak_cannon 60
-#macro wep_sawed_off_shotgun 61
-#macro wep_splinter_pistol 62
-#macro wep_super_splinter_gun 63
-#macro wep_lightning_smg 64
-#macro wep_smart_gun 65
-#macro wep_heavy_crossbow 66
-#macro wep_blood_hammer 67
-#macro wep_lightning_cannon 68
-#macro wep_pop_gun 69
-#macro wep_plasma_rifle 70
-#macro wep_pop_rifle 71
-#macro wep_toxic_launcher 72
-#macro wep_flame_cannon 73
-#macro wep_lightning_hammer 74
-#macro wep_flame_shotgun 75
-#macro wep_double_flame_shotgun 76
-#macro wep_auto_flame_shotgun 77
-#macro wep_cluster_launcher 78
-#macro wep_grenade_shotgun 79
-#macro wep_grenade_rifle 80
-#macro wep_rogue_rifle 81
-#macro wep_party_gun 82
-#macro wep_double_minigun 83
-#macro wep_gatling_bazooka 84
-#macro wep_auto_grenade_shotgun 85
-#macro wep_ultra_revolver 86
-#macro wep_ultra_laser_pistol 87
-#macro wep_sledgehammer 88
-#macro wep_heavy_revolver 89
-#macro wep_heavy_machinegun 90
-#macro wep_heavy_slugger 91
-#macro wep_ultra_shovel 92
-#macro wep_ultra_shotgun 93
-#macro wep_ultra_crossbow 94
-#macro wep_ultra_grenade_launcher 95
-#macro wep_plasma_minigun 96
-#macro wep_devastator 97
-#macro wep_golden_plasma_gun 98
-#macro wep_golden_slugger 99
-#macro wep_golden_splinter_gun 100
-#macro wep_golden_screwdriver 101
-#macro wep_golden_bazooka 102
-#macro wep_golden_assault_rifle 103
-#macro wep_super_disc_gun 104
-#macro wep_heavy_auto_crossbow 105
-#macro wep_heavy_assault_rifle 106
-#macro wep_blood_cannon 107
-#macro wep_dog_spin_attack 108
-#macro wep_dog_missile 109
-#macro wep_incinerator 110
-#macro wep_super_plasma_cannon 111
-#macro wep_seeker_pistol 112
-#macro wep_seeker_shotgun 113
-#macro wep_eraser 114
-#macro wep_guitar 115
-#macro wep_bouncer_smg 116
-#macro wep_bouncer_shotgun 117
-#macro wep_hyper_slugger 118
-#macro wep_super_bazooka 119
-#macro wep_frog_pistol 120
-#macro wep_black_sword 121
-#macro wep_golden_nuke_launcher 122
-#macro wep_golden_disc_gun 123
-#macro wep_heavy_grenade_launcher 124
-#macro wep_gun_gun 125
-#macro wep_beetle_blaster 126
-#macro wep_bone 127
-#macro wep_golden_frog_pistol 255
-
+enum Weapons {
+	None = 0,
+	Revolver = 1,
+	Triple_machinegun = 2,
+	Wrench = 3,
+	Machinegun = 4,
+	Shotgun = 5,
+	Crossbow = 6,
+	Grenade_launcher = 7,
+	Double_shotgun = 8,
+	Minigun = 9,
+	Auto_shotgun = 10,
+	Auto_crossbow = 11,
+	Super_crossbow = 12,
+	Shovel = 13,
+	Bazooka = 14,
+	Sticky_launcher = 15,
+	Smg = 16,
+	Assault_rifle = 17,
+	Disc_gun = 18,
+	Laser_pistol = 19,
+	Laser_rifle = 20,
+	Slugger = 21,
+	Gatling_slugger = 22,
+	Assault_slugger = 23,
+	Energy_sword = 24,
+	Super_slugger = 25,
+	Hyper_rifle = 26,
+	Screwdriver = 27,
+	Laser_minigun = 28,
+	Blood_launcher = 29,
+	Splinter_gun = 30,
+	Toxic_bow = 31,
+	Sentry_gun = 32,
+	Wave_gun = 33,
+	Plasma_gun = 34,
+	Plasma_cannon = 35,
+	Energy_hammer = 36,
+	Jackhammer = 37,
+	Flak_cannon = 38,
+	Golden_revolver = 39,
+	Golden_wrench = 40,
+	Golden_machinegun = 41,
+	Golden_shotgun = 42,
+	Golden_crossbow = 43,
+	Golden_grenade_launcher = 44,
+	Golden_laser_pistol = 45,
+	Chicken_sword = 46,
+	Nuke_launcher = 47,
+	Ion_cannon = 48,
+	Quadruple_machinegun = 49,
+	Flamethrower = 50,
+	Dragon = 51,
+	Flare_gun = 52,
+	Energy_screwdriver = 53,
+	Hyper_launcher = 54,
+	Laser_cannon = 55,
+	Rusty_revolver = 56,
+	Lightning_pistol = 57,
+	Lightning_rifle = 58,
+	Lightning_shotgun = 59,
+	Super_flak_cannon = 60,
+	Sawed_off_shotgun = 61,
+	Splinter_pistol = 62,
+	Super_splinter_gun = 63,
+	Lightning_smg = 64,
+	Smart_gun = 65,
+	Heavy_crossbow = 66,
+	Blood_hammer = 67,
+	Lightning_cannon = 68,
+	Pop_gun = 69,
+	Plasma_rifle = 70,
+	Pop_rifle = 71,
+	Toxic_launcher = 72,
+	Flame_cannon = 73,
+	Lightning_hammer = 74,
+	Flame_shotgun = 75,
+	Double_flame_shotgun = 76,
+	Auto_flame_shotgun = 77,
+	Cluster_launcher = 78,
+	Grenade_shotgun = 79,
+	Grenade_rifle = 80,
+	Rogue_rifle = 81,
+	Party_gun = 82,
+	Double_minigun = 83,
+	Gatling_bazooka = 84,
+	Auto_grenade_shotgun = 85,
+	Ultra_revolver = 86,
+	Ultra_laser_pistol = 87,
+	Sledgehammer = 88,
+	Heavy_revolver = 89,
+	Heavy_machinegun = 90,
+	Heavy_slugger = 91,
+	Ultra_shovel = 92,
+	Ultra_shotgun = 93,
+	Ultra_crossbow = 94,
+	Ultra_grenade_launcher = 95,
+	Plasma_Minigun = 96,
+	Devastator = 97,
+	Golden_plasma_gun = 98,
+	Golden_slugger = 99,
+	Golden_splinter_gun = 100,
+	Golden_screwdriver = 101,
+	Golden_bazooka = 102,
+	Golden_assault_rifle = 103,
+	Super_disc_gun = 104,
+	Heavy_auto_crossbow = 105,
+	Heavy_assault_rifle = 106,
+	Blood_cannon = 107,
+	Dog_spin_attack = 108,
+	Dog_missile = 109,
+	Incinerator = 110,
+	Super_plasma_cannon = 111,
+	Seeker_pistol = 112,
+	Seeker_shotgun = 113,
+	Eraser = 114,
+	Guitar = 115,
+	Bouncer_smg = 116,
+	Bouncer_shotgun = 117,
+	Hyper_slugger = 118,
+	Super_bazooka = 119,
+	Frog_pistol = 120,
+	Black_sword = 121,
+	Golden_nuke_launcher = 122,
+	Golden_disc_gun = 123,
+	Heavy_grenade_launcher = 124,
+	Gun_gun = 125,
+	Beetle_blaster = 126,
+	Bone = 127,
+	Golden_frog_pistol = 255
+}
 
 #macro mut_none 0
 #macro mut_rhino_skin 1
