@@ -1,5 +1,5 @@
 {
-  "$GMSprite":"",
+  "$GMSprite":"v2",
   "%Name":"sprMobileControlJoystick",
   "bboxMode":0,
   "bbox_bottom":73,
@@ -12,9 +12,9 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"2ffeaaad-dd5c-4f04-b1a5-1fae3a35bc56","name":"2ffeaaad-dd5c-4f04-b1a5-1fae3a35bc56","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"","%Name":"0bce0ecd-7236-4e04-981d-c23a21ce380d","name":"0bce0ecd-7236-4e04-981d-c23a21ce380d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"","%Name":"46cc49f3-ac1b-4241-9236-cd168c57c4e2","name":"46cc49f3-ac1b-4241-9236-cd168c57c4e2","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"2ffeaaad-dd5c-4f04-b1a5-1fae3a35bc56","name":"2ffeaaad-dd5c-4f04-b1a5-1fae3a35bc56","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"0bce0ecd-7236-4e04-981d-c23a21ce380d","name":"0bce0ecd-7236-4e04-981d-c23a21ce380d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"46cc49f3-ac1b-4241-9236-cd168c57c4e2","name":"46cc49f3-ac1b-4241-9236-cd168c57c4e2","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
@@ -72,15 +72,9 @@
     "timeUnits":1,
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"2ffeaaad-dd5c-4f04-b1a5-1fae3a35bc56","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"6cffe68c-e0e1-497d-a304-da9158edcc66","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"0bce0ecd-7236-4e04-981d-c23a21ce380d","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"4583d82f-56f4-44a0-814e-920a4fd937dc","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"46cc49f3-ac1b-4241-9236-cd168c57c4e2","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"0c79d73e-f05b-4577-bd90-8eeee3828706","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"2ffeaaad-dd5c-4f04-b1a5-1fae3a35bc56","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"6cffe68c-e0e1-497d-a304-da9158edcc66","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"0bce0ecd-7236-4e04-981d-c23a21ce380d","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"4583d82f-56f4-44a0-814e-920a4fd937dc","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"46cc49f3-ac1b-4241-9236-cd168c57c4e2","path":"sprites/sprMobileControlJoystick/sprMobileControlJoystick.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"0c79d73e-f05b-4577-bd90-8eeee3828706","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

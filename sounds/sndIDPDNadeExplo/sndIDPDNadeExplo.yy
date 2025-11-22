@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndIDPDNadeExplo",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndIDPDNadeExplo",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 0,
-  "conversionMode": 0,
-  "duration": 1,
-  "name": "sndIDPDNadeExplo",
-  "parent": {
-    "name": "IDPD",
-    "path": "folders/Sounds/Enemies/IDPD.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1,
+  "exportDir":"",
+  "name":"sndIDPDNadeExplo",
+  "parent":{
+    "name":"IDPD",
+    "path":"folders/Sounds/Enemies/IDPD.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndIDPDNadeExplo.wav",
-  "type": 0,
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndIDPDNadeExplo.wav",
+  "volume":1,
 }

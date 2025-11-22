@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndSnowTankCooldown",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndSnowTankCooldown",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 0,
-  "conversionMode": 0,
-  "duration": 1.1583331,
-  "name": "sndSnowTankCooldown",
-  "parent": {
-    "name": "SnowTank",
-    "path": "folders/Sounds/SnowTank.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.1583331,
+  "exportDir":"",
+  "name":"sndSnowTankCooldown",
+  "parent":{
+    "name":"SnowTank",
+    "path":"folders/Sounds/SnowTank.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndSnowTankCooldown.wav",
-  "type": 0,
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndSnowTankCooldown.wav",
+  "volume":1,
 }

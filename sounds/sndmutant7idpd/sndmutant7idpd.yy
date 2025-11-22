@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndMutant7IDPD",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndMutant7IDPD",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 2,
-  "conversionMode": 0,
-  "duration": 2.570688,
-  "name": "sndMutant7IDPD",
-  "parent": {
-    "name": "Speech",
-    "path": "folders/Sounds/Mutant/Speech.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":2,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.570688,
+  "exportDir":"",
+  "name":"sndMutant7IDPD",
+  "parent":{
+    "name":"Speech",
+    "path":"folders/Sounds/Mutant/Speech.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndMutant7IDPD.wav",
-  "type": 0,
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndMutant7IDPD.wav",
+  "volume":1,
 }

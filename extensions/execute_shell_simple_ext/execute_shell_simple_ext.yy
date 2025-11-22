@@ -16,19 +16,15 @@
   "exportToGame":true,
   "extensionVersion":"1.0.0",
   "files":[
-    {"$GMExtensionFile":"","%Name":"execute_shell_simple_ext.dll","constants":[],"copyToTargets":9223372036854775807,"filename":"execute_shell_simple_ext.dll","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"execute_shell_simple_ext.dll","constants":[],"copyToTargets":9223372036854775807,"filename":"execute_shell_simple_ext.dll","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"execute_shell_simple_raw","argCount":4,"args":[1,1,1,2,],"documentation":"","externalName":"execute_shell_simple_raw","help":"","hidden":true,"kind":11,"name":"execute_shell_simple_raw","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-      ],"init":"","kind":1,"name":"execute_shell_simple_ext.dll","order":[
-        {"name":"execute_shell_simple_raw","path":"extensions/execute_shell_simple_ext/execute_shell_simple_ext.yy",},
-      ],"origname":"extensions\\execute_shell_simple_ext.dll","ProxyFiles":[
+      ],"init":"","kind":1,"name":"execute_shell_simple_ext.dll","origname":"extensions\\execute_shell_simple_ext.dll","ProxyFiles":[
         {"$GMProxyFile":"","%Name":"execute_shell_simple_ext_x64.dll","name":"execute_shell_simple_ext_x64.dll","resourceType":"GMProxyFile","resourceVersion":"2.0","TargetMask":6,},
       ],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
-    {"$GMExtensionFile":"","%Name":"execute_shell_simple_ext.gml","constants":[],"copyToTargets":9223372036854775807,"filename":"execute_shell_simple_ext.gml","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"execute_shell_simple_ext.gml","constants":[],"copyToTargets":9223372036854775807,"filename":"execute_shell_simple_ext.gml","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"execute_shell_simple","argCount":-1,"args":[],"documentation":"","externalName":"execute_shell_simple","help":"execute_shell_simple(path, args = \"\", action = \"open\", showCmd = 5/*SW_OPEN*/)","hidden":false,"kind":2,"name":"execute_shell_simple","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-      ],"init":"","kind":2,"name":"execute_shell_simple_ext.gml","order":[
-        {"name":"execute_shell_simple","path":"extensions/execute_shell_simple_ext/execute_shell_simple_ext.yy",},
-      ],"origname":"extensions\\gml.gml","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
-    {"$GMExtensionFile":"","%Name":"autogen.gml","constants":[],"copyToTargets":-1,"filename":"autogen.gml","final":"","functions":[],"init":"","kind":2,"name":"autogen.gml","order":[],"origname":"extensions\\autogen.gml","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+      ],"init":"","kind":2,"name":"execute_shell_simple_ext.gml","origname":"extensions\\gml.gml","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+    {"$GMExtensionFile":"v1","%Name":"autogen.gml","constants":[],"copyToTargets":-1,"filename":"autogen.gml","final":"","functions":[],"init":"","kind":2,"name":"autogen.gml","origname":"extensions\\autogen.gml","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":"",
   "hasConvertedCodeInjection":true,

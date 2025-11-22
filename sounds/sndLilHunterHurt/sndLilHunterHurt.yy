@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndLilHunterHurt",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndLilHunterHurt",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 0,
-  "conversionMode": 0,
-  "duration": 0.267031,
-  "name": "sndLilHunterHurt",
-  "parent": {
-    "name": "LilHunter",
-    "path": "folders/Sounds/LilHunter.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.267031,
+  "exportDir":"",
+  "name":"sndLilHunterHurt",
+  "parent":{
+    "name":"LilHunter",
+    "path":"folders/Sounds/LilHunter.yy",
   },
-  "preload": true,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndLilHunterHurt.wav",
-  "type": 0,
-  "volume": 1
+  "preload":true,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndLilHunterHurt.wav",
+  "volume":1,
 }

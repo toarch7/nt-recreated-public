@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndMutant1Hurt",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndMutant1Hurt",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 2,
-  "conversionMode": 0,
-  "duration": 0.237347,
-  "name": "sndMutant1Hurt",
-  "parent": {
-    "name": "Fish",
-    "path": "folders/Sounds/Mutant/Fish.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":2,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.237347,
+  "exportDir":"",
+  "name":"sndMutant1Hurt",
+  "parent":{
+    "name":"Fish",
+    "path":"folders/Sounds/Mutant/Fish.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndMutant1Hurt.wav",
-  "type": 0,
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndMutant1Hurt.wav",
+  "volume":1,
 }
