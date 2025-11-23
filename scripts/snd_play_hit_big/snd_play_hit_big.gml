@@ -2,7 +2,7 @@
 /// @param {Asset.GMSound} sound_index
 /// @param random_pitch=0.2
 function snd_play_hit_big(_sound_index, _random_pitch = 0.2) {
-    if GameCont.area == area_oasis {
+    if GameCont.area == Area.Oasis {
         if _sound_index == sndExplosion
         || _sound_index == sndExplosionL
         || _sound_index == sndExplosionXL {

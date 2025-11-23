@@ -21,7 +21,7 @@ function scrPopChests() {
     }
 
     if GameCont.area == 100 {
-        if instance_exists(CrownObject) {
+        if instance_exists(Crown) {
             with instance_furthest(10016, 10016, WeaponChest) {
                 instance_create(x, y, ProtoChest)
                 instance_destroy(id, 0)

@@ -18,6 +18,138 @@ enum Ammo {
 	NUM_AMMO_TYPES
 }
 
+enum Wep {
+	None = 0,
+	Revolver = 1,
+	TripleMachinegun = 2,
+	Wrench = 3,
+	Machinegun = 4,
+	Shotgun = 5,
+	Crossbow = 6,
+	GrenadeLauncher = 7,
+	DoubleShotgun = 8,
+	Minigun = 9,
+	AutoShotgun = 10,
+	AutoCrossbow = 11,
+	SuperCrossbow = 12,
+	Shovel = 13,
+	Bazooka = 14,
+	StickyLauncher = 15,
+	Smg = 16,
+	AssaultRifle = 17,
+	DiscGun = 18,
+	LaserPistol = 19,
+	LaserRifle = 20,
+	Slugger = 21,
+	GatlingSlugger = 22,
+	AssaultSlugger = 23,
+	EnergySword = 24,
+	SuperSlugger = 25,
+	HyperRifle = 26,
+	Screwdriver = 27,
+	LaserMinigun = 28,
+	BloodLauncher = 29,
+	SplinterGun = 30,
+	ToxicBow = 31,
+	SentryGun = 32,
+	WaveGun = 33,
+	PlasmaGun = 34,
+	PlasmaCannon = 35,
+	EnergyHammer = 36,
+	Jackhammer = 37,
+	FlakCannon = 38,
+	GoldenRevolver = 39,
+	GoldenWrench = 40,
+	GoldenMachinegun = 41,
+	GoldenShotgun = 42,
+	GoldenCrossbow = 43,
+	GoldenGrenadeLauncher = 44,
+	GoldenLaserPistol = 45,
+	ChickenSword = 46,
+	NukeLauncher = 47,
+	IonCannon = 48,
+	QuadrupleMachinegun = 49,
+	Flamethrower = 50,
+	Dragon = 51,
+	FlareGun = 52,
+	EnergyScrewdriver = 53,
+	HyperLauncher = 54,
+	LaserCannon = 55,
+	RustyRevolver = 56,
+	LightningPistol = 57,
+	LightningRifle = 58,
+	LightningShotgun = 59,
+	SuperFlakCannon = 60,
+	SawedOffShotgun = 61,
+	SplinterPistol = 62,
+	SuperSplinterGun = 63,
+	LightningSmg = 64,
+	SmartGun = 65,
+	HeavyCrossbow = 66,
+	BloodHammer = 67,
+	LightningCannon = 68,
+	PopGun = 69,
+	PlasmaRifle = 70,
+	PopRifle = 71,
+	ToxicLauncher = 72,
+	FlameCannon = 73,
+	LightningHammer = 74,
+	FlameShotgun = 75,
+	DoubleFlameShotgun = 76,
+	AutoFlameShotgun = 77,
+	ClusterLauncher = 78,
+	GrenadeShotgun = 79,
+	GrenadeRifle = 80,
+	RogueRifle = 81,
+	PartyGun = 82,
+	DoubleMinigun = 83,
+	GatlingBazooka = 84,
+	AutoGrenadeShotgun = 85,
+	UltraRevolver = 86,
+	UltraLaserPistol = 87,
+	Sledgehammer = 88,
+	HeavyRevolver = 89,
+	HeavyMachinegun = 90,
+	HeavySlugger = 91,
+	UltraShovel = 92,
+	UltraShotgun = 93,
+	UltraCrossbow = 94,
+	UltraGrenadeLauncher = 95,
+	PlasmaMinigun = 96,
+	Devastator = 97,
+	GoldenPlasmaGun = 98,
+	GoldenSlugger = 99,
+	GoldenSplinterGun = 100,
+	GoldenScrewdriver = 101,
+	GoldenBazooka = 102,
+	GoldenAssaultRifle = 103,
+	SuperDiscGun = 104,
+	HeavyAutoCrossbow = 105,
+	HeavyAssaultRifle = 106,
+	BloodCannon = 107,
+	DogSpinAttack = 108,
+	DogMissile = 109,
+	Incinerator = 110,
+	SuperPlasmaCannon = 111,
+	SeekerPistol = 112,
+	SeekerShotgun = 113,
+	Eraser = 114,
+	Guitar = 115,
+	BouncerSmg = 116,
+	BouncerShotgun = 117,
+	HyperSlugger = 118,
+	SuperBazooka = 119,
+	FrogPistol = 120,
+	BlackSword = 121,
+	GoldenNukeLauncher = 122,
+	GoldenDiscGun = 123,
+	HeavyGrenadeLauncher = 124,
+	GunGun = 125,
+	BeetleBlaster = 126,
+	Bone = 127,
+	GoldenFrogPistol = 255
+}
+
 function scrWeapons() {
 	/* Memo:
 		wep_name - weapon name
@@ -1417,9 +1549,9 @@ function scrWeapons() {
 	
 	for(var _weapon_id = 1; _weapon_id <= maxwep; _weapon_id ++) {
 		wep_mele[_weapon_id] = wep_type[_weapon_id] == 0
-                    || _weapon_id == wep_energy_sword
-                    || _weapon_id == wep_energy_screwdriver
-                    || _weapon_id == wep_energy_hammer
+                    || _weapon_id == Wep.EnergySword
+                    || _weapon_id == Wep.EnergyScrewdriver
+                    || _weapon_id == Wep.EnergyHammer
 	}
 	
 	if instance_exists(Player) {
@@ -1432,7 +1564,7 @@ function scrWeapons() {
             typ_ammo[Ammo.Energy] += 3 * _fish_players
         }
 		
-        var _back_muscle = skill_get(mut_back_muscle)
+        var _back_muscle = skill_get(Mut.BackMuscle)
 		if _back_muscle != 0 {
 			typ_amax[Ammo.Bullets] += 300 * _back_muscle
 			for(var i = Ammo.Shells; i < Ammo.NUM_AMMO_TYPES; ++i) {

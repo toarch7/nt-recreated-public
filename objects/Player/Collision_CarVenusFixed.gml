@@ -7,12 +7,12 @@ if KeyCont.press_pick[index] && is_me {
     with enemy hp = 0
 	
 	with GameCont {
-	    if area == area_crib || instance_exists(YungCuz) {
+	    if area == Area.YVCrib || instance_exists(YungCuz) {
 	        area = lastarea
 	        subarea = lastsubarea - 1
 	    }
 		else {
-	        area = area_mansion
+	        area = Area.VenusMansion
 	        subarea = 0
 	    }
 	}

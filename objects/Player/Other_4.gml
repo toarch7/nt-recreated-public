@@ -25,15 +25,15 @@ bcan_shoot = 1
 frogcharge = 0
 froggas = 0
 
-if !instance_exists(CrownObject) && GameCont.crown > 1 {
-    with instance_create(x, y, CrownObject) {
+if !instance_exists(Crown) && GameCont.crown > 1 {
+    with instance_create(x, y, Crown) {
         if (GameCont.area > 1) or (GameCont.subarea > 1) or ((GameCont.loops - global.hardmode) > 0) {
             is_new = 0
         }
     }
 }
 
-with CrownObject {
+with Crown {
     x = other.x
     y = other.y
 
@@ -41,7 +41,7 @@ with CrownObject {
     spr_walk = asset_get_index("sprCrown" + string(GameCont.crown) + "Walk")
 }
 
-if scrCrownCheck(Crown.Luck) hp = 1
+if scrCrownCheck(Crwn.Luck) hp = 1
 
 if race == Race.Frog && is_me && !UberCont.weekly_run {
     scrRaceUnlock(Race.Frog)

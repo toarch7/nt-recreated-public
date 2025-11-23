@@ -41,7 +41,7 @@ if GameCont.crownvisits >= 3 {
     for (var ang1 = 0; ang1 < 360; ang1 += 90) {
         instance_create(x + lengthdir_x(128, ang1), y + lengthdir_y(128, ang1), VaultStatue)
     }
-} else if GameCont.crownvisits > 1 or instance_exists(CrownObject) {
+} else if GameCont.crownvisits > 1 or instance_exists(Crown) {
     var ang1 = rng_choose(0, 0, 90, 180, 270)
 
     do {

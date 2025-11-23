@@ -118,7 +118,7 @@ if save_get_value("game", "tutorial", true) {
 
 if instance_exists(MenuGen) goal = 110
 
-crown = crwn_none
+crown = Crwn.None
 splat = 0
 
 alarm[5] = 600

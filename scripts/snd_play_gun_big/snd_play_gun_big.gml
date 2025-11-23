@@ -3,7 +3,7 @@
 /// @param random_pitch
 function snd_play_gun_big(_sound_index, _random_pitch = 0.2) {
     
-    if (GameCont.area == area_oasis) {
+    if (GameCont.area == Area.Oasis) {
         _sound_index = sndOasisShoot
     }
 

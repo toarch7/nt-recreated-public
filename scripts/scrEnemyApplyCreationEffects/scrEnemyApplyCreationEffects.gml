@@ -1,5 +1,5 @@
 function scrEnemyApplyCreationEffects() {
-	if skill_get(mut_scarier_face) {
+	if skill_get(Mut.ScarierFace) {
 		hp = floor(hp * 0.8)
 		
 		if hp > max_hp {
@@ -11,11 +11,11 @@ function scrEnemyApplyCreationEffects() {
 		raddrop = floor(raddrop * 0.5)
 	}
 	
-	if scrCrownCheck(crwn_blood) {
+	if scrCrownCheck(Crwn.Blood) {
 		raddrop -= 1
 	}
 	
-	if scrCrownCheck(crwn_luck) && random(1) <= 0.1 && !scrEnemyIsBoss(id) {
+	if scrCrownCheck(Crwn.Luck) && random(1) <= 0.1 && !scrEnemyIsBoss(id) {
 		hp = 1
 	}
 }

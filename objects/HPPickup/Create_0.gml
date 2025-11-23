@@ -10,7 +10,7 @@ num = 2
 if skill_get(9)
 	num = 4
 
-if scrCrownCheck(crwn_haste) {
+if scrCrownCheck(Crwn.Haste) {
 	alarm[0] /= 3
 	num ++
 }

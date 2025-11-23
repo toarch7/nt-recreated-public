@@ -1,10 +1,32 @@
+enum Area
+{
+	Campfire = 0,
+	Desert = 1,
+	Sewers = 2,
+	Scrapyards = 3,
+	CrystalCaves = 4,
+	City = 5,
+	Labs = 6,
+	Palace = 7,
+	
+	Secret = 100,
+	Vault = Area.Secret + 0,
+	Oasis = Area.Secret + 1,
+	PizzaSewers = Area.Secret + 2,
+	VenusMansion = Area.Secret + 3,
+	CursedCaves = Area.Secret + 4,
+	Jungle = Area.Secret + 5,
+	HQ = Area.Secret + 6,
+	YVCrib = Area.Secret + 7
+}
+
 skills = -1
 
 if instance_number(object_index) > 1 {
     instance_destroy(id, 0) exit
 }
 
-area = 1
+area = 0
 subarea = 0
 race = 0
 bskin = 0

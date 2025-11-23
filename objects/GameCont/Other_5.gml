@@ -135,7 +135,7 @@ if instance_exists(Player) && !(area == 1 && subarea == 1) {
 	else noradch = 0
 }
 
-if global.hardmode && race == Race.Chicken && area == area_sewers {
+if global.hardmode && race == Race.Chicken && area == Area.Sewers {
     scrRaceUnlockSkin(Race.Chicken, 1)
 }
 

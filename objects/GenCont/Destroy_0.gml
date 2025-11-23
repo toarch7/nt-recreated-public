@@ -2,7 +2,7 @@ var _area = GameCont.area,
 	_subarea = GameCont.subarea,
 	_loops = GameCont.loops,
 	_actual_loops = global.hardmode ? (_loops - 1) : _loops,
-	_is_throne_arena = (_area == area_palace && _subarea == 3)
+	_is_throne_arena = (_area == Area.Palace && _subarea == 3)
 
 scrCreateMobileControls()
 
@@ -43,7 +43,7 @@ if instance_exists(Player) {
 			}
         }
 
-        if skill_get(mut_hammerhead) {
+        if skill_get(Mut.HammerHead) {
             hammerhead_charges = 25
 
             if race == Race.BigDog {
@@ -56,7 +56,7 @@ if instance_exists(Player) {
 				instance_create(x, y, SwipeBombingTutorial)
 		}
 		
-		if _area == area_palace && _subarea != 3 && random(2) < 1 {
+		if _area == Area.Palace && _subarea != 3 && random(2) < 1 {
 	        repeat (4) instance_create(x, y, IDPDSpawn)
 	    }
 		
@@ -75,7 +75,7 @@ if instance_exists(Player) {
 	}
 }
 
-if _area == 5 && _subarea == 1 && skill_get(mut_last_wish) {
+if _area == 5 && _subarea == 1 && skill_get(Mut.LastWish) {
     if instance_exists(prop) {
         with instance_furthest(10016, 10016, prop) {
             instance_change(IceFlower, 1)
@@ -89,7 +89,7 @@ if _area == 5 && _subarea == 1 && skill_get(mut_last_wish) {
 	}
 }
 
-if (_area == area_palace && _subarea == 3) || _area == area_campfire || _area == area_crib {
+if (_area == Area.Palace && _subarea == 3) || _area == Area.Campfire || _area == Area.YVCrib {
     with Wall {
         if (place_meeting(x, y, Floor)) instance_destroy()
     }
@@ -104,7 +104,7 @@ if (_area == area_palace && _subarea == 3) || _area == area_campfire || _area ==
     instance_destroy(RadChestBig, false)
     instance_destroy(enemy, false)
 
-    if _area == area_palace && _subarea == 3 {
+    if _area == Area.Palace && _subarea == 3 {
 		with UberCont {
 			if daily_run && !weekly_run {
 		        scrAchievementUnlock(Achievement.NOT_BAD)
@@ -115,7 +115,7 @@ if (_area == area_palace && _subarea == 3) || _area == area_campfire || _area ==
         instance_create(10016 - 32, 9984, WeaponChest)
         instance_create(10016 + 32, 9984, AmmoChest)
 		
-        if skill_get(mut_open_mind) {
+        if skill_get(Mut.OpenMind) {
 			repeat GameCont.openminds {
 	            instance_create(10016, 10016 - 32, choose(WeaponChest, RadChest, AmmoChest))
 	        }
@@ -125,15 +125,15 @@ if (_area == area_palace && _subarea == 3) || _area == area_campfire || _area ==
     }
 }
 
-if _area == area_campfire && instance_exists(Player) && _actual_loops == 1 {
+if _area == Area.Campfire && instance_exists(Player) && _actual_loops == 1 {
     repeat scrPlayerCountRace(Race.Fish) {
-		scrWeaponPickupCreate(10016, 10016, wep_guitar)
+		scrWeaponPickupCreate(10016, 10016, Wep.Guitar)
     }
 }
 
-if _area == area_desert && _actual_loops > 0 && GameCont.give_blacksword {
+if _area == Area.Desert && _actual_loops > 0 && GameCont.give_blacksword {
 	repeat GameCont.give_blacksword {
-		scrWeaponPickupCreate(10016, 10016, wep_black_sword)
+		scrWeaponPickupCreate(10016, 10016, Wep.BlackSword)
 	}
 	
 	GameCont.give_blacksword = 0
@@ -174,7 +174,7 @@ with GameCont {
     enemies = instance_number(enemy)
 }
 
-if _area == area_hq && _subarea != 3 {
+if _area == Area.HQ && _subarea != 3 {
 	with Wall {
 	    if place_meeting(x, y, Floor) {
 	        instance_destroy()
@@ -182,11 +182,11 @@ if _area == area_hq && _subarea != 3 {
 	}
 }
 
-if _area == area_campfire && GameCont.loops > 0 {
+if _area == Area.Campfire && GameCont.loops > 0 {
 	scrCampfireMenuCreate(true)
 }
 
-if UberCont.halloween && _subarea == area_desert && instance_exists(Bandit) {
+if UberCont.halloween && _subarea == Area.Desert && instance_exists(Bandit) {
     snd_play_hit_big(sndHalloweenWolf, 0.2)
 }
 

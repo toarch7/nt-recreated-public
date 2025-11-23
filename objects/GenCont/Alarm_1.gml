@@ -5,7 +5,7 @@ instance_destroy()
 scrMoveTopPots()
 
 if instance_exists(Player) {
-    with CrownObject {
+    with Crown {
         if is_new {
             if !(GameCont.area == 7 && GameCont.subarea == 3) {
                 instance_create(x, y, IDPDSpawn)

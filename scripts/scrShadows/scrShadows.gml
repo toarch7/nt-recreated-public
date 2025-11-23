@@ -25,7 +25,7 @@ function scrShadows() {
             }
         }
 
-        with CrownObject {
+        with Crown {
 			if visible draw_sprite(shd16, 0, x - view_xview, y - view_yview + 3)
 		}
 		

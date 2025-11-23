@@ -29,17 +29,17 @@ function scrCrownSetCurrent(_crown, _is_start_crown = false) {
 		if index == 0 _player = id
 	}
 	
-	if _crown != crwn_none && instance_exists(_player) {
-		if !instance_exists(CrownObject) {
-			instance_create(_player.x, _player.y, CrownObject)
+	if _crown != Crwn.None && instance_exists(_player) {
+		if !instance_exists(Crown) {
+			instance_create(_player.x, _player.y, Crown)
 		}
 		
-		with CrownObject {
+		with Crown {
 			event_perform(ev_alarm, 2)
 		}
 	}
 	else {
-		instance_destroy(CrownObject)
+		instance_destroy(Crown)
 	}
 }
 
@@ -48,5 +48,5 @@ function scrCrownGetCurrent() {
 		return crown
 	}
 	
-	return crwn_none
+	return Crwn.None
 }

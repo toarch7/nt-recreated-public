@@ -42,7 +42,7 @@ if spirit {
     if spirit_anim >= 6.2
 		spirit_anim = 0
 }
-else if skill_get(mut_strong_spirit) && spirit_index < 8 {
+else if skill_get(Mut.StrongSpirit) && spirit_index < 8 {
     spirit_index += 0.4
 }
 
@@ -56,7 +56,7 @@ if fainted {
 	}
 	
 	if !fainted {
-		if skill_get(mut_strong_spirit) {
+		if skill_get(Mut.StrongSpirit) {
 			scrStrongSpiritRefill()
 		}
 		
@@ -437,7 +437,7 @@ if reload > 0 {
         }
     }
 
-    if skill_get(mut_stress) {
+    if skill_get(Mut.Stress) {
         var stress = 1 - hp / max(1, max_hp)
 
         reload += stress
@@ -605,7 +605,7 @@ if speed > maxspeed {
 	speed = maxspeed
 }
 
-if KeyCont.hold_spec[index] && skill_get(mut_throne_butt) && race == Race.Fish {
+if KeyCont.hold_spec[index] && skill_get(Mut.ThroneButt) && race == Race.Fish {
     x += round(hspeed * 0.2)
     y += round(vspeed * 0.2)
     roll = 1
@@ -615,7 +615,7 @@ if roll {
     speed = 6 + (skill_get(5) * 0.5)
 }
 
-if !skill_get(mut_extra_feet) && place_meeting(x, y, Floor) {
+if !skill_get(Mut.ExtraFeet) && place_meeting(x, y, Floor) {
 	var _floor = instance_nearest(bbox_center_x, bbox_center_y, Floor)
 	
 	friction = 0.45
@@ -631,7 +631,7 @@ if !skill_get(mut_extra_feet) && place_meeting(x, y, Floor) {
 		}
 	}
 }
-else if !(roll && skill_get(mut_throne_butt)) {
+else if !(roll && skill_get(Mut.ThroneButt)) {
 	friction = 0.45
 }
 
@@ -667,7 +667,7 @@ if curse && random(6) < 1 {
     y + lengthdir_y(10, gunangle) + random(6) - 3, Curse)
 }
 
-if skill_get(mut_hammerhead) {
+if skill_get(Mut.HammerHead) {
     if place_meeting(x + hspeed, y, Wall) or place_meeting(x, y + vspeed, Wall) {
         if hammerhead < 15 hammerhead++
     } else if hammerhead hammerhead--
@@ -722,7 +722,7 @@ if race == Race.Frog {
         if froggas >= 25 {
             snd_play(sndFrogGasRelease)
 
-            if skill_get(mut_throne_butt) {
+            if skill_get(Mut.ThroneButt) {
                 snd_play(sndFrogEndButt)
             }
 			else snd_play(sndFrogEnd)
@@ -746,7 +746,7 @@ if horrornorad {
 if KeyCont.press_horn[index] && race == Race.Venuz {
 	scr_screenshake(5)
 	
-    if GameCont.area != area_oasis {
+    if GameCont.area != Area.Oasis {
         if !UberCont.birthday {
             snd_play(sndVenuz)
         }

@@ -8,10 +8,10 @@ function scrFire(wep, useAmmo = true) {
 	
 	var _aim_direction = gunangle,
 		
-		_long_arms = skill_get(mut_long_arms),
-		_laser_brain = skill_get(mut_laser_brain)
+		_long_arms = skill_get(Mut.LongArms),
+		_laser_brain = skill_get(Mut.LaserBrain)
 	
-    if race == 7 && skill_get(mut_throne_butt) && (random(typ_ammo[wep_type[wep]]) < wep_cost[wep]) && ((random(2) < 1 or !bcan_shoot) && random(3) < 2) {
+    if race == 7 && skill_get(Mut.ThroneButt) && (random(typ_ammo[wep_type[wep]]) < wep_cost[wep]) && ((random(2) < 1 or !bcan_shoot) && random(3) < 2) {
 		var typ = wep_type[bwep]
 		
         if typ > 0 {
@@ -31,7 +31,7 @@ function scrFire(wep, useAmmo = true) {
         }
     }
 	
-    if wep_type[wep] == 5 && skill_get(mut_laser_brain) {
+    if wep_type[wep] == 5 && skill_get(Mut.LaserBrain) {
         repeat wep_cost[wep] {
             with instance_create(x, y, AnimParticle) {
                 image_speed = 0.4 - random(0.1)
@@ -373,9 +373,9 @@ function scrFire(wep, useAmmo = true) {
     }
 
     //BAZOOKA
-    if wep == wep_bazooka || wep == wep_golden_bazooka || wep == wep_gatling_bazooka {
+    if wep == Wep.Bazooka || wep == Wep.GoldenBazooka || wep == Wep.GatlingBazooka {
 		var _speed = 2
-		if wep == wep_golden_bazooka {
+		if wep == Wep.GoldenBazooka {
 			snd_play_gun(sndGoldRocket)
 			_speed = 3
 		}
@@ -387,7 +387,7 @@ function scrFire(wep, useAmmo = true) {
             team = other.team
             creator = other.id
             
-			if wep == wep_golden_bazooka {
+			if wep == Wep.GoldenBazooka {
 				sprite_index = sprGoldRocket
 			}
 		}
@@ -507,9 +507,9 @@ function scrFire(wep, useAmmo = true) {
 
 
     //SLUGGER
-    if wep == wep_slugger || wep == wep_golden_slugger {
+    if wep == Wep.Slugger || wep == Wep.GoldenSlugger {
 		var _speed = 16
-        if wep == wep_golden_slugger {
+        if wep == Wep.GoldenSlugger {
 			snd_play_gun(sndGoldSlugger)
 			_speed += 2
 		}
@@ -657,8 +657,8 @@ function scrFire(wep, useAmmo = true) {
 	}*/
 
     //SCREWDRIVER
-    if wep == wep_screwdriver || wep == wep_golden_screwdriver {
-		if wep == wep_golden_screwdriver {
+    if wep == Wep.Screwdriver || wep == Wep.GoldenScrewdriver {
+		if wep == Wep.GoldenScrewdriver {
 			snd_play_gun(sndGoldScrewdriver)
 		}
         else snd_play_gun(sndScrewdriver)
@@ -765,7 +765,7 @@ function scrFire(wep, useAmmo = true) {
     }
 
     //SENTRY GUN
-    if wep == 32 {
+    if wep == Wep.SentryGun {
         snd_play_gun(sndGrenade)
 
         with instance_create(x, y, SentryGun) {
@@ -784,7 +784,7 @@ function scrFire(wep, useAmmo = true) {
     }
 
     //WAVE GUN
-    if wep == 33 {
+    if wep == Wep.WaveGun {
 		snd_play_gun(sndWaveGun)
 		
         with instance_create(x, y, WaveBurst) {
@@ -801,10 +801,10 @@ function scrFire(wep, useAmmo = true) {
     }
 
     //PLASMA GUN
-    if wep == wep_plasma_gun || wep == wep_golden_plasma_gun {
+    if wep == Wep.PlasmaGun || wep == Wep.GoldenPlasmaGun {
 		var _speed = 2
 		
-		if wep == wep_golden_plasma_gun {
+		if wep == Wep.GoldenPlasmaGun {
 			snd_play_gun(_laser_brain ? sndGoldPlasmaUpg : sndGoldPlasma)
 			_speed = 3
 		}
@@ -827,7 +827,7 @@ function scrFire(wep, useAmmo = true) {
     }
 
     //PLASMA CANNON
-    if wep == 35 {
+    if wep == Wep.PlasmaCannon {
         if skill_get(17) snd_play_gun(sndPlasmaBigUpg)
         else snd_play_gun(sndPlasmaBig)
 

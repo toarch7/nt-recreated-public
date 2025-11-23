@@ -45,12 +45,12 @@ if endgame > 30 {
             
 	            if ultra == 2 && random(1) <= 0.4 {
 	                if random(max_hp) > hp && random(3) < 2 {
-	                    if GameCont.crown != crwn_love {
+	                    if GameCont.crown != Crwn.Love {
 	                        instance_create(x, y, HealthChest)
 	                    }
 						else instance_create(x, y, AmmoChest)
 	                }
-					else if GameCont.crown != crwn_love {
+					else if GameCont.crown != Crwn.Love {
 	                    instance_create(x, y, choose(WeaponChest, AmmoChest))
 	                }
 					else instance_create(x, y, AmmoChest)

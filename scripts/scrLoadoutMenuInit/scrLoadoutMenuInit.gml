@@ -9,8 +9,8 @@ function scrLoadoutMenuInit() {
 		var _skins_max = scrRaceGetMaxSkinCount(_race_id),
 			_unlocked_crowns = 0
 		
-		race_crown[_race_id, crwn_random] = true
-		race_crown[_race_id, crwn_none] = true
+		race_crown[_race_id, Crwn.Random] = true
+		race_crown[_race_id, Crwn.None] = true
 
 		for (var _crown_id = 1; _crown_id <= _crownmax; _crown_id++) {
 			var _key = "crowngot" + string(_race_id)
@@ -54,7 +54,7 @@ function scr_loadout_race_get_stored_weapon(_race_id) {
 		return _cwep
 	}
 	
-	return wep_none
+	return Wep.None
 }
 
 /// @function scr_loadout_race_set_stored_weapon
@@ -73,7 +73,7 @@ function scr_loadout_race_get_start_weapon(_race_id) {
 		return save_get_value("cswep", _race_id, scrRaceGetStarterWeapon(_race_id))
 	}
 	
-	return wep_none
+	return Wep.None
 }
 
 /// @function scr_loadout_race_set_start_weapon
@@ -93,10 +93,10 @@ function scr_loadout_race_set_start_weapon(_race_id, _weapon_id) {
 /// @param {Real|Enum.Race} race_id
 function scr_loadout_race_get_start_crown(_race_id) {
 	if UberCont.cgot[_race_id] {
-		return save_get_value("ccrown", _race_id, crwn_none)
+		return save_get_value("ccrown", _race_id, Crwn.None)
 	}
 	
-	return crwn_none
+	return Crwn.None
 }
 
 /// @function scr_loadout_race_set_start_crown

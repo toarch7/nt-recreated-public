@@ -24,13 +24,13 @@ if instance_exists(GameCont) {
 }
 
 if instance_exists(GameCont) {
-    if area == area_vault {
+    if area == Area.Vault {
 		type = SpiralType.Proto
 	}
-    else if area == area_hq {
+    else if area == Area.HQ {
 		type = SpiralType.IDPD
 	}
-    else if (area == area_mansion || area == area_crib) {
+    else if (area == Area.VenusMansion || area == Area.YVCrib) {
 		type = SpiralType.Venuz
 	}
 }

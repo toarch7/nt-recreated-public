@@ -7,7 +7,7 @@ if global.is_server {
     instance_create(view_width, view_height - _offset div 2, GoButton)
 }
 
-crown = crwn_none
+crown = Crwn.None
 race = Race.Random
 
 char = array_create(Race.NUM_ALL_RACE_TYPES, noone)
@@ -53,7 +53,7 @@ textappear = array_create(INPUT_MAX_PLAYERS, 2)
 splatindex = 0
 
 loadout_open = false
-loadout_crown = crwn_none
+loadout_crown = Crwn.None
 loadout_frame = 0
 loadout_arrow_pointed = false
 loadout_crown_pointed = false

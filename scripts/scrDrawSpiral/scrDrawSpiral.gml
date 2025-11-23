@@ -61,7 +61,7 @@ function scrDrawSpiral() {
                 }
 
                 if !instance_exists(Credits) {
-                    if instance_exists(CrownObject) {
+                    if instance_exists(Crown) {
                         spr_crwn = asset_get_index((("sprCrown" + string(GameCont.crown)) + "Idle"))
 
                         if sprite_exists(spr_crwn) {

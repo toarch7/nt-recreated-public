@@ -12,7 +12,7 @@ function scrPlayerFiring() {
 	
 	if KeyCont.press_fire[index] && (!enoughammo or !enoughrads) {
 		if !enoughammo {
-			if wep == wep_blood_launcher or wep == wep_blood_cannon {
+			if wep == Wep.BloodLauncher or wep == Wep.BloodCannon {
 				scrBloodAmmoRefill(wep)
 				snd_play_hit_big(sndBloodHurt, 0.2)
 		        last_hit = wep_sprt[wep]
