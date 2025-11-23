@@ -202,27 +202,28 @@ function scrRaceGetName(_race) {
 
 /// @function scrRaceGetStarterWeapon
 /// @param {Real|Enum.Race} race_id
+/// @returns {Real|Enum.Wep} wep
 function scrRaceGetStarterWeapon(_race) {
     switch _race {
-        case Race.Fish: return wep_revolver
-        case Race.Crystal: return wep_revolver
-        case Race.Eyes: return wep_revolver
-        case Race.Melting: return wep_revolver
-        case Race.Plant: return wep_revolver
-        case Race.Venuz: return wep_golden_revolver
-        case Race.Steroids: return wep_revolver
-        case Race.Robot: return wep_revolver
-        case Race.Chicken: return wep_chicken_sword
-        case Race.Rebel: return wep_revolver
-        case Race.Horror: return wep_revolver
-        case Race.Rogue: return wep_rogue_rifle
-        case Race.BigDog: return wep_dog_spin_attack
-        case Race.Skeleton: return wep_rusty_revolver
-        case Race.Frog: return wep_golden_frog_pistol
-        case Race.Cuz: return wep_golden_revolver
+        case Race.Fish: return Wep.Revolver
+        case Race.Crystal: return Wep.Revolver
+        case Race.Eyes: return Wep.Revolver
+        case Race.Melting: return Wep.Revolver
+        case Race.Plant: return Wep.Revolver
+        case Race.Venuz: return Wep.GoldenRevolver
+        case Race.Steroids: return Wep.Revolver
+        case Race.Robot: return Wep.Revolver
+        case Race.Chicken: return Wep.ChickenSword
+        case Race.Rebel: return Wep.Revolver
+        case Race.Horror: return Wep.Revolver
+        case Race.Rogue: return Wep.RogueRifle
+        case Race.BigDog: return Wep.DogSpinAttack
+        case Race.Skeleton: return Wep.RustyRevolver
+        case Race.Frog: return Wep.GoldenFrogPistol
+        case Race.Cuz: return Wep.GoldenRevolver
     }
     
-    return wep_revolver
+    return Wep.Revolver
 }
 
 /// @function scrRaceGetPassiveSkillDescription

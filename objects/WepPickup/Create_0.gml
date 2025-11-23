@@ -1,5 +1,5 @@
 name = "SCREWDRIVER"
-wep = wep_revolver
+wep = Wep.Revolver
 type = Ammo.None
 ammo = false
 creator = noone

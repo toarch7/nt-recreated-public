@@ -148,8 +148,8 @@ function scrInit() {
     protowep = save_get_value("etc", "protowep", 56)
 	
 	if _fix_inconsistent_weapon_ids && protowep == 255 {
-		save_set_value("etc", "protowep", wep_golden_frog_pistol)
-		protowep = wep_golden_frog_pistol
+		save_set_value("etc", "protowep", Wep.GoldenFrogPistol)
+		protowep = Wep.GoldenFrogPistol
 	}
 	
     save_set_value("cgot", Race.Random, true)
@@ -220,8 +220,8 @@ function scrInit() {
         cwep[_race_id] = save_get_value("cwep", _race_str, scrRaceGetStarterWeapon(_race_id))
 		
 		if cwep[_race_id] == 255 && _fix_inconsistent_weapon_ids {
-			save_set_value("cwep", _race_str, wep_golden_frog_pistol)
-			cwep[_race_id] = wep_golden_frog_pistol
+			save_set_value("cwep", _race_str, Wep.GoldenFrogPistol)
+			cwep[_race_id] = Wep.GoldenFrogPistol
 		}
 		
 		var _max_skins = scrRaceGetMaxSkinCount(_race_id)
@@ -237,8 +237,8 @@ function scrInit() {
             crowngot[_race_id, _crown_id] = save_get_value(_crowngot_key, _crown_id, false)
         }
 
-        crowngot[_race_id, crwn_random] = true
-        crowngot[_race_id, crwn_none] = true
+        crowngot[_race_id, Crwn.Random] = true
+        crowngot[_race_id, Crwn.None] = true
     }
 	
     hardgot = save_get_value("etc", "hard", 0)

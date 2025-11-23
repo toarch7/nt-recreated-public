@@ -31,7 +31,7 @@ if oldarea != _area || !audio_is_playing(song) || !audio_is_playing(amb) {
 		_amb = asset_get_index("amb" + string(_area))
 	
 	if audio_exists(_song) {
-		if GameCont.proto && _area != area_vault {
+		if GameCont.proto && _area != Area.Vault {
 			var _songb = asset_get_index(audio_get_name(_song) + "b")
 			
 			if audio_exists(_songb) {
@@ -49,12 +49,12 @@ if oldarea != _area || !audio_is_playing(song) || !audio_is_playing(amb) {
 	else amb = amb0b
 	
 	// special tunes
-    if _area == area_campfire {
+    if _area == Area.Campfire {
         song = musBoss4Silence
         amb = amb0b
     }
 	
-    if _area == area_hq {
+    if _area == Area.HQ {
         song = mus106
 		
 		with Player {

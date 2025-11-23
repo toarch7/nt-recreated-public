@@ -14,7 +14,7 @@ if sprite_index != sprProtoChestOpen {
     
     instance_create(x, y, FXChestOpen)
     
-    if scrCrownCheck(Crown.Hatred) {
+    if scrCrownCheck(Crwn.Hatred) {
         with other {
             projectile_hit_self(1)
 			last_hit = sprCrown6Idle

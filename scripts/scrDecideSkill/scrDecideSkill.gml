@@ -1,3 +1,5 @@
+/// @description skill_get()
+/// @returns {Real|Enum.Mut} skill
 function scrDecideSkill() {
     var iter = 0
     var skill = -1

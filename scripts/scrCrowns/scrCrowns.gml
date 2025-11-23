@@ -1,6 +1,6 @@
 globalvar crownmax;
 
-enum Crown {
+enum Crwn {
     Random = 0,
     None = 1,
     Death = 2,
@@ -114,7 +114,7 @@ function scrCrownApplyEquipEffect(_crown_id, _is_equipped) {
 	with GameCont {
 		// on-equip and on-unequip effects
 		switch _crown_id {
-			case Crown.Death:
+			case Crwn.Death:
 				with Player {
 					max_hp -= _m
 					hp = max(1, hp - _m)
@@ -126,7 +126,7 @@ function scrCrownApplyEquipEffect(_crown_id, _is_equipped) {
 		// only on-equip effects
 		if _is_equipped {
 			switch _crown_id {
-				case Crown.Destiny:
+				case Crwn.Destiny:
 					if !destiny {
 						skillpoints += 1
 						destiny = true

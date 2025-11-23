@@ -36,7 +36,7 @@ function scrGameRestart(_quit_to_menu = false) {
 		scrCreatePlayers(global.index)
 		
 		with GameCont {
-			area = area_desert
+			area = Area.Desert
 			subarea = 0
 		}
 		

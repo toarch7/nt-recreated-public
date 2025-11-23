@@ -41,7 +41,7 @@ with CrownObject {
     spr_walk = asset_get_index("sprCrown" + string(GameCont.crown) + "Walk")
 }
 
-if scrCrownCheck(Crown.Luck) hp = 1
+if scrCrownCheck(Crwn.Luck) hp = 1
 
 if race == Race.Frog && is_me && !UberCont.weekly_run {
     scrRaceUnlock(Race.Frog)

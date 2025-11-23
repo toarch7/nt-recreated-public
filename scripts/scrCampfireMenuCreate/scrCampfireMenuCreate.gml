@@ -160,8 +160,8 @@ function scrMenuPrepareWeeklyLoadout() {
 		
 		with _inst {
 			race = _weekly_data[? "char"] ?? Race.Fish
-		    cwep = _weekly_data[? "startwep"] ?? wep_revolver
-		    bwep = _weekly_data[? "bstartwep"] ?? wep_none
+		    cwep = _weekly_data[? "startwep"] ?? Wep.Revolver
+		    bwep = _weekly_data[? "bstartwep"] ?? Wep.None
 		    skin = _weekly_data[? "bskin"] ?? 0
 			
 			start_curse = _weekly_data[? "startcursed"] ?? false
@@ -170,7 +170,7 @@ function scrMenuPrepareWeeklyLoadout() {
 	})
 	
 	//
-	var _crown = _weekly_data[? "crown"] ?? crwn_none
+	var _crown = _weekly_data[? "crown"] ?? Crwn.None
 	scrCrownSetCurrent(_crown, true)
 	
 	//
@@ -249,7 +249,7 @@ function scrCampfireMenuDrawRacePortrait(_x, _y, _index, _race, _skin, _halign, 
 			if _pinst.is_race(Race.Chicken) && _pinst.hp <= 0 {
 				_portrait_sprite = sprBigPortraitChickenHeadless
 			}
-			else if _pinst.is_race(Race.Rebel) && _pinst.skin == 1 && GameCont.area == area_city {
+			else if _pinst.is_race(Race.Rebel) && _pinst.skin == 1 && GameCont.area == Area.City {
 				_portrait_sprite = sprBigPortraitRebelBHooded
 			}
 		}
@@ -508,7 +508,7 @@ function scrMenuDrawLoadout(_pinst) {
 			_primary_weapon = _pinst.cwep,
 			_secondary_weapon = _pinst.bwep
 		
-		if _crown_current != crwn_none {
+		if _crown_current != Crwn.None {
 			draw_sprite(sprLoadoutCrown, _crown_current,
 				_loadout_x - _splat_pointed - 16, _loadout_y - _splat_pointed - 40)
 		}
@@ -577,7 +577,7 @@ function scrMenuDrawLoadout(_pinst) {
 		_crown_x = _crownright - _crownsize * 3
 		
 		for(var _crown_id = 0; _crown_id < _crown_count; ++_crown_id) {
-			if _crown_id == crwn_random && !_crown_unlocked_total {
+			if _crown_id == Crwn.Random && !_crown_unlocked_total {
 				_crown_x += _crownsize
 				continue
 			}
@@ -622,7 +622,7 @@ function scrMenuDrawLoadout(_pinst) {
 			
 			_crown_x += _crownsize
 			
-			if _crown_x >= _crownright || _crown_id == crwn_none {
+			if _crown_x >= _crownright || _crown_id == Crwn.None {
 				_crown_x = _crownleft
 				_crown_y += _crownstep
 			}

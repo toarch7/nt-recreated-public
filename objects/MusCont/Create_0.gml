@@ -1,7 +1,7 @@
 song = -1
 amb = -1
 ambfilter = 1
-oldarea = area_campfire
+oldarea = Area.Campfire
 song = custom_sound_check(musThemeA)
 amb = custom_sound_check(amb0)
 

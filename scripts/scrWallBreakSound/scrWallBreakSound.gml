@@ -3,27 +3,27 @@ function scrWallBreakSound() {
 		_area = GameCont.area
 
     switch (_area) {
-        case area_sewers:
-        case area_palace:
-        case area_mansion:
-        case area_crib:
-        case area_pizza_sewers:
+        case Area.Sewers:
+        case Area.Palace:
+        case Area.VenusMansion:
+        case Area.YVCrib:
+        case Area.PizzaSewers:
             _snd = sndWallBreakBrick
             break
-        case area_scrapyards:
+        case Area.Scrapyards:
             _snd = sndWallBreakScrap
             break
-        case area_caves:
-        case area_cursed_caves:
+        case Area.CrystalCaves:
+        case Area.CursedCaves:
             _snd = sndWallBreakCrystal
             break
-        case area_labs:
+        case Area.Labs:
             _snd = sndWallBreakLabs
             break
-        case area_jungle:
+        case Area.Jungle:
             _snd = sndWallBreakJungle
             break
-        case area_oasis:
+        case Area.Oasis:
             _snd = sndOasisExplosionSmall
             break
     }

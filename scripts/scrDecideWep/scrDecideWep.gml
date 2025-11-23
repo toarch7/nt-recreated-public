@@ -38,16 +38,16 @@ function scrDecideWep(extra) {
             if (target.wep == wep or target.bwep == wep) && (target.race != 7 && !(target.wep == wep && target.bwep == wep))
                 continue
 
-            if wep == wep_super_disc_gun && !__cursed
+            if wep == Wep.SuperDiscGun && !__cursed
                 continue
 
             if instance_exists(TutCont) && (wep_type[wep] == 0 or wep_type[wep] == 4)
                 continue
 
-            if !global.hardmode && (wep == wep_golden_disc_gun or wep == wep_golden_nuke_launcher)
+            if !global.hardmode && (wep == Wep.GoldenDiscGun or wep == Wep.GoldenNukeLauncher)
                 continue
 
-            if wep == wep_gun_gun && !scrCrownCheck(crwn_guns)
+            if wep == Wep.GunGun && !scrCrownCheck(Crwn.Guns)
                 continue
 
             fine = true

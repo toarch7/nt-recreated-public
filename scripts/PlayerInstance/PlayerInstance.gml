@@ -29,8 +29,8 @@ function PlayerInstance(_index = 0) constructor {
 	    skin = 0
 	    race = Race.Random
 		randchar = false
-	    cwep = wep_revolver
-		bwep = wep_none
+	    cwep = Wep.Revolver
+		bwep = Wep.None
 		start_curse = false
 		start_bcurse = false
 	}
@@ -273,7 +273,7 @@ function scrCreatePlayers(_my_index = global.index) {
 	        }
 		}
 
-        if _pinst[$ "cwep"] == wep_golden_frog_pistol {
+        if _pinst[$ "cwep"] == Wep.GoldenFrogPistol {
             _pinst.race = Race.Frog
         }
 		

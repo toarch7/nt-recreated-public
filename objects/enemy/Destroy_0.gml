@@ -16,7 +16,7 @@ if corpse {
         image_xscale = other.right
 
         if instance_exists(Player) {
-            if skill_get(mut_impact_wrists) speed += 8
+            if skill_get(Mut.ImpactWrists) speed += 8
         }
 
         if speed > 16 speed = 16
@@ -51,7 +51,7 @@ with Player {
     }
 
 	//
-	var _lucky_shot = skill_get(mut_lucky_shot)
+	var _lucky_shot = skill_get(Mut.LuckyShot)
     
 	if _lucky_shot && random(10) < 1 {
 		var _ammo_type = irandom_range(Ammo.Bullets, Ammo.NUM_AMMO_TYPES - 1),
@@ -61,7 +61,7 @@ with Player {
     }
 
     //
-	var _bloodlust = skill_get(mut_bloodlust)
+	var _bloodlust = skill_get(Mut.Bloodlust)
     
 	if _bloodlust && random(15) < 1 {
         scrPlayerHeal(id, _bloodlust, true)
@@ -77,7 +77,7 @@ with Player {
     }
 		
 	//
-    if skill_get(mut_trigger_fingers) {
+    if skill_get(Mut.TriggerFingers) {
 		if reload > 0 {
 			reload = max(1, floor(reload * 0.6))
 			trigger_fingers_shine = 6

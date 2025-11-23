@@ -69,7 +69,7 @@ function scrPlayerRaceChange(_race, _skin = -1) {
 	// Steroids used to be a scientist
     else if race == Race.Steroids {
         if !scr_weapon_is_valid(bwep) {
-			bwep = wep_revolver
+			bwep = Wep.Revolver
 		}
 		bcan_shoot = true
         accuracy = 1.8
@@ -97,7 +97,7 @@ function scrPlayerRaceChange(_race, _skin = -1) {
         max_hp = 4
     }
 	
-	if scrCrownCheck(Crown.Death) max_hp -= 1
+	if scrCrownCheck(Crwn.Death) max_hp -= 1
 }
 
 

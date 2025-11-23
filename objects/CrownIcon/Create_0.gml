@@ -1,3 +1,3 @@
 selected = false
-crown = Crown.None
+crown = Crwn.None
 scr_network_instance()

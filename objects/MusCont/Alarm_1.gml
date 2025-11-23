@@ -15,6 +15,6 @@ snd_play_ambience(_amb)
 
 var _area = GameCont.area
 
-if _area != area_palace || _area != area_campfire {
+if _area != Area.Palace || _area != Area.Campfire {
 	alarm[3] = 180
 }

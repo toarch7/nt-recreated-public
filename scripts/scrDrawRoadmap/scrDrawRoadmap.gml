@@ -114,7 +114,7 @@ function scrDrawRoadmap(_x, _y, _pos, _gamecont_data = GameCont) {
             if _pinst.is_race(Race.Chicken) && _pinst.hp <= 0 {
                 _sprite = sprMapIconChickenHeadless
             }
-			else if _pinst.is_race(Race.Rebel) && _pinst.skin && _gamecont_data.area == area_city {
+			else if _pinst.is_race(Race.Rebel) && _pinst.skin && _gamecont_data.area == Area.City {
                 _sprite = sprMapIconRebelBHooded
             }
         }

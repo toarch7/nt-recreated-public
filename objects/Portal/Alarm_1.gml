@@ -6,7 +6,7 @@ if instance_exists(TutCont) {
 with WepPickup {
 	if (!visible | persistent) continue
 	
-    if wep == wep_chicken_sword && GameCont.area == area_desert && GameCont.subarea == 1 {
+    if wep == Wep.ChickenSword && GameCont.area == Area.Desert && GameCont.subarea == 1 {
         GameCont.give_blacksword ++
 	}
 }

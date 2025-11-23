@@ -5,7 +5,7 @@ alarm[0] = (200 + random(30)) / ((5 + GameCont.loops) / 5)
 
 
 //RUSH CROWN
-if scrCrownCheck(crwn_haste) {
+if scrCrownCheck(Crwn.Haste) {
 	alarm[0] /= 3
 }
 

@@ -39,7 +39,7 @@ function scrPowers() {
     if race == Race.Eyes {
 		#region Mmmmmmwwwwhhhawwwmmmmhhhhaawwww
         if KeyCont.hold_spec[index] {
-            if skill_get(mut_throne_butt) {
+            if skill_get(Mut.ThroneButt) {
                 if !snd_is_playing(sndEyesLoopUpg)
 					snd_play(sndEyesLoopUpg)
             }
@@ -47,7 +47,7 @@ function scrPowers() {
 				snd_play(sndEyesLoop)
         }
 		else {
-            if skill_get(mut_throne_butt) {
+            if skill_get(Mut.ThroneButt) {
                 if snd_is_playing(sndEyesLoopUpg)
 					snd_stop(sndEyesLoopUpg)
             }
@@ -83,7 +83,7 @@ function scrPowers() {
 			
 			UberCont.ctot_uniq[race] ++
 			
-			var strength = 1 + skill_get(mut_throne_butt), dir, lx, ly
+			var strength = 1 + skill_get(Mut.ThroneButt), dir, lx, ly
 		
 			#macro M_EYES_TELEKINESIS { if !(x > bx1 && y > by1 && x < bx2 && y < by2) continue dir = point_direction(x, y, other.x, other.y) lx = lengthdir_x(strength, dir) ly = lengthdir_y(strength, dir) if !place_meeting(x + lx, y, Wall) x += lx if !place_meeting(x, y + ly, Wall) y += ly }
 		
@@ -150,7 +150,7 @@ function scrPowers() {
         with TangleSeed
 			instance_destroy()
 		
-		snd_play_gun(skill_get(mut_throne_butt) ? sndPlantFireTB : sndPlantFire)
+		snd_play_gun(skill_get(Mut.ThroneButt) ? sndPlantFireTB : sndPlantFire)
 		
         with instance_create(x, y, TangleSeed) {
             motion_add(other.gunangle, 12)
@@ -165,7 +165,7 @@ function scrPowers() {
 			return snd_play(sndMutant6No)
 		
 		var shots = 2,
-			boost = skill_get(mut_throne_butt)
+			boost = skill_get(Mut.ThroneButt)
 		
 		if boost
 			shots += 2
@@ -229,7 +229,7 @@ function scrPowers() {
             if string_starts_with(wep_name[wep], "HYPER") scrRaceUnlockSkin(Race.Robot, 1)
 
             if ultra == 2 && random(1) <= 0.4 {
-				var _love_crown = scrCrownCheck(crwn_love)
+				var _love_crown = scrCrownCheck(Crwn.Love)
 				
                 if random(max_hp) > hp and random(3) < 2 {
                     if !_love_crown {

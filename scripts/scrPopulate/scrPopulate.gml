@@ -31,7 +31,7 @@ function scrPopulate() {
 	//COOL BONES
 
 	with Floor {
-		if spawnarea == area_desert {
+		if spawnarea == Area.Desert {
 			if !place_free(x - 32, y) && !place_free(x + 32, y) && place_free(x, y) {
 				instance_create(x, y, Bones)
 				instance_create(x, y + 16, Bones)
@@ -45,7 +45,7 @@ function scrPopulate() {
 				}
 			}
 		}
-		else if spawnarea == area_scrapyards {
+		else if spawnarea == Area.Scrapyards {
 			if !place_free(x - 32, y) && !place_free(x + 32, y) && place_free(x, y) {
 				if random(7) < 1 instance_create(x, y, Bones)
 				if random(7) < 1 instance_create(x, y + 16, Bones)
@@ -61,7 +61,7 @@ function scrPopulate() {
 			with Bones
 			sprite_index = sprScrapDecal
 		}
-		else if spawnarea == area_city {
+		else if spawnarea == Area.City {
 			if !place_free(x - 32, y) && !place_free(x + 32, y) && place_free(x, y) {
 				if random(7) < 1 instance_create(x, y, Bones) if random(7) < 1 instance_create(x, y + 16, Bones) if random(7) < 1 {
 					with instance_create(x + 32, y, Bones)
@@ -75,7 +75,7 @@ function scrPopulate() {
 			with Bones
 			sprite_index = sprIceDecal
 		}
-		else if spawnarea == area_caves {
+		else if spawnarea == Area.CrystalCaves {
 			if !place_free(x - 32, y) && !place_free(x + 32, y) && place_free(x, y) {
 				if rng_float(RNGStates.Props, 9) < 1 instance_create(x, y, Bones) if rng_float(RNGStates.Props, 9) < 1 instance_create(x, y + 16, Bones) if rng_float(RNGStates.Props, 9) < 1 {
 					with instance_create(x + 32, y, Bones)
@@ -89,7 +89,7 @@ function scrPopulate() {
 			with Bones
 			sprite_index = sprCaveDecal
 		}
-		if spawnarea == area_sewers {
+		if spawnarea == Area.Sewers {
 			if !place_free(x - 32, y) && !place_free(x + 32, y) && place_free(x, y) && rng_float(RNGStates.Props, 10) < 1 {
 				instance_create(x, y + 16, Bones)
 				with instance_create(x + 32, y + 16, Bones)
@@ -115,7 +115,7 @@ function scrPopulate() {
 	}
 
 	// CoB second pass
-	if scrCrownCheck(crwn_blood) {
+	if scrCrownCheck(Crwn.Blood) {
 		with Floor {
 			if rng_float(RNGStates.Enemies, 10 + _difficulty) < _difficulty {
 				scrPopEnemies()
@@ -124,7 +124,7 @@ function scrPopulate() {
 	}
 
 	// cursed caves enemy replacement
-	if _area == area_cursed_caves {
+	if _area == Area.CursedCaves {
 		with LaserCrystal {
 			instance_create(x, y, InvLaserCrystal)
 			instance_destroy(id, false)
@@ -154,17 +154,17 @@ function scrPopulate() {
 	instance_destroy(NOWALLSHEREPLEASE)
 
 	// spawning chests
-	if _area != area_campfire {
+	if _area != Area.Campfire {
 		scrPopChests()
 	}
 	
 	// spawn desert boss
-	if _area == area_desert {
+	if _area == Area.Desert {
 		instance_create(x, y, WantBoss)
 	}
 	
 	// venuz car
-	if _area == area_scrapyards && _subarea == 1 {
+	if _area == Area.Scrapyards && _subarea == 1 {
 		with instance_furthest(10016, 10016, Car) {
 			instance_create(x, y, CarVenus)
 			instance_change(Wind, false)
@@ -181,7 +181,7 @@ function scrPopulate() {
 	}
 
 	// bandits camping chests
-	if _area != area_campfire && (_area < area_city || _area >= area_vault) && _area != area_hq && _area != area_crib {
+	if _area != Area.Campfire && (_area < Area.City || _area >= Area.Vault) && _area != Area.HQ && _area != Area.YVCrib {
 		with chestprop {
 			instance_create(bbox_center_x, bbox_center_y, Bandit)
 		}
@@ -191,7 +191,7 @@ function scrPopulate() {
 	}
 
 	// pizza sewers entrance
-	if _area == area_sewers {
+	if _area == Area.Sewers {
 		with Floor {
 			if sprite_index == sprFloor2 && (image_index == 1 || image_index == 5) {
 				instance_create(x, y, PizzaEntrance)
@@ -209,7 +209,7 @@ function scrPopulate() {
 	}
 
 	// populate pizza sewers
-	if _area == area_pizza_sewers {
+	if _area == Area.PizzaSewers {
 		var _instance = instance_furthest(10016, 10016, enemy),
 			_x = 10016,
 			_y = 10016
@@ -245,7 +245,7 @@ function scrPopulate() {
 			instance_create(10016, 10016, WantPopo)
 		}
 
-		if _area == area_campfire {
+		if _area == Area.Campfire {
 			repeat _loops {
 				instance_create(10016, 10016, IDPDSpawn)
 			}
@@ -257,7 +257,7 @@ function scrPopulate() {
 		}
 	}
 	
-	if _loops && _area == area_labs {
+	if _loops && _area == Area.Labs {
 		with enemy {
 			if distance_to_object(TechnoMancer) > 120 && point_distance(x, y, 10016, 10016) > 160 {
 				instance_create(x, y, TechnoMancer)

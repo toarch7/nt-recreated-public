@@ -1,5 +1,5 @@
 function scrPlayerProcTakeDamage(_amount = 0) {
-	if skill_get(mut_sharp_teeth) {
+	if skill_get(Mut.SharpTeeth) {
 		var _left = view_xview,
 			_top = view_yview,
 			_right = _left + view_width,

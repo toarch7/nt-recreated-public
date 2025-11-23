@@ -1,6 +1,6 @@
 /// @description skill_set(skill, value)
-/// @param skill
-/// @param  value
+/// @param {Real|Enum.Mut} skill
+/// @param value
 function skill_set(skill, value) {
     if value {
         if !skill_get(skill) {

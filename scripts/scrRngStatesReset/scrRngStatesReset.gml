@@ -11,7 +11,7 @@ function scrRngStatesReset() {
 			global.rng_state[i] = (_number + (79379 * i)) % 0x7fffffff
 		}
 		
-        if area == area_hq {
+        if area == Area.HQ {
             global.rng_state[0] = subarea + 24
         }
 		

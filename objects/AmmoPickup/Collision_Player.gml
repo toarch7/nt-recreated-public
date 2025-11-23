@@ -13,7 +13,7 @@ with (scrUltraCheck(Race.CoopUltra, 1) ? Player : _player) {
 		_give_amount = typ_ammo[_ammo_type]
 	
 	//RUSH CROWN
-	if scrCrownCheck(crwn_haste) {
+	if scrCrownCheck(Crwn.Haste) {
 		_give_amount ++
 	}
 	

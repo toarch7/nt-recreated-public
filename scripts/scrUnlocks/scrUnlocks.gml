@@ -29,34 +29,34 @@ function scrUnlocksArea() {
 	}
 	
 	switch GameCont.area {
-		case area_sewers:
+		case Area.Sewers:
 			scrRaceUnlock(Race.Eyes)
 			if (global.hardmode) {
 				try_unlock_skin(Race.Chicken, 1)
 			}
 			break
-		case area_pizza_sewers:
+		case Area.PizzaSewers:
 			try_unlock_skin(Race.Eyes, 1)
 			break
-		case area_scrapyards:
+		case Area.Scrapyards:
 			scrRaceUnlock(Race.Plant)
 			break
-		case area_mansion:
+		case Area.VenusMansion:
 			scrRaceUnlock(Race.Venuz)
 			break
-		case area_cursed_caves:
+		case Area.CursedCaves:
 			try_unlock_skin(Race.Crystal, 1)
 			break
-		case area_city:
+		case Area.City:
 			scrRaceUnlock(Race.Robot)
 			break
-		case area_jungle:
+		case Area.Jungle:
 			scrRaceUnlock(Race.Chicken)
 			break
-		case area_labs:
+		case Area.Labs:
 			scrRaceUnlock(Race.Steroids)
 			break
-		case area_desert:
+		case Area.Desert:
 			if _loops >= 1 scrRaceUnlock(Race.Rebel)
 			break
 	}
@@ -133,7 +133,7 @@ function scrUnlocksCharacterStats() {
 				}
 			}
 			
-			if _cwep == wep_golden_nuke_launcher || _cwep == wep_golden_disc_gun {
+			if _cwep == Wep.GoldenNukeLauncher || _cwep == Wep.GoldenDiscGun {
 				scrAchievementUnlock(Achievement.GOOD_RIDDANCE)
 			}
 			
@@ -168,8 +168,8 @@ function scrPlayerTryUnlockGoldenWeapons(p) {
 			
 	        scrShowUnlockPopup("@y" + loc(wep_name[_store]) + loc("#@sSTORED"))
 			
-	        if _store == wep_golden_disc_gun
-			|| _store == wep_golden_nuke_launcher {
+	        if _store == Wep.GoldenDiscGun
+			|| _store == Wep.GoldenNukeLauncher {
 				scrAchievementUnlock(Achievement.GOOD_RIDDANCE)
 			}
 			

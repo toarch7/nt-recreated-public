@@ -29,7 +29,7 @@ function scrCrownSetCurrent(_crown, _is_start_crown = false) {
 		if index == 0 _player = id
 	}
 	
-	if _crown != crwn_none && instance_exists(_player) {
+	if _crown != Crwn.None && instance_exists(_player) {
 		if !instance_exists(CrownObject) {
 			instance_create(_player.x, _player.y, CrownObject)
 		}
@@ -48,5 +48,5 @@ function scrCrownGetCurrent() {
 		return crown
 	}
 	
-	return crwn_none
+	return Crwn.None
 }
