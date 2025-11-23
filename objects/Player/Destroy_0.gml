@@ -101,7 +101,7 @@ with MusCont {
     snd_play_loop(amb)
 }
 
-with CrownObject {
+with Crown {
     persistent = 0
 }
 

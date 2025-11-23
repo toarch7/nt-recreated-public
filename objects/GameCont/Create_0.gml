@@ -10,14 +10,14 @@ enum Area
 	Palace = 7,
 	
 	Secret = 100,
-	Vault = Secret + 0,
-	Oasis = Secret + 1,
-	PizzaSewers = Secret + 2,
-	VenusMansion = Secret + 3,
-	CursedCaves = Secret + 4,
-	Jungle = Secret + 5,
-	HQ = Secret + 6,
-	YVCrib = Secret + 7
+	Vault = Area.Secret + 0,
+	Oasis = Area.Secret + 1,
+	PizzaSewers = Area.Secret + 2,
+	VenusMansion = Area.Secret + 3,
+	CursedCaves = Area.Secret + 4,
+	Jungle = Area.Secret + 5,
+	HQ = Area.Secret + 6,
+	YVCrib = Area.Secret + 7
 }
 
 skills = -1

@@ -509,7 +509,7 @@ function scrFire(wep, useAmmo = true) {
     //SLUGGER
     if wep == Wep.Slugger || wep == Wep.GoldenSlugger {
 		var _speed = 16
-        if wep == Wep.Golden_slugger {
+        if wep == Wep.GoldenSlugger {
 			snd_play_gun(sndGoldSlugger)
 			_speed += 2
 		}
@@ -765,7 +765,7 @@ function scrFire(wep, useAmmo = true) {
     }
 
     //SENTRY GUN
-    if wep == 32 {
+    if wep == Wep.SentryGun {
         snd_play_gun(sndGrenade)
 
         with instance_create(x, y, SentryGun) {
@@ -784,7 +784,7 @@ function scrFire(wep, useAmmo = true) {
     }
 
     //WAVE GUN
-    if wep == 33 {
+    if wep == Wep.WaveGun {
 		snd_play_gun(sndWaveGun)
 		
         with instance_create(x, y, WaveBurst) {
@@ -801,10 +801,10 @@ function scrFire(wep, useAmmo = true) {
     }
 
     //PLASMA GUN
-    if wep == Wep.plasma_gun || wep == Wep.Golden_plasma_gun {
+    if wep == Wep.PlasmaGun || wep == Wep.GoldenPlasmaGun {
 		var _speed = 2
 		
-		if wep == Wep.Golden_plasma_gun {
+		if wep == Wep.GoldenPlasmaGun {
 			snd_play_gun(_laser_brain ? sndGoldPlasmaUpg : sndGoldPlasma)
 			_speed = 3
 		}
@@ -827,7 +827,7 @@ function scrFire(wep, useAmmo = true) {
     }
 
     //PLASMA CANNON
-    if wep == 35 {
+    if wep == Wep.PlasmaCannon {
         if skill_get(17) snd_play_gun(sndPlasmaBigUpg)
         else snd_play_gun(sndPlasmaBig)
 

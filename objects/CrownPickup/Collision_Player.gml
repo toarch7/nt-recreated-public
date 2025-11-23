@@ -3,8 +3,8 @@ if lockstep_stop
 
 GameCont.crownpoints += 1
 
-if !instance_exists(CrownObject) {
-    with instance_create(x, y, CrownObject) {
+if !instance_exists(Crown) {
+    with instance_create(x, y, Crown) {
         is_new = 1
     }
 }

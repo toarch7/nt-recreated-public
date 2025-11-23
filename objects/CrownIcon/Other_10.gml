@@ -15,6 +15,6 @@ else {
     instance_create(x, y, GenCont)
 }
 
-with CrownObject is_new = true
+with Crown is_new = true
 
 snd_play(crown_sond[crown])

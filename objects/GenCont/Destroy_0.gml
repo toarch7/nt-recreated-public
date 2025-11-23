@@ -75,7 +75,7 @@ if instance_exists(Player) {
 	}
 }
 
-if _area == 5 && _subarea == 1 && skill_get(Mut.last_wish) {
+if _area == 5 && _subarea == 1 && skill_get(Mut.LastWish) {
     if instance_exists(prop) {
         with instance_furthest(10016, 10016, prop) {
             instance_change(IceFlower, 1)

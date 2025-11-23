@@ -25,15 +25,15 @@ bcan_shoot = 1
 frogcharge = 0
 froggas = 0
 
-if !instance_exists(CrownObject) && GameCont.crown > 1 {
-    with instance_create(x, y, CrownObject) {
+if !instance_exists(Crown) && GameCont.crown > 1 {
+    with instance_create(x, y, Crown) {
         if (GameCont.area > 1) or (GameCont.subarea > 1) or ((GameCont.loops - global.hardmode) > 0) {
             is_new = 0
         }
     }
 }
 
-with CrownObject {
+with Crown {
     x = other.x
     y = other.y
 
