@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndMolefishHurt",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndMolefishHurt",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 0,
-  "conversionMode": 0,
-  "duration": 0.242375,
-  "name": "sndMolefishHurt",
-  "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.242375,
+  "exportDir":"",
+  "name":"sndMolefishHurt",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndMolefishHurt.wav",
-  "type": 0,
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndMolefishHurt.wav",
+  "volume":1,
 }

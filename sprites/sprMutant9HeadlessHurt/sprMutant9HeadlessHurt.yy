@@ -1,208 +1,95 @@
 {
-  "$GMSprite": "",
-  "%Name": "sprMutant9HeadlessHurt",
-  "bboxMode": 0,
-  "bbox_bottom": 20,
-  "bbox_left": 5,
-  "bbox_right": 20,
-  "bbox_top": 7,
-  "collisionKind": 0,
-  "collisionTolerance": 0,
-  "DynamicTexturePage": false,
-  "edgeFiltering": false,
-  "For3D": false,
-  "frames": [
-    {
-      "$GMSpriteFrame": "",
-      "%Name": "da8cd27a-fd11-4ff9-8e00-45338b5d657a",
-      "name": "da8cd27a-fd11-4ff9-8e00-45338b5d657a",
-      "resourceType": "GMSpriteFrame",
-      "resourceVersion": "2.0"
-    },
-    {
-      "$GMSpriteFrame": "",
-      "%Name": "1d0c1c7f-bd12-4ed4-bc21-628dbd5c64d3",
-      "name": "1d0c1c7f-bd12-4ed4-bc21-628dbd5c64d3",
-      "resourceType": "GMSpriteFrame",
-      "resourceVersion": "2.0"
-    },
-    {
-      "$GMSpriteFrame": "",
-      "%Name": "23e37b8f-bcb2-4b92-8360-03ccc7273fb3",
-      "name": "23e37b8f-bcb2-4b92-8360-03ccc7273fb3",
-      "resourceType": "GMSpriteFrame",
-      "resourceVersion": "2.0"
-    }
+  "$GMSprite":"v2",
+  "%Name":"sprMutant9HeadlessHurt",
+  "bboxMode":0,
+  "bbox_bottom":20,
+  "bbox_left":5,
+  "bbox_right":20,
+  "bbox_top":7,
+  "collisionKind":0,
+  "collisionTolerance":0,
+  "DynamicTexturePage":false,
+  "edgeFiltering":false,
+  "For3D":false,
+  "frames":[
+    {"$GMSpriteFrame":"v1","%Name":"da8cd27a-fd11-4ff9-8e00-45338b5d657a","name":"da8cd27a-fd11-4ff9-8e00-45338b5d657a","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"1d0c1c7f-bd12-4ed4-bc21-628dbd5c64d3","name":"1d0c1c7f-bd12-4ed4-bc21-628dbd5c64d3","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"23e37b8f-bcb2-4b92-8360-03ccc7273fb3","name":"23e37b8f-bcb2-4b92-8360-03ccc7273fb3","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
-  "gridX": 0,
-  "gridY": 0,
-  "height": 24,
-  "HTile": false,
-  "layers": [
-    {
-      "$GMImageLayer": "",
-      "%Name": "4be7c9f2-a315-422b-896e-8f546d7d7707",
-      "blendMode": 0,
-      "displayName": "default",
-      "isLocked": false,
-      "name": "4be7c9f2-a315-422b-896e-8f546d7d7707",
-      "opacity": 100,
-      "resourceType": "GMImageLayer",
-      "resourceVersion": "2.0",
-      "visible": true
-    }
+  "gridX":0,
+  "gridY":0,
+  "height":24,
+  "HTile":false,
+  "layers":[
+    {"$GMImageLayer":"","%Name":"4be7c9f2-a315-422b-896e-8f546d7d7707","blendMode":0,"displayName":"default","isLocked":false,"name":"4be7c9f2-a315-422b-896e-8f546d7d7707","opacity":100,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
-  "name": "sprMutant9HeadlessHurt",
-  "nineSlice": null,
-  "origin": 4,
-  "parent": {
-    "name": "Chicken",
-    "path": "folders/Sprites/Player/Chicken.yy"
+  "name":"sprMutant9HeadlessHurt",
+  "nineSlice":null,
+  "origin":4,
+  "parent":{
+    "name":"Chicken",
+    "path":"folders/Sprites/Player/Chicken.yy",
   },
-  "preMultiplyAlpha": false,
-  "resourceType": "GMSprite",
-  "resourceVersion": "2.0",
-  "sequence": {
-    "$GMSequence": "v1",
-    "%Name": "",
-    "autoRecord": true,
-    "backdropHeight": 1080,
-    "backdropImageOpacity": 0.5,
-    "backdropImagePath": "",
-    "backdropWidth": 1920,
-    "backdropXOffset": 0,
-    "backdropYOffset": 0,
-    "events": {
-      "$KeyframeStore<MessageEventKeyframe>": "",
-      "Keyframes": [],
-      "resourceType": "KeyframeStore<MessageEventKeyframe>",
-      "resourceVersion": "2.0"
+  "preMultiplyAlpha":false,
+  "resourceType":"GMSprite",
+  "resourceVersion":"2.0",
+  "sequence":{
+    "$GMSequence":"v1",
+    "%Name":"",
+    "autoRecord":true,
+    "backdropHeight":1080,
+    "backdropImageOpacity":0.5,
+    "backdropImagePath":"",
+    "backdropWidth":1920,
+    "backdropXOffset":0,
+    "backdropYOffset":0,
+    "events":{
+      "$KeyframeStore<MessageEventKeyframe>":"",
+      "Keyframes":[],
+      "resourceType":"KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion":"2.0",
     },
-    "eventStubScript": null,
-    "eventToFunction": {},
-    "length": 3,
-    "lockOrigin": false,
-    "moments": {
-      "$KeyframeStore<MomentsEventKeyframe>": "",
-      "Keyframes": [],
-      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
-      "resourceVersion": "2.0"
+    "eventStubScript":null,
+    "eventToFunction":{},
+    "length":3,
+    "lockOrigin":false,
+    "moments":{
+      "$KeyframeStore<MomentsEventKeyframe>":"",
+      "Keyframes":[],
+      "resourceType":"KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion":"2.0",
     },
-    "name": "",
-    "playback": 1,
-    "playbackSpeed": 1,
-    "playbackSpeedType": 1,
-    "resourceType": "GMSequence",
-    "resourceVersion": "2.0",
-    "showBackdrop": true,
-    "showBackdropImage": false,
-    "timeUnits": 1,
-    "tracks": [
-      {
-        "$GMSpriteFramesTrack": "",
-        "builtinName": 0,
-        "events": [],
-        "inheritsTrackColour": true,
-        "interpolation": 1,
-        "isCreationTrack": false,
-        "keyframes": {
-          "$KeyframeStore<SpriteFrameKeyframe>": "",
-          "Keyframes": [
-            {
-              "$Keyframe<SpriteFrameKeyframe>": "",
-              "Channels": {
-                "0": {
-                  "$SpriteFrameKeyframe": "",
-                  "Id": {
-                    "name": "da8cd27a-fd11-4ff9-8e00-45338b5d657a",
-                    "path": "sprites/sprMutant9HeadlessHurt/sprMutant9HeadlessHurt.yy"
-                  },
-                  "resourceType": "SpriteFrameKeyframe",
-                  "resourceVersion": "2.0"
-                }
-              },
-              "Disabled": false,
-              "id": "d8936b03-f2a4-4340-a503-6584760723d5",
-              "IsCreationKey": false,
-              "Key": 0,
-              "Length": 1,
-              "resourceType": "Keyframe<SpriteFrameKeyframe>",
-              "resourceVersion": "2.0",
-              "Stretch": false
-            },
-            {
-              "$Keyframe<SpriteFrameKeyframe>": "",
-              "Channels": {
-                "0": {
-                  "$SpriteFrameKeyframe": "",
-                  "Id": {
-                    "name": "1d0c1c7f-bd12-4ed4-bc21-628dbd5c64d3",
-                    "path": "sprites/sprMutant9HeadlessHurt/sprMutant9HeadlessHurt.yy"
-                  },
-                  "resourceType": "SpriteFrameKeyframe",
-                  "resourceVersion": "2.0"
-                }
-              },
-              "Disabled": false,
-              "id": "08671f94-f8bc-4567-b37b-e6f75b152e51",
-              "IsCreationKey": false,
-              "Key": 1,
-              "Length": 1,
-              "resourceType": "Keyframe<SpriteFrameKeyframe>",
-              "resourceVersion": "2.0",
-              "Stretch": false
-            },
-            {
-              "$Keyframe<SpriteFrameKeyframe>": "",
-              "Channels": {
-                "0": {
-                  "$SpriteFrameKeyframe": "",
-                  "Id": {
-                    "name": "23e37b8f-bcb2-4b92-8360-03ccc7273fb3",
-                    "path": "sprites/sprMutant9HeadlessHurt/sprMutant9HeadlessHurt.yy"
-                  },
-                  "resourceType": "SpriteFrameKeyframe",
-                  "resourceVersion": "2.0"
-                }
-              },
-              "Disabled": false,
-              "id": "2c856d45-c7d5-45e1-8976-626aba8f8b46",
-              "IsCreationKey": false,
-              "Key": 2,
-              "Length": 1,
-              "resourceType": "Keyframe<SpriteFrameKeyframe>",
-              "resourceVersion": "2.0",
-              "Stretch": false
-            }
-          ],
-          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
-          "resourceVersion": "2.0"
-        },
-        "modifiers": [],
-        "name": "frames",
-        "resourceType": "GMSpriteFramesTrack",
-        "resourceVersion": "2.0",
-        "spriteId": null,
-        "trackColour": 0,
-        "tracks": [],
-        "traits": 0
-      }
+    "name":"",
+    "playback":1,
+    "playbackSpeed":1,
+    "playbackSpeedType":1,
+    "resourceType":"GMSequence",
+    "resourceVersion":"2.0",
+    "showBackdrop":true,
+    "showBackdropImage":false,
+    "timeUnits":1,
+    "tracks":[
+      {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"da8cd27a-fd11-4ff9-8e00-45338b5d657a","path":"sprites/sprMutant9HeadlessHurt/sprMutant9HeadlessHurt.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"d8936b03-f2a4-4340-a503-6584760723d5","IsCreationKey":false,"Key":0,"Length":1,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"1d0c1c7f-bd12-4ed4-bc21-628dbd5c64d3","path":"sprites/sprMutant9HeadlessHurt/sprMutant9HeadlessHurt.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"08671f94-f8bc-4567-b37b-e6f75b152e51","IsCreationKey":false,"Key":1,"Length":1,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"23e37b8f-bcb2-4b92-8360-03ccc7273fb3","path":"sprites/sprMutant9HeadlessHurt/sprMutant9HeadlessHurt.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"2c856d45-c7d5-45e1-8976-626aba8f8b46","IsCreationKey":false,"Key":2,"Length":1,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+          ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": {
-      "x": 0,
-      "y": 0
+    "visibleRange":{
+      "x":0,
+      "y":0,
     },
-    "volume": 1,
-    "xorigin": 12,
-    "yorigin": 12
+    "volume":1,
+    "xorigin":12,
+    "yorigin":12,
   },
-  "swatchColours": null,
-  "swfPrecision": 2.525,
-  "textureGroupId": {
-    "name": "Default",
-    "path": "texturegroups/Default"
+  "swatchColours":null,
+  "swfPrecision":2.525,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
   },
-  "type": 0,
-  "VTile": false,
-  "width": 24
+  "type":0,
+  "VTile":false,
+  "width":24,
 }

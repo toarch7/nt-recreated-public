@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndChickenReturn",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndChickenReturn",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 1,
-  "conversionMode": 0,
-  "duration": 0.2173923,
-  "name": "sndChickenReturn",
-  "parent": {
-    "name": "Pickups Chests",
-    "path": "folders/Objects/Pickups Chests.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":1,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.2173923,
+  "exportDir":"",
+  "name":"sndChickenReturn",
+  "parent":{
+    "name":"Pickups Chests",
+    "path":"folders/Objects/Pickups Chests.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndChickenReturn.wav",
-  "type": 0,
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndChickenReturn.wav",
+  "volume":1,
 }

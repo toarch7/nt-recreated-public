@@ -1,321 +1,100 @@
 {
-  "$GMSprite": "",
-  "%Name": "sprCursedChestSteroidsUltra",
-  "bboxMode": 0,
-  "bbox_bottom": 19,
-  "bbox_left": 3,
-  "bbox_right": 20,
-  "bbox_top": 4,
-  "collisionKind": 1,
-  "collisionTolerance": 0,
-  "DynamicTexturePage": false,
-  "edgeFiltering": false,
-  "For3D": false,
-  "frames": [
-    {
-      "$GMSpriteFrame": "",
-      "%Name": "88990d52-6be0-4f49-8958-e58280d02c91",
-      "name": "88990d52-6be0-4f49-8958-e58280d02c91",
-      "resourceType": "GMSpriteFrame",
-      "resourceVersion": "2.0"
-    },
-    {
-      "$GMSpriteFrame": "",
-      "%Name": "fa5fee94-c272-4410-b04f-6560009de96b",
-      "name": "fa5fee94-c272-4410-b04f-6560009de96b",
-      "resourceType": "GMSpriteFrame",
-      "resourceVersion": "2.0"
-    },
-    {
-      "$GMSpriteFrame": "",
-      "%Name": "91d93e80-aa3f-4ee1-bcae-16759389eda9",
-      "name": "91d93e80-aa3f-4ee1-bcae-16759389eda9",
-      "resourceType": "GMSpriteFrame",
-      "resourceVersion": "2.0"
-    },
-    {
-      "$GMSpriteFrame": "",
-      "%Name": "42ac7675-4a71-4ee6-aeb3-33a81f43419e",
-      "name": "42ac7675-4a71-4ee6-aeb3-33a81f43419e",
-      "resourceType": "GMSpriteFrame",
-      "resourceVersion": "2.0"
-    },
-    {
-      "$GMSpriteFrame": "",
-      "%Name": "ac1fa491-164f-43fa-a036-bb185a189882",
-      "name": "ac1fa491-164f-43fa-a036-bb185a189882",
-      "resourceType": "GMSpriteFrame",
-      "resourceVersion": "2.0"
-    },
-    {
-      "$GMSpriteFrame": "",
-      "%Name": "d24860b2-f509-4bb4-a6d8-87cd01c04e84",
-      "name": "d24860b2-f509-4bb4-a6d8-87cd01c04e84",
-      "resourceType": "GMSpriteFrame",
-      "resourceVersion": "2.0"
-    },
-    {
-      "$GMSpriteFrame": "",
-      "%Name": "ef8a7ca7-8203-44b3-9c0a-6d168c3e72ff",
-      "name": "ef8a7ca7-8203-44b3-9c0a-6d168c3e72ff",
-      "resourceType": "GMSpriteFrame",
-      "resourceVersion": "2.0"
-    }
+  "$GMSprite":"v2",
+  "%Name":"sprCursedChestSteroidsUltra",
+  "bboxMode":0,
+  "bbox_bottom":19,
+  "bbox_left":3,
+  "bbox_right":20,
+  "bbox_top":4,
+  "collisionKind":1,
+  "collisionTolerance":0,
+  "DynamicTexturePage":false,
+  "edgeFiltering":false,
+  "For3D":false,
+  "frames":[
+    {"$GMSpriteFrame":"v1","%Name":"88990d52-6be0-4f49-8958-e58280d02c91","name":"88990d52-6be0-4f49-8958-e58280d02c91","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"fa5fee94-c272-4410-b04f-6560009de96b","name":"fa5fee94-c272-4410-b04f-6560009de96b","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"91d93e80-aa3f-4ee1-bcae-16759389eda9","name":"91d93e80-aa3f-4ee1-bcae-16759389eda9","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"42ac7675-4a71-4ee6-aeb3-33a81f43419e","name":"42ac7675-4a71-4ee6-aeb3-33a81f43419e","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"ac1fa491-164f-43fa-a036-bb185a189882","name":"ac1fa491-164f-43fa-a036-bb185a189882","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"d24860b2-f509-4bb4-a6d8-87cd01c04e84","name":"d24860b2-f509-4bb4-a6d8-87cd01c04e84","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"ef8a7ca7-8203-44b3-9c0a-6d168c3e72ff","name":"ef8a7ca7-8203-44b3-9c0a-6d168c3e72ff","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
-  "gridX": 0,
-  "gridY": 0,
-  "height": 24,
-  "HTile": false,
-  "layers": [
-    {
-      "$GMImageLayer": "",
-      "%Name": "0862adb1-9b8b-40c9-89d1-4121e00a795b",
-      "blendMode": 0,
-      "displayName": "default",
-      "isLocked": false,
-      "name": "0862adb1-9b8b-40c9-89d1-4121e00a795b",
-      "opacity": 100,
-      "resourceType": "GMImageLayer",
-      "resourceVersion": "2.0",
-      "visible": true
-    }
+  "gridX":0,
+  "gridY":0,
+  "height":24,
+  "HTile":false,
+  "layers":[
+    {"$GMImageLayer":"","%Name":"0862adb1-9b8b-40c9-89d1-4121e00a795b","blendMode":0,"displayName":"default","isLocked":false,"name":"0862adb1-9b8b-40c9-89d1-4121e00a795b","opacity":100,"resourceType":"GMImageLayer","resourceVersion":"2.0","visible":true,},
   ],
-  "name": "sprCursedChestSteroidsUltra",
-  "nineSlice": null,
-  "origin": 4,
-  "parent": {
-    "name": "Pickups",
-    "path": "folders/Sprites/Pickups.yy"
+  "name":"sprCursedChestSteroidsUltra",
+  "nineSlice":null,
+  "origin":4,
+  "parent":{
+    "name":"Pickups",
+    "path":"folders/Sprites/Pickups.yy",
   },
-  "preMultiplyAlpha": false,
-  "resourceType": "GMSprite",
-  "resourceVersion": "2.0",
-  "sequence": {
-    "$GMSequence": "v1",
-    "%Name": "sprCursedChestSteroidsUltra",
-    "autoRecord": true,
-    "backdropHeight": 768,
-    "backdropImageOpacity": 0.5,
-    "backdropImagePath": "",
-    "backdropWidth": 1366,
-    "backdropXOffset": 0,
-    "backdropYOffset": 0,
-    "events": {
-      "$KeyframeStore<MessageEventKeyframe>": "",
-      "Keyframes": [],
-      "resourceType": "KeyframeStore<MessageEventKeyframe>",
-      "resourceVersion": "2.0"
+  "preMultiplyAlpha":false,
+  "resourceType":"GMSprite",
+  "resourceVersion":"2.0",
+  "sequence":{
+    "$GMSequence":"v1",
+    "%Name":"sprCursedChestSteroidsUltra",
+    "autoRecord":true,
+    "backdropHeight":768,
+    "backdropImageOpacity":0.5,
+    "backdropImagePath":"",
+    "backdropWidth":1366,
+    "backdropXOffset":0,
+    "backdropYOffset":0,
+    "events":{
+      "$KeyframeStore<MessageEventKeyframe>":"",
+      "Keyframes":[],
+      "resourceType":"KeyframeStore<MessageEventKeyframe>",
+      "resourceVersion":"2.0",
     },
-    "eventStubScript": null,
-    "eventToFunction": {},
-    "length": 7,
-    "lockOrigin": false,
-    "moments": {
-      "$KeyframeStore<MomentsEventKeyframe>": "",
-      "Keyframes": [],
-      "resourceType": "KeyframeStore<MomentsEventKeyframe>",
-      "resourceVersion": "2.0"
+    "eventStubScript":null,
+    "eventToFunction":{},
+    "length":7,
+    "lockOrigin":false,
+    "moments":{
+      "$KeyframeStore<MomentsEventKeyframe>":"",
+      "Keyframes":[],
+      "resourceType":"KeyframeStore<MomentsEventKeyframe>",
+      "resourceVersion":"2.0",
     },
-    "name": "sprCursedChestSteroidsUltra",
-    "playback": 1,
-    "playbackSpeed": 30,
-    "playbackSpeedType": 0,
-    "resourceType": "GMSequence",
-    "resourceVersion": "2.0",
-    "showBackdrop": true,
-    "showBackdropImage": false,
-    "timeUnits": 1,
-    "tracks": [
-      {
-        "$GMSpriteFramesTrack": "",
-        "builtinName": 0,
-        "events": [],
-        "inheritsTrackColour": true,
-        "interpolation": 1,
-        "isCreationTrack": false,
-        "keyframes": {
-          "$KeyframeStore<SpriteFrameKeyframe>": "",
-          "Keyframes": [
-            {
-              "$Keyframe<SpriteFrameKeyframe>": "",
-              "Channels": {
-                "0": {
-                  "$SpriteFrameKeyframe": "",
-                  "Id": {
-                    "name": "88990d52-6be0-4f49-8958-e58280d02c91",
-                    "path": "sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy"
-                  },
-                  "resourceType": "SpriteFrameKeyframe",
-                  "resourceVersion": "2.0"
-                }
-              },
-              "Disabled": false,
-              "id": "b47473aa-b547-455d-9b5b-1d3c636b7046",
-              "IsCreationKey": false,
-              "Key": 0,
-              "Length": 1,
-              "resourceType": "Keyframe<SpriteFrameKeyframe>",
-              "resourceVersion": "2.0",
-              "Stretch": false
-            },
-            {
-              "$Keyframe<SpriteFrameKeyframe>": "",
-              "Channels": {
-                "0": {
-                  "$SpriteFrameKeyframe": "",
-                  "Id": {
-                    "name": "fa5fee94-c272-4410-b04f-6560009de96b",
-                    "path": "sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy"
-                  },
-                  "resourceType": "SpriteFrameKeyframe",
-                  "resourceVersion": "2.0"
-                }
-              },
-              "Disabled": false,
-              "id": "ba5f8566-a379-4ceb-b2bb-1bdfb0ab41bd",
-              "IsCreationKey": false,
-              "Key": 1,
-              "Length": 1,
-              "resourceType": "Keyframe<SpriteFrameKeyframe>",
-              "resourceVersion": "2.0",
-              "Stretch": false
-            },
-            {
-              "$Keyframe<SpriteFrameKeyframe>": "",
-              "Channels": {
-                "0": {
-                  "$SpriteFrameKeyframe": "",
-                  "Id": {
-                    "name": "91d93e80-aa3f-4ee1-bcae-16759389eda9",
-                    "path": "sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy"
-                  },
-                  "resourceType": "SpriteFrameKeyframe",
-                  "resourceVersion": "2.0"
-                }
-              },
-              "Disabled": false,
-              "id": "039527c2-427d-4466-84ef-a911c2161e2b",
-              "IsCreationKey": false,
-              "Key": 2,
-              "Length": 1,
-              "resourceType": "Keyframe<SpriteFrameKeyframe>",
-              "resourceVersion": "2.0",
-              "Stretch": false
-            },
-            {
-              "$Keyframe<SpriteFrameKeyframe>": "",
-              "Channels": {
-                "0": {
-                  "$SpriteFrameKeyframe": "",
-                  "Id": {
-                    "name": "42ac7675-4a71-4ee6-aeb3-33a81f43419e",
-                    "path": "sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy"
-                  },
-                  "resourceType": "SpriteFrameKeyframe",
-                  "resourceVersion": "2.0"
-                }
-              },
-              "Disabled": false,
-              "id": "caef8d7b-c8d9-4193-9419-1176ceac72e5",
-              "IsCreationKey": false,
-              "Key": 3,
-              "Length": 1,
-              "resourceType": "Keyframe<SpriteFrameKeyframe>",
-              "resourceVersion": "2.0",
-              "Stretch": false
-            },
-            {
-              "$Keyframe<SpriteFrameKeyframe>": "",
-              "Channels": {
-                "0": {
-                  "$SpriteFrameKeyframe": "",
-                  "Id": {
-                    "name": "ac1fa491-164f-43fa-a036-bb185a189882",
-                    "path": "sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy"
-                  },
-                  "resourceType": "SpriteFrameKeyframe",
-                  "resourceVersion": "2.0"
-                }
-              },
-              "Disabled": false,
-              "id": "a2e67cd3-e90c-4f0c-873c-2f26d8a5c3a9",
-              "IsCreationKey": false,
-              "Key": 4,
-              "Length": 1,
-              "resourceType": "Keyframe<SpriteFrameKeyframe>",
-              "resourceVersion": "2.0",
-              "Stretch": false
-            },
-            {
-              "$Keyframe<SpriteFrameKeyframe>": "",
-              "Channels": {
-                "0": {
-                  "$SpriteFrameKeyframe": "",
-                  "Id": {
-                    "name": "d24860b2-f509-4bb4-a6d8-87cd01c04e84",
-                    "path": "sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy"
-                  },
-                  "resourceType": "SpriteFrameKeyframe",
-                  "resourceVersion": "2.0"
-                }
-              },
-              "Disabled": false,
-              "id": "9b222097-ab2f-474c-879c-95e182a15773",
-              "IsCreationKey": false,
-              "Key": 5,
-              "Length": 1,
-              "resourceType": "Keyframe<SpriteFrameKeyframe>",
-              "resourceVersion": "2.0",
-              "Stretch": false
-            },
-            {
-              "$Keyframe<SpriteFrameKeyframe>": "",
-              "Channels": {
-                "0": {
-                  "$SpriteFrameKeyframe": "",
-                  "Id": {
-                    "name": "ef8a7ca7-8203-44b3-9c0a-6d168c3e72ff",
-                    "path": "sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy"
-                  },
-                  "resourceType": "SpriteFrameKeyframe",
-                  "resourceVersion": "2.0"
-                }
-              },
-              "Disabled": false,
-              "id": "43201262-4bd9-43d1-bf68-889e130efeaf",
-              "IsCreationKey": false,
-              "Key": 6,
-              "Length": 1,
-              "resourceType": "Keyframe<SpriteFrameKeyframe>",
-              "resourceVersion": "2.0",
-              "Stretch": false
-            }
-          ],
-          "resourceType": "KeyframeStore<SpriteFrameKeyframe>",
-          "resourceVersion": "2.0"
-        },
-        "modifiers": [],
-        "name": "frames",
-        "resourceType": "GMSpriteFramesTrack",
-        "resourceVersion": "2.0",
-        "spriteId": null,
-        "trackColour": 0,
-        "tracks": [],
-        "traits": 0
-      }
+    "name":"sprCursedChestSteroidsUltra",
+    "playback":1,
+    "playbackSpeed":30,
+    "playbackSpeedType":0,
+    "resourceType":"GMSequence",
+    "resourceVersion":"2.0",
+    "showBackdrop":true,
+    "showBackdropImage":false,
+    "timeUnits":1,
+    "tracks":[
+      {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"88990d52-6be0-4f49-8958-e58280d02c91","path":"sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"b47473aa-b547-455d-9b5b-1d3c636b7046","IsCreationKey":false,"Key":0,"Length":1,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"fa5fee94-c272-4410-b04f-6560009de96b","path":"sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"ba5f8566-a379-4ceb-b2bb-1bdfb0ab41bd","IsCreationKey":false,"Key":1,"Length":1,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"91d93e80-aa3f-4ee1-bcae-16759389eda9","path":"sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"039527c2-427d-4466-84ef-a911c2161e2b","IsCreationKey":false,"Key":2,"Length":1,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"42ac7675-4a71-4ee6-aeb3-33a81f43419e","path":"sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"caef8d7b-c8d9-4193-9419-1176ceac72e5","IsCreationKey":false,"Key":3,"Length":1,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"ac1fa491-164f-43fa-a036-bb185a189882","path":"sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"a2e67cd3-e90c-4f0c-873c-2f26d8a5c3a9","IsCreationKey":false,"Key":4,"Length":1,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"d24860b2-f509-4bb4-a6d8-87cd01c04e84","path":"sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"9b222097-ab2f-474c-879c-95e182a15773","IsCreationKey":false,"Key":5,"Length":1,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"ef8a7ca7-8203-44b3-9c0a-6d168c3e72ff","path":"sprites/sprCursedChestSteroidsUltra/sprCursedChestSteroidsUltra.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"43201262-4bd9-43d1-bf68-889e130efeaf","IsCreationKey":false,"Key":6,"Length":1,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+          ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
-    "visibleRange": null,
-    "volume": 1,
-    "xorigin": 12,
-    "yorigin": 12
+    "visibleRange":null,
+    "volume":1,
+    "xorigin":12,
+    "yorigin":12,
   },
-  "swatchColours": null,
-  "swfPrecision": 2.525,
-  "textureGroupId": {
-    "name": "Default",
-    "path": "texturegroups/Default"
+  "swatchColours":null,
+  "swfPrecision":2.525,
+  "textureGroupId":{
+    "name":"Default",
+    "path":"texturegroups/Default",
   },
-  "type": 0,
-  "VTile": false,
-  "width": 24
+  "type":0,
+  "VTile":false,
+  "width":24,
 }

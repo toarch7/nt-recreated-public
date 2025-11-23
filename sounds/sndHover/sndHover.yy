@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndHover",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndHover",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 0,
-  "conversionMode": 0,
-  "duration": 0.17138322,
-  "name": "sndHover",
-  "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.17138322,
+  "exportDir":"",
+  "name":"sndHover",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
   },
-  "preload": true,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndHover.wav",
-  "type": 0,
-  "volume": 1
+  "preload":true,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndHover.wav",
+  "volume":1.0,
 }

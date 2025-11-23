@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndEliteInspectorEnter",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndEliteInspectorEnter",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 0,
-  "conversionMode": 0,
-  "duration": 0.576719,
-  "name": "sndEliteInspectorEnter",
-  "parent": {
-    "name": "EliteInspector",
-    "path": "folders/Sounds/Enemies/IDPD/EliteInspector.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.576719,
+  "exportDir":"",
+  "name":"sndEliteInspectorEnter",
+  "parent":{
+    "name":"EliteInspector",
+    "path":"folders/Sounds/Enemies/IDPD/EliteInspector.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndEliteInspectorEnter.wav",
-  "type": 0,
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndEliteInspectorEnter.wav",
+  "volume":1,
 }

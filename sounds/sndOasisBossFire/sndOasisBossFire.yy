@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndOasisBossFire",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndOasisBossFire",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 1,
-  "conversionMode": 0,
-  "duration": 1.6053969,
-  "name": "sndOasisBossFire",
-  "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":1,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.6053969,
+  "exportDir":"",
+  "name":"sndOasisBossFire",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndOasisBossFire.wav",
-  "type": 0,
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndOasisBossFire.wav",
+  "volume":1,
 }

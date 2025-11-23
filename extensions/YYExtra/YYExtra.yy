@@ -20,7 +20,7 @@
   "exportToGame":true,
   "extensionVersion":"0.0.1",
   "files":[
-    {"$GMExtensionFile":"","%Name":"YYExtra.ext","constants":[],"copyToTargets":8,"filename":"YYExtra.ext","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"YYExtra.ext","constants":[],"copyToTargets":8,"filename":"YYExtra.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"IsKitKat","argCount":0,"args":[],"documentation":"","externalName":"IsKitKat","help":"IsKitKat()","hidden":false,"kind":4,"name":"IsKitKat","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"SetVolumeControl","argCount":0,"args":[2,],"documentation":"","externalName":"SetVolumeControl","help":"SetVolumeControl(val)","hidden":false,"kind":4,"name":"SetVolumeControl","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"IsVersionR","argCount":0,"args":[],"documentation":"","externalName":"IsVersionR","help":"IsVersionR()","hidden":false,"kind":4,"name":"IsVersionR","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
@@ -29,21 +29,11 @@
         {"$GMExtensionFunction":"","%Name":"CheckPermission","argCount":0,"args":[],"documentation":"","externalName":"CheckPermission","help":"CheckPermission()","hidden":false,"kind":4,"name":"CheckPermission","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"RequestPermission","argCount":0,"args":[],"documentation":"","externalName":"RequestPermission","help":"RequestPermission()","hidden":false,"kind":4,"name":"RequestPermission","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"OpenDirectoryTree","argCount":0,"args":[],"documentation":"","externalName":"OpenDirectoryTree","help":"OpenDirectoryTree()","hidden":false,"kind":4,"name":"OpenDirectoryTree","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-      ],"init":"","kind":4,"name":"YYExtra.ext","order":[
-        {"name":"SetVolumeControl","path":"extensions/YYExtra/YYExtra.yy",},
-        {"name":"ResourcepackInstall","path":"extensions/YYExtra/YYExtra.yy",},
-        {"name":"SetClipboard","path":"extensions/YYExtra/YYExtra.yy",},
-        {"name":"IsKitKat","path":"extensions/YYExtra/YYExtra.yy",},
-        {"name":"IsVersionR","path":"extensions/YYExtra/YYExtra.yy",},
-        {"name":"CheckPermission","path":"extensions/YYExtra/YYExtra.yy",},
-      ],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
-    {"$GMExtensionFile":"","%Name":"YYExtra.gml","constants":[],"copyToTargets":-1,"filename":"YYExtra.gml","final":"","functions":[
+      ],"init":"","kind":4,"name":"YYExtra.ext","origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+    {"$GMExtensionFile":"v1","%Name":"YYExtra.gml","constants":[],"copyToTargets":-1,"filename":"YYExtra.gml","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"GetPickedFile","argCount":0,"args":[],"documentation":"","externalName":"_GetPickedFile","help":"GetPickedFile()","hidden":false,"kind":2,"name":"GetPickedFile","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"FilePickerCleanup","argCount":0,"args":[],"documentation":"","externalName":"_FilePickerCleanup","help":"","hidden":true,"kind":2,"name":"FilePickerCleanup","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-      ],"init":"","kind":2,"name":"YYExtra.gml","order":[
-        {"name":"GetPickedFile","path":"extensions/YYExtra/YYExtra.yy",},
-        {"name":"FilePickerCleanup","path":"extensions/YYExtra/YYExtra.yy",},
-      ],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+      ],"init":"","kind":2,"name":"YYExtra.gml","origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":"",
   "hasConvertedCodeInjection":true,

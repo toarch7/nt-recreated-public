@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndNothing2DeadStart",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndNothing2DeadStart",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 1,
-  "conversionMode": 0,
-  "duration": 4.944031,
-  "name": "sndNothing2DeadStart",
-  "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":1,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":4.944031,
+  "exportDir":"",
+  "name":"sndNothing2DeadStart",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
   },
-  "preload": true,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndNothing2DeadStart.wav",
-  "type": 0,
-  "volume": 1
+  "preload":true,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndNothing2DeadStart.wav",
+  "volume":1,
 }

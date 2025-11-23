@@ -1,5 +1,5 @@
 {
-  "$GMSprite":"",
+  "$GMSprite":"v2",
   "%Name":"sprGoldToxicGunLoadout",
   "bboxMode":0,
   "bbox_bottom":40,
@@ -12,12 +12,12 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"46e0aae8-5852-4cd3-a1a4-e5b5dc9dabb6","name":"46e0aae8-5852-4cd3-a1a4-e5b5dc9dabb6","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"","%Name":"8de333d7-91de-4a01-8cff-466b9d06bcc2","name":"8de333d7-91de-4a01-8cff-466b9d06bcc2","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"","%Name":"70833743-9491-4db8-b457-b939faa32e5b","name":"70833743-9491-4db8-b457-b939faa32e5b","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"","%Name":"b5ca94dc-0f9b-4e45-aa72-d68c2b7bf9f1","name":"b5ca94dc-0f9b-4e45-aa72-d68c2b7bf9f1","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"","%Name":"39ecbd21-d465-4b4f-91c9-c318def9a816","name":"39ecbd21-d465-4b4f-91c9-c318def9a816","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"","%Name":"ee219743-2aa1-4eb5-93a8-212629fa401f","name":"ee219743-2aa1-4eb5-93a8-212629fa401f","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"46e0aae8-5852-4cd3-a1a4-e5b5dc9dabb6","name":"46e0aae8-5852-4cd3-a1a4-e5b5dc9dabb6","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"8de333d7-91de-4a01-8cff-466b9d06bcc2","name":"8de333d7-91de-4a01-8cff-466b9d06bcc2","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"70833743-9491-4db8-b457-b939faa32e5b","name":"70833743-9491-4db8-b457-b939faa32e5b","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"b5ca94dc-0f9b-4e45-aa72-d68c2b7bf9f1","name":"b5ca94dc-0f9b-4e45-aa72-d68c2b7bf9f1","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"39ecbd21-d465-4b4f-91c9-c318def9a816","name":"39ecbd21-d465-4b4f-91c9-c318def9a816","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"ee219743-2aa1-4eb5-93a8-212629fa401f","name":"ee219743-2aa1-4eb5-93a8-212629fa401f","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
@@ -75,24 +75,12 @@
     "timeUnits":1,
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"46e0aae8-5852-4cd3-a1a4-e5b5dc9dabb6","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"cc0019dd-7361-4326-bb6a-e264925faeee","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"8de333d7-91de-4a01-8cff-466b9d06bcc2","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"41f1fb17-1452-4c9b-8b72-e2ae1832d229","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"70833743-9491-4db8-b457-b939faa32e5b","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"da946f16-c472-4b90-94fb-7980870f6f19","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"b5ca94dc-0f9b-4e45-aa72-d68c2b7bf9f1","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"47adf760-0577-47d7-b412-54e84fe04c51","IsCreationKey":false,"Key":3.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"39ecbd21-d465-4b4f-91c9-c318def9a816","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"7d07911c-824c-400d-9bae-f79fec9ed7ff","IsCreationKey":false,"Key":4.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"ee219743-2aa1-4eb5-93a8-212629fa401f","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"d34a2fec-77c6-493d-9a90-eb7c42ff4cf2","IsCreationKey":false,"Key":5.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"46e0aae8-5852-4cd3-a1a4-e5b5dc9dabb6","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"cc0019dd-7361-4326-bb6a-e264925faeee","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"8de333d7-91de-4a01-8cff-466b9d06bcc2","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"41f1fb17-1452-4c9b-8b72-e2ae1832d229","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"70833743-9491-4db8-b457-b939faa32e5b","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"da946f16-c472-4b90-94fb-7980870f6f19","IsCreationKey":false,"Key":2.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"b5ca94dc-0f9b-4e45-aa72-d68c2b7bf9f1","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"47adf760-0577-47d7-b412-54e84fe04c51","IsCreationKey":false,"Key":3.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"39ecbd21-d465-4b4f-91c9-c318def9a816","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"7d07911c-824c-400d-9bae-f79fec9ed7ff","IsCreationKey":false,"Key":4.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"ee219743-2aa1-4eb5-93a8-212629fa401f","path":"sprites/sprGoldToxicGunLoadout/sprGoldToxicGunLoadout.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"d34a2fec-77c6-493d-9a90-eb7c42ff4cf2","IsCreationKey":false,"Key":5.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

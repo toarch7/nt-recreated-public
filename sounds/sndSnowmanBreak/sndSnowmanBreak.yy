@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndSnowmanBreak",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndSnowmanBreak",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 1,
-  "conversionMode": 0,
-  "duration": 0.7962358,
-  "name": "sndSnowmanBreak",
-  "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":1,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.7962358,
+  "exportDir":"",
+  "name":"sndSnowmanBreak",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndSnowmanBreak.wav",
-  "type": 0,
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndSnowmanBreak.wav",
+  "volume":1,
 }

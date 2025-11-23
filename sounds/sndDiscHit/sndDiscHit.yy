@@ -1,25 +1,26 @@
 {
-  "$GMSound": "",
-  "%Name": "sndDiscHit",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndDiscHit",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "bitRate": 128,
-  "compression": 1,
-  "conversionMode": 0,
-  "duration": 0.31732425,
-  "name": "sndDiscHit",
-  "parent": {
-    "name": "SFX",
-    "path": "folders/Sounds/SFX.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":1,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.31732425,
+  "exportDir":"",
+  "name":"sndDiscHit",
+  "parent":{
+    "name":"SFX",
+    "path":"folders/Sounds/SFX.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndDiscHit.wav",
-  "type": 0,
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndDiscHit.wav",
+  "volume":1,
 }

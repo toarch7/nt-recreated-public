@@ -1,5 +1,5 @@
 {
-  "$GMSprite":"",
+  "$GMSprite":"v2",
   "%Name":"sprBigPortraitChickenHeadless",
   "bboxMode":0,
   "bbox_bottom":193,
@@ -12,8 +12,8 @@
   "edgeFiltering":false,
   "For3D":false,
   "frames":[
-    {"$GMSpriteFrame":"","%Name":"dae7ef4d-6978-4495-b88b-534fb177172d","name":"dae7ef4d-6978-4495-b88b-534fb177172d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
-    {"$GMSpriteFrame":"","%Name":"310c1b1f-89d6-45e8-9ae8-abbbfe29dd8e","name":"310c1b1f-89d6-45e8-9ae8-abbbfe29dd8e","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"dae7ef4d-6978-4495-b88b-534fb177172d","name":"dae7ef4d-6978-4495-b88b-534fb177172d","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
+    {"$GMSpriteFrame":"v1","%Name":"310c1b1f-89d6-45e8-9ae8-abbbfe29dd8e","name":"310c1b1f-89d6-45e8-9ae8-abbbfe29dd8e","resourceType":"GMSpriteFrame","resourceVersion":"2.0",},
   ],
   "gridX":0,
   "gridY":0,
@@ -71,12 +71,8 @@
     "timeUnits":1,
     "tracks":[
       {"$GMSpriteFramesTrack":"","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"$KeyframeStore<SpriteFrameKeyframe>":"","Keyframes":[
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"dae7ef4d-6978-4495-b88b-534fb177172d","path":"sprites/sprBigPortraitChickenHeadless/sprBigPortraitChickenHeadless.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"0403870d-5039-4727-bd80-6cd1b9561ef5","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
-            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{
-                "0":{"$SpriteFrameKeyframe":"","Id":{"name":"310c1b1f-89d6-45e8-9ae8-abbbfe29dd8e","path":"sprites/sprBigPortraitChickenHeadless/sprBigPortraitChickenHeadless.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},
-              },"Disabled":false,"id":"6345fcb2-7854-4919-ae3b-16649fd2cca4","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"dae7ef4d-6978-4495-b88b-534fb177172d","path":"sprites/sprBigPortraitChickenHeadless/sprBigPortraitChickenHeadless.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"0403870d-5039-4727-bd80-6cd1b9561ef5","IsCreationKey":false,"Key":0.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
+            {"$Keyframe<SpriteFrameKeyframe>":"","Channels":{"0":{"$SpriteFrameKeyframe":"","Id":{"name":"310c1b1f-89d6-45e8-9ae8-abbbfe29dd8e","path":"sprites/sprBigPortraitChickenHeadless/sprBigPortraitChickenHeadless.yy",},"resourceType":"SpriteFrameKeyframe","resourceVersion":"2.0",},},"Disabled":false,"id":"6345fcb2-7854-4919-ae3b-16649fd2cca4","IsCreationKey":false,"Key":1.0,"Length":1.0,"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"2.0","Stretch":false,},
           ],"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"2.0",},"modifiers":[],"name":"frames","resourceType":"GMSpriteFramesTrack","resourceVersion":"2.0","spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange":null,

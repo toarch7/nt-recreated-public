@@ -1,5 +1,5 @@
 {
-  "$GMWindowsOptions":"",
+  "$GMWindowsOptions":"v1",
   "%Name":"Windows",
   "ConfigValues":{
     "MultiplayerTesting":{
@@ -12,6 +12,7 @@
   "option_windows_company_info":"",
   "option_windows_copyright_info":"",
   "option_windows_copy_exe_to_dest":false,
+  "option_windows_d3dswapeffectdiscard":false,
   "option_windows_description_info":"",
   "option_windows_disable_sandbox":true,
   "option_windows_display_cursor":true,
