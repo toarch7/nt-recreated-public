@@ -177,7 +177,6 @@ function performSpriteImport(isForce) {
                 twoPassEmbeddedTextures.push({
                     texInfo, textureIndex, indexInGroup: -1, texturePtr
                 });
-                console.log(textureIndex);
             }
         }
 
@@ -218,9 +217,6 @@ function performSpriteImport(isForce) {
                 let dims = getPngDimensions(textureData);
                 textureImageWidth = dims.width;
                 textureImageHeight = dims.height;
-                // console.log(textureData);
-                // const fs = require('fs');
-                // fs.writeFileSync(texInfo.groupName, textureData);
             }
 
             if (textureData) {
@@ -323,9 +319,14 @@ function performSpriteImport(isForce) {
             const layers = resourceInfo.layers;
             const frames = resourceInfo.frames;
             
-            // if (!(spriteName in spriteOverridesMap)) {
-            //     assert.equal(frames.length, sprite.imageNumber, spriteName + " has a varying amount of frames than it's resource file specifies");
-            // }
+            if (!(spriteName in spriteOverridesMap)) {
+                if (spriteName === "sprClusterNader" && !wad.isAssumedlyGMS2()) {
+                    console.warn("\n[WARNING] Nuclear Throne release u99r1 doesn't have some sprClusterNader frames. You must get them from somewhere else. This won't break the game.\n");
+                }
+                else {
+                    assert.equal(frames.length, sprite.imageNumber, spriteName + " has a varying amount of frames than it's resource file specifies");
+                }
+            }
 
             let frameCount = Math.min(sprite.imageNumber, frames.length);
 
