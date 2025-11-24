@@ -440,7 +440,7 @@ if reload > 0 {
     if skill_get(mut_stress) {
         var stress = 1 - hp / max(1, max_hp)
 
-        reload += stress
+        reload -= stress
 
         if race == 7 && breload {
 			breload -= stress * timescale

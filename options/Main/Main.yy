@@ -1,5 +1,5 @@
 {
-  "$GMMainOptions":"v5",
+  "$GMMainOptions":"v3",
   "%Name":"Main",
   "ConfigValues":{
     "MultiplayerTesting":{
@@ -7,7 +7,6 @@
     },
   },
   "name":"Main",
-  "option_allow_instance_change":true,
   "option_audio_error_behaviour":false,
   "option_author":"toncho_",
   "option_collision_compatibility":false,
@@ -19,7 +18,6 @@
   "option_legacy_json_parsing":false,
   "option_legacy_number_conversion":false,
   "option_legacy_other_behaviour":false,
-  "option_legacy_primitive_drawing":true,
   "option_mips_for_3d_textures":false,
   "option_remove_unused_assets":false,
   "option_sci_usesci":false,

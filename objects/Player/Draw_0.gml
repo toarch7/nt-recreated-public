@@ -18,7 +18,7 @@ if race == 3 {
 	if KeyCont.hold_spec[index] {
 		draw_sprite_ext(skill_get(5) ? sprMindPowerTB : sprMindPower, img, x, y, right, 1, angle, c_white, 1)
 	}
-	else if ultra == 2 {
+	else if GameCont.ultra == 2 {
 		draw_sprite_ext(sprEyesB, img % 6, x, y, right, 1, angle, 0xccfbc7, 1)
 	}
 }

@@ -6,7 +6,7 @@ scrTarget()
 
 var _wakeup_call;
 
-if hp < max_hp || !instance_number(enemy) || (instance_exists(target) && scrTargetVisible(target, 64, true) && !instance_exists(Portal)) {
+if hp < max_hp || !instance_number(enemy) || (instance_exists(target) && scrTargetIsVisible(target, 64, true) && !instance_exists(Portal)) {
 	_wakeup_call = true
 }
 else _wakeup_call = false
