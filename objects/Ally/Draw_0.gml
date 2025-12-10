@@ -1,8 +1,18 @@
 if lockstep_stop
 	exit
 
-gunspr = sprBanditGun
-if ((gunangle <= 180) && (spr_idle != sprAllyappear)) draw_sprite_ext(gunspr, - 1, (x + lengthdir_x((-wkick), gunangle)), (y + lengthdir_y((-wkick), gunangle)), 1, right, gunangle, c_white, 1)
-draw_sprite_ext(sprite_index, - 1, x, y, right, 1, 0, c_white, 1)
-if (GameCont.area == 101) draw_sprite(sprPlayerBubble, - 1, x, y)
-if ((gunangle > 180) && (spr_idle != sprAllyappear)) draw_sprite_ext(gunspr, - 1, (x + lengthdir_x((-wkick), gunangle)), (y + lengthdir_y((-wkick), gunangle)), 1, right, gunangle, c_white, 1)
+var _gunspr = buttgot ? sprAllyGunTB : sprAllyGun,
+	_dx = x + lengthdir_x((-wkick), gunangle),
+	_dy = y + lengthdir_y((-wkick), gunangle)
+
+if ((gunangle <= 180) && (spr_idle != sprAllyAppear)) {
+	draw_sprite_ext(_gunspr, 0, _dx, _dy, 1, right, gunangle, c_white, image_alpha)
+}
+
+draw_sprite_ext(sprite_index, -1, x, y, image_xscale * right, image_yscale, image_angle, image_blend, image_alpha)
+
+if (GameCont.area == area_oasis) draw_sprite(sprPlayerBubble, -1, x, y)
+
+if ((gunangle > 180) && (spr_idle != sprAllyAppear)) {
+	draw_sprite_ext(_gunspr, -1, _dx, _dy, 1, right, gunangle, c_white, 1)
+}

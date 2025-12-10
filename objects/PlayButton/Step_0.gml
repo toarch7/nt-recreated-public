@@ -5,7 +5,7 @@ if current_frame < start
 	exit
 
 if current_frame == start {
-	snd_play(sndAppear, 0.7 + random(0.1))
+	snd_play(sndAppear, 1.2)
 	
 	visible = 1
 	appear = 2

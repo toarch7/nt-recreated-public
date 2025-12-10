@@ -13,7 +13,7 @@ if !charge {
         spr_hurt = sprExploGuardianChargeHurt
         charge = 1
         walk = 0
-        snd_play_hit(sndExploGuardianCharge, .2)
+        snd_play_hit(sndExploGuardianCharge, 0.2)
     }
 
     if sprite_index == spr_fire sprite_index = spr_idle

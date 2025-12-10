@@ -1,4 +1,2 @@
-if lockstep_stop
-	exit
-
+/// @description Create trail
 scrBoltTrail()

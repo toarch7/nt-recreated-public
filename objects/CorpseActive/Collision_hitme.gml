@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-var dmg = 1 + skill_get(20)
+var dmg = 1 + scr_skill_get(20)
 
 if size >= other.size - 1 && speed > 2 && !other.inframes {
     with other {
@@ -16,7 +16,7 @@ if size >= other.size - 1 && speed > 2 && !other.inframes {
         inframes = 5
     }
 
-    if skill_get(20) {
+    if scr_skill_get(20) {
         instance_create(x, y, ImpactWrists)
 
         snd_play_hit(sndImpWristHit, 0.2)

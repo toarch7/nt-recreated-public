@@ -39,7 +39,7 @@ spawn_vans = 0
 destiny = 0
 start = 0
 proto = 0
-// TODO: refactor to support multiple ultras
+// TODO: refactor to support multiple players ultras
 ultra = 0
 coopultra = 0
 heavyheart = false
@@ -54,12 +54,12 @@ skills = ds_list_create()
 patiencepick = 0
 patienceskill = 0
 patient = 0
-
+codpick = false
 waypoints = 0
 waypnt[0] = 1
 waysub[0] = 1
 waylps[0] = 0
-
+can_advance_stage = true
 hqarea = 1
 hqsubarea = 1
 

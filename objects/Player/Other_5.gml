@@ -1,10 +1,10 @@
-if skill_get(mut_strong_spirit) {
+if scr_skill_get(mut_strong_spirit) {
 	if !can_spirit && !spirit {
 		can_spirit = true
 	}
 }
 
-if skill_get(mut_patience) && !GameCont.patient {
+if scr_skill_get(mut_patience) && !GameCont.patient {
     GameCont.skillpoints ++
 }
 

@@ -1,5 +1,7 @@
 event_inherited()
+
 typ = 0
+damage = 5
 image_speed = 0.7
-hit_id = -1
-team = 0
+
+spr_fade = sprGuardianBulletHit

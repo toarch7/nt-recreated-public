@@ -12,6 +12,6 @@ if !roll && race != 15 {
         if !place_free(x, y + vspeed) vspeed = 0
     }
 } else {
-    speed *= .3;
+    speed *= 0.3;
     move_bounce_solid(00)
 }

@@ -1,0 +1,1 @@
+if (sprite_exists(spr_fade) && sprite_index != spr_fade) scrBulletHitFX(spr_fade)

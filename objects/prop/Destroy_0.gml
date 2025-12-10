@@ -6,8 +6,7 @@ if self[$ "corpse"] {
     }
 }
 
-if raddrop > 0
-	scrRadDrop(raddrop)
+if (raddrop > 0) scrRadDrop(x, y, raddrop)
 
 if isset("snd_dead")
 	snd_play_hit(snd_dead, 0.2)

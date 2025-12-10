@@ -14,38 +14,42 @@ if gamepad_button_check_pressed(0, gp_face1) {
     event_perform(ev_mouse, ev_global_left_release)
 }
 
+var _cx = view_xview_center, _cy = view_yview_center
+
 if mode == 0 {
-    draw_sprite(sprSaving, da, view_xview + view_width / 2, view_yview + view_height / 2 - 16)
+    draw_sprite(sprSaving, da, _cx, _cy - 16)
     da += 0.5
 
     draw_set_halign(fa_center)
     draw_set_valign(fa_middle)
     draw_set_color(c_white)
-    draw_text_shadow(view_xview + view_width / 2, view_yview + view_height / 2 + 24, "DO NOT TURN OFF NUCLEAR THRONE\nWHILE THIS SAVING ICON IS DISPLAYED.")
+    draw_text_shadow(_cx, _cy + 24, "DO NOT TURN OFF NUCLEAR THRONE\nWHILE THIS SAVING ICON IS DISPLAYED.")
 }
 
 if mode == 1 {
     draw_set_halign(fa_center)
     draw_set_valign(fa_middle)
     draw_set_color(c_white)
-    draw_text_nt(view_xview + view_width / 2, view_yview + view_height / 2, "@sMADE IN GAMEMAKER")
+    draw_text_nt(_cx, _cy, "@sMADE IN GAMEMAKER")
 }
 
 if mode == 2 {
-    draw_sprite(sprite_index, 0, view_width / 2, view_height / 2)
-    gpu_set_blendmode(bm_add)
-
-    repeat 10 {
-        draw_sprite_ext(sprite_index, 0, view_width / 2 + random(8) - 4, view_height / 2 + random(8) - 4, 1, 1, 0, c_white, .1)
+	var _px = view_xview + (view_width - sprite_width) div 2,
+		_py = view_yview + (view_height - sprite_height)
+	
+    draw_sprite(sprite_index, 0, _px, _py)
+    
+	gpu_set_blendmode(bm_add)
+    repeat (10) {
+        draw_sprite_ext(sprite_index, 0, _px + orandom(4), _py + orandom(4), 1, 1, 0, c_white, 0.1)
     }
-
     gpu_set_blendmode(bm_normal)
 }
 
 if mode == 3 {
     draw_set_halign(fa_center)
     draw_set_valign(fa_middle)
-    draw_text_nt(view_xview + view_width / 2, view_yview + view_height / 2, "@yVLAMBEER@s#&#@wPAUL VEER#JUKIO KALLIO#JOONAS TURNER#JUSTIN CHAN@s##PRESENT###")
+    draw_text_nt(_cx, _cy, "@yVLAMBEER@s#&#@wPAUL VEER#JUKIO KALLIO#JOONAS TURNER#JUSTIN CHAN#YELLOWAFTERLIFE@s##PRESENT###")
 }
 
 draw_set_halign(fa_left)

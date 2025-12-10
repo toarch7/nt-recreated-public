@@ -1,39 +1,27 @@
-with instance_create(x, y, EBulletHit)
-sprite_index = sprGuardianBulletHit
+event_inherited()
 
-snd_play(sndBigBallExplo)
+snd_play_hit_big(sndBigBallExplo)
 
 instance_create(x, y, PortalClear)
 
-with ThroneStatue {
-    if distance_to_object(other) <= 32 && instance_exists(Nothing) {
-        instance_destroy()
-    }
-}
-
 if place_meeting(x, y, Floor) scrDrop(50, 0)
 
-var ang = random_angle
-var n = 360 / (7 + GameCont.loops)
-var spd = 2
+var _ang = random_angle,
+	_count = 7 + GameCont.loops,
+	_n = 360 / _count,
+	_spd = 2
 
 repeat 4 {
-    repeat 7 + GameCont.loops {
-        with instance_create(x, y, GuardianBullet) {
+    repeat _count {
+        with scr_projectile_create(x, y, GuardianBullet, _ang, _spd) {
             sprite_index = sprGuardianBullet
-
-            motion_add(ang, spd)
-            team = other.team
-
             typ = 2
-
-            hit_id = other.hit_id
         }
 
-        ang += n
+        _ang += _n
     }
 
-    spd += 0.5
+    _spd += 0.5
 }
 
-with BackCont shake += 5
+scr_screenshake(5)

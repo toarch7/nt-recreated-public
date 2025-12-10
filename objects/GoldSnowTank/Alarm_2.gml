@@ -28,10 +28,10 @@ if ammo {
     }
 
     alarm[2] = 2
-    wave += .1
+    wave += 0.1
     ammo -= 1
 } else {
-    snd_play_hit_big(sndGoldTankCooldown, .2)
+    snd_play_hit_big(sndGoldTankCooldown, 0.2)
     rest = 1
     alarm[1] = 10
     sprite_index = spr_idle

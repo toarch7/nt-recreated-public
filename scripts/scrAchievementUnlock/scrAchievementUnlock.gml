@@ -5,7 +5,7 @@ function scrAchievementUnlock(_achievement_id) {
 	
     if save_get_value("achievement", string(_achievement_id)) exit
 		
-	if opt_achievs {
+	if UberCont.opt_achievs {
 	    with instance_create(instance_number(AchievementSplash), 0, AchievementSplash) {
 	        str1 = chiev_name[_achievement_id]
 	        str2 = chiev_text[_achievement_id]

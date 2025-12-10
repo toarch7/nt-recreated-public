@@ -1,20 +1,15 @@
 event_inherited()
 
-curse = 0
+curse = false
 
-if GameCont.crown > 1 && instance_exists(GenCont) {
-    if rng_float(RNGStates.Chest, 7) <= 1
-	or (GameCont.crown == 11 && rng_float(RNGStates.Chest, 7) <= 4) {
-        curse = true
-    }
-	else curse = 0
-}
-
-if GameCont.underwater {
-    sprite_index = sprClamChest
-}
-
-if curse {
-	sprite_index = sprCursedChest
+if object_index == WeaponChest {
+	if (GameCont.crown > 1 && instance_exists(GenCont)) {
+		if rng_float(RNGStates.Chest, 7) <= (scrCrownCheck(Crown.Curses) ? 4 : 1) {
+			curse = true
+	    }
+	}
+	
+	if (GameCont.underwater) sprite_index = sprClamChest
+	else if (curse) sprite_index = sprCursedChest
 }
 

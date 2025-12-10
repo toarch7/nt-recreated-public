@@ -1,8 +1,8 @@
 event_inherited()
-friction = 0.6
-
+damage = 1
 wallbounce = 0
+friction = 0.6
 alarm[2] = 1
+typ = 1
 
-typ = 1 //0 = nothing, 1 = deflectable, 2 = destructable
-dmg = 1
+spr_fade = sprEBullet3Disappear

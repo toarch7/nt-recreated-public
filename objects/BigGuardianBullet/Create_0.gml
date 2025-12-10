@@ -1,6 +1,8 @@
 event_inherited()
 typ = 0
-image_speed = .5
+damage = 12
+image_speed = 0.5
 snd_play_gun(sndBigBallFire)
-team = 1
-creator = noone
+team = team_enemy
+
+spr_disappear = sprGuardianBulletHit

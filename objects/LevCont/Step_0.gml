@@ -2,29 +2,28 @@ view_xview = 0
 view_yview = 0
 
 // align
-var objects = [ SkillIcon, CrownIcon ]
+var _objects = [ SkillIcon, CrownIcon ],
+	_count = array_length(_objects)
 
-for(var i = 0; i < array_length(objects); i ++) {
-	var obj = objects[i],
-		step = 32, xx, a = false
+for(var i = 0; i < _count; i ++) {
+	var _obj = _objects[i],
+		_x = view_xview_center,
+		_any = false,
+		_step = 32
 	
-	if !instance_exists(obj)
-		continue
-	
-	do {
-		xx = view_width / 2 + (step * max(0, instance_number(obj) - 1) * 0.5)
+	if instance_exists(_obj) {
+		do {
+			_x = view_width / 2 + (_step * max(0, instance_number(_obj) - 1) * 0.5)
+			if (_any) _step -= 2
+			_any = true
+		}
+		until (_x < view_width)
 		
-		if a
-			step -= 2
+		_x = view_xview + _x
 		
-		a = true
-	}
-	until xx < view_width
-	
-	xx = view_xview + xx
-	
-	with obj {
-		x = xx
-		xx -= step
+		with _obj {
+			x = _x
+			_x -= _step
+		}
 	}
 }

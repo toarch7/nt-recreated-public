@@ -11,6 +11,7 @@ if android_check_storage_permission() == os_permission_denied {
 	}
 }
 
+scr_debug_overlay_load()
 
 alarm[0] = 1
 

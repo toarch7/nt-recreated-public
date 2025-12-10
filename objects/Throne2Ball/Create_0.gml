@@ -1,8 +1,9 @@
-alarm[2] = 1
+event_inherited()
+
 typ = 2
-dmg = 12
+damage = 12
 image_speed = 0.4
 friction = 0.25
 timeout = 0
-angle = 0
-hit_id = -1
+angle = random_angle
+sound = true

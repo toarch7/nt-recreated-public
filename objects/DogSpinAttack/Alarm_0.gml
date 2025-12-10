@@ -28,7 +28,7 @@ repeat 6 {
 
 if GameCont.ultra == 1 {
     repeat 6 {
-        with instance_create(x + lengthdir_x(24, - direction), y + lengthdir_y(16, - direction), AllyBullet) {
+        with instance_create(x + lengthdir_x(24, -direction), y + lengthdir_y(16, -direction), AllyBullet) {
             creator = other.id
             motion_add(-other.direction, 2)
             image_angle = direction

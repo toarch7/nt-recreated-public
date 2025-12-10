@@ -3,8 +3,8 @@ max_hp *= (1 + (GameCont.loops / 3))
 raddrop = 50
 meleedamage = 0
 size = 3
-hit_id = 33
-main = 1
+hitid = HitId.Technomancer
+main = true
 spr_idle = sprTechnoMancerInactive
 spr_walk = sprTechnoMancerInactive
 spr_hurt = sprTechnoMancerHurt
@@ -16,10 +16,7 @@ snd_hurt = sndTechnomancerHurt
 snd_dead = sndTechnomancerDead
 
 with Wall {
-    if place_meeting(x, y, other) {
-        instance_destroy()
-        instance_create(x, y, FloorExplo)
-    }
+	if (place_meeting(x, y, other)) scrWallDestroy(id)
 }
 
 alarm[1] = 300

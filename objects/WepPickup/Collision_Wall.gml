@@ -3,4 +3,4 @@ if lockstep_stop
 
 move_bounce_solid(00)
 move_outside_solid(point_direction(other.x + 8, other.y + 8, x, y), 2)
-speed *= .4
+speed *= 0.4

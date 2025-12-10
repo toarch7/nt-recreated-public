@@ -1,11 +1,17 @@
-friction = 0.02
-alarm[0] = 300
-offx = (random(2) - 1)
-offy = (random(2) - 1)
-image_speed = 0.4
+event_inherited()
+
 typ = 1
-alarm[1] = 1
-spin = ((10 + random(10)) * choose(1, - 1))
+
+damage = 45
+knockback_speed = 6
+
+friction = 0.02
+
+image_speed = 0.4
+spin = ((10 + random(10)) * choose(1, -1))
+
 snd = sndBloodCannonLoop
 snd_play(snd)
-hit_id = -1
+
+alarm[0] = 300
+alarm[1] = 1

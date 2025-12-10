@@ -30,6 +30,6 @@ alarm[1] = 120 + random(10)
 walk = 0
 
 spr_shadow = shd64
-//spr_shadow_y = 7
+spr_shadow_y = 7
 
 image_speed = 0.4

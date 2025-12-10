@@ -1,9 +1,12 @@
 /// @function snd_play_gun_small
 /// @param {Asset.GMSound} sound_index
-/// @param random_pitch
+/// @param random_pitch=0.2
 function snd_play_gun_small(_sound_index, _random_pitch = 0.2) {
-    if GameCont.area == 101 && _sound_index != sndOasisMelee
+    if scr_test_is_fps_uncapped() return -1
+	
+	if GameCont.area == area_oasis && _sound_index != sndOasisMelee {
         _sound_index = sndOasisShoot
+	}
 	
     _sound_index = custom_sound_check(_sound_index)
     

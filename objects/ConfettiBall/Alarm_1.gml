@@ -1,1 +1,1 @@
-friction = .3
+friction = 0.3

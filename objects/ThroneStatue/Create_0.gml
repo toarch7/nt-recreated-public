@@ -5,10 +5,9 @@ spr_idle = sprThroneStatue
 spr_hurt = sprThroneStatue
 spr_dead = sprThroneStatueDead
 
-size = 1
+size = 5
 
 event_inherited()
 
-team = 1
+team = team_enemy
 snd_hurt = sndHitRock
-friction = 1000

@@ -1,4 +1,5 @@
 event_inherited()
-damage = 1
-typ = 2
-alarm[3] = 300
+// force disappear
+alarm[0] = 300
+knockback_speed = 8
+damage = 45

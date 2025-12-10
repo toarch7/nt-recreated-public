@@ -4,8 +4,9 @@ if lockstep_stop
 image_angle = direction
 
 
-if speed < 6 and sprite_index != sprSlugDisappear and sprite_index != sprSlugHit {
-    sprite_index = sprSlugDisappear
+if speed < 6 && sprite_index != sprSlugDisappear && sprite_index != sprSlugHit {
+	spr_fade = sprSlugDisappear
+    sprite_index = spr_fade
     image_index = 0
     image_speed = 0.4
 }

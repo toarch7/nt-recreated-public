@@ -21,7 +21,7 @@ if instance_exists(target) {
 
 alarm[0] = 30
 ammo = 15
-turn = choose(1, - 1)
+turn = choose(1, -1)
 walk = 0
 
 if !snd_is_playing(musBoss2) {

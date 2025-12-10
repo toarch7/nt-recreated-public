@@ -15,8 +15,8 @@ repeat 14 {
 instance_create(x, y, PortalClear)
 
 charge = 0
-alarm[1] = 8 / .4
-snd_play_hit(sndExploGuardianFire, .2)
+alarm[1] = 8 / max(0.01, image_speed)
+snd_play_hit(sndExploGuardianFire, 0.2)
 
 if instance_exists(target) motion_add(mcr_target_direction + random(40) - 20, 1.5)
 walk = 20

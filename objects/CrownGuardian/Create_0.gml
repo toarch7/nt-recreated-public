@@ -1,5 +1,5 @@
 raddrop = 11
-max_hp = 50
+max_hp = 70
 meleedamage = 0
 size = 3
 hit_id = sprGuardianIdle

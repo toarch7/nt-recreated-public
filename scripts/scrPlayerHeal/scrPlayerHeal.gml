@@ -18,7 +18,7 @@ function scrPlayerHeal(_player, _amount, _create_popup=false) {
 			}
 			else _is_full = true
 		}
-		else projectile_hit_self(-_amount)
+		else scr_hit_self(-_amount)
 		
 		if _create_popup {
 			if _is_full && _amount > 0 {

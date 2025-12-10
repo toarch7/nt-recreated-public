@@ -20,7 +20,8 @@ function parseProgramArguments() {
         // control flags for specific extraction modes
         extractSounds: true,
         extractSprites: true,
-        auditIgnores: false
+        auditIgnores: false,
+        saveResourceDumps: false
     };
 
     const parametersExpectedArgs = {
@@ -82,6 +83,9 @@ function parseProgramArguments() {
             case "--just-sprites":
                 disableAllExtractionModes();    
                 regenParameters.extractSprites = true;
+                break;
+            case "--save-dumps":
+                regenParameters.saveResourceDumps = true;
                 break;
         }
     }

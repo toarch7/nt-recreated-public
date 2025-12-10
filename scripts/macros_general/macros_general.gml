@@ -20,6 +20,10 @@
 #macro ldrx lengthdir_x
 #macro ldry lengthdir_y
 
+#macro game_speed_default 60
+#macro game_speed_uncaped 9990
+#macro game_speed (game_get_speed(gamespeed_fps))
+
 #macro bbox_center_x ((bbox_left + bbox_right) / 2)
 #macro bbox_center_y ((bbox_top + bbox_bottom) / 2)
 #macro bbox_width (bbox_right - bbox_left)
@@ -27,6 +31,8 @@
 
 #macro x_rel_view (x - view_xview)
 #macro y_rel_view (y - view_yview)
+
+#macro animation_end (image_index + image_speed > sprite_get_number(sprite_index))
 
 #macro random_angle (random(360))
 
@@ -40,20 +46,51 @@
 
 //
 
+#macro mcr_floor_make_walls { \
+		if !position_meeting(x - 16, y - 16, Floor) instance_create(x - 16, y - 16, Wall) \
+	    if !position_meeting(x, y - 16, Floor) instance_create(x, y - 16, Wall)			  \
+	    if !position_meeting(x + 16, y - 16, Floor) instance_create(x + 16, y - 16, Wall) \
+	    if !position_meeting(x + 32, y - 16, Floor) instance_create(x + 32, y - 16, Wall) \
+	    if !position_meeting(x + 32, y, Floor) instance_create(x + 32, y, Wall)			  \
+	    if !position_meeting(x + 32, y + 16, Floor) instance_create(x + 32, y + 16, Wall) \
+	    if !position_meeting(x - 16, y, Floor) instance_create(x - 16, y, Wall)			  \
+	    if !position_meeting(x - 16, y + 16, Floor) instance_create(x - 16, y + 16, Wall) \
+	    if !position_meeting(x - 16, y + 32, Floor) instance_create(x - 16, y + 32, Wall) \
+	    if !position_meeting(x, y + 32, Floor) instance_create(x, y + 32, Wall)			  \
+	    if !position_meeting(x + 16, y + 32, Floor) instance_create(x + 16, y + 32, Wall) \
+	    if !position_meeting(x + 32, y + 32, Floor) instance_create(x + 32, y + 32, Wall) \
+	}
+
+#macro mcr_floor_create_tops { \
+		instance_create(x - 32, y, Top)		 \
+		instance_create(x + 32, y, Top)		 \
+		instance_create(x, y + 32, Top)		 \
+		instance_create(x, y - 32, Top)		 \
+		instance_create(x - 32, y + 32, Top) \
+		instance_create(x + 32, y + 32, Top) \
+		instance_create(x - 32, y - 32, Top) \
+		instance_create(x + 32, y - 32, Top) \
+	}
+
+//
+
 view_width = 320
 view_height = 240
 
 view_xview = 0
 view_yview = 0
 
-globalvar view_width_max;
+globalvar view_width_max, window_min_width, window_min_height;
+
 view_width_max = game_screen_height * scr_display_get_aspect_ratio()
+window_min_width = game_screen_width * 2
+window_min_height = game_screen_height * 2
 
 function scrSetViewSize(_resize_window = true) {
 	with UberCont {
 	    var _width = game_screen_width,
 			_height = game_screen_height,
-			_render_scale = UberCont.opt_scaling
+			_render_scale = opt_scaling
 		
 	    if opt_resolution {
 			_width = view_width_max
@@ -66,6 +103,9 @@ function scrSetViewSize(_resize_window = true) {
 		if _height % 2 != 0 {
 			_height = floor(_height + 1)
 		}
+		
+		_width = floor(_width)
+		_height = floor(_height)
 		
 		var _render_width = _width * _render_scale,
 			_render_height = _height * _render_scale
@@ -84,9 +124,33 @@ function scrSetViewSize(_resize_window = true) {
 	    view_height = _height
 		
 	    if is_desktop && _resize_window {
-	        window_set_min_width(game_screen_width * 2)
-	        window_set_min_height(game_screen_width * 2)
+			window_min_width = game_screen_width * 3
+			window_min_height = game_screen_height * 3
+			
+			if (scr_display_get_width() <= window_min_width
+				|| scr_display_get_height() <= window_min_height
+			) {
+				window_min_width = game_screen_width * 2
+				window_min_height = game_screen_height * 2
+			}
+			
+	        window_set_min_width(window_min_width)
+	        window_set_min_height(window_min_height)
+			window_set_size(window_min_width, window_min_height)
+			scrWindowUpdateWindowedPosition()
 	    }
+	}
+}
+
+function scrWindowUpdateWindowedPosition() {
+	if !is_desktop || scr_window_get_fullscreen() exit
+	
+	window_set_position(
+		(scr_display_get_width() div 2) - (window_min_width div 2),
+		(scr_display_get_height() div 2) - (window_min_height div 2))
+	
+	if global.__window_borderless_fs_enabled {
+		window_enable_borderless_fullscreen(false)
 	}
 }
 
@@ -98,17 +162,23 @@ global.index = 0
 globalvar KeyCont;
 
 KeyCont = {
+	touch: [0, 0, 0, 0],
 	gamepad: [0, 0, 0, 0],
 	keyboard: [0, 0, 0, 0],
+	
     aimassist: [0, 0, 0, 0],
-	
     activeforever: [0, 0, 0, 0],
+	precisemovement: [ 0, 0, 0, 0 ],
     moving: [0, 0, 0, 0],
-	
 	
     dir_move: [0, 0, 0, 0],
     dir_fire: [0, 0, 0, 0],
 	dis_fire: [0, 0, 0, 0],
+	
+	key_west: [0, 0, 0, 0],
+	key_east: [0, 0, 0, 0],
+	key_nort: [0, 0, 0, 0],
+	key_sout: [0, 0, 0, 0],
 	
     crosshair: [0, 0, 0, 0],
 
@@ -328,11 +398,17 @@ function scrHandleInputsGeneral(_index) {
 	var _k = KeyCont
 	
 	_k.press_horn[_index] = 0
-	
 	_k.gamepad[_index] = opt_gamepad
 	_k.keyboard[_index] = opt_keyboard
 	_k.aimassist[_index] = opt_assist
 	_k.crosshair[_index] = opt_crosshair
+	
+	if is_mobile && !(opt_gamepad || opt_keyboard) {
+		_k.touch[_index] = true
+	}
+	else _k.touch[_index] = false
+	
+	_k.precisemovement[_index] = (_k.touch[_index] || _k.gamepad[_index])
 	
 	// generic inputs
 	if opt_gamepad || opt_keyboard {
@@ -452,20 +528,27 @@ function scrSetGamepadInputs(_index = 0) {
 }
 
 function scrSetKeyboardInputs(_index = 0) {
-    var _kh = key_check("east") - key_check("west"),
-		_kv = key_check("south") - key_check("north")
-
-    KeyCont.moving[_index] = false
-
+	var _east = key_check("east"),
+		_west = key_check("west"),
+		_sout = key_check("south"),
+		_nort = key_check("north")
+	
+	KeyCont.key_east[_index] = _east
+	KeyCont.key_west[_index] = _west
+	KeyCont.key_sout[_index] = _sout
+	KeyCont.key_nort[_index] = _nort
+	
+    var _kh = (_east - _west), _kv = (_sout - _nort);
+	
     if !(_kh == 0 && _kv == 0) {
         KeyCont.dir_move[_index] = point_direction(0, 0, _kh, _kv)
         KeyCont.moving[_index] = true
     }
+	else KeyCont.moving[_index] = false
 	
 	if !is_mouse_over_debug_overlay() {
 		with Player {
 			if index != _index continue
-			//KeyCont.dis_fire[_index] = min(1, (point_distance(x, y, mouse_x, mouse_y) / view_width) * 6)
 			KeyCont.dis_fire[_index] = point_distance(x, y, mouse_x, mouse_y)
 			KeyCont.dir_fire[_index] = point_direction(x, y, mouse_x, mouse_y)
 		}
@@ -754,9 +837,8 @@ function t_lerp(a, b, amount) {
 #macro wep_golden_disc_gun 123
 #macro wep_heavy_grenade_launcher 124
 #macro wep_gun_gun 125
-#macro wep_beetle_blaster 126
-#macro wep_bone 127
-#macro wep_golden_frog_pistol 255
+#macro wep_eggplant 126
+#macro wep_golden_frog_pistol 127
 
 
 #macro mut_none 0

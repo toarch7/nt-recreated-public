@@ -17,7 +17,7 @@ wkick = 0
 
 friction = 0.2
 
-right = choose(1, - 1)
+right = choose(1, -1)
 
 team = 2
 

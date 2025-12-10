@@ -16,7 +16,7 @@ scrEnemyApplyCreationEffects()
 
 team = 1
 target = noone
-hit_id = spr_idle
+hit_id = HitId.None
 
 givekill = true
 corpse = true
@@ -25,4 +25,4 @@ snd_hurt = sndHitFlesh
 snd_dead = sndEnemyDie
 snd_mele = sndMaggotBite
 
-dropseed = rng_next_int(RNGStates.Drops)
+dropseed = rng_next_int(RNGStates.WeaponDrops)

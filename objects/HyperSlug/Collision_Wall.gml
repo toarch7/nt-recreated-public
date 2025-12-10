@@ -1,12 +1,16 @@
-if lockstep_stop
-	exit
+if (speed > 6) snd_play_hit(sndShotgunHitWall, 0.2)
 
-if speed > 6 and !snd_is_playing(sndShotgunHitWall) snd_play(sndShotgunHitWall)
 sleep(1)
-move_bounce_solid(0)
+move_bounce_solid(1)
 speed *= 0.8
-speed += wallbounce
-wallbounce *= 0.9
-instance_create(x, y, Dust)
 
-if speed > 18 speed = 18
+if (wallbounce > 0) {
+    bonus = true
+    alarm[2] = 2
+}
+
+speed += wallbounce
+instance_create(x, y, Dust)
+wallbounce *= 0.95
+
+if (speed > 16) speed = 16

@@ -1,27 +1,21 @@
-if lockstep_stop
+if sticky {
+	if scr_can_hit(other.id, false) {
+		if speed > 0 {
+			snd_play_hit(sndGrenadeStickWall)
+			stick_target = other.id
+			speed = 0
+		}
+		else if !instance_exists(stick_target) {
+			stick_target = other.id
+		}
+		
+		if other.id == stick_target {
+			x = other.x + offx
+			y = other.y + offy
+		}
+	}
+	
 	exit
-
-if other.team != team && !other.inframes && hit_id > 0 {
-    other.last_hit = hit_id
 }
 
-if other.team != team {
-    if sticky = 1 {
-        if speed > 0 snd_play(sndGrenadeStickWall) speed = 0
-        x = other.x + offx
-        y = other.y + offy
-    }
-	else {
-        instance_destroy()
-        snd_play_hit(other.snd_hurt, .2)
-        with other {
-            if !inframes {
-                hp -= 15
-                inframes = 1
-                sprite_index = spr_hurt
-                image_index = 0
-                motion_add(other.direction, 10)
-            }
-        }
-    }
-}
+scr_projectile_generic_grenade_hit(grenade_pierce_on_overkill)

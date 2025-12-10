@@ -1,6 +1,4 @@
-snd_play_hit(sndPlasmaHit, 0.2)
-
 event_inherited()
-with instance_create(x, y, PlasmaImpact)
-hit_id = other.hit_id
+snd_play_hit(sndPlasmaHit, 0.2)
+scr_damage_create(x, y, PlasmaImpact)
 sleep(10)

@@ -87,7 +87,7 @@ function __background_set_element(argument0, argument1, argument2, argument3, ar
     //__farthestdepth = max(__farthestdepth, 15999);
     //__nearestdepth = min(__nearestdepth, -15000);
     __farthestdepth = max(__farthestdepth, 2147483600);
-    __nearestdepth = min(__nearestdepth, - 2147482000);
+    __nearestdepth = min(__nearestdepth, -2147482000);
 
     for (__i = 0; __i < 8; __i++) {
         if (__slots[__i] != -1) {

@@ -1,15 +1,14 @@
 if lockstep_stop
 	exit
 
-if team != other.team {
-
-    if other.typ = 1 {
-        other.direction = image_angle
-        other.image_angle = other.direction
-    }
-    if other.typ = 2 {
-        with other
-        instance_destroy()
-    }
-
+with other {
+	if team == other.team break
+	
+	if typ == 1 {
+		image_angle = other.image_angle
+		direction = other.direction
+	}
+	else if typ == 2 {
+		instance_destroy()
+	}
 }

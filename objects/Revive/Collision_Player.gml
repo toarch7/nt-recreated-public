@@ -53,7 +53,7 @@ with player {
         motion_add(point_direction(other.x, other.y, x, y), 4)
     }
 
-    spirit = skill_get(27)
+    spirit = scr_skill_get(27)
 
     if spirit {
         can_spirit = 1

@@ -1,5 +1,6 @@
 #region make menu
 
+scrLetterbox(false, 0)
 image_speed = 0
 
 if global.is_server {

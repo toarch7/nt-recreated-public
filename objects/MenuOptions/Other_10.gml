@@ -250,7 +250,7 @@ if erasing_progress {
                         with SpiralCont
 							visible = 1
 
-                        __background_set_colour(c_black)
+                        background_set_colour(c_black)
 
                         with MusCont {
                             audio_resume_sound(song)
@@ -451,8 +451,10 @@ for (var i = 0; i < item_count; i++) {
 		continue
 	}
 	else if current_frame == last_change + i {
-		var _v = 0.75 + (1 - i / item_count) * 0.5
-		audio_play_sound(sndAppear, 0, false, 1, 0, _v)
+		var _v = 0.75 + (1 - i / item_count) * 0.5,
+			_gain = UberCont.opt_sndvol
+		
+		audio_play_sound(sndAppear, 0, false, _gain, 0, _v)
 	}
 	
     draw_align(_opt.halign, _opt.valign)
@@ -667,8 +669,9 @@ for (var i = 0; i < item_count; i++) {
 						else _value = "< " + string(_value) + " >"
 					}
 					else if _opt.type == "switch" {
-						if (is_real(_value) or is_bool(_value)) && _value < 2
-							_value = _opt.states[_value]
+						if is_numeric(_value) && _value < 2 {
+							_value = _opt.states[(_value ? 1 : 0)]
+						}
 					}
 					else if _opt.type == "keybind" {
 						if await_input && await_keybind == _opt {

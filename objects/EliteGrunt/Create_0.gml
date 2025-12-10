@@ -15,7 +15,7 @@ event_inherited()
 snd_hurt = sndEliteGruntHurt
 snd_dead = sndEliteGruntDead
 
-if GameCont.area == 101 {
+if GameCont.underwater {
     snd_hurt = sndOasisHurt
     snd_dead = sndOasisDeath
 }

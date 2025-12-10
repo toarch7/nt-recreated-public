@@ -8,7 +8,7 @@ if selected {
     event_user(0)
 }
 else {
-    LevCont.splat = 1
+    with (LevCont) splat = true
 
     with UltraIcon {
         selected = (id == other.id)

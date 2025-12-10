@@ -1,8 +1,8 @@
 if lockstep_stop
 	exit
 
-x = view_xview + 2
-y = view_yview + 2
+x = view_xview + 14
+y = view_yview + 14
 
 depth = -1000
 

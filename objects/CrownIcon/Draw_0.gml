@@ -8,7 +8,7 @@ if !isset("appeary") {
 
     if !appeary {
         appeary = 0
-        snd_play_pitch(sndCrownAppear, random(.1) + .9)
+        snd_play_pitch(sndCrownAppear, 0.9 + random(0.1))
     }
 }
 

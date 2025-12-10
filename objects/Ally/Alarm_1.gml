@@ -17,7 +17,7 @@ if ((target >= Player) && instance_exists(target)) {
                 image_angle = direction
                 team = other.team
             }
-            if (skill_get(5)) alarm[1] = 5
+            if (scr_skill_get(5)) alarm[1] = 5
             else alarm[1] = 8
         } else {
             direction = ((mcr_target_direction + random(180)) - 90)

@@ -1,8 +1,11 @@
 event_inherited()
 image_speed = 0.2 + random(0.1)
 image_angle = random_angle
-hit_id = -1
-typ = 2 //0 = nothing, 1 = deflectable, 2 = destructable
-team = 1
+hitid = HitId.None
+team = team_enemy
+damage = 1
+typ = 2
 
-if GameCont.area == 101 instance_destroy()
+if (GameCont.area == area_oasis) {
+	instance_destroy()
+}

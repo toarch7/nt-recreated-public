@@ -25,7 +25,7 @@ if instance_number(Player) > 1 {
 else player = instance_nearest(x, y, Player)
 
 if instance_exists(player) {
-	if distance_to_object(player) < 32 + (skill_get(3) * 64) or instance_exists(Portal) {
+	if distance_to_object(player) < 32 + (scr_skill_get(3) * 64) or instance_exists(Portal) {
 		var dir = point_direction(x, y, player.x, player.y)
 		
 		var xx = ldrx(6, dir)

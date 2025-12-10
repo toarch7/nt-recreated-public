@@ -1,4 +1,1 @@
-if lockstep_stop
-	exit
-
-direction += random(6) - 3
+if (current_frame_active) direction += orandom(3)

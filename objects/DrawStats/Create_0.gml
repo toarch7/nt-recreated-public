@@ -9,7 +9,7 @@ select = 0
 
 var _slot_index = 0
 
-for(var _race_id = Race.Fish; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
+for(var _race_id = Race.Random; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
 	if scrRaceIsHidden(_race_id) && !UberCont.ctot_runs[_race_id] {
 		continue
 	}

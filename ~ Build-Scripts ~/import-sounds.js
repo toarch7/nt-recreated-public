@@ -120,6 +120,19 @@ function processSoundImport(doExtractSounds) {
             soundFileName = soundName + ".ogg";
         }
 
+        if (Options.saveResourceDumps) {
+            if (!fs.existsSync("dumped_sounds")) fs.mkdirSync("dumped_sounds");
+
+            if (isExternal) {
+                const externalSoundPath = gameInstallationDirectory + soundInfo.soundPath;
+                assert.ok(fs.existsSync(externalSoundPath), "Couldn't find external sound file" + externalSoundPath);
+                fs.copyFileSync(externalSoundPath, "dumped_sounds/" + soundFileName);
+            }
+            else {
+                fs.writeFileSync("dumped_sounds/" + soundFileName, bufferInfo.data);
+            }
+        }
+
         let index = unknownSounds.indexOf(soundName);
         if (index != -1) unknownSounds.splice(index, 1);
         

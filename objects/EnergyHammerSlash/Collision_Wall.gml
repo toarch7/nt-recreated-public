@@ -4,11 +4,13 @@ if lockstep_stop
 x -= hspeed
 y -= vspeed
 
-if walled = 0 {
-    walled = 1
+if !walled {
     snd_play(sndMeleeWall)
+    walled = true
 }
+
 sleep(5)
+
 with other {
     instance_destroy()
     instance_create(x, y, FloorExplo)

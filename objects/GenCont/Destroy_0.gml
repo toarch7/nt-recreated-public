@@ -43,11 +43,11 @@ if instance_exists(Player) {
 			}
         }
 
-        if skill_get(mut_hammerhead) {
-            hammerhead_charges = 25
+        if scr_skill_get(mut_hammerhead) {
+            hammerhead = 25
 
             if race == Race.BigDog {
-                hammerhead_charges = 100
+                hammerhead = 100
             }
         }
 		
@@ -75,7 +75,7 @@ if instance_exists(Player) {
 	}
 }
 
-if _area == 5 && _subarea == 1 && skill_get(mut_last_wish) {
+if _area == 5 && _subarea == 1 && scr_skill_get(mut_last_wish) {
     if instance_exists(prop) {
         with instance_furthest(10016, 10016, prop) {
             instance_change(IceFlower, 1)
@@ -115,7 +115,7 @@ if (_area == area_palace && _subarea == 3) || _area == area_campfire || _area ==
         instance_create(10016 - 32, 9984, WeaponChest)
         instance_create(10016 + 32, 9984, AmmoChest)
 		
-        if skill_get(mut_open_mind) {
+        if scr_skill_get(mut_open_mind) {
 			repeat GameCont.openminds {
 	            instance_create(10016, 10016 - 32, choose(WeaponChest, RadChest, AmmoChest))
 	        }

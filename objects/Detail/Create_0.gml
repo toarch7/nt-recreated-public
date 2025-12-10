@@ -11,5 +11,5 @@ if (instance_nearest(x - 16, y - 16, Floor)).styleb && GameCont.area != 5 {
 }
 
 image_speed = 0
-image_xscale = choose(1, - 1)
+image_xscale = choose(1, -1)
 image_index = irandom(image_number)

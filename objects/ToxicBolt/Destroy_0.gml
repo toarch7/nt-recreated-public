@@ -1,3 +1,2 @@
-repeat(15) {
-    instance_create(x, y, ToxicGas)
-}
+repeat (15) instance_create(x, y, ToxicGas)
+event_inherited()

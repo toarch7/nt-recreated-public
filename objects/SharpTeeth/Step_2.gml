@@ -8,7 +8,7 @@ if !hit {
 	
 	if image_index >= 2 {
 		with target {
-			projectile_hit_self(other.damage)
+			scr_hit_self(other.damage)
 		}
 		
 		hit = true

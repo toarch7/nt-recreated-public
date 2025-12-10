@@ -13,13 +13,14 @@ if wave > 6.2 {
 }
 
 if race == 3 {
-	var img = GameCont.tottimer * 0.4
+	var _img = GameCont.tottimer * 0.4
 	
 	if KeyCont.hold_spec[index] {
-		draw_sprite_ext(skill_get(5) ? sprMindPowerTB : sprMindPower, img, x, y, right, 1, angle, c_white, 1)
+		var _sprite = scr_skill_get(mut_throne_butt) ? sprMindPowerTB : sprMindPower
+		draw_sprite_ext(_sprite, _img, x, y, right, 1, angle, c_white, 1)
 	}
-	else if ultra == 2 {
-		draw_sprite_ext(sprEyesB, img % 6, x, y, right, 1, angle, 0xccfbc7, 1)
+	else if scrUltraCheckPlayerRace(id, Race.Eyes, UltraSkill.MonsterStyle) {
+		draw_sprite_ext(sprEyesB, _img % 6, x, y, right, 1, angle, 0xccfbc7, 1)
 	}
 }
 
@@ -60,7 +61,7 @@ if wep_type[wep] == 3 && is_me && !_is_shielding && wep != 18 {
     }
 	until position_meeting(lasx, lasy, Wall) or lasd > 1000
 
-    draw_sprite_ext(sprLaserSightPlayer, - 1, x, y, point_distance(x, y, lasx, lasy) / 2 + 2, 1, gunangle, c_white, 1)
+    draw_sprite_ext(sprLaserSightPlayer, -1, x, y, point_distance(x, y, lasx, lasy) / 2 + 2, 1, gunangle, c_white, 1)
 }
 
 //DUAL WIELDING
@@ -75,10 +76,10 @@ if race == 7 && bwep != 0 && is_me {
             lasy += lengthdir_y(2, gunangle)
         } until position_meeting(lasx, lasy, Wall) or lasd > 1000
 
-        draw_sprite_ext(sprLaserSightPlayer, - 1, x, y - 4, point_distance(x, y, lasx, lasy) / 2 + 2, 1, gunangle, c_white, 1)
+        draw_sprite_ext(sprLaserSightPlayer, -1, x, y - 4, point_distance(x, y, lasx, lasy) / 2 + 2, 1, gunangle, c_white, 1)
     }
 
-    draw_sprite_ext(wep_sprt[bwep], 0, x + lengthdir_x(-bwkick, gunangle + (bwepangle * (1 - wkick / 20))), y - 4 + lengthdir_y(-bwkick, gunangle + (bwepangle * (1 - wkick / 20))), 1, - bwepright, gunangle + (bwepangle * (1 - wkick / 20)), c_white, 1)
+    draw_sprite_ext(wep_sprt[bwep], 0, x + lengthdir_x(-bwkick, gunangle + (bwepangle * (1 - wkick / 20))), y - 4 + lengthdir_y(-bwkick, gunangle + (bwepangle * (1 - wkick / 20))), 1, -bwepright, gunangle + (bwepangle * (1 - wkick / 20)), c_white, 1)
 }
 
 //DRAW DA GUNZ
@@ -107,7 +108,7 @@ if instance_exists(CoopController) && UberCont.opt_outlines {
 	}
 }
 
-draw_sprite_ext(sprite_index, - 1, x, y, right, 1, angle, c_white, 1)
+draw_sprite_ext(sprite_index, -1, x, y, right, 1, angle, c_white, 1)
 
 if !back && !_is_shielding && wep {
 	draw_sprite_ext(wep_sprt[wep], max(0, trigger_fingers_shine),
@@ -127,8 +128,10 @@ if race = 7 {
 		bwkick ++
 }
 
-if instance_exists(GameCont) && GameCont.area == 101 && race != 1 && race != 8
-    draw_sprite(sprPlayerBubble, - 1, x, y)
+if instance_exists(GameCont) && GameCont.underwater && race != 1 && race != 8 {
+    draw_sprite(sprPlayerBubble, -1, x, y)
+}
 
-if infammo
+if infammo {
     draw_sprite(sprGunWarrant, infammo * 0.4, x, y)
+}

@@ -14,7 +14,7 @@ if instance_exists(Cinematic) {
 
         draw_sprite(playersprite, drawframe, x, y)
 
-        if skill_get(27) && !instance_exists(StrongSpiritRefill) && player.spirit {
+        if scr_skill_get(27) && !instance_exists(StrongSpiritRefill) && player.spirit {
             var _y = y - 2 + sin(player.spirit_anim)
             draw_sprite(sprStrongSpirit, player.spirit_index, x + 1, _y)
 

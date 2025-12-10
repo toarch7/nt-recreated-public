@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if sticky = 1 {
+if sticky {
 
     snd_play(sndGrenadeStickWall)
 	

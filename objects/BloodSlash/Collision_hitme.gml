@@ -1,27 +1,14 @@
-if lockstep_stop
-	exit
-
-if other.team != team {
-    hitted = 1
-
-    with other {
-        if !inframes {
-            snd_play_hit(snd_hurt, 0.2)
-
-            hp -= other.dmg * 2
-
-            sprite_index = spr_hurt
-            image_index = 0
-
-            motion_add(other.direction, 8)
-
-            instance_create(x, y, MeatExplosion)
-
-            snd_play_hit(sndExplosion, 0.2)
-
-            BackCont.shake += 5
-
-            inframes = 5
-        }
-    }
+if scr_projectile_generic_hit(false) {
+	if instance_exists(other) {
+		var _x, _y;
+		
+		with other {
+			_x = bbox_center_x
+			_y = bbox_center_y
+		}
+		
+		instance_create(_x, _y, MeatExplosion)
+	}
+	
+	hit = true
 }

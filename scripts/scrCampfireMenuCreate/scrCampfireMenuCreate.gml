@@ -219,8 +219,8 @@ function scrCampfireMenuDrawRacePortrait(_x, _y, _index, _race, _skin, _halign, 
 		_h = gui_h,
 		
 		_is_back_layer = _index >= 2,
-		_portrait_x = (_halign == fa_right ? 2 : -2),
-		_portrait_y = _h - LETTERBOX_SIZE - (8 * (1 + _is_back_layer)),
+		_portrait_x = (_halign == fa_right ? 2 : -2) + 18,
+		_portrait_y = _h - LETTERBOX_SIZE - (8 * (1 + _is_back_layer)) + 44,
 		_portrait_sprite = sprBigPortrait,
 		_portrait_subimage = 0,
 		
@@ -265,6 +265,10 @@ function scrCampfireMenuDrawRacePortrait(_x, _y, _index, _race, _skin, _halign, 
 				with (Menu) _portrait_x -= portrait_offsets[_index] * _xscale
 			}
 			else _portrait_y += 20
+			
+			if scrGameIsPaused() {
+				_portrait_x -= UberCont.pause_portrait_anim * _xscale
+			}
 			
 			draw_sprite_ext(_portrait_sprite, _portrait_subimage,
 				_x + _portrait_x + (_is_back_layer ? 20 : -18) * _xscale, _y + _portrait_y, _xscale, 1, 0, _color, 1)
@@ -320,14 +324,17 @@ function scrCampfireMenuDrawCharText(_x, _y, _index, _race, _skin, _halign = fa_
 		var _race_name = scrRaceGetName(race)
 		
 		if !loc_exists(_race_name) && player_count == 1 {
+			var _drawx = _x + _bigname_x,
+				_drawy = _y + _bigname_y - sprite_get_height(sprBigName)
+			
 			if textappear[_index] != 2 {
-				draw_sprite_ext(sprBigName, _race, _x + _bigname_x + 1, _y + _bigname_y + 0, 1, 1, 0, c_black, 1)
-				draw_sprite_ext(sprBigName, _race, _x + _bigname_x + 1, _y + _bigname_y + 1, 1, 1, 0, c_black, 1)
-				draw_sprite_ext(sprBigName, _race, _x + _bigname_x + 1, _y + _bigname_y + 2, 1, 1, 0, c_black, 1)
-				draw_sprite_ext(sprBigName, _race, _x + _bigname_x + 0, _y + _bigname_y + 2, 1, 1, 0, c_black, 1)
+				draw_sprite_ext(sprBigName, _race, _drawx + 1, _y + _drawy + 0, 1, 1, 0, c_black, 1)
+				draw_sprite_ext(sprBigName, _race, _drawx + 1, _y + _drawy + 1, 1, 1, 0, c_black, 1)
+				draw_sprite_ext(sprBigName, _race, _drawx + 1, _y + _drawy + 2, 1, 1, 0, c_black, 1)
+				draw_sprite_ext(sprBigName, _race, _drawx + 0, _y + _drawy + 2, 1, 1, 0, c_black, 1)
 			}
 			
-			draw_sprite_ext(sprBigName, _race, _x + _bigname_x, _y + _bigname_y, 1, 1, 0, c_white, 1)
+			draw_sprite_ext(sprBigName, _race, _drawx, _drawy, 1, 1, 0, c_white, 1)
 		}
 		else {
 			draw_text_bigname(_x + _bigname_x, _y + _bigname_y, string_upper(loc(_race_name)), c_white, 1, 1)
@@ -367,7 +374,7 @@ function scrCampfireMenuDrawCharText(_x, _y, _index, _race, _skin, _halign = fa_
 /// @param y
 /// @param {Asset.GMScript} function
 function scrMenuDrawPlayersOrdered(_x, _y, _function) {
-	var _do_letterbox = (_function == scrCampfireMenuDrawRacePortrait)
+	var _do_letterbox = (_function == scrCampfireMenuDrawRacePortrait && !scrGameIsPaused())
 	
 	if player_count > 1 {
 		var _player_numbers = [ 2, 3, 0, 1 ],
@@ -468,7 +475,7 @@ function scrMenuDrawLoadout(_pinst) {
 		_crownspace_height = _crownbottom - _crowntop,
 		_crowns_per_column = max(1, _crownspace_height div _crownsize),
 		_crowns_per_row = _crown_count div _crowns_per_column,
-		_crownright = _w,
+		_crownright = _w + 12,
 		_crownleft = _crownright - _crowns_per_row * _crownsize,
 		
 		_weapon_count = 2,
@@ -478,11 +485,11 @@ function scrMenuDrawLoadout(_pinst) {
 		
 		_skin_count = scrRaceGetMaxSkinCount(_race),
 		_skinsize = sprite_get_width(sprLoadoutSkin) - 4,
-		_skins_x = _crownleft - _crownsize div 2 - 6,
-		_skins_y = (_h div 2) - (_skinsize * 0.5) * _skin_count,
+		_skins_x = _crownleft - _crownsize div 2 - 22,
+		_skins_y = (_h div 2) - (_skinsize * 0.5) * _skin_count - 2,
 		
 		_splat_x = _w + 2,
-		_splat_y = _h - LETTERBOX_SIZE + 1,
+		_splat_y = _h - LETTERBOX_SIZE + 2,
 		_splat_width = _skins_x,
 		_splat_open_width = sprite_get_width(sprLoadoutSplat),
 		_splat_open_height = sprite_get_height(sprLoadoutSplat),
@@ -496,7 +503,7 @@ function scrMenuDrawLoadout(_pinst) {
 	//sndNoSelect sndMenuCrown
 	
 	if loadout_frame == 0 {
-		draw_sprite_ext(sprLoadoutSplat, splatindex, _splat_x, _splat_y + 1, 1, 1, 0, c_white, 1)
+		draw_sprite_ext(sprLoadoutSplat, splatindex, _splat_x, _splat_y, 1, 1.05, 0, c_white, 1)
 	}
 	
 	#region Current loadout
@@ -547,14 +554,14 @@ function scrMenuDrawLoadout(_pinst) {
 		
 		if loadout_frame > 0 {
 			var _xscale = max(1, (_w - _skins_x) / (sprite_get_width(sprLoadoutOpen) - _crownsize * 2)),
-				_yscale = (_splat_y - LETTERBOX_SIZE) / sprite_get_height(sprLoadoutOpen)
+				_yscale = (_splat_y - LETTERBOX_SIZE) / sprite_get_height(sprLoadoutOpen) + 0.05
 			
 			draw_sprite_ext(sprLoadoutOpen, loadout_frame,
-				_splat_x - 2, _splat_y + 1, _xscale, _yscale, 0, c_white, 1)
+				_splat_x - 2, _splat_y, _xscale, _yscale, 0, c_white, 1)
 		}
 		
 		draw_sprite_ext(sprLoadoutArrow, loadout_open,
-			_splat_x - 5, _splat_y - _splat_pointed - 2, 1, 1, 0, _splat_pointed ? c_white : c_uigray, 1)
+			_splat_x - 16, _splat_y - _splat_pointed - 2, 1, 1, 0, _splat_pointed ? c_white : c_uigray, 1)
 	}
 	else {
 		loadout_open = false
@@ -571,8 +578,8 @@ function scrMenuDrawLoadout(_pinst) {
 	#region Crowns
 		
 		var _any = false,
-			_crown_x = _crownleft - 4,
-			_crown_y = _crowntop - 40
+			_crown_x = _crownleft + 12,
+			_crown_y = _crowntop - 24
 		
 		_crown_x = _crownright - _crownsize * 3
 		
@@ -582,8 +589,7 @@ function scrMenuDrawLoadout(_pinst) {
 				continue
 			}
 			
-			var _is_pointed = point_in_rectangle(_mx, _my, _crown_x - 4, _crown_y,
-					_crown_x + _crownsize - 5, _crown_y + _crownstep - 1),
+			var _is_pointed = point_in_circle(_mx, _my, _crown_x, _crown_y, _crownsize * 0.5),
 				
 				_unlocked = scr_loadout_race_is_crown_unlocked(_race, _crown_id),
 				
@@ -651,8 +657,11 @@ function scrMenuDrawLoadout(_pinst) {
 								scr_loadout_race_set_skin(_race, _skin_id)
 								portrait_offsets[_pinst.get_index()] = 180
 								_pinst.skin = _skin_id
-							
-								if _skin_id > 0 {
+								
+								if _skin_id == 2 {
+									snd_play(sndMenuCSkin, random_range(0.95, 1.05))
+								}
+								else if _skin_id > 0 {
 									snd_play(sndMenuBSkin, 1 + (_skin_id - 1) * random_range(0.05, 0.1))
 								}
 								else snd_play(sndMenuASkin, 0.95 + random(0.1))

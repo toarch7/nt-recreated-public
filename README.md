@@ -14,9 +14,9 @@ This project is built with the GameMaker engine, much so is the original game - 
 
 ## Resource extraction
 > [!NOTE]
-> These installation scripts currently only support Nuclear Throne versions `release u99r1`[(1)](#u99r1-footnote) and `ntt_development v100.030+`
+> It is required that you provide your own copy of Nuclear Throne (update 100 and above) for the scripts to work.
 
-There's a set of tools available that would allow you to extract assets directly from your installation of the game. By default[(2)](#custom-install-footnote), these tools will look for game files in your Steam library, so no action is needed as long as your Steam library is installed conventionally.
+There's a set of tools available that would allow you to extract assets directly from your installation of the game. By default[\*](#custom-install-footnote), these tools will look for game files in your Steam library, so no action is needed as long as your Steam library is installed conventionally.
 
 Please make sure that you have NodeJS of version 20.0+ installed on your machine. Resource extraction scripts should work on any platform that supports NodeJS runtime. (You might also need to install `npm` in case if it's not bundled with Node on your platform)
 
@@ -24,14 +24,14 @@ Clone this repository, open your terminal in this folder and run the following c
 ```shell
 cd "./~ Build-Scripts ~"
 npm ci
-npm run regenerate
+npm run regen
 ```
 
 After that, all the assets will be automatically extracted and copied to the GameMaker project in this repository, making it compileable.
 
-<a name="u99r1-footnote"></a>\(1\): The script is currently unable to extract the `data.win` file from the u99r1 executable. You would need to extract it manually using the `NTT-Assembler.exe` program that is bundled with NTT 9940.
+Whenever you introduce new assets that weren't part of the project before (for instance, if an update adds a new weapon), you should run `npm run regen-ignores`. This ensures that the resources ignore file is updated, preventing any of the new assets from being included in your commit.
 
-<a name="custom-install-footnote"></a>\(2\): You can specify a custom game installation path by using a parameter when executing the installation script (`npm run regenerate --game-path="/your/path/here/"`)
+<a name="custom-install-footnote"></a>\(*\): You can specify a custom game installation path by using a parameter when executing the installation script (`npm run regen --game-path="/your/path/here/"`)
 
 ## Target platforms
 

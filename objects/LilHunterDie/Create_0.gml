@@ -1,5 +1,5 @@
 typ = 0
-trn = ((random(5) + 5) * choose(1, - 1))
+trn = ((random(5) + 5) * choose(1, -1))
 
 target = instance_nearest(x, y, Player)
 

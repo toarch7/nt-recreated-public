@@ -274,7 +274,8 @@ function scrWeapons() {
     wep_auto[24] = false
     wep_load[24] = 12
     wep_text[24] = "zzzwwoonggg"
-
+	wep_mele[24] = true
+	
     wep_name[25] = "SUPER SLUGGER"
     wep_type[25] = 2
     wep_cost[25] = 5
@@ -382,6 +383,7 @@ function scrWeapons() {
     wep_auto[36] = false
     wep_load[36] = 20
     wep_text[36] = "break a leg"
+	wep_mele[36] = true
 
     wep_name[37] = "JACKHAMMER"
     wep_type[37] = 4
@@ -550,6 +552,7 @@ function scrWeapons() {
     wep_auto[53] = false
     wep_load[53] = 4
     wep_text[53] = "future fixing"
+	wep_mele[53] = true
 
     wep_name[54] = "HYPER LAUNCHER"
     wep_type[54] = 4
@@ -1225,16 +1228,25 @@ function scrWeapons() {
     wep_load[125] = 90
     wep_text[125] = "make it"
 	
-    wep_name[126] = "GOLDEN FROG PISTOL"
-    wep_type[126] = 1
+    wep_name[126] = "EGGPLANT"
+    wep_type[126] = 0
     wep_auto[126] = 0
-    wep_load[126] = 6
-    wep_cost[126] = 1
-    wep_sprt[126] = sprGoldFrogBlaster
+    wep_load[126] = 15
+    wep_cost[126] = 0
+    wep_sprt[126] = sprEggplant
     wep_area[126] = -1
-    wep_text[126] = "ALWAYS BELIEVE IN YOUR SOUL"
-    wep_lout[126] = sprGoldToxicGunLoadout
-    wep_gold[126] = true
+    wep_text[126] = "CAREFUL"
+    
+    wep_name[127] = "GOLDEN FROG PISTOL"
+    wep_type[127] = 1
+    wep_auto[127] = 0
+    wep_load[127] = 6
+    wep_cost[127] = 1
+    wep_sprt[127] = sprGoldFrogBlaster
+    wep_area[127] = -1
+    wep_text[127] = "ALWAYS BELIEVE IN YOUR SOUL"
+    wep_lout[127] = sprGoldToxicGunLoadout
+    wep_gold[127] = true
 	
     wep_swap[0] = sndSwapPistol
     wep_swap[1] = sndSwapPistol
@@ -1390,63 +1402,11 @@ function scrWeapons() {
 	
     wep_swap[255] = sndSwapPistol
     wep_naim[255] = false
-
-    typ_name = array_create(Ammo.NUM_AMMO_TYPES, "N/A")
-    typ_ammo = array_create(Ammo.NUM_AMMO_TYPES, 0)
-    typ_amax = array_create(Ammo.NUM_AMMO_TYPES, 0)
-	
-	typ_name[Ammo.None] = "NONE"
-	typ_name[Ammo.Bullets] = "BULLETS"
-	typ_name[Ammo.Shells] = "SHELLS"
-	typ_name[Ammo.Bolts] = "BOLTS"
-	typ_name[Ammo.Explosives] = "EXPLOSIVES"
-	typ_name[Ammo.Energy] = "ENERGY"
-	
-	typ_ammo[Ammo.Bullets] = 32
-	typ_ammo[Ammo.Shells] = 8
-	typ_ammo[Ammo.Bolts] = 7
-	typ_ammo[Ammo.Explosives] = 6
-	typ_ammo[Ammo.Energy] = 10
-	
-	typ_amax[Ammo.None] = 1000
-	typ_amax[Ammo.Bullets] = 255
-	typ_amax[Ammo.Shells] = 55
-	typ_amax[Ammo.Bolts] = 55
-	typ_amax[Ammo.Explosives] = 55
-	typ_amax[Ammo.Energy] = 55
 	
 	for(var _weapon_id = 1; _weapon_id <= maxwep; _weapon_id ++) {
-		wep_mele[_weapon_id] = wep_type[_weapon_id] == 0
-                    || _weapon_id == wep_energy_sword
-                    || _weapon_id == wep_energy_screwdriver
-                    || _weapon_id == wep_energy_hammer
+		if (wep_type[_weapon_id] == 0) wep_mele[_weapon_id] = true
 	}
 	
-	if instance_exists(Player) {
-        var _fish_players = scrPlayerCountRace(Race.Fish)
-        if _fish_players > 0 {
-            typ_ammo[Ammo.Bullets] += 8 * _fish_players
-            typ_ammo[Ammo.Shells] += 2 * _fish_players
-            typ_ammo[Ammo.Bolts] += 2 * _fish_players
-            typ_ammo[Ammo.Explosives] += 2 * _fish_players
-            typ_ammo[Ammo.Energy] += 3 * _fish_players
-        }
-		
-        var _back_muscle = skill_get(mut_back_muscle)
-		if _back_muscle != 0 {
-			typ_amax[Ammo.Bullets] += 300 * _back_muscle
-			for(var i = Ammo.Shells; i < Ammo.NUM_AMMO_TYPES; ++i) {
-				typ_amax[i] += 44 * _back_muscle
-			}
-		}
-    }
+	scrAmmoInit()
 }
-
-
-
-
-
-
-
-
 

@@ -8,8 +8,8 @@
   "name":"hitme",
   "overriddenProperties":[],
   "parent":{
-    "name":"Cont",
-    "path":"folders/Objects/Cont.yy",
+    "name":"Controllers",
+    "path":"folders/Objects/Controllers.yy",
   },
   "parentObjectId":null,
   "persistent":false,

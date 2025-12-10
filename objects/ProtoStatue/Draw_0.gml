@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-draw_sprite(sprite_index, - 1, x, y)
+draw_sprite(sprite_index, -1, x, y)
 draw_sprite(sprPStatLights, anim, x, y)
 
 if canim > 0 && hp < max_hp * 0.7 {

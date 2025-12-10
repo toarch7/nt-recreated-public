@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndFrogEggHurt",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndFrogEggHurt",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":1,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":0.67770976,
-  "exportDir":"",
-  "name":"sndFrogEggHurt",
-  "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 1,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 0.67770976,
+  "exportDir": "",
+  "name": "sndFrogEggHurt",
+  "parent": {
+    "name": "Sounds",
+    "path": "folders/Sounds.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndFrogEggHurt.wav",
-  "volume":1,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndFrogEggHurt.wav",
+  "volume": 1
 }

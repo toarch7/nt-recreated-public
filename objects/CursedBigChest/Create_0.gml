@@ -1,5 +1,6 @@
 event_inherited()
 
-curse = 1
+curse = true
+
 sprite_index = sprCursedChestBig
 

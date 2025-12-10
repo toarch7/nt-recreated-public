@@ -25,7 +25,7 @@ else {
     snd_play_hit_big(sndShielderEnterM, 0.2)
 }
 
-if GameCont.area == 101 {
+if GameCont.underwater {
     snd_hurt = sndOasisHurt
     snd_dead = sndOasisDeath
 }

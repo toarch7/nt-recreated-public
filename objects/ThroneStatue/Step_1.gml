@@ -1,12 +1,11 @@
 if lockstep_stop
 	exit
 
-if !canbreak hp = 1000
+if (!canbreak) hp = 1000
 
 x = xstart
 y = ystart
+
 speed = 0
 
-if distance_to_object(Nothing) <= 4 {
-    instance_destroy()
-}
+if (place_meeting(x, y, Nothing)) instance_destroy()

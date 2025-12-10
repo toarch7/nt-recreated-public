@@ -5,7 +5,7 @@ if z > 0 {
     image_angle += rotspeed * speed
 }
 
-speed *= .9
+speed *= 0.9
 
 if speed < 3 {
     if z > 0 {

@@ -18,7 +18,7 @@ if instance_exists(target) {
                 snd_play(sndMolefishFire)
                 alarm[1] = 20 + random(5)
             } else {
-                direction = mcr_target_direction + (45 + random(90)) * choose(1, - 1)
+                direction = mcr_target_direction + (45 + random(90)) * choose(1, -1)
                 speed = 0.4
                 walk = 10 + random(10)
                 gunangle = mcr_target_direction

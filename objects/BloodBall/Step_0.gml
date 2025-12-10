@@ -1,8 +1,5 @@
-if lockstep_stop
-	exit
+image_angle += spin * timescale
 
-image_angle += spin
-if (random(6) < 1) {
-    with(instance_create(((x + random(10)) - 5), ((y + random(10)) - 5), MeatExplosion))
-    hit_id = other.hit_id
+if (current_frame_active && random(6) < 1) {
+	scr_damage_create(x + orandom(5), y + orandom(5), MeatExplosion)
 }

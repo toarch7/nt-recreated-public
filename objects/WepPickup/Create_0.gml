@@ -6,8 +6,8 @@ creator = noone
 curse = false
 team = 2
 
-dropseed = rng_next_int(RNGStates.Drops)
-rotspeed = (random(1) + 1) * choose(1, - 1)
+dropseed = rng_next_int(RNGStates.WeaponDrops)
+rotspeed = (random(1) + 1) * choose(1, -1)
 
 image_angle = random_angle
 image_speed = 0

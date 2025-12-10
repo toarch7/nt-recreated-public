@@ -3,28 +3,10 @@
 function print() {
 	static _buffer = buffer_create(1024, buffer_grow, 1)
 	
-	var _index = 1
-	
 	buffer_seek(_buffer, buffer_seek_start, 0)
-	buffer_write(_buffer, buffer_text, "[")
-	//
-	var _hour = date_get_hour(date_current_datetime())
-	if _hour < 10 buffer_write(_buffer, buffer_text, "0")
-	buffer_write(_buffer, buffer_text, _hour)
-	//
-	buffer_write(_buffer, buffer_text, ":")
-	if current_minute < 10 buffer_write(_buffer, buffer_text, "0")
-	buffer_write(_buffer, buffer_text, current_minute)
-	//
-	buffer_write(_buffer, buffer_text, ":")
-	if current_second < 10 buffer_write(_buffer, buffer_text, "0")
-	buffer_write(_buffer, buffer_text, current_second)
-	//
-	buffer_write(_buffer, buffer_text, ".")
-	buffer_write(_buffer, buffer_text, string_pad_zeroes(((current_time % 1000) div 33) * 33, 2))
-	buffer_write(_buffer, buffer_text, "] ")
 	
 	//
+	var _index = 1
 	buffer_write(_buffer, buffer_text, string(argument[0]))
 	repeat (argument_count - 1) {
 		buffer_write(_buffer, buffer_text, " ")

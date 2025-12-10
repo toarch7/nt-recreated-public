@@ -1,3 +1,6 @@
-if sprite_index = sprPopoSlugDisappear instance_destroy() image_speed = 0
+if sprite_index == spr_fade {
+	instance_destroy()
+}
+
 image_index = 1
-//instance_create(x,y,Dust)
+image_speed = 0

@@ -1,53 +1,47 @@
-if lockstep_stop
-	exit
-
-if roll or race == 15 {
-	move_bounce_solid(0)
+if (hammerhead && hammering > 6) {
+	hammering = 12
+	hammerhead --
 	
-	if roll {
-		angle += 360 * right
+	snd_play_hit(hammerhead ? sndHammerHeadProc : sndHammerHeadEnd, 0.1)
+	
+	instance_create(other.x + 8, other.y + 8, Hammerhead)
+	
+	with other {
+		instance_destroy()
+		instance_create(x, y, FloorExplo)
 	}
 	
 	exit
 }
 
-move_contact_solid(direction, max(1, min(maxspeed, speed)))
+if (hammerhead) hammering += timescale * 2
 
-if !place_free(x + hspeed, y) {
-    hspeed /= 2
+if !roll && race != Race.Frog {
+	move_contact_solid(direction, clamp(speed, 1, maxspeed))
 	
-    if !place_free(x + hspeed, y) {
-        hspeed = 0
-    }
-}
-
-if !place_free(x, y + vspeed) {
-    vspeed /= 2
-    if !place_free(x, y + vspeed) {
-        vspeed = 0
-    }
-}
-
-if hammerhead_charges && hammerhead >= 12 {
-    with other {
-		with instance_create(x, y, AnimParticle) {
-			sprite_index = sprHammerHead
-			depth = other.depth - 1
-			
-			image_speed = 0.4
-		}
+	if place_meeting(x + hspeed, y, Wall) {
+		hspeed /= 2
 		
-        instance_create(x, y, FloorExplo)
-        instance_destroy()
-    }
-    
-    hammerhead_charges --
-    
-    if !hammerhead_charges {
-        snd_play(sndHammerHeadEnd)
-    }
-	else {
-        snd_play(sndHammerHeadProc)
-    }
+		if place_meeting(x + hspeed, y, Wall) {
+			hspeed = 0
+		}
+	}
+	
+	if place_meeting(x, y + vspeed, Wall) {
+		vspeed /= 2
+		
+		if place_meeting(x, y + vspeed, Wall) {
+			vspeed = 0
+		}
+	}
+	
+	x += hspeed
+	y += vspeed
 }
-
+else {
+	move_bounce_solid(1)
+	
+	if (race != Race.Frog) {
+		angle += ((720 - abs(angle)) * right * 0.7)
+	}
+}

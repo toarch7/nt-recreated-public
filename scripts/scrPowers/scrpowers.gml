@@ -1,22 +1,18 @@
 function scrPowers() {
     //FISH
-    if KeyCont.press_spec[index] && race == 1 && visible && canwalk {
-        if speed < friction {
-            direction = KeyCont.dir_fire[index]
-        }
-
+    if KeyCont.press_spec[index] && race == 1 && visible && can_walk {
+        if (speed < 1) direction = gunangle
+        
         speed = 4
 
-        if is_me {
-            UberCont.ctot_uniq[1] ++
-        }
-
-        if !skill_get(5) {
-            if angle == 0 snd_play(sndRoll)
+        if (is_me) UberCont.ctot_uniq[Race.Fish] ++
+        
+        if !scr_skill_get(mut_throne_butt) {
+            if (angle == 0) snd_play(sndRoll)
         }
 		else snd_play(sndFishRollUpg)
-
-        roll = 1
+		
+        roll = true
     }
 
     //CRYSTAL
@@ -39,7 +35,7 @@ function scrPowers() {
     if race == Race.Eyes {
 		#region Mmmmmmwwwwhhhawwwmmmmhhhhaawwww
         if KeyCont.hold_spec[index] {
-            if skill_get(mut_throne_butt) {
+            if scr_skill_get(mut_throne_butt) {
                 if !snd_is_playing(sndEyesLoopUpg)
 					snd_play(sndEyesLoopUpg)
             }
@@ -47,7 +43,7 @@ function scrPowers() {
 				snd_play(sndEyesLoop)
         }
 		else {
-            if skill_get(mut_throne_butt) {
+            if scr_skill_get(mut_throne_butt) {
                 if snd_is_playing(sndEyesLoopUpg)
 					snd_stop(sndEyesLoopUpg)
             }
@@ -83,7 +79,7 @@ function scrPowers() {
 			
 			UberCont.ctot_uniq[race] ++
 			
-			var strength = 1 + skill_get(mut_throne_butt), dir, lx, ly
+			var strength = 1 + scr_skill_get(mut_throne_butt), dir, lx, ly
 		
 			#macro M_EYES_TELEKINESIS { if !(x > bx1 && y > by1 && x < bx2 && y < by2) continue dir = point_direction(x, y, other.x, other.y) lx = lengthdir_x(strength, dir) ly = lengthdir_y(strength, dir) if !place_meeting(x + lx, y, Wall) x += lx if !place_meeting(x, y + ly, Wall) y += ly }
 		
@@ -113,7 +109,7 @@ function scrPowers() {
 				}
 			}
 		}
-		else if ultra == 2 {
+		else if scrUltraCheckPlayerRace(id, Race.Eyes, UltraSkill.MonsterStyle) {
 		    with enemy {
 		        if distance_to_object(other) <= 72 && speed < 16 {
 		            motion_add(point_direction(other.x, other.y, x, y), 0.4)
@@ -150,7 +146,7 @@ function scrPowers() {
         with TangleSeed
 			instance_destroy()
 		
-		snd_play_gun(skill_get(mut_throne_butt) ? sndPlantFireTB : sndPlantFire)
+		snd_play_gun(scr_skill_get(mut_throne_butt) ? sndPlantFireTB : sndPlantFire)
 		
         with instance_create(x, y, TangleSeed) {
             motion_add(other.gunangle, 12)
@@ -165,7 +161,7 @@ function scrPowers() {
 			return snd_play(sndMutant6No)
 		
 		var shots = 2,
-			boost = skill_get(mut_throne_butt)
+			boost = scr_skill_get(mut_throne_butt)
 		
 		if boost
 			shots += 2
@@ -254,7 +250,7 @@ function scrPowers() {
 			else instance_create(x, y, AmmoPickup)
 
             if curse {
-                projectile_hit_self(7)
+                scr_hit_self(7)
 				curse = false
 				
                 repeat 10 {
@@ -265,7 +261,7 @@ function scrPowers() {
             scrSwapWeps()
             bwep = 0
 
-            if skill_get(5) {
+            if scr_skill_get(5) {
                 snd_play(sndRobotEatUpg)
                 instance_create(x, y, AmmoPickup)
             }
@@ -315,7 +311,7 @@ function scrPowers() {
     if race == 10 && KeyCont.press_spec[index] && hp > (1 + instance_exists(Ally)) {
         canrebel = 1
 
-        if skill_get(5) {
+        if scr_skill_get(5) {
             snd_play(sndSpawnSuperAlly)
         }
 
@@ -337,7 +333,7 @@ function scrPowers() {
             }
         }
 
-        snd_play_hit(snd_hurt, .2)
+        snd_play_hit(snd_hurt, 0.2)
         instance_create(x, y, Dust)
     }
 
@@ -373,7 +369,7 @@ function scrPowers() {
                 }
             }
 
-            if skill_get(5) && GameCont.tottimer % 30 == 0 && horrortime > 0.3 {
+            if scr_skill_get(5) && GameCont.tottimer % 30 == 0 && horrortime > 0.3 {
                 var num = 1
 
                 hp = min(hp + num, max_hp)
@@ -405,7 +401,7 @@ function scrPowers() {
             }
 
             if is_me {
-                if skill_get(5) {
+                if scr_skill_get(5) {
                     if !snd_is_playing(sndHorrorLoopTB) snd_play_loop(sndHorrorLoopTB)
                 } else if !snd_is_playing(sndHorrorLoop) snd_play_loop(sndHorrorLoop)
             }
@@ -480,8 +476,8 @@ function scrPowers() {
 			if wep_cost[wep] > 0
 				skeletongamble ++
 			
-            if random(typ_ammo[wep_type[wep]] + (skill_get(5) * 12)) < wep_cost[wep] {
-				projectile_hit_self(1)
+            if random(typ_ammo[wep_type[wep]] + (scr_skill_get(5) * 12)) < wep_cost[wep] {
+				scr_hit_self(1)
 				
 				skeletongamble = 0
 				
@@ -496,7 +492,7 @@ function scrPowers() {
 			if skeletongamble > UberCont.ctot_uniq[14]
 				UberCont.ctot_uniq[14] = skeletongamble
 
-            snd_play(skill_get(5) ? sndGambleButt : sndBloodGamble)
+            snd_play(scr_skill_get(5) ? sndGambleButt : sndBloodGamble)
         }
     }
 
@@ -514,7 +510,7 @@ function scrMeltingCorpseExplosion() {
     
     instance_create(x, y, MeltSplat)
     
-    if skill_get(5) {
+    if scr_skill_get(5) {
         ang = random_angle
 		
 		for(var i = 0; i <= 360; i += 120) {
@@ -535,7 +531,7 @@ function scrMeltingCorpseExplosion() {
 	
 	snd_play(sndExplosion)
     
-    if skill_get(5) {
+    if scr_skill_get(5) {
 		snd_play(sndCorpseExploUpg)
 	}
 	else snd_play(sndCorpseExplo)

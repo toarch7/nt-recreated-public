@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"is_touch",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"is_touch",
+  "parent":{
+    "name":"Controls",
+    "path":"folders/Scripts/System/Controls.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

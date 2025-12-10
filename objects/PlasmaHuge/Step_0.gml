@@ -1,8 +1,8 @@
-if lockstep_stop
-	exit
-
 image_yscale = image_xscale
-if image_xscale <= .5 instance_destroy()
 
-instance_create(x + orandom(16), y + orandom(16), PlasmaTrail)
-instance_create(x + orandom(16), y + orandom(16), PlasmaTrail)
+if image_xscale <= 0.4 instance_destroy()
+
+instance_create(
+	random_range(bbox_left, bbox_right),
+	random_range(bbox_top, bbox_bottom),
+	PlasmaTrail)

@@ -1,1 +1,2 @@
-instance_destroy();
+/// @description Disappear
+instance_destroy()

@@ -1,4 +1,4 @@
-if skill_get(5) sprite_index = sprMeltSplatBig
+if scr_skill_get(5) sprite_index = sprMeltSplatBig
 
 image_speed = 0
 

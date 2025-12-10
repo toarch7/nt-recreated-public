@@ -1,12 +1,16 @@
 if lockstep_stop
 	exit
 
-draw_sprite_ext(sprite_index, image_index, 3, 3 - hover, 1, 1, 0, c_black, 1)
-draw_sprite_ext(sprite_index, image_index, 3, 2 - hover, 1, 1, 0, c_black, 1)
+var _x = 16, _y = 19 - hover
 
-var col = hover ? c_white : c_uigray
+draw_sprite_ext(sprite_index, image_index, _x, _y, 1, 1, 0, c_black, 1)
+draw_sprite_ext(sprite_index, image_index, _x, _y, 1, 1, 0, c_black, 1)
 
-draw_sprite_ext(sprite_index, image_index, 2, 2 - hover, 1, 1, 0, col, 1)
+draw_sprite_ext(sprite_index, image_index, _x, _y, 1, 1, 0, c_white, 1)
+if (!hover) {
+	draw_sprite_ext(sprite_index, image_index, _x, _y, 1, 1, 0, c_black, 0.3)
+}
 
-if is_gamepad()
-	draw_gamepad_button(gp_face2, false, 28, 28 - hover, col)
+if is_gamepad() {
+	draw_gamepad_button(gp_face2, false, _x + 16, _y + 16 - hover, col)
+}

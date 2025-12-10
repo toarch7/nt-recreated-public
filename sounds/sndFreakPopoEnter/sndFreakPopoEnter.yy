@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndFreakPopoEnter",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndFreakPopoEnter",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":1,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":1.338344,
-  "exportDir":"",
-  "name":"sndFreakPopoEnter",
-  "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+  "bitDepth": 1,
+  "channelFormat": 1,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 1.338344,
+  "exportDir": "",
+  "name": "sndFreakPopoEnter",
+  "parent": {
+    "name": "Sounds",
+    "path": "folders/Sounds.yy"
   },
-  "preload":true,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndFreakPopoEnter.wav",
-  "volume":0.72,
+  "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndFreakPopoEnter.wav",
+  "volume": 0.72
 }

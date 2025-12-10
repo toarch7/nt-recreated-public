@@ -1,59 +1,58 @@
-function scrDecideWep(extra) {
-    if instance_exists(Player) {
-        var bottom = -1,
-            __cursed = 0,
-            target
+/// @function scrDecideWep
+/// @param tier_extra=0
+/// @param curse=false
+function scrDecideWep(_extra, _curse = false) {
+	var _seed = variable_struct_exists(self, "dropseed") ? dropseed : rng_next_int(RNGStates.WeaponDrops),
+		_target = instance_nearest(x, y, Player),
+		_tier_max = GameCont.hard + _extra,
+		_hardmode = scrGameIsHardmode(),
+		_tier_min = -1
+	
+	random_set_seed(_seed)
+	
+	if (_hardmode) _tier_max = (_tier_max - 13) / 3
+	
+    if (_curse) _tier_min = median(3, 1, ceil(_tier_max + _extra))
+    
+	var _robots = scrPlayerCountRace(Race.Robot)
+	
+	if _robots {
+		_tier_max += _robots
 		
-		var seed = self[$ "dropseed"] ?? rng_next_int(RNGStates.Drops)
+		if scrUltraCheck(Race.Robot, UltraSkill.RefinedTaste) {
+			_tier_min = 6
+		}
+	}
+	
+	var _iteration = 0
+	while ((++_iteration) < 1_000) {
+		var _wep = irandom_range(1, maxwep - 1)
 		
-		random_set_seed(seed)
-		
-        if other[$ "curse"] {
-            bottom = median(3, 1, ceil((GameCont.hard - global.hardmode * 13) / (1 + global.hardmode * 2)) + extra)
-            __cursed = 1
-        }
-
-        target = instance_nearest(x, y, Player)
-
-        with Player {
-            if race == 8 {
-                extra += 1
-
-                if ultra_get(1) { // refined taste
-                    bottom = median(6, 1, ceil((GameCont.hard - global.hardmode * 13) / (1 + global.hardmode * 2)) + extra)
-                }
-            }
-        }
-
-        var h = ceil((GameCont.hard - global.hardmode * 13) / (1 + global.hardmode * 2)) + extra
-
-        do {
-            var fine = false
-
-            wep = round(random(maxwep - 1) + 1)
-
-            if !is_string(wep_name[wep]) or (wep_area[wep] < 0) or (wep_area[wep] < bottom) or (wep_area[wep] > h)
-                continue
-
-            if (target.wep == wep or target.bwep == wep) && (target.race != 7 && !(target.wep == wep && target.bwep == wep))
-                continue
-
-            if wep == wep_super_disc_gun && !__cursed
-                continue
-
-            if instance_exists(TutCont) && (wep_type[wep] == 0 or wep_type[wep] == 4)
-                continue
-
-            if !global.hardmode && (wep == wep_golden_disc_gun or wep == wep_golden_nuke_launcher)
-                continue
-
-            if wep == wep_gun_gun && !scrCrownCheck(crwn_guns)
-                continue
-
-            fine = true
-        }
-		until fine
-    } else wep = round(random(maxwep - 1) + 1)
-
-    return wep
+		if (scr_weapon_is_valid(_wep) && scr_weapon_get_area(_wep) >= 0
+			&& scr_weapon_get_area(_wep) >= _tier_min && scr_weapon_get_area(_wep) < _tier_max
+		) {
+			if instance_exists(_target) && _target.race != Race.Steroids && (_target.wep == _wep || _target.bwep == _wep) {
+				continue
+			}
+			
+			if instance_exists(TutCont) {
+				if scr_weapon_get_type(_wep) == Ammo.None || scr_weapon_get_type(_wep) == Ammo.Explosives {
+					continue
+				}
+			}
+			
+			if ((_wep == wep_super_disc_gun && !_curse)
+				|| ((_wep == wep_golden_disc_gun || _wep == wep_golden_nuke_launcher) && !_hardmode)
+				|| (_wep == wep_gun_gun && !scrCrownCheck(crwn_guns))
+			) {
+				continue
+			}
+			
+			break
+		}
+	}
+	
+	if (variable_struct_exists(self, "wep") && !instance_is(self, Player)) wep = _wep
+	
+    return _wep
 }

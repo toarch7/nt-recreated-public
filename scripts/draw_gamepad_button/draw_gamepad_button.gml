@@ -56,7 +56,15 @@ function draw_pickup_button(x, y) {
 			c = scrKeyName(key)
 		
 		if string_length(c) == 1 {
-			draw_sprite(sprEPickup, 2, x, y)
+			draw_set_color(c_black)
+			draw_rectangle(x - 5, y - 5, x + 5, y - 4, false)
+			draw_set_color(c_white)
+			draw_rectangle(x - 5, y - 4, x + 5, y - 16, false)
+			draw_set_color(c_black)
+			draw_rectangle(x - 4, y - 5, x + 4, y - 15, false)
+			draw_set_color(c_white)
+			
+			draw_sprite(sprEPickup, 1, x, y)
 			
 			var h = draw_get_halign(),
 				v = draw_get_valign()
@@ -64,7 +72,7 @@ function draw_pickup_button(x, y) {
 			draw_set_halign(fa_center)
 			draw_set_valign(fa_middle)
 			
-			draw_text_nt(x - 0.5, y - 8, c)
+			draw_text_nt(x, y - 9, c)
 			
 			draw_set_halign(h)
 			draw_set_valign(v)

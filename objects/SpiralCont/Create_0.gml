@@ -13,11 +13,9 @@ image_angle = random_angle
 bossfight = instance_exists(Nothing2) || instance_exists(Nothing2Appear)
 type = SpiralType.Normal
 
-letterbox = 0
 active = 0
 time = 0
 area = 0
-
 
 if instance_exists(GameCont) {
 	area = GameCont.area
@@ -52,3 +50,5 @@ repeat 150 {
 snd_play_ambience(sndPortalLoop, true)
 
 active = true
+
+if (!instance_exists(NothingSpiral)) scrLetterbox(true)

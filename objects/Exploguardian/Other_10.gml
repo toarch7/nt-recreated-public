@@ -22,7 +22,7 @@ if hspeed > 0 right = 1
 else if hspeed < 0 right = -1
 
 if walk && !charge && sprite_index != spr_hurt {
-    motion_add(direction, .5)
+    motion_add(direction, 0.5)
 }
 
 if charge {

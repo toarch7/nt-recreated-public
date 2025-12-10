@@ -1,2 +1,2 @@
-active = 1
-BackCont.shake += 2
+active = true
+scr_screenshake(2)

@@ -54,6 +54,4 @@ if !scrGameIsLockstep() && (want_restart || want_menu) {
 		    want_restart = 0
 		}
 	}
-	
-	print("I'm restarted", want_menu, want_restart)
 }

@@ -19,5 +19,5 @@ if charge {
         ang += 24
     }
 
-    snd_play_hit(sndExploGuardianDeadCharge, .2)
+    snd_play_hit(sndExploGuardianDeadCharge, 0.2)
 }

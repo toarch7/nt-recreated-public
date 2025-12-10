@@ -70,3 +70,5 @@ if !(instance_exists(Leaderboards) || instance_exists(NicknameInput)) {
 with UberCont {
 	gamepad_sel = 0
 }
+
+snd_play(sndClick)

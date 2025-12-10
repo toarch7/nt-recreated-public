@@ -22,7 +22,7 @@ if p.max_hp > 1 {
 
 instance_create(x, y, SmallChestPickup)
 
-snd_play(skill_get(mut_second_stomach) ? sndHPPickupBig : sndHPPickup)
+snd_play(scr_skill_get(mut_second_stomach) ? sndHPPickupBig : sndHPPickup)
 
 if GameCont.coopultra == 2 && alarm[0] != -1 {
 	var plr = p.id

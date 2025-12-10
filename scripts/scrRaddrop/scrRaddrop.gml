@@ -1,33 +1,29 @@
-function scrRadDrop(raddrop) {
-	var p = instance_nearest(x, y, Player),
-		high = 15
+/// @function scrRadDrop
+/// @param x
+/// @param y
+/// @param amount
+function scrRadDrop(_x, _y, _amount) {
+	var _high = instance_is(self, RadChest) ? 26 : 15
 	
-	if instance_is(self, RadChest)
-		high = 26
-	
-	while raddrop >= high {
-		raddrop -= 10
+	while _amount >= _high {
+		_amount -= 10
 		
-		with instance_create(x, y, BigRad) {
+		with instance_create(_x, _y, BigRad) {
 			motion_add(other.direction, other.speed)
-			motion_add(random_angle, random(raddrop / 2) + 5)
+			motion_add(random_angle, random(_amount * 0.5) + 5)
 			
-			repeat speed
-				speed *= 0.9
+			repeat (speed) speed *= 0.9
 			
-			repeat 4 {
-				scrStalkerProc()
-			}
+			repeat (4) scrStalkerProc()
 		}
 	}
 	
-	repeat raddrop {
-		with instance_create(x, y, Rad) {
+	repeat _amount {
+		with instance_create(_x, _y, Rad) {
 			motion_add(other.direction, other.speed)
-			motion_add(random_angle, random(raddrop / 2) + 5)
+			motion_add(random_angle, random(_amount * 0.5) + 5)
 			
-			repeat speed
-			speed *= 0.9
+			repeat (speed) speed *= 0.9
 			
 			scrStalkerProc()
 		}

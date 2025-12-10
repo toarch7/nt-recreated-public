@@ -39,11 +39,11 @@ function scrGameContDrawGUI() {
 			dix = 0
 		
         if coopultra {
-            draw_sprite(sprUltraIconCoopHUD, coopultra - 1, view_width - 12 - 16 * dix, 13)
+            draw_sprite(sprEGIconHUD, coopultra - 1, view_width - 12 - 16 * dix, 13)
             dix ++
         }
 		else if ultra {
-            draw_sprite(sprUltraIconHUD, ultr_indx[race, ultra], view_width - 12 - 16 * dix, 13)
+            draw_sprite(sprEGIconHUD, ultr_indx[race, ultra], view_width - 12 - 16 * dix, 13)
             dix ++
         }
 

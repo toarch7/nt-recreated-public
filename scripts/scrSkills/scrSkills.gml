@@ -1,3 +1,5 @@
+globalvar skill_name, skill_text, skill_msnd, skill_tips, maxskill;
+
 function scrSkills() {
     skill_name[0] = ""
     skill_text[0] = ""
@@ -149,7 +151,7 @@ function scrSkills() {
     skill_msnd[29] = sndMutHeavyHeart
     skill_tips[29] = ""
 
-    maxskill = 28
+    maxskill = 29
 	
 	if instance_exists(Player) && instance_exists(GameCont) {
         var _thronebutt_text = ""
@@ -171,4 +173,164 @@ function scrSkills() {
 		
         skill_text[mut_throne_butt] = _thronebutt_text
     }
+}
+
+function scrSkillIsWeaponMutation(_skill) {
+	gml_pragma("forceinline")
+	return _skill == mut_long_arms
+		|| _skill == mut_recycle_gland
+		|| _skill == mut_shotgun_shoulders
+		|| _skill == mut_boiling_veins
+		|| _skill == mut_bolt_marrow
+		|| _skill == mut_laser_brain
+}
+
+function scr_skill_is_valid(_skill) {
+	gml_pragma("forceinline")
+	return is_numeric(_skill) && _skill > 0 && _skill <= maxskill
+}
+
+function scr_skill_get_name(_skill) {
+	gml_pragma("forceinline")
+	return scr_skill_is_valid(_skill) ? skill_name[_skill] : "MUT" + string(_skill)
+}
+
+function scr_skill_get_text(_skill) {
+	gml_pragma("forceinline")
+	return scr_skill_is_valid(_skill) ? skill_text[_skill] : "???"
+}
+
+function scr_skill_get_sound(_skill) {
+	gml_pragma("forceinline")
+	return scr_skill_is_valid(_skill) ? skill_msnd[_skill] : -1
+}
+
+function scr_skill_get_tips(_skill) {
+	gml_pragma("forceinline")
+	return scr_skill_is_valid(_skill) ? skill_tips[_skill] : -1
+}
+
+function scr_skill_can_appear(_skill) {
+	if !scr_skill_is_valid(_skill) return false
+	
+	if scr_skill_get(_skill) || (_skill == mut_heavy_heart)
+		|| (_skill == mut_last_wish && scrCrownCheck(crwn_destiny) && !scrPlayerCountRace(Race.Horror)
+	) {
+		return false
+	}
+	
+	return true
+}
+
+/// @description scr_skill_set(skill, value)
+/// @param skill
+/// @param value
+function scr_skill_set(_skill, _value) {
+	var _previous = scr_skill_get(_skill)
+	if (_previous == _value) exit
+	
+	var _is_removed = false
+	
+	#region process application
+	if _value {
+		if (_previous && _value > _previous) scr_skill_set(_skill, 0)
+		
+		var _skill_index = ds_list_find_index(GameCont.skills, _skill)
+		if (_skill_index == -1) ds_list_add(GameCont.skills, _skill)
+		
+	    if instance_exists(LevCont) && LevCont.placeonpatience {
+	        GameCont.patienceskill = _skill
+		}
+		
+		if scrSkillIsWeaponMutation(_skill) {
+			GameCont.heavyheart ++
+		}
+		
+		_is_removed = false
+	}
+	#endregion
+	
+	#region process removal
+	if !_value {
+		var _skill_index = ds_list_find_index(GameCont.skills, _skill)
+		if (_skill_index >= 0) ds_list_delete(GameCont.skills, _skill_index)
+		
+		if GameCont.patienceskill == _skill {
+			GameCont.patienceskill = 0
+		}
+		
+		if scrSkillIsWeaponMutation(_skill) {
+			GameCont.heavyheart --
+		}
+		
+		_is_removed = true
+	}
+	#endregion
+	
+	var _effect = _is_removed ? -1 : 1
+	
+	switch _skill {
+		case mut_rhino_skin:
+			with Player {
+				max_hp += 4 * _effect
+				hp += 4 * _effect
+				if (!hp) hp = 1
+			}
+			break
+		case mut_extra_feet:
+			with Player {
+				maxspeed += 0.5 * _effect
+				footextra += _effect
+			}
+			break
+		case mut_back_muscle:
+			scrAmmoUpdateTypeStats()
+			break
+		case mut_last_wish:
+			with Player {
+				if (_is_removed) break
+				
+				scrPlayerGiveAmmo(id, Ammo.Bullets, 200)
+				
+				for(var _ammo_type = Ammo.Shells; _ammo_type < Ammo.NUM_AMMO_TYPES; ++_ammo_type) { 
+					scrPlayerGiveAmmo(id, _ammo_type, 20)
+				}
+				
+				hp = max_hp
+				
+				if headloses > 0 {
+					max_hp += headloses
+					headloses = 0
+				}
+				
+				scrPlayerUncurse(all)
+				
+				if race == Race.Rogue {
+					rogue_ammo = rogue_ammo_max
+				}
+			}
+			break
+		case mut_eagle_eyes:
+			with (Player) {
+				if _is_removed {
+					accuracy /= 0.4
+				}
+				else accuracy *= 0.4
+			}
+			break
+		case mut_strong_spirit:
+			with Player {
+				spirit += _effect
+			}
+			break
+	}
+}
+
+/// @description scr_skill_get(skill)
+/// @param skill
+function scr_skill_get(_skill) {
+	gml_pragma("forceinline")
+    return instance_exists(GameCont)
+		&& scr_skill_is_valid(_skill)
+		&& ds_list_find_index(GameCont.skills, _skill) >= 0
 }

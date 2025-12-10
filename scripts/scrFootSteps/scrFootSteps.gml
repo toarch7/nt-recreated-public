@@ -20,7 +20,7 @@ function scrFootSteps() {
         if place_meeting(x, y, FloorMiddle)
             material = 3
 
-        if skill_get(2) {
+        if scr_skill_get(2) {
             with instance_create(x, y + 4, Dust)
 				sprite_index = sprExtraFeetDust
         }

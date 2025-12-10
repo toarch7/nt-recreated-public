@@ -1,3 +1,2 @@
-instance_destroy()
-
+event_inherited()
 snd_play(sndToxicBoltGas)

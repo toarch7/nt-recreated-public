@@ -8,6 +8,6 @@ if sprite_index == spr_hurt {
     alarm[1] = 50
 }
 
-speed = 2 + skill_get(5)
+speed = 2 + scr_skill_get(5)
 
 if random(4) < 1 instance_create(xprevious, yprevious, Smoke)

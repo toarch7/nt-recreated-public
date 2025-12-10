@@ -1,2 +1,4 @@
 event_inherited()
-typ = 2 //0 = normal, 1 = deflectable, 2 = destructable
+marrow_distance = 16
+damage = 50
+typ = 2

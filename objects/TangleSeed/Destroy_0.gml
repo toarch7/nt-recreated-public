@@ -1,9 +1,11 @@
-if instance_exists(Player) && ultra_get(1, 5) {
-    var rand = irandom(90)
+if scrUltraCheck(Race.Plant, UltraSkill.Trapper) {
+    var _ang = random_angle
 	
-    for (var i = rand; i < 360 + rand; i += 72) {
+	repeat (5) {
         with instance_create(x, y, Tangle) {
-            move_contact_solid(i, 26 + irandom(4))
+            move_contact_solid(_ang, 26 + irandom(4))
         }
+		
+		_ang += 72
     }
 }

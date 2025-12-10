@@ -1,46 +1,34 @@
 if lockstep_stop
 	exit
 
-if !instance_exists(GenCont) {
-	if scrChestOpened()
-		exit
+if instance_exists(GenCont) exit
+if scrChestOpened() exit
 
-	if curse global.rng_state[3] += 1234
-	
-	var p = instance_nearest(x, y, Player)
+var _shift = curse ? 736817 : 0
 
-	var pickup = instance_create(x, y, WepPickup)
+if (_shift != 0) global.rng_state[RNGStates.WeaponDrops] += _shift
 	
-	with pickup {
-		scrDecideWep(1 + other.curse * 2)
-				
-		name = wep_name[wep]
-		ammo = 1
-		
-		type = wep_type[wep]
-		curse = other.curse
-		
-		sprite_index = wep_sprt[wep]
-	}
+var _extra = 1 + curse * 2,
+	_player = instance_nearest(x, y, Player),
+	_wep = scrDecideWep(_extra, curse),
+	_count = 1
 
-	if GameCont.underwater
-		snd_play(sndOasisChest)
-	else if curse {
-	    snd_play(sndCursedChest)
-	    global.rng_state[3] -= 1234
-	}
-	else
-		snd_play(sndWeaponChest)
-	
-	if p.race == 7 && p.ultra == 1 {
-		with pickup {
-			instance_copy(0)
-			
-			x = xprevious
-			y = yprevious
-		}
-	}
-	
-	instance_destroy()
+if scrUltraCheckPlayerRace(_player, Race.Steroids, UltraSkill.Ambidextrous) {
+	_count ++
 }
 
+repeat (_count) scrWeaponPickupCreate(x + orandom(2), y + orandom(2), _wep, true)
+
+if GameCont.underwater {
+	snd_play(sndOasisChest)
+}
+else if curse {
+	snd_play(sndCursedChest)
+}
+else {
+	snd_play(sndWeaponChest)
+}
+
+if (_shift != 0) global.rng_state[RNGStates.WeaponDrops] -= _shift
+
+instance_destroy()

@@ -5,7 +5,7 @@ if scr_network_handle_event(ev_mouse, ev_mouse_enter)
 	exit
 
 if is_keyboard() {
-    LevCont.splat = 1
+    with (LevCont) splat = true
     snd_play(sndHover)
     selected = 1
 }

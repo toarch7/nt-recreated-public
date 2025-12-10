@@ -5,7 +5,7 @@ if random(3) < 1 {
     alarm[1] = 15
     snd_play(sndBigDogSpin)
     ammo = 10 + 10 * (1 - (hp / max_hp))
-    turn = choose(1, - 1)
+    turn = choose(1, -1)
     walk = 0
     image_index = 0
     spr_idle = sprScrapBossCharge

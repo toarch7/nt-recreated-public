@@ -16,7 +16,7 @@ if sprite_index != sprProtoChestOpen {
     
     if scrCrownCheck(Crown.Hatred) {
         with other {
-            projectile_hit_self(1)
+            scr_hit_self(1)
 			last_hit = sprCrown6Idle
 			
             repeat (16) {

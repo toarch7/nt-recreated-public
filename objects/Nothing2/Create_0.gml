@@ -23,7 +23,7 @@ event_inherited()
 walk = 0
 right = 1
 scrTarget()
-side = choose(1, - 1)
+side = choose(1, -1)
 shots = 0
 walkdir = random_angle
 aimdir = random_angle
@@ -37,7 +37,7 @@ snd_dead = sndNothing2Dead
 instance_create(x, y, SpiralCont)
 instance_create(x, y, NothingSpiral)
 snd_play_hit_big(sndNothing2Appear, 0)
-flip = choose(1, - 1)
+flip = choose(1, -1)
 attack = 1
 sndhalfhp = 0
 sndtaunt = 0

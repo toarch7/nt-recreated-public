@@ -22,8 +22,9 @@ rest = 0
 wave = 0
 
 spr_shadow = shd32
-spr_shadow_y = 3
+spr_shadow_y = 5
 
+hitid = HitId.SnowTank
 
 var rand = 40
 

@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"musCredits",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "musCredits",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":3,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":270.00702,
-  "exportDir":"",
-  "name":"musCredits",
-  "parent":{
-    "name":"Music",
-    "path":"folders/Sounds/Music.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 3,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 270.00702,
+  "exportDir": "",
+  "name": "musCredits",
+  "parent": {
+    "name": "Music",
+    "path": "folders/Sounds/Music.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"musCredits.ogg",
-  "volume":1,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "musCredits.ogg",
+  "volume": 1
 }

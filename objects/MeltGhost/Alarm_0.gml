@@ -5,7 +5,7 @@ with Corpse
 if sprite_index == sprMutant4Dead or sprite_index == sprMutant4BDead {
     snd_play(sndExplosion)
 
-    if skill_get(5) {
+    if scr_skill_get(5) {
         snd_play(sndCorpseExploUpg)
     } else {
         snd_play(sndCorpseExplo)
@@ -18,7 +18,7 @@ if sprite_index == sprMutant4Dead or sprite_index == sprMutant4BDead {
 
     instance_create(x, y, MeltSplat)
 
-    if skill_get(5) {
+    if scr_skill_get(5) {
         ang = random_angle
         instance_create(x + lengthdir_x(24, ang), y + lengthdir_y(24, ang), MeatExplosion)
         instance_create(x + lengthdir_x(24, ang + 120), y + lengthdir_y(24, ang + 120), MeatExplosion)

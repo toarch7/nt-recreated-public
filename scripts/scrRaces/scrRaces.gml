@@ -17,10 +17,17 @@ enum Race {
     Skeleton = 14,
     Frog = 15,
     Cuz = 16,
-    NUM_ALL_RACE_TYPES = 17,
+    NUM_ALL_RACE_TYPES,
 	
 	Reserved17 = 17,
 	Reserved18 = 18,
+}
+
+enum SkinLetter {
+	A,
+	B,
+	C,
+	D
 }
 
 /// @function scr_race_is_unlocked
@@ -38,7 +45,7 @@ function scr_race_set_unlocked(_race, _unlocked = true) {
 
 /// @function scr_race_is_skin_unlocked
 /// @param {Real|Enum.Race} race
-/// @param skin_id=1
+/// @param {Real|Enum.SkinLetter} skin=SkinLetter.B
 function scr_race_is_skin_unlocked(_race, _skin = 1) {
 	with UberCont {
 		return _skin <= 0 || (array_length(cskingot[_race]) > _skin && cskingot[_race, _skin])
@@ -47,9 +54,9 @@ function scr_race_is_skin_unlocked(_race, _skin = 1) {
 
 /// @function scr_race_set_skin_unlocked
 /// @param {Real|Enum.Race} race
-/// @param skin_id=1
+/// @param {Real|Enum.SkinLetter} skin=SkinLetter.B
 /// @param is_unlocked=true
-function scr_race_set_skin_unlocked(_race, _skin=1, _unlock=true) {
+function scr_race_set_skin_unlocked(_race, _skin=SkinLetter.B, _unlock=true) {
 	with UberCont cskingot[_race, _skin] = _unlock
 }
 
@@ -57,12 +64,12 @@ function scr_race_set_skin_unlocked(_race, _skin=1, _unlock=true) {
 /// @param {Real|Enum.Race|String} race
 /// @param sprite_name
 /// @param {Asset.GMSprite} default=-1
-/// @param skin_id=0
-function scr_race_get_sprite(_race, _sound_name, _default = -1, _skin = 0) {
+/// @param {Real|Enum.SkinLetter} skin_id=SkinLetter.A
+function scr_race_get_sprite(_race, _sprite_name, _default = -1, _skin = SkinLetter.A) {
 	repeat 2 {
 		var _name = is_numeric(_race)
-			? $"sprMutant{_race}{scr_race_get_skin_letter(_skin, false)}{_sound_name}"
-			: $"spr{_race}{_sound_name}"
+			? $"sprMutant{_race}{scr_race_get_skin_letter(_skin, false)}{_sprite_name}"
+			: $"spr{_race}{_sprite_name}"
 		
 		var _asset = asset_get_index(_name)
 		
@@ -102,6 +109,7 @@ function scr_race_get_sound(_race, _sound_name, _default = -1) {
 /// @param {Real|Enum.Race} race
 /// @param skin
 function scr_race_get_skin_subimage(_race, _skin) {
+	if (_skin >= 2) return (_skin * 16) + (_race - 1)
 	return _race > 0 ? ((_race - 1) * 2 + _skin) : -1
 }
 
@@ -321,7 +329,7 @@ function scrRaceGetUnlockDescription(_race) {
         case Race.BigDog: return "BEAT THE BIG DOG"
         case Race.Skeleton: return "SECRET CHARACTER"
         case Race.Frog: return "SECRET CHARACTER"
-        case Race.Cuz: return "CANNOT BE UNLOCKED"
+        case Race.Cuz: return "???"
     }
     
     return "???"
@@ -329,10 +337,10 @@ function scrRaceGetUnlockDescription(_race) {
 
 /// @function scrRaceGetSkinUnlockDescription
 /// @param {Real|Enum.Race} race_id
-/// @param {Real|Enum.Race} skin_id
+/// @param {Real|Enum.SkinLetter} skin
 function scrRaceGetSkinUnlockDescription(_race, _skin_id) {
-	switch scr_race_get_skin_letter(_skin_id) {
-		case "B":
+	switch _skin_id {
+		case SkinLetter.B:
 			switch _race {
 		        case Race.Fish: return "Loop with every character"
 		        case Race.Crystal: return "Reach 4-?"
@@ -349,8 +357,28 @@ function scrRaceGetSkinUnlockDescription(_race, _skin_id) {
 		        case Race.BigDog: return "EMBRACE ETERNITY"
 		        case Race.Skeleton: return "NO SKIN"
 		        case Race.Frog: return "NO SKIN"
-		        case Race.Cuz: return "NO SKIN"
+		        case Race.Cuz: return "CARRY 3 @y???"
 		    }
+		break
+		case SkinLetter.C:
+			switch _race {
+				case Race.Fish: return "Unlock all B-skins"
+				case Race.Crystal: return "Survive over 100 damage"
+				case Race.Eyes: return "REACH THE NUCLEAR THRONE#WITHOUT FIRING A SHOT"
+				case Race.Melting: return "Have 12 mutations"
+				case Race.Plant: return "@rBLOOD BLOOD BLOOD"
+				case Race.Venuz: return "Defeat ??? as ???"
+				case Race.Steroids: return "Reach the Nuclear Throne#without picking up any weapons"
+				case Race.Robot: return "EAT ???"
+				case Race.Chicken: return "DEFEAT EVERY BOSS#WITH THE ???"
+				case Race.Rebel: return "Defeat 1000 bandits"
+				case Race.Horror: return "REACH ???#WITH 3 OR FEWER MUTATIONS"
+				case Race.Rogue: return "Don't defeat ???"
+				case Race.BigDog: return "NO SKIN"
+				case Race.Skeleton: return "NO SKIN"
+				case Race.Frog: return "NO SKIN"
+				case Race.Cuz: return "CARRY 6 @q???"
+			}
 		break
 	}
 	
@@ -410,13 +438,16 @@ function scrRaceGetSkinUnlockCauseText(_race, _skin_id) {
 /// @function scrRaceGetMaxSkinCount
 /// @param {Real|Enum.Race} race_id
 function scrRaceGetMaxSkinCount(_race) {
-    if _race == Race.BigDog
-	|| _race == Race.Skeleton
-	|| _race == Race.Frog
-	|| _race == Race.Cuz
+    if _race == Race.BigDog || _race == Race.Frog
 		return 1
 	
-	return 2
+	// TODO: these are NTT skins. Maybe these should become accessible once you have a 100% savefile?
+	if false {
+		if _race == Race.Robot return 4
+		else if _race == Race.Skeleton return 2
+	}
+	
+	return 3
 }
 
 /// @function scrRaceIsHidden
@@ -451,7 +482,7 @@ function scrRaceUnlock(_race) {
 
 /// @function scrRaceUnlockSkin
 /// @param {Real|Enum.Race} race_id
-/// @param skin_id
+/// @param {Real|Enum.SkinLetter} skin
 function scrRaceUnlockSkin(_race, _skin_id) {
 	if scr_race_is_unlocked(_race) && !scr_race_is_skin_unlocked(_race, _skin_id) {
 		

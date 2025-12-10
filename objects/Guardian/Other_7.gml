@@ -1,12 +1,12 @@
-if (spr_idle == sprPalaceGuardianAppear) {
+if (spr_idle == sprGuardianAppear) {
     meleedamage = 2
-    spr_idle = sprPalaceGuardianIdle
+    spr_idle = sprGuardianIdle
 }
 
-if (spr_idle == sprPalaceGuardianDisappear) {
+if (spr_idle == sprGuardianDisappear) {
     meleedamage = 0
     snd_play(sndGuardianAppear)
-    spr_idle = sprPalaceGuardianAppear
+    spr_idle = sprGuardianAppear
     if (instance_exists(target)) {
         dist = (64 + random(120))
         do {

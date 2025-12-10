@@ -1,17 +1,20 @@
 move_contact_solid(direction, 16)
 
-repeat(4) {
-    with instance_create(x, y, Smoke)
-    motion_add(random_angle, random(2))
+repeat 4 {
+    with (instance_create(x, y, Smoke)) speed ++
 }
-
 
 sleep(50)
-dir = 0
-do {
-    dir += 1 x += lengthdir_x(4, direction) y += lengthdir_y(4, direction)
-}
-until dir > 100 or place_meeting(x, y, Wall) or place_meeting(x, y, NothingInactive) or place_meeting(x, y, hitme)
-alarm[1] = 2
 
-speed = 4
+var _dir = 0,
+	_xstep = bbox_width,
+	_ystep = bbox_height
+
+do {
+    _dir ++
+	x += lengthdir_x(_xstep, direction)
+	y += lengthdir_y(_ystep, direction)
+}
+until _dir > 100 || place_meeting(x, y, Wall) || place_meeting(x, y, hitme)
+
+alarm[1] = 2

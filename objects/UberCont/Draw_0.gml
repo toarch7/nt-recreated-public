@@ -18,9 +18,6 @@ if bossintro {
     draw_set_alpha(1)
 	
 	//
-    scrDrawLetterbox()
-	
-	//
     draw_set_color(c_white)
 	
     if boss != 4 && boss != 6 && boss != 9 && boss != 7 && boss != 8 {
@@ -100,12 +97,24 @@ else if paused && sprite_exists(pausespr) {
 	    draw_sprite(sprPaused, 0, view_xview + view_width / 2, view_yview + 52 - yoff)
 	}
 	
-	scrDrawLetterbox()
-	
     draw_sprite(sprCharSplat, splatindex, view_xview, view_yview + view_height - 31)
-    draw_sprite_ext(sprCharSplat, splatindex, view_xview + view_width, view_yview + view_height - 31, - 1, 1, 0, c_white, 1)
+    draw_sprite_ext(sprCharSplat, splatindex, view_xview + view_width, view_yview + view_height - 31, -1, 1, 0, c_white, 1)
 
     scrDrawRoadmap(view_xview + view_width / 2, view_yview + view_height / 2, 1000)
+	
+	if pause_portrait_anim != 0 {
+		var _amount = min(pause_portrait_anim, 180)
+			
+		if (_amount == -2) pause_portrait_anim = 0
+		else if (_amount == 90) pause_portrait_anim = -2
+		else pause_portrait_anim = 90
+	}
+}
+
+letterbox_frame = approach(letterbox_frame, letterbox ? 3 : 0, timescale)
+
+if (letterbox_frame != 0) {
+	scrDrawLetterbox(letterbox_frame)
 }
 
 if opt_gamepad && instance_exists(ParButton) {

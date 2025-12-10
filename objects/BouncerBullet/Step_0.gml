@@ -1,4 +1,1 @@
-if lockstep_stop
-	exit
-
-image_angle += speed
+image_angle += rot * timescale

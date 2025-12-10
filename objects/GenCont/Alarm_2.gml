@@ -48,7 +48,7 @@ if GameCont.area == 107 {
         } else {
             instance_create(lowx + 16 - 90, lowy + 64, GiantWeaponChest)
             instance_create(lowx + 16 + 90, lowy + 64, GiantWeaponChest)
-            if skill_get(28) {
+            if scr_skill_get(28) {
                 instance_create((lowx + 16), (lowy + 64), GiantWeaponChest)
             }
         }

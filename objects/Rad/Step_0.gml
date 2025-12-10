@@ -13,7 +13,7 @@ if !speed {
 	else if instance_exists(Player) {
 		var p = instance_nearest(x, y, Player)
 		
-        if (distance_to_object(p) < 80 + (skill_get(3) * 60) && !p.horrornorad) || instance_exists(Portal) {
+        if (distance_to_object(p) < 80 + (scr_skill_get(3) * 60) && !p.horrornorad) || instance_exists(Portal) {
             target = instance_nearest(x, y, Player)
         }
     }
@@ -32,7 +32,7 @@ if !speed {
         with instance_create(x + orandom(3), y + orandom(3), RadEat) {
             sprite_index = other.object_index == BigRad ? sprEatBigRad : sprEatRad
 
-            if skill_get(3) {
+            if scr_skill_get(3) {
                 sprite_index = other.object_index == BigRad ? sprEatBigRadPlut : sprEatRadPlut
             }
         }
@@ -52,7 +52,7 @@ if (!speed && place_meeting(x, y, Player)) or place_meeting(x, y, Portal) {
     with instance_create(x + orandom(3), y + orandom(3), RadEat) {
         sprite_index = other.object_index == BigRad ? sprEatBigRad : sprEatRad
 
-        if skill_get(3) {
+        if scr_skill_get(3) {
             sprite_index = other.object_index == BigRad ? sprEatBigRadPlut : sprEatRadPlut
         }
     }

@@ -5,7 +5,7 @@ var _color = hover ? c_white : c_uigray,
 	_button_name = scrMenuButtonName(),
 	_dx = x, _dy = y + appear
 
-if appear != 2 {
+if appear < 2 {
 	if loc_exists(_button_name) {
 		// currently unused
 		var _angle = 0

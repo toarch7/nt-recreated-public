@@ -1,33 +1,17 @@
-function scrDecideSkill() {
-    var iter = 0
-    var skill = -1
+/// @function scrDecideSkill
+/// @param return_default=false
+function scrDecideSkill(_return_default=false) {
+	var _skill = -1
 	
-    do {
-        var fine = 1
-
-        skill = irandom(GameCont.maxskill)
-        iter++
-		
+    repeat (100) {
+        _skill = irandom(maxskill)
+        
         with SkillIcon {
-            if self.skill == skill {
-                fine = 0
-            }
+            if (skill == _skill) _skill = -1
         }
-
-        var horrorexists = 0
 		
-        with Player {
-			if race == 11 {
-				horrorexists = 1
-				break
-			}
-		}
-		
-        if !skill or skill_get(skill) or (skill == 18 && GameCont.crown == 8 && !horrorexists) {
-            fine = 0
-        }
+		if scr_skill_can_appear(_skill) return _skill
     }
-	until fine && iter < 100
-
-    return skill
+	
+	return _return_default ? mut_last_wish : -1
 }

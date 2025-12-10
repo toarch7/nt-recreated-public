@@ -14,9 +14,9 @@ with(instance_create(x, y, Corpse)) {
     mask_index = mskPlayer
     motion_add(other.direction, other.speed)
     sprite_index = sprLilHunterDead
-    image_xscale = choose(1, - 1)
+    image_xscale = choose(1, -1)
     if instance_exists(Player) {
-        if (skill_get(20)) speed += 8
+        if (scr_skill_get(20)) speed += 8
     }
     if (speed > 16) speed = 16
     if (size > 0) speed /= size

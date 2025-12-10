@@ -22,7 +22,4 @@ freeze += 100
 with WantVan
 canspawn = 1
 
-if GameCont.area == 101 {
-    with instance_create(x, y, AnimParticle)
-    sprite_index = sprPlayerBubblePop
-}
+scrBubblePopFX()

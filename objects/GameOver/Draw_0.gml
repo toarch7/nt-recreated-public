@@ -32,7 +32,7 @@ if GameCont.win {
 	draw_set_color(c_white)
 }
 if GameCont.last_hit > 0 {
-    draw_sprite(GameCont.last_hit, - 1, xx + 86, yy - offsety)
+    draw_sprite(GameCont.last_hit, -1, xx + 86, yy - offsety)
 }
 
 draw_text_shadow(xx + 86, yy - offsety - 25, loc(msg))

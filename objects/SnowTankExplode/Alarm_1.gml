@@ -1,9 +1,7 @@
 snd_play(sndExplosionL)
 
-repeat(3) {
-    with instance_create(x + random(8) - 4, y + random(8) - 4, Explosion) {
-        hit_id = other.sprite_index
-    }
+repeat (3) {
+    instance_create(x + orandom(4), y + orandom(4), Explosion)
 }
 
 with instance_create(x, y, Corpse) {
@@ -17,6 +15,7 @@ with instance_create(x, y, Corpse) {
 instance_destroy()
 
 repeat 5 {
-    with instance_create(x, y, GroundFlame)
-    move_contact_solid(random_angle, 8 + random(16))
+    with (instance_create(x, y, GroundFlame)) {
+	    move_contact_solid(random_angle, 8 + random(16))
+	}
 }

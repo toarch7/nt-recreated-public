@@ -1,35 +1,36 @@
 function scrGamePause() {
 	if scrGameIsPaused() exit
 	
-	paused = true
-    want_pause = 2
-	
-	if os_type == os_android && opt_volumecontrol {
-		SetVolumeControl(false)
-	}
-	
-	scrGetPauseImage()
+	with UberCont {
+		paused = true
+	    want_pause = 2
+		
+		if os_type == os_android && opt_volumecontrol {
+			SetVolumeControl(false)
+		}
 			
-    splatindex = 0
-	
-	if opt_pauseonpause
-		audio_pause_all()
-	
-	audio_resume_sound(sndClick)
-	audio_resume_sound(sndHover)
-
-	with MusCont {
-        if audio_exists(song)
-			audio_resume_sound(song)
-
-        if audio_exists(amb)
-			audio_resume_sound(amb)
-    }
-
-    with Player {
-        with scr_playerinstance_find(index) hp = other.hp
-    }
-
+	    splatindex = 0
+		
+		pause_portrait_anim = 180
+		
+		if (opt_pauseonpause) audio_pause_all()
+		
+		audio_resume_sound(sndClick)
+		audio_resume_sound(sndHover)
+		
+		scrLetterbox(true)
+		
+		with MusCont {
+	        if (audio_exists(song)) audio_resume_sound(song)
+	        if (audio_exists(amb)) audio_resume_sound(amb)
+	    }
+		
+	    with Player {
+	        with (scr_playerinstance_find(index)) hp = other.hp
+	    }
+		
+		scrGetPauseImage()
+	}
 }
 
 function scrGameUnpause() {
@@ -50,9 +51,11 @@ function scrGameUnpause() {
 			SetVolumeControl(true)
 		}
     }
-
+	
+	instance_destroy(PauseButton)
+	
     KeyCont.press_fire[global.index] = 0
-
+	
 	if instance_exists(MobileUI) {
 		with MobileUI index = -1
         with JoystickAttack event_perform(ev_create, 0)
@@ -67,6 +70,8 @@ function scrGameUnpause() {
 			}
 		}
     }
+	
+	if (!instance_exists(LevCont)) scrLetterbox(false)
 	
     audio_resume_all()
 }

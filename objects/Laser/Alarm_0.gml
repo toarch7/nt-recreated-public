@@ -1,9 +1,11 @@
-var dir;
-dir = 0
+var _dir = 0, _step = 2
+
 do {
-    x += lengthdir_x(2, image_angle) y += lengthdir_y(2, image_angle) dir += 1
+    x += ldrx(_step, image_angle)
+	y += ldry(_step, image_angle)
+	_dir += 1
 }
-until (place_meeting(x, y, hitme) and dir > 16) or place_meeting(x, y, Wall) or dir > 160
+until (place_meeting(x, y, hitme) && _dir > 16) || place_meeting(x, y, Wall) || _dir > 160
 
 alarm[0] = 2
 

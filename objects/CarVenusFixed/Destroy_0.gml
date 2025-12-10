@@ -3,7 +3,7 @@ repeat 5 {
 }
 
 with instance_create(x, y + 6, Scorchmark) {
-    visible = 0
+    visible = false
 }
 
 repeat 2 + irandom(3) {
@@ -12,7 +12,7 @@ repeat 2 + irandom(3) {
     }
 }
 
-corpse = 0
+corpse = false
 
 event_inherited()
 

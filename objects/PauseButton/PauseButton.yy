@@ -11,8 +11,8 @@
   "name":"PauseButton",
   "overriddenProperties":[],
   "parent":{
-    "name":"Cont",
-    "path":"folders/Objects/Cont.yy",
+    "name":"Menu",
+    "path":"folders/Objects/Menu.yy",
   },
   "parentObjectId":{
     "name":"ParButton",

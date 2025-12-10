@@ -31,7 +31,8 @@ else {
 }
 
 if splat {
-    draw_sprite(sprMutationSplat, 0, view_width / 2, view_height - 31)
+	if (splatimg < sprite_get_number(sprMutationSplat) - 1) splatimg ++
+    draw_sprite(sprMutationSplat, splatimg, view_width / 2, view_height - 31)
 }
 
 var spr = sprLevelUpText,

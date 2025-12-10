@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndFastRatExpire",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndFastRatExpire",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":1.226338,
-  "exportDir":"",
-  "name":"sndFastRatExpire",
-  "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 1.226338,
+  "exportDir": "",
+  "name": "sndFastRatExpire",
+  "parent": {
+    "name": "Sounds",
+    "path": "folders/Sounds.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndFastRatExpire.wav",
-  "volume":1,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndFastRatExpire.wav",
+  "volume": 1
 }

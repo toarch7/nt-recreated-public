@@ -9,4 +9,4 @@ corpse = 1
 snd_hurt = sndHitPlant
 inframes = 0
 
-image_xscale = choose(1, - 1)
+image_xscale = choose(1, -1)

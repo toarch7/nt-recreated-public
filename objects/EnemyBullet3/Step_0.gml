@@ -4,8 +4,8 @@ if lockstep_stop
 image_angle = direction
 
 
-if speed < 6 and sprite_index != sprEBullet3Disappear {
-    sprite_index = sprEBullet3Disappear
+if speed < 6 && sprite_index != spr_fade {
+    sprite_index = spr_fade
     image_index = 0
     image_speed = 0.4
 }

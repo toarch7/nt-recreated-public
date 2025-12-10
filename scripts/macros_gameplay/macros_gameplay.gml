@@ -19,3 +19,5 @@ current_frame = 0
 is_desktop = ((os_type == os_windows) || (os_type == os_linux) || (os_type == os_macosx))
 is_mobile = ((os_type == os_android) || (os_type == os_ios))
 is_steamdeck = scr_check_steamdeck()
+
+#macro current_frame_active ((current_frame % 1) < timescale)

@@ -15,7 +15,7 @@ snd_hurt = sndEliteShielderHurt
 snd_dead = sndEliteShielderDead
 snd_play_hit(sndEliteShielderEnter, 0.2)
 
-if GameCont.area == 101 {
+if GameCont.underwater {
     snd_hurt = sndOasisHurt
     snd_dead = sndOasisDeath
 }

@@ -60,6 +60,9 @@ function scrOptionsSaveKeymaps() {
 
 #macro __mouse_button_max 6
 
+/// @function key_check
+/// @param name
+/// @param state=keystate_hold
 function key_check(name, state = keystate_hold) {
 	var v = keymap_get(name)
 	
@@ -68,7 +71,6 @@ function key_check(name, state = keystate_hold) {
 	}
 	
 	if UberCont.opt_gamepad && !keymap_ret_nogamepad {
-		
 		if state == keystate_hold {
 			return input_gamepad_check(global.index, v)
 		}

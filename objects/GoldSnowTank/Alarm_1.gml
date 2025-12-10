@@ -4,7 +4,7 @@ scrTarget()
 if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         if !ammo && random(2) < 1 && point_distance(x, y, target.x, target.y) > 64 && point_distance(x, y, target.x, target.y) < 160 {
-            snd_play_hit_big(sndGoldTankAim, .2)
+            snd_play_hit_big(sndGoldTankAim, 0.2)
             scrTarget()
 
             if instance_exists(target) {
@@ -15,6 +15,6 @@ if instance_exists(target) {
             ammo = 16
         }
 
-        direction = mcr_target_direction + 70 + random(40) * choose(1, - 1)
-    } else motion_add(random_angle, .5)
-} else motion_add(random_angle, .5)
+        direction = mcr_target_direction + 70 + random(40) * choose(1, -1)
+    } else motion_add(random_angle, 0.5)
+} else motion_add(random_angle, 0.5)

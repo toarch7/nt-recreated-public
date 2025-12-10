@@ -4,7 +4,7 @@ if lockstep_stop
 if other.team != team {
     with other {
         if !inframes {
-            snd_play_hit(snd_hurt, .2)
+            snd_play_hit(snd_hurt, 0.2)
             hp -= 4
             inframes = 5
             sprite_index = spr_hurt

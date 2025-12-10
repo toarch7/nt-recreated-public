@@ -9,7 +9,7 @@ with other {
     snd_play(sndGammaGutsProc)
     sprite_index = spr_hurt
     image_index = 0
-    motion_addm(point_direction(other.x, other.y, x, y), 3)
+    motion_add_m(point_direction(other.x, other.y, x, y), 3)
 }
 
 if other.hp <= 0 {

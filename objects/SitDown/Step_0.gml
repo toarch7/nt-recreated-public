@@ -34,7 +34,7 @@ if do_thing {
 
         with Player {
             visible = 0
-            canwalk = 0
+            can_walk = 0
 			
             if is_me {
                 other.spr_gosit = spr_gosit

@@ -1,10 +1,6 @@
 event_inherited()
+damage = 10
+knockback_speed = 5
+
 friction = 0.1
-alarm[1] = 6
-alarm[0] = 30
-
-offx = random(2) - 1
-offy = random(2) - 1
-
-
 typ = 1

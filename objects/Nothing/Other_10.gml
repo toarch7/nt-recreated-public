@@ -1,6 +1,6 @@
 event_inherited()
 
-if hp < (max_hp * .7) && !sndhalfhp {
+if hp < (max_hp * 0.7) && !sndhalfhp {
     snd_hurt = sndNothingHurtMid
     snd_play(sndNothingMidHP)
     sndhalfhp = 1

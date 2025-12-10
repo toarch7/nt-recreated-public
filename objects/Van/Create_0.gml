@@ -11,7 +11,7 @@ spr_walk = sprVanDrive
 spr_hurt = sprVanHurt
 spr_dead = sprVanDead
 snd_hurt = sndVanHurt
-right = choose(1, - 1)
+right = choose(1, -1)
 
 var p = instance_nearest(x, y, Player)
 

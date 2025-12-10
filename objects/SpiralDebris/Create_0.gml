@@ -26,7 +26,7 @@ if instance_exists(GameCont) {
         if GameCont.area = 102 sprite_index = sprSlice
 
         image_index = 1
-        rotspeed = (10 + random(20)) * choose(1, - 1)
+        rotspeed = (10 + random(20)) * choose(1, -1)
     }
 
 }

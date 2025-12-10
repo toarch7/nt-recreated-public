@@ -1,11 +1,10 @@
 scrDrop(60, 0)
 event_inherited()
 
-if instance_exists(Player) {
-    with Player
-    if is_me && race == 12 {
-        UberCont.ctot_uniq[12] += 1
-    }
+with Player {
+	if is_me && race == Race.Rogue {
+	    UberCont.ctot_uniq[race] ++
+	}
 }
 
 if random(4) < 1 {

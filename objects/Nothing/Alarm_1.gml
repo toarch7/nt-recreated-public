@@ -46,12 +46,12 @@ if instance_exists(target) && instance_exists(target) {
                 flame = sprThroneFlameBig
             } else if (hp <= max_hp * 0.4) && instance_exists(Player) {
                 alarm[1] = 20
-                addangle = choose(0, - 10, 10, 20, - 20, 30, - 30)
+                addangle = choose(0, -10, 10, 20, -20, 30, -30)
                 ammo = 3 + GameCont.loops
                 alarm[2] = 5
             } else if instance_exists(Player) {
                 alarm[1] = 60
-                addangle = choose(0, - 10, 10, 20, - 20)
+                addangle = choose(0, -10, 10, 20, -20)
                 ammo = (8 + GameCont.loops)
                 alarm[2] = 5
             }

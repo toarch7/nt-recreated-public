@@ -1,19 +1,5 @@
+with (Floor) mcr_floor_make_walls;
 
-
-with Floor {
-    if !position_meeting(x - 16, y - 16, Floor) instance_create(x - 16, y - 16, Wall)
-    if !position_meeting(x, y - 16, Floor) instance_create(x, y - 16, Wall)
-    if !position_meeting(x + 16, y - 16, Floor) instance_create(x + 16, y - 16, Wall)
-    if !position_meeting(x + 32, y - 16, Floor) instance_create(x + 32, y - 16, Wall)
-    if !position_meeting(x + 32, y, Floor) instance_create(x + 32, y, Wall)
-    if !position_meeting(x + 32, y + 16, Floor) instance_create(x + 32, y + 16, Wall)
-    if !position_meeting(x - 16, y, Floor) instance_create(x - 16, y, Wall)
-    if !position_meeting(x - 16, y + 16, Floor) instance_create(x - 16, y + 16, Wall)
-    if !position_meeting(x - 16, y + 32, Floor) instance_create(x - 16, y + 32, Wall)
-    if !position_meeting(x, y + 32, Floor) instance_create(x, y + 32, Wall)
-    if !position_meeting(x + 16, y + 32, Floor) instance_create(x + 16, y + 32, Wall)
-    if !position_meeting(x + 32, y + 32, Floor) instance_create(x + 32, y + 32, Wall)
-}
 /*
 if !instance_exists(Player)
 scrPlayerCreate(global.coop ? global.index : 0, GameCont.race)
@@ -28,7 +14,7 @@ if instance_exists(Player) {
         angle = 0
         instance_create(x, y, PortalClear)
 		
-		if skill_get(8) && !instance_exists_var(GammaGuts, "creator", id) {
+		if scr_skill_get(8) && !instance_exists_var(GammaGuts, "creator", id) {
 		    with instance_create(x, y, GammaGuts) {
 		        creator = other.id
 		    }

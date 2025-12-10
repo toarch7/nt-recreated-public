@@ -1,23 +1,21 @@
-ang = random_angle
+sleep(100)
+
+var _ang = random_angle
+
 repeat 5 {
-    with instance_create(x, y, FlakBullet) {
-        motion_add(other.ang, 12 + random(4))
+    with scr_projectile_create(x, y, FlakBullet, _ang, random_range(12, 16)) {
         image_angle = direction
-        team = other.team
     }
-
-    ang += 72
+	
+    _ang += 72
 }
 
-with instance_create(x, y, BulletHit) {
-	sprite_index = other.sprite_index
-	image_index = 2
+repeat 6 {
+    with (instance_create(x, y, Smoke)) {
+		motion_add(random_angle, random(3))
+	}
 }
 
-repeat(6) {
-    with instance_create(x, y, Smoke)
-    motion_add(random_angle, random(3))
-}
+scr_screenshake(8)
 
-BackCont.shake += 8
 snd_play_hit_big(sndSuperFlakExplode, 0.2)

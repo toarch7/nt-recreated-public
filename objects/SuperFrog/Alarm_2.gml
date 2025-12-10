@@ -1,9 +1,2 @@
-with instance_create(x, y, EnemyBullet2) {
-    motion_add(random_angle, 2)
-    image_angle = direction
-    team = other.team
-    creator = other.id
-    hit_id = other.spr_idle
-}
-
+scr_projectile_create(x, y, EnemyBullet2, random_angle, 2)
 alarm[2] = 3

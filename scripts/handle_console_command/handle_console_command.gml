@@ -115,10 +115,10 @@ function handle_console_command(str) {
 			
             case "mut":
             case "skill":
-                var s = scrContentIdByName(args, GameCont.skill_name)
+                var s = scrContentIdByName(args, skill_name)
 
                 if s {
-                    skill_set(s, !skill_get(s))
+                    scr_skill_set(s, !scr_skill_get(s))
                 } else scr_log_push("Unknown mut given", c_red)
                 break
 

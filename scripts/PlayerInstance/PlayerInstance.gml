@@ -9,7 +9,7 @@ function PlayerInstance(_index = 0) constructor {
 	race = Race.Random
 	skin = 0
 	name = "player" + string(_index)
-	cprefs = 0 << 1
+	cprefs = (0 << 1)
     color = -1
 	uid = "N/A"
 	hp = 8
@@ -240,7 +240,7 @@ function scrCreatePlayers(_my_index = global.index) {
         if _pinst.race == Race.Random || _pinst.randchar {
 			var _randrace;
 			do {
-                _randrace = irandom_range(Race.Fish, Race.NUM_ALL_RACE_TYPES)
+                _randrace = irandom_range(Race.Fish, Race.NUM_ALL_RACE_TYPES - 1)
 
                 if _randrace == Race.BigDog {
                     _randrace = -1
@@ -252,12 +252,11 @@ function scrCreatePlayers(_my_index = global.index) {
 			_pinst.randchar = true
 
             if !instance_exists(CoopController) {
-                assert(false, "TODO")
-				if !UberCont.daily_run {
-                    _pinst.cwep = save_get_value("cswep", string(_pinst.race), 0) ? UberCont.cwep[_pinst.race] : UberCont.race_swep[_pinst.race]
+				if !scrGameIsEventRun() {
+                    _pinst.cwep = scr_loadout_race_get_start_weapon(_pinst.race)
                 }
 				else if !UberCont.weekly_run {
-                    _pinst.cwep = race_swep[_pinst.race]
+                    _pinst.cwep = scrRaceGetStarterWeapon(_pinst.race)
                 }
             }
 
@@ -297,14 +296,10 @@ function scrCreatePlayers(_my_index = global.index) {
             wep = _pinst.cwep
             bwep = _pinst.bwep
 			
-			print("Weapon", wep, "Secondary", bwep)
-			
 			if scr_weapon_is_valid(wep) {
 				var _type = scr_weapon_get_type(wep)
 				
-				print("...Okaaay...", wep, _type, scrAmmoGetTypeAmount(_type) * 3)
-				
-				scrPlayerGiveAmmo(id, _type, scrAmmoGetTypeAmount(_type) * 3)
+				scrPlayerGiveAmmo(id, _type, scrAmmoGetPickupAmount(_type) * 3)
 				
 				if _pinst.start_curse {
 					curse = true
@@ -313,7 +308,7 @@ function scrCreatePlayers(_my_index = global.index) {
             
 			if scr_weapon_is_valid(bwep) {
 				var _type = scr_weapon_get_type(bwep)
-				scrPlayerGiveAmmo(id, _type, scrAmmoGetTypeAmount(_type) * 3)
+				scrPlayerGiveAmmo(id, _type, scrAmmoGetPickupAmount(_type) * 3)
 				
 				if _pinst.start_bcurse {
 					bcurse = true

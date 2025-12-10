@@ -84,7 +84,7 @@ function scrSave() {
 	        }
 			
 	        var f = file_text_open_write("temp")
-	        file_text_write_string(f, string(save_get_value("etc", "seed", - 1)))
+	        file_text_write_string(f, string(save_get_value("etc", "seed", -1)))
 	        file_text_close(f)
 		}
 		

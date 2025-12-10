@@ -37,7 +37,7 @@ if endgame > 30 {
 	            }
 				else instance_create(x, y, AmmoPickup)
             
-	            if skill_get(5) {
+	            if scr_skill_get(5) {
 	                snd_play(sndRobotEatUpg)
 	                instance_create(x, y, AmmoPickup)
 	            }

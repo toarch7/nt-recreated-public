@@ -17,7 +17,7 @@ repeat(5) {
         motion_add(random_angle, (10 + random(6)))
         sprite_index = sprNothing2Part
         image_index = other.img
-        image_xscale = choose(1, - 1)
+        image_xscale = choose(1, -1)
         if (speed > 16) speed = 16
     }
     img += 1

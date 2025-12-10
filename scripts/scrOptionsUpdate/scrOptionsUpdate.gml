@@ -48,10 +48,10 @@ function scrOptionsUpdate() {
         opt_walls = save_get_option("visual", "walls", 1)
         opt_timer = save_get_option("visual", "timer", 1)
         opt_camera = save_get_option("visual", "camera", 1)
-        opt_bossintro = save_get_option("visual", "bossintro", 0)
+        opt_bossintro = save_get_option("visual", "bossintro", 1)
         opt_resolution = save_get_option("visual", "resolution", 1)
         opt_shake = save_get_option("visual", "screenshake", 1)
-        opt_freezeframes = save_get_option("visual", "freezeframes", 0)
+        opt_freeze = save_get_option("visual", "freezeframes", 1)
         opt_scaling = save_get_option("visual", "scaling", 1)
         opt_hud = save_get_option("visual", "hud", 1)
 		

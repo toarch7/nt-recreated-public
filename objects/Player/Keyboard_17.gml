@@ -1,156 +1,60 @@
-///*
+if (is_keyboard_used_debug_overlay() || global.console_active || UberCont.public) exit
 
-//exit
-
-if UberCont.public = 0 {
-
-    if scr_keyboard_check_pressed(ord("H")) {
-        hp = 10000
-        max_hp = hp
-    }
-
-    if scr_keyboard_check_pressed(ord("R")) {
-        game_restart()
-    }
-
-    if global.console_active exit
-
-    //CHEATS
-
-    if scr_keyboard_check_pressed(ord("Z")) or mouse_wheel_up() {
-
-		ammo[1] += 200
-        ammo[2] += 20
-        ammo[3] += 20
-        ammo[4] += 20
-        ammo[5] += 20
-        
-		if wep < maxwep {
-			wep += 1
-		}
-		else wep = 1
-    }
-	
-    if scr_keyboard_check_pressed(ord("X")) or mouse_wheel_down() {
-
-        ammo[1] += 200
-        ammo[2] += 20
-        ammo[3] += 20
-        ammo[4] += 20
-        ammo[5] += 20
-
-        if wep > 1 wep -= 1
-        else wep = maxwep
-    }
-
-    if scr_keyboard_check_pressed(ord("1")) {
-        GameCont.area = 1
-        GameCont.subarea = 0
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-
-    if scr_keyboard_check_pressed(ord("2")) {
-        GameCont.area = 1
-        GameCont.subarea = 3
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-
-    if scr_keyboard_check_pressed(ord("3")) {
-        GameCont.area = 3
-        GameCont.subarea = 2
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-
-    if scr_keyboard_check_pressed(ord("4")) {
-        GameCont.area = 3
-        GameCont.subarea = 3
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-    if scr_keyboard_check_pressed(ord("5")) {
-        GameCont.area = 5
-        GameCont.subarea = 0
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-    if scr_keyboard_check_pressed(ord("6")) {
-        GameCont.area = 5
-        GameCont.subarea = 3
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-    if scr_keyboard_check_pressed(ord("7")) {
-        GameCont.area = 7
-        GameCont.subarea = 0
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-    if scr_keyboard_check_pressed(ord("8")) {
-        GameCont.area = 106
-        GameCont.subarea = 2
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-    if scr_keyboard_check_pressed(ord("9")) {
-        GameCont.area = 103
-        GameCont.subarea = 0
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-
-
-    if scr_keyboard_check_pressed(ord("0")) {
-        GameCont.area = 100
-        GameCont.subarea = 0
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-
-    if scr_keyboard_check_pressed(ord("L")) {
-        GameCont.loops += 1
-        with enemy
-        hp = 0
-        with instance_create(x, y, Portal) type = 1
-    }
-
-    if scr_keyboard_check_pressed(ord("V")) {
-        with instance_create(x, y, Portal) {
-            sprite_index = sprPortalDisappear
-            event_perform(ev_other, ev_animation_end)
-        }
-    }
-
-    if scr_keyboard_check_pressed(ord("C")) {
-        instance_create(mouse_x, mouse_y, DogGuardian)
-    }
-
-    if scr_keyboard_check_pressed(ord("P")) {
-        instance_create(mouse_x, mouse_y, SnowTank)
-    }
-
-    if scr_keyboard_check_held(ord("B")) {
-        if scr_keyboard_check_held(vk_shift) repeat 10 instance_create(x, y, BigRad)
-        else instance_create(x, y, BigRad)
-    }
-
-    if scr_keyboard_check_pressed(ord("K")) {
-        with enemy
-        hp = 0
-    }
-
+if scr_keyboard_check_pressed(ord("H")) {
+    hp = 10000
+    max_hp = hp
+	lsthealth = hp
 }
 
-//*/
+if scr_keyboard_check_pressed(ord("R")) game_restart()
+
+//CHEATS
+var _weapon_change = (mouse_wheel_down() - mouse_wheel_up())
+	
+if (_weapon_change == 0) {
+	_weapon_change = scr_keyboard_check_pressed(ord("X")) - scr_keyboard_check_pressed(ord("Z"))
+}
+	
+if (_weapon_change != 0) {
+	wep -= _weapon_change
+	
+	if !scr_weapon_is_valid(wep) {
+		if (wep <= 0) wep = maxwep - 1
+		else wep = wep_revolver
+	}
+		
+	var _type = scr_weapon_get_type(wep)
+		
+	if (_type) ammo[_type] = scrAmmoGetTypeCapacity(_type)
+	with (instance_create(x, y, WepSwap)) target = other.id
+	with (PopupText) if (self[$ "__from_debug"]) instance_destroy()
+	with (scrPopupCreate(x, y, scr_weapon_get_name(wep) + "!")) {
+		self[$ "__from_debug"] = true
+	}
+	snd_play(wep_swap[wep])
+}
+
+if scr_keyboard_check_pressed(ord("V")) {
+    with (instance_create(x, y, Portal)) {
+        sprite_index = sprPortalDisappear
+        event_perform(ev_other, ev_animation_end)
+    }
+}
+
+if scr_keyboard_check_pressed(ord("C")) {
+    instance_create(mouse_x, mouse_y, Bandit)
+}
+
+if scr_keyboard_check_pressed(ord("P")) {
+    instance_create(mouse_x, mouse_y, SnowTank)
+}
+
+if scr_keyboard_check_held(ord("B")) {
+    if scr_keyboard_check_held(vk_shift) repeat 10 instance_create(x, y, BigRad)
+    else instance_create(x, y, BigRad)
+}
+
+if scr_keyboard_check_pressed(ord("K")) {
+    with enemy
+    hp = 0
+}

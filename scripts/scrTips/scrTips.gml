@@ -225,14 +225,14 @@ function scrTips() {
 	        tip = ""
 	    }
 		else {
-	        dir = 0
+	        var _skill = 0
         
 	        do {
-	            dir = irandom(plr.maxskill)
+	            _skill = irandom(maxskill)
 	        }
-			until skill_get(dir)
+			until scr_skill_get(_skill)
         
-	        tip = plr.skill_tips[dir]
+	        tip = scr_skill_get_tips(_skill)
 	    }
 	}
 

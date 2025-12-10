@@ -25,7 +25,7 @@ wepangle = choose(-140, 140)
 wepflip = 1
 
 friction = 0.4
-right = choose(1, - 1)
+right = choose(1, -1)
 
 scrEnemyApplyCreationEffects()
 

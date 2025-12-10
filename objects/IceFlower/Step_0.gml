@@ -12,8 +12,8 @@ if feed >= 4 {
     with instance_create(x, y, Portal) type = 1
 
     with Player {
-        if skill_get(18) {
-            skill_set(18, 0)
+        if scr_skill_get(18) {
+            scr_skill_set(18, 0)
             GameCont.skillpoints++ds_list_delete(GameCont.skills, ds_list_find_index(GameCont.skills, 18))
         }
     }

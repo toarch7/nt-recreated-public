@@ -13,7 +13,7 @@ event_inherited()
 snd_hurt = sndBanditHit
 snd_dead = sndBanditDie
 
-if GameCont.area == 101 {
+if GameCont.area == area_oasis {
     snd_hurt = sndOasisHurt
     snd_dead = sndOasisDeath
 }
@@ -24,13 +24,14 @@ gunangle = random_angle
 alarm[1] = 30 + random(90)
 wkick = 0
 
-if random(1) < .1 {
+if random(1) < 0.1 {
     if UberCont.xmas {
         spr_idle = sprSnowBanditIdle
         spr_walk = sprSnowBanditWalk
         spr_hurt = sprSnowBanditHurt
         spr_dead = sprSnowBanditDead
-    } else if UberCont.halloween {
+    }
+	else if UberCont.halloween {
         spr_idle = sprSpookyBanditIdle
         spr_walk = sprSpookyBanditWalk
         spr_hurt = sprSpookyBanditHurt
@@ -38,7 +39,7 @@ if random(1) < .1 {
     }
 }
 
-if GameCont.area == 5 {
+if GameCont.area == area_city {
     spr_idle = sprSnowBanditIdle
     spr_walk = sprSnowBanditWalk
     spr_hurt = sprSnowBanditHurt

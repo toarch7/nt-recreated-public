@@ -1,6 +1,5 @@
-with instance_create(x, y, BulletHit) {
-    sprite_index = sprHorrorBulletHit
-    if other.sprite_index == sprHorrorBBullet {
-        sprite_index = sprHorrorBulletHitB
-    }
+if sprite_index == sprHorrorBBullet && spr_fade == sprHorrorBulletHit {
+	spr_fade = sprHorrorBulletHitB
 }
+
+event_inherited()

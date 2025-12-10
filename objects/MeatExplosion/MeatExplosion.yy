@@ -15,7 +15,10 @@
     "name":"FX",
     "path":"folders/Objects/FX.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"damagesource",
+    "path":"objects/damagesource/damagesource.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,

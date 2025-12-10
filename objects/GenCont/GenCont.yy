@@ -15,8 +15,8 @@
   "name":"GenCont",
   "overriddenProperties":[],
   "parent":{
-    "name":"Cont",
-    "path":"folders/Objects/Cont.yy",
+    "name":"Generation",
+    "path":"folders/Objects/Controllers/Area/Generation.yy",
   },
   "parentObjectId":null,
   "persistent":false,

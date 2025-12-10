@@ -11,4 +11,4 @@ event_inherited()
 snd_hurt = sndHitMetal
 snd_dead = sndGeneratorBreak
 
-image_xscale = choose(1, - 1)
+image_xscale = choose(1, -1)

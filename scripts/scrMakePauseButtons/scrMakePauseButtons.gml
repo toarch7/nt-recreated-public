@@ -9,24 +9,24 @@ function scrMakePauseButtons() {
 		// Settings
         with instance_create(_right - 68, _top_row, PauseButton) {
 			image_index = 2
-			appear = 2
+			appear = 3
 		}
 		// Continue
         with instance_create(_right - 78, _bottom_row, PauseButton) {
 			image_index = 3
-			appear = 1
+			appear = 3
 		}
 		// Menu
         with instance_create(_left + 45, _top_row, PauseButton) {
 			image_index = 0
-			appear = 2
+			appear = 1
 		}
 		
         if weekly_run || !daily_run {
 			// Retry
             with instance_create(_left + 60, _bottom_row, PauseButton) {
 				image_index = 1
-				appear = 1
+				appear = 2
 			}
 		}
     }

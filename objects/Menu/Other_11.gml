@@ -21,14 +21,10 @@ for(var i = 0; i < INPUT_MAX_PLAYERS; ++ i) {
 	}
 	
 	if portrait_offsets[i] != 0 {
-		var _amount = clamp(portrait_offsets[i], 0, 180)
+		var _amount = min(portrait_offsets[i], 180)
 		
-		if _amount == 2 {
-			portrait_offsets[i] = 0
-		}
-		else if _amount == 90 {
-			portrait_offsets[i] = 2
-		}
+		if (_amount == -2) portrait_offsets[i] = 0
+		else if (_amount == 90) portrait_offsets[i] = -2
 		else portrait_offsets[i] = 90
 	}
 }

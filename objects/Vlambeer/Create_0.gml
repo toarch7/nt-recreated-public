@@ -102,17 +102,17 @@ else if instance_exists(GameCont) {
     instance_destroy()
 }
 else {
-    if instance_exists(MusCont) {
-        with MusCont
-			instance_destroy()
-    }
-
+	scrLetterbox(true)
+	
+	instance_destroy(MusCont)
     instance_create(x, y, MusCont)
-
+	
     alarm[0] = 120
     mode = 0
-
+	
     snd_play(sndVlambeer)
 }
 
 da = 0
+
+

@@ -1,5 +1,5 @@
 if sprite_index == spr_disappear {
-    if instance_exists(creator) && skill_get(5) {
+    if instance_exists(creator) && scr_skill_get(5) {
         with creator {
             repeat 6 + irandom(3) {
                 with instance_create(x, y, AnimParticle) {
@@ -30,13 +30,10 @@ if sprite_index == spr_disappear {
             yprevious = y
         }
     }
-
-    with creator {
-        canshield = ceil(other.time / 3)
-    }
-
+	
     instance_destroy()
-} else {
+}
+else {
     image_index = 3
     image_speed = 0
 }

@@ -8,7 +8,7 @@ with instance_create(x + expl_x + orandom(4), y + expl_y + orandom(4), PopoExplo
     image_xscale -= 0.5
     image_yscale -= 0.5
 	
-    if skill_get(5) {
+    if scr_skill_get(5) {
         image_xscale += 0.5
         image_yscale += 0.5
 		

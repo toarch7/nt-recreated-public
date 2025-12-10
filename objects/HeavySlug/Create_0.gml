@@ -1,8 +1,11 @@
 event_inherited()
 friction = 1
 wallbounce = 2
+knockback_speed = 14
+spr_fade = sprHeavySlugHit
+damage = 60
 if instance_exists(Player) {
-    if skill_get(15) wallbounce = 6
+    if scr_skill_get(mut_shotgun_shoulders) wallbounce = 6
 }
 typ = 1
 bonus = 10

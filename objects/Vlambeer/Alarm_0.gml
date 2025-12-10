@@ -1,7 +1,6 @@
 if mode >= 3 {
-    instance_create(x, y, SpiralCont)
+	instance_create(x, y, SpiralCont)
     instance_create(x, y, Logo)
-	
     instance_destroy()
 } 
 else {

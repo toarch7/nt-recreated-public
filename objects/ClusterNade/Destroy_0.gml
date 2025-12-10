@@ -1,19 +1,19 @@
-num = 8
-snd_play_hit(sndClusterOpen, 0.2)
+var _num = 8 + scrCrownCheck(crwn_death)
 
-if GameCont.crown == 2 num++
-
-repeat num {
-    with instance_create(x + random(4) - 2, y + random(4) - 2, SmallGrenade) {
-        motion_add(random_angle, 3 + random(5))
+repeat _num {
+	var _dir = random_angle, _spd = random_range(3, 5)
+	
+    with scr_projectile_create(
+		x + orandom(2), y + orandom(2),
+		SmallGrenade, _dir, _spd
+	) {
         motion_add(other.direction, 2)
-        hit_id = other.hit_id
-        team = other.team
         friction = 0.4
     }
 }
 
-repeat 8 {
-    with instance_create(x, y, Smoke)
-    motion_add(random_angle, random(2) + 3)
+snd_play_hit(sndClusterOpen, 0.2)
+
+repeat (8) {
+	with (instance_create(x, y, Smoke)) motion_add(random_angle, random_range(2, 3))
 }

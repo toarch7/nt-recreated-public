@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if active = 1 {
+if active && current_frame_active {
+    motion_add_m(direction, accel, maxspeed)
     instance_create(x, y, Smoke)
-    if speed < 12 speed += 2
 }

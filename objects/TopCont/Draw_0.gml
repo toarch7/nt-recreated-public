@@ -123,8 +123,8 @@ if instance_exists(Player) {
 if !scrGameIsGenerationScreen() {
     if !instance_exists(NothingSpiral) {
 		with Spiral {
-	        draw_sprite_ext(sprite_index, - 1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_white, 1)
-	        draw_sprite_ext(sprite_index, - 1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_black, 0.8 - image_xscale)
+	        draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_white, 1)
+	        draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_black, 0.8 - image_xscale)
 	    }
 	}
 	
@@ -148,7 +148,7 @@ if !scrGameIsGenerationScreen() {
     }
 
     with LevelUp {
-        draw_sprite(sprite_index, - 1, x, y)
+        draw_sprite(sprite_index, -1, x, y)
     }
 
     draw_set_halign(fa_left)

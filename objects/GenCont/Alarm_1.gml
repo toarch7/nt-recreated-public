@@ -24,15 +24,13 @@ if instance_exists(Player) {
     with instance_random(Player) {
         if GameCont.area == 100 {
             snd_play(snd_valt)
-        } else if GameCont.subarea == 1 {
+        }
+		else if GameCont.subarea == 1 {
             snd_play(snd_wrld)
-
-            if GameCont.area == 106 {
-                var s = asset_get_index("sndMutant" + string(race) + "IDPD")
-
-                if audio_exists(s) {
-                    snd_play_hit_big(s, 0.1)
-                }
+			
+            if GameCont.area == area_hq {
+                var _sound = asset_get_index("sndMutant" + string(race) + "IDPD")
+                if (audio_exists(_sound)) snd_play(_sound, 0.1)
             }
         }
     }
@@ -88,9 +86,6 @@ with Wall {
     if place_free(x, y + 16) h = 24 - r
     else h = 20 - r
 }
-
-//with WeaponChest
-//instance_create(x,y,DramaCamera)
 
 instance_activate_object(Bones)
 

@@ -2,37 +2,26 @@
 #macro GAME_BUILD 3000
 #macro BETA true
 
-opt_fulscrn = 1
-opt_fitscrn = 1
-opt_mousecp = 1
-opt_bksides = 0
-
-native_cursor_inst = -1
-
-//show_debug_overlay(1)
-
-font = fntM1
-big_font = fntBig
-
-draw_set_font(font)
-device_mouse_dbclick_enable(0)
-mp_potential_settings(90, 5, 5, 0)
-
 global.string_split_list = ds_list_create()
 
-pauseimg = -1
 version = GAME_VERSION
 public = true
 
-scrn = 0
-scrn_take = 0
+native_cursor_inst = -1
 
 //DEFAULT STUFF
 race = 0
 paused = false
 want_pause = false
 quit_pause = false
+pauseimg = -1
+pause_portrait_anim = 0
 alarm[0] = 30
+
+// non-public when running through GameMaker IDE
+if GM_build_type == "run" {
+	public = false
+}
 
 saving = 0
 saving_index = 0
@@ -40,14 +29,12 @@ saving_index = 0
 mainsound = audio_emitter_create()
 mainvol = 1
 
-// non-public when running through GameMaker IDE
-if GM_build_type == "run" {
-	public = false
-}
-
 audio_emitter_falloff(mainsound, 100, 300, 1)
 
-if is_undefined(my_player) scr_playerinstances_reset_all()
+if (is_undefined(my_player)) scr_playerinstances_reset_all()
+
+letterbox = 0
+letterbox_frame = 0
 
 scrInit()
 
@@ -65,28 +52,10 @@ scrSetViewSize()
 draw_unlock = 0
 unlock_text = ""
 
-current_dt = date_current_datetime()
-
-date_day = date_get_day(current_dt)
-date_month = date_get_month(current_dt)
-date_year = date_get_year(current_dt)
-
-if date_day == 1 && date_month == 4 {
-    april_fools = 1
-}
-
-if date_day >= 27 && date_month == 12 {
-    xmas = 1
-}
-
-if date_day >= 30 && date_month == 10 {
-    halloween = 1
-}
-
-if date_day == 7 && date_month == 8 {
-    birthday = 1
-}
-
+if (current_day == 1 && current_month == 4) april_fools = true
+if (current_day >= 27 && current_month == 12) xmas = true
+if (current_day >= 30 && current_month == 10) halloween = true
+if (current_day == 7 && current_month == 8) birthday = true
 
 //daily
 namereq = -1
@@ -147,6 +116,12 @@ outsound = 0
 // check for potential achievement sync-up
 scrUnlocksCharacterStats()
 
+font = fntM1
+big_font = fntBig
+
+draw_set_font(font)
+device_mouse_dbclick_enable(0)
+//mp_potential_settings(90, 5, 5, 0)
 gamepad_set_axis_deadzone(0, 0.1)
 
 localcoop = 0
@@ -191,3 +166,5 @@ if MultiplayerConfig
 	scrWindowOpenSecondary(true)
 
 global.seed = random_get_seed()
+
+test_framerate_uncapped = false

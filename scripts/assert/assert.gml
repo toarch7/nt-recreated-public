@@ -1,3 +1,5 @@
+#macro debug_assert if (GM_build_type != "run") assert
+
 /// @function assert
 /// @param value
 /// @param [template]

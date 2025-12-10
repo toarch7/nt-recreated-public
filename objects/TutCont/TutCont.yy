@@ -11,8 +11,8 @@
   "name":"TutCont",
   "overriddenProperties":[],
   "parent":{
-    "name":"Cont",
-    "path":"folders/Objects/Cont.yy",
+    "name":"Area",
+    "path":"folders/Objects/Controllers/Area.yy",
   },
   "parentObjectId":null,
   "persistent":false,

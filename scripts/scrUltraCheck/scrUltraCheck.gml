@@ -17,7 +17,7 @@ function scrUltraCheck(_race, _ultra) {
 }
 
 /// @function scrUltraCheckPlayerRace
-/// @param player_instance
+/// @param player
 /// @param {Real|Enum.Race} race_id
 /// @param {Real|Enum.UltraSkill} ultra_id
 function scrUltraCheckPlayerRace(_player, _race, _ultra) {

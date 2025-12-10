@@ -41,7 +41,4 @@ instance_create(x, y, PortalClear)
 image_speed = 0.4
 alarm[0] = 40 + instance_number(VanSpawn) * 10
 
-if GameCont.area == 101
-	snd_play(sndOasisPopo)
-
-else snd_play(sndVanWarning)
+snd_play(GameCont.underwater ? sndOasisPopo : sndVanWarning)

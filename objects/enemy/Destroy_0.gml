@@ -1,22 +1,22 @@
-if !instance_exists(id) exit
-
 if givekill && instance_exists(GameCont) {
     GameCont.kills ++
 }
 
-if instance_number(enemy) == 2 with Player snd_play_hit_big(sndLastEnemy, 0.2)
+if (instance_number(enemy) == 2) {
+	with (Player) snd_play_hit_big(sndLastEnemy, 0.2)
+}
 
 if corpse {
     with instance_create(x, y, CorpseActive) {
         size = other.size
         mask_index = other.mask_index
         motion_add(other.direction, other.speed)
-        speed += max(0, - other.hp / 5)
+        speed += max(0, -other.hp / 5)
         sprite_index = other.spr_dead
         image_xscale = other.right
 
         if instance_exists(Player) {
-            if skill_get(mut_impact_wrists) speed += 8
+            if scr_skill_get(mut_impact_wrists) speed += 8
         }
 
         if speed > 16 speed = 16
@@ -31,16 +31,7 @@ snd_play(snd_dead)
 
 sleep(20 + size * 15)
 
-if instance_exists(Player) {
-    with Player {
-        if race == Race.Melting {
-			other.raddrop += 1
-		}
-	}
-}
-
-scrRadDrop(raddrop)
-
+scrRadDrop(x, y, raddrop + scrPlayerCountRace(Race.Melting))
 
 if hp > 0 exit
 
@@ -51,17 +42,17 @@ with Player {
     }
 
 	//
-	var _lucky_shot = skill_get(mut_lucky_shot)
+	var _lucky_shot = scr_skill_get(mut_lucky_shot)
     
 	if _lucky_shot && random(10) < 1 {
 		var _ammo_type = irandom_range(Ammo.Bullets, Ammo.NUM_AMMO_TYPES - 1),
-			_ammo_give = round(scrAmmoGetTypeAmount(_ammo_type) / 2) * _lucky_shot
+			_ammo_give = round(scrAmmoGetPickupAmount(_ammo_type) / 2) * _lucky_shot
 		
 		scrPlayerGiveAmmo(id, _ammo_type, _ammo_give, true)
     }
 
     //
-	var _bloodlust = skill_get(mut_bloodlust)
+	var _bloodlust = scr_skill_get(mut_bloodlust)
     
 	if _bloodlust && random(15) < 1 {
         scrPlayerHeal(id, _bloodlust, true)
@@ -77,7 +68,7 @@ with Player {
     }
 		
 	//
-    if skill_get(mut_trigger_fingers) {
+    if scr_skill_get(mut_trigger_fingers) {
 		if reload > 0 {
 			reload = max(1, floor(reload * 0.6))
 			trigger_fingers_shine = 6

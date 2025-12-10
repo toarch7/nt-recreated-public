@@ -17,7 +17,7 @@ if !instance_exists(GenCont) {
 	
 	instance_create(x, y, FXChestOpen)
 	
-	if skill_get(9) {
+	if scr_skill_get(9) {
 	    snd_play(sndHealthChestBig)
 	}
 	else snd_play(sndHealthChest)

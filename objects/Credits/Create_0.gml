@@ -58,3 +58,5 @@ if !instance_exists(MenuOptions) {
 }
 
 file_delete("gamestate.dat")
+
+scrLetterbox(false)

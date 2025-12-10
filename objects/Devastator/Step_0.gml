@@ -1,6 +1,9 @@
-if lockstep_stop
-	exit
-
-instance_create(((x + random(32)) - 16), ((y + random(32)) - 16), PlasmaImpact)
-x += (random(2) - 1)
-y += (random(2) - 1)
+if current_frame_active {
+	instance_create(
+		x + orandom(16),
+		y + orandom(16),
+		PlasmaImpact)
+	
+	x += orandom(1)
+	y += orandom(1)
+}

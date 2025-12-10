@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndRogueAim",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndRogueAim",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":1,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":0.664031,
-  "exportDir":"",
-  "name":"sndRogueAim",
-  "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+  "bitDepth": 1,
+  "channelFormat": 1,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 0.664031,
+  "exportDir": "",
+  "name": "sndRogueAim",
+  "parent": {
+    "name": "Sounds",
+    "path": "folders/Sounds.yy"
   },
-  "preload":true,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndRogueAim.wav",
-  "volume":0.8,
+  "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndRogueAim.wav",
+  "volume": 0.8
 }

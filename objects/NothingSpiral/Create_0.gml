@@ -1,1 +1,2 @@
-with TopPot instance_destroy()
+instance_destroy(TopPot)
+scrLetterbox(false)

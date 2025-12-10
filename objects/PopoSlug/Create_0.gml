@@ -1,7 +1,6 @@
 event_inherited()
 friction = 0.8
-
-wallbounce = 0
-
+knockback_speed = 8
+spr_fade = sprPopoSlugDisappear
+damage = 5
 typ = 1
-hit_id = sprInspectorIdle

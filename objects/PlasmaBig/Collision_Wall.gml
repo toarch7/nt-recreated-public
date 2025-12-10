@@ -3,4 +3,4 @@ if lockstep_stop
 
 x -= hspeed
 y -= vspeed
-image_xscale -= .1
+image_xscale -= 0.1

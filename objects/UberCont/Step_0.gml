@@ -7,7 +7,7 @@ input_tick()
 
 #region Opening & closing debug overlay
 if !public && scr_keyboard_check_pressed(vk_tilde) {
-	show_debug_log(!is_debug_overlay_open())
+	scr_debug_overlay_toggle()
 	keyboard_string = ""
 }
 
@@ -150,12 +150,35 @@ if !paused && !want_pause && !instance_exists(PauseButton) {
 }
 
 if instance_exists(CoopController) {
-	with CoopController
-		event_user(0)
+	with (CoopController) event_user(0)
 }
 
 if is_desktop {
-	if window_has_focus() && scr_window_get_fullscreen() != global.__window_borderless_requested {
-		scr_window_set_fullscreen(global.__window_borderless_requested)
+	if scr_keyboard_check_held(vk_alt) && scr_keyboard_check_pressed(vk_enter) {
+		opt_fullscreen = !opt_fullscreen
+		scr_window_set_fullscreen(opt_fullscreen)
 	}
+	
+	if global.__window_borderless_fs_requested {
+		if scr_window_get_fullscreen() != global.__window_borderless_fs_target {
+			if window_has_focus() {
+				scr_window_set_fullscreen(global.__window_borderless_fs_target)
+			}
+		}
+		else {
+			global.__window_borderless_fs_requested = false
+		}
+	}
+}
+
+if instance_exists(TestCont) && global.__debug_test_framerate_uncapped {
+	if !test_framerate_uncapped {
+		display_reset(display_aa, false)
+		game_set_speed(game_speed_uncaped, gamespeed_fps)
+		test_framerate_uncapped = true
+	}
+}
+else if test_framerate_uncapped {
+	display_reset(display_aa, opt_vsync)
+	game_set_speed(30, gamespeed_fps)
 }

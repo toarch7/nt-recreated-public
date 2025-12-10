@@ -1,3 +1,3 @@
-function is_gamepad(index = global.index) {
-	return KeyCont.gamepad[index]
+function is_gamepad(_index = global.index) {
+	return KeyCont.gamepad[_index]
 }

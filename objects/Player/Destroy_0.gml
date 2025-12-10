@@ -30,7 +30,7 @@ with instance_create(x, y, WepPickup) {
     type = wep_type[wep]
     sprite_index = wep_sprt[wep]
     motion_add(other.direction, other.speed)
-    speed += max(0, - other.hp / 5)
+    speed += max(0, -other.hp / 5)
     motion_add(random_angle, 2)
     speed *= 0.8
 }
@@ -45,7 +45,7 @@ if bwep > 0 {
         type = wep_type[wep]
         sprite_index = wep_sprt[wep]
         motion_add(other.direction, other.speed)
-        speed += max(0, - other.hp / 5)
+        speed += max(0, -other.hp / 5)
         motion_add(random_angle, 2)
         speed *= 0.8
     }
@@ -85,7 +85,7 @@ if race != 13 {
         mask_index = other.mask_index
         motion_add(other.direction, other.speed)
 
-        speed += max(0, - other.hp / 5)
+        speed += max(0, -other.hp / 5)
 
         sprite_index = other.spr_dead
         image_xscale = other.right
@@ -171,7 +171,7 @@ if race == 11 {
     }
 }
 
-if GameCont.area == 101 && race != 1 && race != 8 {
+if GameCont.underwater && race != Race.Fish && race != Race.Robot {
     with instance_create(x, y, Wind) sprite_index = sprPlayerBubblePop
 }
 

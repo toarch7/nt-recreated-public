@@ -7,7 +7,7 @@ if other.team != team and other.hp > 0 {
         sprite_index = spr_hurt
         image_index = 0
 
-        motion_addm(other.direction, 3)
+        motion_add_m(other.direction, 3)
 
         last_hit = other.hit_id
         inframes = 5

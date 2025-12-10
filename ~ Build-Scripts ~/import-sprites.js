@@ -236,6 +236,7 @@ function performSpriteImport(isForce) {
         
         for(let spriteIndex = 0; spriteIndex < spriteCount; ++spriteIndex) {
             let pos = wad.readUint32(offset + (spriteIndex + 1) * 4);
+            let start = pos;
             let name = wad.readRefSTRG(pos);
             let width = wad.readUint32(pos += 4);
             let height = wad.readUint32(pos += 4);
@@ -251,8 +252,8 @@ function performSpriteImport(isForce) {
             let preload = wad.readBool(pos ++);
             let bboxMode = wad.readUint32(pos += 4);
             let sepMasks = wad.readUint32(pos += 4);
-            let originX = wad.readUint32(pos += 4);
-            let originY = wad.readUint32(pos += 4);
+            let originX = wad.readInt32(pos += 4);
+            let originY = wad.readInt32(pos += 4);
             
             if (isGMS2) pos += 28;
             let imageNumber = wad.readUint32(pos += 4);
@@ -272,10 +273,11 @@ function performSpriteImport(isForce) {
     
     const chunkSPRTMap = generateSpriteInfoMap();
     fs.writeFileSync("game_sprites.json", JSON.stringify(chunkSPRTMap, null, 2));
-
+    
+    const loadedTextures = new Array(texturePages.length).fill(null);
+    
     function importSpriteImages() {
         const projectSpritesLocation = project.locate("sprites/");
-        const loadedTextures = new Array(texturePages.length).fill(null);
         const missingProjectSprites = [];
         let totalSprites = Object.keys(chunkSPRTMap).length;
         let spriteCounter = 0;
@@ -292,6 +294,22 @@ function performSpriteImport(isForce) {
             }
             else if (spriteCounter % 5 === 0) {
                 process.stdout.write(".");
+            }
+
+            if (Options.saveResourceDumps) {
+                if (!fs.existsSync("dumped_sprites")) fs.mkdirSync("dumped_sprites");
+                let imageNumber = sprite.imageNumber;
+
+                if (imageNumber > 0 && sprite.width && sprite.height) {
+                    let png;
+                    try {
+                        png = createSpriteStripPNG(sprite, 0, imageNumber);
+                    }
+                    catch(e) { console.error(e.message); continue; }
+
+                    let pngWriteBuffer = PNG.sync.write(png);
+                    fs.writeFileSync("dumped_sprites/" + spriteName + "_strip" + imageNumber + ".png", pngWriteBuffer);
+                }
             }
 
             const spriteLocation = projectSpritesLocation + spriteName + "/";
@@ -341,45 +359,14 @@ function performSpriteImport(isForce) {
                     continue;
                 }
 
-                const frameData = sprite.tPageItems[frameNumber];
-                const texturePageId = frameData.texturePageId;
-                const texturePage = texturePages[texturePageId];
-                if (!texturePage) {
-                    console.warn("Frame", frameNumber, "of", spriteName, "is located on an unknown texture page!");
+                let png;
+                
+                try {
+                    png = createSpriteStripPNG(sprite, frameNumber, 1);
+                }
+                catch(e) {
+                    console.error(e.message);
                     continue;
-                }
-                
-                const [ srcX, srcY ] = frameData.sourcePosition;
-                const [ cropWidth, cropHeight ] = frameData.sourceSize;
-                const [ targetX, targetY ] = frameData.targetPosition;
-                const [ frameWidth, frameHeight ] = frameData.boundingSize;
-                const textureW = texturePage.textureImageWidth;
-                let canvas = loadedTextures[texturePageId];
-                
-                if (!canvas) {
-                    canvas = PNG.sync.read(texturePage.textureData);
-                    loadedTextures[texturePageId] = canvas;
-                }
-                
-                let png = new PNG({
-                    filterType: -1,
-                    width: frameWidth,
-                    height: frameHeight
-                });
-
-                for(let y = 0; y < cropHeight; ++y) {
-                    for(let x = 0; x < cropWidth; ++x) {
-                        let x1 = x + srcX;
-                        let y1 = y + srcY;
-                        let x2 = x + targetX;
-                        let y2 = y + targetY;
-                        let sourceIdx = (y1 * textureW + x1) << 2;
-                        let targetIdx = (y2 * frameWidth + x2) << 2;
-                        png.data[targetIdx + 0] = canvas.data[sourceIdx + 0];
-                        png.data[targetIdx + 1] = canvas.data[sourceIdx + 1];
-                        png.data[targetIdx + 2] = canvas.data[sourceIdx + 2];
-                        png.data[targetIdx + 3] = canvas.data[sourceIdx + 3];
-                    }
                 }
                 
                 let pngWriteBuffer = PNG.sync.write(png);
@@ -397,6 +384,54 @@ function performSpriteImport(isForce) {
 
     importSpriteImages();
 
+    function createSpriteStripPNG(sprite, startFrame, frameCount = 1) {
+        let png = new PNG({
+            filterType: -1,
+            width: sprite.width * frameCount,
+            height: sprite.height
+        });
+        
+        for(let subimageIndex = 0; subimageIndex < frameCount; ++subimageIndex) {
+            const frameNumber = startFrame + subimageIndex;
+            const frameData = sprite.tPageItems[frameNumber];
+            const texturePageId = frameData.texturePageId;
+            const texturePage = texturePages[texturePageId];
+
+            assert.ok(texturePage, "Frame " + frameNumber + " of " + sprite.name + " is located on an unknown texture page!");
+            
+            const [ srcX, srcY ] = frameData.sourcePosition;
+            const [ cropWidth, cropHeight ] = frameData.sourceSize;
+            const [ targetX, targetY ] = frameData.targetPosition;
+            const [ frameWidth, frameHeight ] = frameData.boundingSize;
+            const stripFrameOffset = sprite.width * subimageIndex;
+            const textureW = texturePage.textureImageWidth;
+            
+            let canvas = loadedTextures[texturePageId];
+            
+            if (!canvas) {
+                canvas = PNG.sync.read(texturePage.textureData);
+                loadedTextures[texturePageId] = canvas;
+            }
+
+            for(let y = 0; y < cropHeight; ++y) {
+                for(let x = 0; x < cropWidth; ++x) {
+                    let x1 = x + srcX;
+                    let y1 = y + srcY;
+                    let x2 = x + targetX + stripFrameOffset;
+                    let y2 = y + targetY;
+                    let sourceIdx = (y1 * textureW + x1) << 2;
+                    let targetIdx = (y2 * png.width + x2) << 2;
+                    png.data[targetIdx + 0] = canvas.data[sourceIdx + 0];
+                    png.data[targetIdx + 1] = canvas.data[sourceIdx + 1];
+                    png.data[targetIdx + 2] = canvas.data[sourceIdx + 2];
+                    png.data[targetIdx + 3] = canvas.data[sourceIdx + 3];
+                }
+            }
+        }
+        
+        return png;
+    }
+
     function performSpriteSizeFixes() {
         for(let dirname of projectSpriteDirectories) {
             const spriteLocation = projectSpritesLocation + dirname + "/";
@@ -408,6 +443,7 @@ function performSpriteImport(isForce) {
 
             const spriteInfo = project.parseYY(fs.readFileSync(spriteLocation + yyName, "utf-8"));
             let { name, width, height, bbox_left, bbox_right, bbox_top, bbox_bottom, bboxMode, collisionKind } = spriteInfo;
+            let { xorigin, yorigin } = spriteInfo.sequence;
 
             if (name in spriteOverridesMap) {
                 let overrides = spriteOverridesMap[name];
@@ -435,7 +471,7 @@ function performSpriteImport(isForce) {
                 assert.ok((frameImageDims.width === correctWidth && frameImageDims.height === correctHeight),
                         dirname + " sprite image dimensions are not equal to its dimensions size information from SPRT. Please make sure that your exported sprites are up-to-date!");
 
-                if (width != correctWidth|| height != correctHeight) {
+                if (width != correctWidth || height != correctHeight) {
                     console.error(name, "sprite width/height doesn't match with image dimensions! Sprite:",
                             width + "/" + height, "and Image:", correctWidth + "/" + correctHeight);
                     spriteInfo.width = correctWidth;
@@ -449,10 +485,24 @@ function performSpriteImport(isForce) {
                     changesWereMade = true;
                 }
 
+                if (bboxMode != sprtData.bboxMode) {
+                    console.log(name, "BBox mode mismatch! Sprite:", bboxMode, "and SPRT:", sprtData.bboxMode);
+                    spriteInfo.bboxMode = sprtData.bboxMode;
+                    changesWereMade = true;
+                }
+
                 if (collisionKind == sprtData.sepMasks) {
                     let correctValue = sprtData.sepMasks ? 0 : 1;
                     console.log(name, "BBox sep. masks kind mismatch! Sprite:", collisionKind, "and SPRT:", correctValue);
                     spriteInfo.collisionKind = correctValue;
+                    changesWereMade = true;
+                }
+
+                if (!(xorigin == sprtData.originX && yorigin == sprtData.originY)) {
+                    console.log(name, "Sprite origin points mismatch! Sprite:", xorigin, yorigin, "and SPRT:", sprtData.originX, sprtData.originY);
+                    spriteInfo.sequence.xorigin = sprtData.originX;
+                    spriteInfo.sequence.yorigin = sprtData.originY;
+                    console.log(spriteInfo.sequence.xorigin, spriteInfo.sequence.yorigin);
                     changesWereMade = true;
                 }
                 

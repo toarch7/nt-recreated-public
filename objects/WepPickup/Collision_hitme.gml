@@ -7,13 +7,13 @@ if mask_index != mskWepPickup {
             if !inframes {
                 hp -= 15 + 4 * GameCont.level
                 sprite_index = spr_hurt
-                snd_play_hit(snd_hurt, .2)
+                snd_play_hit(snd_hurt, 0.2)
                 inframes = 5
             }
         }
 
         instance_create(x, y, ThrowHit)
 
-        if !skill_get(5) speed *= .2
+        if !scr_skill_get(5) speed *= 0.2
     }
 }

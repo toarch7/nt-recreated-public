@@ -1,3 +1,2 @@
-with FloorMaker {
-    instance_destroy()
-}
+/// @function Safety break
+instance_destroy(FloorMaker)

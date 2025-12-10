@@ -1,25 +1,3 @@
-if lockstep_stop
-	exit
-
-if other.team != team && !other.inframes && hit_id > 0 {
-    other.last_hit = hit_id
-}
-
-if other.team != team {
-    with other {
-        if !inframes {
-            snd_play_hit(snd_hurt, 0.2)
-            
-			inframes = 5
-            hp -= 10
-			
-            sprite_index = spr_hurt
-            image_index = 0
-            
-			motion_add(point_direction(other.x, other.y, x, y), 2)
-            sleep(5)
-			
-            BackCont.shake += 2
-        }
-    }
+if scr_can_hit(other.id) && scr_hit(other.id, damage, hitid) {
+	with (other) motion_add_m(point_direction(other.x, other.y, x, y), 2, 16)
 }

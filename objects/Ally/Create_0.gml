@@ -1,13 +1,14 @@
 event_inherited()
 
-skill_got[14] = 0
 wkick = -1
 spr_chrg = -1
 spr_fire = -1
 raddrop = 5
 max_hp = 12
 
-if instance_exists(Player) && ultra_get(2) {
+buttgot = scr_skill_get(mut_throne_butt)
+
+if scrUltraCheck(Race.Rebel, UltraSkill.PersonalGuard) {
     max_hp = 30
 }
 
@@ -19,7 +20,7 @@ spr_hurt = sprAllyHurt
 spr_dead = sprAllyDead
 image_speed = 0.4
 friction = 0.4
-right = choose(1, - 1)
+right = choose(1, -1)
 hp = max_hp
 target = noone
 team = 2

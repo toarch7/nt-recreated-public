@@ -12,7 +12,9 @@ image_speed = 0.3 + random(0.2)
 friction = 0.15
 image_angle = random_angle
 
-if GameCont.area == 101 instance_destroy()
+if GameCont.underwater {
+	instance_create(x, y, Bubble)
+	instance_destroy()
+}
 
-/* */
-/*  */
+damage = 2

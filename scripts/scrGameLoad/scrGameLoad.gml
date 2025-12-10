@@ -1,4 +1,6 @@
 function scrGameLoad() {
+	exit
+	
     try {
         var c = buffer_load("gamestate.dat")
         var b = buffer_decompress(c)

@@ -9,8 +9,8 @@
   "name":"GameOver",
   "overriddenProperties":[],
   "parent":{
-    "name":"Cont",
-    "path":"folders/Objects/Cont.yy",
+    "name":"Miscellaneous",
+    "path":"folders/Objects/Miscellaneous.yy",
   },
   "parentObjectId":null,
   "persistent":false,

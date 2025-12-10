@@ -8,7 +8,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "node regen.js --dryrun --include-wad u99r1.win && node regen.js --dryrun --include-wad v100.win",
-    "regen": "node regen.js"
+    "regen": "node regen.js",
+    "regen-ignores": "node regen.js --regen-ignore-file"
   },
   "author": "toarch7",
   "license": "GPL-3.0",

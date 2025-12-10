@@ -1,4 +1,1 @@
-if lockstep_stop
-	exit
-
-if other.team > 1 hp = 0
+if (other.team == team_player) hp = 0

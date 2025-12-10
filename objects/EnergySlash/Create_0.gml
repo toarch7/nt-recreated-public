@@ -1,10 +1,3 @@
 event_inherited()
-image_speed = 0.4
-
-if instance_exists(Player) {
-    if skill_get(17) image_speed = 0.2
-}
-
-typ = 0 //0 = nothing, 1 = deflectable, 2 = destructable, 3 = deflectable
-
-walled = 0
+image_speed = scr_skill_get(mut_laser_brain) ? 0.2 : 0.4
+damage = 22

@@ -19,11 +19,11 @@ timer = 0
 
 image_speed = 0.4
 friction = 0.4
-right = choose(1, - 1)
+right = choose(1, -1)
 hp = max_hp
 
 if instance_exists(Player) {
-    if skill_get(11) hp = round(hp * 0.8)
+    if scr_skill_get(11) hp = round(hp * 0.8)
 }
 
 

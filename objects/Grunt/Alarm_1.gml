@@ -5,7 +5,7 @@ if instance_exists(target) and roll = 0 {
     if random(hp / 2 + 2 + target.can_shoot * 3) < 1 and freeze > 40 {
         //ROLL
         if point_distance(x, y, target.x, target.y) > 150 direction = mcr_target_direction + random(60) - 30
-        else direction = mcr_target_direction + (70 + random(60)) * choose(1, - 1)
+        else direction = mcr_target_direction + (70 + random(60)) * choose(1, -1)
         speed = 4
         roll = 1
         snd_play(sndRoll)

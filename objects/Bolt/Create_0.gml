@@ -1,3 +1,7 @@
 event_inherited()
-typ = 2 //0 = normal, 1 = deflectable, 2 = destructable
-damage = 1
+damage = 20
+typ = 2
+
+check_wall_hit_damage = true
+
+marrow_distance = 24

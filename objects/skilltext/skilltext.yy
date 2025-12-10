@@ -10,8 +10,8 @@
   "name":"SkillText",
   "overriddenProperties":[],
   "parent":{
-    "name":"Cont",
-    "path":"folders/Objects/Cont.yy",
+    "name":"Level Up Screen",
+    "path":"folders/Objects/Miscellaneous/Level Up Screen.yy",
   },
   "parentObjectId":null,
   "persistent":true,

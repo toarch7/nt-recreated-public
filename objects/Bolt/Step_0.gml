@@ -1,13 +1,12 @@
-if lockstep_stop
-	exit
+/// @description Bolt marrow
 
 if instance_exists(enemy) && instance_exists(Player) {
-    if speed > 0 && skill_get(21) && damage {
-        dir = instance_nearest(x, y, enemy)
+    if speed > 0 && scr_skill_get(mut_bolt_marrow) && damage {
+        var _target = instance_nearest(x, y, enemy)
 
-        if point_distance(x, y, dir.x, dir.y) < 24 {
-            x = dir.x - hspeed
-            y = dir.y - vspeed
+        if point_distance(x, y, _target.x, _target.y) < marrow_distance {
+            x = _target.x - hspeed
+            y = _target.y - vspeed
         }
     }
 }

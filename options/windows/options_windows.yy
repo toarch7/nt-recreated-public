@@ -1,13 +1,8 @@
 {
   "$GMWindowsOptions":"v1",
   "%Name":"Windows",
-  "ConfigValues":{
-    "MultiplayerTesting":{
-      "option_windows_start_fullscreen":"false",
-    },
-  },
   "name":"Windows",
-  "option_windows_allow_fullscreen_switching":true,
+  "option_windows_allow_fullscreen_switching":false,
   "option_windows_borderless":false,
   "option_windows_company_info":"",
   "option_windows_copyright_info":"",
@@ -29,14 +24,14 @@
   "option_windows_resize_window":true,
   "option_windows_save_location":0,
   "option_windows_scale":0,
-  "option_windows_sleep_margin":1,
+  "option_windows_sleep_margin":10,
   "option_windows_splash_screen":"${options_dir}/windows/splash.png",
   "option_windows_start_fullscreen":false,
   "option_windows_steam_use_alternative_launcher":false,
   "option_windows_texture_page":"2048x2048",
   "option_windows_use_splash":false,
   "option_windows_version":"3.0.0.0",
-  "option_windows_vsync":true,
+  "option_windows_vsync":false,
   "resourceType":"GMWindowsOptions",
   "resourceVersion":"2.0",
 }

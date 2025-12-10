@@ -5,9 +5,8 @@ if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         if point_distance(target.x, target.y, x, y) > 48 {
             if random(4) < 1 {
-                if GameCont.area == 101 snd_play(sndOasisShoot)
-                else snd_play(sndEnemyFire)
                 wkick = 4
+                snd_play(GameCont.underwater ? sndOasisShoot : sndEnemyFire)
                 with instance_create(x, y, EnemyBullet1) {
                     motion_add(other.gunangle + random(20) - 10, 4)
                     image_angle = direction

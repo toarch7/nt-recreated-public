@@ -1,7 +1,7 @@
 event_inherited()
 
 if walk > 0 {
-    motion_add(direction, .8)
+    motion_add(direction, 0.8)
     walk -= 1
 }
 
@@ -18,7 +18,7 @@ if ammo {
         raddrop -= round(charge + 1)
 
         repeat round(charge + 1) {
-            with instance_create(x + random(2 + charge) * choose(1, - 1), y + random(2 + charge) * choose(1, - 1), HorrorBullet) {
+            with instance_create(x + random(2 + charge) * choose(1, -1), y + random(2 + charge) * choose(1, -1), HorrorBullet) {
                 motion_add(other.gunangle, 12)
                 image_angle = direction
                 hit_id = other.hit_id
@@ -26,7 +26,7 @@ if ammo {
             }
         }
 
-        charge += .1
+        charge += 0.1
     }
 
     ammo--

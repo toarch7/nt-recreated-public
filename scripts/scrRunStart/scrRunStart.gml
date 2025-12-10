@@ -1,14 +1,17 @@
 function scrRunStart() {
+	if (!instance_exists(GameCont)) instance_create(0, 0, GameCont)
+	
     random_set_seed(global.seed)
 	
 	print("Run started. Seed:", global.seed)
 	
-	with CoopController global.index = index
-	with Menu scrCrownSetCurrent(loadout_crown, true)
+	with (CoopController) global.index = index
+	
+	with (Menu) scrCrownSetCurrent(loadout_crown, true)
 	
     scrCreatePlayers(global.index)
 	
-    with Player {
+    with (Player) {
 		snd_play(scr_race_get_sound(race, "Cnfm", sndMutant0Cnfm))
 	}
 	

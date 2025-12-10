@@ -12,7 +12,7 @@ if instance_exists(target) {
                 gunangle = mcr_target_direction
                 gunoffset = random(20) - 10
             } else if random(4) < 3 {
-                direction = mcr_target_direction + (40 + random(60)) * choose(1, - 1)
+                direction = mcr_target_direction + (40 + random(60)) * choose(1, -1)
                 speed = 0.4
                 walk = 20 + random(10)
                 gunangle = mcr_target_direction

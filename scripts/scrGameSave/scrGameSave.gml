@@ -37,7 +37,7 @@ function scrGameSave() {
 
     var keys = [
 		"rng_state", "index", "seed", "is_server", "custom_seed",
-		"hardmode", "time", "party_gun_dropped", "crownpick", "recontinues"
+		"hardmode", "time", "party_gun_special_drop", "crownpick", "recontinues"
 	]
 
     for (var i = 0; i < array_length(keys); i++) {

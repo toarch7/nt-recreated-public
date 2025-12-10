@@ -1,16 +1,14 @@
 snd_play(sndExplosionL)
 
-ang = random_angle
-instance_create(x + lengthdir_x(16, ang), y + lengthdir_y(16, ang), GreenExplosion)
-instance_create(x + lengthdir_x(16, ang + 120), y + lengthdir_y(16, ang + 120), GreenExplosion)
-instance_create(x + lengthdir_x(16, ang + 240), y + lengthdir_y(16, ang + 240), GreenExplosion)
+var _ang = random_angle
 
-repeat 8 {
-    with instance_create(x, y, Rad) {
-        motion_add(other.direction, other.speed)
-        motion_add(random_angle, random(other.raddrop / 2) + 3)
-
-        repeat(speed)
-        speed *= 0.9
-    }
+repeat 3 {
+	scr_damage_create(
+		x + lengthdir_x(16, _ang),
+		y + lengthdir_y(16, _ang),
+		GreenExplosion)
+	
+	_ang += 120
 }
+
+scrRadDrop(x, y, 8)

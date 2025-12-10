@@ -76,7 +76,7 @@ if UberCont.opt_griller && !instance_exists(CrownIcon) && !instance_exists(Ultra
 						break
 					}
 				}
-				until skill > 0 && !skill_get(skill) && !instance_exists_var_notme(SkillIcon, "skill", skill)
+				until skill > 0 && !scr_skill_get(skill) && !instance_exists_var_notme(SkillIcon, "skill", skill)
 				
 				if skill < 0 {
 					skill = mut_heavy_heart + skill

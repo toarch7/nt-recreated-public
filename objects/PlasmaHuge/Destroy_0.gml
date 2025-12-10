@@ -1,21 +1,18 @@
-if skill_get(17) {
+if scr_skill_get(17) {
     snd_play_hit_big(sndPlasmaBigExplodeUpg, 0.2)
 } else snd_play_hit_big(sndPlasmaBigExplode, 0.2)
 
-ang = random_angle
-repeat(4) {
-    with instance_create(xprevious, yprevious, PlasmaBig) {
-        motion_add(other.ang, 2)
+var _ang = random_angle
+
+repeat 4 {
+    with scr_projectile_create(xprevious, yprevious, PlasmaBig, _ang) {
         image_angle = direction
-        team = other.team
     }
-    ang += 90
+	
+    _ang += 360 / 4
 }
 
-instance_create(x, y, PortalClear)
-
-with ThroneStatue {
-    if distance_to_object(other) <= 48 && instance_exists(Nothing) {
-        instance_destroy()
-    }
+with instance_create(x, y, PortalClear) {
+	image_xscale *= 1.5
+	image_yscale *= 1.5
 }

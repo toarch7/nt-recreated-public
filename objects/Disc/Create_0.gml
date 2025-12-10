@@ -1,9 +1,6 @@
 event_inherited()
-typ = 1 //0 = normal, 1 = deflectable, 2 = destructable, 3 = deflectable
-
+typ = 1
+damage = 6
 alarm[0] = 4
-
+hitid = HitId.Disc
 dist = 0
-hit_id = sprDisc
-
-creator = noone

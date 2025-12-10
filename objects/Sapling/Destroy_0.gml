@@ -4,8 +4,21 @@ var _ang = random_angle
 
 snd_play_hit(sndSaplingDead, 0.2)
 
-instance_create(x + lengthdir_x(24, _ang), y + lengthdir_y(24, _ang), MeatExplosion)
-instance_create(x + lengthdir_x(24, _ang + 120), y + lengthdir_y(24, _ang + 120), MeatExplosion)
-instance_create(x + lengthdir_x(24, _ang + 240), y + lengthdir_y(24, _ang + 240), MeatExplosion)
+repeat (3) {
+	with scr_damage_create(
+		x + ldrx(24, _ang), y + ldry(24, _ang), MeatExplosion
+	) {
+		creator = other.creator
+	}
+	
+	_ang += 120
+}
 
-instance_create(x, y, Scorchmark)
+with instance_create(x, y, CorpseActive) {
+	sprite_index = other.spr_dead
+	size = other.size
+	image_xscale *= other.right
+	direction = other.direction
+	speed = min(16, other.speed)
+	if (size != 0) speed /= size
+}

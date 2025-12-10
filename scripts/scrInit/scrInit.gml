@@ -128,6 +128,7 @@ function scrInit() {
     scrCrowns()
 	scrWeapons()
 	scrUltras()
+	scrDeathCauses()
 	
 	#endregion
 	

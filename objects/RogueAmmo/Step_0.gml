@@ -9,7 +9,7 @@ image_index += 0.4
 var player = instance_nearest(x, y, Player)
 
 if instance_exists(player) {
-	if point_distance(x,y,player.x,player.y) < 32 + (skill_get(3) * 64) or instance_exists(Portal) {
+	if point_distance(x,y,player.x,player.y) < 32 + (scr_skill_get(3) * 64) or instance_exists(Portal) {
 		var dir = point_direction(x, y, player.x, player.y),
 			xx = ldrx(6, dir),
 			yy = ldry(6, dir)

@@ -14,3 +14,7 @@ attract = 0
 raddrop = 8
 
 attract_flash = 0
+
+knockback_speed = 18
+
+grenade_pierce_on_overkill = true

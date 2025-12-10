@@ -24,8 +24,9 @@ if x < view_xview - 16 or x > view_xview + view_width + 16 or y < view_yview - 1
 
 if (!sound && image_xscale > 1.3)
 {
-    snd_play_pitchvol(choose(sndPortalFlyby1, sndPortalFlyby2, sndPortalFlyby3, sndPortalFlyby4), 0.1)
-    sound = 1
+	var _snd = choose(sndPortalFlyby1, sndPortalFlyby2, sndPortalFlyby3, sndPortalFlyby4)
+    snd_play_pitchvol(_snd, 0.1, UberCont.opt_ambvol)
+    sound = true
 }
 
 image_angle += rotspeed

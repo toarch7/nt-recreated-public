@@ -1,86 +1,102 @@
-/// @description scrDrop(ammo,weapon)
+global.party_gun_special_drop = false
+
+/// @function scrDrop(ammo,weapon)
 /// @param ammo
 /// @param weapon
-function scrDrop(argument0, argument1) {
-    var player = instance_nearest(x, y, Player)
-
-    if !instance_exists(player) or !instance_exists(id) exit
+function scrDrop(_pickup_chance, _weapon_chance) {
+    var _player = instance_nearest(x, y, Player)
+	
+	if (_player == noone) exit
 	
     //roll
-	var seed = self[$ "dropseed"] ?? rng_next_int(RNGStates.Pickups)
+	var _seed = variable_struct_exists(self, "dropseed") ? dropseed : rng_next_int(RNGStates.Pickups)
 	
-    random_set_seed(seed)
+    random_set_seed(_seed)
 	
-	var confiscate = (player.race == 1 && ultra_get(1)) && !irandom(10)
+	var _need = 0,
+		_confiscate = false,
+		_anything_dropped = false,
+		_max_hp = _player.max_hp,
+		_hp = _player.hp,
+		_paw_chance = 0
 	
-    if GameCont.crown == 5 {
-		argument1 += 9
+    if (scrCrownCheck(crwn_guns)) {
+		_weapon_chance += 9
 	}
 	
-	//calculate need
-    need = 0
-
-    if skill_get(29) argument1 *= 2.5
-
-    //CROWN OF RISK
-    if GameCont.crown == 12 {
-        if player.hp >= player.max_hp {
-            argument0 *= 1.5
-        }
-		else argument0 *= 0.5
-    }
-
-    if player.ammo[wep_type[player.wep]] < typ_amax[wep_type[player.wep]] * 0.2 need += 0.75
-    else if player.ammo[wep_type[player.wep]] > typ_amax[wep_type[player.wep]] * 0.6 need += 0.1
-    else need += 0.5
-
-    if player.bwep = 0 need += 0.5
-    else if player.ammo[wep_type[player.bwep]] < typ_amax[wep_type[player.bwep]] * 0.2 need += 0.75
-    else if player.ammo[wep_type[player.bwep]] > typ_amax[wep_type[player.bwep]] * 0.6 need += 0.1
-    else need += 0.5
-
-    //drop items
-    if random(100) < argument0 * (need + skill_get(4) * 0.6) {
-        if random(player.max_hp) > player.hp && random(3) < (global.hardmode ? 1.5 : 2) && GameCont.crown != 3 {
-			instance_create(x + random(4) - 2, y + random(4) - 2, confiscate ? HealthChest : HPPickup)
+    if (scr_skill_get(mut_rabbit_paw)) {
+		_paw_chance = 1 + scr_skill_get(mut_rabbit_paw) * 0.6
+		_weapon_chance *= 2.5
+	}
+	
+	with (_player) {
+		if scrUltraCheck(Race.Fish, UltraSkill.Confiscate) && random(1) < 0.1 {
+			_confiscate = true
 		}
-        else if GameCont.crown != 5 {
-			instance_create(x + random(4) - 2, y + random(4) - 2, confiscate ? AmmoChest : AmmoPickup)
+		
+		var _slot = wep, _first = true
+		
+		repeat (2) {
+			if scr_weapon_is_valid(_slot) {
+				var _type = scr_weapon_get_type(_slot),
+					_cap = scrAmmoGetTypeCapacity(_type)
+				
+				if (ammo[_type] < _cap * 0.2) _need += 0.75
+				else if (ammo[_type] > _cap * 0.6) _need += 0.1
+				else _need += 0.5
+			}
+			else if (!_first) _need += 0.5
+			
+			_first = false
+			_slot = bwep
 		}
 	}
-	else if argument1 {
-        if random(100) < argument1 * (1 + skill_get(4) * 0.6) {
+	
+	if scrCrownCheck(Crown.Risk) {
+		_pickup_chance *= (_hp >= _max_hp) ? 1.5 : 0.5
+	}
+	
+	if (_paw_chance != 0) _need += _paw_chance
+	
+    if random(100) < _pickup_chance {
+		var _advantage = (scrGameIsHardmode() ? 1.5 : 2)
+		
+		// Health
+        if random(_max_hp) > _hp && random(3) < _advantage && !scrCrownCheck(crwn_life) {
+			var _object = (_confiscate ? HealthChest : HPPickup)
+			instance_create(x + orandom(2), y + orandom(2), _object)
+			_anything_dropped = true
+		}
+		// Ammo
+        else if !scrCrownCheck(crwn_guns) {
+			var _object = (_confiscate ? AmmoChest : AmmoPickup)
+			instance_create(x + orandom(2), y + orandom(2), _object)
+			_anything_dropped = true
+		}
+	}
+	// Drop weapons
+	else if _weapon_chance > 0 {
+        if random(100) < (_weapon_chance * _paw_chance) {
             //drop weps
-			if confiscate {
+			if _confiscate {
 				instance_create(x + orandom(2), y + orandom(2), WeaponChest)
 			}
 			else {
-	            with instance_create(x + random(4) - 2, y + random(4) - 2, WepPickup) {
-	                scrDecideWep(0)
-	                name = wep_name[wep]
-	                type = wep_type[wep]
-	                ammo = 50
-	                curse = 0
-	                sprite_index = wep_sprt[wep]
-	            }
+				var _wep = scrDecideWep(0)
+				scrWeaponPickupCreate(x + orandom(2), y + orandom(2), _wep, true)
 			}
+			
+			_anything_dropped = true
         }
     }
 
-    if UberCont.birthday && random(1) <= 0.05 {
-        if !global.party_gun_dropped {
-            with instance_create(x + random(4) - 2, y + random(4) - 2, WepPickup) {
-                wep = 82
-                name = wep_name[wep]
-                type = wep_type[wep]
-                ammo = 0
-                curse = 0
-                sprite_index = wep_sprt[wep]
-            }
-
-            global.party_gun_dropped = 1
+    if UberCont.birthday && !_anything_dropped && random(1) <= 0.05 {
+        if !global.party_gun_special_drop {
+			scrWeaponPickupCreate(x + orandom(2), y + orandom(2), wep_party_gun, true)
+            global.party_gun_special_drop = true
+			_anything_dropped = true
         }
     }
+	
+	return _anything_dropped
 }
-
-global.party_gun_dropped = 0

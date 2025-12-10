@@ -16,7 +16,7 @@ if instance_exists(target) {
         alarm[1] /= 3
     } else if random(2) < 1 && freeze > 40 {
         if dist > 150 direction = dir + orandom(30)
-        else direction = dir + random_range(70, 130) * choose(1, - 1)
+        else direction = dir + random_range(70, 130) * choose(1, -1)
 
         speed = 4
         roll = 1
@@ -56,11 +56,10 @@ if instance_exists(target) {
         gunangle = dir + orandom(10)
         wkick = 8
         snd_play_hit_big(sndEliteGruntRocketFire, 0.2)
-        with instance_create(x, y, IDPDRocket) {
-            hitid = sprEliteGruntIdle
+        
+		with scr_projectile_create(x, y, IDPDRocket) {
             motion_add(other.gunangle + orandom(10), 10)
             image_angle = direction
-            team = other.team
         }
     }
 } else if random(10) < 1 && !roll {

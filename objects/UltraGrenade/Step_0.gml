@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-attract_flash = lerp(attract_flash, 0, 0.1)
+attract_flash = t_lerp(attract_flash, 0, 0.1)
 
 if !attract {
 	

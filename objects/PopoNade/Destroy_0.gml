@@ -1,2 +1,2 @@
-with instance_create(x, y, PopoExplosion)
-hit_id = other.hit_id
+scr_damage_create(x, y, PopoExplosion)
+snd_play(sndIDPDNadeExplo)

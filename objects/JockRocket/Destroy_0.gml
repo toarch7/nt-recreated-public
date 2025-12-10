@@ -1,6 +1,13 @@
 snd_stop(snd)
-
 snd_play(sndExplosionL)
-ang = random_angle
-instance_create(x + lengthdir_x(12, ang), y + lengthdir_y(12, ang), Explosion)
-instance_create(x + lengthdir_x(12, ang + 180), y + lengthdir_y(12, ang + 180), Explosion)
+
+var _ang = random_angle
+
+repeat (2) {
+	instance_create(
+		x + ldrx(12, _ang),
+		y + ldry(12, _ang),
+		Explosion)
+	
+	_ang += 180
+}

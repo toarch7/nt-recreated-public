@@ -128,6 +128,7 @@ function scrCrownApplyEquipEffect(_crown_id, _is_equipped) {
 			switch _crown_id {
 				case Crown.Destiny:
 					if !destiny {
+						codpick = true
 						skillpoints += 1
 						destiny = true
 						
@@ -141,7 +142,7 @@ function scrCrownApplyEquipEffect(_crown_id, _is_equipped) {
 	}
 }
 
-/// @function scr_loadout_race_unlock_crown
+/// @function scrCrownUnlock
 /// @param {Real|Enum.Race} race_id
 /// @param {Real|Enum.Crown} crown_id
 function scrCrownUnlock(_race_id, _crown_id) {

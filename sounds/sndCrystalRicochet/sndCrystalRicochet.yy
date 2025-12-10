@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndCrystalRicochet",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndCrystalRicochet",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":1,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":0.8397052,
-  "exportDir":"",
-  "name":"sndCrystalRicochet",
-  "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 1,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 0.8397052,
+  "exportDir": "",
+  "name": "sndCrystalRicochet",
+  "parent": {
+    "name": "Sounds",
+    "path": "folders/Sounds.yy"
   },
-  "preload":true,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndCrystalRicochet.wav",
-  "volume":1,
+  "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndCrystalRicochet.wav",
+  "volume": 1
 }

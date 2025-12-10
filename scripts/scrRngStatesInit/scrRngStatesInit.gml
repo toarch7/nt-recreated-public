@@ -6,7 +6,7 @@ enum RNGStates {
 	Generation = 0,
 	Enemies = 1,
 	Props = 2,
-	Drops = 3,
+	WeaponDrops = 3,
 	Chest = 4,
 	Skill = 5,
 	Popo = 8,
@@ -15,9 +15,11 @@ enum RNGStates {
 }
 
 global.seed = 1
-global.custom_seed = 0
+global.custom_seed = false
 
 function scrRngStatesInit() {
+	global.rng_states = array_create(RNGStates.NUM_RNG_STATES, 1)
+	
 	if global.custom_seed {
 		global.seed = global.custom_seed
 	}

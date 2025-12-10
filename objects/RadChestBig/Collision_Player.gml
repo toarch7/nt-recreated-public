@@ -8,7 +8,7 @@ if GameCont.crown == 6 {
         hp -= 1
         sprite_index = spr_hurt
         image_index = 0
-        snd_play_hit(snd_hurt, .2)
+        snd_play_hit(snd_hurt, 0.2)
         last_hit = sprCrown6Idle
 
         repeat(16) {

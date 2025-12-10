@@ -26,7 +26,7 @@ if image_index == 7 {
 	ang = 0
 	
     repeat(8) {
-        draw_sprite_ext(sprLogoGlow, - 1, view_xview + view_width / 2 + shkx + lengthdir_x(4 + sin(wave) * (2 + random(1)), ang), view_yview + view_height / 2 + shky + lengthdir_y(4 + sin(wave) * (2 + random(1)), ang), 1, 1, 0, c_white, 0.05)
+        draw_sprite_ext(sprLogoGlow, -1, view_xview + view_width / 2 + shkx + lengthdir_x(4 + sin(wave) * (2 + random(1)), ang), view_yview + view_height / 2 + shky + lengthdir_y(4 + sin(wave) * (2 + random(1)), ang), 1, 1, 0, c_white, 0.05)
         ang += 360 / 8
         wave += random(0.02)
     }

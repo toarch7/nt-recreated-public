@@ -1,4 +1,1 @@
-if lockstep_stop
-	exit
-
-instance_destroy()
+if (scr_can_hit(other.id, false)) instance_destroy()

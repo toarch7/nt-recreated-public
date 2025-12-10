@@ -11,7 +11,7 @@ with other {
     }
 
     if instance_exists(Player) {
-        if skill_get(5) {
+        if scr_skill_get(5) {
             if hp <= max_hp / 3 {
                 hp = 0
 				

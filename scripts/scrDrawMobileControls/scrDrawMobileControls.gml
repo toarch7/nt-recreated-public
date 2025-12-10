@@ -116,7 +116,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
 		}
     }
 
-    var crystaltb = instance_exists(plr) && plr.race == 2 && skill_get(5)
+    var crystaltb = instance_exists(plr) && plr.race == 2 && scr_skill_get(5)
 
     with ButtonActive {
         if crystaltb {
@@ -229,7 +229,7 @@ function scrDrawMobileControls(plr = noone, scale = UberCont.opt_controls_scale)
             var s = wep_sprt[bwep]
             var offx = round(sprite_get_width(s) / 2) - sprite_get_xoffset(s)
             var offy = round(sprite_get_height(s) / 2) - sprite_get_yoffset(s)
-            draw_sprite_ext(s, 0, x - offx, y - offy, scale + 0.5, scale + 0.5, - rot + 30, c_gray, 1)
+            draw_sprite_ext(s, 0, x - offx, y - offy, scale + 0.5, scale + 0.5, -rot + 30, c_gray, 1)
         }
 
         if wep {

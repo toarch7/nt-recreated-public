@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if !place_meeting(x, y, hitme) && speed > 0 {
+if speed > 0 && !place_meeting(x, y, hitme) {
     snd_play(sndBoltHitWall)
 
     speed = 0
@@ -12,5 +12,4 @@ if !place_meeting(x, y, hitme) && speed > 0 {
     move_contact_solid(direction, 16)
     instance_create(x, y, Dust)
     alarm[0] = 30
-    alarm[1] = 1
 }

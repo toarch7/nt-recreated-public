@@ -7,7 +7,7 @@ image_speed = 0
 
 num = 2
 
-if skill_get(9)
+if scr_skill_get(9)
 	num = 4
 
 if scrCrownCheck(crwn_haste) {

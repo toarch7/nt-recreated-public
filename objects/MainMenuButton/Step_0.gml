@@ -5,13 +5,13 @@ if current_frame < start
 	exit
 
 if current_frame == start {
-	snd_play(sndAppear, 0.7 + random(0.1))
-	
+	snd_play(sndAppear, 1.2)
 	visible = 1
 	appear = 2
 }
-else if appear
+else if appear {
 	appear --
+}
 
 var press = mouse_ui_clicked()
 
@@ -26,7 +26,8 @@ if mouse_hover {
 	if press
 		event_user(0)
 }
-else if !is_gamepad() && hover
+else if !is_gamepad() && hover {
 	hover = 0
+}
 
 splat = lerp(splat, hover * 4, 0.4)

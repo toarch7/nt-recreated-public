@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrAmmoInit",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrAmmoInit",
+  "parent":{
+    "name":"Resources",
+    "path":"folders/Scripts/Gameplay/Resources.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

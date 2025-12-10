@@ -6,7 +6,7 @@ if (sprite_index == spr_fire) {
     justfired = 1
     alarm[1] += 10
 }
-if (instance_exists(target) && ((spr_idle != sprPalaceGuardianDisappear) && (spr_idle != sprPalaceGuardianAppear))) {
+if (instance_exists(target) && ((spr_idle != sprGuardianDisappear) && (spr_idle != sprGuardianAppear))) {
     if (target > Player) {
         if (collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0) {
             direction = ((mcr_target_direction + random(180)) - 90)
@@ -34,7 +34,7 @@ if (instance_exists(target) && ((spr_idle != sprPalaceGuardianDisappear) && (spr
                 }
             } else if (random(2) < 1) {
                 snd_play_hit_big(sndGuardianDisappear, 0.2)
-                spr_idle = sprPalaceGuardianDisappear
+                spr_idle = sprGuardianDisappear
                 sprite_index = spr_idle
                 alarm[1] += 60
             }
@@ -43,7 +43,7 @@ if (instance_exists(target) && ((spr_idle != sprPalaceGuardianDisappear) && (spr
         motion_add(random_angle, 0.5)
         if (random(20) < 1) {
             snd_play_hit_big(sndGuardianDisappear, 0.2)
-            spr_idle = sprPalaceGuardianDisappear
+            spr_idle = sprGuardianDisappear
             sprite_index = spr_idle
             alarm[1] += 60
         }

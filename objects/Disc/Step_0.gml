@@ -1,18 +1,17 @@
 if lockstep_stop
 	exit
 
-instance_create(x, y, DiscTrail)
-dist += 1
+if (current_frame_active) instance_create(x, y, DiscTrail)
 
-if instance_exists(Player) and instance_exists(enemy) {
-    dir = instance_nearest(x, y, enemy)
+dist += timescale
+
+if instance_exists(enemy) && scr_skill_get(mut_bolt_marrow) {
+    var _target = instance_nearest(x, y, enemy)
 	
-    if speed > 0 and skill_get(21) and point_distance(x, y, dir.x, dir.y) < 32 {
-        x += lengthdir_x(1, point_direction(x, y, dir.x, dir.y))
-        y += lengthdir_y(1, point_direction(x, y, dir.x, dir.y))
+    if speed > 0 && point_distance(x, y, _target.x, _target.y) < 32 {
+        x += lengthdir_x(1, point_direction(x, y, _target.x, _target.y))
+        y += lengthdir_y(1, point_direction(x, y, _target.x, _target.y))
     }
 }
 
-if alarm[0] == -1 && team != -1 {
-	alarm[0] = 4
-}
+if (alarm[0] == -1 && team != team_none) alarm[0] = 4

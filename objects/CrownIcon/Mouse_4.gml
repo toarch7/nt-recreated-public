@@ -14,5 +14,5 @@ else {
 		selected = (id == other.id)
 	}
 	
-	LevCont.splat = 1
+	with (LevCont) splat = true
 }

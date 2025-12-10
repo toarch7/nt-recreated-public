@@ -32,7 +32,7 @@ function scrSwapWeps() {
 		wepangle = 0
 	}
 	else if wepangle == 0 {
-		wepangle = choose(120, - 120)
+		wepangle = choose(120, -120)
 	}
 	
     drawempty = 30

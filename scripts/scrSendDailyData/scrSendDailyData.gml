@@ -60,8 +60,8 @@ function scrSendDailyData() {
                 bwep: bwep,
                 crown: GameCont.crown,
 
-                day: UberCont.date_day,
-                month: UberCont.date_month,
+                day: UberCont.current_day,
+                month: UberCont.current_month,
                 timestamp: date_current_datetime(),
 
                 area: GameCont.area,
@@ -83,7 +83,7 @@ function scrSendDailyData() {
 
         var map = ds_map_create();
         map[? "Content-type"] = "application/json";
-        var date = string_pad_zeroes(UberCont.date_day, 1) + "." + string_pad_zeroes(UberCont.date_month, 1) + "." + string(UberCont.date_year)
+        var date = string_pad_zeroes(UberCont.current_day, 1) + "." + string_pad_zeroes(UberCont.current_month, 1) + "." + string(UberCont.current_year)
         var time = string_pad_zeroes(GameCont.minutes, 1) + ":" + string_pad_zeroes(GameCont.seconds, 1)
 
         var name = save_get_value("etc", "name", "unnamed")

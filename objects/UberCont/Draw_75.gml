@@ -19,7 +19,7 @@ if (is_desktop ? (window_get_cursor() == cr_none) : opt_keyboard) && show_crossh
     draw_sprite_ext(sprCrosshair, opt_crosshair, device_mouse_x_to_gui(0), device_mouse_y_to_gui(0), 1, 1, 0, opt_cursorcol, 1)
 }
 
-if DevelopmentMode {
+if global.__debug_camera_display_info {
 	var _str  = $"Camera width  ({camera_get_view_width(view_camera)}) (global = {view_width})\n"
 	    _str += $"Camera height ({camera_get_view_height(view_camera)}) (global = {view_height})\n\n"
 	    _str += $"Port     {view_wport[0]}/{view_hport[0]}\n"
@@ -29,5 +29,13 @@ if DevelopmentMode {
 		_str += $"GUI {gui_w} {gui_h}\nMouse {device_mouse_x(0)} {device_mouse_x(1)}\n\n"
 		_str += $"Camera\nX {view_xview} \nY {view_yview}"
 	
-	draw_text_transformed(0, 0, _str, 0.5, 0.5, 0)
+	draw_set_color(c_white)
+	var _scale = scr_window_get_fullscreen() ? 0.5 : 1
+	draw_text_transformed(0, 0, _str, _scale, _scale, 0)
+}
+
+if instance_exists(TestCont) {
+	draw_set_font(fntSmall)
+	with (TestCont) event_user(0)
+	draw_reset_font()
 }

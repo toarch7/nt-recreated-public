@@ -1,8 +1,3 @@
-hit_id = -1
-
-team = -1
-creator = noone
-
-
-if BruteSync
-	netid = irandom(UINT_MAX)
+event_inherited()
+knockback_speed = 4
+spr_fade = -1

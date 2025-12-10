@@ -1,9 +1,7 @@
 if lockstep_stop
 	exit
 
-if friction > 0.15 {
-    with instance_create(x, y, Flame) {
-        motion_add(other.direction + random(20) - 10, random(1))
-        team = other.team
-    }
+if current_frame_active && friction > 0.15 {
+	var _dir = direction + orandom(10)
+    scr_projectile_create(x, y, Flame, _dir, random(1))
 }

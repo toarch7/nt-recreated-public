@@ -1,1 +1,1 @@
-bonus = 0
+bonus = false

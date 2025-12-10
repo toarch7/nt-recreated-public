@@ -1,19 +1,13 @@
 with instance_create(x, y, ChestOpen) {
-    if other.curse {
+    if other.sprite_index == sprCursedChest {
         sprite_index = sprCursedChestOpen
     }
-	else if GameCont.underwater {
+	else if other.sprite_index == sprClamChest {
         sprite_index = sprClamChestOpen
     }
-	else sprite_index = sprWeaponChestOpen
-}
-
-if GameCont.underwater {
-    repeat 12 + random(8) {
-        with instance_create(x, y, Bubble) {
-            motion_add(random_angle, random(2) + 2)
-        }
-    }
+	else {
+		sprite_index = sprWeaponChestOpen
+	}
 }
 
 instance_create(x, y, FXChestOpen)

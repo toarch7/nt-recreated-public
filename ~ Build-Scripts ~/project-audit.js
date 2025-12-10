@@ -38,6 +38,11 @@ function performSpriteAudit() {
         if (spriteName in spriteMap) {
             const frames = spriteInfo.frames;
             const basegameFrameCount = spriteMap[spriteName].imageNumber;
+            if (!frames) {
+                console.log("Missing frames field in sprite", spriteName);
+                problemCounter ++;
+                continue;
+            }
             const myFrameCount = frames.length;
             if (basegameFrameCount != myFrameCount) {
                 let diff = basegameFrameCount - myFrameCount;
@@ -113,6 +118,11 @@ function performCompletenesAudit() {
         const yyPath = path.join(spriteLocation, yyName);
         const spriteInfo = project.parseYY(fs.readFileSync(yyPath, "utf-8"));
         let frames = spriteInfo.frames, missingFrames = null;
+        if (!frames) {
+            console.log("Missing frames field in sprite", spriteName);
+            problemCounter ++;
+            continue;
+        }
         for(const frameInfo of frames) {
             const frameImageLocation = path.join(spriteLocation, frameInfo.name + ".png");
             if (!fs.existsSync(frameImageLocation)) {

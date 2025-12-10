@@ -41,7 +41,7 @@ function __background_get_colour_element() {
         }
     } else {
         // Need to construct a new layer with a new background
-        var __newback = __background_set_element(-1, false, false, - 1, 0, 0, true, true, 1, 1, true, 0, 0, $0, 1);
+        var __newback = __background_set_element(-1, false, false, -1, 0, 0, true, true, 1, 1, true, 0, 0, $0, 1);
         __result[0] = __newback[0];
         __result[1] = __newback[1];
     }

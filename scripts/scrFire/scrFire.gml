@@ -1,38 +1,38 @@
-function scrFire(wep, useAmmo = true) {
-	reload = wep_load[wep]
+/// @function scrFire
+/// @param weapon
+/// @param consume_ammo=true
+function scrFire(_wep, _consume_ammo = true) {
+	var _weapon_type = scr_weapon_get_type(_wep)
+	
+	reload = wep_load[_wep]
 	can_shoot = 0
     
     var oldviewx2 = BackCont.viewx2,
 		oldviewy2 = BackCont.viewy2,
 		oldshake = BackCont.shake
 	
-	var _aim_direction = gunangle,
-		
-		_long_arms = skill_get(mut_long_arms),
-		_laser_brain = skill_get(mut_laser_brain)
+	var _gunangle = gunangle,
+		_long_arms = scr_skill_get(mut_long_arms),
+		_laser_brain = scr_skill_get(mut_laser_brain),
+		_is_golden = scr_weapon_is_golden(_wep),
+		_is_melee = scr_weapon_is_melee(_wep),
+		_accuracy = accuracy
 	
-    if race == 7 && skill_get(mut_throne_butt) && (random(typ_ammo[wep_type[wep]]) < wep_cost[wep]) && ((random(2) < 1 or !bcan_shoot) && random(3) < 2) {
-		var typ = wep_type[bwep]
+	// Steroids TB
+    if race == Race.Steroids && scr_skill_get(mut_throne_butt) && _weapon_type != Ammo.None {
+		var _cost = scr_weapon_get_cost(_wep),
+			_amount = scrAmmoGetPickupAmount(_wep)
 		
-        if typ > 0 {
-            var amount = ceil(typ_ammo[typ] / 2),
-                popup = instance_create(x, y, PopupText)
-			
-            with popup {
-			    mytext = "+" + string(amount) + " " + loc(typ_name[typ])
-            }
-			
-            ammo[typ] += amount
-			
-            if ammo[typ] > typ_amax[typ] {
-                popup.mytext = loc_sfmt("MAX %", loc(typ_name[typ]))
-                ammo[typ] = typ_amax[typ]
-            }
-        }
+		if (random(_amount) < _cost) && ((random(2) < 1 || !bcan_shoot) && random(3) < 2) {
+			scrPlayerGiveAmmo(id, _weapon_type, ceil(_amount * 0.5), true)
+		}
     }
 	
-    if wep_type[wep] == 5 && skill_get(mut_laser_brain) {
-        repeat wep_cost[wep] {
+	// Laser brain lightning FX
+    if scr_weapon_get_type(Ammo.Energy) && scr_skill_get(mut_laser_brain) {
+		var _count = scr_weapon_get_cost(_wep)
+		
+        repeat _count {
             with instance_create(x, y, AnimParticle) {
                 image_speed = 0.4 - random(0.1)
                 creator = other.id
@@ -43,2411 +43,874 @@ function scrFire(wep, useAmmo = true) {
         }
     }
 	
-    if !infammo && useAmmo {
-        ammo[wep_type[wep]] -= wep_cost[wep]
+	// Consume ammo
+    if !infammo && _consume_ammo {
+        ammo[_weapon_type] -= scr_weapon_get_cost(_wep)
 		
-        if GameCont.rad >= wep_rads[@ wep]
-            GameCont.rad -= wep_rads[@ wep]
-    }
-
-    if wep_type[wep] != 0 {
-        drawempty = 10
-    }
-
-    // snd_play_gun already plays the normal oasis
-    // shoot sound when in oasis 
-    if GameCont.area == 101 && wep_type[wep] == 0 {
-        snd_play_gun(sndOasisMelee)
-    }
-
-    //REVOLVER
-    if wep == 1 {
-        snd_play_gun(sndPistol)
-
-        with instance_create(x, y, Shell)
-			motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + (random(8) - 4) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 2
-    }
-
-    //TRIPLE MACHINEGUN
-    if wep == 2 {
-        snd_play_gun(sndTripleMachinegun)
-
-        repeat(3) {
-            with instance_create(x, y, Shell)
-            motion_add(other.gunangle + other.right * 100 + random(70) - 35, 2 + random(2))
-        }
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + (random(6) - 3) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + 15 * other.accuracy + (random(6) - 3) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle - 15 * other.accuracy + (random(6) - 3) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 6
-    }
-
-    //WRENCH
-    if wep == 3 {
-        snd_play_gun(sndWrench)
-
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), Slash) {
-            dmg = 8
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(gunangle, 6)
-        BackCont.viewx2 += lengthdir_x(12, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle) * UberCont.opt_shake
-        BackCont.shake += 1
-        wkick = -4
-    }
-
-    //MACHINEGUN
-    if wep == 4 {
-        snd_play_gun(sndMachinegun)
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + (random(12) - 6) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 3
-        wkick = 2
-    }
-
-    //SHOTGUN
-    if wep == 5 {
-        snd_play_gun(sndShotgun)
-
-        repeat(7) {
-            with instance_create(x, y, Bullet2) {
-                motion_add(other.gunangle + (random(40) - 20) * other.accuracy, 12 + random(6))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        BackCont.viewx2 += lengthdir_x(12, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 8
-        wkick = 6
-    }
-
-
-    //CROSSBOW
-    if wep == 6 {
-        snd_play_gun(sndCrossbow)
-
-        with instance_create(x, y, Bolt) {
-            motion_add(other.gunangle, 24)
-            image_angle = direction
-            team = other.team
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 4
-    }
-
-    //NADER
-    if wep == 7 {
-        snd_play_gun(sndGrenade)
-
-        with instance_create(x, y, Grenade) {
-            sticky = 0
-            motion_add(other.gunangle + (random(6) - 3) * other.accuracy, 10)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //DOUBLE SHOTGUN
-    if wep == 8 {
-        snd_play_gun(sndDoubleShotgun)
-
-        repeat(14) {
-            with instance_create(x, y, Bullet2) {
-                motion_add(other.gunangle + (random(50) - 30) * other.accuracy, 12 + random(6))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        motion_add(other.gunangle + 180, 2)
-
-        BackCont.viewx2 += lengthdir_x(15, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(15, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 16
-        wkick = 8
-    }
-
-    //MINIGUN
-    if wep == 9 {
-        snd_play_gun(sndMinigun)
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(80) - 40, 3 + random(2))
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + (random(26) - 13) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        motion_add(other.gunangle + 180, 0.6)
-        BackCont.viewx2 += lengthdir_x(7, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(7, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 4
-    }
-
-    //AUTO SHOTGUN
-    if wep == 10 {
-        snd_play_gun(sndShotgun)
-
-        repeat(6) {
-            with instance_create(x, y, Bullet2) {
-                motion_add(other.gunangle + (random(30) - 15) * other.accuracy, 12 + random(6))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        BackCont.viewx2 += lengthdir_x(12, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 8
-        wkick = 5
-    }
-
-    //AUTO CROSSBOW
-    if wep == 11 {
-        snd_play_gun(sndCrossbow)
-
-        with instance_create(x, y, Bolt) {
-            motion_add(other.gunangle + (random(8) - 4) * other.accuracy, 24)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 5
-        wkick = 4
-    }
-
-    //SUPER CROSSBOW
-    if wep == 12 {
-        snd_play_gun(sndSuperCrossbow)
-
-        with instance_create(x, y, Bolt) {
-            motion_add(other.gunangle, 24)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Bolt) {
-            motion_add(other.gunangle + 5 * other.accuracy, 24)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Bolt) {
-            motion_add(other.gunangle - 5 * other.accuracy, 24)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Bolt) {
-            motion_add(other.gunangle + 10 * other.accuracy, 24)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Bolt) {
-            motion_add(other.gunangle - 10 * other.accuracy, 24)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        motion_add(other.gunangle + 180, 1)
-
-        BackCont.viewx2 += lengthdir_x(60, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(60, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 14
-        wkick = 8
-    }
-
-
-    //SHOVEL
-    if (wep == 13) {
-        snd_play_gun(sndShovel, 0.2)
-        instance_create(x, y, Dust)
-        with(instance_create((x + lengthdir_x((skill_get(13) * 20), other.gunangle)), (y + lengthdir_y((skill_get(13) * 20), other.gunangle)), Slash)) {
-            dmg = 16
-            longarms = 0
-            longarms = skill_get(13) * 3
-            sprite_index = sprHeavySlash
-            motion_add(other.gunangle, (3 + longarms))
-            image_angle = direction
-            team = other.team
-        }
-        with(instance_create((x + lengthdir_x((skill_get(13) * 15), (other.gunangle + (60 * accuracy)))), (y + lengthdir_y((skill_get(13) * 15), (other.gunangle + (60 * accuracy)))), Slash)) {
-            dmg = 16
-            longarms = 0
-            longarms = skill_get(13) * 3
-            sprite_index = sprHeavySlash
-            motion_add((other.gunangle + (60 * other.accuracy)), (2 + longarms))
-            image_angle = direction
-            team = other.team
-        }
-        with(instance_create((x + lengthdir_x((skill_get(13) * 15), (other.gunangle - (60 * accuracy)))), (y + lengthdir_y((skill_get(13) * 15), (other.gunangle - (60 * accuracy)))), Slash)) {
-            dmg = 16
-            longarms = 0
-            longarms = skill_get(13) * 3
-            sprite_index = sprHeavySlash
-            motion_add((other.gunangle - (60 * other.accuracy)), (2 + longarms))
-            image_angle = direction
-            team = other.team
-        }
-
-        wepangle *= -1
-        motion_add(other.gunangle, 6)
-        BackCont.viewx2 += (lengthdir_x(24, other.gunangle) * UberCont.opt_shake)
-        BackCont.viewy2 += (lengthdir_y(24, other.gunangle) * UberCont.opt_shake)
-        BackCont.shake += 1
-        wkick = -4
-    }
-
-    //BAZOOKA
-    if wep == wep_bazooka || wep == wep_golden_bazooka || wep == wep_gatling_bazooka {
-		var _speed = 2
-		if wep == wep_golden_bazooka {
-			snd_play_gun(sndGoldRocket)
-			_speed = 3
+		var _wep_rads = scr_weapon_get_rads(_wep)
+        if _wep_rads && GameCont.rad >= _wep_rads {
+            GameCont.rad -= _wep_rads
 		}
-        else snd_play_gun(sndRocket)
-		
-        with instance_create(x, y, Rocket) {
-            motion_add(other.gunangle + (random(4) - 2) * other.accuracy, _speed)
-            image_angle = direction
-            team = other.team
-            creator = other.id
-            
-			if wep == wep_golden_bazooka {
-				sprite_index = sprGoldRocket
-			}
-		}
-
-        BackCont.viewx2 += lengthdir_x(30, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(30, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 10
-    }
-
-    // STICKY NADER
-    if wep == 15 {
-        snd_play_gun(sndGrenade)
-
-        with instance_create(x, y, Grenade) {
-            sprite_index = sprStickyGrenade
-            sticky = 1
-            motion_add(other.gunangle + (random(6) - 3) * other.accuracy, 11)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //SMG
-    if wep == 16 {
-        snd_play_gun(sndPistol)
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(60) - 30, 2 + random(2))
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + (random(32) - 16) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 3
-        wkick = 2
-    }
-
-
-
-    //ASSAULT RIFLE
-    if wep == 17 or wep == 103 {
-        with instance_create(x, y, Burst) {
-            creator = other.id
-            ammo = 3
-            time = 2
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-    }
-
-
-    //DISC GUN
-    if wep == 18 {
-        snd_play_gun(sndDiscgun)
-
-        with instance_create(x, y, Disc) {
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 5)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 6
-        wkick = 4
-    }
-
-
-    //LASER PISTOL
-    if wep == 19 {
-
-        if skill_get(17) snd_play_gun(sndLaserUpg)
-        else snd_play_gun(sndLaser)
-        with instance_create(x, y, Laser) {
-            image_angle = other.gunangle + (random(2) - 1) * other.accuracy
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-
-        BackCont.viewx2 += lengthdir_x(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 2
-    }
-
-
-    //LASER RIFLE
-    if wep == 20 {
-        if skill_get(17) snd_play_gun(sndLaserUpg)
-        else snd_play_gun(sndLaser)
-        with instance_create(x, y, Laser) {
-            image_angle = other.gunangle + (random(6) - 3) * other.accuracy
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-
-        BackCont.viewx2 += lengthdir_x(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-
-    //SLUGGER
-    if wep == wep_slugger || wep == wep_golden_slugger {
-		var _speed = 16
-        if wep == wep_golden_slugger {
-			snd_play_gun(sndGoldSlugger)
-			_speed += 2
-		}
-		else snd_play_gun(sndSlugger)
-
-        with instance_create(x, y, Slug) {
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, _speed)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(14, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(14, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 10
-        wkick = 8
-    }
-
-    //GATLING SLUGGER
-    if wep == 22 {
-        snd_play_gun(sndSlugger)
-
-        with instance_create(x, y, Slug) {
-            motion_add(other.gunangle + (random(12) - 6) * other.accuracy, 18)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 10
-        wkick = 8
-    }
-
-    //ASSAULT SLUGGER
-    if wep == 23 {
-        with instance_create(x, y, SlugBurst) {
-            creator = other.id
-            ammo = 3
-            time = 3
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-    }
-
-    //ENERGY SWORD
-    if wep == 24 {
-
-        if skill_get(17) snd_play_gun(sndEnergySwordUpg)
-        else snd_play_gun(sndEnergySword)
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), EnergySlash) {
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(other.gunangle, 7)
-        BackCont.viewx2 += lengthdir_x(24, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(24, gunangle) * UberCont.opt_shake
-        BackCont.shake += 1
-        wkick = -4
-    }
-
-    //SUPER SLUGGER
-    if wep == 25 {
-        snd_play_gun(sndSuperSlugger)
-
-        motion_add(other.gunangle + 180, 3)
-
-        with instance_create(x, y, Slug) {
-            motion_add(other.gunangle + (random(8) - 4) * other.accuracy, 18)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Slug) {
-            motion_add(other.gunangle + 10 * other.accuracy + (random(8) - 4) * other.accuracy, 18)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Slug) {
-            motion_add(other.gunangle + 20 * other.accuracy + (random(8) - 4) * other.accuracy, 18)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Slug) {
-            motion_add(other.gunangle - 10 * other.accuracy + (random(8) - 4) * other.accuracy, 18)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Slug) {
-            motion_add(other.gunangle - 20 * other.accuracy + (random(8) - 4) * other.accuracy, 18)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 15
-        wkick = 8
-    }
-
-    //HYPER RIFLE
-    if wep == 26 {
-        snd_play_gun(sndHyperRifle)
-		
-        with instance_create(x, y, Burst) {
-            creator = other.id
-            ammo = 6
-            time = 1
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-    }
-
-
-
-    //MINES
-    /*
-	if wep == 27
-	{
-	snd_play_gun(sndGrenade)
-
-	with instance_create(x,y,Mine)
-	{
-	motion_add(other.gunangle+(random(30)-15)*other.accuracy,4)
-	team = other.team; creator = other.id}
-
-	BackCont.viewx2 += lengthdir_x(5,gunangle)
-	BackCont.viewy2 += lengthdir_y(5,gunangle)
-	wkick = 8
-	}*/
-
-    //SCREWDRIVER
-    if wep == wep_screwdriver || wep == wep_golden_screwdriver {
-		if wep == wep_golden_screwdriver {
-			snd_play_gun(sndGoldScrewdriver)
-		}
-        else snd_play_gun(sndScrewdriver)
-
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 10, gunangle), y + lengthdir_y(skill_get(13) * 10, gunangle), Shank) {
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 3 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(gunangle, 4)
-        BackCont.viewx2 += lengthdir_x(12, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle) * UberCont.opt_shake
-        BackCont.shake += 1
-        wkick = -8
-    }
-
-    //LASER MINIGUN
-    if wep == 28 {
-        if skill_get(17) snd_play_gun(sndLaserUpg)
-        else snd_play_gun(sndLaser)
-        with instance_create(x, y, Laser) {
-            image_angle = other.gunangle + (random(24) - 12) * other.accuracy
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-
-        BackCont.viewx2 += lengthdir_x(5, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(5, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 8
-
-        motion_add(other.gunangle + 180, 0.6)
-    }
-
-
-    //BLOOD NADER
-    if wep == 29 {
-        snd_play_gun(sndBloodLauncher)
-
-        with instance_create(x, y, BloodGrenade) {
-            sticky = 0
-            motion_add(other.gunangle + (random(12) - 6) * other.accuracy, 10)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(5, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(5, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 3
-        wkick = 4
-    }
-
-    //SPLINTER GUN
-    if wep == 30 or wep == 100 {
-        snd_play_gun(sndSplinterGun, 0.2)
-
-        repeat 3 {
-            with instance_create(x, y, Splinter) {
-                motion_add(other.gunangle + orandom(10) * other.accuracy, 20 + random(4))
-                image_angle = direction
-                team = other.team
-            }
-        }
-
-        repeat 2 {
-            with instance_create(x, y, Splinter) {
-                motion_add(other.gunangle + orandom(5) * other.accuracy, 20 + random(4))
-                image_angle = direction
-                team = other.team
-            }
-        }
-
-        BackCont.viewx2 += lengthdir_x(15, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(15, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 3
-        wkick = 3
-    }
-
-
-    //TOXIC BOW
-    if wep == 31 {
-        snd_play_gun(sndCrossbow)
-
-        with instance_create(x, y, ToxicBolt) {
-            motion_add(other.gunangle, 22)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 5
-        wkick = 4
-    }
-
-    //SENTRY GUN
-    if wep == 32 {
-        snd_play_gun(sndGrenade)
-
-        with instance_create(x, y, SentryGun) {
-            sticky = 0
-            team = other.team
-            creator = other.id
-
-            image_angle = direction
-            motion_add(other.gunangle, 6)
-        }
-
-        BackCont.viewx2 += lengthdir_x(5, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(5, gunangle + 180) * UberCont.opt_shake
-
-        wkick = -10
-    }
-
-    //WAVE GUN
-    if wep == 33 {
-		snd_play_gun(sndWaveGun)
-		
-        with instance_create(x, y, WaveBurst) {
-            creator = other.id
-            ammo = 7
-            time = 1
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-		
-		scr_weapon_post(_aim_direction, 5, 5, 5)
-		motion_add(_aim_direction + 180, 3)
-    }
-
-    //PLASMA GUN
-    if wep == wep_plasma_gun || wep == wep_golden_plasma_gun {
-		var _speed = 2
-		
-		if wep == wep_golden_plasma_gun {
-			snd_play_gun(_laser_brain ? sndGoldPlasmaUpg : sndGoldPlasma)
-			_speed = 3
-		}
-		else {
-			snd_play_gun(_laser_brain ? sndPlasmaUpg : sndPlasma)
-		}
-		
-        with instance_create(x, y, PlasmaBall) {
-            motion_add(other.gunangle + (random(8) - 4) * other.accuracy, _speed)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        motion_add(other.gunangle + 180, 3)
-        BackCont.viewx2 += lengthdir_x(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 3
-        wkick = 5
-    }
-
-    //PLASMA CANNON
-    if wep == 35 {
-        if skill_get(17) snd_play_gun(sndPlasmaBigUpg)
-        else snd_play_gun(sndPlasmaBig)
-
-        with instance_create(x, y, PlasmaBig) {
-            motion_add(other.gunangle + (random(4) - 2) * other.accuracy, 2)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        motion_add(other.gunangle + 180, 6)
-        BackCont.viewx2 += lengthdir_x(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 8
-        wkick = 10
-    }
-
-    //ENERGY HAMMER
-    if wep == 36 {
-
-        if skill_get(17) snd_play_gun(sndEnergyHammerUpg)
-        else snd_play_gun(sndEnergyHammer)
-        instance_create(x, y, Dust)
-
-        with instance_create(x, y, EnergyHammerSlash) {
-			longarms = skill_get(13) * 2
-			
-			motion_add(other.gunangle, 1 + longarms)
-			
-			if longarms {
-				x += ldrx(12, direction)
-				y += ldry(12, direction)
-			}
-			
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(other.gunangle, 7)
-        BackCont.viewx2 += lengthdir_x(32, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(32, gunangle) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = -3
-    }
-
-    //JACKHAMMER
-    if wep == 37 {
-        with instance_create(x, y, SawBurst) {
-            creator = other.id
-            ammo = 12
-            time = 1
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-    }
-
-    //FLAK CANNON
-    if wep == 38 {
-        snd_play_gun(sndFlakCannon)
-
-        with instance_create(x, y, FlakBullet) {
-            motion_add(other.gunangle + (random(12) - 6) * other.accuracy, 11 + random(2))
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(32, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(32, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 7
-    }
-
-
-    //GOLDEN REVOLVER
-    if wep == 39 {
-        snd_play_gun(sndGoldPistol)
-
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + (random(8) - 4) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 5
-        wkick = 4
-    }
-
-    //GOLDEN WRENCH
-    if wep == 40 {
-        snd_play_gun(sndGoldWrench)
-
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), Slash) {
-            dmg = 8
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(gunangle, 6)
-        BackCont.viewx2 += lengthdir_x(16, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(16, gunangle) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = -6
-    }
-
-
-    //GOLDEN MACHINEGUN
-    if wep == 41 {
-        snd_play_gun(sndGoldMachinegun, 0.2)
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + (random(8) - 4) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 4
-    }
-
-
-    //GOLDEN SHOTGUN
-    if wep == 42 {
-        snd_play_gun(sndGoldShotgun)
-
-        repeat(8) {
-            with instance_create(x, y, Bullet2) {
-                motion_add(other.gunangle + (random(40) - 20) * other.accuracy, 12 + random(6))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        BackCont.viewx2 += lengthdir_x(16, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(16, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 10
-        wkick = 8
-    }
-
-
-
-    //GOLDEN CROSSBOW
-    if wep == 43 {
-        snd_play_gun(sndGoldCrossbow)
-
-        with instance_create(x, y, Bolt) {
-            motion_add(other.gunangle, 24)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(44, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(44, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 6
-        wkick = 6
-    }
-
-    //GOLDEN NADER
-    if wep == 44 {
-        snd_play_gun(sndGoldGrenade)
-
-        with instance_create(x, y, Grenade) {
-            sprite_index = sprGoldGrenade
-            sticky = 0
-            motion_add(other.gunangle, 12)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(12, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 7
-    }
-
-    //GOLDEN LASER PISTOL
-    if wep == 45 {
-
-        if skill_get(17) snd_play_gun(sndGoldLaserUpg)
-        else snd_play_gun(sndGoldLaser)
-        with instance_create(x, y, Laser) {
-            image_angle = other.gunangle
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-
-        BackCont.viewx2 += lengthdir_x(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 4
-    }
-
-
-    //CHICKEN SWORD
-    if wep == 46 {
-        snd_play_gun(sndChickenSword)
-
-        instance_create(x, y, Dust)
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), Slash) {
-            ang = other.gunangle
-            dmg = 6
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(ang, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(gunangle, 4)
-        BackCont.viewx2 += lengthdir_x(8, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(8, gunangle) * UberCont.opt_shake
-        BackCont.shake += 1
-        wkick = -6
-    }
-
-
-    //NUKE LAUNCHER
-    if wep == 47 {
-        snd_play_gun(sndNukeFire)
-
-        with instance_create(x, y, Nuke) {
-            motion_add(other.gunangle + (random(4) - 2) * other.accuracy, 2)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 8
-        wkick = 10
-    }
-
-    //ION CANNON
-    if wep == 48 {
-
-        if skill_get(17) snd_play_gun(sndLaserUpg)
-        else snd_play_gun(sndLaser)
-        with instance_create(x, y, IonBurst) {
-            creator = other.id
-            ammo = 10
-            time = 1
-            hit_id = other.spr_idle
-            team = other.team;
-            creator = other.id
-            alarm[0] = 30
-        }
-
-        BackCont.shake += 6
-        wkick = 3
-    }
-
-
-    //QUADRUPLE MACHINEGUN
-    if wep == 49 {
-        snd_play_gun(sndQuadMachinegun)
-
-        repeat(4) {
-            with instance_create(x, y, Shell)
-            motion_add(other.gunangle + other.right * 100 + random(70) - 35, 4 + random(3))
-        }
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + 6 * other.accuracy + (random(6) - 3) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle - 6 * other.accuracy + (random(6) - 3) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + 18 * other.accuracy + (random(6) - 3) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle - 18 * other.accuracy + (random(6) - 3) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 6
-        wkick = 8
-    }
-
-    //FLAMETHROWER
-    if wep == 50 {
-        if !instance_exists(FlameSound) instance_create(x, y, FlameSound)
-        with instance_create(x, y, FlameBurst) {
-            creator = other.id
-            ammo = 12
-            time = 1
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-    }
-
-    //DRAGON
-    if wep == 51 {
-        if !instance_exists(DragonSound) instance_create(x, y, DragonSound)
-        with instance_create(x, y, DragonBurst) {
-            creator = other.id
-            ammo = 7
-            time = 1
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
-    }
-
-
-    //FLARE GUN
-    if wep == 52 {
-        snd_play_gun(sndFlare)
-
-        with instance_create(x, y, Flare) {
-            sticky = 0
-            motion_add(other.gunangle + (random(14) - 7) * other.accuracy, 9)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 5
-        wkick = 5
-    }
-
-
-    //ENERGY SCREWDRIVER
-    if wep == 53 {
-        if skill_get(17) snd_play_gun(sndEnergyScrewdriverUpg)
-        else snd_play_gun(sndEnergyScrewdriver)
-
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 10, gunangle), y + lengthdir_y(skill_get(13) * 10, gunangle), EnergyShank) {
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 3 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(other.gunangle, 5)
-        BackCont.viewx2 += lengthdir_x(12, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = -8
-    }
-
-
-    //HYPER LAUNCHER
-    if wep == 54 {
-        snd_play_gun(sndHyperLauncher)
-
-        with instance_create(x, y, HyperGrenade) {
-            direction = other.gunangle + (random(4) - 2) * other.accuracy
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(20, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(20, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 8
-    }
-
-    //LASER CANNON
-    if wep == 55 {
-
-
-        snd_play_gun(sndLaserCannonCharge)
-
-        with instance_create(x, y, LaserCannon) {
-            creator = other.id
-            ammo = 3 + skill_get(17) * 2
-            time = 1
-            team = other.team;
-            creator = other.id
-            alarm[0] = 10
-        }
-    }
-
-
-    //RUSTY REVOLVER
-    if wep == 56 {
-        snd_play_gun(sndRustyRevolver)
-
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 5
-        wkick = 4
-    }
-
-
-    //LIGHTNING PISTOL
-    if wep == 57 {
-
-        if skill_get(17) snd_play_gun(sndLightningPistolUpg)
-        else snd_play_gun(sndLightningPistol)
-
-
-        with instance_create(x, y, Lightning) {
-            image_angle = other.gunangle + (random(30) - 15) * other.accuracy
-            team = other.team;
-            creator = other.id
-            ammo = 14
-            event_perform(ev_alarm, 0)
-            visible = 0
-            with instance_create(x, y, LightningSpawn)
-            image_angle = other.image_angle
-        }
-
-        BackCont.viewx2 += lengthdir_x(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 5
-        wkick = 4
-    }
-
-    //LIGHTNING RIFLE
-    if wep == 58 {
-
-        if skill_get(17) snd_play_gun(sndLightningRifleUpg)
-        else snd_play_gun(sndLightningRifle)
-
-
-        with instance_create(x, y, Lightning) {
-            image_angle = other.gunangle + (random(6) - 3) * other.accuracy
-            team = other.team;
-            creator = other.id
-            ammo = 30
-            event_perform(ev_alarm, 0)
-            visible = 0
-            with instance_create(x, y, LightningSpawn)
-            image_angle = other.image_angle
-        }
-
-        BackCont.viewx2 += lengthdir_x(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 8
-        wkick = 8
-    }
-
-
-    //LIGHTNING SHOTGUN
-    if wep == 59 {
-
-        if skill_get(17) snd_play_gun(sndLightningShotgunUpg)
-        else snd_play_gun(sndLightningShotgun)
-
-        repeat(8) {
-            with instance_create(x, y, Lightning) {
-                image_angle = other.gunangle + (random(180) - 60) * other.accuracy
-                team = other.team;
-                creator = other.id
-                ammo = 9 + random(3)
-                event_perform(ev_alarm, 0)
-                visible = 0
-                with instance_create(x, y, LightningSpawn)
-                image_angle = other.image_angle
-            }
-        }
-
-
-        BackCont.viewx2 += lengthdir_x(4, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(4, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 10
-        wkick = 5
-    }
-
-    //ROGUE RIFLE
-    if wep == 81 {
-
-        with instance_create(x, y, IDPDBurst) {
-            creator = other.id
-            ammo = 2
-            time = 2
-            team = other.team
-            event_perform(ev_alarm, 0)
-        }
-    }
-
-    //SLEDGEHAMMER
-    if wep == 88 {
-
-        snd_play_gun(sndHammer)
-
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), Slash) {
-            dmg = 22
-            sprite_index = sprHeavySlash
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(gunangle, 6)
-        BackCont.viewx2 += lengthdir_x(12, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle) * UberCont.opt_shake
-        BackCont.shake += 1
-        wkick = -4
-    }
-
-    //GRENADE RIFLE
-    if wep == 80 {
-
-        with instance_create(x, y, ProjectileBurst) {
-            creator = other.id
-            team = other.team
-            snd = sndGrenadeRifle
-            ammo = 3
-            proj = SmallGrenade
-        }
-
-    }
-
-    //BLOOD HAMMER
-    if wep == 67 {
-
-        snd_play_gun(sndBloodHammer)
-
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), BloodSlash) {
-            dmg = 14
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(gunangle, 6)
-        BackCont.viewx2 += lengthdir_x(12, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle) * UberCont.opt_shake
-        BackCont.shake += 1
-        wkick = -4
-    }
-
-    //SEEKER PISTOL
-    if wep == 112 {
-
-        repeat 2 {
-            with instance_create(x, y, Seeker) {
-                motion_add(other.gunangle + random_range(-15, 15) * other.accuracy, 7)
-                team = other.team
-            }
-            snd_play_gun(sndSeekerPistol)
-        }
-
-        wkick = 4
-    }
-
-    //SEEKER SHOTGUN
-    if wep == 113 {
-
-        repeat 6 {
-            with instance_create(x, y, Seeker) {
-                motion_add(other.gunangle + random_range(-30, 30) * other.accuracy, 7)
-                team = other.team
-            }
-        }
-
-        snd_play_gun(sndSeekerShotgun)
-        wkick = 4
-    }
-
-    //Double Minigun
-    if wep == 83 {
-        snd_play_gun_big(sndDoubleMinigun, 0.2)
-        repeat 2 {
-            with instance_create(x, y, Bullet1) {
-                motion_add(other.gunangle + random_range(-20, 20) * other.accuracy, 16)
-                team = other.team
-                image_angle = direction
-            }
-
-            with instance_create(x, y, Shell)
-            motion_add(other.gunangle + other.right * 100 + random(80) - 40, 3 + random(2))
-        }
-
-        motion_add(other.gunangle + 180, 1)
-
-        wkick = 4
-    }
-
-    //Pop Gun
-    if wep == 69 {
-        snd_play_gun(sndPopgun)
-
-        with instance_create(x, y, Bullet2) {
-            motion_add(other.gunangle + random_range(-4, 4) * other.accuracy, 16)
-            team = other.team
-        }
-
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(80) - 40, 3 + random(2))
-
-        scr_weapon_post(gunangle, 0, 2, 4)
-    }
-
-    //Pop Rifle
-    if wep == 71 {
-        with instance_create(x, y, ProjectileBurst) {
-            creator = other.id
-            team = other.team
-            snd = sndPopgun
-            ammo = 3
-            time = 2
-            proj = Bullet2
-        }
-
-        wkick = 4
-    }
-
-    //Heavy Crossbow
-    if wep == 66 or wep == 105 {
-        snd_play_gun(sndHeavyCrossbow)
-
-        with instance_create(x, y, HeavyBolt) {
-            motion_add(other.gunangle, 18)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        wkick = 6
-    }
-
-    //Toxic Launcher
-    if wep == 72 {
-        snd_play_gun(sndToxicLauncher)
-
-        with instance_create(x, y, ToxicGrenade) {
-            motion_add(other.gunangle + (random(6) - 3) * other.accuracy, 10)
-            image_angle = direction
-            team = other.team
-            creator = other.id
-        }
-
-        wkick = 4
-    }
-
-    //FLAME SHOTGUN
-    if wep == 75 {
-        snd_play_gun(sndFireShotgun)
-
-        repeat(6) {
-            with instance_create(x, y, FlameShell) {
-                motion_add(other.gunangle + orandom(15) * other.accuracy, 12 + random(6))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        BackCont.viewx2 += lengthdir_x(12, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 8
-        wkick = 6
-    }
-
-    //BOUNCER SHOTGUN
-    if wep == 117 {
-        snd_play_gun(sndBouncerShotgun)
-
-        for (i = -3; i <= 3; i++) {
-            with instance_create(x, y, BouncerBullet) {
-                motion_add(other.gunangle + (other.i * 15) * other.accuracy, 6)
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        wkick = 6
-    }
-
-    //BOUNCER SMG
-    if wep == 116 {
-        snd_play_gun(sndBouncerSmg)
-
-        with instance_create(x, y, BouncerBullet) {
-            motion_add(other.gunangle + random_range(-10, 10) * other.accuracy, 6)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wkick = 3
-    }
-
-    //SAWED-OFF SHOTGUN
-    if wep == 61 {
-        snd_play_gun(sndSawedOffShotgun)
-
-        repeat(20) {
-            with instance_create(x, y, Bullet2) {
-                motion_add(other.gunangle + (random_range(-30, 30)) * other.accuracy, 10 + random(6))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        motion_add(other.gunangle + 180, 0.6)
-		
-		scr_weapon_post(gunangle, 12, 10, 5)
-    }
-
-    //SPLINTER PISTOL
-    if wep == 62 {
-        snd_play_gun(sndSplinterPistol)
-
-        repeat 4 {
-            with instance_create(x, y, Splinter) {
-                motion_add(other.gunangle + orandom(4) * other.accuracy, 20 + random(4))
-                image_angle = direction
-                team = other.team
-            }
-        }
-
-        wkick = 3
-    }
-
-    //DOUBLE FLAME SHOTGUN
-    if wep == 76 {
-        snd_play_gun(sndDoubleFireShotgun)
-
-        i = 0
-        var offset = 10
-        repeat 14 {
-            i++
-
-            if i == 7 offset = -10
-
-            with instance_create(x, y, FlameShell) {
-                motion_add(other.gunangle + (orandom(15) * other.accuracy) + offset, 12 + random(6))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        wkick = 9
-    }
-
-    //GRENADE SHOTGUN
-    if wep == 79 {
-        snd_play_gun(sndGrenadeShotgun)
-
-        repeat(6) {
-            with instance_create(x, y, SmallGrenade) {
-                motion_add(other.gunangle + (random(30) - 15) * other.accuracy, random_range(10, 15))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        wkick = 8
-    }
-
-    //Lightning Hammer
-    if wep == 74 {
-
-        snd_play_gun(sndLightningHammer, 0.2)
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), LightningSlash) {
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(other.gunangle, 7)
-        BackCont.viewx2 += lengthdir_x(24, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(24, gunangle) * UberCont.opt_shake
-        BackCont.shake += 1
-        wkick = -4
-    }
-
-    //ERASER
-    if wep == 114 {
-        snd_play_gun(sndEraser)
-
-        repeat(17) {
-            with instance_create(x, y, Bullet2) {
-                motion_add(other.gunangle + (random_range(-2, 2)) * other.accuracy, 8 + random(8))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        wkick = 6
-    }
-
-    //HEAVY NADER
-    if wep == 124 {
-        snd_play_gun(sndHeavyNader)
-
-        with instance_create(x, y, HeavyGrenade) {
-            sticky = 0
-            motion_add(other.gunangle + (random(6) - 3) * other.accuracy, 10)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //PLASMA RIFLE
-    if wep == 70 {
-        if skill_get(17) snd_play_gun(sndPlasmaRifleUpg)
-        else snd_play_gun(sndPlasmaRifle)
-
-        with instance_create(x, y, PlasmaBall) {
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 2)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        motion_add(other.gunangle + 180, 3)
-        BackCont.viewx2 += lengthdir_x(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 3
-        wkick = 5
-    }
-
-    //HEAVY REVOLVER
-    if wep == 89 {
-        snd_play_gun(sndHeavyRevolver)
-
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
-
-        with instance_create(x, y, HeavyBullet) {
-            motion_add(other.gunangle + (random(8) - 4) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 4
-    }
-
-    //SMART GUN
-    if wep == 65 {
-        snd_play_gun(sndSmartgun)
-        en = instance_nearest(x, y, enemy)
-
-        if instance_exists(en) gunangle = point_direction(x, y, en.x, en.y)
-
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
-
-        with instance_create(x, y, Bullet1) {
-            motion_add(other.gunangle + (random(4) - 2) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 4
-    }
-
-    //HEAVY MACHINEGUN
-    if wep == 90 {
-        snd_play_gun(sndHeavyMachinegun)
-
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
-
-        with instance_create(x, y, HeavyBullet) {
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 4
-    }
-
-    //AUTO FLAME SHOTGUN
-    if wep == 77 {
-        snd_play_gun(sndFireShotgun)
-
-        repeat(6) {
-            with instance_create(x, y, FlameShell) {
-                motion_add(other.gunangle + (random(26) - 13) * other.accuracy, 10 + random(8))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        BackCont.viewx2 += lengthdir_x(12, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 8
-        wkick = 6
-    }
-
-    //SUPER BAZOOKA
-    if wep == 119 {
-        snd_play_gun(sndSuperBazooka)
-
-        for (i = -2; i <= 2; i++) {
-            with instance_create(x, y, Rocket) {
-                motion_add(other.gunangle + (random(4) - 2) * other.accuracy + other.i * 10, 2)
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        BackCont.viewx2 += lengthdir_x(30, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(30, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 16
-    }
-
-    //SUPER FLAK CANNON
-    if wep == 60 {
-        snd_play_gun(sndSuperFlakCannon)
-
-        with instance_create(x, y, SuperFlakBullet) {
-            motion_add(other.gunangle + (random(4) - 2) * other.accuracy, 10 + random(4))
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(30, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(30, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 10
-    }
-
-    //SUPER DSISCGUN
-    if wep == 104 {
-        snd_play_gun(sndSuperDiscGun)
-
-        with instance_create(x, y, Disc) {
-            motion_add(other.gunangle, 5)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Disc) {
-            motion_add(other.gunangle + 5 * other.accuracy, 5)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Disc) {
-            motion_add(other.gunangle - 5 * other.accuracy, 5)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Disc) {
-            motion_add(other.gunangle + 10 * other.accuracy, 5)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x, y, Disc) {
-            motion_add(other.gunangle - 10 * other.accuracy, 5)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        motion_add(other.gunangle + 180, 1)
-
-        BackCont.viewx2 += lengthdir_x(60, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(60, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 14
-        wkick = 4
-    }
-
-    //HEAVY ASSAULT RIFLE
-    if wep == 106 {
-        snd_play_gun(sndHeavyRevolver)
-        with instance_create(x, y, HeavyBurst) {
-            creator = other.id
-            ammo = 3
-            time = 2
-            team = other.team;
-            creator = other.id
-            event_perform(ev_alarm, 0)
-        }
     }
 
-    //AUTO GRENADE SHOTGUN
-    if wep == 85 {
-        snd_play_gun(sndGrenadeShotgun)
-
-        repeat(6) {
-            with instance_create(x, y, SmallGrenade) {
-                motion_add(other.gunangle + (random(14) - 4) * other.accuracy, 8 + random(3))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-		wkick = 4
-    }
-
-    //HYPER SLUGGER
-    if wep == 118 {
-        with instance_create(x, y, HyperSlug) {
-            direction = other.gunangle + random_range(-5, 5);
-            team = other.team;
-            creator = other.id
-        }
-        snd_play_gun(sndHyperSlugger)
-		wkick = 6
-    }
-
-    //PLASMA MINIGUN
-    if wep == 96 {
-        if skill_get(17) snd_play_gun(sndPlasmaMinigunUpg)
-        else snd_play_gun(sndPlasmaMinigun)
-
-        with instance_create(x, y, PlasmaBall) {
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 2)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        motion_add(other.gunangle + 180, 2)
-        BackCont.viewx2 += lengthdir_x(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 3
-        wkick = 5
-    }
-
-    //INCINERATOR
-    if wep == 110 {
-        snd_play_gun(sndIncinerator)
-
-        for (i = -1; i <= 1; i++)
-        with instance_create(x, y, FlameShell) {
-            {
-                motion_add(other.gunangle + (other.i * 10 + orandom(6)) * other.accuracy, 16)
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        BackCont.viewx2 += lengthdir_x(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 3
-        wkick = 5
-    }
-
-    //SUPER PLASMA CANNON
-    if wep == 111 {
-        if skill_get(17) snd_play_gun_big(sndPlasmaHugeUpg, .7)
-        else snd_play_gun_big(sndPlasmaHuge, .7)
-
-        with instance_create(x, y, PlasmaHuge) {
-            motion_add(other.gunangle + (random(4) - 2) * other.accuracy, 2)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        motion_add(other.gunangle + 180, 6)
-        BackCont.viewx2 += lengthdir_x(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(8, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 8
-        wkick = 10
-    }
-
-    //ULTRA REVOLVER
-    if wep == 86 {
-        snd_play_gun(sndUltraPistol)
-
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
-
-        with instance_create(x, y, UltraBullet) {
-            motion_add(other.gunangle + (random(8) - 4) * other.accuracy, 18)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 2
-    }
-
-    //ULTRA SHOTGUN
-    if wep == 93 {
-        snd_play_gun(sndUltraShotgun)
-
-        with instance_create(x, y, Shell)
-        motion_add(other.gunangle + other.right * 100 + random(50) - 25, 2 + random(2))
-
-        repeat(7 + random(2)) {
-            with instance_create(x, y, UltraShell) {
-                motion_add(other.gunangle + (random(40) - 20) * other.accuracy, 14 + random(6))
-                image_angle = direction
-                team = other.team;
-                creator = other.id
-            }
-        }
-
-        BackCont.viewx2 += lengthdir_x(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(6, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 2
-    }
-
-    //ULTRA CROSSBOW
-    if wep == 94 {
-        snd_play_gun(sndUltraCrossbow)
-
-        with instance_create(x, y, UltraBolt) {
-            motion_add(other.gunangle, 24)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 4
-        wkick = 4
-    }
-
-    //ULTRA NADER
-    if wep == 95 {
-        snd_play_gun(sndUltraGrenade)
-
-        with instance_create(x, y, UltraGrenade) {
-            sticky = 0
-            motion_add(other.gunangle + (random(6) - 3) * other.accuracy, 12)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //ULTRA LASER PISTOL
-    if wep == 87 {
-
-        if skill_get(17) snd_play_gun(sndUltraLaserUpg)
-        else snd_play_gun(sndUltraLaser)
-
-        for (i = -2; i <= 2; i++) {
-            with instance_create(x, y, Laser) {
-                image_angle = other.gunangle + (random(2) - 1 + other.i * 12) * other.accuracy
-                team = other.team;
-                creator = other.id
-                event_perform(ev_alarm, 0)
-            }
-        }
-
-        BackCont.viewx2 += lengthdir_x(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(3, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 2
-    }
-
-
-    //ULTRA SHOVEL
-    if wep == 92 {
-        snd_play_gun(sndUltraShovel)
-
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), UltraSlash) {
-            dmg = 30
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle, 3 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x + lengthdir_x(skill_get(13) * 15, gunangle + 60 * accuracy), y + lengthdir_y(skill_get(13) * 15, gunangle + 60 * accuracy), UltraSlash) {
-            dmg = 30
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle + 60 * other.accuracy, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-        with instance_create(x + lengthdir_x(skill_get(13) * 15, gunangle - 60 * accuracy), y + lengthdir_y(skill_get(13) * 15, gunangle - 60 * accuracy), UltraSlash) {
-            dmg = 30
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle - 60 * other.accuracy, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(gunangle, 6)
-        BackCont.viewx2 += lengthdir_x(24, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(24, gunangle) * UberCont.opt_shake
-        BackCont.shake += 1
-        wkick = -4
-    }
-
-    //FROG PISTOLS
-    if wep == 120 or wep == 255 {
-        snd_play_gun(sndFrogPistol, 0.2)
-
-        repeat 3 {
-            with instance_create(x, y, EnemyBullet2) {
-                motion_add(other.gunangle + (random(12) - 6) * other.accuracy, 10 + random(4))
-                image_angle = direction
-                team = other.team
-                hit_id = -1
-            }
-        }
-
-        BackCont.viewx2 += (lengthdir_x(4, (other.gunangle + 180)) * UberCont.opt_shake)
-        BackCont.viewy2 += (lengthdir_y(4, (other.gunangle + 180)) * UberCont.opt_shake)
-        BackCont.shake += 4
-        wkick = 2
-    }
-
-    //GUITAR
-    if wep == 115 {
-
-        snd_play_gun(sndGuitar)
-
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), Slash) {
-            dmg = 26
-            sprite_index = sprHeavySlash
-            guitar = true
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(gunangle, 6)
-        BackCont.viewx2 += lengthdir_x(12, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle) * UberCont.opt_shake
-        BackCont.shake += 1
-        wkick = -4
-    }
-
-    //BLACK SWORD
-    if wep == 121 {
-
-        if bleed {
-            snd_play_gun(sndBlackSwordMega)
-        } else snd_play_gun(sndBlackSword)
-
-        instance_create(x, y, Dust)
-
-        with instance_create(x + lengthdir_x(skill_get(13) * 12, gunangle), y + lengthdir_y(skill_get(13) * 12, gunangle), Slash) {
-            dmg = 11
-
-            if other.bleed {
-                damage = 30
-                image_xscale = 2
-                image_yscale = 2
-            }
-
-            sprite_index = sprSlash
-            longarms = 0
-            if instance_exists(Player) longarms = skill_get(13) * 2
-            motion_add(other.gunangle, 2 + longarms)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        wepangle = -wepangle
-        motion_add(gunangle, 6)
-        BackCont.viewx2 += lengthdir_x(12, gunangle) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(12, gunangle) * UberCont.opt_shake
-        BackCont.shake += 1
-        wkick = -4
-    }
-
-    //PARTY GUN
-    if wep == 82 {
-        snd_play_gun_big(sndConfettiGun, .2)
-
-        with instance_create(x, y, ConfettiBall) {
-            sticky = 0
-            motion_add(other.gunangle + orandom(15) * other.accuracy, 8)
-            image_angle = direction
-            team = other.team
-        }
-
-        BackCont.viewx2 += (lengthdir_x(3, (other.gunangle + 180)) * UberCont.opt_shake)
-        BackCont.viewy2 += (lengthdir_y(3, (other.gunangle + 180)) * UberCont.opt_shake)
-        BackCont.shake += 3
-        wkick = 2
-    }
-
-    //BLOOD CANNON
-    if wep == 107 {
-        snd_play_gun(sndBloodCannon)
-
-        with instance_create(x, y, BloodBall) {
-            sticky = 0
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 5)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //DOG SPIN ATTACK
-    if wep == 108 {
-        with instance_create(x, y, DogSpinAttack) {
-            team = other.team
-            creator = other.id
-            ammo = 15
-        }
-
-        snd_play(sndBigDogSpin)
-    }
-
-    //DEVASTATOR
-    if wep == 97 {
-        if !skill_get(17) {
-            snd_play_gun(sndDevastator)
-        } else snd_play_gun(sndDevastatorUpg)
-
-        with instance_create(x, y, Devastator) {
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 16)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //LIGHTNING CANNON
-    if wep == 68 {
-        if !skill_get(17) {
-            snd_play_gun(sndLightningCannon)
-        } else snd_play_gun(sndLightningCannonUpg)
-
-        with instance_create(x, y, LightningBall) {
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 3)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //LIGHTNING SMG
-    if wep == 64 {
-        if !skill_get(17) {
-            snd_play_gun(sndLightningPistol)
-        } else snd_play_gun(sndLightningPistolUpg)
-
-        with instance_create(x, y, Lightning) {
-            image_angle = other.gunangle + (random(15) - 7.5) * other.accuracy
-            team = other.team;
-            creator = other.id
-            ammo = 14
-            event_perform(ev_alarm, 0)
-            visible = 0
-            with instance_create(x, y, LightningSpawn)
-            image_angle = other.image_angle
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //HEAVY SLUGGER
-    if wep == 91 {
-        snd_play_gun(sndHeavySlugger)
-
-        with instance_create(x, y, HeavySlug) {
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 11)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //CLUSTER LAUNCHER
-    if wep == 78 {
-        snd_play_gun(sndClusterLauncher)
-
-        with instance_create(x, y, ClusterNade) {
-            motion_add(other.gunangle + (random(10) - 5) * other.accuracy, 8)
-            image_angle = direction
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //SUPER SPLINTER GUN
-    if wep == 63 {
-        snd_play_gun(sndSuperSplinterGun)
-
-        with instance_create(x, y, SplinterBurst) {
-            creator = other.id
-            ammo = 6
-            time = 1
-            team = other.team
-            event_perform(2, 0)
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //FLAME CANNON
-    if wep == 73 {
-        snd_play_gun_big(sndFlameCannon, .2)
-
-        with instance_create(x, y, FlameBall) {
-            creator = other.id
-            image_angle = direction
-            team = other.team
-            motion_add((other.gunangle + ((random(10) - 5) * other.accuracy)), 3)
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 2
-        wkick = 5
-    }
-
-    //GOLDEN NUKE LAUNCHER
-    if wep == 122 {
-        snd_play_gun(sndGoldNukeFire)
-
-        with instance_create(x, y, Nuke) {
-            motion_add(other.gunangle + (random(2) - 1) * other.accuracy, 4)
-            image_angle = direction
-            sprite_index = sprGoldNuke
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(40, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 8
-        wkick = 10
-    }
-
-    //GOLDEN DISC GUN
-    if wep == 123 {
-        snd_play_gun(sndGoldFrogPistol)
-
-        with instance_create(x, y, Disc) {
-            motion_add(other.gunangle + (random(5) - 2.5) * other.accuracy, 6)
-            image_angle = direction
-            sprite_index = sprGoldDisc
-            team = other.team;
-            creator = other.id
-        }
-
-        BackCont.viewx2 += lengthdir_x(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.viewy2 += lengthdir_y(10, gunangle + 180) * UberCont.opt_shake
-        BackCont.shake += 6
-        wkick = 4
-    }
-
-    //Gungun
-    if wep == 125 {
-        snd_play_gun(sndGunGun, 0.3)
-
-        with instance_create(x, y, WepPickup) {
-            scrDecideWep(10)
-            name = wep_name[id.wep]
-            type = wep_type[id.wep]
-            sprite_index = wep_sprt[id.wep]
-            curse = 0
-            ammo = 50
-            motion_add(other.gunangle, 16)
-            instance_create(x + hspeed, y + vspeed, GunGun)
-            team = other.team
-            image_angle = direction
-            mask_index = mskPlasma
-        }
-
-        BackCont.viewx2 += (lengthdir_x(30, (other.gunangle + 180)) * UberCont.opt_shake)
-        BackCont.viewy2 += (lengthdir_y(30, (other.gunangle + 180)) * UberCont.opt_shake)
-        BackCont.shake += 8
-        wkick = 6
-    }
+    if (_weapon_type == Ammo.None) {
+	    if (GameCont.area == area_oasis) snd_play_gun(sndOasisMelee)
+	}
+	else {
+		drawempty = 10
+	}
 	
-    if object_index == Player && index != global.index {
-        BackCont.viewx2 = oldviewx2
-        BackCont.viewy2 = oldviewy2
-        BackCont.shake = oldshake
-    }
+	if (_is_melee) wepangle *= -1
+	
+	switch (_wep) {
+		case wep_revolver:
+		case wep_rusty_revolver:
+		case wep_golden_revolver:
+			snd_play_gun(_is_golden ? sndGoldPistol : sndPistol)
+			scrBulletShotShellFX(Shell)
+			with scr_projectile_create(x, y, Bullet1, _gunangle, 16) {
+				scr_projectile_spread(4)
+			}
+			scr_weapon_post(_gunangle, 6, 5, 4)
+			break
+		case wep_triple_machinegun:
+			snd_play_gun(sndTripleMachinegun)
+			for(var i = -1; i <= 1; ++i) {
+				scrBulletShotShellFX(Shell, 35)
+				with scr_projectile_create(x, y, Bullet1, _gunangle, 16) {
+					scr_projectile_shift(i * 15)
+					scr_projectile_spread(3)
+				}
+			}
+			scr_weapon_post(_gunangle, 6, 0, 4)
+			break
+		case wep_wrench:
+		case wep_golden_wrench:
+			snd_play_gun(_is_golden ? sndGoldWrench : sndWrench)
+			instance_create(x, y, Dust)
+			with scr_projectile_create(x, y, Slash, _gunangle, 2) {
+				damage = 8
+				scr_projectile_long_arms(_long_arms)
+				if (_is_golden) repeat(2) {
+					instance_create(
+						bbox_center_x + orandom(8),
+						bbox_center_y + orandom(8), CaveSparkle)
+				}
+			}
+			scr_weapon_post(_gunangle, 12, 1, -4, -6)
+			break
+		case wep_machinegun:
+		case wep_golden_machinegun:
+			snd_play_gun(_is_golden ? sndGoldMachinegun : sndMachinegun)
+			scrBulletShotShellFX(Shell)
+			with scr_projectile_create(x, y, Bullet1, _gunangle, 16) {
+				scr_projectile_spread(6)
+			}
+			scr_weapon_post(_gunangle, 6, 3, 4)
+			break
+		case wep_shotgun:
+		case wep_golden_shotgun:
+		case wep_double_shotgun:
+		case wep_auto_shotgun:
+		case wep_sawed_off_shotgun:
+			var _pellets = 7, _spread = 20
+			
+			if _wep == wep_double_shotgun {
+				snd_play(sndDoubleShotgun)
+				scr_weapon_post(_gunangle, 15, 8, 8, 2)
+				_pellets = 14
+				_spread = 30
+			}
+			else if _wep == wep_sawed_off_shotgun {
+				snd_play(sndSawedOffShotgun)
+				scr_weapon_post(_gunangle, 18, 10, 9, 2)
+				_pellets = 20
+				_spread = 45
+			}
+			else {
+				if (_wep == wep_auto_shotgun) {
+					_spread = 15
+					_pellets --
+				}
+				snd_play(_is_golden ? sndGoldShotgun : sndShotgun)
+				scr_weapon_post(_gunangle, 12, 1, -4)
+			}
+			
+			repeat (_pellets + _is_golden) {
+				with scr_projectile_create(x, y, Bullet2, _gunangle, random_range(12, 18)) {
+					scr_projectile_spread(_spread)
+				}
+			}
+			
+			break
+		case wep_crossbow:
+		case wep_golden_crossbow:
+		case wep_auto_crossbow:
+			snd_play_gun(_is_golden ? sndGoldCrossbow : sndCrossbow)
+			scr_weapon_post(_gunangle, 12, 0, 4, 0)
+			with scr_projectile_create(x, y, Bolt, _gunangle, 24) {
+				if (_wep == wep_auto_crossbow) scr_projectile_spread(5)
+				if (_is_golden) sprite_index = sprBoltGold
+			}
+			break
+		case wep_grenade_launcher:
+		case wep_golden_grenade_launcher:
+			snd_play_gun(_is_golden ? sndGoldGrenade : sndGrenade)
+			scr_weapon_post(_gunangle, 10, 2, 5)
+			with scr_projectile_create(x, y, Grenade, _gunangle, 10) {
+				scr_projectile_spread(3)
+				if (_is_golden) sprite_index = sprGoldGrenade
+			}
+			break
+		case wep_minigun:
+			snd_play_gun(sndMinigun)
+			scrBulletShotShellFX(Shell, 40)
+			scr_weapon_post(_gunangle, 7, 4, 4, 0.6)
+			with scr_projectile_create(x, y, Bullet1, _gunangle, 16) {
+				scr_projectile_spread(13)
+			}
+			break
+		case wep_super_crossbow:
+			snd_play_gun(sndSuperCrossbow)
+			scr_weapon_post(_gunangle, 60, 14, 8, 1)
+			for(var i = -2; i <= 2; ++i) {
+				with scr_projectile_create(x, y, Bolt, _gunangle, 24) {
+					scr_projectile_shift(5 * i)
+				}
+			}
+			break
+		case wep_shovel:
+			snd_play_gun(sndShovel, 0.2)
+			instance_create(x, y, Dust)
+			scr_weapon_post(_gunangle, 24, 1, -4, -6)
+			for(var i = -1; i <= 1; ++i) {
+				with scr_projectile_create(x, y, Slash, _gunangle, 3) {
+					damage = 16
+					scr_projectile_shift(i * 60)
+					scr_projectile_long_arms(_long_arms)
+				}
+			}
+			break
+		case wep_bazooka:
+		case wep_golden_bazooka:
+		case wep_gatling_bazooka:
+			snd_play_gun(_is_golden ? sndGoldRocket : sndRocket)
+			scr_weapon_post(_gunangle, 30, 4, 10)
+			with scr_projectile_create(x, y, Rocket, _gunangle, 2) {
+				scr_projectile_spread(_wep == wep_gatling_bazooka ? 12 : 3)
+				if (_is_golden) sprite_index = sprGoldRocket
+			}
+			break
+		case wep_sticky_launcher:
+			snd_play(sndGrenade)
+			scr_weapon_post(_gunangle, 10, 0, 2)
+			with scr_projectile_create(x, y, Grenade, _gunangle, 11) {
+				scr_projectile_spread(3)
+				sprite_index = sprStickyGrenade
+				sticky = true
+			}
+			break
+		case wep_smg:
+			snd_play_gun(sndPistol)
+			scrBulletShotShellFX(Shell, 30)
+			scr_weapon_post(_gunangle, 6, 3, 2)
+			with scr_projectile_create(x, y, Bullet1, _gunangle, 16) {
+				scr_projectile_spread(16)
+			}
+			break
+		case wep_assault_rifle:
+		case wep_golden_assault_rifle:
+			with scr_damage_create(x, y, Burst) {
+				golden = _is_golden
+	            event_perform(ev_alarm, 0)
+	        }
+			break
+		case wep_disc_gun:
+		case wep_golden_disc_gun:
+			snd_play_gun(sndDiscgun)
+			scr_weapon_post(_gunangle, 10, 6, 4)
+			with scr_projectile_create(x, y, Disc, _gunangle, 5) {
+				if (_wep == wep_golden_disc_gun) {
+					sprite_index = sprGoldDisc
+					speed ++
+				}
+				scr_projectile_spread(5)
+				hitid = HitId.Disc
+			}
+			break
+		case wep_laser_pistol:
+		case wep_golden_laser_pistol:
+		case wep_laser_rifle:
+		case wep_laser_minigun:
+			snd_play_gun(_laser_brain ? sndLaserUpg : sndLaser)
+			if _wep == wep_laser_minigun {
+				scr_weapon_post(_gunangle, 5, 2, 8, 0.6)
+			}
+			else {
+				scr_weapon_post(_gunangle, 3, 2, (_wep == wep_laser_rifle ? 5 : 2))
+			}
+			with scr_projectile_create(x, y, Laser, _gunangle) {
+				if _wep == wep_laser_rifle scr_projectile_spread(3)
+				else if _wep == wep_laser_minigun scr_projectile_spread(12)
+				else scr_projectile_spread(1)
+				event_perform(ev_alarm, 0)
+			}
+			break
+		case wep_slugger:
+		case wep_golden_slugger:
+		case wep_gatling_slugger:
+			var _gatling_slugger = (_wep == wep_gatling_slugger)
+			snd_play_gun(_is_golden ? sndGoldSlugger : sndSlugger)
+			scr_weapon_post(_gunangle, 14, 10, _gatling_slugger ? 10 : 8)
+			with scr_projectile_create(x, y, Slug, _gunangle, _gatling_slugger ? 18 : 16) {
+				scr_projectile_spread(_gatling_slugger ? 6 : 5)
+			}
+			break
+		case wep_assault_slugger:
+			with scr_damage_create(x, y, SlugBurst) {
+				event_perform(ev_alarm, 0)
+			}
+			break
+		case wep_energy_sword:
+			snd_play_gun(_laser_brain ? sndEnergySwordUpg : sndEnergySword)
+			scr_weapon_post(_gunangle, 24, 1, -4, -7)
+			instance_create(x, y, Dust)
+			with scr_projectile_create(x, y, EnergySlash, _gunangle) {
+				scr_projectile_long_arms(_long_arms)
+			}
+			break
+		case wep_super_slugger:
+			snd_play_gun_big(sndSuperSlugger)
+			scr_weapon_post(_gunangle, 10, 15, 8, 3)
+			for(var i = -2; i <= 2; ++i) {
+				with scr_projectile_create(x, y, Slug, _gunangle, 18) {
+					scr_projectile_shift(i * 10)
+					scr_projectile_spread(4)
+				}
+			}
+			break
+		case wep_hyper_rifle:
+			snd_play_gun(sndHyperRifle)
+			with scr_damage_create(x, y, HyperBurst) {
+	            event_perform(ev_alarm, 0)
+	        }
+			break
+		case wep_screwdriver:
+		case wep_golden_screwdriver:
+			snd_play_gun(_is_golden ? sndGoldScrewdriver : sndScrewdriver)
+			scr_weapon_post(_gunangle, 12, 1, -8, -4)
+			instance_create(x, y, Dust)
+			with scr_projectile_create(x, y, Shank, _gunangle, 3) {
+				scr_projectile_spread(5)
+				scr_projectile_long_arms(_long_arms)
+			}
+			break
+		case wep_blood_launcher:
+			snd_play_gun(sndBloodLauncher)
+			scr_weapon_post(_gunangle, 5, 3, 4)
+			with scr_projectile_create(x, y, BloodGrenade, _gunangle, 10) {
+				scr_projectile_spread(6)
+			}
+			break
+		case wep_splinter_gun:
+			snd_play_gun(sndSplinterGun, 0.2)
+			scr_weapon_post(_gunangle, 15, 3, 3)
+			repeat (3) {
+				with scr_projectile_create(x, y, Splinter, _gunangle, random_range(20, 24)) {
+					scr_projectile_spread(10)
+				}
+			}
+			repeat (2) {
+				with scr_projectile_create(x, y, Splinter, _gunangle, random_range(20, 24)) {
+					scr_projectile_spread(5)
+				}
+			}
+		case wep_golden_splinter_gun:
+			snd_play_gun(sndGoldSplinterGun, 0.2)
+			scr_weapon_post(_gunangle, 15, 3, 3)
+			repeat (3) {
+				with scr_projectile_create(x, y, Splinter, _gunangle, random_range(20, 24)) {
+					scr_projectile_spread(10)
+				}
+				with scr_projectile_create(x, y, Splinter, _gunangle, random_range(20, 24)) {
+					scr_projectile_spread(5)
+				}
+			}
+			break
+		case wep_toxic_bow:
+			snd_play_gun(sndCrossbow)
+			scr_weapon_post(_gunangle, 40, 5, 4)
+			scr_projectile_create(x, y, ToxicBolt, _gunangle, 22)
+			break
+		case wep_sentry_gun:
+			snd_play_gun(sndGrenade)
+			scr_weapon_post(_gunangle, 5, 0, -10)
+			with instance_create(x, y, SentryGun) {
+				team = other.team
+				creator = other.id
+				motion_add(_gunangle, 6)
+				image_angle = direction
+			}
+			break
+		case wep_wave_gun:
+			snd_play_gun(sndWaveGun)
+			with scr_damage_create(x, y, WaveBurst) {
+				event_perform(ev_alarm, 0)
+			}
+			break
+		case wep_plasma_gun:
+		case wep_golden_plasma_gun:
+			snd_play_gun(_is_golden
+				? (_laser_brain ? sndGoldPlasmaUpg : sndGoldPlasma)
+				: (_laser_brain ? sndPlasmaUpg : sndPlasma))
+			scr_weapon_post(_gunangle, 3, 3, 5, 3)
+			with scr_projectile_create(x, y, PlasmaBall, _gunangle, 2 + _is_golden) {
+				scr_projectile_spread(4)
+			}
+			break
+		case wep_plasma_cannon:
+			snd_play_gun(_laser_brain ? sndPlasmaBigUpg : sndPlasmaBig)
+			scr_weapon_post(_gunangle, 8, 8, 10, 6)
+			with scr_projectile_create(x, y, PlasmaBig, _gunangle, 2) {
+				scr_projectile_spread(2)
+			}
+			break
+		case wep_energy_hammer:
+			snd_play_gun(_laser_brain ? sndEnergyHammer : sndEnergyHammerUpg)
+			scr_weapon_post(_gunangle, 32, 2, -3, -7)
+			instance_create(x, y, Dust)
+			with scr_projectile_create(x, y, EnergyHammerSlash) {
+				scr_projectile_long_arms(_long_arms)
+			}
+			break
+		case wep_jackhammer:
+			with scr_damage_create(x, y, SawBurst) {
+				event_perform(ev_alarm, 0)
+			}
+			break
+		case wep_flak_cannon:
+			snd_play_gun(sndFlakCannon)
+			scr_weapon_post(_gunangle, 32, 4, 7)
+			with scr_projectile_create(x, y, FlakBullet, _gunangle, random_range(11, 13)) {
+				scr_projectile_spread(6)
+			}
+			break
+		case wep_chicken_sword:
+			snd_play_gun(sndChickenSword)
+			instance_create(x, y, Dust)
+			scr_weapon_post(_gunangle, 8, 1, -6, -4)
+			with scr_projectile_create(x, y, Slash, _gunangle) {
+				scr_projectile_long_arms(_long_arms)
+				damage = 6
+			}
+			break
+		case wep_nuke_launcher:
+		case wep_golden_nuke_launcher:
+			snd_play_gun(sndNukeFire)
+			scr_weapon_post(_gunangle, 40, 8, 10)
+			with scr_projectile_create(x, y, Nuke, _gunangle, 2) {
+				if (_wep == wep_golden_nuke_launcher) sprite_index = sprGoldNuke
+				scr_projectile_spread(2)
+				index = other.index
+			}
+			break
+		case wep_ion_cannon:
+			snd_play_gun(_laser_brain ? sndLaserUpg : sndLaser)
+			scr_damage_create(x, y, IonBurst)
+			break
+		case wep_quadruple_machinegun:
+			snd_play_gun(sndQuadMachinegun)
+			scr_weapon_post(_gunangle, 10, 6, 8)
+			for(var i = -2; i <= 2; ++i) {
+				if (i == 0) continue
+				scrBulletShotShellFX(Shell, 35)
+				
+				with scr_projectile_create(x, y, Bullet1, _gunangle, 16) {
+					scr_projectile_shift(floor(i * 8.5))
+					scr_projectile_spread(3)
+				}
+			}
+			break
+		case wep_flamethrower:
+			if !instance_exists(FlameSound) instance_create(x, y, FlameSound)
+			with scr_damage_create(x, y, FlameBurst) event_perform(ev_alarm, 0)
+			break
+		case wep_dragon:
+			if !instance_exists(FlameSound) instance_create(x, y, FlameSound)
+			with scr_damage_create(x, y, DragonBurst) event_perform(ev_alarm, 0)
+			break
+		case wep_flare_gun:
+			snd_play_gun(sndFlare)
+			scr_weapon_post(_gunangle, 10, 5, 5)
+			with scr_projectile_create(x, y, Flare, _gunangle, 9) {
+				scr_projectile_spread(7)
+			}
+			break
+		case wep_energy_screwdriver:
+			snd_play_gun(_laser_brain ? sndEnergyScrewdriverUpg : sndEnergyScrewdriver)
+			instance_create(x, y, Dust)
+			scr_weapon_post(_gunangle, 12, 2, -8, -5)
+			with scr_projectile_create(x, y, EnergyShank, _gunangle, 3) {
+				scr_projectile_long_arms(_long_arms)
+			}
+			break
+		case wep_hyper_launcher:
+			snd_play_gun(sndHyperLauncher)
+			scr_weapon_post(_gunangle, 20, 4, 8)
+			with scr_projectile_create(x, y, HyperGrenade, _gunangle) {
+				scr_projectile_spread(2)
+			}
+			break
+		case wep_laser_cannon:
+			snd_play_gun(sndLaserCannonCharge)
+			with scr_damage_create(x, y, LaserCannon) {
+				if (_laser_brain) ammo += 2
+				image_angle = _gunangle
+				direction = _gunangle
+			}
+			break
+		case wep_lightning_pistol:
+			snd_play_gun(_laser_brain ? sndLightningPistolUpg : sndLightningPistol)
+			scr_weapon_post(_gunangle, 3, 5, 4)
+			scrLightningCreate(x, y, _gunangle + orandom(15) * _accuracy, 14)
+			break
+		case wep_lightning_rifle:
+			snd_play_gun(_laser_brain ? sndLightningRifleUpg : sndLightningRifle)
+			scr_weapon_post(_gunangle, 6, 8, 8)
+			scrLightningCreate(x, y, _gunangle + orandom(15) * _accuracy, 30)
+			break
+		case wep_lightning_shotgun:
+			snd_play_gun(_laser_brain ? sndLightningShotgunUpg : sndLightningShotgun)
+			scr_weapon_post(_gunangle, 4, 10, 5)
+			repeat (8) scrLightningCreate(x, y, _gunangle, irandom_range(9, 12))
+			break
+		case wep_super_flak_cannon:
+			snd_play_gun(sndSuperFlakCannon)
+			with scr_projectile_create(x, y, SuperFlakBullet, _gunangle, random_range(10, 11)) {
+				scr_projectile_spread(4)
+			}
+			scr_weapon_post(_gunangle, 48, 8, 9)
+			break
+		case wep_splinter_pistol:
+			snd_play_gun(sndSplinterPistol)
+			repeat (4) with scr_projectile_create(x, y, Splinter, _gunangle, random_range(18, 24)) {
+				scr_projectile_spread(4)
+			}
+			scr_weapon_post(_gunangle, 10, 2, 3)
+			break
+		case wep_super_splinter_gun:
+			snd_play_gun(sndSuperSplinterGun)
+			with scr_damage_create(x, y, SplinterBurst) {
+				event_perform(ev_alarm, 0)
+			}
+			break
+		case wep_lightning_smg:
+			snd_play_gun(_laser_brain ? sndLightningPistolUpg : sndLightningPistol)
+			scrLightningCreate(x, y, _gunangle + orandom(30) * _accuracy, 14)
+			scr_weapon_post(_gunangle, 4, 5, )
+			break
+		case wep_smart_gun:
+			snd_play_gun(sndSmartgun)
+			var _target = noone
+			if instance_exists(enemy) {
+				_target = instance_nearest(x, y, enemy)
+				if (instance_exists(_target)) {
+					_gunangle = point_direction(x, y, _target.x, _target.y)
+					if (instance_is(self, Player)) gunangle = _gunangle
+				}
+			}
+			scrBulletShotShellFX(Shell, 35)
+			with scr_projectile_create(x, y, Bullet1, _gunangle, 16) {
+				scr_projectile_spread(5)
+			}
+			scr_weapon_post(_gunangle, 50, 5, 6)
+			break
+		case wep_heavy_crossbow:
+		case wep_heavy_auto_crossbow:
+			snd_play_gun(sndHeavyCrossbow)
+			scr_weapon_post(_gunangle, 50, 5, 6, 0)
+			with scr_projectile_create(x, y, HeavyBolt, _gunangle, 16) {
+				if (_wep == wep_heavy_auto_crossbow) scr_projectile_spread(6)
+			}
+			break
+		case wep_blood_hammer:
+			snd_play_gun(sndBloodHammer)
+			scr_weapon_post(_gunangle, 12, 1, -4, 6)
+			with scr_projectile_create(x, y, BloodSlash, _gunangle) {
+				scr_projectile_long_arms(_long_arms)
+				damage = 14
+			}
+			break
+		case wep_lightning_cannon:
+			snd_play_gun(_laser_brain ? sndLightningCannonUpg : sndLightningCannon)
+			with scr_projectile_create(x, y, LightningBall, _gunangle, 3) {
+				scr_projectile_spread(5)
+			}
+			scr_weapon_post(_gunangle, 6, 9, 6, 6)
+			break
+		case wep_pop_gun:
+			snd_play_gun(sndPopgun)
+			scrBulletShotShellFX(Shell)
+	        scr_weapon_post(_gunangle, 4, 2, 2)
+	        with scr_projectile_create(x, y, Bullet2, _gunangle, 16) {
+	            scr_projectile_spread(4)
+	        }
+			break
+		case wep_plasma_rifle:
+			snd_play_gun(_laser_brain ? sndPlasmaRifleUpg : sndPlasmaRifle)
+	        with scr_projectile_create(x, y, PlasmaBall, _gunangle, 2) {
+	            scr_projectile_spread(3)
+	        }
+			scr_weapon_post(_gunangle, 3, 3, 5, 3)
+			break
+		case wep_pop_rifle:
+			with scr_damage_create(x, y, PopBurst) {
+				event_perform(ev_alarm, 0)
+			}
+			break
+		case wep_toxic_launcher:
+			snd_play_gun(sndToxicLauncher)
+			scr_weapon_post(_gunangle, 10, 2, 4)
+			with scr_projectile_create(x, y, ToxicGrenade, _gunangle, 9) {
+				scr_projectile_spread(3)
+			}
+			break
+		case wep_flame_cannon:
+			snd_play_gun_big(sndFlameCannon, 0.2)
+	        with scr_projectile_create(x, y, FlameBall, _gunangle, 3) {
+				scr_projectile_spread(5)
+	        }
+			scr_weapon_post(_gunangle, 10, 2, 5)
+			break
+		case wep_lightning_hammer:
+			snd_play_gun(sndLightningHammer, 0.2)
+	        instance_create(x, y, Dust)
+	        with scr_projectile_create(x, y, LightningSlash) {
+	            scr_projectile_long_arms(_long_arms)
+	        }
+			scr_weapon_post(_gunangle, 24, 1, -4, -7)
+			break
+		case wep_flame_shotgun:
+		case wep_auto_flame_shotgun:
+			snd_play(sndFireShotgun)
+			scr_weapon_post(_gunangle, 12, 6, 5)
+			repeat (6) {
+				with scr_projectile_create(x, y, FlameShell, _gunangle, random_range(12, 18)) {
+					scr_projectile_spread(_wep == wep_auto_flame_shotgun ? 10 : 15)
+				}
+			}
+			break
+		case wep_double_flame_shotgun:
+			snd_play_gun(sndDoubleFireShotgun)
+			for(var i = -1; i <= 1; ++i) {
+				if (i == 0) continue
+				repeat (7) with scr_projectile_create(x, y, FlameShell, _gunangle, random_range(12, 18)) {
+					scr_projectile_shift(i * 15)
+					scr_projectile_spread(15)
+				}
+			}
+			scr_weapon_post(_gunangle, 22, 12, 9)
+			break
+		case wep_cluster_launcher:
+			snd_play_gun(sndClusterLauncher)
+	        with scr_projectile_create(x, y, ClusterNade, _gunangle, 8) {
+				scr_projectile_spread(8)
+	        }
+			scr_weapon_post(_gunangle, 10, 2, 5)
+			break
+		case wep_grenade_shotgun:
+		case wep_auto_grenade_shotgun:
+			snd_play_gun(sndGrenadeShotgun)
+			var _num = (_wep == wep_auto_grenade_shotgun ? 3 : 4) + scrCrownCheck(crwn_death)
+	        repeat (_num) {
+	            with scr_projectile_create(x, y, SmallGrenade, _gunangle, random_range(10, 15)) {
+	                scr_projectile_spread(17)
+	            }
+			}
+			scr_weapon_post(_gunangle, 10, 2, 8)
+			break
+		case wep_grenade_rifle:
+			with scr_damage_create(x, y, NadeBurst) {
+				ammo = 3 + scrCrownCheck(crwn_death)
+				event_perform(ev_alarm, 0)
+			}
+			break
+		case wep_rogue_rifle:
+			scr_damage_create(x, y, IDPDBurst)
+			break
+		case wep_party_gun:
+			snd_play_gun_big(sndConfettiGun, 0.2)
+	        with scr_projectile_create(x, y, ConfettiBall, _gunangle, 8) {
+				scr_projectile_spread(8)
+	        }
+			scr_weapon_post(_gunangle, 3, 3, 2)
+			break
+		case wep_double_minigun:
+			snd_play_gun_big(sndDoubleMinigun)
+			scr_weapon_post(_gunangle, 12, 6, 7, 0.7)
+			for(var i = -1; i <= 1; ++i) {
+				if (i == 0) continue
+				with scrBulletShotShellFX(Shell, 40) speed ++
+				with scr_projectile_create(x, y, Bullet1, _gunangle, 16) {
+					scr_projectile_shift(i * 7)
+					scr_projectile_spread(12)
+				}
+			}
+			break
+		case wep_ultra_revolver:
+			snd_play_gun_big(sndUltraPistol)
+			scrBulletShotShellFX(Shell)
+			with scr_projectile_create(x, y, UltraBullet, _gunangle, 24) {
+				scr_projectile_spread(3)
+			}
+			scr_weapon_post(_gunangle, 12, 6, 4)
+			break
+		case wep_ultra_laser_pistol:
+			snd_play_gun_big(_laser_brain ? sndUltraLaserUpg : sndUltraLaser)
+			for(var i = -2; i <= 2; ++i) {
+				with scr_projectile_create(x, y, Laser, _gunangle) {
+					scr_projectile_shift(i * 8)
+					scr_projectile_spread(1)
+				}
+			}
+			scr_weapon_post(_gunangle, 12, 10, 7)
+			break
+		case wep_sledgehammer:
+			snd_play_gun(sndHammer)
+			instance_create(x, y, Dust)
+			scr_weapon_post(_gunangle, 12, 1, -4, -6)
+			with scr_projectile_create(x, y, Slash, _gunangle) {
+				damage = 24
+				sprite_index = sprHeavySlash
+				scr_projectile_long_arms(_long_arms)
+			}
+			break
+		case wep_heavy_revolver:
+		case wep_heavy_machinegun:
+			if (_wep == wep_heavy_machinegun) snd_play_gun(sndHeavyRevolver)
+			else snd_play_gun(sndHeavyRevolver)
+			scrBulletShotShellFX(HeavyShell)
+			with scr_projectile_create(x, y, HeavyBullet, _gunangle, 16) {
+				scr_projectile_spread(_wep == wep_heavy_machinegun ? 3 : 1)
+			}
+			scr_weapon_post(_gunangle, 7, 5, 6)
+			break
+		case wep_heavy_slugger:
+			snd_play_gun(sndHeavySlugger)
+			with scr_projectile_create(x, y, HeavySlug, _gunangle, 13) {
+				scr_projectile_spread(4)
+			}
+			scr_weapon_post(_gunangle, 34, 14, 10)
+			break
+		case wep_ultra_shovel:
+			snd_play_gun_big(sndUltraShovel)
+			instance_create(x, y, Dust)
+			for(var i = -1; i <= 1; ++i) {
+				with scr_projectile_create(x, y, UltraSlash, _gunangle, 3) {
+					damage = 30
+					scr_projectile_long_arms(3)
+				}
+			}
+			scr_weapon_post(_gunangle, 28, 1, -6, -8)
+			break
+		case wep_ultra_shotgun:
+			snd_play_gun_big(sndUltraShotgun)
+			repeat (9) with scr_projectile_create(x, y, UltraShell, _gunangle, random_range(12, 18)) {
+				scr_projectile_spread(22)
+			}
+			scr_weapon_post(_gunangle, 44, 5, 7)
+			break
+		case wep_ultra_crossbow:
+			snd_play_gun_big(sndUltraCrossbow)
+			scr_projectile_create(x, y, UltraBolt, _gunangle, 20)
+			scr_weapon_post(_gunangle, 44, 5, 8)
+			break
+		case wep_ultra_grenade_launcher:
+			snd_play_gun_big(sndUltraGrenade)
+			with scr_projectile_create(x, y, UltraGrenade, _gunangle, 10) {
+				scr_projectile_spread(5)
+			}
+			scr_weapon_post(_gunangle, 12, 3, 8)
+			break
+		case wep_plasma_minigun:
+			snd_play_gun(_laser_brain ? sndPlasmaMinigunUpg : sndPlasmaMinigun)
+			with scr_projectile_create(x, y, PlasmaBall, _gunangle, 1) {
+				scr_projectile_spread(10)
+			}
+			scr_weapon_post(_gunangle, 5, 3, 8)
+			break
+		case wep_devastator:
+			snd_play_gun(_laser_brain ? sndDevastatorUpg : sndDevastator)
+			with scr_projectile_create(x, y, Devastator, _gunangle, 16) {
+				scr_projectile_spread(3)
+			}
+			scr_weapon_post(_gunangle, 30, 10, 8, 5)
+			break
+		case wep_super_disc_gun:
+			snd_play_gun(sndSuperDiscGun)
+			for(var i = -2; i <= 2; ++i) {
+				with scr_projectile_create(x, y, Disc, _gunangle + i * 7, 5) {
+					scr_projectile_spread(2)
+					hitid = HitId.Disc
+				}
+			}
+			scr_weapon_post(_gunangle, 16, 6, 6)
+			break
+		case wep_heavy_assault_rifle:
+			with scr_damage_create(x, y, HeavyBurst) {
+				event_perform(ev_alarm, 0)
+			}
+			break
+		case wep_blood_cannon:
+			snd_play_gun(sndBloodCannon)
+			with scr_projectile_create(x, y, BloodBall, _gunangle, 5) {
+				scr_projectile_spread(5)
+				if (!place_free(x, y)) move_outside_solid(direction, speed)
+			}
+			scr_weapon_post(_gunangle, 9, 6, 6)
+			break
+		case wep_dog_spin_attack:
+			snd_play_gun(sndBigDogSpin)
+			with instance_create(x, y, DogSpinAttack) {
+	            team = other.team
+	            creator = other.id
+	            ammo = 15
+	        }
+			break
+		case wep_incinerator:
+			snd_play_gun(sndIncinerator)
+			for(var i = -1; i <= 1; ++i) {
+				scrBulletShotShellFX(Shell, 35)
+				with scr_projectile_create(x, y, FlameShell, _gunangle, 16) {
+					scr_projectile_spread(5)
+					scr_projectile_shift(i)
+				}
+			}
+			scr_weapon_post(_gunangle, 9, 4, 7)
+			break
+		case wep_super_plasma_cannon:
+			snd_play_gun(_laser_brain ? sndPlasmaHugeUpg : sndPlasmaHuge)
+			with scr_projectile_create(x, y, PlasmaHuge, _gunangle, 1.5) {
+				scr_projectile_spread(1)
+			}
+			scr_weapon_post(_gunangle, 40, 15, 10, 16)
+			break
+		case wep_seeker_pistol:
+			snd_play_gun(sndSeekerPistol)
+			scr_weapon_post(_gunangle, 12, 2, 4)
+			repeat (2) {
+				with scr_projectile_create(x, y, Seeker, _gunangle, 8) {
+					scr_projectile_spread(30)
+				}
+			}
+			break
+		case wep_seeker_shotgun:
+			snd_play_gun(sndSeekerShotgun)
+			scr_weapon_post(_gunangle, 16, 6, 8)
+			repeat (6) {
+				with scr_projectile_create(x, y, Seeker, _gunangle, 8) {
+					scr_projectile_spread(70)
+				}
+			}
+			break
+		case wep_eraser:
+			snd_play_gun(sndEraser)
+			repeat (17) {
+	            with scr_projectile_create(x, y, Bullet2, _gunangle, random_range(10, 18)) {
+	                scr_projectile_spread(1)
+	            }
+	        }
+			scr_weapon_post(_gunangle, 18, 8, 8, 2)
+			break
+		case wep_guitar:
+			snd_play_gun(sndGuitar)
+	        instance_create(x, y, Dust)
+	        with scr_projectile_create(x, y, Slash, _gunangle, 2) {
+	            damage = 26
+				scr_projectile_long_arms(_long_arms)
+	            sprite_index = sprHeavySlash
+	            guitar = true
+	        }
+			scr_weapon_post(_gunangle, 12, 1, -4, -6)
+			break
+		case wep_bouncer_smg:
+			snd_play_gun(sndBouncerSmg)
+			scrBulletShotShellFX(Shell, 30)
+			with scr_projectile_create(x, y, BouncerBullet, _gunangle, 6) {
+				scr_projectile_spread(20)
+			}
+			scr_weapon_post(_gunangle, 5, 2, 2)
+			break
+		case wep_bouncer_shotgun:
+			snd_play_gun(sndBouncerShotgun)
+			for(var i = -2; i <= 2; ++i) {
+				with scr_projectile_create(x, y, BouncerBullet, _gunangle, 6) {
+					sprite_index = sprBouncerShell
+					scr_projectile_shift(i * 10)
+					scr_projectile_spread(3)
+				}
+			}
+			scr_weapon_post(_gunangle, 7, 7, 5)
+			break
+		case wep_hyper_slugger:
+			snd_play_gun(sndHyperSlugger)
+			with scr_projectile_create(x, y, HyperSlug, _gunangle, 12) {
+				scr_projectile_spread(2)
+			}
+			scr_weapon_post(_gunangle, 16, 11, 10)
+			break
+		case wep_super_bazooka:
+			snd_play_gun(sndSuperBazooka)
+			for(var i = -2; i <= 2; ++i) {
+				scr_projectile_create(x, y, Rocket, _gunangle + i * 6, 2)
+			}
+			scr_weapon_post(_gunangle, 60, 20, 12, 1)
+			break
+		case wep_frog_pistol:
+		case wep_golden_frog_pistol:
+			snd_play_gun(_is_golden ? sndGoldFrogPistol : sndFrogPistol)
+			repeat (3) with scr_projectile_create(x, y, EnemyBullet2, _gunangle, random_range(10, 14)) {
+				scr_projectile_spread(6)
+				hitid = HitId.None
+			}
+			scr_weapon_post(_gunangle, 4, 4, 2)
+			break
+		case wep_black_sword:
+			var _mega = (instance_is(self, Player) && (hp <= 0 || max_hp <= 0))
+			snd_play_gun(_mega ? sndBlackSwordMega : sndBlackSword)
+			instance_create(x, y, Dust)
+			with scr_projectile_create(x, y, Slash, _gunangle, 2) {
+				damage = _mega ? 80 : 12
+				scr_projectile_long_arms(_long_arms)
+				if _mega {
+					sprite_index = sprMegaSlash
+					mask_index = mskMegaSlash
+				}
+			}
+			sleep(8)
+			scr_weapon_post(_gunangle, 9, 1, -7, -8)
+			break
+		case wep_heavy_grenade_launcher:
+			snd_play_gun(sndHeavyNader)
+			with scr_projectile_create(x, y, HeavyGrenade, _gunangle, random_range(10, 11)) {
+				scr_projectile_spread(4)
+			}
+			scr_weapon_post(_gunangle, 12, 2, 8)
+			break
+		case wep_gun_gun:
+			snd_play_gun(sndGunGun)
+			var _drop_wep = scrDecideWep(10)
+			with scrWeaponPickupCreate(x, y, _drop_wep) {
+				motion_add_m(_gunangle, 16)
+				instance_create(x + hspeed, y + vspeed, GunGun)
+				mask_index = mskPlasma
+				team = other.team
+				creator = other.id
+			}
+			scr_weapon_post(_gunangle, 30, 8, 6)
+			break
+		default: print("Unkown weapon:", _wep)
+	}
 	
 	return true
 }
