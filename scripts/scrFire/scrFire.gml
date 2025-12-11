@@ -379,7 +379,7 @@ function scrFire(_wep, _consume_ammo = true) {
 			snd_play_gun(_laser_brain ? sndEnergyHammer : sndEnergyHammerUpg)
 			scr_weapon_post(_gunangle, 32, 2, -3, -7)
 			instance_create(x, y, Dust)
-			with scr_projectile_create(x, y, EnergyHammerSlash) {
+			with scr_projectile_create(x, y, EnergyHammerSlash, _gunangle, 2) {
 				scr_projectile_long_arms(_long_arms)
 			}
 			break
@@ -436,7 +436,7 @@ function scrFire(_wep, _consume_ammo = true) {
 			with scr_damage_create(x, y, FlameBurst) event_perform(ev_alarm, 0)
 			break
 		case wep_dragon:
-			if !instance_exists(FlameSound) instance_create(x, y, FlameSound)
+			if !instance_exists(DragonSound) instance_create(x, y, DragonSound)
 			with scr_damage_create(x, y, DragonBurst) event_perform(ev_alarm, 0)
 			break
 		case wep_flare_gun:
@@ -493,7 +493,7 @@ function scrFire(_wep, _consume_ammo = true) {
 			break
 		case wep_splinter_pistol:
 			snd_play_gun(sndSplinterPistol)
-			repeat (4) with scr_projectile_create(x, y, Splinter, _gunangle, random_range(18, 24)) {
+			repeat (4) with scr_projectile_create(x, y, Splinter, _gunangle, random_range(16, 24)) {
 				scr_projectile_spread(4)
 			}
 			scr_weapon_post(_gunangle, 10, 2, 3)
@@ -523,7 +523,7 @@ function scrFire(_wep, _consume_ammo = true) {
 			with scr_projectile_create(x, y, Bullet1, _gunangle, 16) {
 				scr_projectile_spread(5)
 			}
-			scr_weapon_post(_gunangle, 50, 5, 6)
+			scr_weapon_post(_gunangle, 0, 5, 5)
 			break
 		case wep_heavy_crossbow:
 		case wep_heavy_auto_crossbow:
@@ -535,8 +535,8 @@ function scrFire(_wep, _consume_ammo = true) {
 			break
 		case wep_blood_hammer:
 			snd_play_gun(sndBloodHammer)
-			scr_weapon_post(_gunangle, 12, 1, -4, 6)
-			with scr_projectile_create(x, y, BloodSlash, _gunangle) {
+			scr_weapon_post(_gunangle, 12, 1, -4, -6)
+			with scr_projectile_create(x, y, BloodSlash, _gunangle, 2) {
 				scr_projectile_long_arms(_long_arms)
 				damage = 14
 			}
@@ -585,7 +585,7 @@ function scrFire(_wep, _consume_ammo = true) {
 		case wep_lightning_hammer:
 			snd_play_gun(sndLightningHammer, 0.2)
 	        instance_create(x, y, Dust)
-	        with scr_projectile_create(x, y, LightningSlash) {
+	        with scr_projectile_create(x, y, LightningSlash, _gunangle, 2) {
 	            scr_projectile_long_arms(_long_arms)
 	        }
 			scr_weapon_post(_gunangle, 24, 1, -4, -7)
@@ -679,7 +679,7 @@ function scrFire(_wep, _consume_ammo = true) {
 			snd_play_gun(sndHammer)
 			instance_create(x, y, Dust)
 			scr_weapon_post(_gunangle, 12, 1, -4, -6)
-			with scr_projectile_create(x, y, Slash, _gunangle) {
+			with scr_projectile_create(x, y, Slash, _gunangle, 2) {
 				damage = 24
 				sprite_index = sprHeavySlash
 				scr_projectile_long_arms(_long_arms)
@@ -709,6 +709,7 @@ function scrFire(_wep, _consume_ammo = true) {
 				with scr_projectile_create(x, y, UltraSlash, _gunangle, 3) {
 					damage = 30
 					scr_projectile_long_arms(3)
+					scr_projectile_shift(60 * i)
 				}
 			}
 			scr_weapon_post(_gunangle, 28, 1, -6, -8)
@@ -737,7 +738,7 @@ function scrFire(_wep, _consume_ammo = true) {
 			with scr_projectile_create(x, y, PlasmaBall, _gunangle, 1) {
 				scr_projectile_spread(10)
 			}
-			scr_weapon_post(_gunangle, 5, 3, 8)
+			scr_weapon_post(_gunangle, 5, 3, 8, 2)
 			break
 		case wep_devastator:
 			snd_play_gun(_laser_brain ? sndDevastatorUpg : sndDevastator)
@@ -782,8 +783,8 @@ function scrFire(_wep, _consume_ammo = true) {
 			for(var i = -1; i <= 1; ++i) {
 				scrBulletShotShellFX(Shell, 35)
 				with scr_projectile_create(x, y, FlameShell, _gunangle, 16) {
+					scr_projectile_shift(18 * i)
 					scr_projectile_spread(5)
-					scr_projectile_shift(i)
 				}
 			}
 			scr_weapon_post(_gunangle, 9, 4, 7)

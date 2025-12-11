@@ -40,7 +40,7 @@ function scr_create_debug_overlay_views() {
 	
 	#region Common
 	
-	dbg_view("Common", false)
+	dbg_view("Utils", false)
 		
 		dbg_section("Toggles")
 		dbg_checkbox(ref_create(global, "__debug_camera_display_info"), "Camera & display info")

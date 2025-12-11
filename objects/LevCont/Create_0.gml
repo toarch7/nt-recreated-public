@@ -1,3 +1,5 @@
+scrLetterbox(true)
+
 random_set_seed(global.seed)
 
 var _destiny = scrCrownCheck(crwn_destiny)

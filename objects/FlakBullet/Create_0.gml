@@ -6,5 +6,5 @@ typ = 1
 damage = 8
 knockback_speed = 6
 
-bonus = false
+bonus = true
 alarm[2] = 2

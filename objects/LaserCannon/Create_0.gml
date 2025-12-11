@@ -8,4 +8,4 @@ image_xscale = 0.2
 image_yscale = 0.2
 damage = 2
 
-alarm[0] = 10
+alarm[0] = 15

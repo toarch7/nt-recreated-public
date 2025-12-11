@@ -10,6 +10,8 @@ function scrGameRestart(_quit_to_menu = false) {
 		exit
 	}
 	
+	audio_stop_all()
+	
 	with UberCont {
 		continued_run = false
 		
@@ -23,11 +25,6 @@ function scrGameRestart(_quit_to_menu = false) {
 			break
 		}
 		
-		with GameCont {
-			crown = global.crownpick
-			skillpoints = 0
-		}
-		
 		instance_create(0, 0, GameCont)
 		
 		instance_destroy(MusCont)
@@ -35,16 +32,14 @@ function scrGameRestart(_quit_to_menu = false) {
 		
 		scrCreatePlayers(global.index)
 		
-		with GameCont {
-			area = area_desert
-			subarea = 0
+		with (Player) {
+			snd_play(scr_race_get_sound(race, "Cnfm", sndMutant0Cnfm))
 		}
 		
 		instance_create(x, y, GenCont)
 		instance_destroy(WepPickup)
 	}
 	
-	audio_stop_all()
 	room_restart()
 }
 

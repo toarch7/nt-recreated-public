@@ -12,9 +12,8 @@ function scrLevelUpScreenSubmit(_selection_text=undefined) {
 	}
 	
 	if is_string(_selection_text) {
-		with instance_create(0, 0, SkillText) {
-		    txt = _selection_text
-		}
+		var _ypos = view_yview + view_height - string_height(_selection_text) - 70
+		with (instance_create(view_xview_center, _ypos, SkillText)) txt = _selection_text
 	}
 	
 	scrGameSave()

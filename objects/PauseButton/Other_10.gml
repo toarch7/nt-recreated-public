@@ -48,10 +48,10 @@ if image_index == 5 || image_index == 6 {
 		if other.image_index == 5 {
 			show_leaderboards_menu = scrGameIsEventRun()
 			show_weekly_results_menu = scrGameIsWeeklyRun()
-			want_menu = 1
+			want_menu = true
 		}
 		else {
-			want_restart = 1
+			want_restart = true
 		}
 	}
 	

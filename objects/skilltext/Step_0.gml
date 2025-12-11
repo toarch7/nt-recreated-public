@@ -2,7 +2,9 @@ if lockstep_stop
 	exit
 
 if disappear {
-    disappear--
+    disappear --
 
-    if disappear <= 0 instance_destroy()
+    if (disappear <= 0) {
+		instance_destroy()
+	}
 }
