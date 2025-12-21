@@ -1,4 +1,6 @@
 function scrGameSave() {
+	exit
+	
     var b = buffer_create(1, buffer_grow, 1)
 
     // Various info

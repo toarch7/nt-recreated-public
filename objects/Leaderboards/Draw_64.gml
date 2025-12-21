@@ -17,12 +17,12 @@ var start = ypos div 20,
 	count = min(array_length(items), start + display),
 	press = mouse_ui_clicked(),
 	size = draw_step_size,
-	pos = 48, xoff = 32, gap = 260,
+	pos = 48, xoff = 32, _gap_size = 260,
 	full = UberCont.opt_resolution
 
 if !full {
 	xoff = 16
-	gap = 220
+	_gap_size = 220
 }
 
 if last_min != start or last_max != count {
@@ -77,21 +77,23 @@ for(var i = start; i < count; i ++) {
 	draw_set_halign(fa_right)
 	draw_text_shadow(20 + xoff, yy, string(i + 1) + ".")
 	
-	var name = item.name
+	var _name = item.name
 	
-	if gap < 260
-		name = string_copy(name, 1, 12)
+	if _gap_size < 260 {
+		_name = string_copy(_name, 1, 12)
+	}
 	
-	name = "@(" + string(item.skin ? sprPlayerMapIconSkin : sprMapIcon) + ":" + string(item.char) + ")  " + name
+	var _image = scr_race_get_skin_subimage(item.char, item.skin)
+	_name = $"@(sprMapIcon:{_image})  " + _name
 	
 	draw_set_halign(fa_left)
 	
-	draw_text_nt(32 + xoff, yy, name)
+	draw_text_nt(32 + xoff, yy, _name)
 	
 	draw_sprite(sprKillsIcon, 0, 160 + (full * 30) + xoff, yy)
 	draw_text_nt(172 + (full * 30) + xoff, yy, item.kills)
 	
-	draw_text_nt(gap + xoff, yy, area_get_name(item.area, item.subarea, item.loops))
+	draw_text_nt(_gap_size + xoff, yy, scrAreaGetMapName(item.area, item.subarea, item.loops))
 	
 	pos += size
 }

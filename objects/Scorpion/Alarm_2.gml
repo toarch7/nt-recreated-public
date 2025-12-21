@@ -1,16 +1,17 @@
 if ammo > 0 {
-    snd_play(sndScorpionFire)
-    ammo -= 1
+    ammo --
     alarm[2] = 2
-    sprite_index = spr_fire
-    with instance_create(x, y, EnemyBullet2) {
-        motion_add(other.gunangle + orandom(20), 3 + random(1))
-        image_angle = direction
-        creator = other.id
-        team = other.team
-        hit_id = other.spr_idle
+	
+    snd_play(sndScorpionFire)
+    
+	with scr_projectile_create(x, y, EnemyBullet2, gunangle, random_range(3, 4)) {
+        scr_projectile_spread(orandom(20))
     }
-} else {
+    
+	sprite_index = spr_fire
+	image_index = 0
+}
+else {
     sprite_index = spr_idle
     alarm[1] = 40 + random(10)
 }

@@ -24,7 +24,7 @@ instance_create(x, y, SmallChestPickup)
 
 snd_play(scr_skill_get(mut_second_stomach) ? sndHPPickupBig : sndHPPickup)
 
-if GameCont.coopultra == 2 && alarm[0] != -1 {
+if scr_ultra_get(Race.CoopUltra, UltraSkill.BloodBond) && alarm[0] != -1 {
 	var plr = p.id
 	alarm[0] = -1
 	

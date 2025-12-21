@@ -89,7 +89,7 @@ function scrDrawStats() {
     
 	if (runs > 0) {
         draw_stat_header("BEST RUN")
-        draw_stat(scrRaceGetName(brace), area_get_name(barea, bsuba, bloop))
+        draw_stat(scrRaceGetName(brace), scrAreaGetMapName(barea, bsuba, bloop))
         draw_stat("kills", string(bkill))
         draw_stat_header("")
     }
@@ -106,13 +106,13 @@ function scrDrawStats() {
 	
     if (wins > 0) {
         draw_stat_header("BEST TIME")
-        draw_stat(scrRaceGetName(frace), scrTimeSpeedrun(baked_fastest[frace]))
+        draw_stat(scrRaceGetName(frace), baked_fastest[frace])
         draw_stat_header("")
     }
 	
     if dailies > 0 {
         draw_stat_header("DAILY")
-        draw_stat(scrRaceGetName(drace), area_get_name(darea, dsuba, dloop))
+        draw_stat(scrRaceGetName(drace), scrAreaGetMapName(darea, dsuba, dloop))
         draw_stat("kills", string(dkill))
         draw_stat("runs", string(dailies))
         draw_stat_header("")
@@ -120,7 +120,7 @@ function scrDrawStats() {
 	
     if UberCont.hardgot && hard > 0 {
         draw_stat_header("HARD")
-        draw_stat(scrRaceGetName(hrace), area_get_name_hard(harea, hsuba, hloop))
+        draw_stat(scrRaceGetName(hrace), scrAreaGetMapName(harea, hsuba, hloop, true))
         draw_stat("kills", string(hkill))
         draw_stat("runs", string(hard))
         draw_stat_header("")

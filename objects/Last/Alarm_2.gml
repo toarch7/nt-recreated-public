@@ -6,13 +6,13 @@ if (attacktype == 0) {
         gunangle += 9
         repeat(4) {
             with(instance_create(x, y, IDPDBullet)) {
-                hit_id = other.spr_idle
+                hitid = other.hitid
                 motion_add(other.gunangle, 4)
                 image_angle = direction
                 team = other.team
             }
             with(instance_create(x, y, IDPDBullet)) {
-                hit_id = other.spr_idle
+                hitid = other.hitid
                 motion_add((-other.gunangle), 4)
                 image_angle = direction
                 team = other.team
@@ -30,25 +30,25 @@ if (attacktype == 1) {
         motion_add((gunangle + 180), 0.5)
         snd_play_hit_big(sndGruntFire, 0.2)
         with(instance_create(x, y, IDPDBullet)) {
-            hit_id = other.spr_idle
+            hitid = other.hitid
             motion_add((other.gunangle - ((other.ammo * 5) + 16)), 12)
             image_angle = direction
             team = other.team
         }
         with(instance_create(x, y, IDPDBullet)) {
-            hit_id = other.spr_idle
+            hitid = other.hitid
             motion_add((other.gunangle - (((other.ammo * 5) + 16) / 2)), 12)
             image_angle = direction
             team = other.team
         }
         with(instance_create(x, y, IDPDBullet)) {
-            hit_id = other.spr_idle
+            hitid = other.hitid
             motion_add((other.gunangle + (((other.ammo * 5) + 16) / 2)), 12)
             image_angle = direction
             team = other.team
         }
         with(instance_create(x, y, IDPDBullet)) {
-            hit_id = other.spr_idle
+            hitid = other.hitid
             motion_add((other.gunangle + ((other.ammo * 5) + 16)), 12)
             image_angle = direction
             team = other.team

@@ -12,7 +12,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Nothing",
-    "path":"folders/Objects/Enemies/Nothing.yy",
+    "path":"folders/Objects/Enemies/Bosses/Nothing.yy",
   },
   "parentObjectId":{
     "name":"prop",

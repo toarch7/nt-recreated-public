@@ -1,13 +1,15 @@
-if lockstep_stop
-	exit
-
-if image_index = 0 && !instance_exists(FrogQueen) {
-    image_index = 1
-    with GameCont {
-        area = 102
-        subarea = 0
-    }
-    with enemy
-    hp = 0
-    with instance_create(x + 16, y + 16, Portal) type = 1
+if image_index == 0 && !instance_exists(FrogQueen) {
+	image_index = 1
+	
+	with (enemy) {
+		hp = 0
+		instance_destroy()
+	}
+	
+	with GameCont {
+		area = area_pizza_sewers
+		subarea = 0
+	}
+	
+	instance_create(bbox_center_x, bbox_center_y, Portal)
 }

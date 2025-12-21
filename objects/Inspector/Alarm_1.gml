@@ -19,7 +19,7 @@ if instance_exists(target) {
                 with instance_create(x, y, PopoSlug) {
                     motion_add(other.gunangle + random(12) - 6, 16)
                     image_angle = direction
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     team = other.team
                 }
 
@@ -54,7 +54,7 @@ if instance_exists(target) {
                     motion_add(other.gunangle + random(20) - 10, 10)
                     image_angle = direction
                     team = other.team
-                    hit_id = other.hit_id
+                    hitid = other.hitid
                 }
             }
 

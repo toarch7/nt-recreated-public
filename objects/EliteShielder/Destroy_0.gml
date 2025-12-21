@@ -2,21 +2,7 @@ scrDrop(20, 0)
 
 event_inherited()
 
-with Grunt
-    freeze += 100
-with Shielder
-    freeze += 100
-with Inspector
-    freeze += 100
-with EliteGrunt
-    freeze += 100
-with EliteShielder
-    freeze += 100
-with EliteInspector
-    freeze += 100
-
-with WantVan
-canspawn = 1
+scrOnPopoKill()
 
 with EliteShield {
     if (creator != other.id) continue

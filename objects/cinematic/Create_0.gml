@@ -1,8 +1,9 @@
 x = 10016
 y = 10016 - 245
 
-with TopCont
-drawcontrols = 0
+scrLetterbox(false, 0)
+
+with (TopCont) drawcontrols = 0
 
 alarm[0] = 110
 
@@ -12,12 +13,12 @@ view_yview = y - view_height / 2
 camera_set_view_pos(view_camera, view_xview, view_yview)
 
 with GameCont {
-    area = 106
+    area = area_hq
     subarea = 3
 }
 
 with Player {
-    visible = 0
+    visible = false
     mask_index = mskNone
 
     x = other.x

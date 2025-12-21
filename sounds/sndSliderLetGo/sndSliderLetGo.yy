@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.120906,
+  "duration": 0.12090703,
   "exportDir": "",
   "name": "sndSliderLetGo",
   "parent": {

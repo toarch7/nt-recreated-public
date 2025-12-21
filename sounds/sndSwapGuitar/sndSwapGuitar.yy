@@ -7,15 +7,15 @@
   },
   "bitDepth": 1,
   "channelFormat": 1,
-  "compression": 1,
+  "compression": 2,
   "compressionQuality": 4,
   "conversionMode": 0,
   "duration": 0.414375,
   "exportDir": "",
   "name": "sndSwapGuitar",
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+    "name": "Guitar",
+    "path": "folders/Sounds/Guitar.yy"
   },
   "preload": true,
   "resourceType": "GMSound",

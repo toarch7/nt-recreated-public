@@ -18,3 +18,5 @@ snd_mele = sndSpiderMelee
 walk = 0
 alarm[1] = 30 + random(90)
 maxspeed = 3
+
+hitid = HitId.Spider

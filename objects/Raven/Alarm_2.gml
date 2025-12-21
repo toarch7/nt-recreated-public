@@ -6,7 +6,7 @@ if ammo > 0 {
         image_angle = direction
         team = other.team
         creator = other.id
-        hit_id = other.spr_idle
+        hitid = other.hitid
     }
     ammo -= 1
     alarm[2] = 5

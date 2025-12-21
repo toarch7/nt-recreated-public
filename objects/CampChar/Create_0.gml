@@ -10,4 +10,7 @@ spr_dead = sprMutant1Dead
 
 depth = -2
 image_speed = 0.4
+direction = random_angle
 friction = 0.4
+
+stuck = 0

@@ -6,7 +6,7 @@ repeat 14 {
         team = other.team
         motion_add(other.ang, 10)
         image_angle = direction
-        hit_id = other.spr_idle
+        hitid = other.hitid
     }
 
     ang += 24

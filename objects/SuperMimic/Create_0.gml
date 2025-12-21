@@ -17,4 +17,6 @@ snd_mele = sndMimicMelee
 //behavior
 alarm[1] = 90 + random(150)
 
-if place_free(x, y - 12) move_contact_solid(90, 12)
+if (place_free(x, y - 12)) move_contact_solid(90, 12)
+
+hitid = HitId.HpMimic

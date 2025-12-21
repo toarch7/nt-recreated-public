@@ -1,5 +1,5 @@
 image_speed = 0.4
 alarm[0] = 80
 motion_add(random_angle, 1)
-hit_id = sprite_index
+hitid = HitId.Throne2Death
 alarm[1] = 2

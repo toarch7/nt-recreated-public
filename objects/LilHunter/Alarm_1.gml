@@ -1,13 +1,18 @@
-if !hp exit
+if (hp <= 0) exit
 
 alarm[1] = (20 + random(6))
 scrTarget()
 
+if (scrPlayerCountRace(Race.Rogue, true) && !scr_check_enemies(instance_number(object_index))) {
+	forceliftoff = true
+}
+
 if instance_exists(target) {
-    if random(30) < 1 or (point_distance(x, y, target.x, target.y) < 64 && random(3) < 2) or (point_distance(x, y, target.x, target.y) > 160) && (random(16) < 1) {
+    if forceliftoff or random(30) < 1 or (point_distance(x, y, target.x, target.y) < 64 && random(3) < 2) or (point_distance(x, y, target.x, target.y) > 160) && (random(16) < 1) {
         image_index = 0
         sprite_index = sprLilHunterLiftStart
-        instance_change(LilHunterFly, Player)
+		forceliftoff = false
+        instance_change(LilHunterFly, false)
         snd_play(sndLilHunterLaunch)
     }
 	else {
@@ -26,7 +31,7 @@ if instance_exists(target) {
 					
                     repeat 11 + GameCont.loops {
                         with instance_create(x, y, LHBouncer) {
-                            hit_id = other.hit_id
+                            hitid = other.hitid
                             motion_add((other.gunangle + other.addang), 3)
                             image_angle = direction
                             team = other.team
@@ -46,7 +51,7 @@ if instance_exists(target) {
                     wkick = 8
                     repeat 10 + GameCont.loops * 2 {
                         with instance_create(x, y, EnemyBullet1) {
-                            hit_id = other.hit_id
+                            hitid = other.hitid
                             motion_add(other.gunangle, 7 + random(6))
                             image_angle = direction
                             team = other.team

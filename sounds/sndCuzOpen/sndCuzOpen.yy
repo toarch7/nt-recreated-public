@@ -10,12 +10,12 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.669438,
+  "duration": 0.66444445,
   "exportDir": "",
   "name": "sndCuzOpen",
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+    "name": "Cuz",
+    "path": "folders/Sounds/Cuz.yy"
   },
   "preload": true,
   "resourceType": "GMSound",

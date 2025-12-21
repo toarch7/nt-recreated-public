@@ -14,8 +14,8 @@
   "exportDir": "",
   "name": "sndCuzCry",
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+    "name": "Cry",
+    "path": "folders/Sounds/Cuz/Cry.yy"
   },
   "preload": true,
   "resourceType": "GMSound",

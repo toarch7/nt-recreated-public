@@ -9,7 +9,7 @@ if instance_exists(target) {
         aimdir = mcr_target_direction + ((30 + random(10)) * side)
 
         with instance_create(x, y, BigGuardianBullet) {
-            hit_id = other.spr_idle
+            hitid = other.hitid
             motion_add(other.aimdir, 5 + random(1))
             team = other.team
         }
@@ -29,7 +29,7 @@ if instance_exists(target) {
         }
         repeat(10 + GameCont.loops) {
             with(instance_create(x, y, GuardianBullet)) {
-                hit_id = other.spr_idle
+                hitid = other.hitid
                 motion_add(other.aimdir, 8)
                 if (hspeed > 0) image_xscale = 1
                 else image_xscale = -1
@@ -54,7 +54,7 @@ if instance_exists(target) {
         ang = random_angle
         repeat(4 + GameCont.loops) {
             with(instance_create(x, y, Throne2Ball)) {
-                hit_id = other.spr_idle
+                hitid = other.hitid
                 motion_add(other.ang, (4 + random(6)))
                 speed = (4 + random(6))
                 other.ang += (360 / (4 + GameCont.loops))

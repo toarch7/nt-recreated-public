@@ -13,7 +13,7 @@ if (ammo > 0) {
         motion_add((other.gunangle + (sin(other.wave) * 70)), 6)
         image_angle = direction
         team = other.team
-        hit_id = other.spr_idle
+        hitid = other.hitid
     }
     instance_create(x, y, Smoke)
 } else {

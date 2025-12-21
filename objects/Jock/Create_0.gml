@@ -22,3 +22,5 @@ gunangle = random_angle
 alarm[1] = 30 + random(90)
 wkick = 0
 ammo = 5
+
+hitid = HitId.Jock

@@ -1,36 +1,45 @@
 function scrPlayerFiring() {
-	var enoughrads = scrCheckRads(wep),
-		enoughammo = scrCheckAmmo(wep)
+	if (!scr_weapon_is_valid(wep)) exit
 	
-    if infammo > 0 {
-		enoughrads = true
-		enoughammo = true
+	var _type = scr_weapon_get_type(wep),
+		_enoughrads = scrCheckRads(wep),
+		_enoughammo = scrCheckAmmo(wep)
+	
+	if (infammo > 0) {
+		_enoughrads = true
+		_enoughammo = true
 	}
 	
-    if KeyCont.press_fire[index] && race != Race.Steroids && !wep_auto[wep] && ((wep_type[wep] == 0 or wep_type[wep] == 1) or can_shoot) && reload < 10
-        clicked = true
+    if (KeyCont.press_fire[index] && race != Race.Steroids) {
+		if (!scr_weapon_is_auto(wep) && reload < 10
+			&& ((_type == Ammo.None || _type == Ammo.Bullets || scr_weapon_is_melee(wep)) || can_shoot)
+		) {
+			clicked = true
+		}
+	}
 	
-	if KeyCont.press_fire[index] && (!enoughammo or !enoughrads) {
-		if !enoughammo {
-			if wep == wep_blood_launcher or wep == wep_blood_cannon {
+	if (KeyCont.press_fire[index] && !(_enoughammo && _enoughrads)) {
+		if (!_enoughammo) {
+			if (wep == wep_blood_launcher || wep == wep_blood_cannon) {
 				scrBloodAmmoRefill(wep)
 				snd_play_hit_big(sndBloodHurt, 0.2)
-		        last_hit = wep_sprt[wep]
 		        sleep(40)
 		    }
-			else scrEmpty()
+			else {
+				scrEmpty()
+			}
 		}
-		else if !enoughrads {
-			scrEmptyRads()
-		}
+		else if (!_enoughrads) scrEmptyRads()
 		
 		clicked = false
 	}
 	
-	if scrCheckCanShoot(wep) or infammo {
-		if can_shoot && (clicked or KeyCont.press_fire[index] or (KeyCont.hold_fire[index] && (wep_auto[wep] or race == 7))) {
+	if (scrCheckCanShoot(wep) || infammo) {
+		if (can_shoot && (clicked || KeyCont.press_fire[index]
+			|| (KeyCont.hold_fire[index] && (wep_auto[wep] || race == Race.Steroids)))
+		) {
 	        scrFire(wep)
-			clicked = 0
+			clicked = false
 		}
     }
 }

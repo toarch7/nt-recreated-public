@@ -1,13 +1,12 @@
 event_inherited()
+spr_fade = sprBullet2Disappear
 friction = 0.6
-
 wallbounce = 0
-if instance_exists(Player) {
-    if scr_skill_get(15) wallbounce = 2
-}
+
+damage = 2
+
+if scr_skill_get(mut_shotgun_shoulders) wallbounce = 1
 
 typ = 1
-
-hit_id = -1
-
-bonus = 1
+bonus = true
+alarm[2] = 2

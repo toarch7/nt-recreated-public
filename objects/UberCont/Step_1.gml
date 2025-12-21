@@ -3,19 +3,14 @@
 if want_pause > 0 {
 	want_pause --
 	
-	if !want_pause && instance_exists(Player) && !instance_exists(GenCont) {
+	if want_pause <= 0 && instance_exists(Player) && !instance_exists(GenCont) && !instance_exists(GameOver) {
 	    want_pause = 0
 	
-	    if !bossintro {
-	        scrMakePauseButtons()
-		}
+	    if (!bossintro) scrMakePauseButtons()
 		
-	    with MobileUI {
-			index = -1
-		}
+	    with (MobileUI) index = -1
 		
-	    instance_deactivate_all(1)
-		
+	    instance_deactivate_all(true)
 	    instance_activate_object(BackCont)
 	    instance_activate_object(GameCont)
 	    instance_activate_object(TopCont)
@@ -29,9 +24,7 @@ if want_pause > 0 {
 
 if quit_pause {
 	if !instance_exists(GenCont) && !instance_exists(LevCont) {
-		with MobileUI
-			instance_destroy()
-		
+		with (MobileUI) instance_destroy()
 		scrCreateMobileControls()
 	}
 	

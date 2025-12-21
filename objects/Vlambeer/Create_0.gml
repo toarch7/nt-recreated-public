@@ -90,7 +90,9 @@ else if instance_exists(GameCont) {
 		instance_create(x, y, SpiralCont)
 	}
 	
-    if !instance_exists(Cinematic) && (GameCont.skillpoints > 0 or GameCont.crownpoints > 0 or GameCont.ultrapoints > 0) {
+    if (!instance_exists(Cinematic) && GameCont.tottimer != 0
+		&& (GameCont.skillpoints > 0 || GameCont.crownpoints > 0 || GameCont.ultrapoints > 0)
+	) {
         instance_create(0, 0, BackCont)
         instance_create(x, y, LevCont)
     }
@@ -107,8 +109,14 @@ else {
 	instance_destroy(MusCont)
     instance_create(x, y, MusCont)
 	
-    alarm[0] = 120
+	alarm[0] = 120
     mode = 0
+	
+	if file_exists("no_intro.txt") {
+		mode = 3
+		event_perform(ev_alarm, 0)
+		with (Logo) event_perform(ev_alarm, 1)
+	}
 	
     snd_play(sndVlambeer)
 }

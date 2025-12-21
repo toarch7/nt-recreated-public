@@ -133,8 +133,8 @@
   "size":12.0,
   "styleName":"Medium",
   "textureGroupId":{
-    "name":"rare",
-    "path":"texturegroups/rare",
+    "name":"ui",
+    "path":"texturegroups/ui",
   },
   "TTFName":"",
   "usesSDF":false,

@@ -1,8 +1,13 @@
-gameovertime = 0
+scrLetterbox(true)
 
 text = loc("YOU DID NOT REACH THE NUCLEAR THRONE")
 
-if GameCont.area == 7 && GameCont.subarea == 3 text = loc("YOU ALMOST REACHED THE NUCLEAR THRONE") if GameCont.loops text = loc("THE STRUGGLE CONTINUES")
+if GameCont.area == area_palace && GameCont.subarea == 3 {
+	text = loc("YOU ALMOST REACHED THE NUCLEAR THRONE")
+}
+else if GameCont.loops > 0 {
+	text = loc("THE STRUGGLE CONTINUES")
+}
 
 if GameCont.win {
     if instance_exists(Cinematic) {
@@ -13,41 +18,35 @@ if GameCont.win {
     }
 }
 
-var p = 0
+var _image = 0
 
 repeat 2 {
-    with instance_create(view_xview + view_width / 2, view_yview + view_height / 2 + 58 + p * 32, PauseButton) {
-        image_index = p
+    with instance_create(view_xview_center, view_yview_center + 58 + _image * 32, PauseButton) {
+        image_index = _image++
+		appear = 3 + _image
     }
-
-    p ++
 }
 
-if UberCont.daily_run {
-	with instance_find(PauseButton, 1)
-		sprite_index = sprGameOverResult
+if scrGameIsEventRun() {
+	with (instance_find(PauseButton, 1)) sprite_index = sprGameOverResult
 	
-	if !UberCont.weekly_run {
-	    with instance_find(PauseButton, 0)
-	        instance_destroy()
+	if !scrGameIsWeeklyRun() {
+	    instance_destroy(instance_find(PauseButton, 0))
 	}
-	else with instance_find(PauseButton, 0)
-	    image_index = 1
+	else {
+		with (instance_find(PauseButton, 0)) image_index = 1
+	}
 }
 
-kills = GameCont.kills
-
+gameovertime = 0
+splatimg = 0
 death_pos = 0
-
 offsety = 128
 
 image_speed = 0.4
 
-if instance_exists(Credits) {
-    depth = -102
-}
+instance_destroy(MobileUI)
 
-with MobileUI
-	instance_destroy()
+if (instance_exists(Credits)) depth = -102
 
 file_delete("gamestate.dat")

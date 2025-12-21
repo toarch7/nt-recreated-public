@@ -1,35 +1,16 @@
 /// @description Unlock, version, pause, etc
 
-if draw_unlock {
-    if instance_exists(GenCont) or instance_exists(LevCont) or instance_exists(AchievementSplash) {
-        alarm[1] = 90
-        exit
-    }
-
-    if splatindex != 3 splatindex++
-
-    draw_sprite(sprUnlockPopupSplat, splatindex, view_width, view_height)
-
-    draw_set_halign(fa_right)
-    draw_set_valign(fa_top)
-
-    if splatindex == 3 {
-        draw_text_nt(view_width - 2, view_height - 24, unlock_text)
-    }
-
-    draw_set_halign(fa_left)
-}
-
 if (!instance_exists(Player) or instance_exists(GenCont)) && room == romGame {
 	var menu_credits = instance_exists(Credits) && !instance_exists(GameCont)
 	
     if !instance_exists(MenuOptions) && !instance_exists(DailyList) && !instance_exists(Vlambeer)
 	&& !instance_exists(StatChar) && !instance_exists(CharSelect) && !instance_exists(LevCont)
 	&& !instance_exists(UnlockScreen) && !bossintro && !menu_credits {
-		var offx = 0
+		var offx = is_mobile ? 4 : 0
 		
-		if instance_exists(GameCont) && UberCont.opt_timer
-			offx = string_width(GameCont.time) + 3
+		if instance_exists(GameCont) && UberCont.opt_showtimer {
+			offx = string_width(GameCont.timer_string) + 3
+		}
 		
 		draw_set_font(fntSmall)
 		draw_set_halign(fa_right)
@@ -58,15 +39,37 @@ else if MultiplayerConfig or (global.custom_seed or opt_practice) {
     draw_set_font(fntM1)
 }
 
-if instance_exists(Player) && opt_pausebutton && !instance_exists(Credits) {
-    draw_sprite_ext(sprMobilePauseButton, 0, view_width - 18, 18, 0.7, 0.7, 0, c_white, 0.5)
+if instance_exists(Player) && opt_pausebutton && !instance_exists(Credits) && !want_pause {
+	var _pause_x = view_width - 24, _pause_y = 16
+	
+    draw_sprite_ext(sprMobilePauseButton, 0, _pause_x, _pause_y, 0.75, 0.75, 0, c_white, 0.5)
 
-    for (var touch = 0; touch <= 4; touch ++) {
-        if device_mouse_check_button_released(touch, mb_left) {
-            if point_in_circle(device_mouse_x_to_gui(touch), device_mouse_y_to_gui(touch), view_width - 18, 18, 16)
+    for (var _touch = 0; _touch <= 4; _touch ++) {
+        if device_mouse_check_button_released(_touch, mb_left) {
+			var _mx = device_mouse_x_to_gui(_touch),
+				_my = device_mouse_y_to_gui(_touch)
+			
+            if point_in_circle(_mx, _my, _pause_x, _pause_y, 24) {
                 KeyCont.press_paus[global.index] = true
+			}
         }
     }
+}
+
+if draw_unlock {
+    if (scrGameIsGenerationScreen() || instance_exists(AchievementSplash)) {
+        alarm[1] = 90
+        exit
+    }
+
+	splatindex = approach(splatindex, 3, timescale)
+
+    draw_sprite(sprUnlockPopupSplat, splatindex, view_width, view_height)
+
+    draw_align(fa_right, fa_top)
+	var _height = string_height(string_hash_to_newline(unlock_text))
+    if (splatindex >= 3) draw_text_nt(view_width - 2, view_height - _height - 5, unlock_text)
+    draw_align()
 }
 
 if saving {
@@ -90,8 +93,9 @@ if paused && !want_pause && !instance_exists(CoopController) {
 	if !want_menu && !want_restart && !instance_exists(MenuOptions) {
 	    instance_activate_object(Player)
 		
-	    with TopCont
-			scrDrawHUD()
+		with (TopCont) {
+			scrDrawPlayerHUD(scrPlayerFindLocal())
+		}
 		
 	    instance_deactivate_object(Player)
 	}

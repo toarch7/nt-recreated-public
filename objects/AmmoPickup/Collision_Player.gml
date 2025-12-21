@@ -1,6 +1,3 @@
-if lockstep_stop
-	exit
-
 var _player;
 
 if !instance_is(other, Player) {
@@ -8,9 +5,13 @@ if !instance_is(other, Player) {
 }
 else _player = other.id
 
-with (scrUltraCheck(Race.CoopUltra, 1) ? Player : _player) {
+with (scr_ultra_get(Race.CoopUltra, 1) ? Player : _player) {
 	var _ammo_type = scrAmmoDecideType(id, false),
 		_give_amount = typ_ammo[_ammo_type]
+	
+	if instance_is(self, CursedPickup) {
+		_give_amount = round(_give_amount * 1.5)
+	}
 	
 	//RUSH CROWN
 	if scrCrownCheck(crwn_haste) {

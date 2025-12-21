@@ -37,7 +37,7 @@ if hp > 0 exit
 
 with Player {
     //
-	if scrUltraCheckPlayerRace(id, Race.Chicken, UltraSkill.HarderToKill) {
+	if scr_player_ultra_get(id, Race.Chicken, UltraSkill.HarderToKill) {
         if bleed > 0 bleed = 1
     }
 
@@ -46,9 +46,16 @@ with Player {
     
 	if _lucky_shot && random(10) < 1 {
 		var _ammo_type = irandom_range(Ammo.Bullets, Ammo.NUM_AMMO_TYPES - 1),
-			_ammo_give = round(scrAmmoGetPickupAmount(_ammo_type) / 2) * _lucky_shot
+			_ammo_give = scrAmmoGetPickupAmount(_ammo_type) * _lucky_shot
 		
 		scrPlayerGiveAmmo(id, _ammo_type, _ammo_give, true)
+		
+		with instance_create(x, y, AnimParticle) {
+			sprite_index = sprLuckyShot
+			creator = other.id
+		}
+		
+		snd_play(sndLuckyShotProc)
     }
 
     //
@@ -59,8 +66,6 @@ with Player {
 
         with instance_create(x, y, AnimParticle) {
             sprite_index = sprBloodLust
-            image_speed = 0.4
-
             creator = other.id
         }
 
@@ -77,11 +82,16 @@ with Player {
 		if breload > 0 {
 			breload = max(1, floor(breload * 0.6))
 		}
+		
+		var _extra_count = array_length(extra_weps)
+		for(var i = _extra_count - 1; i >= 0; --i) {
+			extra_weps_reload[i] = max(1, floor(extra_weps_reload[i] * 0.6))
+		}
 	}
 }
 
 if instance_exists(Player) && place_meeting(x, y, Tangle) {
-	repeat scrUltraCheck(Race.Plant, UltraSkill.Killer) {
+	repeat scr_ultra_get(Race.Plant, UltraSkill.Killer) {
 	    instance_create(x, y, Sapling)
 	}
 }

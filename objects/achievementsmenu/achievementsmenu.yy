@@ -33,6 +33,9 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":null,
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"mskButtonAchievements",
+    "path":"sprites/mskButtonAchievements/mskButtonAchievements.yy",
+  },
   "visible":true,
 }

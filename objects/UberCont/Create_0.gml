@@ -40,7 +40,7 @@ scrInit()
 
 tot_time = save_get_value("data", "tot_time", 0)
 checksettings = save_get_value("etc", "checksettings", 0)
-tot_time = save_get_value("data", "tot_time", 0)
+tot_banditkills = save_get_value("data", "tot_banditkills", 0)
 
 xmas = 0
 halloween = 0
@@ -104,7 +104,7 @@ show_leaderboards_menu = false
 show_weekly_results_menu = false
 
 global.lis_walls_visible = ds_list_create()
-global.list_floors_visible = ds_list_create()
+global.lis_floors_visible = ds_list_create()
 
 boss = 0
 bossintro = 0

@@ -1,7 +1,6 @@
 event_inherited()
 
-if instance_exists(MenuOptions) or UberCont.opt_keyboard
-	exit
+if (instance_exists(MenuOptions) || UberCont.opt_keyboard) exit
 
 KeyCont.dis_fire[global.index] = 0
 
@@ -42,12 +41,11 @@ if UberCont.opt_aimbot {
     }
 }
 
-if UberCont.opt_gamepad
-	exit
+if UberCont.opt_gamepad exit
 
 var i = get_nearest_touch(rad)
 
-// reset movement
+// reset attack
 KeyCont.hold_fire[global.index] = 0
 KeyCont.press_fire[global.index] = 0
 KeyCont.release_fire[global.index] = 0
@@ -63,24 +61,26 @@ if !UberCont.opt_aimbot {
         var mx = device_mouse_x_to_gui(index),
 			my = device_mouse_y_to_gui(index)
 
-        var dir = point_direction(x, y, mx, my)
+        dir = point_direction(x, y, mx, my)
         dis = min(rad, point_distance(x, y, mx, my))
 		
         KeyCont.dir_fire[global.index] = dir
-        KeyCont.dis_fire[global.index] = dis / rad
+        KeyCont.dis_fire[global.index] = dis * 2
 
         // note: press & release are swapped intentionally
-		if (dis / rad) > ATTACK_BUTTON_DEADZONE && !UberCont.opt_splitfire {
-			KeyCont.hold_fire[global.index] = 1
+		if ((dis / rad) > ATTACK_BUTTON_DEADZONE && !UberCont.opt_splitfire) {
+			KeyCont.hold_fire[global.index] = true
 			
-	        if device_mouse_check_button_pressed(index, mb_left)
-				KeyCont.release_fire[global.index] = 1
+	        if device_mouse_check_button_pressed(index, mb_left) {
+				KeyCont.release_fire[global.index] = true
+			}
 			
-	        if device_mouse_check_button_released(index, mb_left)
-				KeyCont.press_fire[global.index] = 1
+	        if device_mouse_check_button_released(index, mb_left) {
+				KeyCont.press_fire[global.index] = true
+			}
 		}
 		
-        if !device_mouse_check_button(index, mb_left) or (distance_to_point(mx, my) > rad * 3) {
+        if (!device_mouse_check_button(index, mb_left) || (distance_to_point(mx, my) > rad * 3)) {
             index = -1
         }
 
@@ -91,11 +91,9 @@ if !UberCont.opt_aimbot {
         dis = 0
 
         if !hold {
-            if vdis > 0 {
-                vdis--
-            }
+            if (vdis > 0) vdis -= timescale
         }
-		else hold--
+		else hold --
     }
 }
 else {

@@ -1,11 +1,8 @@
-if !instance_exists(Player) or GameCont.area == 106 exit
-
-var p = instance_exists_var(Player, "is_me", 1)
-
-if !p
-	exit
-
-if snd_is_playing(p.snd_spch) or snd_is_playing(p.snd_thrn) {
-    alarm[1] = 15 exit
+if (GameCont.area != area_hq) with (Player) {
+	if snd_is_playing(snd_spch) || snd_is_playing(snd_thrn) {
+	    other.alarm[1] = 15
+		break
+	}
+	
+	snd_play(snd_spch)
 }
-else snd_play(p.snd_spch)

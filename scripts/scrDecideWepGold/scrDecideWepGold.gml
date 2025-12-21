@@ -1,22 +1,25 @@
-function scrDecideWepGold(argument0) {
-	var p = instance_nearest(x, y, Player)
+function scrDecideWepGold() {
+	var _player = instance_nearest(x, y, Player), _wep;
+    if !instance_exists(_player) exit
 	
-    if !instance_exists(p) {
-        exit
-    }
-
-    if GameCont.race == 8 {
-        argument0 += 1
-    }
-
     if GameCont.loops {
-        do wep = rng_choose(3, 98, 99, 100, 101, 102, 103)
-        until((wep != p.wep and wep != p.bwep) or p.race == 7)
-    } else {
-        do wep = rng_choose(3, 40, 41, 42, 43, 44, 45)
-        until((wep != p.wep and wep != p.bwep) or p.race == 7)
+        do {
+			_wep = rng_choose(RNGStates.WeaponDrops,
+				wep_golden_plasma_gun, wep_golden_slugger, wep_golden_splinter_gun,
+				wep_golden_screwdriver, wep_golden_bazooka, wep_golden_assault_rifle)
+		}
+		until (_player.race == Race.Steroids || !scrPlayerHasWeapon(_player, _wep))
     }
-
-
-
+	else {
+        do {
+			_wep = rng_choose(RNGStates.WeaponDrops,
+				wep_golden_wrench, wep_golden_machinegun, wep_golden_shotgun,
+				wep_golden_crossbow, wep_golden_grenade_launcher, wep_golden_laser_pistol)
+		}
+		until (_player.race == Race.Steroids || !scrPlayerHasWeapon(_player, _wep))
+    }
+	
+	if (instance_is(self, chestprop) || instance_is(self, WepPickup)) wep = _wep
+	
+	return _wep
 }

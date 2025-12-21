@@ -21,3 +21,4 @@ gunangle = random_angle
 alarm[1] = 30 + random(90)
 
 spr_shadow_y = 4
+hitid = HitId.CursedCrystal

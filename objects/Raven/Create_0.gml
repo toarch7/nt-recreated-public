@@ -22,3 +22,5 @@ wkick = 0
 ammo = 3
 z = 0
 nofly = 30
+
+hitid = HitId.Raven

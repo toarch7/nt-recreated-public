@@ -1,9 +1,11 @@
-if GameCont.loops alarm[0] = max(1, 12 - GameCont.loops)
+if GameCont.loops > 0 {
+	alarm[0] = max(1, 12 - GameCont.loops)
+}
 
 with instance_create(x, y, EnemyBullet1) {
     motion_add(other.direction, other.speed + 2)
     image_angle = direction
-    creator = other.id
+    creator = other.creator
     team = other.team
-    hit_id = sprScrapBossIdle
+    hitid = HitId.BigDog
 }

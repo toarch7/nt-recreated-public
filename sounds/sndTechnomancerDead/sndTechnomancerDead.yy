@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 6.01675,
+  "duration": 6.011769,
   "exportDir": "",
   "name": "sndTechnomancerDead",
   "parent": {

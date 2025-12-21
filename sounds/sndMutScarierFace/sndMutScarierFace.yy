@@ -10,7 +10,7 @@
   "compression": 2,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 1.981009,
+  "duration": 1.9760318,
   "exportDir": "",
   "name": "sndMutScarierFace",
   "parent": {

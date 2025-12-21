@@ -15,7 +15,6 @@ spr_fire = sprBanditBossFire
 
 event_inherited()
 
-
 snd_hurt = sndBigBanditHit
 snd_dead = sndBigBanditDie
 
@@ -31,7 +30,8 @@ intro = 0
 wkick = 0
 
 scrTarget()
-if target != -1 gunangle = mcr_target_direction
+
+if instance_exists(target) gunangle = mcr_target_direction
 
 sndhalfhp = 0
 sndtaunt = 0
@@ -39,3 +39,5 @@ tauntdelay = 0
 
 spr_shadow = shd32
 spr_shadow_y = 4
+
+hitid = HitId.BigBandit

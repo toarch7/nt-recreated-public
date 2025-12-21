@@ -1,0 +1,26 @@
+{
+  "$GMSound": "v2",
+  "%Name": "sndCuzOasisRinger",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
+  },
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 2,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 0.5150113,
+  "exportDir": "",
+  "name": "sndCuzOasisRinger",
+  "parent": {
+    "name": "Cuz",
+    "path": "folders/Sounds/Cuz.yy"
+  },
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndCuzOasisRinger.wav",
+  "volume": 1
+}

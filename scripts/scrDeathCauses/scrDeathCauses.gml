@@ -30,6 +30,7 @@ enum HitId {
 	Wolf,
 	SnowTank,
 	LilHunter,
+	LilHunterDie,
 	Freak,
 	Explofreak,
 	Rhinofreak,
@@ -93,6 +94,7 @@ enum HitId {
 	EliteGrunt,
 	BloodGamble,
 	EliteShielder,
+	EliteShielderShield,
 	EliteInspector,
 	Captain,
 	Van,
@@ -109,6 +111,9 @@ enum HitId {
 	OasisBoss,
 	PopoExplosion,
 	Player,
+	PlayerRevive,
+	WeaponMimic,
+	GunGod,
 	NUM_HIT_IDS
 }
 
@@ -140,6 +145,7 @@ function scrDeathCauses() {
     scrDeathCauseDefine(HitId.Wolf, sprWolfIdle, "WOLF")
     scrDeathCauseDefine(HitId.SnowTank, sprSnowTankIdle, "SNOWTANK")
     scrDeathCauseDefine(HitId.LilHunter, sprLilHunter, "LIL HUNTER")
+    scrDeathCauseDefine(HitId.LilHunterDie, sprLilHunterHurt, "LIL HUNTER'S EXPLOSION")
     scrDeathCauseDefine(HitId.Freak, sprFreak1Idle, "FREAK")
     scrDeathCauseDefine(HitId.Explofreak, sprExploFreakIdle, "EXPLOFREAK")
     scrDeathCauseDefine(HitId.Rhinofreak, sprRhinoFreakIdle, "RHINOFREAK")
@@ -169,7 +175,7 @@ function scrDeathCauses() {
     scrDeathCauseDefine(HitId.Explosion, sprExplosion, "EXPLOSION")
     scrDeathCauseDefine(HitId.SmallExplosion, sprSmallExplosion, "SMALL EXPLOSION")
     scrDeathCauseDefine(HitId.FireTrap, sprTrapGameover, "FIRE TRAP")
-    scrDeathCauseDefine(HitId.Shield, sprShielderIdle, "SHIELD")
+    scrDeathCauseDefine(HitId.Shield, sprShielderShieldAppear, "SHIELD")
     scrDeathCauseDefine(HitId.Toxin, sprToxicGas, "TOXIN")
     scrDeathCauseDefine(HitId.Horror, sprEnemyHorrorIdle, "HORROR")
     scrDeathCauseDefine(HitId.Barrel, sprBarrel, "BARREL")
@@ -201,8 +207,9 @@ function scrDeathCauses() {
     scrDeathCauseDefine(HitId.CursedAmmoPickup, sprCursedAmmo, "CURSED AMMO PICKUP")
     scrDeathCauseDefine(HitId.UnderwaterLightning, sprLightningDeath, "UNDERWATER LIGHTNING")
     scrDeathCauseDefine(HitId.EliteGrunt, sprEliteGruntIdle, "ELITE GRUNT")
-    scrDeathCauseDefine(HitId.BloodGamble, sprBloodGamble, "BLOOD GAMBLE")
+    scrDeathCauseDefine(HitId.BloodGamble, sprKillsIcon, "BLOOD GAMBLE")
     scrDeathCauseDefine(HitId.EliteShielder, sprEliteShielderIdle, "ELITE SHIELDER")
+    scrDeathCauseDefine(HitId.EliteShielderShield, sprEliteShielderShieldAppear, "ELITE SHIELDER SHIELD")
     scrDeathCauseDefine(HitId.EliteInspector, sprEliteInspectorIdle, "ELITE INSPECTOR")
     scrDeathCauseDefine(HitId.Captain, sprLastIdle, "CAPTAIN")
     scrDeathCauseDefine(HitId.Van, sprVanDrive, "VAN")
@@ -219,8 +226,10 @@ function scrDeathCauses() {
     scrDeathCauseDefine(HitId.OasisBoss, sprBigFishIdle, "OASIS BOSS")
     scrDeathCauseDefine(HitId.PopoExplosion, sprPopoExplo, "I.D.P.D. EXPLOSION")
     scrDeathCauseDefine(HitId.Player, sprMutant1Idle, "PLAYER")
+    scrDeathCauseDefine(HitId.PlayerRevive, sprMutant1Hurt, "REVIVE")
+    scrDeathCauseDefine(HitId.WeaponMimic, sprWepMimicFire, "WEAPON MIMIC")
+    scrDeathCauseDefine(HitId.GunGod, sprYVBossIdle, "GUN GOD")
 }
-
 
 /// @function scrDeathCauseDefine
 /// @param {Enum.HitId} id
@@ -233,13 +242,28 @@ function scrDeathCauseDefine(_id, _sprite, _name) {
 /// @function scrDeathCauseGetSprite
 /// @param {Real|Array} hit_id
 function scrDeathCauseGetSprite(_cause) {
-	if (is_array(_cause)) return array_last(_cause)
-	return deathcause_types[_cause][0]
+	if (is_array(_cause)) {
+		return array_first(_cause)
+	}
+	if (scr_death_cause_is_valid(_cause)) {
+		return deathcause_types[_cause][0]
+	}
+	return undefined
 }
 
 /// @function scrDeathCauseGetName
 /// @param {Real|Array} hit_id
 function scrDeathCauseGetName(_cause) {
-	if (is_array(_cause)) return array_first(_cause)
-	return deathcause_types[_cause][1]
+	if (is_array(_cause)) {
+		return array_last(_cause)
+	}
+	if (scr_death_cause_is_valid(_cause)) {
+		return deathcause_types[_cause][1]
+	}
+	return undefined
+}
+
+function scr_death_cause_is_valid(_cause) {
+	gml_pragma("forceinline")
+	return is_array(_cause) || (is_numeric(_cause) && _cause > 0 && _cause < HitId.NUM_HIT_IDS)
 }

@@ -1,4 +1,4 @@
-# Generated at Thu Dec 11 2025 01:43:23 GMT+0300 (Москва, стандартное время)
+# Generated at Sun Dec 21 2025 02:50:25 GMT+0300 (Москва, стандартное время)
 #
 # This file excludes all image assets from the repo that are unallowed to be used.
 # The only assets that are present here are the ones exclusive to NTM.
@@ -209,10 +209,30 @@ sndCursedPickupDisappear/sndCursedPickupDisappear.wav
 sndCursedReminder/sndCursedReminder.wav
 sndCuzBye/sndCuzBye.wav
 sndCuzCry/sndCuzCry.ogg
+sndCuzCryAttack/sndCuzCryAttack.wav
+sndCuzCryAttackNoAmmo/sndCuzCryAttackNoAmmo.wav
+sndCuzCryAttackUltraB/sndCuzCryAttackUltraB.wav
+sndCuzCryBonus1/sndCuzCryBonus1.ogg
+sndCuzCryBonus10/sndCuzCryBonus10.ogg
+sndCuzCryBonus2/sndCuzCryBonus2.ogg
+sndCuzCryBonus3/sndCuzCryBonus3.ogg
+sndCuzCryBonus4/sndCuzCryBonus4.ogg
+sndCuzCryBonus5/sndCuzCryBonus5.ogg
+sndCuzCryBonus6/sndCuzCryBonus6.ogg
+sndCuzCryBonus7/sndCuzCryBonus7.ogg
+sndCuzCryBonus8/sndCuzCryBonus8.ogg
+sndCuzCryBonus9/sndCuzCryBonus9.ogg
+sndCuzCryNew/sndCuzCryNew.ogg
 sndCuzGreet/sndCuzGreet.wav
+sndCuzGreetOther/sndCuzGreetOther.ogg
+sndCuzGreetYV/sndCuzGreetYV.ogg
 sndCuzHorn/sndCuzHorn.wav
+sndCuzOasisRinger/sndCuzOasisRinger.wav
 sndCuzOpen/sndCuzOpen.wav
 sndCuzOutaway/sndCuzOutaway.wav
+sndCuzRinger/sndCuzRinger.wav
+sndCuzUltraA/sndCuzUltraA.wav
+sndCuzUltraB/sndCuzUltraB.wav
 sndCuzWep/sndCuzWep.wav
 sndDevastator/sndDevastator.wav
 sndDevastatorExplo/sndDevastatorExplo.wav
@@ -233,6 +253,13 @@ sndDoubleShotgun/sndDoubleShotgun.wav
 sndDragonLoop/sndDragonLoop.wav
 sndDragonStart/sndDragonStart.wav
 sndDragonStop/sndDragonStop.wav
+sndElectricGuitar/sndElectricGuitar.wav
+sndElectricGuitarHit1/sndElectricGuitarHit1.wav
+sndElectricGuitarHit2/sndElectricGuitarHit2.wav
+sndElectricGuitarHit3/sndElectricGuitarHit3.wav
+sndElectricGuitarHit4/sndElectricGuitarHit4.wav
+sndElectricGuitarHit5/sndElectricGuitarHit5.wav
+sndElectricGuitarHit6/sndElectricGuitarHit6.wav
 sndEliteGruntDead/sndEliteGruntDead.wav
 sndEliteGruntEnter/sndEliteGruntEnter.wav
 sndEliteGruntHurt/sndEliteGruntHurt.wav
@@ -485,6 +512,10 @@ sndGuitarHit5/sndGuitarHit5.wav
 sndGuitarHit6/sndGuitarHit6.wav
 sndGuitarHit7/sndGuitarHit7.wav
 sndGuitarPickup/sndGuitarPickup.wav
+sndGunGodCoop/sndGunGodCoop.wav
+sndGunGodIntro/sndGunGodIntro.wav
+sndGunGodLowHP/sndGunGodLowHP.wav
+sndGunGodTaunt/sndGunGodTaunt.wav
 sndGunGun/sndGunGun.wav
 sndHalloweenWolf/sndHalloweenWolf.ogg
 sndHammer/sndHammer.wav
@@ -736,11 +767,16 @@ sndMutant15Thrn/sndMutant15Thrn.ogg
 sndMutant15Valt/sndMutant15Valt.wav
 sndMutant15Wrld/sndMutant15Wrld.wav
 sndMutant16Chst/sndMutant16Chst.wav
+sndMutant16Cnfm/sndMutant16Cnfm.wav
 sndMutant16Cptn/sndMutant16Cptn.wav
+sndMutant16Crwn/sndMutant16Crwn.wav
 sndMutant16Dead/sndMutant16Dead.wav
 sndMutant16Hurt/sndMutant16Hurt.wav
 sndMutant16IDPD/sndMutant16IDPD.wav
 sndMutant16LowA/sndMutant16LowA.wav
+sndMutant16LowH/sndMutant16LowH.wav
+sndMutant16Slct/sndMutant16Slct.wav
+sndMutant16Spch/sndMutant16Spch.wav
 sndMutant16Thrn/sndMutant16Thrn.ogg
 sndMutant16Valt/sndMutant16Valt.wav
 sndMutant16Wrld/sndMutant16Wrld.wav
@@ -1135,6 +1171,7 @@ sndSuperSplinterGun/sndSuperSplinterGun.wav
 sndSwapBow/sndSwapBow.wav
 sndSwapCursed/sndSwapCursed.wav
 sndSwapDragon/sndSwapDragon.wav
+sndSwapElectricGuitar/sndSwapElectricGuitar.wav
 sndSwapEnergy/sndSwapEnergy.wav
 sndSwapExplosive/sndSwapExplosive.wav
 sndSwapFlame/sndSwapFlame.wav
@@ -1204,5 +1241,8 @@ sndWolfDead/sndWolfDead.wav
 sndWolfHurt/sndWolfHurt.wav
 sndWolfRoll/sndWolfRoll.wav
 sndWrench/sndWrench.wav
+sndYVCuzCoop1/sndYVCuzCoop1.wav
+sndYVCuzCoop2/sndYVCuzCoop2.wav
+sndYVCuzCoop3/sndYVCuzCoop3.wav
 sndYVUltraA/sndYVUltraA.ogg
 sndYVUltraB/sndYVUltraB.ogg

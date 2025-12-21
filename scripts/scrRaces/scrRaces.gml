@@ -107,10 +107,12 @@ function scr_race_get_sound(_race, _sound_name, _default = -1) {
 
 /// @function scr_race_get_skin_subimage
 /// @param {Real|Enum.Race} race
-/// @param skin
+/// @param {Real|Enum.SkinLetter} skin
 function scr_race_get_skin_subimage(_race, _skin) {
-	if (_skin >= 2) return (_skin * 16) + (_race - 1)
-	return _race > 0 ? ((_race - 1) * 2 + _skin) : -1
+	gml_pragma("forceinline")
+	return ((_race > 0) ?
+		((_skin < 2) ? (_skin + (_race - 1) * 2)
+					 : (_skin * 16 + (_race - 1))) : -1)
 }
 
 /// @function scr_race_get_skin_letter
@@ -253,7 +255,7 @@ function scrRaceGetPassiveSkillDescription(_race) {
         case Race.BigDog: return "MORE @rHP@w#SPIN ATTACK"
         case Race.Skeleton: return "LESS HP, SPEED, AND ACCURACY"
         case Race.Frog: return "CAN'T STAND STILL#TOXIC IMMUNITY"
-        case Race.Cuz: return "LIL BUDDY"
+        case Race.Cuz: return "3 WEAPONS"
     }
 
     return ""
@@ -279,7 +281,7 @@ function scrRaceGetActiveSkillDescription(_race) {
         case Race.BigDog: return "MISSILES"
         case Race.Skeleton: return "BLOOD GAMBLE"
         case Race.Frog: return "FROG ACTIVE"
-        case Race.Cuz: return "GOT UR BACK"
+        case Race.Cuz: return "@bCRY"
     }
 
     return ""
@@ -304,7 +306,7 @@ function scrRaceGetThroneButtDescription(_race) {
         case Race.BigDog: return "FASTER ROCKETS"
         case Race.Skeleton: return "BETTER ODDS"
         case Race.Frog: return "TOXIC SPREADS FASTER"
-        case Race.Cuz: return "PLACEHOLDER"
+        case Race.Cuz: return "CRY REFILLS FULLY WHEN HIT"
     }
 
     return ""
@@ -402,7 +404,7 @@ function scrRaceGetUnlockCauseText(_race) {
 		case Race.BigDog: return "BIG DOG DEFEATED"
 		case Race.Skeleton: return "FOR REACHING LEVEL ULTRA AS SKELETON"
 		case Race.Frog: return "FOR PLAYING THE FROG"
-		case Race.Cuz: return "I WISH I KNEW"
+		case Race.Cuz: return "FOR REACHING CRIB"
 	}
 	
 	return ""
@@ -413,8 +415,8 @@ function scrRaceGetUnlockCauseText(_race) {
 /// @param skin_id
 function scrRaceGetSkinUnlockCauseText(_race, _skin_id) {
 	
-	switch scr_race_get_skin_letter(_skin_id) {
-		case "B":
+	switch _skin_id {
+		case SkinLetter.B:
 			switch _race {
 				case Race.Fish: return "FOR LOOPING WITH EVERY CHARACTER"
 				case Race.Crystal: return "FOR REACHING 4-?"
@@ -428,6 +430,24 @@ function scrRaceGetSkinUnlockCauseText(_race, _skin_id) {
 				case Race.Rebel: return "FOR DEFEATING MOM"
 				case Race.Horror: return "FOR DEFEATING HYPER CRYSTAL"
 				case Race.Rogue: return "FOR REACHING THE NUCLEAR THRONE"
+				case Race.Cuz: return "FOR CARRYING#3 GOLD WEAPONS"
+			}
+		break
+		case SkinLetter.C:
+			switch _race {
+				case Race.Fish: return "FOR GETTING ALL B-SKINS"
+				case Race.Crystal: return "FOR SURVIVING#A LOT OF DAMAGE"
+				case Race.Eyes: return "FOR REACHING THE THRONE#WITHOUT SHOOTING"
+				case Race.Melting: return "FOR HAVING 12 MUTATIONS"
+				case Race.Plant: return "FOR GATHERING 3 BLOODS"
+				case Race.Venuz: return "FOR DEFEATING Y.V."
+				case Race.Steroids: return "FOR REACHING THE THRONE#WITHOUT PICKING UP#ANY WEAPONS"
+				case Race.Robot: return "FOR EATING A RUSTY REVOLVER"
+				case Race.Chicken: return "FOR REACHING THE THRONE#WITH A BLACK SWORD"
+				case Race.Rebel: return "FOR DEFEATING 1000 BANDITS"
+				case Race.Horror: return "FOR REACHING HQ#WITHOUT REACHING#LEVEL @(g)ULTRA"
+				case Race.Rogue: return "FOR NOT DEFEATING#LIL HUNTER"
+				case Race.Cuz: return "FOR CARRYING#6 CURSED WEAPONS"
 			}
 		break
 	}
@@ -454,9 +474,9 @@ function scrRaceGetMaxSkinCount(_race) {
 /// @param {Real|Enum.Race} race_id
 /// @param count_in_unlockable=true
 function scrRaceIsHidden(_race, _count_in_unlockable = true) {
-	if _race == Race.BigDog || _race == Race.Cuz
-	|| (_count_in_unlockable && (_race == Race.Frog || _race == Race.Skeleton))
+	if _race == Race.BigDog || (_count_in_unlockable && (_race == Race.Frog || _race == Race.Skeleton)) {
 		return true
+	}
 	
 	return false
 }
@@ -502,4 +522,32 @@ function scrRaceUnlockSkin(_race, _skin_id) {
 	}
 }
 
+/// @function scrRaceGetUltraSkillMax
+/// @param {Real|Enum.Race} race
+function scrRaceGetUltraSkillMax(_race) {
+	return _race == Race.Horror ? 3 : 2
+}
 
+/// @function scrRaceGetUltraSkillName
+/// @param {real|Enum.Race} race
+/// @param {Enum.UltraSkill} ultra
+function scrRaceGetUltraSkillName(_race, _ultra) {
+	gml_pragma("forceinline")
+	return ultr_name[_race, _ultra]
+}
+
+/// @function scrRaceGetUltraSkillText
+/// @param {real|Enum.Race} race
+/// @param {Enum.UltraSkill} ultra
+function scrRaceGetUltraSkillText(_race, _ultra) {
+	gml_pragma("forceinline")
+	return ultr_text[_race, _ultra]
+}
+
+/// @function scrRaceGetUltraSkillSound
+/// @param {real|Enum.Race} race
+/// @param {Enum.UltraSkill} ultra
+function scrRaceGetUltraSkillSound(_race, _ultra) {
+	gml_pragma("forceinline")
+	return ultr_msnd[_race, _ultra]
+}

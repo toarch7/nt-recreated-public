@@ -26,11 +26,10 @@ function scrDrop(_pickup_chance, _weapon_chance) {
 	
     if (scr_skill_get(mut_rabbit_paw)) {
 		_paw_chance = 1 + scr_skill_get(mut_rabbit_paw) * 0.6
-		_weapon_chance *= 2.5
 	}
 	
 	with (_player) {
-		if scrUltraCheck(Race.Fish, UltraSkill.Confiscate) && random(1) < 0.1 {
+		if scr_ultra_get(Race.Fish, UltraSkill.Confiscate) && random(1) < 0.2 {
 			_confiscate = true
 		}
 		
@@ -58,7 +57,7 @@ function scrDrop(_pickup_chance, _weapon_chance) {
 	
 	if (_paw_chance != 0) _need += _paw_chance
 	
-    if random(100) < _pickup_chance {
+    if _pickup_chance > 0 && random(100) < _pickup_chance {
 		var _advantage = (scrGameIsHardmode() ? 1.5 : 2)
 		
 		// Health
@@ -73,10 +72,12 @@ function scrDrop(_pickup_chance, _weapon_chance) {
 			instance_create(x + orandom(2), y + orandom(2), _object)
 			_anything_dropped = true
 		}
+		
+		if (_paw_chance != 0 && _anything_dropped) instance_create(x, y, RabbitPaw)
 	}
 	// Drop weapons
 	else if _weapon_chance > 0 {
-        if random(100) < (_weapon_chance * _paw_chance) {
+        if random(100) < _weapon_chance {
             //drop weps
 			if _confiscate {
 				instance_create(x + orandom(2), y + orandom(2), WeaponChest)

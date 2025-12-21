@@ -16,7 +16,7 @@ else if appear
 if !wait && available {
 	var press = mouse_ui_clicked()
 	
-	if mouse_hover {
+	if mouse_ui_hovered(id, false) {
 		if !is_gamepad() {
 			if !hover {
 				snd_play(sndHover)

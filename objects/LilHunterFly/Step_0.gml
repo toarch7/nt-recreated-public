@@ -1,11 +1,29 @@
-if lockstep_stop
-	exit
-
 if sprite_index == sprLilHunterLift {
     z -= 8
 	
     if (y + z) < (view_yview - 64) && (-z) > 160 {
-        if instance_exists(target) {
+		if !scr_check_enemies(instance_number(object_index)) {
+			var _x = x, _y = y;
+			
+			with (instance_nearest(x, y, Floor)) {
+				_x = bbox_center_x
+				_y = bbox_center_y
+			}
+			
+			instance_create(_x, _y, IDPDSpawn)
+			
+			if (scrPlayerCountRace(Race.Rogue, true)) {
+				scrRaceUnlockSkin(Race.Rogue, SkinLetter.C)
+			}
+			
+			var _snd = custom_sound_check(musBoss3)
+			if (audio_is_playing(_snd)) {
+				audio_sound_gain(_snd, 0, 2000)
+			}
+			
+			instance_destroy(id, false)
+		}
+        else if instance_exists(target) {
             x = target.x
             y = target.y
 			
@@ -43,7 +61,7 @@ if sprite_index == sprLilHunterLand {
             firang += 4.5
 			
             with instance_create(x, y, TrapFire) {
-                hit_id = other.spr_idle
+                hitid = other.hitid
                 sprite_index = sprFireLilHunter
                 motion_add(other.firang, 2 + random(0.2))
                 move_contact_solid(direction, 12)

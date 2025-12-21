@@ -1,7 +1,10 @@
 function scrCampfireMenuCreate(_dead_mode = false) {
+	var _x = _dead_mode ? 10016 : 64,
+		_y = _dead_mode ? 10016 : 64
+	
 	#region Create usual suspects
 	
-	with instance_create(64, 64, Campfire) {
+	with instance_create(_x, _y, Campfire) {
 		with (Menu) char[0] = other.id
 		instance_create(x, y - 32, LogMenu)
 		
@@ -19,7 +22,7 @@ function scrCampfireMenuCreate(_dead_mode = false) {
 		_bigdog_instance = noone
 	
 	for(var _race_id = Race.Plant; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
-		if (_race_id == Race.BigDog && !UberCont.april_fools) continue
+		if (_race_id == Race.BigDog && _dead_mode) continue
 		
 		with scrCampfireMenuCreateCharacter(_race_id) {
 			if _race_id == Race.Chicken {
@@ -32,17 +35,28 @@ function scrCampfireMenuCreate(_dead_mode = false) {
 	}
 	
 	// Shuffle them around
-	with (CampChar) {
+	var _count = instance_number(CampChar)
+	for(var i = 0; i < _count; ++i) with (instance_find(CampChar, i)) {
 		if (!randomize_position) continue
+		
+		var _iteration = 0
 		
 		do {
 			x = xstart
 			y = ystart
 			
-			var _distance = 32 + random(32) + random(64) * random(1)
+			var _distance = 32 + _iteration * 2 + random(32) + random(64) * random(1)
+			
+			if (_dead_mode) _distance *= 2
+			
 			move_contact_solid(random_angle, _distance)
+			
+			if ((++_iteration) >= 50) {
+				if (_dead_mode || _iteration >= 100) break
+				instance_create(x, y, PortalClear)
+			}
 		}
-		until distance_to_object(CampChar) >= 32 && (race != Race.Chicken || (!collision_circle(x, y - 32, 16, CampChar, 1, 1)))
+		until (distance_to_object(CampChar) >= 32 && (race != Race.Chicken || (!collision_circle(x, y - 32, 16, CampChar, true, true))))
 		
 		x = floor(x)
 		y = floor(y)
@@ -53,6 +67,7 @@ function scrCampfireMenuCreate(_dead_mode = false) {
 	
 	// Give chicken her tv
 	with (_chicken_instance) {
+		if (_dead_mode) break
 		with instance_create(x + orandom(2), y + orandom(4) - 32, TV) {
 	        with instance_create(x, y + 16, PortalClear) image_rescale(0.5)
 	        with instance_create(x, y, PortalClear) image_rescale(0.5)
@@ -66,6 +81,8 @@ function scrCampfireMenuCreate(_dead_mode = false) {
 		spr_to = sprScrapBossIntro
 		spr_from = sprScrapBossSleepHurt
 		spr_slct = sprScrapBossSleep
+		spr_dead = sprScrapBossDead
+		spr_shadow = shd96
 		
 		instance_create(x - 32, y, PortalClear)
 		instance_create(x + 32, y, PortalClear)
@@ -82,9 +99,10 @@ function scrCampfireMenuCreate(_dead_mode = false) {
 			with instance_create(x, y, Corpse) {
 				sprite_index = other.spr_dead
 				image_index = image_number - 1
+				image_xscale = choose(-1, 1)
 				image_speed = 0
 				
-				move_contact_solid(random_angle, true)
+				move_contact_solid(random_angle, 64 + irandom(64))
 			}
 			
 			instance_destroy()
@@ -92,8 +110,10 @@ function scrCampfireMenuCreate(_dead_mode = false) {
 		
 		with (Campfire) {
 			instance_create(x, y, CampfireOff)
-			instance_destroy()
+			instance_destroy(id, false)
 		}
+		
+		instance_destroy(LogMenu, false)
 	}
 	
 	#endregion
@@ -153,16 +173,42 @@ function scrMenuPrepareWeeklyLoadout() {
 	assert(is_numeric(_weekly_data) && ds_exists(_weekly_data, ds_type_map))
 	
 	//
-	struct_foreach(global.__playerinstance_list, function(_, _inst) {
-		if is_undefined(_inst) exit
+	array_foreach(global.__playerinstance_list, function(_inst) {
+		if (is_undefined(_inst)) exit
 		
-		var _weekly_data = UberCont.weekly_data
+		var _weekly_data = UberCont.weekly_data,
+			_seed = (_weekly_data[? "seed"] ?? global.seed)
 		
-		with _inst {
-			race = _weekly_data[? "char"] ?? Race.Fish
-		    cwep = _weekly_data[? "startwep"] ?? wep_revolver
-		    bwep = _weekly_data[? "bstartwep"] ?? wep_none
-		    skin = _weekly_data[? "bskin"] ?? 0
+		random_set_seed(_seed)
+		
+		with (_inst) {
+			race = _weekly_data[? "char"] ?? Race.Random
+		    skin = _weekly_data[? "bskin"] ?? SkinLetter.A
+		    cwep = _weekly_data[? "startwep"] ?? -1
+		    bwep = _weekly_data[? "bstartwep"] ?? -1
+			
+			if (race == Race.Random) {
+				for(var i = Race.Fish; i < Race.NUM_ALL_RACE_TYPES; ++i) {
+					race = (i + (_seed % rng_m)) % Race.NUM_ALL_RACE_TYPES
+					if (!scrRaceIsHidden(race)) break
+				}
+			}
+			
+			var _max_skins = scrRaceGetMaxSkinCount(race)
+			if (skin < 0 || skin >= _max_skins) {
+				skin = _max_skins ? irandom(_max_skins - 1) : SkinLetter.A
+			}
+			
+			if (!scr_weapon_is_valid(cwep)) {
+				cwep = scrWeeklyWeaponDecide()
+				
+				if (!scr_weapon_is_valid(bwep) && random(1) < 0.4) {
+					bwep = scrWeeklyWeaponDecide()
+				}
+			}
+			else if (!scr_weapon_is_valid(bwep)) {
+				bwep = wep_none
+			}
 			
 			start_curse = _weekly_data[? "startcursed"] ?? false
 			start_bcurse = _weekly_data[? "bstartcursed"] ?? false
@@ -170,8 +216,14 @@ function scrMenuPrepareWeeklyLoadout() {
 	})
 	
 	//
-	var _crown = _weekly_data[? "crown"] ?? crwn_none
-	scrCrownSetCurrent(_crown, true)
+	var _crown = _weekly_data[? "crown"] ?? crwn_random
+	
+	if (_crown == crwn_random) {
+		scrCrownSetCurrent(irandom_range(1, crownmax), true)
+	}
+	else if (scr_crown_is_valid(_crown)) {
+		scrCrownSetCurrent(_crown, true)
+	}
 	
 	//
 	var _inst = scr_playerinstance_find(global.index)
@@ -185,6 +237,10 @@ function scrMenuPrepareWeeklyLoadout() {
 		}
 		
 		instance_destroy()
+	}
+	
+	with (GoButton) {
+		if (sprite_index == sprGoButtonSymbolic) instance_destroy()
 	}
 	
     weekly = true
@@ -248,6 +304,7 @@ function scrCampfireMenuDrawRacePortrait(_x, _y, _index, _race, _skin, _halign, 
 		if !is_undefined(_pinst) && !instance_exists(Menu) {
 			if _pinst.is_race(Race.Chicken) && _pinst.hp <= 0 {
 				_portrait_sprite = sprBigPortraitChickenHeadless
+				_portrait_subimage = _pinst.skin
 			}
 			else if _pinst.is_race(Race.Rebel) && _pinst.skin == 1 && GameCont.area == area_city {
 				_portrait_sprite = sprBigPortraitRebelBHooded
@@ -425,13 +482,13 @@ function scrCampfireMenuSelectionChange(_player_index, _race) {
 				_pinst.cwep = scrRaceGetStarterWeapon(_race)
 		    }
 			else if !scrGameIsWeeklyRun() {
-				_pinst.cwep = scr_loadout_race_get_stored_weapon(_race)
+				_pinst.cwep = scr_loadout_race_get_start_weapon(_race)
 		    }
 			
-			with GoButton {
-				alarm[0] = 30
-		    }
-		
+			if is_touch(_player_index) {
+				with (GoButton) alarm[0] = 30
+			}
+			
 			if !scrGameIsEventRun() && global.is_server {
 				var _start_crown = scr_loadout_race_get_start_crown(_race)
 				
@@ -452,6 +509,25 @@ function scrCampfireMenuSelectionChange(_player_index, _race) {
 /// @function scrMenuDrawLoadout
 /// @param playerinstance
 function scrMenuDrawLoadout(_pinst) {
+	static __update_tooltip_display = function(_tooltip, _tooltip_x, _tooltip_y) {
+		with (Menu) {
+			if (is_string(_tooltip)) {
+				if (tooltip != _tooltip) {
+					tooltip = _tooltip
+					tooltip_pop = 1
+				}
+				else if (tooltip_pop) {
+					tooltip_pop --
+				}
+				
+				scrDrawTooltip(_tooltip_x, _tooltip_y + tooltip_pop, _tooltip, true)
+			}
+			else if (!is_undefined(tooltip)) {
+				tooltip = undefined
+				tooltip_pop = 0
+			}
+		}
+	}
 	
 	var _w = gui_w,
 		_h = gui_h,
@@ -463,7 +539,7 @@ function scrMenuDrawLoadout(_pinst) {
 		_race = _pinst.get_race(),
 		_skin_current = _pinst.get_skin(),
 		
-		_is_mobile = is_mobile,
+		_is_touch = is_touch(),
 		
 		_crown_count = crownmax + 1,
 		_crown_current = scrCrownGetCurrent(),
@@ -498,42 +574,21 @@ function scrMenuDrawLoadout(_pinst) {
 			_splat_y - _splat_open_height div 2,
 			_splat_x, _splat_y),
 		
-		_fullview = (loadout_frame >= 2)
+		_fullview = (loadout_frame >= 2),
+		_tooltip = undefined,
+		_tooltip_x = 0,
+		_tooltip_y = 0,
+		
+		_primary_weapon = _pinst.cwep,
+		_secondary_weapon = _pinst.bwep
 	
-	//sndNoSelect sndMenuCrown
+	if _race == Race.Steroids && !scr_weapon_is_valid(_secondary_weapon) {
+		_secondary_weapon = wep_revolver
+	}
 	
 	if loadout_frame == 0 {
 		draw_sprite_ext(sprLoadoutSplat, splatindex, _splat_x, _splat_y, 1, 1.05, 0, c_white, 1)
 	}
-	
-	#region Current loadout
-	
-	if !_fullview && _race != Race.Random {
-		var _loadout_x = _splat_x - 60,
-			_loadout_y = _splat_y - 15,
-			
-			_primary_weapon = _pinst.cwep,
-			_secondary_weapon = _pinst.bwep
-		
-		if _crown_current != crwn_none {
-			draw_sprite(sprLoadoutCrown, _crown_current,
-				_loadout_x - _splat_pointed - 16, _loadout_y - _splat_pointed - 40)
-		}
-		
-		if scr_weapon_is_valid(_primary_weapon) && scr_weapon_is_valid(_secondary_weapon) {
-			scrLoadoutDrawWeapon(_primary_weapon,
-				_loadout_x - _splat_pointed, _loadout_y + _splat_pointed, c_white)
-			
-			scrLoadoutDrawWeapon(_secondary_weapon,
-				_loadout_x - _splat_pointed, _loadout_y + _splat_pointed, c_white)
-		}
-		else if scr_weapon_is_valid(_primary_weapon) {
-			scrLoadoutDrawWeapon(_primary_weapon,
-				_loadout_x - _splat_pointed, _loadout_y + _splat_pointed, c_white)
-		}
-	}
-	
-	#endregion
 	
 	#region Loadout arrow
 	
@@ -561,7 +616,7 @@ function scrMenuDrawLoadout(_pinst) {
 		}
 		
 		draw_sprite_ext(sprLoadoutArrow, loadout_open,
-			_splat_x - 16, _splat_y - _splat_pointed - 2, 1, 1, 0, _splat_pointed ? c_white : c_uigray, 1)
+			_splat_x - 16, _splat_y - _splat_pointed - 16, 1, 1, 0, _splat_pointed ? c_white : c_uigray, 1)
 	}
 	else {
 		loadout_open = false
@@ -569,17 +624,74 @@ function scrMenuDrawLoadout(_pinst) {
 			_fullview = false
 			loadout_frame = 0
 		}
+		
+		var _tooltip_always_visible = !is_keyboard(_pinst.index)
+		if scrGameIsWeeklyRun() && (_tooltip_always_visible || _splat_pointed) {
+			_tooltip = loc(scr_crown_get_name(GameCont.crown)) + "\n"
+					+ "@s" + loc(scr_crown_get_text(GameCont.crown)) + "@w"
+			
+			if (scr_weapon_is_valid(_primary_weapon)) {
+				_tooltip += "\n" + loc(scr_weapon_get_name(_primary_weapon))
+			}
+			if (scr_weapon_is_valid(_secondary_weapon)) {
+				_tooltip += "\n" + loc(scr_weapon_get_name(_secondary_weapon))
+			}
+			
+			_tooltip_x = _splat_x - 55
+			_tooltip_y = _splat_y - 50
+			
+			if (_tooltip_always_visible) _tooltip_y -= 15
+		}
 	}
 	
 	#endregion
 	
-	if !_fullview exit
+	#region Current loadout
+	
+	if !_fullview && _race != Race.Random {
+		var _loadout_x = _splat_x - 60,
+			_loadout_y = _splat_y - 15,
+		
+		if !scrGameIsWeeklyRun() && !scr_loadout_is_available_for_race(_race) {
+			_splat_pointed = false
+		}
+		
+		if _crown_current != crwn_none {
+			var _crown_x = _loadout_x - _splat_pointed,
+				_crown_y = _loadout_y - _splat_pointed - 25
+			
+			draw_sprite(sprLoadoutCrown, _crown_current, _crown_x, _crown_y)
+			
+			if (_crown_current == crwn_haste) scrDrawClock(_crown_x - 2, _crown_y - 1)
+		}
+		
+		if scr_weapon_is_valid(_primary_weapon) && scr_weapon_is_valid(_secondary_weapon) {
+			scrLoadoutDrawWeapon(_secondary_weapon,
+				_loadout_x - _splat_pointed + 16, _loadout_y + _splat_pointed, c_silver)
+			
+			scrLoadoutDrawWeapon(_primary_weapon,
+				_loadout_x - _splat_pointed - 8, _loadout_y + _splat_pointed, c_white)
+		}
+		else if scr_weapon_is_valid(_primary_weapon) {
+			scrLoadoutDrawWeapon(_primary_weapon,
+				_loadout_x - _splat_pointed, _loadout_y + _splat_pointed, c_white)
+		}
+	}
+	
+	#endregion
+	
+	if (!_fullview) {
+		__update_tooltip_display(_tooltip, _tooltip_x, _tooltip_y)
+		exit
+	}
+	
+	var _openaddy = (loadout_frame >= 2 && loadout_frame < 3) ? (loadout_open ? 1 : -1) : 0
 	
 	#region Crowns
 		
 		var _any = false,
 			_crown_x = _crownleft + 12,
-			_crown_y = _crowntop - 24
+			_crown_y = _crowntop + _openaddy - 24
 		
 		_crown_x = _crownright - _crownsize * 3
 		
@@ -600,10 +712,21 @@ function scrMenuDrawLoadout(_pinst) {
 			draw_sprite_ext(_unlocked ? sprLoadoutCrown : sprLockedLoadoutCrown, _crown_id,
 				_crown_x, _crown_y - _is_suspected_selection, 1, 1, 0, _selection_tint, 1)
 			
+			if _unlocked && _crown_id == crwn_haste {
+				scrDrawClock(_crown_x - 2, _crown_y - _is_suspected_selection - 1, _selection_tint)
+			}
+			
 			if _is_pointed {
 				_any = true
 				
 				if _unlocked {
+					//
+					_tooltip = loc(scr_crown_get_name(_crown_id)) + "\n@s" + loc(scr_crown_get_text(_crown_id))
+					
+					_tooltip_x = _crown_x
+					_tooltip_y = _crown_y - 16
+					
+					//
 					if _press && _crown_current != _crown_id {
 						scrCrownSetCurrent(_crown_id, true)
 						scr_loadout_race_set_start_crown(_race, _crown_id)
@@ -615,14 +738,22 @@ function scrMenuDrawLoadout(_pinst) {
 						snd_play(sndHover)
 					}
 				}
-				else if _press {
-					with Menu {
-						unlock_hint = "LOCKED"
-						unlock_hint_pop = 2
-						alarm[11] = 90
+				else {
+					if (!_is_touch) {
+						_tooltip = loc("LOCKED")
+						_tooltip_x = _crown_x
+						_tooltip_y = _crown_y - 16
 					}
 					
-					snd_play(sndNoSelect, 0.95 + random(0.1))
+					if _press {
+						if (_is_touch) with (Menu) {
+							unlock_hint = "LOCKED"
+							unlock_hint_pop = 2
+							alarm[11] = 90
+						}
+						
+						snd_play(sndNoSelect, 0.95 + random(0.1))
+					}
 				}
 			}
 			
@@ -652,6 +783,10 @@ function scrMenuDrawLoadout(_pinst) {
 							snd_play(sndHover)
 						}
 						
+						_tooltip = loc_sfmt("% SKIN", scr_race_get_skin_letter(_skin_id, true))
+						_tooltip_x = _skins_x
+						_tooltip_y = _skins_y - 16
+						
 						if _press {
 							if scr_loadout_race_get_skin(_race) != _skin_id {
 								scr_loadout_race_set_skin(_race, _skin_id)
@@ -669,14 +804,22 @@ function scrMenuDrawLoadout(_pinst) {
 							_press = false
 						}
 					}
-					else if _press {
-						with Menu {
-							unlock_hint = scrRaceGetSkinUnlockDescription(_race, _skin_id)
-							unlock_hint_pop = 2
-							alarm[11] = 90
+					else {
+						if (!_is_touch) {
+							_tooltip = scrRaceGetSkinUnlockDescription(_race, _skin_id)
+							_tooltip_x = _skins_x
+							_tooltip_y = _skins_y - 16
 						}
 						
-						snd_play(sndNoSelect, 0.95 + random(0.1))
+						if _press {
+							if (_is_touch) with Menu {
+								unlock_hint = scrRaceGetSkinUnlockDescription(_race, _skin_id)
+								unlock_hint_pop = 2
+								alarm[11] = 90
+							}
+						
+							snd_play(sndNoSelect, 0.95 + random(0.1))
+						}
 					}
 					
 					_any = true
@@ -686,7 +829,7 @@ function scrMenuDrawLoadout(_pinst) {
 					_is_selection = _unlocked && (_skin_current == _skin_id || _is_pointed)
 				
 				draw_sprite_ext(_unlocked ? sprLoadoutSkin : sprLoadoutSkinLocked, _subimage,
-					_skins_x, _skins_y - _is_selection, 1, 1, 0, _is_selection ? c_white : c_uigray, 1)
+					_skins_x, _skins_y + _openaddy - _is_selection, 1, 1, 0, _is_selection ? c_white : c_uigray, 1)
 				
 				_skins_y += _skinsize
 			}
@@ -718,11 +861,15 @@ function scrMenuDrawLoadout(_pinst) {
 				var _is_chosen = (_current_weapon == _weapon),
 					_is_pointed = point_in_circle(_mx, _my, _weapons_x, _weapons_y, 10),
 					_color = _is_chosen ? c_white : (_is_pointed ? c_uilight : c_uigray),
-					_offset = max(_is_pointed, _is_chosen * 2)
+					_offset = max(_is_pointed, _is_chosen * 2) - _openaddy
 				
 				scrLoadoutDrawWeapon(_weapon, _weapons_x, _weapons_y - _offset, _color)
 				
 				if _is_pointed {
+					_tooltip = loc(scr_weapon_get_name(_weapon))
+					_tooltip_x = _weapons_x
+					_tooltip_y = _weapons_y - 16
+					
 					if !loadout_weapon_pointed {
 						loadout_weapon_pointed = true
 						snd_play(sndHover)
@@ -746,6 +893,8 @@ function scrMenuDrawLoadout(_pinst) {
 		}
 		
 	#endregion
+	
+	__update_tooltip_display(_tooltip, _tooltip_x, _tooltip_y)
 }
 
 /// @function scrLoadoutDrawWeapon

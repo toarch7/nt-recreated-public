@@ -14,3 +14,5 @@ event_inherited()
 alarm[1] = 10 + random(10)
 
 spr_shadow = shd16
+
+hitid = HitId.Maggot

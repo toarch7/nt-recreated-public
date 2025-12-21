@@ -9,7 +9,7 @@ repeat(5 + (GameCont.loops * 2)) {
     with(instance_create(x, y, EnemyLaser)) {
         image_angle = other.lang
         team = other.team
-        hit_id = other.spr_idle
+        hitid = other.hitid
         event_perform(2, 0)
     }
     lang += (360 / (5 + (GameCont.loops * 2)))

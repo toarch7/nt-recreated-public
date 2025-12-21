@@ -18,3 +18,5 @@ snd_mele = sndRatMelee
 //behavior
 walk = 0
 alarm[1] = 30 + random(90)
+
+hitid = HitId.Rat

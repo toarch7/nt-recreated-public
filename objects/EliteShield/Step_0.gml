@@ -7,3 +7,8 @@ if alarm[0] > 0 {
         creator.y = y
     }
 }
+else if sprite_index != sprEliteShielderShieldDisappear {
+    sprite_index = sprEliteShielderShieldDisappear
+    image_speed = 0.4
+    image_index = 0
+}

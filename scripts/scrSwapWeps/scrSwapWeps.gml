@@ -1,12 +1,17 @@
-function scrSwapWeps() {
-    //SWAP DA WEPS
-    var twep = wep,
-	    tcurse = curse,
-	    treload = reload,
-	    twkick = wkick,
-	    twepflip = wepflip,
-	    twepangle = wepangle,
-	    tcan_shoot = can_shoot
+/// @function scrSwapWeps
+/// @param swap_extra=true
+function scrSwapWeps(_swap_extra = true) {
+	if _swap_extra && array_length(extra_weps) {
+		scrExtraWepStoreCurrent()
+	}
+	
+	var _t_wep = wep,
+	    _t_curse = curse,
+	    _t_reload = reload,
+	    _t_wkick = wkick,
+	    _t_wepflip = wepflip,
+	    _t_wepangle = wepangle,
+	    _t_can_shoot = can_shoot
 	
     wep = bwep
     curse = bcurse
@@ -16,19 +21,17 @@ function scrSwapWeps() {
     wepangle = bwepangle
     can_shoot = bcan_shoot
 
-    bwkick = twkick
-    bcurse = tcurse
-    bcan_shoot = tcan_shoot
-    bwepflip = twepflip
-    bwepangle = twepangle
-    breload = treload
-    bwep = twep
-    clicked = 0
-
-    if reload > 0 can_shoot = 0
-    else can_shoot = 1
-
-    if !wep_mele[wep] {
+    bwkick = _t_wkick
+    bcurse = _t_curse
+    bcan_shoot = _t_can_shoot
+    bwepflip = _t_wepflip
+    bwepangle = _t_wepangle
+    breload = _t_reload
+    bwep = _t_wep
+    clicked = false
+	can_shoot = (reload <= 0)
+    
+    if !scr_weapon_is_melee(wep) {
 		wepangle = 0
 	}
 	else if wepangle == 0 {
@@ -36,14 +39,25 @@ function scrSwapWeps() {
 	}
 	
     drawempty = 30
-
-    if instance_exists(TutCont) && TutCont.pos == 2 && !TutCont.step_complete {
-        TutCont.alarm[0] = 30
-        TutCont.step_complete = 1
-    }
+	
+	with TutCont {
+		if pos == 2 && !step_complete {
+			step_complete = true
+			alarm[0] = 30
+		}
+	}
 	
 	if instance_exists(WepstickAttack) && index == global.index {
-		with WepstickAttack
-			scrWepstickUpdateSprite(other.id)
+		with (WepstickAttack) scrWepstickUpdateSprite(other.id)
+	}
+	
+	if _swap_extra && array_length(extra_weps) {
+		bwep = array_shift(extra_weps)
+		bcurse = array_shift(extra_weps_curse)
+		breload = array_shift(extra_weps_reload)
+		bwkick = array_shift(extra_weps_wkick)
+		bwepflip = array_shift(extra_weps_wepflip)
+		bwepangle = array_shift(extra_weps_wepangle)
+		bcan_shoot = array_shift(extra_weps_can_shoot)
 	}
 }

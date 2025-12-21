@@ -4,7 +4,7 @@ if lockstep_stop
 var olddir, oldspeed;
 olddir = direction
 oldspeed = speed
-move_bounce_solid(00)
+move_bounce_solid(true)
 motion_add(olddir, speed)
 speed = oldspeed
 if ((hspeed > 0) && (!place_free((x + hspeed), y))) {

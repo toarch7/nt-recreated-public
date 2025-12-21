@@ -1,12 +1,14 @@
 #macro CHEAT_PRACTICE_FAINTED_TIME (45 * 30)
 #macro PLAYER_LEVEL_MAX 10
 
-#macro c_gold      #dad090
-#macro c_ultra     #3dc616
-#macro c_tooltip   #31293d
-#macro c_uidark    #333333
-#macro c_uigray    #999999
-#macro c_uilight   #dcdcdc
+#macro c_gold     #dad090
+#macro c_curse    #8b448c
+#macro c_ultra    #3dc616
+#macro c_tooltip  #31293d
+#macro c_uidark   #333333
+#macro c_uigray   #999999
+#macro c_uilight  #dcdcdc
+#macro c_uisilver #7d838d
 
 #macro team_none   0
 #macro team_enemy  1

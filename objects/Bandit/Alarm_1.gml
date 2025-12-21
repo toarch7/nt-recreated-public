@@ -12,7 +12,7 @@ if instance_exists(target) {
                     image_angle = direction
                     creator = other.id
                     team = other.team
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                 }
                 gunangle = mcr_target_direction
                 alarm[1] = 20 + random(5)

@@ -12,16 +12,10 @@ if scrCrownCheck(crwn_haste) {
 image_speed = 0
 
 if instance_exists(Player) {
-	var _curse = 0
+	var _curse = scrPlayerCountCursed(all)
 	
-	with Player {
-		if curse && bcurse {
-			_curse = 1
-			break
-		}
-	}
-	
-	if _curse && !irandom(3) {
-		instance_change(CursedPickup, 1)
+	if _curse && random(_curse + 3) < _curse {
+		instance_create(x, y, CursedPickup)
+		instance_destroy(id, false)
 	}
 }

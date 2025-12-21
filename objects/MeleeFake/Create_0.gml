@@ -9,6 +9,7 @@ spr_idle = sprite_index
 spr_walk = sprite_index
 spr_hurt = sprMeleeHurt
 spr_dead = sprMeleeDead
+hitid = HitId.Assassin
 
 event_inherited()
 

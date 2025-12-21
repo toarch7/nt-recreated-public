@@ -1,17 +1,16 @@
-if lockstep_stop
-	exit
-
-if sprite_index != sprVenusCarFix {
-    if sprite_index != spr_hurt
-        sprite_index = spr_idle
-
-    if sprite_index == spr_hurt {
-        if image_index > 2 sprite_index = spr_idle
-    }
+if sprite_index != spr_hurt {
+	sprite_index = spr_idle
+}
+else if image_index > 2 {
+	sprite_index = spr_idle
 }
 
-speed = 0
+var _floor = instance_nearest(x - 16, y - 16, Floor)
+if instance_exists(_floor) && _floor.sprite_index == sprFloor5B {
+    if (friction != 0.05) friction = 0.05
+}
+else if (friction != 1.5) friction = 1.5
 
-if hp <= 0 instance_destroy()
+if (hp <= 0) instance_destroy()
 
-if inframes inframes--
+if (speed > 4) speed = 4

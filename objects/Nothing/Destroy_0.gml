@@ -1,28 +1,20 @@
 instance_create(x, y, NothingDeath)
 
-with MusCont {
-    alarm[1] = 1
-}
+with (MusCont) alarm[1] = 1
 
 snd_play(sndNothingDeath1)
 scrAchievementUnlock(33)
 audio_stop_sound(sndNothingBeamLoop)
 
-with enemy {
-    hp = 0
+with (enemy) hp = 0
+
+with (projectile) {
+    if (team != team_player) instance_destroy()
 }
 
-with projectile {
-    if team == other.team {
-        instance_destroy()
-    }
-}
-
-with Guardian {
-    instance_destroy()
-}
-
-with BigGenerator {
-    instance_destroy(id, 0)
+with (BigGenerator) {
     instance_create(x, y, BigGeneratorInactive)
+    instance_destroy(id, false)
 }
+
+scrOnBossKill()

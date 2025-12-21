@@ -3,7 +3,7 @@ event_inherited()
 image_angle = random_angle
 motion_add(random_angle, random(1.5) + 0.2)
 
-if (scrUltraCheck(Race.Frog, UltraSkill.Intimacy)) speed ++
+if (scr_ultra_get(Race.Frog, UltraSkill.Intimacy)) speed ++
 
 friction = 0.01
 image_speed = 0

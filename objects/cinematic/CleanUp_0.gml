@@ -1,4 +1,3 @@
-with BackCont
-if persistent {
+with (BackCont) if (persistent) {
     instance_destroy()
 }

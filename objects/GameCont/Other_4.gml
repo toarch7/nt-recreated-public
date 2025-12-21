@@ -11,3 +11,5 @@ if area == area_vault crownvisits ++
 if area == area_jungle junglevisits ++
 
 underwater = (area == area_oasis)
+
+is_level_ended = false

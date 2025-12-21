@@ -6,33 +6,25 @@ function scrChestOpened() {
 	
 	var p = instance_nearest(x, y, Player)
 	
-	if !instance_exists(p)
-		exit
+	if (!instance_exists(p)) exit
 	
 	// crown of hatred
-	if instance_is(other, Player) {
-		var p = other.id
-		
-		if GameCont.crown == 6 {
-		    with p {
-		        hp -= 1
+	if instance_is(other, Player) && scrCrownCheck(Crown.Hatred) {
+		with (p) {
+			if (mask_index == mskNone) break
 			
-		        sprite_index = spr_hurt
-		        image_index = 0
+		    scr_hit_self(1, HitId.CrownOfHatred)
 			
-		        snd_play_hit(snd_hurt, 0.2)
-				last_hit = sprCrown6Idle
-				
-				var a = 16
-				
-				if object_is_ancestor(other.object_index, RadChest)
-					a = 24
-				
-		        repeat a {
-		            with instance_create(x, y, Rad)
-						motion_add(random_angle, 2 + random(4))
-		        }
-		    }
+			var _amount = 16
+			if instance_is(other, RadChest) {
+				_amount = 24
+			}
+			
+		    repeat _amount {
+		        with (instance_create(x, y, Rad)) {
+					motion_add(random_angle, 2 + random(4))
+				}
+			}
 		}
 	}
 }

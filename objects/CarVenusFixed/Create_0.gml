@@ -1,18 +1,23 @@
+size = 1
+
+event_inherited()
+
 max_hp = 25
+hp = max_hp
 
 spr_idle = sprVenusCarFixed
 spr_hurt = sprVenusCarFixedHurt
 spr_dead = sprScorchmark
 
-size = 1
-
-event_inherited()
-
-sprite_index = sprVenusCarFix
-
 snd_hurt = sndHitMetal
 
-image_xscale = 1
+image_xscale = choose(1, -1)
+
+if (GameCont.area == area_crib && random(1) < 0.5) {
+	spr_idle = sprVenuzCar2
+	spr_hurt = sprVenuzCar2Hurt
+	sprite_index = spr_idle
+}
 
 name = "CAR"
 

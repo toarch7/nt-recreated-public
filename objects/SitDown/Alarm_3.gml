@@ -1,1 +1,2 @@
-force_sit = 1
+alarm[2] = -1
+force_sit = true

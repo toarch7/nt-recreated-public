@@ -21,9 +21,15 @@ if tv = 2 myscreen = choose(sprTV2A, sprTV2B, sprTV2C)
 
 if tv = 3 myscreen = choose(sprTV3A, sprTV3B, sprTV3C)
 
-if !irandom(20) {
-    tv = 4
-    myscreen = sprTV4A
+if random(1) < 0.05 {
+    if random(1) < 0.5 {
+		tv = 4
+		myscreen = choose(sprTV4A, sprTV4B, sprTV4C)
+	}
+    else {
+		tv = 5
+		myscreen = sprTV5A
+	}
 }
 
 alarm[0] = 30 + random(90)

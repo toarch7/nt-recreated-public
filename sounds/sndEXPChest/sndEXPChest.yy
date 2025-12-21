@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.726009,
+  "duration": 0.7260317,
   "exportDir": "",
   "name": "sndEXPChest",
   "parent": {

@@ -19,3 +19,5 @@ snd_mele = sndFreakMelee
 alarm[1] = 20 + random(10)
 
 walk = 0
+
+hitid = HitId.Freak

@@ -16,11 +16,11 @@ size = 8
 
 spr_idle = sprNothingMiddle
 spr_walk = sprNothingMiddle
-spr_hurt = sprNothingHurt
+spr_hurt = sprNothingMiddle
 spr_dead = sprNothingMiddle
 
 event_inherited()
-hit_id = sprKilledByThrone
+hitid = HitId.Throne
 
 hp = max_hp
 
@@ -45,3 +45,5 @@ flanim = 0
 sndhalfhp = 0
 sndtaunt = 0
 tauntdelay = 0
+
+hitid = HitId.Throne

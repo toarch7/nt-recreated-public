@@ -14,6 +14,8 @@ event_inherited()
 snd_hurt = sndSnowBotHurt
 snd_dead = sndSnowBotDead
 
+is_red_car = false
+
 //behavior
 ammo = 10
 walk = 0
@@ -22,3 +24,5 @@ alarm[1] = 80
 
 spr_shadow = shd24
 spr_shadow_y = 1
+
+hitid = HitId.Snowbot

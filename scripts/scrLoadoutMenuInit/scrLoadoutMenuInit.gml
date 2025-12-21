@@ -1,42 +1,38 @@
 function scrLoadoutMenuInit() {
-	var _all_crowns = true,
-		_any_crowns = false,
-		_crownmax = crownmax
-	
-	for (var _race_id = Race.Fish; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
-		_all_crowns = true
+	with UberCont {
+		var _all_crowns = true,
+			_any_crowns = false,
+			_crownmax = crownmax
 		
-		var _skins_max = scrRaceGetMaxSkinCount(_race_id),
-			_unlocked_crowns = 0
-		
-		race_crown[_race_id, crwn_random] = true
-		race_crown[_race_id, crwn_none] = true
-
-		for (var _crown_id = 1; _crown_id <= _crownmax; _crown_id++) {
-			var _key = "crowngot" + string(_race_id)
-			race_crown[_race_id, _crown_id] = save_get_value(_key, string(_crown_id), 0)
-
-			if race_crown[_race_id, _crown_id] {
-				_any_crowns = true
-				
-				if _crown_id > 1 {
-					_unlocked_crowns ++
+		for (var _race_id = Race.Fish; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
+			_all_crowns = true
+			
+			var _skins_max = scrRaceGetMaxSkinCount(_race_id),
+				_unlocked_crowns = 0
+			
+			for (var _crown_id = 1; _crown_id <= _crownmax; _crown_id++) {
+				if (crowngot[_race_id, _crown_id]) {
+					_any_crowns = true
+					
+					if _crown_id > crwn_none {
+						_unlocked_crowns ++
+					}
+				}
+				else if _crown_id > 1 {
+					_all_crowns = false
 				}
 			}
-			else if _crown_id > 1 {
-				_all_crowns = false
+		
+			save_set_value("crowngottotal", _race_id, _unlocked_crowns)
+
+			if _all_crowns {
+				scrAchievementUnlock(Achievement.VAULT_RAIDER)
 			}
 		}
-		
-		save_set_value("crowngottotal", _race_id, _unlocked_crowns)
 
-		if _all_crowns {
-			scrAchievementUnlock(Achievement.VAULT_RAIDER)
+		if _any_crowns {
+			scrAchievementUnlock(Achievement.CROWN_LIFE)
 		}
-	}
-
-	if _any_crowns {
-		scrAchievementUnlock(Achievement.CROWN_LIFE)
 	}
 }
 
@@ -128,7 +124,7 @@ function scr_loadout_race_is_crown_unlocked(_race_id, _crown_id) {
 /// @param {Real|Enum.Crown} crown_id
 function scr_loadout_race_unlock_crown(_race_id, _crown_id) {
 	with UberCont {
-		if crowngot[_race_id, _crown_id] exit
+		if (crowngot[_race_id, _crown_id]) exit
 		scr_loadout_race_set_start_crown(_race_id, _crown_id)
 		crowngot[_race_id, _crown_id] = true
 	}
@@ -138,9 +134,7 @@ function scr_loadout_race_unlock_crown(_race_id, _crown_id) {
 /// @param {Real|Enum.Race} race_id
 function scr_loadout_race_get_unlocked_crowns_count(_race_id) {
 	with UberCont {
-		if cgot[_race_id] {
-			return save_get_value("crowngottotal", _race_id, 0)
-		}
+		if (cgot[_race_id]) return save_get_value("crowngottotal", _race_id, 0)
 	}
 	
 	return 0

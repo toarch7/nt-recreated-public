@@ -4,84 +4,86 @@ function scrOptionsUpdate() {
         var res = self[$ "opt_resolution"],
 			scaling = self[$ "opt_scaling"],
 			cursor = self[$ "opt_cursor"],
-			crosshair = self[$ "opt_crosshair"]
+			crosshair = self[$ "opt_crosshair"],
 			vsync = self[$ "opt_vsync"]
 		
-		var mobile = !is_desktop,
+		var mobile = is_mobile,
 			desktop = is_desktop
 		
-        opt_volume = save_get_option("volume", "master", 1)
-        opt_musvol = save_get_option("volume", "music", 1)
-        opt_ambvol = save_get_option("volume", "ambient", 1)
-        opt_sndvol = save_get_option("volume", "sfx", 1)
-		opt_3Dsound = save_get_option("volume", "3dsound", 1)
-		opt_pauseonpause = save_get_option("volume", "pauseonpause", 0)
+        opt_volume = save_get_option("volume", "master", true)
+        opt_musvol = save_get_option("volume", "music", true)
+        opt_ambvol = save_get_option("volume", "ambient", true)
+        opt_sndvol = save_get_option("volume", "sfx", true)
+		opt_3Dsound = save_get_option("volume", "3dsound", true)
+		opt_pauseonpause = save_get_option("volume", "pauseonpause", false)
         
-		opt_crosshair = save_get_option("options", "crosshair", 0)
-        opt_gamepad = save_get_option("options", "gamepad", 0)
-        opt_lefthanded = save_get_option("options", "lefthanded", 0)
+		opt_crosshair = save_get_option("options", "crosshair", false)
+        opt_gamepad = save_get_option("options", "gamepad", false)
+        opt_lefthanded = save_get_option("options", "lefthanded", false)
 		opt_keyboard = save_get_option("options", "keyboard", desktop)
         opt_assist = save_get_option("controls", "assist", mobile)
-        opt_aimbot = save_get_option("controls", "aimbot", 0)
+        opt_aimbot = save_get_option("controls", "aimbot", false)
         opt_stickregions = save_get_option("controls", "stickregions", false)
         opt_hiddensticks = save_get_option("controls", "hiddensticks", false)
         opt_pausebutton = save_get_option("options", "pausebutton", mobile)
         opt_volumecontrol = save_get_option("options", "volumecontrol", mobile)
-        opt_fixsight = save_get_option("controls", "fixsight", 0)
+        opt_fixsight = save_get_option("controls", "fixsight", false)
 		
+		opt_fullscreen = save_get_option("options", "fullscreen", true)
+		opt_vsync = save_get_option("options", "vsync", false)
+		opt_cursor = save_get_option("options", "cursor", false)
+		opt_mouselock = save_get_option("options", "mouselock", false)
+        opt_autopause = save_get_option("options", "autopause", true)
+		opt_achievs = save_get_option("options", "achievements", true)
 		
-		opt_fullscreen = save_get_option("options", "fullscreen", 1)
-		opt_vsync = save_get_option("options", "vsync", 0)
-		opt_cursor = save_get_option("options", "cursor", 0)
-		opt_mouselock = save_get_option("options", "mouselock", 0)
-        opt_autopause = save_get_option("options", "autopause", 1)
-		opt_achievs = save_get_option("options", "achievements", 1)
+        opt_outlines = save_get_option("controls", "outlines", true)
+        opt_assist = save_get_option("controls", "assist", true)
+        opt_sideart = save_get_option("options", "sideart", true)
+        opt_color = save_get_option("options", "color", false)
 		
-        opt_outlines = save_get_option("controls", "outlines", 1)
-        opt_assist = save_get_option("controls", "assist", 1)
-        opt_sideart = save_get_option("options", "sideart", 1)
-        opt_color = save_get_option("options", "color", 0)
-		
-        opt_simplify = save_get_option("visual", "simplify", 0)
-        opt_prtcls = save_get_option("visual", "particles", 0)
-        opt_bloom = save_get_option("visual", "bloom", 1)
-        opt_walls = save_get_option("visual", "walls", 1)
-        opt_timer = save_get_option("visual", "timer", 1)
-        opt_camera = save_get_option("visual", "camera", 1)
-        opt_bossintro = save_get_option("visual", "bossintro", 1)
-        opt_resolution = save_get_option("visual", "resolution", 1)
-        opt_shake = save_get_option("visual", "screenshake", 1)
-        opt_freeze = save_get_option("visual", "freezeframes", 1)
-        opt_scaling = save_get_option("visual", "scaling", 1)
-        opt_hud = save_get_option("visual", "hud", 1)
+        opt_simplify = save_get_option("visual", "simplify", false)
+        opt_prtcls = save_get_option("visual", "particles", false)
+        opt_bloom = save_get_option("visual", "bloom", true)
+        opt_showtimer = save_get_option("visual", "timer", false)
+        opt_showarea = save_get_option("visual", "area", false)
+        opt_camera = save_get_option("visual", "camera", true)
+        opt_bossintro = save_get_option("visual", "bossintro", true)
+        opt_resolution = save_get_option("visual", "resolution", true)
+        opt_shake = save_get_option("visual", "screenshake", true)
+        opt_freeze = save_get_option("visual", "freezeframes", true)
+        opt_scaling = save_get_option("visual", "scaling", true)
+        opt_hud = save_get_option("visual", "hud", true)
 		
         opt_controls_scale = save_get_option("controls", "scale", 0.5)
-		opt_wepstick = save_get_option("controls", "wepstick", 0)
-		opt_splitfire = save_get_option("controls", "splitfire", 0)
+		opt_wepstick = save_get_option("controls", "wepstick", false)
+		opt_splitfire = save_get_option("controls", "splitfire", false)
 		
+		if (opt_aimbot) opt_splitfire = false
+		
+		var _language_last = self[$ "opt_language"]
         opt_language = save_get_option("etc", "language", "null")
 		opt_nickname = save_get_option("etc", "name", "null")
 		
-		opt_cheats = save_get_option("cheats", "unlocked", 0)
-		opt_console = save_get_option("cheats", "console", 0)
-		opt_griller = save_get_option("cheats", "griller", 0)
-		opt_practice = save_get_option("cheats", "practice", 0)
+		opt_cheats = save_get_option("cheats", "unlocked", false)
+		opt_console = save_get_option("cheats", "console", false)
+		opt_griller = save_get_option("cheats", "griller", false)
+		opt_practice = save_get_option("cheats", "practice", false)
 		
 		opt_remote_ip = save_get_option("coop", "lastip", "127.0.0.1")
 		opt_remote_port = save_get_option("coop", "lastport", 25256)
 		
-		opt_gamepad_type = save_get_option("options", "gamepad_type", 0)
+		opt_gamepad_type = save_get_option("options", "gamepad_type", false)
 		
 		cpref_list = [ "eyes", "melting", "plant", "yv", "steroids", "horror", "rogue", "skeleton" ]
 		
-		cpref_eyes = save_get_option("cprefs", "eyes", 1)
-		cpref_melting = save_get_option("cprefs", "melting", 1)
-		cpref_plant = save_get_option("cprefs", "plant", 0)
-		cpref_yv = save_get_option("cprefs", "yv", 1)
-		cpref_steroids = save_get_option("cprefs", "steroids", 1)
-		cpref_horror = save_get_option("cprefs", "horror", 1)
-		cpref_rogue = save_get_option("cprefs", "rogue", 1)
-		cpref_skeleton = save_get_option("cprefs", "skeleton", 0)
+		cpref_eyes = save_get_option("cprefs", "eyes", true)
+		cpref_melting = save_get_option("cprefs", "melting", true)
+		cpref_plant = save_get_option("cprefs", "plant", false)
+		cpref_yv = save_get_option("cprefs", "yv", true)
+		cpref_steroids = save_get_option("cprefs", "steroids", true)
+		cpref_horror = save_get_option("cprefs", "horror", true)
+		cpref_rogue = save_get_option("cprefs", "rogue", true)
+		cpref_skeleton = save_get_option("cprefs", "skeleton", false)
 		
 		
 		// Update variables
@@ -105,13 +107,13 @@ function scrOptionsUpdate() {
 		if opt_stickregions
 			opt_hiddensticks = true
 		
-        scrLanguageSet(opt_language)
+        if (_language_last != opt_language) scrLanguageSet(opt_language)
 		
-        if res != undefined && (res != opt_resolution or scaling != opt_scaling) {
+        if res != undefined && (res != opt_resolution || scaling != opt_scaling) {
             scrSetViewSize(false)
 		}
 		
-		showtutorial = save_get_option("game", "tutorial", 1)
+		showtutorial = save_get_option("game", "tutorial", true)
 		
 		if scrValidateUsername(undefined, opt_nickname, true) {
 			save_set_value("etc", "nickname", "null")

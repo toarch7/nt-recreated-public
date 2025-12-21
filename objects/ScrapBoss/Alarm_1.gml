@@ -16,7 +16,7 @@ if ammo > 0 {
 	
 	repeat count {
         with instance_create(x + lengthdir_x(24, gunangle), y + lengthdir_y(16, gunangle), EnemyBullet1) {
-            hit_id = other.spr_idle
+            hitid = other.hitid
             creator = other.id
             motion_add(other.gunangle, 2)
             image_angle = direction

@@ -1,21 +1,17 @@
 image_index = image_number - 1
 image_speed = 0
 
-if !scr_check_enemies() {
-    with Corpse
-		alarm[0] = -1
+if (forceportal || scr_check_enemies()) exit
 
-    alarm[0] = 30
-}
+with (Corpse) alarm[0] = -1
 
-if position_empty(x, y) {
-    var flor = instance_nearest(x, y, Floor)
+alarm[0] = 30
 	
-	if flor {
-	    x = flor.x + flor.sprite_width / 2
-	    y = flor.y + flor.sprite_height / 2
-		
-		xprevious = x
-		yprevious = y
+if !place_meeting(x, y, Floor) {
+	with instance_nearest(x, y, Floor) {
+		other.x = bbox_center_x
+		other.y = bbox_center_y
 	}
+	xprevious = x
+	yprevious = y
 }

@@ -3,15 +3,12 @@
 scrLetterbox(false, 0)
 image_speed = 0
 
-if global.is_server {
-	var _offset = LETTERBOX_SIZE - sprite_get_bbox_height(sprGoButton)
-    instance_create(view_width, view_height - _offset div 2, GoButton)
-}
-
 crown = crwn_none
 race = Race.Random
 
 char = array_create(Race.NUM_ALL_RACE_TYPES, noone)
+
+scrLoadoutMenuInit()
 
 scrCampfireMenuCreate()
 
@@ -41,11 +38,17 @@ for (var _race_id = Race.Random; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id)
 	_slot_index ++
 }
 
-with GoButton {
-	if _slot_x >= bbox_left {
-		instance_destroy()
+if global.is_server && _slot_x < (view_width - 30) {
+	var _sprite = sprGoButtonSymbolic,
+		_offset = sprite_get_bbox_height(_sprite) div 2,
+		_ypos = view_height - LETTERBOX_SIZE + _offset - 2
+    
+	with instance_create(_slot_x + _slot_step_size, _ypos, GoButton) {
+		sprite_index = _sprite
+		visible = false
 	}
 }
+
 
 #endregion
 
@@ -70,6 +73,8 @@ if scrGameIsWeeklyRun() {
 
 unlock_hint = ""
 unlock_hint_pop = 0
+tooltip = undefined
+tooltip_pop = 0
 
 if !instance_exists(MusCont) {
 	instance_create(0, 0, MusCont)

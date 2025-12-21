@@ -1,21 +1,11 @@
-var _bones = []
+var _bones = bones, _count = 0
 
-with Bones {
-    array_push(_bones, id)
-}
+with (Bones) _bones[_count++] = id
 
-bones = _bones
-
-array_sort(bones, function(a, b) {
-    return a.y - b.y
-})
+bonecount = _count
 
 alarm[0] = 30
 
-if UberCont.opt_walls {
-    with TopPot {
-        if !place_meeting(x, y, TopSmall) {
-            instance_destroy()
-        }
-    }
+with (TopPot) {
+    if (!place_meeting(x, y, TopSmall)) instance_destroy()
 }

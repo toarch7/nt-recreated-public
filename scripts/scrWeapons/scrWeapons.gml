@@ -8,16 +8,6 @@ wep_gold = undefined
 wep_mele = undefined
 wep_naim = undefined
 
-enum Ammo {
-	None,
-	Bullets,
-	Shells,
-	Bolts,
-	Explosives,
-	Energy,
-	NUM_AMMO_TYPES
-}
-
 function scrWeapons() {
 	/* Memo:
 		wep_name - weapon name
@@ -34,19 +24,19 @@ function scrWeapons() {
 		wep_naim - if aim assist should be ignored when using this weapon
 	*/
     
-    maxwep = 126
-    wep_name = array_create(maxwep, "")
-    wep_type = array_create(maxwep, Ammo.None)
-    wep_auto = array_create(maxwep, false)
-    wep_cost = array_create(maxwep, 0)
-    wep_area = array_create(maxwep, -1)
-    wep_sprt = array_create(maxwep, sprDefault)
-    wep_gold = array_create(maxwep, false)
-    wep_rads = array_create(maxwep, 0)
-    wep_lout = array_create(maxwep, -1)
-    wep_swap = array_create(maxwep, -1)
-    wep_mele = array_create(maxwep, false)
-    wep_naim = array_create(maxwep, true)
+    maxwep = 128
+    wep_name = array_create(maxwep + 1, "")
+    wep_type = array_create(maxwep + 1, Ammo.None)
+    wep_auto = array_create(maxwep + 1, false)
+    wep_cost = array_create(maxwep + 1, 0)
+    wep_area = array_create(maxwep + 1, -1)
+    wep_sprt = array_create(maxwep + 1, sprDefault)
+    wep_gold = array_create(maxwep + 1, false)
+    wep_rads = array_create(maxwep + 1, 0)
+    wep_lout = array_create(maxwep + 1, -1)
+    wep_swap = array_create(maxwep + 1, -1)
+    wep_mele = array_create(maxwep + 1, false)
+    wep_naim = array_create(maxwep + 1, false)
     
 	wep_name[0] = ""
     wep_type[0] = 0
@@ -1247,7 +1237,17 @@ function scrWeapons() {
     wep_text[127] = "ALWAYS BELIEVE IN YOUR SOUL"
     wep_lout[127] = sprGoldToxicGunLoadout
     wep_gold[127] = true
+    wep_swap[127] = sndSwapPistol
 	
+    wep_name[128] = "ELECTRIC GUITAR"
+    wep_type[128] = 0
+    wep_cost[128] = 0
+    wep_sprt[128] = sprElectricGuitar
+    wep_area[128] = -1
+    wep_auto[128] = false
+    wep_load[128] = 21
+    wep_text[128] = "fish can rock and roll"
+
     wep_swap[0] = sndSwapPistol
     wep_swap[1] = sndSwapPistol
     wep_swap[2] = sndSwapMachinegun
@@ -1376,6 +1376,7 @@ function scrWeapons() {
     wep_swap[125] = sndSwapEnergy
     wep_swap[126] = sndSwapPistol
     wep_swap[127] = sndSwapPistol
+    wep_swap[128] = sndSwapElectricGuitar
 	
 	wep_naim[2] = true
 	wep_naim[8] = true
@@ -1400,8 +1401,6 @@ function scrWeapons() {
 	wep_naim[125] = true
 	wep_naim[111] = true
 	
-    wep_swap[255] = sndSwapPistol
-    wep_naim[255] = false
 	
 	for(var _weapon_id = 1; _weapon_id <= maxwep; _weapon_id ++) {
 		if (wep_type[_weapon_id] == 0) wep_mele[_weapon_id] = true

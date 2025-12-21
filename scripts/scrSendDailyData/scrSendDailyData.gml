@@ -1,14 +1,14 @@
 function scrSendDailyData() {
-    if !UberCont.daily_run or is_undefined(UberCont.update_info) or global.cheats
-        exit
+    if (!scrGameIsEventRun() || is_undefined(UberCont.update_info) || global.cheats) exit
 	
-	with UberCont if !weekly_run
-		can_daily = false
+	if (scrGameIsDailyRun()) UberCont.can_daily = false
 	
-    with Player if is_me {
+    with (Player) if (scr_player_is_local(index)) {
+		var _race = race,
+			_bskin = bskin
+        
 		#region write run to history
-		
-        var d = struct_secure_load(game_directory + "dailyruns.dat")
+		var d = struct_secure_load(game_directory + "dailyruns.dat")
 
         if is_undefined(d) {
             d = {
@@ -31,7 +31,7 @@ function scrSendDailyData() {
         for (var i = 0; i < ds_list_size(l); i++) {
             var skill = l[| i]
 
-            if skill != 25 {
+            if skill != mut_patience {
                 array_push(skillsarr, skill)
             }
         }
@@ -51,7 +51,8 @@ function scrSendDailyData() {
             list[$ string(global.seed)] = {
                 race: race,
                 skin: bskin,
-                ultra: GameCont.ultra,
+                ultra_got: GameCont.ultra_got,
+				ultra: 0,
 
                 skills: skillsarr,
                 patienceskill: GameCont.patienceskill,
@@ -60,15 +61,16 @@ function scrSendDailyData() {
                 bwep: bwep,
                 crown: GameCont.crown,
 
-                day: UberCont.current_day,
-                month: UberCont.current_month,
+                day: current_day,
+                month: current_month,
+                year: current_year,
                 timestamp: date_current_datetime(),
 
                 area: GameCont.area,
                 subarea: GameCont.subarea,
                 loop: GameCont.loops,
 
-                killed_by: sprite_exists(last_hit) ? sprite_get_name(last_hit) : mskNone,
+                killed_by: sprite_exists(deathcause) ? sprite_get_name(deathcause) : mskNone,
                 kills: GameCont.kills
             }
 
@@ -83,7 +85,7 @@ function scrSendDailyData() {
 
         var map = ds_map_create();
         map[? "Content-type"] = "application/json";
-        var date = string_pad_zeroes(UberCont.current_day, 1) + "." + string_pad_zeroes(UberCont.current_month, 1) + "." + string(UberCont.current_year)
+        var date = string_pad_zeroes(current_day, 1) + "." + string_pad_zeroes(current_month, 1) + "." + string(current_year)
         var time = string_pad_zeroes(GameCont.minutes, 1) + ":" + string_pad_zeroes(GameCont.seconds, 1)
 
         var name = save_get_value("etc", "name", "unnamed")
@@ -93,14 +95,13 @@ function scrSendDailyData() {
         name = string_replace_all(name, "\n", "")
         name = string_replace_all(name, "#", "")
 
-        if instance_exists(GameCont) && ((GameCont.hard > 3 && UberCont.weekly_run) or !UberCont.weekly_run) {
+        if instance_exists(GameCont) && (GM_build_type == "run" || (GameCont.hard > 3 && scrGameIsWeeklyRun()) || !UberCont.weekly_run) {
             scrRaces()
             scrCrowns()
             scrSkills()
             scrUltras()
 
-            var mut_list = "",
-				runId = base_convert(global.seed, 10, 16)
+            var mut_list = "", runId = base_convert(global.seed, 10, 16)
 
             scrWebhookEmoteIDs()
 
@@ -112,9 +113,17 @@ function scrSendDailyData() {
                 mut_list = "\n**Muts**:\n" + mut_list
             }
 
-            if GameCont.ultra {
-                mut_list += ulticon[GameCont.race, GameCont.ultra]
-            }
+            if GameCont.level >= 10 {
+				var _icons = ulticon
+				with (GameCont) {
+	                var _ultras = ultra_got[_race],
+						_count = array_length(_ultras)
+					
+					for(var i = 1; i < _count; ++i) {
+						if (_ultras[i]) mut_list += _icons[_race, i]
+		            }
+				}
+			}
 
             var week = 0
 
@@ -123,30 +132,36 @@ function scrSendDailyData() {
                 date = "Week #" + string(week) + " " + date
             }
 
-            var char_icon = chricon[GameCont.race, GameCont.bskin + 1]
-            var crownicon = cwnicon[GameCont.crown]
+            var _char_icon = chricon[_race, _bskin + 1]
+            var _crown_icon = cwnicon[GameCont.crown]
 
             random_set_seed(global.seed)
 
-            var footerstring = "(v" + string(GAME_BUILD) + ") " + save_get_value("general", "uid", "-1") + ";" + runId
+            var _footer = "(v" + string(GAME_BUILD) + ") " + save_get_value("general", "uid", "-1") + ";" + runId
 
-            if avg <= 0 {
-                footerstring = "(no score improvement)"
+            if avg <= 0 && scrGameIsWeeklyRun() {
+                _footer = "(no score improvement)"
             }
 			
-			var _area = area_get_name(GameCont.area, GameCont.subarea, GameCont.loops),
+			var _area = scrAreaGetMapName(GameCont.area, GameCont.subarea, GameCont.loops),
+				
 				_gap = "<:none:763720063140233226> <:none:763720063140233226> <:none:763720063140233226> <:Kills:763751370901159979>",
-				_weapons = "\n\n**Weapons**:\n" + string_lower_camel(wep_name[wep]) + (bwep ? ", " + string_lower_camel(wep_name[bwep]) : ""),
-				_crown = "\n**Crown**: " + crownicon,
+				
+				_weapons = "\n\n**Weapons**:\n"
+					+ string_lower_camel(scr_weapon_get_name(wep), true)
+					+ (bwep ? ", " + string_lower_camel(scr_weapon_get_name(bwep), true) : ""),
+				
+				_crown = "\n**Crown**: " + _crown_icon,
+				
 				_time = "\n**Time**: " + time,
 			
             var result = {
                 embeds: [{
-                    title: string(char_icon) + " " + string_copy(name, 1, 15),
+                    title: string(_char_icon) + " " + string_copy(name, 1, 15),
                     description: " **" + _area + (GameCont.win ? " (Win)" : "") + _gap + " " + string(GameCont.kills) + "**" + _weapons + mut_list + _crown + _time,
                     color: UberCont.opt_healthcol,
                     footer: {
-                        text: footerstring
+                        text: _footer
                     }
                 }],
 
@@ -190,8 +205,8 @@ function scrSendDailyData() {
 			}
 			
 			var my_entry = {
-				char: GameCont.race,
-				skin: GameCont.bskin,
+				char: _race,
+				skin: _bskin,
 				area: GameCont.area,
 				subarea: GameCont.subarea,
 				loops: GameCont.loops,
@@ -199,7 +214,8 @@ function scrSendDailyData() {
 				bwep: bwep,
 				win: GameCont.win,
 				kills: GameCont.kills,
-				ultra: GameCont.ultra,
+				ultra_got: GameCont.ultra_got,
+				ultra: 0,
 				skills: _skills,
 				crown: GameCont.crown,
 				version: UberCont.version,
@@ -218,7 +234,5 @@ function scrSendDailyData() {
         ds_map_destroy(map)
     }
 
-    if !UberCont.weekly_run {
-        save_set_value("etc", "seed", UberCont.daily_seed)
-    }
+    if (!scrGameIsWeeklyRun()) save_set_value("etc", "seed", UberCont.daily_seed)
 }

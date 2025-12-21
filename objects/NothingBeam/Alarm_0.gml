@@ -1,2 +1,2 @@
-disappear = 1
+disappear = true
 anim = 0

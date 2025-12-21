@@ -1,16 +1,18 @@
 event_inherited()
 
+hp = 8
+max_hp = hp
+lsthealth = hp
 race = Race.Fish
 bskin = 0
 index = 0
 is_me = false
-max_hp = 8
 maxspeed = 4
 accuracy = 1
 gunangle = 0
 team = team_player
 raddrop = 0
-cantoxic = 1
+cantoxic = true
 patient = -1
 size = 5
 curse = false
@@ -20,11 +22,28 @@ breload = 0
 wep = wep_none
 bwep = wep_none
 hitid = HitId.Player
+totdamagetaken = 0
+
+snd_hurt = sndMutant1Hurt
+snd_dead = sndMutant1Dead
+snd_lowa = sndMutant1LowA
+snd_lowh = sndMutant1LowH
+snd_crwn = sndMutant1Crwn
+snd_chst = sndMutant1Chst
+snd_wrld = sndMutant1Wrld
+snd_thrn = sndMutant1Thrn
+snd_valt = sndMutant1Valt
+snd_spch = sndMutant1Spch
+snd_cptn = sndMutant1Spch
+spr_idle = sprMutant1Idle
+spr_walk = sprMutant1Walk
+spr_hurt = sprMutant1Hurt
+spr_dead = sprMutant1Dead
+spr_gosit = sprMutant1GoSit
+spr_sit = sprMutant1Sit
+spr_cry = -1
 
 scrPlayerAmmoInit()
-
-last_hit = -1
-inframes = 0
 		
 clicked = false
 wepflip = 1
@@ -51,6 +70,9 @@ show_empty_cooldown = 0
 
 rogue_ammo = 1
 rogue_ammo_max = 3
+cuz_ammo = 1
+cuz_ammo_max = 3
+scrExtraWepsInit()
 
 hammering = 0
 hammerhead = 0
@@ -69,6 +91,7 @@ froggas = 0
 horrortime = 0
 horrornorad = 0
 veinsthreshold = 4
+specfiring = false
 can_pick = true
 can_die = true
 can_spirit = spirit
@@ -77,6 +100,7 @@ can_aim = true
 can_shoot = true
 bcan_shoot = false
 can_spec = true
+swapanim = 0
 
 crosshair_x = x
 crosshair_y = y
@@ -90,6 +114,9 @@ active_button_forever = 0
 aimassist_target = noone
 
 recontinues = 0
+
+eyesloop = -1
+horrorloop = -1
 
 pref = function(name) {
 	var _pinst = scr_playerinstance_find(index)

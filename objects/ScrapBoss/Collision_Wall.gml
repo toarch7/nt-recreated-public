@@ -1,9 +1,1 @@
-if lockstep_stop
-	exit
-
-//with other
-//{
-//instance_destroy()
-//instance_create(x,y,FloorExplo)
-//}
-move_bounce_solid(00)
+move_bounce_solid(true)

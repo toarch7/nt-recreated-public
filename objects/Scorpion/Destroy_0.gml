@@ -2,12 +2,12 @@ scrDrop(15, 0)
 
 event_inherited()
 
-dir = random_angle
+var _ang = random_angle
 
-repeat(3) {
+repeat (3) {
     with instance_create(x, y, AcidStreak) {
-        motion_add(other.dir, 8)
+        motion_add(_ang, 8)
         image_angle = direction
     }
-    dir += 120
+    _ang += 120
 }

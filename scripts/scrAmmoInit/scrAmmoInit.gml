@@ -1,3 +1,13 @@
+enum Ammo {
+	None,
+	Bullets,
+	Shells,
+	Bolts,
+	Explosives,
+	Energy,
+	NUM_AMMO_TYPES
+}
+
 function scrAmmoInit() {
 	typ_name = array_create(Ammo.NUM_AMMO_TYPES, "N/A")
     typ_ammo = array_create(Ammo.NUM_AMMO_TYPES, 0)
@@ -28,7 +38,12 @@ function scrAmmoDecideType(_player, _prioritize_primary = false) {
 	
 	with _player {
 		var _atype = scr_weapon_get_type(wep),
-			_btype = scr_weapon_get_type(bwep)
+			_btype = scr_weapon_get_type(bwep),
+			_extra_count = array_length(extra_weps)
+		
+		if (_extra_count > 0 && random(1) > (1 / (_extra_count + 1))) {
+			_btype = scr_weapon_get_type(extra_weps[irandom(_extra_count - 1)])
+		}
 		
 		if (_prioritize_primary || !bwep) {
 			if (_atype != Ammo.None && ammo[_atype] < typ_amax[_atype]) {
@@ -120,6 +135,16 @@ function scrAmmoUpdateTypeStats() {
 		for(var i = Ammo.Shells; i < Ammo.NUM_AMMO_TYPES; ++i) {
 			typ_amax[i] += 44 * _back_muscle
 		}
+	}
+	
+	var _haste = scrCrownCheck(crwn_haste)
+	
+	if _haste != 0 {
+		typ_ammo[Ammo.Bullets] += _haste
+        typ_ammo[Ammo.Shells] += _haste
+        typ_ammo[Ammo.Bolts] += _haste
+        typ_ammo[Ammo.Explosives] += _haste
+        typ_ammo[Ammo.Energy] += _haste
 	}
 }
 

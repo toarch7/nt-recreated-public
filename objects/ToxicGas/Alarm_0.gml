@@ -1,2 +1,2 @@
-/// @description Become destructable
+/// @description Become tangible
 typ = 2

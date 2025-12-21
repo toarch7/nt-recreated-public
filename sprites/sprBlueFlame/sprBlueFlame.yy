@@ -32,8 +32,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"FX",
-    "path":"folders/Sprites/FX.yy",
+    "name":"GroundFlame",
+    "path":"folders/Sprites/FX/GroundFlame.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

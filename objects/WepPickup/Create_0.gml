@@ -1,13 +1,17 @@
 name = "SCREWDRIVER"
-wep = wep_revolver
+sprite_index = sprScrewDriver
+wep = wep_screwdriver
 type = Ammo.None
 ammo = false
 creator = noone
 curse = false
 team = 2
 
-dropseed = rng_next_int(RNGStates.WeaponDrops)
-rotspeed = (random(1) + 1) * choose(1, -1)
+// parts of `cuz_fun`
+autopick = false
+slowreturn = false
+
+rotspeed = random_range(0.7, 1) * choose(1, -1)
 
 image_angle = random_angle
 image_speed = 0

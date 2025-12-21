@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-var yoff = 0, _juggernaut = scrUltraCheckPlayerRace(creator, Race.Crystal, UltraSkill.Juggernaut)
+var yoff = 0, _juggernaut = scr_player_ultra_get(creator, Race.Crystal, UltraSkill.Juggernaut)
 
 if instance_exists(creator) && sprite_index != spr_disappear {
 	shieldright = 1
@@ -10,7 +10,7 @@ if instance_exists(creator) && sprite_index != spr_disappear {
 		shieldright = -1
 	}
 
-	yoff = -3
+	yoff = -2
 
 	if _juggernaut {
 		var _back_idle = sprCrystalShieldIdleBack,
@@ -26,12 +26,11 @@ if instance_exists(creator) && sprite_index != spr_disappear {
 			_back_walk = sprCrystalShieldCWalkBack
 		}
 		
-		if !creator.speed {
-			draw_sprite_ext(_back_idle, walk, x, y + 6, shieldright, 1, 0, c_white, 1)
+		if creator.speed != 0 {
+			draw_sprite_ext(_back_walk, walk, x, y + 2, shieldright, 1, 0, c_white, 1)
 		}
 		else {
-			draw_sprite_ext(_back_walk, walk, x, y + 6, shieldright, 1, 0, c_white, 1)
-			walk += 0.4
+			draw_sprite_ext(_back_idle, walk, x, y + 2, shieldright, 1, 0, c_white, 1)
 		}
 	}
 }
@@ -54,24 +53,20 @@ if instance_exists(creator) {
 		}
 		
 		if creator.speed != 0 {
-			draw_sprite_ext(_front_idle, walk, x, y + 4, shieldright, 1, 0, c_white, 1)
+			draw_sprite_ext(_front_walk, walk, x, y, shieldright, 1, 0, c_white, 1)
 		}
 		else {
-			draw_sprite_ext(_front_walk, walk, x, y + 4, shieldright, 1, 0, c_white, 1)
+			draw_sprite_ext(_front_idle, walk, x, y, shieldright, 1, 0, c_white, 1)
 		}
 	}
 	
-	if creator.index == global.index {
-		if scr_skill_get(mut_throne_butt) {
-			var _f = instance_nearest(mouse_x, mouse_y, Floor)
-			var _px = _f.x + _f.sprite_width / 2
-			var _py = _f.y + _f.sprite_height / 2
-
-			draw_set_alpha(0.5)
-			draw_sprite(creator.spr_idle, creator.image_index, _px, _py)
-			draw_set_alpha(0.3)
-			draw_sprite(spr_idle, 3, _px, _py)
-			draw_set_alpha(1)
-		}
+	if (teleporting && scr_player_is_local(creator.index) && !is_keyboard(creator.index)) {
+		draw_set_alpha(0.5)
+		draw_sprite(creator.spr_idle, creator.image_index, teleport_x, teleport_y)
+		
+		draw_set_alpha(0.3)
+		draw_sprite(spr_idle, 3, teleport_x, teleport_y)
+		
+		draw_set_alpha(1)
 	}
 }

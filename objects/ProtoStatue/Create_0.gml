@@ -26,10 +26,7 @@ instance_create(x - 16 + 32, y - 16 - 32, Floor)
 instance_create(x - 16 + 32, y - 16 + 32, Floor)
 
 with Wall {
-    if place_meeting(x, y, other) {
-        instance_create(x, y, FloorExplo)
-        instance_destroy()
-    }
+    if (place_meeting(x, y, other)) scrWallDestroy(id)
 }
 
 /*
@@ -41,5 +38,5 @@ with Floor {
 instance_create(x, y, PortalClear)
 
 repeat 4 {
-    instance_create(((x + random(12)) - 6), ((y + random(12)) - 6), Bandit)
+    instance_create(x + orandom(6), y + orandom(6), Bandit)
 }

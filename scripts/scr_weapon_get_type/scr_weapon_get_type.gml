@@ -1,6 +1,6 @@
 function scr_weapon_is_valid(_weapon) {
 	gml_pragma("forceinline")
-	return is_numeric(_weapon) && _weapon > 0 && _weapon <= (maxwep - 1)
+	return is_numeric(_weapon) && _weapon > 0 && _weapon <= maxwep
 }
 
 function scr_weapon_get_name(_weapon) {
@@ -61,4 +61,8 @@ function scr_weapon_is_melee(_weapon) {
 function scr_weapon_has_assist_disabled(_weapon) {
 	gml_pragma("forceinline")
 	return scr_weapon_is_valid(_weapon) ? wep_naim[_weapon] : false
+}
+
+function scr_weapon_is_hyper(_weapon) {
+	return _weapon == wep_hyper_launcher || _weapon == wep_hyper_rifle || _weapon == wep_hyper_slugger
 }

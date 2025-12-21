@@ -31,8 +31,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Pickups",
-    "path":"folders/Sprites/Pickups.yy",
+    "name":"Weapon",
+    "path":"folders/Sprites/Pickups/Weapon.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

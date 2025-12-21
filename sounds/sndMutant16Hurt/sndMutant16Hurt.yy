@@ -7,10 +7,10 @@
   },
   "bitDepth": 1,
   "channelFormat": 0,
-  "compression": 1,
+  "compression": 2,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.29904762,
+  "duration": 0.653356,
   "exportDir": "",
   "name": "sndMutant16Hurt",
   "parent": {

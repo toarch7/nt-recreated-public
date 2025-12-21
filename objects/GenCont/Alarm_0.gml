@@ -1,41 +1,10 @@
+/// @description Spawn walls, bosses
+
 with (Floor) mcr_floor_make_walls;
 
-/*
-if !instance_exists(Player)
-scrPlayerCreate(global.coop ? global.index : 0, GameCont.race)
-*/
-if instance_exists(Player) {
-    with Player {
-        depth = -2
-        visible = 1
-
-        x = 10016
-        y = 10016
-        angle = 0
-        instance_create(x, y, PortalClear)
-		
-		if scr_skill_get(8) && !instance_exists_var(GammaGuts, "creator", id) {
-		    with instance_create(x, y, GammaGuts) {
-		        creator = other.id
-		    }
-		}
-	}
-	
-	with WepPickup {
-        if persistent {
-            persistent = false
-            visible = 1
-			
-            x = 10016
-			y = 10016
-			
-            mask_index = mskWepPickup
-			
-            motion_add(random_angle, 1.5 + random(1))
-        }
-    }
-}
-
+var _area = GameCont.area,
+	_subarea = GameCont.subarea,
+	_loops = GameCont.loops
 
 if instance_exists(Player) {
     view_xview = 10016 - view_width / 2
@@ -48,90 +17,79 @@ if instance_exists(Player) {
     }
 }
 
-if !(GameCont.area == 7 && GameCont.subarea == 3) && !(GameCont.area == 106 && GameCont.subarea == 3) {
-    if safespawn {
-        with RadChest {
-            x += lengthdir_x(other.safefloors * 32, other.safedir)
-            y += lengthdir_y(other.safefloors * 32, other.safedir)
-        }
-    }
+var _max_subareas = scrAreaGetMaxSubareas(GameCont.area)
 
-    scrPopulate()
+if (!(GameCont.subarea == _max_subareas && (GameCont.area == area_palace || GameCont.area == area_hq))) {
+	scrPopulate()
 	
-	if instance_exists(TutCont) {
-		with enemy {
-			if object_index != TutorialTarget
-				instance_destroy(id, 0)
+	if (instance_exists(TutCont)) {
+		with (enemy) {
+			if (object_index != TutorialTarget) instance_destroy(id, false)
 		}
 		
-		with Wall {
-			if place_meeting(x, y, Floor)
-				instance_destroy()
+		with (Wall) {
+			if (place_meeting(x, y, Floor)) instance_destroy()
 		}
 		
-		with chestprop
-			instance_destroy(id, 0)
-		
-		with RadChest
-			instance_destroy(id, 0)
-		
-		with WantBoss
-			instance_destroy()
-		
-		with WantPopo
-			instance_destroy()
+		instance_destroy(chestprop, false)
+		instance_destroy(RadChest, false)
+		instance_destroy(WantBoss, false)
+		instance_destroy(WantPopo, false)
 	}
-
+	
     with Floor {
         if GameCont.area == 0 && instance_exists(Player) && (rng_float(RNGStates.Enemies, 10 + GameCont.hard) > GameCont.hard or !instance_exists(IDPDSpawn)) {
             if instance_number(IDPDSpawn) < 5 + GameCont.loops instance_create(x + 16, y + 16, IDPDSpawn)
         }
     }
-} else {
-    with WeaponChest instance_destroy(id, 0)
-    with RadChest instance_destroy(id, 0)
-    with AmmoChest instance_destroy(id, 0)
+}
+else {
+	instance_destroy(chestprop, false)
+	instance_destroy(RadChest, false)
 }
 
-var flor = instance_furthest(10000, 10000, Floor)
-
-if GameCont.area == 3 && GameCont.subarea == 3 {
-    var dir = instance_furthest(10016, 10016, Floor)
-
-    if dir {
-        var dis = point_distance(10016, 10016, dir.x, dir.y)
-        var dirct = point_direction(10016, 10016, dir.x, dir.y)
-
-        var dar = instance_nearest(10016 + lengthdir_x(dis * 0.75, dirct), 10016 + lengthdir_y(dis * 0.75, dirct), Floor)
-
-        with instance_create(dar.x + 16, dar.y + 16, BecomeScrapBoss) {
-            xprevious = x
-            yprevious = y
-        }
-
-        /*with enemy {
-	        if point_distance(x, y, BecomeScrapBoss.x, BecomeScrapBoss.y) < 96 && random(2) < 1 {
-	            instance_destroy(id, 0)
-			}
-		}*/
-    }
+if (GameCont.subarea == _max_subareas) {
+	var _floor = instance_furthest(10000, 10000, Floor), _fx, _fy;
+	
+	if (instance_exists(_floor)) {
+		with (_floor) {
+			_fx = bbox_center_x
+			_fy = bbox_center_y
+		}
+	}
+	else {
+		_fx = 10016
+		_fy = 10016
+	}
+	
+	if (GameCont.area == area_scrapyards) {
+	    var _distance = point_distance(10016, 10016, _fx, _fy),
+			_direction = point_direction(10016, 10016, _fx, _fy),
+			_x = 10016 + lengthdir_x(_distance * 0.75, _direction),
+			_y = 10016 + lengthdir_y(_distance * 0.75, _direction)
+		
+		with (instance_nearest(_x, _y, Floor)) {
+		    with (instance_create(bbox_center_x, bbox_center_y, BecomeScrapBoss)) {
+		        xprevious = x
+		        yprevious = y
+		    }
+		}
+	}
+	else if (GameCont.area == area_city) {
+		instance_create(_floor.x + 16, _floor.y + 16, LilHunter)
+	}
+	else if ((GameCont.area == area_caves || GameCont.area == area_cursed_caves) && GameCont.loops) {
+		instance_create(_floor.x + 16, _floor.y + 16, HyperCrystal)
+	}
+	else if (GameCont.area == area_sewers && GameCont.loops) {
+		instance_create(_floor.x + 16, _floor.y + 16, FrogQueen)
+	}
 }
 
-if GameCont.area == 5 && GameCont.subarea == 3 instance_create(flor.x + 16, flor.y + 16, LilHunter)
+with (Floor) mcr_floor_create_tops;
 
-if (GameCont.area == 4 or GameCont.area == 104) && GameCont.loops instance_create(flor.x + 16, flor.y + 16, HyperCrystal)
-
-if GameCont.area == 2 && GameCont.loops instance_create(flor.x + 16, flor.y + 16, FrogQueen)
-
-with Floor {
-    instance_create(x - 32, y, Top)
-    instance_create(x + 32, y, Top)
-    instance_create(x - 32, y + 32, Top)
-    instance_create(x + 32, y + 32, Top)
-    instance_create(x - 32, y - 32, Top)
-    instance_create(x + 32, y - 32, Top)
-    instance_create(x, y + 32, Top)
-    instance_create(x, y - 32, Top)
-}
+call_after(5, function() {
+	with (Floor) mcr_floor_create_tops;
+})
 
 alarm[1] = 2

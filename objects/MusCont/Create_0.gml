@@ -7,15 +7,13 @@ amb = custom_sound_check(amb0)
 
 if !snd_is_playing(musCredits) {
     snd_play_music(song)
-
+	
     alarm[0] = audio_sound_length(song) * 30
-
-    if song == musThemeA {
-        alarm[0] -= 160
-    }
-
-    if !alarm[0] alarm[0] = 30
-
+	
+    if (song == musThemeA) alarm[0] -= 160
+    
+    if (alarm[0] <= 0) alarm[0] = 30
+	
     snd_play(sndRestart)
 }
 

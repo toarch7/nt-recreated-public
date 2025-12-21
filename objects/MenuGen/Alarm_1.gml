@@ -1,39 +1,36 @@
-with Floor {
-    if !position_meeting(x - 32, y, Floor) instance_create(x - 32, y, Floor)
-    if !position_meeting(x + 32, y, Floor) instance_create(x + 32, y, Floor)
-    if !position_meeting(x, y - 32, Floor) instance_create(x, y - 32, Floor)
-    if !position_meeting(x, y + 32, Floor) instance_create(x, y + 32, Floor)
+with (Floor) {
+    if (!position_meeting(x - 32, y, Floor)) instance_create(x - 32, y, Floor)
+    if (!position_meeting(x + 32, y, Floor)) instance_create(x + 32, y, Floor)
+    if (!position_meeting(x, y - 32, Floor)) instance_create(x, y - 32, Floor)
+    if (!position_meeting(x, y + 32, Floor)) instance_create(x, y + 32, Floor)
 }
 
-with Floor {
-    if !position_meeting(x - 16, y - 16, Floor) instance_create(x - 16, y - 16, Wall)
-    if !position_meeting(x, y - 16, Floor) instance_create(x, y - 16, Wall)
-    if !position_meeting(x + 16, y - 16, Floor) instance_create(x + 16, y - 16, Wall)
-    if !position_meeting(x + 32, y - 16, Floor) instance_create(x + 32, y - 16, Wall)
-    if !position_meeting(x + 32, y, Floor) instance_create(x + 32, y, Wall)
-    if !position_meeting(x + 32, y + 16, Floor) instance_create(x + 32, y + 16, Wall)
-    if !position_meeting(x - 16, y, Floor) instance_create(x - 16, y, Wall)
-    if !position_meeting(x - 16, y + 16, Floor) instance_create(x - 16, y + 16, Wall)
-    if !position_meeting(x - 16, y + 32, Floor) instance_create(x - 16, y + 32, Wall)
-    if !position_meeting(x, y + 32, Floor) instance_create(x, y + 32, Wall)
-    if !position_meeting(x + 16, y + 32, Floor) instance_create(x + 16, y + 32, Wall)
-    if !position_meeting(x + 32, y + 32, Floor) instance_create(x + 32, y + 32, Wall)
+with (Floor) mcr_floor_make_walls;
+
+with (Floor) mcr_floor_create_tops;
+
+instance_destroy(Smoke)
+instance_destroy(RadChest, false)
+instance_destroy(chestprop, false)
+instance_destroy(ChestOpen, false)
+
+with (Floor) {
+    if (random(6) < 1) {
+		if (irandom(21)) {
+			if (distance_to_object(CampChar) > 24 && distance_to_object(NightCactus) > 16) {
+				instance_create(x + 16, y + 16, NightCactus)
+			}
+        }
+		else {
+			instance_create(x + 16, y + 16, TopDecalNightDesert)
+		}
+	}
 }
 
-with RadChest
-instance_destroy()
-with WeaponChest
-instance_destroy()
-with AmmoChest
-instance_destroy()
-with BigWeaponChest
-instance_destroy()
-with ChestOpen
-instance_destroy()
+with (CampChar) instance_create(x, y, PortalClear)
 
-with Vlambeer {
-    mode = 1
-    alarm[0] = 30
-}
+call_after(1, function() {
+	with (Wall) mcr_wall_update_lrwh;
+})
 
-event_perform(ev_alarm, 2)
+scrMoveTopPots()

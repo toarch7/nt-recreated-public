@@ -2,7 +2,7 @@ raddrop = 0
 max_hp = 250
 meleedamage = 20
 size = 7
-hit_id = sprite_index
+hitid = HitId.Van
 name = "VAN"
 spr_idle = sprVanDrive
 event_inherited()
@@ -23,7 +23,7 @@ if instance_exists(p) {
 }
 
 drive = 1
-break_walls = 24
+wallbreak = 24
 drivespeed = 8
 alarm[0] = 40
 drawspr = spr_idle

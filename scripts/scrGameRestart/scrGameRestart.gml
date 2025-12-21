@@ -3,7 +3,8 @@ function scrGameRestart(_quit_to_menu = false) {
 	
 	if scrGameIsPaused() {
 		scrGameUnpause()
-		call_after(1, method({_quit_to_menu}, function() {
+		
+		call_after(1, method({ _quit_to_menu }, function() {
 			scrGameRestart(_quit_to_menu)
 		}))
 		
@@ -14,33 +15,23 @@ function scrGameRestart(_quit_to_menu = false) {
 	
 	with UberCont {
 		continued_run = false
-		
 		file_delete("gamestate.dat")
-		
 		scrCleanupSessionInstances()
 		
 		if _quit_to_menu {
 			global.custom_seed = 0
+			global.crownpick = crwn_none
 			want_quit_to_menu = true
+			room_restart()
 			break
 		}
 		
-		instance_create(0, 0, GameCont)
-		
 		instance_destroy(MusCont)
+		
 		instance_create(0, 0, MusCont)
 		
-		scrCreatePlayers(global.index)
-		
-		with (Player) {
-			snd_play(scr_race_get_sound(race, "Cnfm", sndMutant0Cnfm))
-		}
-		
-		instance_create(x, y, GenCont)
-		instance_destroy(WepPickup)
+		scrRunStart()
 	}
-	
-	room_restart()
 }
 
 /// @function scrGameQuitToMenu

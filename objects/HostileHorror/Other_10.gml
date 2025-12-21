@@ -21,7 +21,7 @@ if ammo {
             with instance_create(x + random(2 + charge) * choose(1, -1), y + random(2 + charge) * choose(1, -1), HorrorBullet) {
                 motion_add(other.gunangle, 12)
                 image_angle = direction
-                hit_id = other.hit_id
+                hitid = other.hitid
                 team = other.team
             }
         }

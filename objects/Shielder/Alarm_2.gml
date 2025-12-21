@@ -4,7 +4,7 @@ if ammo > 0 && !place_meeting(x, y, PopoShield) {
     motion_add(gunangle + 180, 0.5)
 
     with instance_create(x, y, IDPDBullet) {
-        hit_id = other.spr_idle
+        hitid = other.hitid
         motion_add(other.gunangle + random(20) - 10, 8)
         image_angle = direction
         team = other.team

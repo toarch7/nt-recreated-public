@@ -1,5 +1,7 @@
 #macro debug_overlay_file "dbg_overlay.ini"
 
+global.__debug_transit_loop = -1
+
 function scr_debug_overlay_load() {
 	static load = function(_global_name, _default) {
 		variable_global_set(_global_name, is_numeric(_default)
@@ -30,7 +32,10 @@ function scr_debug_overlay_save() {
 	}
 	
 	ini_open(debug_overlay_file)
-	
+	write("__debug_test_framerate_uncapped")
+	write("__debug_camera_display_info")
+	write("__debug_hitboxes")
+	write("__debug_health")
 	ini_close()
 }
 
@@ -47,27 +52,62 @@ function scr_create_debug_overlay_views() {
 		dbg_checkbox(ref_create(global, "__debug_hitboxes"), "Object hitboxes")
 		dbg_checkbox(ref_create(global, "__debug_health"), "Enemy health")
 		
+		dbg_section("Resources")
+		dbg_button("Give rads", function() {
+			with (GameCont) {
+				rad = max_rad
+				event_perform(ev_step, ev_step_normal)
+			}
+		})
+		dbg_same_line()
+		dbg_button("Level Ultra", function() {
+			with (GameCont) {
+				if (level >= 10) break
+				ultrapoints = 1
+				var _skillpoints = max(0, 8 - ds_list_size(skills) - level)
+				if (_skillpoints > 0) skillpoints = _skillpoints
+				level = 10
+				event_perform(ev_step, ev_step_normal)
+				rad = max_rad
+				room_restart()
+			}
+		})
+		
 	#endregion
 	
 	#region Transit
 		
 		dbg_view("Goto")
-		dbg_section("Areas")
-		
 		static __area_transit_button = function(_area, _subarea) {
-			if (scrGameIsPaused()) scrGameUnpause()
 			return method({ area: _area, subarea: _subarea }, function() {
+				if (!instance_exists(GameCont)) {
+					print("Unable to teleport - You're not in the game!")
+					exit
+				}
+				
+				if (scrGameIsPaused()) scrGameUnpause()
+				
 				var _area = area,
 					_subarea = subarea
 				
 				with (GameCont) {
 					area = _area
-					if (_subarea != 0) {
-						subarea = _subarea
-					}
-					else subarea = 0
+					subarea = _subarea
 					is_level_ended = false
 					can_advance_stage = false
+					
+					if (global.__debug_transit_loop != -1) {
+						loops = global.__debug_transit_loop
+					}
+					
+					hard = scrAreaGetDifficulty(_area, _subarea, loops)
+					
+					print("Teleporting to", scrAreaGetMapName(_area, _subarea, loops), "diff", hard)
+					
+					waypnt[waypoints] = area
+					waysub[waypoints] = subarea
+					waylps[waypoints] = loops
+					waypoints ++
 				}
 				
 				with (instance_create(10016, 10016, Portal)) {
@@ -77,31 +117,85 @@ function scr_create_debug_overlay_views() {
 			})
 		}
 		
-		var _low = area_campfire, _high = area_palace, _secret = false;
-		repeat (2) {
-			// Normal
-			for(var i = _low; i <= _high; ++i) {
-				dbg_button(scrAreaGetName(i), __area_transit_button(i, 1), 120)
-				
-				var _subareas = scrAreaGetMaxSubareas(i)
-				for(var j = 0; j < _subareas; ++j) {
-					dbg_same_line()
-					
-					var _area_title = _secret ? (i - 100) : i,
-						_subarea_title = (_secret && _subareas <= 1) ? "?" : (j + 1),
-						_label = $"{_area_title}-{_subarea_title}"
-					
-					if (i == area_vault) _label = "???"
-					else if (i == area_crib) _label = "$$$"
-					
-					dbg_button(_label, __area_transit_button(i, j), 60)
-				}
+		dbg_section("Area", true)
+		
+		dbg_slider_int(ref_create(global, "__debug_transit_loop"), -1, 10, "Loop")
+		
+		var _default_max_subareas = 3,
+			_area_list = range(area_campfire, area_palace)
+		
+		array_push(_area_list, area_hq)
+		
+		var _area_count = array_length(_area_list)
+		
+		for(var i = 0; i < _area_count; ++i) {
+			var _area = _area_list[i],
+				_secret_area = (_area % 100) + 100
+			
+			dbg_button(scrAreaGetName(_area), __area_transit_button(_area, 1), 120)
+			
+			var _subareas = scrAreaGetMaxSubareas(_area),
+				_secret_subareas = scrAreaGetMaxSubareas(_secret_area),
+				_missing_subareas = max(0, _default_max_subareas - _subareas),
+				_has_secret = true
+			
+			if (_secret_subareas > 1 || _area == _secret_area) _has_secret = false
+			
+			for(var _subarea = 1; _subarea <= _subareas; ++_subarea) {
+				dbg_same_line()
+				dbg_button(
+					scrAreaGetMapName(_area, _subarea, 0),
+					__area_transit_button(_area, _subarea),
+					(65 + _missing_subareas * 20.33) * max(1, _missing_subareas))
 			}
 			
-			_low = area_vault
-			_high = area_crib
-			_secret = true
+			if (_has_secret) {
+				dbg_same_line()
+				dbg_text("")
+				dbg_same_line()
+				dbg_button(scrAreaGetName(_secret_area),
+					__area_transit_button(_area + 100, 1), 110)
+			}
 		}
+	#endregion
+	
+	#region Mutations
+	
+		dbg_view("Mutations")
+		dbg_section("Skills", true)
+		
+		for(var i = 1; i <= maxskill; ++i) {
+			dbg_button($"{i}. {string_lower_camel(scr_skill_get_name(i), true)}", method({ skill: i }, function() {
+				if !scr_skill_get(skill) {
+					scr_skill_set(skill, true)
+				}
+				else {
+					scr_skill_set(skill, false)
+				}
+			}))
+			
+			if ((i % 3) != 0) dbg_same_line()
+		}
+		dbg_text("")
+		
+		for(var i = Race.CoopUltra; i < Race.NUM_ALL_RACE_TYPES; ++i) {
+			var _open = (scrPlayerCountRace(i, true) != 0)
+			dbg_section($"{i}. Ultras - {i == 0 ? "Co-op" : string_lower_camel(scrRaceGetName(i), true)}", _open)
+			for(var j = 1; j <= (2 + (i == Race.Horror)); ++j) {
+				var _name = string_lower_camel(scrRaceGetUltraSkillName(i, j), true)
+				dbg_button(_name, method({ race: i, ultra: j }, function() {
+					if !scr_ultra_get(race, ultra) {
+						scr_ultra_set(race, ultra, true)
+					}
+					else {
+						scr_ultra_set(race, ultra, false)
+					}
+				}))
+				dbg_same_line()
+			}
+			dbg_text("")
+		}
+	
 	#endregion
 	
 	#region Tests

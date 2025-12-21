@@ -30,11 +30,8 @@ instance_create(x - 16 - 32, y - 16, Floor)
 instance_create(x - 16 + 32, y - 16, Floor)
 
 
-with Wall {
-    if place_meeting(x, y, other) {
-        instance_destroy()
-        instance_create(x, y, FloorExplo)
-    }
+with (Wall) {
+    if (place_meeting(x, y, other)) scrWallDestroy(id)
 }
 
 if GameCont.crownvisits >= 3 {

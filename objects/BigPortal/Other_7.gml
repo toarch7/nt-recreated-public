@@ -1,19 +1,18 @@
-if sprite_index = sprBigPortalSpawn {
+if sprite_index == sprBigPortalSpawn {
     instance_create(x, y, PortalShock)
     sprite_index = sprBigPortal
 }
-if sprite_index = sprBigPortalDisappear {
+
+if sprite_index == sprBigPortalDisappear {
     with Player {
         reload = 0
         breload = 0
-
-        if curse or bcurse snd_play(sndUncurse)
-
-        curse = 0
-        bcurse = 0
+		can_shoot = true
+		bcan_shoot = true
+		scrPlayerUncurse(id)
     }
 
-    GameCont.is_level_ended = 1
+    GameCont.is_level_ended = true
 
     snd_stop(sndPortalLoop)
 

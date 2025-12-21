@@ -3,19 +3,36 @@ if lockstep_stop
 
 if !(can_pick && other.visible) exit
 
-if KeyCont.press_pick[index] && other.id == instance_nearest(x, y, WepPickup) {
-    if curse == other.curse || !scr_weapon_is_valid(bwep) {
-        with (instance_create(x, y, WepSwap)) target = other.id
-		
-        if other.wep == wep_guitar {
-            snd_play(sndGuitarPickup)
-        }
-		else {
-            if scr_weapon_is_golden(other.wep) {
-				snd_play(sndGoldPickup)
+if ((other.autopick && (!other.speed || other.slowreturn == 2)) || KeyCont.press_pick[index]) && other.id == instance_nearest(x, y, WepPickup) {
+    if (!curse || other.curse
+		|| array_length(extra_weps) < max_extra_weps
+		|| !scr_weapon_is_valid(bwep)
+	) {
+        if (!other.autopick) {
+	        with (instance_create(x, y, WepSwap)) target = other.id
+			
+			if (other.wep == wep_guitar) {
+	            snd_play(sndGuitarPickup)
+	        }
+			else if (other.wep == wep_electric_guitar) {
+	            snd_play(sndSwapElectricGuitar)
+	        }
+			else {
+	            if (scr_weapon_is_golden(other.wep)) {
+					snd_play(sndGoldPickup)
+				}
+				else {
+					snd_play(sndWeaponPickup)
+				}
 			}
-			else snd_play(sndWeaponPickup)
-        }
+		}
+		else {
+			instance_create(other.x + orandom(3), other.y + orandom(2), WepSwap)
+			if (other.slowreturn == 2) {
+				snd_play_hit(wep_swap[other.wep])
+			}
+			else snd_play(sndPickupDisappear, 1.2)
+		}
 		
 		with TutCont {
 	        if pos == 1 && !step_complete {
@@ -25,8 +42,13 @@ if KeyCont.press_pick[index] && other.id == instance_nearest(x, y, WepPickup) {
 		}
 
         if scr_weapon_is_valid(bwep) {
-			with scrWeaponPickupCreate(other.x, other.y, wep) {
-				curse = other.curse
+			if max_extra_weps && array_length(extra_weps) < max_extra_weps {
+				scrExtraWepStoreCurrent()
+			}
+			else {
+				with scrWeaponPickupCreate(other.x, other.y, wep) {
+					curse = other.curse
+				}
 			}
         }
 		else {
@@ -41,11 +63,17 @@ if KeyCont.press_pick[index] && other.id == instance_nearest(x, y, WepPickup) {
         reload = 0
 		
         if (curse) snd_play(sndCursedPickup)
-        
-        snd_play(wep_swap[wep])
 		
-		// TODO: localized string
-		scrPopupCreate(x, y, loc(wep_name[wep]) + "!")
+		scrUnlocksPlayerEquipment(id)
+		
+		GameCont.haspickedweps = true
+        
+        if (!other.autopick) {
+			snd_play(wep_swap[wep])
+			
+			// TODO: localized string
+			scrPopupCreate(x, y, loc(wep_name[wep]) + "!")
+		}
 		
 		if scr_weapon_is_melee(wep) {
 			wepangle = choose(120, -120)
@@ -54,9 +82,12 @@ if KeyCont.press_pick[index] && other.id == instance_nearest(x, y, WepPickup) {
 		
         instance_destroy(other)
     }
-	else if (curse) snd_play(sndCursedReminder)
+	else {
+		if (curse) snd_play(sndCursedReminder)
+		other.autopick = false
+	}
 	
-	if index == global.index {
+	if (index == global.index) {
 		with (WepstickAttack) scrWepstickUpdateSprite(other.id)
 	}
 }

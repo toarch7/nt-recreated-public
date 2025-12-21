@@ -3,7 +3,7 @@ with instance_create(x, y, EnemySlash) {
     motion_add(other.gunangle + random(10) - 5, 2)
     creator = other.id
     team = other.team
-    hit_id = other.spr_idle
+    hitid = other.hitid
 }
 
 wepangle *= -1

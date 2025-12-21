@@ -1,68 +1,65 @@
 if lockstep_stop
 	exit
 
-if (GameCont.tottimer - starttimer < 30) or (other.inframes or other.bleed) && other.object_index == Player exit
+if ((GameCont.tottimer - starttimer < 30) || !scr_can_hit(other.id) || other.bleed) exit
 
 hp = clamp(ceil(other.hp / 2), 1, max_hp)
 
 with other {
-    inframes = 10
-
-    sprite_index = spr_hurt
-    image_index = 0
-
-    snd_play_hit(snd_hurt, 0.2)
-
+	scr_hit_self(max(1, floor(hp * 0.5), HitId.PlayerRevive))
+	
     hp = round(hp / 2)
-
-    if speed < 4 {
-        motion_add(point_direction(other.x, other.y, x, y), 4)
-    }
+	
+	motion_add(point_direction(other.x, other.y, x, y), 4)
+    if (speed > 4) speed = 4
 }
 
 with Corpse {
     if sprite_index == other.spr_dead {
         instance_destroy()
+		break
     }
 }
 
-var player = id
+var _player = id
 instance_change(Player, 0)
 
-with player {
+with _player {
     repeat 2 {
-        with instance_nearest(x, y, WepPickup) if !curse {
-            if !other.wep {
-                other.wep = wep
-                instance_destroy()
-            } else {
-                var _wep = other.wep
-                other.bwep = _wep
-                other.wep = wep
-                instance_destroy()
-            }
-        }
-    }
-
-    inframes = 10
-
+		var _distance_max = 64, _instance = noone
+		
+		with WepPickup {
+			var _distance = distance_to_object(other)
+			
+	        if (!curse && _distance_max < _distance) {
+				_distance_max = _distance
+				_instance = id
+			}
+		}
+		
+		if instance_exists(_instance) {
+			if (wep) scrSwapWeps()
+			wep = _instance.wep
+			instance_destroy(_instance)
+		}
+	}
+	
+	nexthurt = current_frame + 30
     sprite_index = spr_hurt
     image_index = 0
-
-    if speed < 4 {
-        motion_add(point_direction(other.x, other.y, x, y), 4)
-    }
-
-    spirit = scr_skill_get(27)
-
+	
+	motion_add_m(point_direction(other.x, other.y, x, y), 4)
+	
+    spirit = scr_skill_get(mut_strong_spirit)
+	
     if spirit {
         can_spirit = 1
         spirit_index = 0
     }
-
+	
     reload = 1
     breload = 1
-
+	
     snd_play(snd_lowh)
 }
 
@@ -70,6 +67,6 @@ image_alpha = 1
 mask_index = mskPlayer
 visible = 1
 
-if race == 13 {
+if race == Race.BigDog {
     mask_index = mskScrapBoss
 }

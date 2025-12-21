@@ -1,4 +1,1 @@
-if lockstep_stop
-	exit
-
-scrGameContDrawGUI()
+if (!instance_exists(TopCont)) scrDrawMiscHUD()

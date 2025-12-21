@@ -6,7 +6,7 @@ alarm[0] += 45
 with instance_create(x, y, EnemyFlak) {
     motion_add(other.gunangle + (random(50) - 25), 8 + random(2))
     creator = other.id
-    hit_id = other.spr_idle
+    hitid = other.hitid
     image_angle = direction
     creator = other.id
     team = other.team

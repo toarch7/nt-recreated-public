@@ -32,7 +32,7 @@
 #macro x_rel_view (x - view_xview)
 #macro y_rel_view (y - view_yview)
 
-#macro animation_end (image_index + image_speed > sprite_get_number(sprite_index))
+#macro animation_end ((image_index + image_speed) > sprite_get_number(sprite_index))
 
 #macro random_angle (random(360))
 
@@ -70,6 +70,13 @@
 		instance_create(x + 32, y + 32, Top) \
 		instance_create(x - 32, y - 32, Top) \
 		instance_create(x + 32, y - 32, Top) \
+	}
+
+#macro mcr_wall_update_lrwh { \
+		if (place_free(x - 16, y)) l = 0 else l = 4           \
+	    if (place_free(x + 16, y)) w = 24 - l else w = 20 - l \
+	    if (place_free(x, y - 16)) r = 0 else r = 4           \
+	    if (place_free(x, y + 16)) h = 24 - r else h = 20 - r \
 	}
 
 //
@@ -403,10 +410,7 @@ function scrHandleInputsGeneral(_index) {
 	_k.aimassist[_index] = opt_assist
 	_k.crosshair[_index] = opt_crosshair
 	
-	if is_mobile && !(opt_gamepad || opt_keyboard) {
-		_k.touch[_index] = true
-	}
-	else _k.touch[_index] = false
+	_k.touch[_index] = !(opt_gamepad || opt_keyboard)
 	
 	_k.precisemovement[_index] = (_k.touch[_index] || _k.gamepad[_index])
 	
@@ -445,7 +449,7 @@ function scrHandleInputsGeneral(_index) {
 	        scrSetGamepadInputs(1)
 	    }
 		else if gamepad_button_check(0, gp_start) {
-	        opt_gamepad = 1
+	        opt_gamepad = true
 	    }
 		
 		// keyboard ui control
@@ -466,9 +470,14 @@ function scrHandleInputsGeneral(_index) {
 	else {
 		// reset swap inputs in case of using wepsticks
 		if opt_wepstick {
-			KeyCont.hold_swap[_index] = 0
-			KeyCont.press_swap[_index] = 0
-			KeyCont.release_swap[_index] = 0
+			KeyCont.hold_swap[_index] = false
+			KeyCont.press_swap[_index] = false
+			KeyCont.release_swap[_index] = false
+		}
+		
+		// reset previous input states
+		if !instance_exists(MobileUI) {
+			KeyCont.press_swap[_index] = false
 		}
 		
 		if volqueue != -1 && ds_queue_size(volqueue) {
@@ -480,18 +489,15 @@ function scrHandleInputsGeneral(_index) {
 		with MobileUI {
 			if UberCont.opt_stickregions && !instance_exists(MenuOptions) {
 				if (object_index == JoystickMove || object_index == JoystickAttack) {
-					for(var i = 0; i <= 4; i ++)
-						scrStickRegions(i)
+					for(var i = 0; i <= 4; i ++) scrStickRegions(i)
 				}
 			}
 			
-			if object_index != ButtonActive event_user(0)
+			if (object_index != ButtonActive) event_user(0)
 		}
 		
-		with ButtonActive {
-			// always ran last
-			event_user(0)
-		}
+		// always ran last
+		with (ButtonActive) event_user(0)
 		
 		// keep track of touch durations
 		var _count = array_length(touch_duration)
@@ -586,25 +592,60 @@ function month_name_short(month) {
     return "??"
 }
 
-#macro mouse_hover (collision_point(mouse_x, mouse_y, object_index, false, false) == id)
+#macro mouse_hover ()
 
 function mouse_ui_clicked() {
-	if is_desktop
-		return mouse_check_button_pressed(mb_left)
-	
-	for(var i = 0; i < 4; i ++) {
-		if device_mouse_check_button_released(i, mb_left)
-			return true
+	if (is_mobile) {
+		for(var i = 0; i < 4; i ++) {
+			if (device_mouse_check_button_released(i, mb_left)) return true
+		}
+		
+		return false
 	}
 	
-	return false
+	return mouse_check_button_pressed(mb_left)
+}
+
+/// @function mouse_ui_hovered
+/// @param instance
+/// @param is_gui=false
+function mouse_ui_hovered(_instance, _gui = false) {
+	if (is_mouse_over_debug_overlay()) {
+		return false
+	}
+	
+	if (is_mobile) {
+		for(var i = 0; i < 4; i ++) {
+			if (!(device_mouse_check_button(i, mb_left)
+				|| device_mouse_check_button_pressed(i, mb_left)
+				|| device_mouse_check_button_released(i, mb_left))
+			) {
+				continue
+			}
+			
+			var _mx = _gui ? device_mouse_x_to_gui(i) : device_mouse_x(i),
+				_my = _gui ? device_mouse_y_to_gui(i) : device_mouse_y(i)
+			
+			if (collision_point(_mx, _my, object_index, false, false) == _instance) {
+				return true
+			}
+		}
+		
+		return false
+	}
+	
+	var _mx = _gui ? device_mouse_x_to_gui(0) : mouse_x,
+		_my = _gui ? device_mouse_y_to_gui(0) : mouse_y
+	
+	return (collision_point(_mx, _my, object_index, false, false) == _instance)
 }
 
 function input_ui_horizontal_pressed() {
 	var v = input_gamepad_check_pressed(0, gp_padr) - input_gamepad_check_pressed(0, gp_padl)
 	
-	if v == 0
+	if (v == 0) {
 		return scr_keyboard_check_pressed(vk_right) - scr_keyboard_check_pressed(vk_left)
+	}
 	
 	return v
 }
@@ -632,7 +673,7 @@ function scr_camera_set_position(_x, _y, _halign = fa_left, _valign = fa_top) {
 }
 
 function approach(a, b, v) {
-	return b < a ? max(b, a - v) : min(a + v, b)
+	return (b < a ? max(b, a - v) : min(a + v, b))
 }
 
 function image_rescale(_scale_multiplier) {
@@ -652,6 +693,7 @@ function sprite_get_bbox_height(_sprite) {
 /// @param halign=fa_left
 /// @param valign=fa_top
 function draw_align(_halign = fa_left, _valign = fa_top) {
+	gml_pragma("forceinline")
 	draw_set_halign(_halign)
 	draw_set_valign(_valign)
 }
@@ -839,7 +881,7 @@ function t_lerp(a, b, amount) {
 #macro wep_gun_gun 125
 #macro wep_eggplant 126
 #macro wep_golden_frog_pistol 127
-
+#macro wep_electric_guitar 128
 
 #macro mut_none 0
 #macro mut_rhino_skin 1
@@ -905,4 +947,3 @@ function t_lerp(a, b, amount) {
 #macro area_jungle 105
 #macro area_hq 106
 #macro area_crib 107
-

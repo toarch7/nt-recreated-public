@@ -8,23 +8,32 @@ else {
 	image_index += 0.4
 }
 
-var player = instance_nearest(x, y, Player)
+var _player = noone,
+	_least = infinity
 
-if instance_exists(player) {
-	if distance_to_object(player) < 32 + (scr_skill_get(3) * 64) or instance_exists(Portal) {
-		var dir = point_direction(x, y, player.x, player.y)
+if instance_number(Player) > 1 {
+	with Player {
+		if hp < max_hp && hp < _least {
+			_player = id
+			_least = hp
+		}
+	}
+}
+else _player = instance_find(Player, 0)
+
+if instance_exists(_player) {
+	var _distance = 32 + (64 * scr_skill_get(mut_plutonium_hunger))
+	if distance_to_object(_player) < _distance || instance_exists(Portal) {
+		var _direction = point_direction(x, y, _player.x, _player.y)
 		
-		var xx = ldrx(6, dir)
-		var yy = ldry(6, dir)
-	
-		if place_free(x + xx, y)
-			x += xx
+		var _x = ldrx(6, _direction)
+		if place_free(x + _x, y) x += _x
 		
-		if place_free(x, y + yy)
-			y += yy
+		var _y = ldry(6, _direction)
+		if place_free(x, y + _y) y += _y
 	}
 }
 
-if instance_exists(player) && place_meeting(x, y, Portal) {
-	event_perform(ev_collision, Player)
+if instance_exists(_player) && place_meeting(x, y, Portal) {
+	event_perform(ev_collision, _player)
 }

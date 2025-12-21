@@ -1,17 +1,30 @@
-if GameCont.area == 100 {
+/// @description Spawn in vaults & crib chests
+
+var _area = GameCont.area,
+	_subarea = GameCont.subarea,
+	_loops = GameCont.loops
+
+if GameCont.area == area_vault {
     with instance_furthest(10016, 10016, Floor)
     instance_create(x + 16, y + 16, CrownPickup)
-} else if !instance_exists(ProtoStatue) && GameCont.subarea == 2 && ((GameCont.area == 1 && GameCont.loops) or GameCont.area == 3 or GameCont.area == 5 or (GameCont.area == 7 && GameCont.loops)) && GameCont.crownvisits < 3 {
-    flor = instance_furthest(10016, 10016, Floor)
-
-    with instance_nearest(
-    (flor.x * 2 + 10016) / 3 + random(128) - 64, (flor.y * 2 + 10016) / 3 + random(128) - 64,
-    Floor) {
-        instance_create(x + 16, y + 16, ProtoStatue)
-    }
+}
+else if (GameCont.crownvisits < 3 && !instance_exists(ProtoStatue) && instance_exists(Floor)) {
+	var _middle = ceil(scrAreaGetMaxSubareas(_area) / 2)
+	
+	if (_subarea == _middle
+		&& ((_loops && (_area == area_desert || _area == area_palace)) || _area == area_scrapyards || _area == area_city)
+	) {
+		var _floor = instance_furthest(10016, 10016, Floor),
+			_tx = (_floor.x * 2 + 10016) * 0.33 + orandom(64),
+			_ty = (_floor.y * 2 + 10016) * 0.33 + orandom(64)
+		
+		with (instance_nearest(_tx, _ty, Floor)) {
+	        instance_create(bbox_center_x, bbox_center_y, ProtoStatue)
+	    }
+	}
 }
 
-if GameCont.area == 107 {
+if GameCont.area == area_crib {
     lowx = x
     lowy = -10000
 
@@ -39,19 +52,24 @@ if GameCont.area == 107 {
     instance_create(lowx + 16, lowy + 104, VenuzCouch)
     instance_create(lowx + 16 - 64, lowy + 104, MoneyPile)
     instance_create(lowx + 16 + 64, lowy + 104, MoneyPile)
+	
     if instance_exists(Player) {
-        if GameCont.crown == 9 {
-            instance_create(((lowx + 16) - 90), (lowy + 64), GiantAmmoChest)
-            instance_create(((lowx + 16) + 90), (lowy + 64), GiantAmmoChest)
-            //if (GameCont.skill_got[28] == 1)
-            //    instance_create((lowx + 16), (lowy + 64), GiantAmmoChest)
-        } else {
-            instance_create(lowx + 16 - 90, lowy + 64, GiantWeaponChest)
-            instance_create(lowx + 16 + 90, lowy + 64, GiantWeaponChest)
-            if scr_skill_get(28) {
-                instance_create((lowx + 16), (lowy + 64), GiantWeaponChest)
-            }
-        }
+		var _openmind = scr_skill_get(mut_open_mind), _dx = 90, _dy = 64;
+		
+		if (_openmind) _dx += _openmind * 32
+		
+		repeat (1 + _openmind) {
+	        if (scrCrownCheck(crwn_love)) {
+	            instance_create(((lowx + 16) - _dx), (lowy + _dy), GiantAmmoChest)
+	            instance_create(((lowx + 16) + _dx), (lowy + _dy), GiantAmmoChest)
+	        }
+			else {
+	            instance_create(lowx + 16 - _dx, lowy + _dy, GiantWeaponChest)
+	            instance_create(lowx + 16 + _dx, lowy + _dy, GiantWeaponChest)
+	        }
+			_dy -= 28
+			_dx -= 48
+		}
     }
 
     instance_create(lowx + 16, lowy + 104, VenuzCarpet)
@@ -85,5 +103,6 @@ if GameCont.area == 107 {
     }
 }
 
-with Smoke instance_destroy()
-with SpiralCont alarm[0] = 1
+instance_destroy(Smoke)
+
+with (SpiralCont) alarm[0] = 1

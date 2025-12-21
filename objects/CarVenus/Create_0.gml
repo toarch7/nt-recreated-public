@@ -1,14 +1,13 @@
+size = 1
+
+event_inherited()
+
 max_hp = 25
+hp = max_hp
 
 spr_idle = sprVenusCar
 spr_hurt = sprVenusCarHurt
 spr_dead = sprScorchmark
-
-size = 1
-screwed = 0
-
-event_inherited()
-
 
 snd_hurt = sndHitMetal
 

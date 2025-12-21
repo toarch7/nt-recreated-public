@@ -20,11 +20,11 @@
   "overriddenProperties":[],
   "parent":{
     "name":"Last",
-    "path":"folders/Objects/Enemies/Last.yy",
+    "path":"folders/Objects/Enemies/Bosses/Last.yy",
   },
   "parentObjectId":{
-    "name":"enemy",
-    "path":"objects/enemy/enemy.yy",
+    "name":"bossenemy",
+    "path":"objects/bossenemy/bossenemy.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

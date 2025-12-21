@@ -1,11 +1,4 @@
-if lockstep_stop
-	exit
-
-if scrChestOpened()
-	exit
-
-hp = 0
-
-snd_play(sndAmmoPickup)
-
-GameCont.noradch = 0
+if !scrChestOpened() {
+	GameCont.noradch = 0
+	hp = 0
+}

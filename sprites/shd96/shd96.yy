@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"FX",
-    "path":"folders/Sprites/FX.yy",
+    "name":"Shadows",
+    "path":"folders/Sprites/Shadows.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

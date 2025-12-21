@@ -5,6 +5,16 @@ if !instance_exists(Player) scrDrawGameModeIndication()
 // render loadout
 event_user(1)
 
+with (CharSelect) if (tooltip) {
+	var _str = can ? scrRaceGetName(race) : scrRaceGetUnlockDescription(race)
+	scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc(_str), true)
+}
+
+with (GoButton) if (tooltip) {
+	scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc("START RUN"), true)
+}
+
+
 //
 if UberCont.opt_practice {
 	var py = 48
@@ -51,8 +61,8 @@ if string_length(unlock_hint) {
 	
 	draw_align(fa_center, fa_middle)
 	
-	var _width = string_width(_message) / 2 + 8 + unlock_hint_pop,
-		_height = string_height(_message) / 2 + 8,
+	var _width = string_width_pure(_message) * 0.5 + 8 + unlock_hint_pop,
+		_height = string_height_pure(_message) * 0.5 + 8,
 		_xpos = gui_w div 2, _ypos = gui_h - 30
 	
     draw_set_colour(c_tooltip)
@@ -63,7 +73,7 @@ if string_length(unlock_hint) {
 	draw_set_color(c_white)
 	draw_text_nt(_xpos, _ypos + unlock_hint_pop, _message)
 	
-	draw_align(fa_center, fa_middle)
+	draw_align()
 	
 	unlock_hint_pop = approach(unlock_hint_pop, 0, timescale)
 }

@@ -40,10 +40,7 @@ repeat(10) {
 }
 
 with Wall {
-    if place_meeting(x, y, other) {
-        instance_destroy()
-        instance_create(x, y, FloorExplo)
-    }
+    if (place_meeting(x, y, other)) scrWallDestroy(id)
 }
 
 snd_hurt = sndBigDogHit
@@ -54,11 +51,11 @@ sndtaunt = 0
 tauntdelay = 0
 
 if instance_exists(Player) {
-    with Raven {
-        scrRavenLift()
-    }
+    with (Raven) scrRavenLift()
 }
 
 spr_shadow = shd96
 
 alarm[2] = 20
+
+hitid = HitId.BigDog

@@ -3,7 +3,7 @@ if lockstep_stop
 
 if (speed > 6) snd_play_hit(sndShotgunHitWall, 0.2)
 
-move_bounce_solid(00)
+move_bounce_solid(true)
 if (wallbounce > 2) {
     bonus = 1
     alarm[2] = 2

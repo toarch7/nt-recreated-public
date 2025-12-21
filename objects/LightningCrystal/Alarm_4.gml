@@ -10,7 +10,7 @@ repeat(5 + (GameCont.loops * 2)) {
         image_angle = other.lang
         team = other.team
         ammo = (6 + random(6))
-        hit_id = other.hit_id
+        hitid = other.hitid
         event_perform(2, 0)
         visible = 0
         with(instance_create(x, y, LightningSpawn))

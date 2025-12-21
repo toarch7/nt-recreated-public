@@ -39,5 +39,4 @@ alarm[1] = 2
 
 instance_create(0, 0, BackCont)
 instance_create(0, 0, TopCont)
-
 instance_create(0, 0, Menu)

@@ -1,1 +1,3 @@
-done = 1
+scrRaceUnlock(Race.Rogue)
+
+done = true

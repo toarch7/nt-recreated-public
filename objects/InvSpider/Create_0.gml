@@ -17,3 +17,5 @@ snd_dead = choose(sndLaserCrystalDeath, sndRavenDie, sndBanditDie, sndEnemyDie)
 walk = 0
 alarm[1] = 30 + random(90)
 maxspeed = 3
+
+hitid = HitId.CursedSpider

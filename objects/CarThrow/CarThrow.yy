@@ -38,8 +38,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprCarIdle",
-    "path":"sprites/sprCarIdle/sprCarIdle.yy",
+    "name":"sprCarThrown",
+    "path":"sprites/sprCarThrown/sprCarThrown.yy",
   },
   "spriteMaskId":{
     "name":"mskSnowBot",

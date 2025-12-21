@@ -9,7 +9,7 @@ if ammo > 0 {
     motion_add(gunangle + 180, 1)
     wkick = 5
     with instance_create(x, y, EnemyBullet1) {
-        hit_id = other.spr_idle
+        hitid = other.hitid
         creator = other.id
         motion_add(other.gunangle + orandom(15), 8)
         image_angle = direction

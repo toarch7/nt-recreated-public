@@ -1,13 +1,16 @@
 /// @function scrWallDestroy
 /// @param wall_instance
 function scrWallDestroy(_instance) {
-	with _instance {
-		debug_assert(instance_is(self, Wall))
-		
-		instance_destroy()
-		
-		return instance_create(x, y, FloorExplo)
-	}
+	if (!instance_exists(_instance)) exit
 	
-	return noone
+	with (_instance) {
+		do {
+			instance_destroy(_instance)
+			instance_create(x, y, FloorExplo)
+			
+			_instance = collision_rectangle(
+				bbox_left, bbox_top, bbox_right, bbox_bottom, Wall, false, true)
+		}
+		until (!instance_exists(_instance))
+	}
 }

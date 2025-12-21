@@ -20,3 +20,5 @@ spr_shadow = shd32
 alarm[1] = 10 + random(10)
 
 motion_add(point_direction(10016, 10016, x, y), 1)
+
+hitid = HitId.Fireballer

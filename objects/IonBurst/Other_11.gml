@@ -24,13 +24,16 @@ x = _tx
 y = _ty
 
 //FIRING
-snd_play(sndLaser)
+var _laser_brain = scr_skill_get(mut_laser_brain)
 
-if place_meeting(x, x, Floor) {
+snd_play(_laser_brain ? sndLaserUpg : sndLaser)
+
+if place_meeting(x, y, Floor) {
+	var _damage = 2 * (1 + _laser_brain)
     with scr_damage_create(x, y, PlasmaImpact) {
         with hitme {
             if place_meeting(x, y, other) && scr_can_hit(id, false, other.id) {
-				scr_hit_self(2, other.hitid)
+				scr_hit_self(_damage, other.hitid)
 			}
 		}
     }

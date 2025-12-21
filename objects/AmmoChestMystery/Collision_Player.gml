@@ -11,15 +11,23 @@ if scrChestOpened() exit
 var m = _player.ammo
 
 // Get Loaded
-if _player.race == Race.Steroids && scrUltraCheck(_player.race, 2) {
-	event_perform_object(AmmoChest, event_type, event_number)
-	exit
+if scr_ultra_get(Race.Steroids, UltraSkill.GetLoaded) {
+	var _player_ammo_type = scrAmmoDecideType(_player, true),
+		_player_ammo_type_b = scrAmmoDecideType(_player, true)
+	
+	for(var _ammo_type = Ammo.Bullets; _ammo_type < Ammo.NUM_AMMO_TYPES; _ammo_type ++) {
+		if (_player_ammo_type != _ammo_type && _player_ammo_type_b != _ammo_type) {
+			var _give_amount = scrAmmoGetTypeCapacity(_ammo_type) * 3
+			scrPlayerGiveAmmo(_player, _ammo_type, _give_amount, true)
+		}
+	}
 }
-
-var _ammo_type = scrAmmoDecideTypeMystery(_player),
-	_give_amount = typ_ammo[_ammo_type] * 3
-
-scrPlayerGiveAmmo(_player, _ammo_type, _give_amount, true)
+else {
+	var _ammo_type = scrAmmoDecideTypeMystery(_player),
+		_give_amount = scrAmmoGetTypeCapacity(_ammo_type) * 3
+	
+	scrPlayerGiveAmmo(_player, _ammo_type, _give_amount, true)
+}
 
 snd_play(GameCont.underwater ? sndOasisChest : sndAmmoChest)
 

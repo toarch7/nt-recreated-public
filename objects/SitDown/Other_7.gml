@@ -1,48 +1,45 @@
-if (sprite_index && sprite_index != spr_sit) || alarm[2] {
-    sprite_index = spr_sit
-    alarm[0] = 430
+if (sprite_index != spr_gosit) exit
 
-    var s = GameCont.area == 106 ? Player.snd_cptn : Player.snd_thrn,
-		race = GameCont.race
+sprite_index = spr_sit
+alarm[0] = 430
 	
-    snd_play(s)
-	
-    UberCont.ctot_wins[race]++
-	UberCont.ctot_strk[race]++
+var _sound_played = false
+with (Player) if (scr_player_is_local(index)) {
+	if (!_sound_played) {
+		snd_play(GameCont.area == area_hq ? snd_cptn : snd_thrn)
+		_sound_played = true
+	}
+		
+	var _race = race
+	with UberCont {
+		ctot_wins[_race] ++
+		ctot_strk[_race] ++
+			
+		if (ctot_strk[_race] > cbst_strk[_race]) {
+			cbst_strk[_race] = ctot_strk[_race]
+		}
+			
+		if (GameCont.tottimer < cbst_fast[_race] || cbst_fast[_race] <= 0) {
+			cbst_fast[_race] = GameCont.tottimer
+		}
+	}
+		
+	if (race == Race.Chicken && _player.hp <= 0) {
+		scrAchievementUnlock(Achievement.IMPOSSIBLE)
+	}
+}
 
-    if UberCont.ctot_strk[race] > UberCont.cbst_strk[race] {
-        UberCont.cbst_strk[race] = UberCont.ctot_strk[race]
-    }
+scrUnlocksArea()
 
-    if GameCont.tottimer < UberCont.cbst_fast[race] {
-        UberCont.cbst_fast[race] = GameCont.tottimer
-    }
+scrUnlocksWinOrLoop()
 
-    if sprite_index == sprMutant9HeadlessSit {
-        scrAchievementUnlock(28)
-    }
-	
-	// TODO: crown unlock refactoring
-    with GameCont {
-        var pinst = scr_playerinstance_find(global.index)
-        var _race = pinst.race
+alarm[2] = -1
 
-        if !UberCont.crowngot[_race, crown] && crown > 1 {
-            UberCont.crowngot[_race, crown] = 1
-            UberCont.race_crown[_race, crown] = 1
-            //scrShowUnlockPopup(crown_name[crown] + "#UNLOCKED FOR " + race_name[_race])
-            scrAchievementUnlock(22)
-        }
-    }
-
-    alarm[2] = -1
-
-    if GameCont.area != 106 {
-        alarm[1] = 15
-
-        if debug {
-            alarm[0] = 2
-            alarm[1] = 1
-        }
-    }
+if (GameCont.area != area_hq) {
+	alarm[1] = 15
+		
+	if debug {
+	    alarm[0] = 2
+	    alarm[1] = 1
+	}
 }

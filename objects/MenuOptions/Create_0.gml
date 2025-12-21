@@ -4,6 +4,11 @@
 scr_network_instance()
 
 languages = struct_keys(global.language_list)
+array_sort(languages, true)
+
+var _index = array_get_index(languages, "en")
+if (_index != -1) array_delete(languages, _index, 1)
+array_insert(languages, 0, "en")
 
 enum OptionCategory {
 	Main,
@@ -12,6 +17,7 @@ enum OptionCategory {
 	Video,
 	Game,
 	Controls,
+	Language,
 	Resourcepacks,
 	Cheats,
 	
@@ -136,6 +142,7 @@ scrOptionsMenuCreateElements
 	{ type: "category", name: "VIDEO",    category: OptionCategory.Video,    sprite: [ sprOptionsButtons, 1 ] },
 	{ type: "category", name: "GAME",     category: OptionCategory.Game,     sprite: [ sprOptionsButtons, 2 ] },
 	{ type: "category", name: "CONTROLS", category: OptionCategory.Controls, sprite: [ sprOptionsButtons, 3 ] },
+	{ type: "category", name: "LANGUAGE", category: OptionCategory.Language },
 	
 	{
 		type: "button", name: "RESOURCEPACKS", ingame: false,
@@ -143,12 +150,16 @@ scrOptionsMenuCreateElements
 		click: function() {
 			scrOptionsMenuChangeCategory(OptionCategory.Resourcepacks)
 			
-			if !save_get_value("etc", "rp_warning", 0)
+			if (!save_get_value("etc", "rp_warning", 0)) {
 				rp_warning = true
+			}
 		}
 	},
 	
-	{ type: "category", name: "CHEATS",   category: OptionCategory.Cheats, ingame: false,
+	{ type: "button", name: "CHEATS", ingame: false,
+		click: function() {
+			scrOptionsMenuChangeCategory(OptionCategory.Cheats)
+		},
 		awake: function(opt) {
 			opt.visible = UberCont.opt_cheats
 		}
@@ -197,10 +208,7 @@ scrOptionsMenuCreateElements(
 		list: range(0, sprite_get_number(sprCrosshair) - 1),
 		
 		draw: function(opt) {
-			if opt.value < sprite_get_number(sprCrosshair) - 1 {
-				draw_sprite(sprCrosshair, opt.value, drawx + 90, drawy)
-			}
-			else draw_text_nt(drawx + 90, drawy, loc("NONE"))
+			draw_sprite(sprCrosshair, opt.value, drawx + 90, drawy)
 		},
 		
 		value_get: function(opt) {
@@ -229,9 +237,8 @@ scrOptionsMenuCreateElements(
 	{ type: "slider",  name: "SCREENSHAKE",      key: "visual_screenshake"  },
 	{ type: "slider",  name: "FREEZE FRAMES",    key: "visual_freezeframes" },
 	
-	{ type: "switch",  name: "WALL FIX",         key: "visual_walls"        },
-	{ type: "switch",  name: "PARTICLES",        key: "visual_particles",   states: [ OPTION_ON, OPTION_OFF ] },
 	{ type: "switch",  name: "BLOOM",            key: "visual_bloom"        },
+	{ type: "switch",  name: "PARTICLES",        key: "visual_particles",   states: [ OPTION_ON, OPTION_OFF ] },
 	{ type: "switch",  name: "HIDE HUD",         key: "visual_hud",         states: [ OPTION_ON, OPTION_OFF ] },
 	
 	{
@@ -294,12 +301,11 @@ scrOptionsMenuCreateElements(
 scrOptionsMenuCategoryBegin(OptionCategory.Game)
 
 scrOptionsMenuCreateElements(
-	{ type: "list",     name: "LANGUAGE",          key: "etc_language", list: languages },
-	
-	{ type: "switch",   name: "BOSS INTROS",       key: "visual_bossintro" },
-	{ type: "switch",   name: "DYNAMIC CAMERA",    key: "visual_camera" },
-	{ type: "switch",   name: "PLAY TUTORIAL",     key: "game_tutorial",  ingame: false },
-	{ type: "switch",   name: "TIMER",             key: "visual_timer"     },
+	{ type: "switch",   name: "BOSS INTROS", key: "visual_bossintro" },
+	{ type: "switch",   name: "DYNAMIC CAMERA", key: "visual_camera" },
+	{ type: "switch",   name: "PLAY TUTORIAL", key: "game_tutorial",  ingame: false },
+	{ type: "switch",   name: "SHOW TIMER", key: "visual_timer" },
+	{ type: "switch",   name: "SHOW AREA", key: "visual_area" },
 	//{
 	//	type: "switch", name: "CURSOR", desktop_only: true,
 	//	states: [ "DEFAULT", "NATIVE" ], key: "options_cursor",
@@ -595,7 +601,11 @@ scrOptionsMenuCreateElements(
 	{ type: "switch", name: "AIM ASSIST",       key: "controls_assist",       mobile_only: true },
 	{ type: "switch", name: "360 AIMBOT",       key: "controls_aimbot",       mobile_only: true },
 	{ type: "switch", name: "VOLUME CONTROLS",  key: "options_volumecontrol", mobile_only: true },
-	{ type: "switch", name: "SPLIT AIM & FIRE", key: "controls_splitfire",    mobile_only: true },
+	{ type: "switch", name: "SPLIT AIM & FIRE", key: "controls_splitfire",    mobile_only: true,
+		condition: function() {
+			return !UberCont.opt_aimbot
+		}
+	},
 	{ type: "switch", name: "FIXED SIGHT",      key: "controls_fixsight",     mobile_only: true },
 	
 	{ type: "slider", name: "SIZE SCALE", key: "controls_scale", mobile_only: true },
@@ -623,8 +633,7 @@ scrOptionsMenuCreateElements(
 			editing_mode = true
 	        remap_pos = 0
 			
-	        if !UberCont.opt_gamepad
-	            scrCreateMobileControls()
+	        if (!UberCont.opt_gamepad) scrCreateMobileControls()
 			
 			scrOptionsMenuChangeCategory(OptionCategory.Controls_Remapping, false)
 		}
@@ -637,6 +646,30 @@ scrOptionsMenuCreateElements(
 
 scrOptionsMenuCategoryEnd()
 #endregion Controls
+#region Language
+scrOptionsMenuCategoryBegin(OptionCategory.Language)
+
+array_foreach(languages, function(_language_key) {
+	var _language_data = global.language_list[$ _language_key]
+	
+	if (is_undefined(_language_data)) exit
+	var _language_name = _language_data[$ "_LANGUAGE_NAME"]
+	if (!is_string(_language_name)) _language_name = string_upper(_language_key)
+	if (_language_name == "EN") _language_name = "ENGLISH"
+	
+	scrOptionsMenuCreateElement(
+		{ type: "button", name: _language_name, language: _language_key,
+			click: function(_opt) {
+				snd_play(sndClick)
+				save_set_value("etc", "language", _opt.language)
+				scrOptionsUpdate()
+			}
+		},
+	)
+})
+
+scrOptionsMenuCategoryEnd()
+#endregion Language
 #region Controls_Remapping
 scrOptionsMenuCategoryBegin(OptionCategory.Controls_Remapping)
 
@@ -715,31 +748,31 @@ scrOptionsMenuCreateElements(
 scrOptionsMenuCategoryBegin(OptionCategory.Controls_Preferences)
 
 cpref_condition = function(opt) { return UberCont.ctot_time[opt.char] > 0 }
-cpref_name = function(opt) { return (!UberCont.ctot_time[opt.char]) ? "@d- LOCKED -" : "@(sprPlayerMapIcon:" + string(opt.char) + ")  " + loc(opt.name) }
+cpref_name = function(opt) { return (!UberCont.ctot_time[opt.char]) ? "@d- LOCKED -" : "@(sprMapIcon," + string(scr_race_get_skin_subimage(opt.char, 0)) + ") " + loc(opt.name) }
 
 scrOptionsMenuCreateElements(
-	{ type: "switch", name: "AUTO TELEKINESIS",      key: "cprefs_eyes", char: 3,
+	{ type: "switch", name: "AUTO TELEKINESIS",      key: "cprefs_eyes", char: Race.Eyes,
 			condition: cpref_condition, name_get: cpref_name },
 		
-	{ type: "switch", name: "AUTO EXPLOSIONS",       key: "cprefs_melting", char: 4,
+	{ type: "switch", name: "AUTO EXPLOSIONS",       key: "cprefs_melting", char: Race.Melting,
 			condition: cpref_condition, name_get: cpref_name },
 		
-	{ type: "switch", name: "AUTO SNARE",            key: "cprefs_plant", char: 5,
+	{ type: "switch", name: "AUTO SNARE",            key: "cprefs_plant", char: Race.Plant,
 			condition: cpref_condition, name_get: cpref_name },
 		
-	{ type: "switch", name: "POP-POP SWITCH",        key: "cprefs_yv", char: 6,
+	{ type: "switch", name: "POP-POP SWITCH",        key: "cprefs_yv", char: Race.Venuz,
 			condition: cpref_condition, name_get: cpref_name },
 		
-	{ type: "switch", name: "DUAL WEILD SWITCH",     key: "cprefs_steroids", char: 7,
+	{ type: "switch", name: "DUAL WEILD SWITCH",     key: "cprefs_steroids", char: Race.Steroids,
 			condition: cpref_condition, name_get: cpref_name },
 		
-	{ type: "switch", name: "USE WEAPON BEAMING",    key: "cprefs_horror", char: 11,
+	{ type: "switch", name: "USE WEAPON BEAMING",    key: "cprefs_horror", char: Race.Horror,
 			condition: cpref_condition, name_get: cpref_name },
 		
-	{ type: "switch", name: "SWIPE BOMBING",         key: "cprefs_rogue", char: 12,
+	{ type: "switch", name: "SWIPE BOMBING",         key: "cprefs_rogue", char: Race.Rogue,
 			condition: cpref_condition, name_get: cpref_name },
 	
-	{ type: "switch", name: "GAMBLE SWITCH",         key: "cprefs_skeleton", char: 14,
+	{ type: "switch", name: "GAMBLE SWITCH",         key: "cprefs_skeleton", char: Race.Skeleton,
 			condition: cpref_condition, name_get: cpref_name },
 )
 

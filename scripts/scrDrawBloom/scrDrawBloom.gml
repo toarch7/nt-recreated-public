@@ -12,17 +12,19 @@ function scrDrawBloom() {
         }
     }
 
-    with Rocket {
-        if active {
-            draw_sprite_ext(sprRocketFlame, -1, x, y, 2, 2, image_angle, c_white, 0.1)
+    with (Rocket) {
+        if (active) {
+		    draw_sprite_ext(sprRocketFlame, current_frame * 0.4,
+				x, y, image_xscale * 2, image_yscale * 2, image_angle, image_blend, 0.1)
         }
     }
-
-    with(JockRocket) {
-        if active {
-            draw_sprite_ext(sprRocketFlame, -1, x, y, 2, 2, image_angle, c_white, 0.1)
-        }
-    }
+	
+	with (Nuke) {
+		if (active) {
+		    draw_sprite_ext(sprNukeFlame, current_frame * 0.4,
+				x, y, image_xscale * 2, image_yscale * 2, image_angle, image_blend, 0.1)
+		}
+	}
 
     with(Bullet1)
     draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
@@ -107,8 +109,8 @@ function scrDrawBloom() {
         draw_sprite_ext(sprEnemyLaserEnd, img, x, y, 3, 3, image_angle, c_white, 0.1)
     }
 
-    for (var i = 0; i < ds_list_size(global.list_floors_visible); i++) {
-        with(global.list_floors_visible[| i]) {
+    for (var i = 0; i < ds_list_size(global.lis_floors_visible); i++) {
+        with(global.lis_floors_visible[| i]) {
             if (sprite_index == sprFloor2B) draw_sprite_ext(sprFloor2BBloom, image_index, x, y, 1, 1, image_angle, c_white, 0.1)
             if (sprite_index == sprFloor102B) draw_sprite_ext(sprFloor102BBloom, image_index, x, y, 1, 1, image_angle, c_white, 0.1)
         }
@@ -140,11 +142,13 @@ function scrDrawBloom() {
     draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
     with(SmallExplosion)
     draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
-    with(Bolt)
-    draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
+    //with(Bolt)
+    //draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
     with(MeatExplosion)
     draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
     with(BulletHit)
+    draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
+    with(LaserBrain)
     draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
     with(BigGuardianBullet)
     draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
@@ -171,6 +175,8 @@ function scrDrawBloom() {
     with(ExploguardianBullet)
     draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
     with(PlasmaTrail)
+    draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
+    with(YVBullet)
     draw_sprite_ext(sprite_index, -1, x, y, 2, 2, image_angle, c_white, 0.1)
 
     gpu_set_blendmode(bm_normal)

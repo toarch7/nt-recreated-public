@@ -1,9 +1,6 @@
 if lockstep_stop
 	exit
 
-move_bounce_solid(1)
+move_bounce_solid(true)
 
-with other {
-    instance_create(x, y, FloorExplo)
-    instance_destroy()
-}
+scrWallDestroy(other.id)

@@ -19,4 +19,6 @@ with Player {
     GameCont.popolevel -= 1.5
 }
 
+repeat (4) scrFX(x, y, PortalL, random_angle, 3)
+
 close = false

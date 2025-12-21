@@ -23,18 +23,27 @@ function scrPlayerCreate(_index = 0, _race = Race.Random, _skin = 0, _struct = {
         hp = max_hp
         lsthealth = max_hp
     }
-
+	
+	scrAmmoInit()
+	
     return player
 }
 
 function scrPlayerRaceChange(_race, _skin = -1) {
 	race = _race
-	if _skin != -1 bskin = _skin
-	else _skin = bskin
+	
+	if (_skin != -1) {
+		bskin = _skin
+	}
+	else {
+		_skin = bskin
+	}
 	
     max_hp = 8
     maxspeed = 4
     accuracy = 1
+	veinsthreshold = 4
+	cantoxic = true
 	
     snd_hurt = scr_race_get_sound(_race, "Hurt", sndMutant1Hurt)
 	snd_dead = scr_race_get_sound(_race, "Dead", sndMutant1Dead)
@@ -48,16 +57,21 @@ function scrPlayerRaceChange(_race, _skin = -1) {
 	snd_spch = scr_race_get_sound(_race, "Spch", sndMutant1Spch)
 	snd_cptn = scr_race_get_sound(_race, "Spch", sndMutant1Spch)
 	
-	spr_idle  = scr_race_get_sprite(_race, "Idle",  sprMutant1Idle,  _skin)
-	spr_walk  = scr_race_get_sprite(_race, "Walk",  sprMutant1Walk,  _skin)
-	spr_hurt  = scr_race_get_sprite(_race, "Hurt",  sprMutant1Hurt,  _skin)
-	spr_dead  = scr_race_get_sprite(_race, "Dead",  sprMutant1Dead,  _skin)
-	spr_gosit = scr_race_get_sprite(_race, "GoSit", sprMutant1GoSit, _skin)
-	spr_sit   = scr_race_get_sprite(_race, "Sit",   sprMutant1Sit,   _skin)
+	var _sprite_skin = ((_race == Race.Rebel && _skin >= 2) ? _skin + 1 : _skin)
+	spr_idle = scr_race_get_sprite(_race, "Idle", sprMutant1Idle, _sprite_skin)
+	spr_walk = scr_race_get_sprite(_race, "Walk", sprMutant1Walk, _sprite_skin)
+	spr_hurt = scr_race_get_sprite(_race, "Hurt", sprMutant1Hurt, _sprite_skin)
+	spr_dead = scr_race_get_sprite(_race, "Dead", sprMutant1Dead, _sprite_skin)
+	spr_gosit = scr_race_get_sprite(_race, "GoSit", sprMutant1GoSit, _sprite_skin)
+	spr_sit = scr_race_get_sprite(_race, "Sit", sprMutant1Sit, _sprite_skin)
+	spr_cry   = -1
 	
 	// force default dead sprite regardless of bskin
     if race == Race.Chicken {
         spr_dead = sprMutant9Dead
+		if (_skin == SkinLetter.C) {
+			spr_dead = sprMutant9CDead
+		}
     }
 	
 	// Crystal can handle this
@@ -88,6 +102,7 @@ function scrPlayerRaceChange(_race, _skin = -1) {
         mask_index = mskScrapBoss
 		scrPlayerGiveAmmo(id, Ammo.Bullets, 255)
 		scrPlayerGiveAmmo(id, Ammo.Explosives, 44)
+		veinsthreshold = (max_hp div 2)
         can_pick = 0
     }
 	// Postmortal
@@ -96,6 +111,20 @@ function scrPlayerRaceChange(_race, _skin = -1) {
         accuracy = 1.5
         max_hp = 4
     }
+	// Always believe in your soul
+	else if race == Race.Frog {
+		cantoxic = false
+	}
+	// It's ok to cry
+	else if race == Race.Cuz {
+		spr_cry = scr_race_get_sprite(_race, "Cry", sprMutant16Cry, _skin)
+		max_extra_weps = 1
+	}
+	
+	with scr_playerinstance_find(index) {
+		race = _race
+		skin = _skin
+	}
 	
 	if scrCrownCheck(Crown.Death) max_hp -= 1
 }

@@ -1,10 +1,10 @@
 alarm[0] = 90
 image_speed = 0.4
 
+hitid = HitId.ThroneDeath
+
 spr_idle = sprNothingDeath
-spr_dead = sprNothingDead
-snd = 0
+spr_dead = sprNothingDeath
+soundplayed = false
 
-hit_id = sprite_index
-
-team = 1
+team = team_enemy

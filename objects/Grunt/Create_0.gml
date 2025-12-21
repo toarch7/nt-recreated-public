@@ -43,3 +43,5 @@ angle = 0
 freeze = 0
 lastx = x
 lasty = y
+
+hitid = HitId.Grunt

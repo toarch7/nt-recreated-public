@@ -1,36 +1,32 @@
-var area;
-if !instance_exists(MenuGen) && !instance_exists(Menu) area = GameCont.area
-else area = 0
+var _area;
 
-sprite_index = asset_get_index("sprFloor" + string(area) + "Explo")
+if (!instance_exists(MenuGen) && !instance_exists(Menu)) {
+	instance_create(x + orandom(4) + 8, y + random(4) + 8, Debris)
+	scrWallBreakSound()
+	_area = GameCont.area
+}
+else {
+	_area = area_campfire
+}
+
+sprite_index = asset_get_index("sprFloor" + string(_area) + "Explo")
 
 image_speed = 0
 image_index = choose(1, 2, 3, 4)
 
 var _list = global.lis_walls_visible
 
-if !position_meeting(x - 16, y, Floor) && !position_meeting(x - 16, y, Wall) ds_list_add(_list, instance_create(x - 16, y, Wall))
+if (!position_meeting(x - 16, y, Floor) && !position_meeting(x - 16, y, Wall)) ds_list_add(_list, instance_create(x - 16, y, Wall))
+if (!position_meeting(x + 16, y, Floor) && !position_meeting(x + 16, y, Wall)) ds_list_add(_list, instance_create(x + 16, y, Wall))
+if (!position_meeting(x, y + 16, Floor) && !position_meeting(x, y + 16, Wall)) ds_list_add(_list, instance_create(x, y + 16, Wall))
+if (!position_meeting(x, y - 16, Floor) && !position_meeting(x, y - 16, Wall)) ds_list_add(_list, instance_create(x, y - 16, Wall))
 
-if !position_meeting(x + 16, y, Floor) && !position_meeting(x + 16, y, Wall) ds_list_add(_list, instance_create(x + 16, y, Wall))
-
-if !position_meeting(x, y + 16, Floor) && !position_meeting(x, y + 16, Wall) ds_list_add(_list, instance_create(x, y + 16, Wall))
-
-if !position_meeting(x, y - 16, Floor) && !position_meeting(x, y - 16, Wall) ds_list_add(_list, instance_create(x, y - 16, Wall))
-
-if !position_meeting(x - 16, y + 16, Floor) && !position_meeting(x - 16, y + 16, Wall) ds_list_add(_list, instance_create(x - 16, y + 16, Wall))
-
-if !position_meeting(x + 16, y - 16, Floor) && !position_meeting(x + 16, y - 16, Wall) ds_list_add(_list, instance_create(x + 16, y - 16, Wall))
-
-if !position_meeting(x + 16, y + 16, Floor) && !position_meeting(x + 16, y + 16, Wall) ds_list_add(_list, instance_create(x + 16, y + 16, Wall))
-
-if !position_meeting(x - 16, y - 16, Floor) && !position_meeting(x - 16, y - 16, Wall) ds_list_add(_list, instance_create(x - 16, y - 16, Wall))
+if (!position_meeting(x - 16, y + 16, Floor) && !position_meeting(x - 16, y + 16, Wall)) ds_list_add(_list, instance_create(x - 16, y + 16, Wall))
+if (!position_meeting(x + 16, y - 16, Floor) && !position_meeting(x + 16, y - 16, Wall)) ds_list_add(_list, instance_create(x + 16, y - 16, Wall))
+if (!position_meeting(x + 16, y + 16, Floor) && !position_meeting(x + 16, y + 16, Wall)) ds_list_add(_list, instance_create(x + 16, y + 16, Wall))
+if (!position_meeting(x - 16, y - 16, Floor) && !position_meeting(x - 16, y - 16, Wall)) ds_list_add(_list, instance_create(x - 16, y - 16, Wall))
 
 scr_screenshake(2)
-
-if !instance_exists(GenCont) && !instance_exists(MenuGen) {
-    instance_create(x + 8 + random(8) - 4, y + 8 + random(8) - 4, Debris)
-	scrWallBreakSound()
-}
 
 styleb = 0
 
@@ -47,27 +43,18 @@ instance_create(x + 32, y - 32, Top)
 instance_create(x - 32, y - 32, Top)
 instance_create(x + 32, y + 32, Top)
 
-with Wall {
-    if object_index == InvisiWall
-		continue
-
-    if distance_to_object(other) <= 64 {
-        if position_meeting(x, y, FloorExplo) {
-            instance_destroy() continue
+with (Wall) {
+    if (point_distance(x, y, other.x, other.y) <= 32) {
+        if (position_meeting(x, y, FloorExplo)) {
+            instance_destroy()
+			continue
         }
-
+		
         visible = place_meeting(x, y + 16, Floor)
-
-        if place_free(x - 16, y) l = 0
-        else l = 4
-
-        if place_free(x + 16, y) w = 24 - l
-        else w = 20 - l
-
-        if place_free(x, y - 16) r = 0
-        else r = 4
-
-        if place_free(x, y + 16) h = 24 - r
-        else h = 20 - r
+		
+        if (place_free(x - 16, y)) l = 0 else l = 4
+        if (place_free(x + 16, y)) w = 24 - l else w = 20 - l
+        if (place_free(x, y - 16)) r = 0 else r = 4
+        if (place_free(x, y + 16)) h = 24 - r else h = 20 - r
     }
 }

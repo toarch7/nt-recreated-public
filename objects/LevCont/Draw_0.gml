@@ -15,8 +15,17 @@ if GameCont.crownpoints <= 0 {
     }
 
     txt2 = "SELECT "
-
-    if GameCont.race == 8 {
+	
+	var _robot_message = false
+	
+	with Player {
+		if scr_player_is_local(index) && race == Race.Robot {
+			_robot_message = true
+			break
+		}
+	}
+	
+    if _robot_message {
         if GameCont.skillpoints <= 1 {
             txt = " @gUPDATE"
         }

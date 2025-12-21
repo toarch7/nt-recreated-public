@@ -18,6 +18,8 @@ givekill = 0
 spr_shadow_y = 3
 //alarm[2] = 1
 
-if GameCont.ultra == 2 {
+if scr_ultra_get(Race.BigDog, UltraSkill.UltraMissiles) {
     alarm[0] = max(1, 7)
 }
+
+hitid = HitId.BigDogMissile

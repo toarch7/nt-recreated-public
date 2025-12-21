@@ -7,16 +7,16 @@ right = choose(1, -1)
 max_hp *= 1 + GameCont.loops / 20
 hp = max_hp
 
-inframes = 0
 gunangle = 0
 
 canmelee = 1
 
 scrEnemyApplyCreationEffects()
 
-team = 1
 target = noone
-hit_id = HitId.None
+team = team_enemy
+
+if (!variable_struct_exists(self, "hitid")) hitid = HitId.None
 
 givekill = true
 corpse = true

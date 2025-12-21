@@ -10,7 +10,7 @@
   "compression": 2,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 1.311667,
+  "duration": 1.3066894,
   "exportDir": "",
   "name": "sndMutant1Wrld",
   "parent": {

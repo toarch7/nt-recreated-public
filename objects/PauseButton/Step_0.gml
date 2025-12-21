@@ -14,7 +14,7 @@ if gamepad_button_check(0, gp_face2) && image_index == 3 {
 	event_user(0)
 }
 
-if mouse_hover {
+if mouse_ui_hovered(id, false) {
 	if !is_gamepad() {
 		if !hover {
 			snd_play(sndHover)

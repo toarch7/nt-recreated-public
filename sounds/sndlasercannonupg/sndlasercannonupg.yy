@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 3.184563,
+  "duration": 3.1845806,
   "exportDir": "",
   "name": "sndLaserCannonUpg",
   "parent": {

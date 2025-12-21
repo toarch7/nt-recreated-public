@@ -9,10 +9,19 @@ alarm[1] = 40
 
 snd_play(sndSnowBotPickup)
 
+if other.spr_idle == sprFrozenCar {
+	is_red_car = false
+	spr_idle = sprSnowBotCarLift
+	spr_walk = sprSnowBotCarWalk
+	spr_hurt = sprSnowBotCarHurt
+}
+else {
+	is_red_car = true
+	spr_idle = sprSnowBotRedCarLift
+	spr_walk = sprSnowBotRedCarWalk
+	spr_hurt = sprSnowBotRedCarHurt
+}
 
-spr_idle = sprSnowBotCarLift
-spr_walk = sprSnowBotCarWalk
-spr_hurt = sprSnowBotCarHurt
 meleedamage = 0
 alarm[2] = 4 / 0.4
 sprite_index = spr_idle

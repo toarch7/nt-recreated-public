@@ -6,3 +6,4 @@ damage = 50
 knockback_speed = 10
 snd = sndRocketFly
 snd_play(snd)
+index = -1

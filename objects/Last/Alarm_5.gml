@@ -5,7 +5,7 @@ if (drawspr == sprLastWarpIn) {
 
     if (instance_exists(target)) {
         with(instance_create(x, y, LastBall)) {
-            hit_id = other.hit_id
+            hitid = other.hitid
             team = other.team
             motion_add(point_direction(x, y, other.target.x, other.target.y), 6)
         }

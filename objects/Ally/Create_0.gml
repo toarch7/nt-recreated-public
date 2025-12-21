@@ -1,20 +1,19 @@
 event_inherited()
 
 wkick = -1
-spr_chrg = -1
-spr_fire = -1
 raddrop = 5
 max_hp = 12
 
 buttgot = scr_skill_get(mut_throne_butt)
+bskin = SkinLetter.A
+setup = true
 
-if scrUltraCheck(Race.Rebel, UltraSkill.PersonalGuard) {
-    max_hp = 30
-}
+if (scr_ultra_get(Race.Rebel, UltraSkill.PersonalGuard)) max_hp = 30
 
 meleedamage = 0
 size = 3
-spr_idle = sprAllyappear
+spr_appear = sprAllyAppear
+spr_idle = sprAllyAppear
 spr_walk = sprAllyWalk
 spr_hurt = sprAllyHurt
 spr_dead = sprAllyDead
@@ -27,7 +26,6 @@ team = 2
 snd_hurt = sndAllyHurt
 snd_dead = sndAllyDead
 walk = 0
-inframes = 0
 gunangle = random_angle
 alarm[1] = 60
 wkick = 0

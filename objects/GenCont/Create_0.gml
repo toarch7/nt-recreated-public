@@ -1,12 +1,16 @@
-random_set_seed(global.rng_state[0])
+random_set_seed(global.rng_state[RNGStates.Generation])
 instance_create(0, 0, TopCont)
 wave = 0
 
 with Player {
 	x = 10016
 	y = 10016
+	xprevious = x
+	yprevious = y
 	xstart = x
 	ystart = y
+	
+	scr_camera_set_position(x, y, fa_center, fa_middle)
 }
 
 background_set_colour(scrAreaGetBackroundColor(GameCont.area))
@@ -36,8 +40,7 @@ if (GameCont.area == area_campfire) {
 }
 
 safespawn = scrAreaHasSafespawn()
-safedir = irandom(3) * 90
-safefloors = 0
+safedir = choose(0, 90, 180, 270)
 
 if save_get_value("game", "tutorial", true) {
 	instance_create(x, y, TutCont)
@@ -52,7 +55,7 @@ with instance_create(10000, 10000, FloorMaker) {
 }
 
 with (GameCont) {
-	if scr_skill_get(mut_patience) && !patient {
+	if (!gocrib && scr_skill_get(mut_patience) && !patient) {
 	    skillpoints ++
 		patiencepick = true
 	    patient = true

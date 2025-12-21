@@ -11,6 +11,7 @@ if timeout > 15 {
     }
 	
     with scr_projectile_create(x, y, EnemyBullet2, angle, 10) {
+		sprite_index = sprHorrorBullet
 		image_angle = direction
 	}
 }

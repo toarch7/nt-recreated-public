@@ -23,6 +23,9 @@ wkick = 0
 if instance_exists(Player) {
     if random(30) < GameCont.hard {
         instance_create(x, y, BuffGator)
-        instance_change(Wind, 0)
+		instance_destroy(id, false)
+		exit
     }
 }
+
+hitid = HitId.Gator

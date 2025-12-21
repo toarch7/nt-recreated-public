@@ -1,26 +1,25 @@
 friction = 0.2
 image_angle = random_angle
-
+depth = 0
 
 blink = 30
 
 alarm[0] = (150 + random(30)) / ((4 + GameCont.loops) / 4)
 
-//RUSH CROWN
-if instance_exists(Player) {
-    if GameCont.crown = 4 alarm[0] /= 3
-}
+if (scrCrownCheck(crwn_haste)) alarm[0] /= 3
 
 image_index = random(7)
 image_speed = 0
 
-if instance_exists(Player) {
-	var p = instance_nearest(x, y, Player)
+if (object_index == BigRad) {
+	repeat (4 * scr_ultra_get(Race.Frog, UltraSkill.Distance)) {
+		with (instance_create(x, y, ToxicGas)) scrFrogGasStat()
+	}
 	
-    if p.race == 15 && ultra_get(1) && irandom(3) == 1 {
-        with instance_create(x, y, ToxicGas)
-			scrFrogGasStat()
-    }
+	alarm[0] += 40
 }
-
-depth = 1
+else if random(1) < 0.33 {
+	repeat (scr_ultra_get(Race.Frog, UltraSkill.Distance)) {
+		with (instance_create(x, y, ToxicGas)) scrFrogGasStat()
+	}
+}

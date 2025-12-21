@@ -14,6 +14,8 @@ else {
 	wepangle = 0
 }
 
+if (swapanim != 0) swapanim = approach(swapanim, 0, timescale)
+
 //SWAP WEPS
 if KeyCont.press_swap[index] && bwep != 0 {
 	if visible {
@@ -30,6 +32,7 @@ if KeyCont.press_swap[index] && bwep != 0 {
 	}
 
 	scrSwapWeps()
+	swapanim = 1
 
 	if !scrGameIsLockState() KeyCont.press_swap[index] = 0
 
@@ -88,15 +91,10 @@ if fainted {
 		snd_play(snd_lowh)
 		drawlowhp = 30
 		
-		mask_index = mskPlayer
-		
-		if race == 13
-			mask_index = mskScrapBoss
-		
 		image_alpha = 1
-		
-		inframes = max(30, inframes)
-		
+		mask_index = mskPlayer
+		if (race == Race.BigDog) mask_index = mskScrapBoss
+		nexthurt = current_frame + 30
 		hp = 1
 	}
 	
@@ -107,15 +105,32 @@ if (!visible || scrGameIsLockState()) exit
 
 if !roll {
 	if can_walk && KeyCont.moving[index] > 0 {
-		var _maxspeed = maxspeed // * KeyCont.moving[index]
+		var _maxspeed = maxspeed, // * KeyCont.moving[index]
+			_movspeed = 3
+		
+		if (race == Race.Crystal && KeyCont.hold_spec[index]) {
+			with (CrystalShield) {
+				if (sprite_index == spr_disappear || creator != other.id) continue
+				
+				if (scr_ultra_get(Race.Crystal, UltraSkill.Juggernaut)) {
+					_maxspeed *= 0.5
+					_movspeed *= 0.5
+				}
+				else if (instance_exists(CrystalShield)) {
+					_maxspeed = 0
+					_movspeed = 0
+				}
+			}
+		}
 		
 		if (speed < _maxspeed) {
 			if (!KeyCont.precisemovement[index]) {
-				hspeed += 3 * (KeyCont.key_east[index] - KeyCont.key_west[index])
-				vspeed += 3 * (KeyCont.key_sout[index] - KeyCont.key_nort[index])
+				hspeed += _movspeed * (KeyCont.key_east[index] - KeyCont.key_west[index])
+				vspeed += _movspeed * (KeyCont.key_sout[index] - KeyCont.key_nort[index])
 			}
 			else {
-				motion_add(KeyCont.dir_move[index], _maxspeed)
+				hspeed += ldrx(_movspeed, KeyCont.dir_move[index])
+				vspeed += ldry(_movspeed, KeyCont.dir_move[index])
 			}
 			
 			if (speed > _maxspeed) speed = _maxspeed
@@ -132,21 +147,10 @@ if !roll {
 	if place_meeting(x, y, NothingDeath) && instance_exists(SitDown) {
 		move_towards_point(SitDown.x, SitDown.y, maxspeed)
 	}
-
-	if !speed {
-		if (sprite_index != spr_hurt) sprite_index = spr_idle
-	}
-	else {
-		if (sprite_index != spr_hurt) sprite_index = spr_walk
-	}
-
-	if sprite_index == spr_hurt {
-		if (image_index > 2) sprite_index = spr_idle
-	}
 }
 else {
 	// rolling
-	var rollspeed = maxspeed + (1 - scr_skill_get(mut_throne_butt) * 0.5)
+	var _rollspeed = maxspeed + (1 - scr_skill_get(mut_throne_butt) * 0.5)
 
 	if scr_skill_get(mut_throne_butt) {
 		angle = direction - 90
@@ -181,18 +185,26 @@ else {
 		}
 	}
 
-	if roll speed = rollspeed
+	if (roll) speed = _rollspeed
+}
 
-	if !speed {
-		if sprite_index != spr_hurt
-			sprite_index = spr_idle
-	} else {
-		if sprite_index != spr_hurt
-			sprite_index = spr_walk
+if (sprite_exists(spr_cry) && sprite_index == spr_cry) {
+	if (animation_end) {
+		sprite_index = (speed ? spr_walk : spr_idle)
+		image_index = 0
 	}
-
-	if sprite_index == spr_hurt && image_index > 2 {
+}
+else {
+	if (!speed) {
+		if (sprite_index != spr_hurt) sprite_index = spr_idle
+	}
+	else {
+		if (sprite_index != spr_hurt) sprite_index = spr_walk
+	}
+	
+	if (sprite_index == spr_hurt && image_index > 2) {
 		sprite_index = spr_idle
+		image_index = 0
 	}
 }
 
@@ -200,27 +212,18 @@ if bleed > 0 && hp > 0 && visible {
 	snd_stop(sndChickenHeadlessLoop)
 	snd_play(sndChickenRegenHead)
 	bleed = 0
-
-
-	if !bskin {
-		spr_idle = sprMutant9Idle
-		spr_walk = sprMutant9Walk
-		spr_hurt = sprMutant9Hurt
-		spr_dead = sprMutant9Dead
-		spr_gosit = sprMutant9GoSit
-		spr_sit = sprMutant9Sit
-	}
-	else {
-		spr_idle = sprMutant9BIdle
-		spr_walk = sprMutant9BWalk
-		spr_hurt = sprMutant9BHurt
-		spr_dead = sprMutant9Dead
-		spr_gosit = sprMutant9BGoSit
-		spr_sit = sprMutant9BSit
-	}
+	
+	spr_idle = scr_race_get_sprite(race, "Idle", sprMutant9Idle, bskin)
+	spr_walk = scr_race_get_sprite(race, "Walk", sprMutant9Walk, bskin)
+	spr_hurt = scr_race_get_sprite(race, "Hurt", sprMutant9Hurt, bskin)
+	spr_dead = scr_race_get_sprite(race, "Dead", sprMutant9Dead, bskin)
+	spr_gosit = scr_race_get_sprite(race, "GoSit", sprMutant9GoSit, bskin)
+	spr_sit = scr_race_get_sprite(race, "Sit", sprMutant9Sit, bskin)
 
 	with Corpse {
-		if sprite_index == sprMutant9HeadIdle or sprite_index == sprMutant9BHeadIdle {
+		if sprite_index == sprMutant9HeadIdle
+		|| sprite_index == sprMutant9BHeadIdle
+		|| sprite_index == sprMutant9CHeadIdle {
 			instance_destroy()
 		}
 	}
@@ -230,11 +233,11 @@ if hp <= 0 {
 	if spirit {
 		hp = 1
 		snd_play(sndStrongSpiritLost)
-		inframes = 30
-		spirit = 0
+		nexthurt = current_frame + 30
+		spirit = false
 	}
-	else if race == 9 && bleed < 150 && visible {
-		if bleed = 0 {
+	else if race == Race.Chicken && bleed < 150 && visible {
+		if !bleed {
 			snd_play(sndChickenLoseHead)
 			snd_play_loop(sndChickenHeadlessLoop)
 
@@ -246,51 +249,50 @@ if hp <= 0 {
 			}
 
 			headloses += 2
-			if max_hp max_hp -= 2
+			if (max_hp) max_hp -= 2
 
-			repeat 9 + irandom(4) {
+			var _skin = bskin
+			
+			repeat (9 + irandom(4)) {
 				with instance_create(x, y, Feather) {
-					sprite_index = sprChickenFeather
+					if (_skin != SkinLetter.C) sprite_index = sprChickenFeather
 				}
 			}
-
-			spr_idle = sprMutant9HeadlessIdle
-			spr_hurt = sprMutant9HeadlessHurt
-			spr_walk = sprMutant9HeadlessWalk
-			spr_gosit = sprMutant9HeadlessGoSit
-			spr_sit = sprMutant9HeadlessSit
-
+			
+			spr_idle = scr_race_get_sprite(race, "HeadlessIdle", sprMutant9HeadlessIdle, _skin)
+			spr_hurt = scr_race_get_sprite(race, "HeadlessHurt", sprMutant9HeadlessHurt, _skin)
+			spr_walk = scr_race_get_sprite(race, "HeadlessWalk", sprMutant9HeadlessWalk, _skin)
+			spr_gosit = scr_race_get_sprite(race, "HeadlessGoSit", sprMutant9HeadlessGoSit, _skin)
+			spr_sit = scr_race_get_sprite(race, "HeadlessSit", sprMutant9HeadlessSit, _skin)
+			
 			with instance_create(x, y, CorpseActive) {
-				size = 1
 				mask_index = other.mask_index
 				motion_add(other.direction, other.speed)
 				speed += max(0, -other.hp / 5)
-				if other.bskin sprite_index = sprMutant9BHeadIdle
+				/**/ if (_skin == SkinLetter.B) sprite_index = sprMutant9BHeadIdle
+				else if (_skin == SkinLetter.C) sprite_index = sprMutant9CHeadIdle
 				else sprite_index = sprMutant9HeadIdle
 				image_xscale = other.right
-				if speed > 16 speed = 16
+				if (speed > 16) speed = 16
 			}
 
 			sleep(60)
 		}
 
-		if random(12) < 1 {
+		if current_frame_active && random(12) < 1 {
 			with instance_create(x, y - 4, BloodStreak) {
 				motion_add(45 + random(90), 2 + random(3))
 				image_angle = direction
 			}
 		}
 
-		if visible {
-			bleed += 1
-		}
-
-		UberCont.ctot_uniq[9] ++
+		UberCont.ctot_uniq[9] += timescale
+		if (visible) bleed += timescale
 	}
 	else if can_die {
-		if race == 4 && place_meeting(x, y, ReviveCircle) && !instance_exists(CoopController) {
-			hp = 1
+		if race == Race.Melting && place_meeting(x, y, ReviveCircle) && !instance_exists(CoopController) {
 			scrTurnIntoSkeleton()
+			hp = 1
 		}
 		else if UberCont.opt_practice {
 			mask_index = mskNone
@@ -302,24 +304,22 @@ if hp <= 0 {
 			image_speed = 0.4
 			sprite_index = spr_hurt
 			image_alpha = 0.5
-
-			//wep = 0
-			//bwep = 0
+			
 			curse = 0
 			bcurse = 0
 			reload = 0
 			breload = 0
-
+			
 			with instance_create(x, y, CorpseActive) {
 				size = 1
-
+				
 				mask_index = other.mask_index
 				motion_add(other.direction, other.speed)
 				speed += max(0, -other.hp / 5)
 				sprite_index = other.spr_dead
 				image_xscale = other.right
-
-				if speed > 16 speed = 16
+				
+				if (speed > 16) speed = 16
 			}
 		}
 		else {
@@ -335,50 +335,61 @@ if !aimassist_wait || KeyCont.press_fire[index] || KeyCont.release_fire[index] {
 }
 else aimassist_wait -= 1
 
-if (KeyCont.press_fire[index] || (KeyCont.hold_fire[index] && (wep_auto[wep] || race == 7))
-	|| clicked || (KeyCont.press_spec[index] && (race == 5 || race == 6 || race == 7 || race == 14))
+if (KeyCont.press_fire[index] || (KeyCont.hold_fire[index] && (wep_auto[wep] || race == Race.Steroids))
+	|| clicked || (KeyCont.press_spec[index] && (race == Race.Plant || race == Race.Venuz || Race.Steroids || race == Race.Skeleton))
 ) {
-	if !instance_exists(aimassist_target) aimassist_target = noone
+	if (!instance_exists(aimassist_target)) aimassist_target = noone
 	
-	if KeyCont.aimassist[index] && wep_type[wep] != 0 && !scr_weapon_has_assist_disabled(wep) && can_aim {
-		var _aim_target = noone
+	if KeyCont.aimassist[index] && scr_weapon_get_type(wep) != Ammo.None && !scr_weapon_has_assist_disabled(wep) && can_aim {
+		var _area_w = 480,
+			_area_h = 180,
+			_aim_target = noone,
+			_aim_tracer_length = _area_w * 0.5
 
 		with instance_create(x, y, AimAssist) {
-			image_xscale = view_width
 			image_angle = other.gunangle
-
-			var x2 = x + lengthdir_x(view_width, image_angle)
-			var y2 = y + lengthdir_y(view_height, image_angle)
-
+			image_xscale = view_width
+			image_yscale *= 5
+			
 			team = other.team
-
-			var l = []
-
-			with hitme {
-				if team == other.team {
-					array_push(l, id)
-					instance_deactivate_object(id)
+			
+			var _distance_max = infinity
+			
+			with (hitme) {
+				if (place_meeting(x, y, other) && team != other.team) {
+					if (collision_line(other.x, other.y, x, y, Wall, true, false) != noone) continue
+					
+					var _distance = point_distance(x, y, other.x, other.y)
+					
+					// make it so that props are less likely to be targeted
+					if (instance_is(self, prop)) _distance *= 2
+					
+					if _distance < _distance_max {
+						_distance_max = _distance
+						_aim_target = id
+					}
 				}
 			}
-
-			_aim_target = collision_line(x, y, x2, y2, hitme, 0, 1)
-
-			for (var i = 0; i < array_length(l); i++) {
-				instance_activate_object(l[i])
-			}
 		}
-
-		if !instance_exists(_aim_target) {
-			_aim_target = instance_nearest(x, y, enemy)
-		}
-
+		
+		//if (!instance_exists(_aim_target)) {
+		//	_aim_target = instance_nearest(x, y, enemy)
+		//}
+		
 		if scrTargetIsVisible(_aim_target) && _aim_target.object_index != Nothing && _aim_target.object_index != Nothing2 {
-			var _d = point_direction(x, y, _aim_target.x, _aim_target.y)
+			var _direction = point_direction(x, y, _aim_target.x, _aim_target.y),
+				_snap_angle = 35
 
-			if _aim_target.x > x - 240 && _aim_target.y > y - 180 && _aim_target.x < x + 240 && _aim_target.y < y + 180 {
-				if abs(angle_difference(gunangle, _d)) <= 32 {
+			if (_aim_target.x > (x - _area_w)
+				&& _aim_target.y > (y - _area_h)
+				&& _aim_target.x < (x + _area_w)
+				&& _aim_target.y < (y + _area_h)
+			) {
+				var _diff = abs(angle_difference(gunangle, _direction))
+				if (_diff <= _snap_angle) {
+					//gunangle = angle_lerp(gunangle, _direction, _diff / _snap_angle)
 					aimassist_target = _aim_target
-					gunangle = _d
+					gunangle = _direction
 				}
 			}
 		}
@@ -388,26 +399,27 @@ if (KeyCont.press_fire[index] || (KeyCont.hold_fire[index] && (wep_auto[wep] || 
 
 if !(race == Race.Crystal && KeyCont.hold_spec[index]) && hp >= 0 {
 	scrPlayerFiring()
-		
+	
 	if race == Race.Steroids && KeyCont.hold_spec[index] && bcan_shoot {
 		var press = KeyCont.press_fire[index],
 			hold = KeyCont.hold_fire[index]
-			
+		
 		KeyCont.press_fire[index] = false
-			
-		if KeyCont.press_spec[index]
+		
+		if KeyCont.press_spec[index] {
 			KeyCont.press_fire[index] = true
-			
+		}
+		
 		KeyCont.hold_fire[index] = true
-			
+		
 		scrSwapWeps()
-			
+		
 		scrPlayerFiring()
-			
+		
 		bcan_shoot = can_shoot
-			
+		
 		scrSwapWeps()
-			
+		
 		KeyCont.press_fire[index] = press
 		KeyCont.hold_fire[index] = hold
 	}
@@ -445,7 +457,7 @@ if reload > 0 || (breload > 0 && race == Race.Steroids) {
 	if race == Race.Venuz {
 		_reload_speed += 0.2
 		
-		var _imagungod = scrUltraCheck(race, UltraSkill.ImaGunGod)
+		var _imagungod = scr_ultra_get(race, UltraSkill.ImaGunGod)
 		
 		if _imagungod > 0 {
 			_reload_speed += _imagungod * 0.4
@@ -472,20 +484,22 @@ if reload > 0 || (breload > 0 && race == Race.Steroids) {
 		}
 	}
 	
-	reload -= _reload_speed * timescale
-	
-	if reload <= 0 {
-		scrPlayerGunReloadFX(wep)
+	if (reload > 0) {
+		reload -= _reload_speed * timescale
 		
-		wepflip *= -1
-		can_shoot = 1
-		reload = 0
+		if (reload <= 0) {
+			scrPlayerGunReloadFX(wep)
+			
+			wepflip *= -1
+			can_shoot = true
+			reload = 0
+		}
 	}
 	
-	if race == Race.Steroids && breload > 0 {
+	if (race == Race.Steroids && breload > 0) {
 		breload -= _reload_speed * timescale
 		
-		if breload <= 0 {
+		if (breload <= 0) {
 			scrPlayerGunReloadFX(bwep)
 			
 			wepflip *= -1
@@ -497,27 +511,8 @@ if reload > 0 || (breload > 0 && race == Race.Steroids) {
 #endregion
 
 if lsthealth != hp {
-	var _damage_taken = lsthealth - hp
-	
-	if lsthealth > hp {
-		drawlowhp = 30
-	}
-	
-	if _damage_taken > 0 {
-		try {
-			scrPlayerProcTakeDamage(_damage_taken)
-		}
-		catch(e) { print_error(e.message) }
-		
-		try {
-			
-		}
-		catch (e) {
-			print(e.message)
-		}
-	}
-	
-	lsthealth = approach(lsthealth, hp, timescale)
+	if (lsthealth > hp) drawlowhp = 30
+	lsthealth = approach(lsthealth, hp, 0.5 * timescale)
 }
 
 if lsthealth >= max_hp {
@@ -530,7 +525,24 @@ if sprite_index != spr_hurt && lsthealth > hp {
 	}
 	
 	drawlowhp = 30
-	lsthealth -= 0.5
+}
+else if (drawlowhp > 0) drawlowhp -= timescale
+
+if drawempty > 0 {
+	if drawempty >= 10 && (drawempty - timescale) < 10 {
+		var _t1 = scr_weapon_get_type(wep),
+			_t2 = scr_weapon_get_type(bwep),
+			_v1 = _t1 ? scrAmmoGetPickupAmount(_t1) : 999,
+			_v2 = _t2 ? scrAmmoGetPickupAmount(_t2) : 999
+		
+		if ((_t1 && ammo[_t1] <= _v1 && ammo[_t1] > (_v1 - scr_weapon_get_cost(wep)))
+			|| (race == Race.Steroids && _t2 && ammo[_t2] <= _v2 && ammo[_t2] > (_v2 - scr_weapon_get_cost(bwep)))
+		) {
+			if !audio_is_playing(snd_lowa) snd_play(snd_lowa)
+		}
+	}
+	
+	drawempty -= timescale
 }
 
 if can_spirit && !spirit && hp >= max_hp && max_hp > 1 {
@@ -593,7 +605,6 @@ if infammo {
 	}
 }
 
-if inframes > 0 inframes -= timescale
 if show_empty_cooldown > 0 show_empty_cooldown -= timescale
 if hammering > 0 hammering -= timescale
 
@@ -606,19 +617,19 @@ if curse && current_frame_active && random(6) < 1 {
 if (can_spec) scrPowers()
 
 if race == Race.Frog {
-	if ultra_get(2) && !irandom(2) {
-		with instance_create(x, y, ToxicGas)
-			scrFrogGasStat()
+	if current_frame_active && scr_ultra_get(Race.Frog, UltraSkill.Intimacy) && random(1) < 0.5 {
+		with (instance_create(x, y, ToxicGas)) scrFrogGasStat()
 	}
 
 	speed = maxspeed
 
 	if KeyCont.hold_spec[index] {
 		if !froggas {
-			if scr_skill_get(5) {
+			if scr_skill_get(mut_throne_butt) {
 				snd_play(sndFrogStartButt)
 				snd_play_loop(sndFrogLoopButt)
-			} else {
+			}
+			else {
 				snd_play(sndFrogStart)
 				snd_play_loop(sndFrogLoop)
 			}
@@ -628,21 +639,19 @@ if race == Race.Frog {
 			froggas += timescale
 		}
 
-		if ultra_get(2) && !irandom(1) {
-			with instance_create(x, y, ToxicGas)
-				scrFrogGasStat()
+		if current_frame_active && scr_ultra_get(Race.Frog, UltraSkill.Intimacy) && random(1) < 0.5 {
+			with (instance_create(x, y, ToxicGas)) scrFrogGasStat()
 		}
 
 		speed = 0
 		sprite_index = spr_idle
 	}
-	else if froggas {
+	else if froggas > 0 {
 		snd_stop(sndFrogLoopButt)
 		snd_stop(sndFrogLoop)
 
 		repeat froggas {
-			with instance_create(x, y, ToxicGas)
-				scrFrogGasStat()
+			with (instance_create(x, y, ToxicGas)) scrFrogGasStat()
 		}
 
 		if froggas >= 25 {
@@ -669,20 +678,30 @@ if horrornorad {
 	horrornorad -= timescale
 }
 
-if KeyCont.press_horn[index] && race == Race.Venuz {
-	scr_screenshake(5)
-	
-	if GameCont.area != area_oasis {
-		if !UberCont.birthday {
+if KeyCont.press_horn[index] {
+	if race == Race.Venuz {
+		scr_screenshake(5)
+		
+		if (!GameCont.underwater) {
+			snd_play(UberCont.birthday ? sndVenuz : sndPartyHorn)
+		}
+		else {
+			snd_play(sndOasisHorn)
+		}
+		
+		with YungCuz {
+			sprite_index = sprCuzHorn
+			snd_play(sndCuzHorn)
+		}
+	}
+	else if race == Race.Cuz {
+		snd_play(GameCont.underwater ? sndCuzOasisRinger : sndCuzRinger)
+		
+		with YungVenuzCouch {
+			sprite_index = sprYVBossGamingAirhorn
+			if (image_index >= 7) image_index = 3
 			snd_play(sndVenuz)
 		}
-		else snd_play(sndPartyHorn)
-	}
-	else snd_play(sndOasisHorn)
-
-	with YungCuz {
-		sprite_index = sprCuzHorn
-		snd_play(sndCuzHorn)
 	}
 }
 

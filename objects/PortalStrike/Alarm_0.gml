@@ -1,27 +1,41 @@
-if !ammo {
-	instance_destroy(); exit
-}
+var _butt = buttgot, _cskin = (instance_is(creator, Player) && creator.bskin == SkinLetter.C)
 
-with instance_create(x + expl_x + orandom(4), y + expl_y + orandom(4), PopoExplosion) {
-    team = -1
+with instance_create(x + explo_x, y + explo_y, PopoExplosion) {
+    team = team_none
+	creator = other.creator
 	
-    image_xscale -= 0.5
-    image_yscale -= 0.5
+	x += orandom(4)
+	y += orandom(4)
 	
-    if scr_skill_get(5) {
-        image_xscale += 0.5
-        image_yscale += 0.5
-		
-        repeat 4 + random(8)
-            instance_create(x + lengthdir_x(random(48), random_angle), y + lengthdir_y(random(48), random_angle), BlueFlame)
-    }
+	if (_cskin) {
+		sprite_index = (_butt ? sprRogueExplosionCTB : sprRogueExplosionC)
+	}
+	else {
+		sprite_index = (_butt ? sprRogueExplosionTB : sprRogueExplosion)
+	}
+	
+	hitid = [ sprite_index, scrDeathCauseGetName(HitId.PopoExplosion) ]
+	
+    if (_butt) {
+		repeat (4 + random(8)) {
+			var _angle = random_angle,
+				_x = x + lengthdir_x(random(48), _angle),
+				_y = y + lengthdir_y(random(48), _angle)
+            
+			instance_create(_x, _y, _cskin ? GreenFlame : BlueFlame)
+		}
+	}
+	else {
+		mask_index = mskExplosion
+	}
 	
     snd_play(sndIDPDNadeExplo)
 }
 
-expl_x += lengthdir_x(28 + random(4), direction)
-expl_y += lengthdir_y(28 + random(4), direction)
+explo_x += ldrx(size, direction)
+explo_y += ldry(size, direction)
 
-alarm[0] = 3
-
-ammo --
+if ((--ammo) <= 0) {
+	instance_destroy()
+}
+else alarm[0] = 2

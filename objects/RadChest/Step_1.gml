@@ -1,8 +1,4 @@
-if lockstep_stop
-	exit
-
-if hp <= 0
-	instance_destroy()
+if (hp <= 0) instance_destroy()
 
 if sprite_index != spr_hurt {
 	if image_index > 1 {
@@ -17,9 +13,4 @@ if sprite_index == spr_hurt {
 		sprite_index = spr_idle
 }
 
-if speed > 1
-	speed = 1
-
-if inframes
-	inframes --
-
+if (speed > 1) speed = 1

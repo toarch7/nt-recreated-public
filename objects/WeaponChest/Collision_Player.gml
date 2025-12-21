@@ -13,7 +13,7 @@ var _extra = 1 + curse * 2,
 	_wep = scrDecideWep(_extra, curse),
 	_count = 1
 
-if scrUltraCheckPlayerRace(_player, Race.Steroids, UltraSkill.Ambidextrous) {
+if scr_ultra_get(Race.Steroids, UltraSkill.Ambidextrous) {
 	_count ++
 }
 

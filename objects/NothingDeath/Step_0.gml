@@ -1,19 +1,26 @@
 if lockstep_stop
 	exit
 
-if alarm[0] >= 5 {
-    with instance_create(x + orandom(128), y + orandom(128), choose(Explosion, Explosion, GreenExplosion)) {
-        hit_id = other.sprite_index
+if (alarm[0] >= 5 && current_frame_active) {
+    with instance_create(
+		random_range(bbox_left, bbox_right),
+		random_range(bbox_top + 20, bbox_bottom - 10),
+		choose(Explosion, Explosion, GreenExplosion)
+	) {
+        hitid = other.hitid
     }
-    snd_play_hit_big(sndExplosionS, 0.2)
+    
+	if (!soundplayed) {
+		snd_play_hit_big(sndExplosionS, 0.2)
+		soundplayed = true
+	}
+	else {
+		soundplayed = false
+	}
 }
 
 with projectile {
-    if team == other.team {
-        instance_destroy()
-    }
+    if (team == other.team) instance_destroy()
 }
 
-with Guardian {
-    instance_destroy()
-}
+instance_destroy(Guardian)

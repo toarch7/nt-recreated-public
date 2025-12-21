@@ -1,18 +1,18 @@
-expl_x = 0
-expl_y = 0
+setup = true
+
+explo_x = 0
+explo_y = 0
+size = 28
 
 ammo = 5
 
-if scr_skill_get(5)
-	sprite_index = sprRogueStrikeTB
+buttgot = scr_skill_get(mut_throne_butt)
 
-snd_play(sndRogueAim)
+if (buttgot) sprite_index = sprRogueStrikeTB
 
-snd = sndPortalStrikeFire
-
-if instance_exists(Player) && scr_skill_get(5)
-    snd = sndPortalStrikeFireButt
+snd = buttgot ? sndPortalStrikeFireButt : sndPortalStrikeFire
 
 snd_play_loop(sndPortalStrikeLoop)
+snd_play(sndRogueAim)
 
 touch = -1

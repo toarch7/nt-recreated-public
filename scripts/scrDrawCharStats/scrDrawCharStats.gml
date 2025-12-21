@@ -29,10 +29,11 @@ function scrDrawCharStats() {
         else if ((select == 13) && (UberCont.ctot_uniq[13] > 0)) draw_stat("DAMAGED", string(UberCont.ctot_uniq[13]))
         else if ((select == 14) && (UberCont.ctot_uniq[14] > 0)) draw_stat("LUCK STREAK", string(UberCont.ctot_uniq[14]))
         else if ((select == 15) && (UberCont.ctot_uniq[15] > 0)) draw_stat("GAS VOLUMES", string(UberCont.ctot_uniq[15] / 1000))
+        else if ((select == 16) && (UberCont.ctot_uniq[16] > 0)) draw_stat("TEARS CRIED", string(UberCont.ctot_uniq[15] / 1000))
         if (UberCont.ctot_runs[select] > 0) {
             draw_stat_header("")
             draw_stat_header("BEST RUN")
-            draw_stat("area", area_get_name(UberCont.cbst_area[select], UberCont.cbst_suba[select], UberCont.cbst_loop[select]))
+            draw_stat("area", scrAreaGetMapName(UberCont.cbst_area[select], UberCont.cbst_suba[select], UberCont.cbst_loop[select]))
             draw_stat("kills", string(UberCont.cbst_kill[select]))
             statx = ((view_xview + view_width) - 70)
             staty = (view_yview + 52)
@@ -50,14 +51,14 @@ function scrDrawCharStats() {
         }
         if (UberCont.ctot_days[select] > 0) {
             draw_stat_header("DAILY")
-            draw_stat("area", area_get_name(UberCont.dbst_area[select], UberCont.dbst_suba[select], UberCont.dbst_loop[select]))
+            draw_stat("area", scrAreaGetMapName(UberCont.dbst_area[select], UberCont.dbst_suba[select], UberCont.dbst_loop[select]))
             draw_stat("kills", string(UberCont.dbst_kill[select]))
             draw_stat("runs", string(UberCont.ctot_days[select]))
             draw_stat_header("")
         }
         if ((UberCont.hardgot == 1) && (UberCont.ctot_hard[select] > 0)) {
             draw_stat_header("HARD")
-            draw_stat("area", area_get_name(UberCont.hbst_area[select], UberCont.hbst_suba[select], UberCont.hbst_loop[select]))
+            draw_stat("area", scrAreaGetMapName(UberCont.hbst_area[select], UberCont.hbst_suba[select], UberCont.hbst_loop[select]))
             draw_stat("kills", string(UberCont.hbst_kill[select]))
             draw_stat("runs", string(UberCont.ctot_hard[select]))
             draw_stat_header("")

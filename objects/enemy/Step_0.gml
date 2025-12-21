@@ -60,9 +60,6 @@ else {
     }
 }
 
-if inframes
-	inframes --
-
 scrTarget()
 
 event_user(0)

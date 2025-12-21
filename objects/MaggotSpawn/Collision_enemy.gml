@@ -1,12 +1,13 @@
 if lockstep_stop
 	exit
 
-if other.object_index == object_index && id < other.id {
-    var d = point_direction(other.x, other.y, x, y) + orandom(1)
-    var xx = lengthdir_x(8, d),
-        yy = lengthdir_y(8, d)
-
-        if !place_meeting(x + xx, y, Wall) x += xx
-
-    if !place_meeting(x, y + yy, Wall) y += yy
+if instance_is(other, MaggotSpawn) && id < other.id {
+    var _direction = point_direction(
+			other.x + orandom(1), other.y + orandom(1), x, y),
+		
+		_mx = lengthdir_x(8, _direction),
+        _my = lengthdir_y(8, _direction)
+	
+    if place_free(x + _mx, y) x += _mx
+	if place_free(x, y + _my) y += _my
 }

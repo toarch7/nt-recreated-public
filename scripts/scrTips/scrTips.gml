@@ -108,108 +108,110 @@ function scrTips() {
 	}
 
 	 //Character based
-	if tiptype = 2 {
-		var race = GameCont.race
+	if tiptype == 2 {
+		var _race = Race.Random
+		
+		with (instance_random(Player)) _race = race
 		
 		if GameCont.level >= 10 && random(5) < 1 {
-			if race == 0
+			if _race == 0
 				tip = choose("random @gultra@s, unstoppable")
 			
-			if race == 1
+			if _race == 1
 				tip = choose("getting used to this", "just one more day")
 			
-			if race == 2
+			if _race == 2
 				tip = choose("just a scratch", "stay strong")
 			
-			if race == 3
+			if _race == 3
 				tip = choose("know everything", "show nothing", "keep it inside")
 			
-			if race == 4
+			if _race == 4
 				tip = choose("the pain...", "please stop...")
 			
-			if race == 5
+			if _race == 5
 				tip = choose("end end end")
 			
-			if race == 6
+			if _race == 6
 				tip = choose("\#verifycuz", "airsiren.wav", "\#blessed", "one of these days...", "real thugs hustle", "YV fact: YV IS THE BEST", "4EVER", "GO HARD", "VOTE 2 B COOL")
 			
-			if race == 7
+			if _race == 7
 				tip = choose("let's hope this is correct", "so strong")
 			
-			if race == 8
+			if _race == 8
 				tip = choose("6d 61 63 68 69 6e 65 73#77 69 6c 6c#6e 65 76 65 72#65 6e 64", "66 6c 65 73 68#69 73#77 65 61 6b", "73 69 6e 67 75 6c 61 72 69 74 79", "don't panic")
 			
-			if race == 9
+			if _race == 9
 				tip = choose("this is destiny", "just like in the movies", "again we are defeated")
 			
-			if race == 10
+			if _race == 10
 				tip = choose("all together now", "no stopping now")
 			
-			if race == 11
+			if _race == 11
 				tip = choose("the air is changing", "the light moves", "things are different")
 			
-			if race == 12
+			if _race == 12
 				tip = choose("use this", "you deserve this", "they can't chase you forever")
 			
-			if race == 13
+			if _race == 13
 				tip = choose("guard this land", "none will pass", "fire at will")
 			
-			if race == 14
+			if _race == 14
 				tip = choose("this is better", "avoid the living", "no need for peace")
 			
-			if race == 15
+			if _race == 15
 				tip = choose("bwahahaha", "singing", "sweet sounds", "go forever", "smell great")
 			
-			if race == 16
+			if _race == 16
 				tip = choose("what a good time")
 		}
 		else {
-			if race == 1
+			if _race == 1
 				tip = choose("last day before retirement", "duty calls", "it's ok to eat", "gills on your neck", "like kevin costner", "the taste of mud")
 			
-			if race == 2
+			if _race == 2
 				tip = choose("crystal can handle this", "family")
 			
-			if race == 3
+			if _race == 3
 				tip = choose("eyes sees everything", "don't blink", "all these thoughts", "eyes can't speak", "telekinesis pushes projectiles away")
 			
-			if race == 4
+			if _race == 4
 				tip = choose("it's so cold out here", "melting is tired", "everything hurts", "cough", "brr...", "it's ok to be scared")
 			
-			if race == 5
+			if _race == 5
 				tip = choose("kill kill kill", "death death death", "blood blood blood", "no mercy", "photosynthesizing...", "snare is a source of light", "gotta go fast")
 			
-			if race == 6
+			if _race == 6
 				tip = choose("yung venuz is so cool", "yung venuz is the best", "so cool", "thanks gun god", "\#verifyvenuz", "2 yung 2 die", "guns for fake necklace", "guns that send textses", "guns that make breakfast", "mony", "guns that straight festive", "guns with 6 senses", "guns that hate texas", "guns that wear vests it", "no @bpopo@s", "pop pop")
 			
-			if race == 7
+			if _race == 7
 				tip = choose("time to flex","steroids could do pushups forever","steroids used to be a scientist","appreciate revolvers","get shots","get strong")
 
-			if race == 8
+			if _race == 8
 				tip = choose("6b 69 6c 6c#61 6c 6c#68 75 6d 61 6e 73","72 6f 62 6f 74","3c 33","74 61 73 74 79","guns for breakfast","I'm afraid I can't let you do that","don't forget to eat weapons")
 
-			if race == 9
+			if _race == 9
 				tip = choose("remember the training","focus","go","never surrender","amateur hour is over","again")
 
-			if race == 10
+			if _race == 10
 				tip = choose("forget the old days","change is coming","a new generation","it will get better","spawning new allies heals old ones","allies take damage over time")
 
-			if race == 11
+			if _race == 11
 				tip = choose("Radiation is everywhere","Firing the beam pauses rad attraction","Enemies absorb the beam's rads","Horror's beam destroys projectiles","Power","The horror","In the zone")
 
-			if race == 12
+			if _race == 12
 				tip = choose("Keep moving","Never look back","Never slow down","They're getting closer","Never stop","Another world lost")
 
-			if race == 13
+			if _race == 13
 				tip = choose("big", "dog")
 
-			if race == 14
+			if _race == 14
 				tip = choose("postmortem")
 
-			if race == 15
+			if _race == 15
 				tip = choose("Family", "Don't stop me", "Can't stand still")
 
-			if race == 16
+			if _race == 16
 				tip = choose("Gaming")
 		}
 	}
@@ -237,9 +239,7 @@ function scrTips() {
 	}
 
 	 //Crowns
-	if tiptype == 5 {
-	    tip = GameCont.crown_tips[GameCont.crown]
-	}
+	if (tiptype == 5) tip = crown_tips[GameCont.crown]
 	
 	if tip == ""
 		scrTips()

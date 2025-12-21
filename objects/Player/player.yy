@@ -57,5 +57,5 @@
     "name":"mskPlayer",
     "path":"sprites/mskPlayer/mskPlayer.yy",
   },
-  "visible":false,
+  "visible":true,
 }

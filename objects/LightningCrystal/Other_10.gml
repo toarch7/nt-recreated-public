@@ -12,7 +12,7 @@ if (((alarm[2] > 8) && (random(4) < 1)) || (random(20) < 1)) {
         image_angle = random_angle
         team = other.team
         ammo = (2 + random(4))
-        hit_id = other.hit_id
+        hitid = other.hitid
         event_perform(2, 0)
         visible = 0
         with(instance_create(x, y, LightningSpawn))

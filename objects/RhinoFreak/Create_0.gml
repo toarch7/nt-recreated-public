@@ -22,3 +22,5 @@ alarm[1] = 20 + random(10)
 spr_shadow_y = 4
 spr_shadow_x = -2
 walk = 0
+
+hitid = HitId.Rhinofreak

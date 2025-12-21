@@ -11,14 +11,12 @@ spr_idle = sprNothing2Idle
 spr_walk = sprNothing2Idle
 spr_hurt = sprNothing2Hurt
 spr_dead = sprNothing2Death
-with(Wall) {
-    if (place_free((x - 16), y) && (place_free((x + 16), y) && (place_free(x, (y + 16)) && place_free(x, (y - 16))))) {
-        instance_destroy()
-        instance_create(x, y, FloorExplo)
+with (Wall) {
+    if (place_free(x - 16, y) && place_free(x + 16, y) && place_free(x, y + 16) && place_free(x, y - 16)) {
+		scrWallDestroy(id)
     }
 }
-with(Bones)
-instance_destroy()
+instance_destroy(Bones)
 event_inherited()
 walk = 0
 right = 1

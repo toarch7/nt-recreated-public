@@ -18,3 +18,5 @@ alarm[1] = 40 + random(40)
 motion_add(point_direction(10016, 10016, x, y), 1)
 
 close = 0
+
+hitid = HitId.Frog

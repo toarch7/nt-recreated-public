@@ -1,5 +1,2 @@
-if lockstep_stop
-	exit
-
-if mouse_check_button_released(mb_left)
-    instance_destroy()
+if (visible && can_continue) instance_destroy()
+if (alarm[1] > 10) alarm[1] = 10

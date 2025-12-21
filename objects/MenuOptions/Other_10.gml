@@ -46,7 +46,7 @@ if text_input_element != undefined {
 	}
 	
 	if _opt.key == "etc_name"
-		draw_set_font(fontConsole)
+		draw_set_font(fntConsole)
 	
 	draw_text_shadow(drawx, drawy, loc(string(_value)) + text_input_cursor)
 	
@@ -220,7 +220,7 @@ if erasing_progress {
         }
     }
 	else {
-        if mouse_ui_clicked() or back_pressed {
+        if (mouse_ui_clicked() || back_pressed) {
             if !wait {
                 if point_in_rectangle(_mx, _my, view_width / 2 - 10, view_height / 2 + o - 8, view_width / 2 + 10, view_height / 2 + o + 8) {
                     snd_play(sndClick)
@@ -537,13 +537,12 @@ for (var i = 0; i < item_count; i++) {
 	if option_selected {
 		draw_set_color(c_white)
 		
-		if _opt.splat < sprite_get_number(sprMainMenuSplat) - 1
-			_opt.splat ++
+		_opt.splat = approach(_opt.splat, sprite_get_number(sprMainMenuSplat) - 1, timescale)
 		
 		if _opt.type == "slider" && mouse_check_button_pressed(mb_left) {
 			if slider == undefined {
 				slider = _opt
-				slider_x = drawx + 20
+				slider_x = drawx
 				snd_play(sndSlider)
 			}
 		}
@@ -651,16 +650,19 @@ for (var i = 0; i < item_count; i++) {
 					if _opt.type == "slider" {
 						_value = string(round(_value * 100)) + "%"
 						
-						var wdefault = sprite_get_width(sprOptionSlider) - 10,
+						var _slider_x = drawx - 6,
+							_slider_y = drawy - 4,
+							wdefault = sprite_get_width(sprOptionSlider) - 10,
 							h = sprite_get_height(sprOptionSlider),
 							w = wdefault * _opt.value
 						
 						draw_set_color(c_white)
 						
-						var offset = 0
-						draw_sprite(sprOptionSlider, 0, drawx + offset, drawy)
-						draw_sprite_part(sprOptionSlider, 1, 0, 0, w + 1, h + 1, drawx - (10 + offset), drawy - 9)
-						draw_sprite(sprSliderEnd, 0, drawx + (44 - offset) + w - wdefault / 2, drawy)
+						draw_sprite(sprOptionSlider, 0, _slider_x, _slider_y)
+						draw_sprite_part(sprOptionSlider, 1, 4, 0, w + 5, h + 1, _slider_x, _slider_y - 5)
+						draw_sprite(sprSliderEnd, 0, _slider_x + w + 4, _slider_y + 2)
+						
+						if (slider == _opt) slider_x = _slider_x
 					}
 					else if _opt.type == "list" {
 						if _opt.list_kind == "numeric" && is_numeric(_value) {
@@ -675,7 +677,7 @@ for (var i = 0; i < item_count; i++) {
 					}
 					else if _opt.type == "keybind" {
 						if await_input && await_keybind == _opt {
-							_value = "@g" + loc("PRESS _any#BUTTON")
+							_value = "@g" + loc("PRESS ANY#BUTTON")
 							
 							if (current_frame % 30) > 20
 								_value = "@q" + _value
@@ -694,6 +696,10 @@ for (var i = 0; i < item_count; i++) {
 				
 				drawx -= _size
 			}
+			else if _opt.type == "category" && category == OptionCategory.Main {
+				draw_text_bigname(drawx, drawy, loc(_name))
+				drawy += 2
+			}
 			else draw_text_nt(drawx, drawy, loc(_name))
 		}
 		
@@ -710,14 +716,14 @@ for (var i = 0; i < item_count; i++) {
 }
 
 if slider != undefined {
-	var _width = sprite_get_width(sprSlider)
+	var _width = sprite_get_width(sprSlider) - 10
 	
 	if _mx > 0 {
 		if _mx != slider_x {
 			slider_change = 1
 		}
 		
-		slider.value = clamp(1 - (_width - (_mx - slider_x)) / sprite_get_width(sprSlider), 0, 1)
+		slider.value = clamp(1 - (_width - (_mx - slider_x)) / _width, 0, 1)
 	}
 	
 	if !mouse_check_button(mb_left) {

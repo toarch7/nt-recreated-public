@@ -7,7 +7,7 @@ if ammo > 0 {
     with instance_create(x, y, EnemyLaser) {
         image_angle = other.gunangle + random(6) - 3
         team = other.team
-        hit_id = other.spr_idle
+        hitid = other.hitid
         event_perform(2, 0)
     }
 

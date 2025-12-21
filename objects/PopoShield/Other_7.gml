@@ -1,7 +1,10 @@
-if sprite_index = sprShielderShieldDisappear {
-    instance_destroy()
-    with Shielder alarm[1] += 20
-} else {
-    image_index = 4
-    image_speed = 0
+if sprite_index == sprShielderShieldDisappear {
+    with (Shielder) {
+		alarm[1] += 20
+	}
+	instance_destroy()
+    exit
 }
+
+image_index = image_number - 1
+image_speed = 0

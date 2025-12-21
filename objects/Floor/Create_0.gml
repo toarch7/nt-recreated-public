@@ -1,20 +1,45 @@
-image_index = choose(0, 0, 0, 0, 0, 0, 0, 1, 2)
+if (place_meeting(x, y, Floor)) {
+	instance_destroy()
+	exit
+}
+
 image_speed = 0
-if random(500) < 1 image_index = 3 image_index += choose(0, 4)
 
-if instance_exists(FloorMaker) styleb = instance_nearest(x, y, FloorMaker).styleb
-else styleb = 0
+if (random(500) < 1) {
+	image_index = 3
+}
+else {
+	image_index = choose(0, 0, 0, 0, 0, 0, 0, 1, 2) + choose(0, 4)
+}
 
-var area;
-if !instance_exists(MenuGen) && !instance_exists(Menu) area = GameCont.area
-else area = 0
+if instance_exists(FloorMaker) {
+	styleb = instance_nearest(x, y, FloorMaker).styleb
+}
+else {
+	styleb = false
+}
 
-sprite_index = asset_get_index("sprFloor" + string(area))
-//sprite_index = sprFloorCV
+var _area;
+if (!instance_exists(MenuGen) && !instance_exists(Menu)) {
+	_area = GameCont.area
+}
+else {
+	_area = area_campfire
+}
 
-if styleb = 1 and area != 0 {
-    depth = 9
-    sprite_index = asset_get_index("sprFloor" + string(area) + "B")
+if (styleb && _area != area_campfire) {
+    sprite_index = asset_get_index("sprFloor" + string(_area) + "B")
+    depth = 8
+	
+	if (GameCont.area == area_city) {
+		with (instance_create(x, y - 1, SnowFloor)) {
+			image_index = other.image_index
+			image_speed = 0
+		}
+	}
+}
+else {
+	sprite_index = asset_get_index("sprFloor" + string(_area))
 }
 
 material = 1

@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if UberCont.cgot[num] {
+if scr_race_is_unlocked(num) {
     snd_play(sndClick)
 	
     with StatChar {
@@ -10,10 +10,6 @@ if UberCont.cgot[num] {
 	
     DrawStats.select = num
 }
-
-if !UberCont.cgot[num] {
-	with Menu {
-	    hint = "locked#" + race_lock[other.num]
-	    alarm[11] = 90
-	}
+else {
+	snd_play(sndNoSelect)
 }

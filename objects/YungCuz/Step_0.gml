@@ -1,4 +1,1 @@
-if lockstep_stop
-	exit
-
-UberCont.ctot_uniq[6] += 1
+UberCont.ctot_uniq[Race.Venuz] += timescale

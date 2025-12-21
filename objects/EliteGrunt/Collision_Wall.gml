@@ -16,6 +16,6 @@ if !roll {
         if !place_free(x, y + vspeed) vspeed = 0
     }
 } else {
-    move_bounce_solid(1)
+    move_bounce_solid(true)
     angle += (720 - abs(angle)) * right * 0.7
 }

@@ -4,7 +4,7 @@ if (ammo > 0) {
     sprite_index = spr_fire
     snd_play_hit_big(sndTurretFire, 0.2)
     with(instance_create(x, y, EnemyBullet1)) {
-        hit_id = other.spr_idle
+        hitid = other.hitid
         motion_add(((other.gunangle + random(8)) - 4), 8)
         image_angle = direction
         team = other.team

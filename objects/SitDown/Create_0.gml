@@ -2,22 +2,21 @@ sit = 0
 spr_sit = sprMutant1Sit
 spr_gosit = sprMutant1GoSit
 
-with Player {
-    if is_me {
-        other.spr_sit = spr_sit
-        other.spr_gosit = spr_gosit
-    }
+player = noone
+
+with (Player) {
+	if (scr_player_is_local(index)) {
+	    other.spr_sit = spr_sit
+	    other.spr_gosit = spr_gosit
+		other.player = id
+	}
 }
 
-weapon = mskNone
-bweapon = mskNone
-
+// why is this here? I can't remember..
 volume_control_command = 0
 
-debug = 0
+debug = false
+do_thing = false
+force_sit = false
 
-force_sit = 0
-
-if GameCont.area == 106 {
-    alarm[3] = 560
-}
+alarm[3] = ((GameCont.area == area_hq) ? 300 : 900)

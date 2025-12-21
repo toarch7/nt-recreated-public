@@ -7,7 +7,7 @@ if scrChestOpened() exit
 var _player = instance_nearest(x, y, Player),
 	_count = 3
 
-if scrUltraCheckPlayerRace(_player, Race.Steroids, UltraSkill.Ambidextrous) {
+if scr_ultra_get(Race.Steroids, UltraSkill.Ambidextrous) {
 	_count ++
 }
 

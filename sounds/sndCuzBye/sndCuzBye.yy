@@ -14,8 +14,8 @@
   "exportDir": "",
   "name": "sndCuzBye",
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+    "name": "Crib",
+    "path": "folders/Sounds/Cuz/Crib.yy"
   },
   "preload": true,
   "resourceType": "GMSound",

@@ -179,7 +179,7 @@ function performSpriteImport(isForce) {
         }
 
         if (hasBZ2QOI && flagBZ2QOIDisabled) {
-            console.warn("It appears like the game has some textures encoded with BZ2+QOI (or just QOI) format, which are not currently supported. Please report if some of the game sprites will be missing.");
+            console.warn("It appears like the game BZ2+QOI (or just QOI) encoded textures, which are not currently supported. Please report if some of the game sprites will be missing.");
         }
         
         // 2nd pass for embedded textures
@@ -377,7 +377,7 @@ function performSpriteImport(isForce) {
 
         if (missingProjectSprites.length) {
             console.log("\x1b[90m" + missingProjectSprites.join(",  ") + "\x1b[0m\x1b[1m\nThe listed sprite names (" + missingProjectSprites.length + ") are missing from the project.");
-            console.log("\x1b[1mThis isn't a critical error. It's just a list of things that still need to be added to the game.\x1b[0m");
+            console.log("\x1b[1mThis isn't a critical error. It's just a list of things that could need to be added.\x1b[0m");
             console.log("Sprite extraction complete.\n\n");
         }
     }
@@ -443,7 +443,7 @@ function performSpriteImport(isForce) {
 
             const spriteInfo = project.parseYY(fs.readFileSync(spriteLocation + yyName, "utf-8"));
             let { name, width, height, bbox_left, bbox_right, bbox_top, bbox_bottom, bboxMode, collisionKind } = spriteInfo;
-            let { xorigin, yorigin } = spriteInfo.sequence;
+            let { xorigin, yorigin, playbackSpeed, playbackSpeedType } = spriteInfo.sequence;
 
             if (name in spriteOverridesMap) {
                 let overrides = spriteOverridesMap[name];
@@ -500,11 +500,19 @@ function performSpriteImport(isForce) {
 
                 if (!(xorigin == sprtData.originX && yorigin == sprtData.originY)) {
                     console.log(name, "Sprite origin points mismatch! Sprite:", xorigin, yorigin, "and SPRT:", sprtData.originX, sprtData.originY);
-                    spriteInfo.sequence.xorigin = sprtData.originX;
                     spriteInfo.sequence.yorigin = sprtData.originY;
+                    spriteInfo.sequence.xorigin = sprtData.originX;
                     console.log(spriteInfo.sequence.xorigin, spriteInfo.sequence.yorigin);
                     changesWereMade = true;
                 }
+				
+				if (!(playbackSpeed == 1 && playbackSpeedType == 1)) {
+					console.log(name, "Is using incorrect FPS! Current= playbackSpeed:", playbackSpeed, "playbackSpeedType:", playbackSpeedType,
+						", Required= playbackSpeed:", 1, ", playbackSpeedType:", 1);
+					spriteInfo.sequence.playbackSpeed = 1;
+                    spriteInfo.sequence.playbackSpeedType = 1;
+					changesWereMade = true;
+				}
                 
                 const margin = sprtData.margin;
                 if (margin.left != bbox_left

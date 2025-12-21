@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"FX",
-    "path":"folders/Sprites/FX.yy",
+    "name":"Spiral",
+    "path":"folders/Sprites/FX/Spiral.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -41,7 +41,7 @@ if loading {
         var my = device_mouse_y_to_gui(0)
 
         scrDrawRoadmap(xx, yy, round(pos), cont)
-        scrDrawHUD(player)
+        scrDrawPlayerHUD(player)
 
         draw_set_halign(fa_center)
 
@@ -74,7 +74,7 @@ if loading {
             var s = skills
             skills = other.skills
 
-            scrGameContDrawGUI()
+            scrDrawMiscHUD()
 
             skills = s
         }

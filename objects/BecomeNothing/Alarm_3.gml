@@ -1,2 +1,3 @@
-with instance_create(x, y, NothingBeam)
-    creator = other.id
+with (scr_damage_create(x, y, NothingBeam)) {
+	hitid = other.hitid
+}

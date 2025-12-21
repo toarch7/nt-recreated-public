@@ -6,7 +6,7 @@ function scr_hit(_instance, _amount, _hitid = HitId.None) {
 	with _instance {
 		if _amount > 0 {
 			hp -= _amount
-			inframes = 5
+			nexthurt = current_frame + 5
 		}
 		
 		sprite_index = spr_hurt
@@ -23,8 +23,11 @@ function scr_hit(_instance, _amount, _hitid = HitId.None) {
 			}
 		}
 		
-		if instance_is(self, Player) && _hitid >= 0 {
-			last_hit = _hitid
+		if instance_is(self, Player) {
+			scrPlayerProcTakeDamage(_amount)
+			if _hitid >= 0 && _hitid != HitId.Player {
+				if (scr_player_is_local(index)) GameCont.deathcause = _hitid
+			}
 		}
 		
 		return true
@@ -163,10 +166,7 @@ function scr_projectile_generic_flame_hit() {
 }
 
 function scr_explosion_generic_hit() {
-	// NOTE: in u100, there was an unintentional change towards
-	// the behavior of explosions to check for inframes whereas this
-	// wasn't the case prior to the update
-	if scr_can_hit(other.id, instance_is(other, Player)) {
+	if scr_can_hit(other.id, false) {
 		var _amount = damage
 		
 		if instance_is(other, Player) && scr_skill_get(mut_boiling_veins) {
@@ -207,13 +207,17 @@ function scr_projectile_generic_bolt_hit(_pierce=true) {
 		return false
 	}
 	
-	if scr_can_hit(other.id, false) && scr_projectile_hit(other.id, damage, knockback_speed) {
-		if !_pierce || other.hp > (damage * 0.5) {
+	if scr_can_hit(other.id, false) {
+		var _hp_last = other.hp
+		
+		if (!scr_projectile_hit(other.id, damage, knockback_speed)) return false
+		
+		if !_pierce || _hp_last > (damage * 0.5) {
 			var _target = other.id
 			
 			with instance_create(x, y, BoltStick) {
 				sprite_index = other.sprite_index
-				image_index = other.image_index
+				image_index = sprite_get_number(sprite_index) - 1
 				image_angle = other.image_angle
 	            target = _target
 			}
@@ -225,6 +229,7 @@ function scr_projectile_generic_bolt_hit(_pierce=true) {
 			
 			instance_destroy()
 		}
+		else motion_add_m(direction, knockback_speed)
 		
 		return true
 	}

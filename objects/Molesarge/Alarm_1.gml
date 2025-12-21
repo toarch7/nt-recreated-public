@@ -14,35 +14,35 @@ if instance_exists(target) {
                 with instance_create(x, y, EnemyBullet3) {
                     motion_add(other.gunangle, 10 + random(2))
                     image_angle = direction
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     creator = other.id
                     team = other.team
                 }
                 with instance_create(x, y, EnemyBullet3) {
                     motion_add(other.gunangle - 15, 10 + random(2))
                     image_angle = direction
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     creator = other.id
                     team = other.team
                 }
                 with instance_create(x, y, EnemyBullet3) {
                     motion_add(other.gunangle + 15, 10 + random(2))
                     image_angle = direction
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     creator = other.id
                     team = other.team
                 }
                 with instance_create(x, y, EnemyBullet3) {
                     motion_add(other.gunangle - 30, 10 + random(2))
                     image_angle = direction
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     creator = other.id
                     team = other.team
                 }
                 with instance_create(x, y, EnemyBullet3) {
                     motion_add(other.gunangle + 30, 10 + random(2))
                     image_angle = direction
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     creator = other.id
                     team = other.team
                 }

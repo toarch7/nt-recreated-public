@@ -4,18 +4,8 @@ if lockstep_stop
 if scrChestOpened()
 	exit
 
-
-with instance_create(x, y, WepPickup) {
-	scrDecideWepGold(1)
-	
-	name = wep_name[wep]
-	type = wep_type[wep]
-	
-	ammo = 1
-	curse = 0
-	
-	sprite_index = wep_sprt[wep]
-}
+var _wep = scrDecideWepGold()
+scrWeaponPickupCreate(x, y, _wep, true)
 
 snd_play(sndGoldChest)
 

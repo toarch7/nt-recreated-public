@@ -12,16 +12,14 @@ function scrDecideWep(_extra, _curse = false) {
 	
 	if (_hardmode) _tier_max = (_tier_max - 13) / 3
 	
+	var _robots = scrPlayerCountRace(Race.Robot)
+	if (_robots > 0) _tier_max += _robots
+	
     if (_curse) _tier_min = median(3, 1, ceil(_tier_max + _extra))
     
-	var _robots = scrPlayerCountRace(Race.Robot)
-	
-	if _robots {
-		_tier_max += _robots
-		
-		if scrUltraCheck(Race.Robot, UltraSkill.RefinedTaste) {
-			_tier_min = 6
-		}
+	if (scr_ultra_get(Race.Robot, UltraSkill.RefinedTaste)) {
+		instance_create(x, y, RobotA)
+		_tier_min = median(6, 1, _tier_max + _extra)
 	}
 	
 	var _iteration = 0
@@ -29,9 +27,9 @@ function scrDecideWep(_extra, _curse = false) {
 		var _wep = irandom_range(1, maxwep - 1)
 		
 		if (scr_weapon_is_valid(_wep) && scr_weapon_get_area(_wep) >= 0
-			&& scr_weapon_get_area(_wep) >= _tier_min && scr_weapon_get_area(_wep) < _tier_max
+			&& scr_weapon_get_area(_wep) >= _tier_min && scr_weapon_get_area(_wep) <= _tier_max
 		) {
-			if instance_exists(_target) && _target.race != Race.Steroids && (_target.wep == _wep || _target.bwep == _wep) {
+			if instance_exists(_target) && _target.race != Race.Steroids && scrPlayerHasWeapon(_target, _wep) {
 				continue
 			}
 			
@@ -53,6 +51,8 @@ function scrDecideWep(_extra, _curse = false) {
 	}
 	
 	if (variable_struct_exists(self, "wep") && !instance_is(self, Player)) wep = _wep
+	
+	if (variable_struct_exists(self, "dropseed")) dropseed = irandom(0x7fffffff)
 	
     return _wep
 }

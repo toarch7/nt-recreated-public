@@ -28,8 +28,8 @@ if is_gamepad() {
 	vspeed = v * 8
 }
 
-if mouse_wheel_up() vspeed = -24
-if mouse_wheel_down() vspeed = 24
+if mouse_wheel_up() vspeed = -18
+if mouse_wheel_down() vspeed = 18
 
 var p = ypos div 40
 

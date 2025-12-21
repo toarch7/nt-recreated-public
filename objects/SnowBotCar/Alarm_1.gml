@@ -6,12 +6,12 @@ if instance_exists(target) {
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 and random(3) < 1 and point_distance(x, y, target.x, target.y) < 160 {
 
         gunangle = mcr_target_direction + random(8) - 4
-        //SEE PLAYER
-
-
-        spr_idle = sprSnowBotCarThrow
-        spr_walk = sprSnowBotWalk
+        
+        spr_idle = (is_red_car ? sprSnowBotRedCarThrow : sprSnowBotCarThrow)
+        
+		spr_walk = sprSnowBotWalk
         spr_hurt = sprSnowBotHurt
+		
         alarm[2] = 5 / 0.4
         sprite_index = spr_idle
         speed = 0
@@ -21,8 +21,13 @@ if instance_exists(target) {
         with instance_create(x, y, CarThrow) {
             team = other.team
             motion_add(other.gunangle, 12)
+			
+			if !other.is_red_car {
+			    spr_idle = sprFrozenCarThrown
+			    spr_hurt = sprFrozenCarHurt
+			    spr_dead = sprScorchmark
+			}
         }
-
     } else if random(5) < 1 {
         //DO NOTHING
         gunangle = random_angle

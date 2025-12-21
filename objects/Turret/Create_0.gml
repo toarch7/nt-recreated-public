@@ -2,12 +2,12 @@ raddrop = 1
 max_hp = 40
 meleedamage = 0
 size = 1
-hit_id = sprTurtleIdle
 spr_idle = sprTurretAppear
 spr_walk = sprTurretIdle
 spr_hurt = sprTurretHurt
 spr_dead = sprTurretDead
 event_inherited()
+hitid = HitId.Turtle
 spr_fire = sprTurretFire
 snd_hurt = sndTurretHurt
 snd_dead = sndTurretDead

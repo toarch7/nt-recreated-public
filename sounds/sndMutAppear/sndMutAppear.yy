@@ -10,7 +10,7 @@
   "compression": 2,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.078031,
+  "duration": 0.07804988,
   "exportDir": "",
   "name": "sndMutAppear",
   "parent": {

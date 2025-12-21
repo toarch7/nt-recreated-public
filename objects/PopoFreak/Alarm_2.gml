@@ -4,13 +4,13 @@ if (ammo > 0) {
     snd_play_hit_big(sndGruntFire, 0.2)
     wkick = 5
     with(instance_create(x, y, IDPDBullet)) {
-        hit_id = other.spr_idle
+        hitid = other.hitid
         motion_add(((other.gunangle + random(100)) - 50), (4 + random(3)))
         image_angle = direction
         team = other.team
     }
     with(instance_create(x, y, IDPDBullet)) {
-        hit_id = other.spr_idle
+        hitid = other.hitid
         motion_add(((other.gunangle + random(40)) - 20), (4 + random(3)))
         image_angle = direction
         team = other.team

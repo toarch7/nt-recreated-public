@@ -37,3 +37,5 @@ freeze = 0
 
 lastx = x
 lasty = y
+
+hitid = HitId.EliteInspector

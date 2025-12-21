@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.412188,
+  "duration": 0.40723357,
   "exportDir": "",
   "name": "sndPopPopUpg",
   "parent": {

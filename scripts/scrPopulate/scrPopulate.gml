@@ -89,14 +89,18 @@ function scrPopulate() {
 			with Bones
 			sprite_index = sprCaveDecal
 		}
-		if spawnarea == area_sewers {
+		else if spawnarea == area_sewers || spawnarea == area_oasis {
 			if !place_free(x - 32, y) && !place_free(x + 32, y) && place_free(x, y) && rng_float(RNGStates.Props, 10) < 1 {
 				instance_create(x, y + 16, Bones)
 				with instance_create(x + 32, y + 16, Bones)
 				image_xscale = -1
 			}
-			with Bones
-			sprite_index = sprSewerDecal
+			if spawnarea == area_oasis {
+				with (Bones) sprite_index = sprCoral
+			}
+			else {
+				with (Bones) sprite_index = sprSewerDecal
+			}
 		}
 	}
 
@@ -223,14 +227,14 @@ function scrPopulate() {
 			_y = bbox_center_y
 		}
 		
+		instance_destroy(enemy, false)
+		instance_destroy(Corpse, false)
+		
 		repeat(4) {
 			instance_create(_x + orandom(2), _y + orandom(2), Turtle)
 		}
 		
 		instance_create(_x, _y, Rat)
-		
-		instance_destroy(enemy, false)
-		instance_destroy(Corpse, false)
 	}
 
 	// popo on your lawn

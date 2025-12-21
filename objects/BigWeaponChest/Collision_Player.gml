@@ -7,7 +7,7 @@ if scrChestOpened() exit
 var _player = instance_nearest(x, y, Player),
 	_count = 3
 
-if scrUltraCheckPlayerRace(_player, Race.Steroids, UltraSkill.Ambidextrous) {
+if scr_ultra_get(Race.Steroids, UltraSkill.Ambidextrous) {
 	_count ++
 }
 
@@ -19,7 +19,7 @@ repeat _count {
 	var _wep = scrDecideWep(1, false),
 		_x = bbox_center_x + orandom(2),
 		_y = bbox_center_y + orandom(2)
-		
+	
 	scrWeaponPickupCreate(_x, _y, _wep, true)
 }
 

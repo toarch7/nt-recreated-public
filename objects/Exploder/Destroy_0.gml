@@ -8,7 +8,7 @@ repeat(8) {
         image_angle = direction
         creator = other.id
         team = other.team
-        hit_id = other.spr_idle
+        hitid = other.hitid
     }
     with instance_create(x, y, AcidStreak) {
         motion_add(other.dir, 8)

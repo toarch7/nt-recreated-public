@@ -1,16 +1,10 @@
-if lockstep_stop
-	exit
-
-if !active
-	hp = max_hp
-
-inframes = 0
+if (!active) hp = max_hp
 
 speed = 0
 x = xstart
 y = ystart
 
-if !hp {
+if (hp <= 0) {
 	instance_create(x, y, BecomeNothing)
 	
 	snd_stop(sndBecomeNothingStartup)
@@ -40,10 +34,13 @@ if !hp {
 	instance_destroy()
 }
 
-if !active && distance_to_object(Player) <= 24 {
+if (!active && distance_to_object(Player) <= 24) {
     active = true
 	
     image_speed = 0.4
+	sprite_index = sprNothingSwitchOn
+	spr_idle = sprite_index
+	spr_hurt = sprite_index
 	
     snd_play(sndBecomeNothingStartup)
     snd_play_loop(sndBecomeNothingIdle)

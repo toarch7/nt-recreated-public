@@ -6,11 +6,9 @@ if image_index >= 3 && image_speed > 0 {
 }
 
 if image_index >= 9 && !explode {
-	instance_create(x + random(6) - 3, y - 8 + random(6) - 6, Explosion)
-	instance_create(x, y + 6, Scorchmark)
+	instance_create(x + orandom(3), y + orandom(3) - 8, Explosion)
 	
-	repeat 12
-		instance_create(x, y, Bubble)
+	repeat (12) instance_create(x, y, Bubble)
 	
 	var ang = random_angle
 	

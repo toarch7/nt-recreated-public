@@ -2,14 +2,14 @@ if ammo > 0 {
     walk = 0
 
     with instance_create(x, y, EnemyBullet2) {
-        hit_id = other.hit_id
+        hitid = other.hitid
         motion_add(other.gunangle + orandom(3) - 20, 5 + random(2))
         image_angle = direction
         team = other.team
     }
 
     with instance_create(x, y, EnemyBullet2) {
-        hit_id = other.hit_id
+        hitid = other.hitid
         motion_add(other.gunangle + orandom(3) + 20, 5 + random(2))
         image_angle = direction
         team = other.team

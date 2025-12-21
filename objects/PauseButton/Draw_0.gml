@@ -40,7 +40,7 @@ if image_index == 5 && !instance_exists(CoopController) && !save_get_value("etc"
     else draw_set_color(#3b3e43)
 	
 	draw_text_shadow(view_xview_center, view_yview + view_height + appear - 12,
-		loc("CLOSING THE GAME WITHOUT QUITTING TO MAIN MENU#ALLOWS YOU TO SAVE AND CONTINUE LATER"))
+		loc("YOU CAN SAVE AND CONTINUE LATER#IF YOU EXIT WITHOUT QUITTING TO MAIN MENU"))
 	
 	draw_set_color(c_white)
 	draw_align()

@@ -1,8 +1,9 @@
 if lockstep_stop
 	exit
 
-if instance_exists(Player) && !instance_exists(Cinematic)
-    scrDrawHUD()
+if instance_exists(Player) && !instance_exists(Cinematic) {
+	scrDrawPlayerHUD(scrPlayerFindLocal())
+}
 
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)
@@ -17,83 +18,79 @@ draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 
 if UberCont.opt_griller && !instance_exists(CrownIcon) && !instance_exists(UltraIcon) && !overgrilled {
-	var press = mouse_ui_clicked(),
-		change = scr_keyboard_check_pressed(vk_right) - scr_keyboard_check_pressed(vk_left),
+	var _press = mouse_ui_clicked(),
+		_change = scr_keyboard_check_pressed(vk_right) - scr_keyboard_check_pressed(vk_left),
 		
-		mx = device_mouse_x_to_gui(0),
-		my = device_mouse_y_to_gui(0),
+		_mx = device_mouse_x_to_gui(0),
+		_my = device_mouse_y_to_gui(0),
 		
-		step = 32,
-		count = (view_width - (step * 2)) div 32,
-		pagemax = maxskill div count
+		_step = 32,
+		_count = (view_width - (_step * 2)) div 32,
+		_pagemax = maxskill div _count
 	
-	if grillpage == -1
-		change = 1
+	// simulate initial input
+	if (grillpage == -1) _change = 1
 	
-	if grillpadchange != 0 && change == 0
-		change = grillpadchange
+	if (grillpadchange != 0 && _change == 0) {
+		_change = grillpadchange
+	}
 	
 	grillpadchange = 0
 	
-	if press {
-		if point_in_circle(mx, my, 16, view_height - 18, 20) {
-			change = -1
+	if _press {
+		if point_in_circle(_mx, _my, 16, view_height - 18, 20) {
+			_change = -1
 		}
-		else if point_in_circle(mx, my, view_width - 16, view_height - 18, 20) {
-			change = 1
+		else if point_in_circle(_mx, _my, view_width - 16, view_height - 18, 20) {
+			_change = 1
 		}
 	}
 	
-	draw_sprite_ext(sprDailyArrow, 0,              24, view_height - 18, 1, 1, 0, c_ultra, 1)
+	draw_sprite_ext(sprDailyArrow, 0, 24, view_height - 18, 1, 1, 0, c_ultra, 1)
 	draw_sprite_ext(sprDailyArrow, 1, view_width - 24, view_height - 18, 1, 1, 0, c_ultra, 1)
 	
-	if change != 0 {
-		with SkillIcon
-			instance_destroy()
+	if _change != 0 {
+		instance_destroy(SkillIcon)
 		
-		grillpage += change
+		grillpage += _change
 		
 		snd_play(sndClick)
 		
-		if grillpage < 0
-			grillpage = pagemax
-		else if grillpage > pagemax
+		if grillpage < 0 {
+			grillpage = _pagemax
+		}
+		else if grillpage > _pagemax {
 			grillpage = 0
+		}
 		
-		var dx = view_xview + view_width / 2,
-			dy = view_yview + view_height - 20,
-			page = grillpage, _num = 0
+		var _dx = view_xview + view_width / 2,
+			_dy = view_yview + view_height - 20,
+			_page = grillpage, _num = 0
 		
-		for(var i = 0; i < count; i ++) {
-			with instance_create(i * 32, dy, SkillIcon) {
-				var tries = 1
+		for(var i = 0; i < _count; i ++) {
+			with instance_create(i * 32, _dy, SkillIcon) {
+				var _tries = 1
 				
 				do {
-					skill = (i + (page * count)) % (mut_heavy_heart) + tries
+					skill = (i + (_page * _count)) % (maxskill) + _tries
 					
-					if (++ tries) > 99 {
+					if (++ _tries) > 99 {
 						instance_destroy()
 						break
 					}
 				}
 				until skill > 0 && !scr_skill_get(skill) && !instance_exists_var_notme(SkillIcon, "skill", skill)
 				
-				if skill < 0 {
-					skill = mut_heavy_heart + skill
-				}
+				if (skill < 0) skill = maxskill + skill
 				
-				if skill < 0 or skill > mut_heavy_heart
-					instance_destroy()
+				if (skill < 0 || skill > maxskill) instance_destroy()
 				
 				num = i
 			}
 		}
 		
-		if change > 0 {
-			print("Change!", change)
-			
-			with SkillIcon
-				num = -- i
+		if (_change > 0) {
+			with (SkillIcon) num = i--
 		}
 	}
 	
@@ -104,4 +101,6 @@ if UberCont.opt_griller && !instance_exists(CrownIcon) && !instance_exists(Ultra
 		
 		overgrilled = true
 	}
+	
+	event_user(0)
 }

@@ -23,7 +23,7 @@ if instance_exists(target) and roll = 0 {
                 with instance_create(x, y, IDPDBullet) {
                     motion_add(other.gunangle + random(6) - 3, 8)
                     image_angle = direction
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     team = other.team
                 }
 
@@ -61,7 +61,7 @@ if instance_exists(target) and roll = 0 {
                     motion_add(other.gunangle + random(20) - 10, 10)
                     image_angle = direction
                     team = other.team
-                    hit_id = other.hit_id
+                    hitid = other.hitid
                 }
             }
 

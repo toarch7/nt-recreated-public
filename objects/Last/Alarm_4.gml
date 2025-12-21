@@ -5,7 +5,7 @@ if (charge == 0) {
     snd_play(sndExplosion)
     with(instance_create(x, y, PopoExplosion)) {
         team = other.team
-        hit_id = other.spr_idle
+        hitid = other.hitid
     }
     scrTarget()
     if (target) {

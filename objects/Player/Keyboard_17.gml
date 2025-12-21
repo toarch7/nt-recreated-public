@@ -1,4 +1,4 @@
-if (is_keyboard_used_debug_overlay() || global.console_active || UberCont.public) exit
+if (scr_keyboard_is_typing() || global.console_active || UberCont.public) exit
 
 if scr_keyboard_check_pressed(ord("H")) {
     hp = 10000
@@ -46,15 +46,46 @@ if scr_keyboard_check_pressed(ord("C")) {
 }
 
 if scr_keyboard_check_pressed(ord("P")) {
-    instance_create(mouse_x, mouse_y, SnowTank)
+    instance_create(mouse_x, mouse_y, DebugObjectSpawner)
+}
+
+if scr_keyboard_check_pressed(ord("O")) {
+	scrBossIntro(0)
 }
 
 if scr_keyboard_check_held(ord("B")) {
-    if scr_keyboard_check_held(vk_shift) repeat 10 instance_create(x, y, BigRad)
-    else instance_create(x, y, BigRad)
+    if scr_keyboard_check_held(vk_shift) {
+		repeat (10) instance_create(x, y, BigRad)
+	}
+	else {
+		instance_create(x, y, BigRad)
+	}
 }
 
 if scr_keyboard_check_pressed(ord("K")) {
-    with enemy
-    hp = 0
+	if instance_exists(YungVenuzCouch) {
+		instance_destroy(VenuzTV)
+	}
+	else {
+		with (bossenemy) {
+			hp = 0
+			event_perform(ev_destroy, 0)
+		}
+		instance_destroy(enemy, false)
+	}
+	with (projectile) {
+		if (team != team_player) instance_destroy(id, false)
+	}
+	instance_destroy(prop, false)
+	instance_destroy(Portal, false)
+	instance_destroy(Corpse, false)
+	instance_destroy(Scorch, false)
+	instance_destroy(chestprop, false)
+	instance_destroy(IDPDSpawn, false)
+	instance_destroy(VanSpawn, false)
+	instance_destroy(IDPDPortalCharge, false)
+	if (race == Race.BigDog) mask_index = mskScrapBoss
+	if (!roll) angle = 0
+	mask_index = mskPlayer
+	visible = true
 }

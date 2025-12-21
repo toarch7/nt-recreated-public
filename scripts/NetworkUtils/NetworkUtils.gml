@@ -63,8 +63,11 @@ function scrGameNetplayDisable() {
 	global.is_server = true
 	
 	with GameCont {
-		if coopultra {
-			coopultra = 0
+		if (scr_ultra_get(Race.CoopUltra, UltraSkill.GunBond)
+			|| scr_ultra_get(Race.CoopUltra, UltraSkill.BloodBond)
+		) {
+			scr_ultra_set(Race.CoopUltra, UltraSkill.GunBond, false)
+			scr_ultra_set(Race.CoopUltra, UltraSkill.BloodBond, false)
 			ultrapoints ++
 		}
 	}

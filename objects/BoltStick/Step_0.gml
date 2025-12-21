@@ -1,15 +1,15 @@
-if lockstep_stop
-	exit
-
 if instance_exists(target) {
     z = 0
 
-    if target.object_index == LilHunterFly or target.object_index == RavenFly {
-        instance_destroy()
-        exit
+    if (variable_instance_exists(target, "z")) {
+        z = target.z
+		if (instance_is(target, DogGuardian)) z *= -1
     }
 
-    x = target.x
-    y = target.y - z
+    x = target.x - ldrx(16, image_angle)
+    y = target.y - ldry(16, image_angle) - z
     visible = target.visible
-} else instance_destroy()
+}
+else {
+	instance_destroy()
+}

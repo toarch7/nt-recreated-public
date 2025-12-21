@@ -1,12 +1,11 @@
 if lockstep_stop
 	exit
 
-if size >= other.size - 1 and speed > 2 and other.sprite_index != other.spr_hurt {
+if size >= other.size - 1 && speed > 2 && scr_can_hit(other.id) {
     with other {
-        hp -= round(1 + other.speed / 10)
-        sprite_index = spr_hurt
-        image_index = 0
-        motion_add(other.direction, other.speed / 2)
+		if (scr_hit_self(floor(1 + other.speed * 0.1))) {
+			motion_add(other.direction, other.speed / 2)
+		}
     }
 	
     speed /= 2

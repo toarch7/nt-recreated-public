@@ -26,9 +26,9 @@ repeat 6 {
     direction += 360 / 6
 }
 
-if GameCont.ultra == 1 {
+if scr_ultra_get(Race.BigDog, UltraSkill.UltraSpin) {
     repeat 6 {
-        with instance_create(x + lengthdir_x(24, -direction), y + lengthdir_y(16, -direction), AllyBullet) {
+        with instance_create(x + ldrx(24, -direction), y + ldry(16, -direction), AllyBullet) {
             creator = other.id
             motion_add(-other.direction, 2)
             image_angle = direction
@@ -41,15 +41,16 @@ if GameCont.ultra == 1 {
 
 direction += 4 * turn
 
-ammo--
+ammo --
 
 if !ammo {
-    with creator
-    if race == 13 {
-        spr_idle = sprScrapBossIdle
-        spr_walk = sprScrapBossWalk
-        spr_hurt = sprScrapBossHurt
-    }
+    with creator {
+	    if race == Race.BigDog {
+	        spr_idle = sprScrapBossIdle
+	        spr_walk = sprScrapBossWalk
+	        spr_hurt = sprScrapBossHurt
+	    }
+	}
 
     instance_destroy()
 }

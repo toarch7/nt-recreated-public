@@ -18,7 +18,7 @@ if instance_exists(damagesource) {
 			"was taking way too long")
 		
 		with damagesource {
-			print("    destroying", id, x, y, "distance:", , distance_to_point(10016, 10016))
+			print("    destroying", id, x, y, "distance:", distance_to_point(10016, 10016))
 			instance_destroy(id, false)
 		}
 	}

@@ -9,7 +9,7 @@ if instance_exists(target) {
                 snd_play(sndEnemyFire)
                 wkick = 4
                 with instance_create(x, y, EnemyBullet1) {
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     creator = other.id
                     motion_add(other.gunangle + random(4) - 2, 4)
                     image_angle = direction

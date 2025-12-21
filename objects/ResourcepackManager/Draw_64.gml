@@ -56,8 +56,11 @@ else if !downloading {
 }
 
 if max_height > 0 && !show_details && !downloading {
-	draw_sprite_ext(sprOptionSlider, 0, view_width - 16, 48, 1.6, 1, 270, c_white, 1)
-	draw_sprite_ext(sprSliderEnd, 0, view_width - 18 + (dragging > 0), 48 + (view_height - 96) * (ypos / max_height), 1, 1, 90, dragging ? c_uigray : c_white, 1)
+	var _slider_size = 80,
+		_slider_bottom = view_height - _slider_size
+	
+	draw_sprite_ext(sprOptionSlider, 0, view_width - 16, 36, 1.6, 1, 270, c_white, 1)
+	draw_sprite_ext(sprSliderEndHorizontal, 0, view_width - 20 + (dragging > 0), 40 + _slider_bottom * (ypos / max_height), 1, 1, 0, dragging ? c_uigray : c_white, 1)
 	
 	if dragging != -1 && mouse_check_button(mb_left) {
 		for(var i = 0; i < 4; i ++) {
@@ -67,13 +70,8 @@ if max_height > 0 && !show_details && !downloading {
 			var mx = device_mouse_x_to_gui(i),
 				my = device_mouse_y_to_gui(i)
 			
-			if (mx >= view_width - 32 && mx <= view_width) or dragging {
-				var pos = my - 48,
-					pos_max = view_height - 96
-				
-				var _ypos = ypos
-				
-				ypos = max_height * clamp(pos / pos_max, 0, 1)
+			if (mx >= view_width - 32 && mx <= view_width) || dragging {
+				ypos = max_height * clamp((my - LETTERBOX_SIZE) / _slider_bottom, 0, 1)
 				
 				if !dragging {
 					snd_play(sndSlider)

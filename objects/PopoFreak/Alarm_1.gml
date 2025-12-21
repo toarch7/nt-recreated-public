@@ -1,6 +1,6 @@
 scrTarget()
 alarm[1] = (15 + random(5))
-if (target > Player) {
+if (target != noone) {
     if (collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0) {
         walk = 20
         motion_add(((mcr_target_direction + random(90)) - 45), 5)

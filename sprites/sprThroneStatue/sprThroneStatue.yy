@@ -38,8 +38,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Nothing",
-    "path":"folders/Sprites/Enemies/Nothing.yy",
+    "name":"Statue",
+    "path":"folders/Sprites/Enemies/Throne & Throne2/Throne/Statue.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

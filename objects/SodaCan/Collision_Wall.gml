@@ -1,5 +1,4 @@
 if lockstep_stop
 	exit
 
-move_bounce_solid(00)
-speed /= 2
+move_bounce_solid(true)

@@ -1,22 +1,18 @@
 if lockstep_stop
 	exit
 
-with TopCont
-drawcontrols = 0
+if (!done && UberCont.letterbox) scrLetterbox(false)
 
-with Player
-visible = 0
+with (TopCont) drawcontrols = false
 
-if alarm[0] == 10 y -= 75
+with (Player) visible = false
 
-with CrownObject
-instance_destroy()
+if (alarm[0] == 10) y -= 75
 
-with IDPDSpawn
-instance_destroy()
+instance_destroy(CrownObject)
 
-with WantPopo
-instance_destroy()
+instance_destroy(IDPDSpawn)
 
-with WantVan
-instance_destroy()
+instance_destroy(WantPopo)
+
+instance_destroy(WantVan)

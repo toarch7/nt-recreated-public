@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"FX",
-    "path":"folders/Sprites/FX.yy",
+    "name":"ProjectileHits",
+    "path":"folders/Sprites/FX/ProjectileHits.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-move_bounce_solid(00)
+move_bounce_solid(true)
 
 hp -= 3
 sprite_index = spr_hurt

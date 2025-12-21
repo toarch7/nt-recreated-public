@@ -1,7 +1,7 @@
 if ammo {
     if ammo == 16 {
         with instance_create(x, y, JockRocket) {
-            hit_id = other.hit_id
+            hitid = other.hitid
             motion_add(other.gunangle, 2)
             sprite_index = sprGoldRocket
             image_angle = direction
@@ -16,14 +16,14 @@ if ammo {
     with instance_create(x, y, EnemyBullet4) {
         motion_add(other.gunangle + sin(other.wave) * 15, 12)
         team = other.team
-        hit_id = other.hit_id
+        hitid = other.hitid
         image_angle = direction
     }
 
     with instance_create(x, y, EnemyBullet4) {
         motion_add(other.gunangle - sin(other.wave) * 15, 12)
         team = other.team
-        hit_id = other.hit_id
+        hitid = other.hitid
         image_angle = direction
     }
 

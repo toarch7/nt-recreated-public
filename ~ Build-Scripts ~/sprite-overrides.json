@@ -40,6 +40,10 @@
     "sprResourcepackDownload": { "custom": true },
     "sprScrapBossMissileDead": { "custom": true },
     "sprSwipeTutorHand": { "custom": true },
+    "mskButtonAchievements": { "custom": true },
+    "mskButtonAchievementsMax": { "custom": true },
+    "sprMobilePickup": { "custom": true },
+    "sprSliderEndHorizontal": { "custom": true },
     "sprTextLinkURLfound": { "custom": true },
     "sprTextLinkURL": { "custom": true }
 }

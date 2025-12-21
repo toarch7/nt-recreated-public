@@ -1,6 +1,7 @@
 if sprite_index == sprEliteShielderShieldDisappear {
     instance_destroy()
-} else {
-    image_index = 11
-    image_speed = 0
+	exit
 }
+
+image_index = image_number - 1
+image_speed = 0

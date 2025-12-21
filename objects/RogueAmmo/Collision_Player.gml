@@ -1,27 +1,21 @@
 if lockstep_stop
 	exit
 
-var p = instance_nearest(x, y, Player)
-
-if !p or p.race != 12
-	exit
-
-with p {
-	var a = 1 + (ultra == 1)
+with (other) {
+	if (race != Race.Rogue) exit
 	
-    rogue_ammo += a
+	var _amount = 1 + scr_ultra_get(Race.Rogue, UltraSkill.SuperPortalStrike)
 	
-	var str = loc_sfmt("+% PORTAL STRIKE" + (a > 1 ? "S" : ""), string(a))
+	rogue_ammo += _amount
 	
-	if rogue_ammo >= rogue_ammo_max {
-		str = loc("MAX PORTAL STRIKES")
+	var _str = loc_sfmt("+% PORTAL STRIKE" + (_amount > 1 ? "S" : ""), string(_amount))
+	
+	if (rogue_ammo >= rogue_ammo_max) {
+		_str = loc("MAX PORTAL STRIKES")
 		rogue_ammo = rogue_ammo_max
 	}
 	
-    with instance_create(x, y, PopupText)
-		mytext = str
+	scrPopupCreate(x, y, _str)
 }
-
 snd_play(sndRogueCanister)
-
 instance_destroy()

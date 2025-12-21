@@ -2,48 +2,56 @@
 > This is a temporary solution for tracking the list of tasks list. Ideally this should be fixed to use GitHub issues & milestones...
 
 # Main priority
-- [ ] Replace `inframes` mechanism with `nexthurt` akin to base NT
 - [ ] A proper state serialization system for saving/loading
 - [ ] Implement automated testing
     - [x] `scrFire` test
     - [x] `damagesource` test
-    - [ ] Run test
-- [x] Implement freezeframes (for real this time)
-- [ ] Input system refactoring
-    - [ ] Drop Input library support, as it was only required because of its handy-dandy gamepad mappings
-    - [ ] Proper gamepad controls for loadout menu
-    - [ ] *TBD*
+    - [ ] Random run test
+- [ ] Implement freezeframes
+    - [x] Implement `sleep`
+    - [ ] Go over all cases where `Sleep()` is called in the base game and introduce these calls in this project.
+- [ ] Drop Input library support, as it was only used because of its handy-dandy gamepad mappings
+- [ ] Proper gamepad controls in the loadout menu
 - [ ] Damage & projectile system refactoring
     - [x] Refactor object-based damage dealing
     - [x] Clean up projectile collision damage code
     - [x] Introduce `HitId`s
-    - [ ] Make the "Killed By" in the Game Over use hitid to display information
-- [ ] Support for NTT/u100 localization format
+    - [x] Make the "Killed By" in the Game Over use hitid to display information
+    - [ ] Assign all enemies & damage sourcers their proper `hitid`s 
+- [ ] Implement full support of NTT and u100 localization formats
     - [ ] Implement `.ini` localization file support
     - [ ] Implement `lang.csv` localization support (directly related to the previous paragraph)
     - [ ] Introduce localization tokens to simplify localization
-- [ ] Loadout menu refactoring
+- [ ] Revisit the enemy/prop animation logic 
+- [x] Replace `inframes` mechanism with `nexthurt` akin to base NT
+- [x] Loadout menu refactoring
     - [x] Campfire menu refactoring
     - [x] Untangle the loadout menu logic
     - [x] Implement loadout rendering for multiple players
-    - [ ] Fully implement random starting crowns
-- [ ] Content systems refactoring
-    - [ ] Races
+    - [x] Fully implement random starting crown
+- [x] Content systems refactoring
+    - [x] Races
         - [x] Support for unlimited amount of playable characters
         - [x] Partial support for unlimited mutant skins
         - [x] Complete support for unlimited mutant skins
-        - [ ] Ability system refactoring
-        - [ ] *TDB*
-    - [ ] Ultra Mutations
-        - [ ] Implement per-character multiplayer ultras
-        - [ ] Refactor any leftover checks for ultras (`ultra_check`, direct variable comparisons)
-        - [ ] Implement multiple ultras rendering in HUD
+        - [x] Ability system refactoring
+    - [x] Ultra Mutations
+        - [x] Implement per-character multiplayer ultras
+        - [x] Refactor any leftover checks for ultras (`ultra_check`, direct variable comparisons)
+        - [x] Implement multiple ultras rendering in HUD
+        - [x] Impliment multiplayer ultra selections per player (race)
+        - [x] Implement co-op ultra and race ultra selection in first ultra level pick (aka `/ultras all` from NTT)
     - [x] Ammo, Ammo Pickups & Health Pickups system refactoring
+    - [ ] *TBD*
 
 # Medium priority
+- [ ] 60+ FPS and timescale support
+    - [ ] Figure out a replacement system for alarms that introduces minimal overhead
+    - [ ] Refactor all object logic to not use alarms
+    - [ ] Implement custom 2D physics that allows seamless transition from the current GameMaker physics engine
 - [ ] Console refactoring (currently considering to use GameMaker's ImGui debug overlay)
 - [ ] Full support of the base NT savefile format
-    - [ ] Implement automatic conversion of NTM -> NT savefiles
+    - [ ] Implement automatic conversion of the current NTM save file structure
     - [ ] Make NTM savefiles 100% interchangible with base NT
 
 # CI (low priority)

@@ -83,7 +83,7 @@ function scrShadows() {
 	}
 		
 	with SodaCan {
-		draw_rectangle(x - 2, bbox_bottom, x + 2, bbox_bottom + 2, false)
+		draw_sprite_ext(shd16, 0, x, bbox_bottom, 0.5, 0.5, 0, c_black, 1)
 	}
 		
 	with RavenFly {

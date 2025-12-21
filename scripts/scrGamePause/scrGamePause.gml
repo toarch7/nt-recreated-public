@@ -8,7 +8,7 @@ function scrGamePause() {
 		if os_type == os_android && opt_volumecontrol {
 			SetVolumeControl(false)
 		}
-			
+		
 	    splatindex = 0
 		
 		pause_portrait_anim = 180
@@ -78,4 +78,9 @@ function scrGameUnpause() {
 
 function scrGameIsPaused() {
 	return UberCont.paused
+}
+
+function scrGameCanPause() {
+	return !(instance_exists(GenCont) || instance_exists(Credits) || instance_exists(Cinematic)
+		|| !instance_exists(Player) || instance_exists(GameOver) || UberCont.want_pause)
 }

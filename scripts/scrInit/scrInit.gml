@@ -1,7 +1,8 @@
 /// TODO: ideally this savedata should be made full compatible with base NT
 function scrInit() {
 	var _fix_inconsistent_weapon_ids = false,
-		_fix_binary_skin_system = false
+		_fix_binary_skin_system = false,
+		_fix_cswep_being_boolean = false
 	
 	#region Load savedata file
     saveData = undefined
@@ -125,24 +126,28 @@ function scrInit() {
 	#region Register some of the content
 	
     scrRaces()
+	scrSkills()
+	scrUltras()
     scrCrowns()
 	scrWeapons()
-	scrUltras()
 	scrDeathCauses()
 	
 	#endregion
 	
 	#region Setup conversion flags
 	
-	var _last_loaded_version = save_get_value("etc", "versioncheck", GAME_BUILD)
+	var _last_loaded_version = save_get_value("etc", "versioncheck", -1)
 	
 	if _last_loaded_version != GAME_BUILD {
 		// Build 3000 - major game code refactoring
 		if _last_loaded_version < 3000 {
+			_fix_cswep_being_boolean = true
 			_fix_inconsistent_weapon_ids = true
 			_fix_binary_skin_system = true
 		}
 	}
+	
+	save_set_value("etc", "versioncheck", GAME_BUILD)
 	
 	#endregion
 	
@@ -220,9 +225,17 @@ function scrInit() {
 		
         cwep[_race_id] = save_get_value("cwep", _race_str, scrRaceGetStarterWeapon(_race_id))
 		
+		// fix Golden Frog Pistol ID being 255 instead of 126
 		if cwep[_race_id] == 255 && _fix_inconsistent_weapon_ids {
 			save_set_value("cwep", _race_str, wep_golden_frog_pistol)
 			cwep[_race_id] = wep_golden_frog_pistol
+		}
+		
+		if _fix_cswep_being_boolean {
+			var _chosen_cwep = save_get_value("cswep", _race_str, false),
+				_starter_weapon = scrRaceGetStarterWeapon(_race_id)
+			
+			save_set_value("cswep", _race_str, _chosen_cwep ? cwep[_race_id] : _starter_weapon)
 		}
 		
 		var _max_skins = scrRaceGetMaxSkinCount(_race_id)
@@ -232,8 +245,7 @@ function scrInit() {
 			cskingot[_race_id, _skin_id] = save_get_value(_cskingot_key, _skin_id, (_skin_id == 0))
 		}
 		
-		var _max_crowns = crownmax + 1
-        for (var _crown_id = 1; _crown_id < _max_crowns; ++_crown_id) {
+        for (var _crown_id = 1; _crown_id <= crownmax; ++_crown_id) {
 			var _crowngot_key = "crowngot" + _race_str
             crowngot[_race_id, _crown_id] = save_get_value(_crowngot_key, _crown_id, false)
         }

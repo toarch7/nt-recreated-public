@@ -20,5 +20,5 @@ snd_dead = sndHydrantBreak
 
 if spr_idle == sprIcicle {
 	snd_hurt = sndHitRock
-	snd_dead = sndIcicle
+	snd_dead = sndIcicleBreak
 }

@@ -23,3 +23,5 @@ alarm[1] = 20 + random(10)
 walk = 0
 spr_shadow = shd32
 spr_shadow_y = 8
+
+hitid = HitId.Exploguardian

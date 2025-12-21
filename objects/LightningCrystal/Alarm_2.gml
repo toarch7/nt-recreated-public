@@ -7,7 +7,7 @@ if (ammo > 0) {
         image_angle = (other.gunangle + (random(30) - 15))
         team = other.team
         ammo = (6 + random(8))
-        hit_id = other.hit_id
+        hitid = other.hitid
         event_perform(2, 0)
         visible = 0
         with(instance_create(x, y, LightningSpawn))

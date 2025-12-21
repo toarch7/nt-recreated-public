@@ -37,7 +37,6 @@ if area == 106 shadow_color = 9184256
 if area == 107 shadow_color = 1310738
 
 alarm[0] = 1
-alarm[1] = 120
 
 try {
     var c = global.customshadowcolors[$ string(area)]

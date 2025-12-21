@@ -136,24 +136,22 @@ function render_parse_text(_text) {
 					do {
 						var _comma = string_pos(",", _tag)
 						
-						if _comma == 0 or _parameter_number == 3
+						if _comma == 0 || _parameter_number == 3
 							break
 						
 						try {
 							var _extra = (string_length(_tag) - _comma + 1),
 								_index_str = string_copy(_tag, _comma + 1, _extra)
 							
-							//
-								if _parameter_number == 0 {
-									_index = real(_index_str)
-								}
-								else if _parameter_number == 1 {
-									_xoffset = real(_index_str)
-								}
-								else if _parameter_number == 2 {
-									_yoffset = real(_index_str)
-								}
-							//
+							if _parameter_number == 0 {
+								_index = real(_index_str)
+							}
+							else if _parameter_number == 1 {
+								_xoffset = real(_index_str)
+							}
+							else if _parameter_number == 2 {
+								_yoffset = real(_index_str)
+							}
 						}
 						catch(e) { /* ... */ }
 						
@@ -165,8 +163,10 @@ function render_parse_text(_text) {
 					
 					var _spr = asset_get_index(_tag)
 					
-					if !sprite_exists(_spr)
-						_spr = msk_none
+					if !sprite_exists(_spr) {
+						print("Unknown sprite:", _tag)
+						_spr = mskNone
+					}
 					
 					var _w = sprite_get_width(_spr),
 						_h = sprite_get_height(_spr),

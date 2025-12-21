@@ -14,10 +14,10 @@ size = 8
 
 right = choose(1, -1)
 
-team = 1
+team = team_enemy
 
 snd_hurt = sndHitRock
 
 spr_idle = sprNothingOff
-spr_hurt = sprNothingHurt
+spr_hurt = sprNothingOff
 spr_dead = sprNothingDeath

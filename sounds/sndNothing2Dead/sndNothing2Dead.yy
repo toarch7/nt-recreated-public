@@ -7,10 +7,10 @@
   },
   "bitDepth": 1,
   "channelFormat": 0,
-  "compression": 1,
+  "compression": 2,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 6.005,
+  "duration": 6,
   "exportDir": "",
   "name": "sndNothing2Dead",
   "parent": {

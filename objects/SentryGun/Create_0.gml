@@ -5,7 +5,6 @@ hp = max_hp
 meleedamage = 0
 size = 1
 ammo = 24
-inframes = 0
 
 snd_hurt = sndHitMetal
 

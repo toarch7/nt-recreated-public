@@ -4,10 +4,11 @@
 function snd_play_hit_big(_sound_index, _random_pitch = 0.2) {
     if scr_test_is_fps_uncapped() return -1
 	
-	if GameCont.area == area_oasis {
-        if _sound_index == sndExplosion
-        || _sound_index == sndExplosionL
-        || _sound_index == sndExplosionXL {
+	if GameCont.underwater {
+        if (_sound_index == sndExplosion
+	        || _sound_index == sndExplosionL
+	        || _sound_index == sndExplosionXL
+		) {
 			_sound_index = sndOasisExplosion
         }
 		

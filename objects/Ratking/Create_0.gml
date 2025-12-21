@@ -26,3 +26,5 @@ mydir = 0
 
 spr_shadow = shd32
 spr_shadow_y = 4
+
+hitid = HitId.BigRat

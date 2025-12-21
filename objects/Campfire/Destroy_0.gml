@@ -1,3 +1,8 @@
 instance_create(x, y, Explosion)
-instance_create(x, y + 6, Scorchmark)
+
+if (corpse) {
+	instance_create(x, y, CampfireOff)
+	corpse = false
+}
+
 event_inherited()

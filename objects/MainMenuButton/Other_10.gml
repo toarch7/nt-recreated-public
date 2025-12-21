@@ -96,22 +96,13 @@ switch image_index {
 
 	// Quit
     case 4:
+		snd_play(sndClick)
         game_restart()
         game_end()
         break
-	
-	// (Unused) Achievements
-    case 5:
-        instance_create(0, 0, BackButton)
-        instance_create(0, 0, AchievementsMenu)
-        with MainMenuButton instance_destroy()
-        break
 }
 
-if !instance_exists(Player) {
-	print(my_player, global.__playerinstance_list)
-	my_player.reset_session_data()
-}
+if (!instance_exists(Player)) my_player.reset_session_data()
 
 with UberCont {
 	gamepad_sel = 0

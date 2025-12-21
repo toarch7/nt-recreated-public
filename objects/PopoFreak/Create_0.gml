@@ -2,7 +2,6 @@ raddrop = 25
 max_hp = 30
 meleedamage = 5
 size = 2
-hit_id = sprPopoFreakIdle
 spr_idle = sprPopoFreakIdle
 spr_walk = sprPopoFreakWalk
 spr_hurt = sprPopoFreakHurt
@@ -25,3 +24,5 @@ spr_shadow = shd32
 spr_shadow_y = 4
 
 depth = -2
+
+hitid = HitId.PopoFreak

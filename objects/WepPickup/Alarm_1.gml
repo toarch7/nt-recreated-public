@@ -1,30 +1,29 @@
-if speed > 0 {
-    alarm[1] = 30
-    exit
-}
-
-if !instance_exists(creator) or !visible exit
+if !(instance_exists(creator) && visible) exit
 
 with creator {
-    if !bwep {
-        if !wep {
-            wep = other.wep
-            reload = 0
-        } else {
-            bwep = other.wep
-            breload = 0
-        }
-
-        repeat 4 {
-            instance_create(other.x + random(12) - 6, other.y + random(12) - 6, Dust)
-        }
-
-        repeat 2 {
-            scrSwapWeps()
-        }
-
-        instance_destroy(other.id, 1)
+    if (wep && bwep) break
+	
+    if !wep {
+        wep = other.wep
+        reload = 0
     }
+	else {
+        bwep = other.wep
+        breload = 0
+    }
+
+    repeat (4) instance_create(other.x + orandom(6), other.y + orandom(6), Dust)
+    
+    repeat (2) scrSwapWeps()
+    
+	swapanim = 2
+	
+	with instance_create(x, y, AnimParticle) {
+		sprite_index = sprChickenB
+		creator = other.id
+	}
+
+    instance_destroy(other.id, true)
 }
 
 snd_play(sndChickenReturn)

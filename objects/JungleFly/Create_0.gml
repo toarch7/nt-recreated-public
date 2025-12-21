@@ -14,6 +14,8 @@ snd_hurt = sndFlyHurt
 snd_dead = sndFlyDead
 snd_mele = sndFlyMelee
 
+spr_shadow = shd32
+
 //behavior
 walk = 0
 gunangle = random_angle

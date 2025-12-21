@@ -5,7 +5,7 @@ if instance_exists(target) {
 
     if collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0 {
         //SEE TARGET
-        gunangle = target_direction
+        gunangle = mcr_target_direction
         if target.x < x right = -1
         else if target.x > x right = 1
         //SEE PLAYER AND FAR ENOUGH AND NOT SHOUTING "FREEZE MOTHERFUCKER"
@@ -17,16 +17,17 @@ if instance_exists(target) {
             alarm[1] = 50
         } else if random(3) < 1 {
             //SHIELD
-            with instance_create(x, y, PopoShield) {
+			with instance_create(x, y, PopoShield) {
                 creator = other.id
+				team = other.team
             }
-
+			snd_play_hit(male ? sndShielderShieldM : sndShielderShieldF)
             alarm[1] = 85
             speed = 0
             walk = 0
         } else { //JUST WALK YOU KNOW
-            if point_distance(x, y, target.x, target.y) > 64 direction = target_direction + random(50) - 25
-            else direction = target_direction + 180 + random(90) - 45
+            if point_distance(x, y, target.x, target.y) > 64 direction = mcr_target_direction + random(50) - 25
+            else direction = mcr_target_direction + 180 + random(90) - 45
             speed = 0.4
             walk = 10 + random(10)
             if freeze < 40 alarm[1] += random(30)

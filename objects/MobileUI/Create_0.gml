@@ -3,6 +3,7 @@ if !instance_is(self, WepstickAttack) && instance_number(object_index) > 1 {
 }
 
 index = -1
+smoothrad = 0
 
 self[$ "key"] ??= object_get_name(object_index)
 

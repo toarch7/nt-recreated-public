@@ -6,10 +6,7 @@ if (hammerhead && hammering > 6) {
 	
 	instance_create(other.x + 8, other.y + 8, Hammerhead)
 	
-	with other {
-		instance_destroy()
-		instance_create(x, y, FloorExplo)
-	}
+	scrWallDestroy(other.id)
 	
 	exit
 }
@@ -39,9 +36,12 @@ if !roll && race != Race.Frog {
 	y += vspeed
 }
 else {
-	move_bounce_solid(1)
+	move_bounce_solid(true)
 	
 	if (race != Race.Frog) {
 		angle += ((720 - abs(angle)) * right * 0.7)
 	}
+	
+	x += hspeed
+	y += vspeed
 }

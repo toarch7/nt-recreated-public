@@ -30,6 +30,7 @@ function scrWebhookEmoteIDs() {
     muticon[28] = "<:open_mind:763720342002204683>"
     muticon[29] = "<:heavy_heart:763720342333947904>"
 
+	//
     ulticon[1, 1] = "<:confiscate:763743179584569344>"
     ulticon[1, 2] = "<:gun_warrant:763743179274453013>"
 
@@ -73,51 +74,72 @@ function scrWebhookEmoteIDs() {
     ulticon[15, 1] = "<:distance:763743180310970408>"
     ulticon[15, 2] = "<:intimacy:763743180469436416>"
 
+	//
     chricon[1, 1] = "<:FISHA:763750012605431808>"
     chricon[1, 2] = "<:FISHB:763750013129850880>"
+	chricon[1, 3] = "<:FISHC:1448771539531989002>"
 
     chricon[2, 1] = "<:CRYSTALA:763750012613820426>"
     chricon[2, 2] = "<:CRYSTALB:763750013100490752>"
+	chricon[2, 3] = "<:CRYSTALC:1448771573866561720>"
 
     chricon[3, 1] = "<:EYESA:763750012663889941>"
     chricon[3, 2] = "<:EYESB:763750013012148246>"
+	chricon[3, 3] = "<:EYESC:1448771610675904665>"
 
     chricon[4, 1] = "<:MELTINGA:763750012601237504>"
     chricon[4, 2] = "<:MELTINGB:763750013054353448>"
+	chricon[4, 3] = "<:MELTINGC:1448771653566988428>"
 
     chricon[5, 1] = "<:PLANTA:763750012353118229>"
     chricon[5, 2] = "<:PLANTB:763750013171138600>"
+	chricon[5, 3] = "<:PLANTC:1448771708281684048>"
 
     chricon[6, 1] = "<:YVA:763750012467019777>"
     chricon[6, 2] = "<:YVB:763750013066674187>"
+	chricon[6, 3] = "<:YVC:1448771757979734017>"
 
     chricon[7, 1] = "<:STEROIDSA:763750012630597632>"
     chricon[7, 2] = "<:STEROIDSB:763750013306011648>"
+	chricon[7, 3] = "<:STEROIDSC:1448771817924853870>"
 
     chricon[8, 1] = "<:ROBOTA:763750012798631946>"
     chricon[8, 2] = "<:ROBOTB:763750013100228618>"
+	chricon[8, 3] = "<:ROBOTC:1448771877119201300>"
 
     chricon[9, 1] = "<:CHICKENA:763750012286271500>"
     chricon[9, 2] = "<:CHICKENB:763750012878192641>"
+	chricon[9, 3] = "<:CHICKENC:1448771967674089533>"
 
     chricon[10, 1] = "<:REBELA:763750012524953651>"
     chricon[10, 2] = "<:REBELB:763750013062742026>"
+	chricon[10, 3] = "<:REBELC:1448772013547065435>"
 
     chricon[11, 1] = "<:HORRORA:763750012361768962>"
     chricon[11, 2] = "<:HORRORB:763750012856303648>"
+	chricon[11, 3] = "<:HORRORC:1448772087564079355>"
 
     chricon[12, 1] = "<:ROGUEA:763750012634660874>"
     chricon[12, 2] = "<:ROGUEB:763750013086990356>"
+	chricon[12, 3] = "<:ROGUEC:1448772117964259478>"
 
-    chricon[13, 1] = ":dog:"
-    chricon[13, 2] = ":dog:"
+    chricon[13, 1] = "<:BIGDOGA:1448771413438890179>"
+    chricon[13, 2] = "<:BIGDOGA:1448771413438890179>"
+    chricon[13, 3] = "<:BIGDOGA:1448771413438890179>"
 
-    chricon[14, 1] = "<:SKELETONA:763754120250392616>"
-    chricon[14, 2] = "<:SKELETONA:763754120250392616>"
+	chricon[14, 1] = "<:SKELETONA:1448772317009416262>"
+	chricon[14, 2] = "<:SKELETONB:1448772350832152576>"
+	chricon[14, 3] = "<:SKELETONA:1448772317009416262>"
 
     chricon[15, 1] = "<:FROGA:763754120246198272>"
     chricon[15, 2] = "<:FROGA:763754120246198272>"
+    chricon[15, 3] = "<:FROGA:763754120246198272>"
+	
+	chricon[16, 1] = "<:CUZA:1448772200856551604>"
+	chricon[16, 2] = "<:CUZB:1448772274264998053>"
+	chricon[16, 3] = "<:CUZC:1448772161463390499>"
 
+	//
     cwnicon[0] = "<:Crown0:763750012907421766>"
     cwnicon[1] = "<:Crown1:763750012605693964>"
     cwnicon[2] = "<:Crown3:763750012902440970>"

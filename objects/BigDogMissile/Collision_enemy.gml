@@ -1,21 +1,11 @@
 if lockstep_stop
 	exit
 
-if meleedamage > 0 && canmelee && team != other.team {
-    if other.inframes exit
-
-    with other {
-        if sprite_index != spr_hurt {
-            snd_play_hit_big(other.snd_mele, 0.2)
-            sprite_index = spr_hurt
-            image_index = 0
-            last_hit = other.hit_id
-            snd_play_hit(snd_hurt, 0.2)
-            hp -= other.meleedamage
-            motion_add(point_direction(other.x, other.y, x, y), 4)
-        }
-    }
-
-    hp -= 3
+if meleedamage > 0 && canmelee && scr_can_hit(other.id) {
+    with (other) if (scr_hit_self(other.meleedamage)) {
+		motion_add(point_direction(other.x, other.y, x, y), 4)
+	}
+	
+	hp -= 3
     alarm[1] = 30
 }

@@ -1,46 +1,55 @@
-/// @description area_get_name(area,subarea,loop)
+/// @description scrAreaGetMapName
 /// @param area
 /// @param subarea
 /// @param loop
-function area_get_name(argument0, argument1, argument2) {
-    var ___area = "?"
-    var ___subarea = "?"
-    var ___loop = ""
-
-    if argument0 == 106 {
-        ___area = "HQ"
-        ___subarea = string(argument1)
-    } else if argument0 == 107 {
-        ___area = "$$$"
-        ___subarea = ""
-    } else if argument0 > 100 {
-        ___area = string(argument0 - 100)
-        ___subarea = "-?"
-    } else if argument0 == 100 {
-        ___area = "???"
-        ___subarea = ""
-    } else {
-        ___area = string(argument0)
-        ___subarea = "-" + string(argument1)
+/// @param is_hardmode
+function scrAreaGetMapName(_area, _subarea, _loop, _is_hardmode=undefined) {
+    var _area_string = "?",
+		_subarea_string = "?",
+		_loop_string = ""
+	
+	if (is_undefined(_is_hardmode)) _is_hardmode = scrGameIsHardmode()
+	
+    if _area == area_hq {
+        _area_string = "HQ"
+        _subarea_string = string(_subarea)
+    }
+	else if _area == area_crib {
+        _area_string = "$$$"
+        _subarea_string = ""
+    }
+	// secret areas
+	else if _area > 100 {
+        _area_string = string(_area - 100)
+        _subarea_string = "-?"
+    }
+	else if _area == area_vault {
+        _area_string = "???"
+        _subarea_string = ""
+    }
+	else {
+        _area_string = string(_area)
+        _subarea_string = "-" + string(_subarea)
     }
 
-    if instance_exists(Credits) or instance_exists(Cinematic) {
-        ___area = "END"
-
+    if (instance_exists(GameCont) && GameCont.win) {
+        _area_string = "END"
+		
+		// END1 - Throne
         if instance_exists(Cinematic) {
-            ___subarea = "1"
-        } else if GameCont.area == 106 && GameCont.subarea == 3 {
-            ___subarea = "2"
+            _subarea_string = "1"
+        }
+		// END2 - HQ
+		else if (GameCont.area == area_hq && GameCont.subarea == 3) {
+            _subarea_string = "2"
         }
 
-        argument2 = 0
+        _loop = 0
     }
 
-    if argument2 && ___area != 107 {
-        if global.hardmode {
-            ___loop = " H" + string(argument2)
-        } else ___loop = " L" + string(argument2)
+    if _loop && _area_string != area_crib {
+        _loop_string = (_is_hardmode ? " H" : " L") + string(_loop)
     }
 
-    return ___area + ___subarea + ___loop
+    return _area_string + _subarea_string + _loop_string
 }

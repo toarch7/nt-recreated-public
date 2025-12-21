@@ -1,14 +1,18 @@
-if position_meeting(x, y, Wall) {
+if (position_meeting(x, y, Wall) || position_meeting(x, y, Floor)) {
     instance_destroy()
     exit
 }
 
-var area;
-if !instance_exists(MenuGen) && !instance_exists(Menu) {
-    area = GameCont.area
-} else area = 0
+var _area;
 
-sprite_index = asset_get_index("sprWall" + string(area) + "Trans")
+if (!instance_exists(MenuGen) && !instance_exists(Menu)) {
+    _area = GameCont.area
+}
+else {
+	_area = area_campfire
+}
 
-image_index = irandom(7)
+sprite_index = asset_get_index("sprWall" + string(_area) + "Trans")
+
+image_index = irandom(image_number)
 image_speed = 0

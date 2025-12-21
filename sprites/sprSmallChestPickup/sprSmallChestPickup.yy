@@ -30,8 +30,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"FX",
-    "path":"folders/Sprites/FX.yy",
+    "name":"Pickups",
+    "path":"folders/Sprites/FX/Pickups.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

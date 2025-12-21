@@ -15,14 +15,12 @@ if instance_exists(target) {
                 image_index = 0
                 sprite_index = spr_fire
                 wkick = 4
-                with instance_create(x, y, JockRocket) {
-                    motion_add(other.gunangle + random(20) - 10, 2)
-                    image_angle = direction
-                    team = other.team
-                    hit_id = other.spr_idle
+                with scr_projectile_create(x, y, JockRocket, gunangle, 2) {
+                    scr_projectile_spread(10)
                 }
                 alarm[1] = 8
-            } else if random(3) < 2 {
+            }
+			else if random(3) < 2 {
                 direction = mcr_target_direction + random(80) - 40
                 speed = 0.4
                 walk = 10 + random(10)

@@ -5,8 +5,9 @@ hp = max_hp
 spr_shadow = shd24
 team = 0
 raddrop = 0
-corpse = 1
+corpse = true
 snd_hurt = sndHitPlant
-inframes = 0
+snd_dead = -1
+immmovable = true
 
 image_xscale = choose(1, -1)

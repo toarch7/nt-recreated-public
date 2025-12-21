@@ -18,27 +18,23 @@ for (var i = _count - 1; i >= 0; --i) {
 }
 	
 with TopSmall {
-    draw_sprite(sprite_index, -1, x, y - 8)
+    draw_sprite_ext(sprite_index, -1, x, y - 8, 1, 1, 0, image_blend, 1)
 }
 	
 with Wall {
-	draw_sprite(topspr, image_index, x, y - 8)
+	draw_sprite_ext(topspr, image_index, x, y - 8, 1, 1, 0, image_blend, 1)
 }
 	
 with TopPot {
     draw_sprite(sprite_index, image_index, x, y - 8)
 }
-	
-for (var i = 0; i < array_length(bones); i++) {
-    var obj = bones[i]
 
-    if is_undefined(obj) {
-        continue
-    }
-
-    with obj {
-        draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, 0, c_white, 1)
-    }
+if (bonecount) {
+	var _index = bonecount
+	repeat (bonecount) with (bones[--_index]) {
+	    draw_sprite_ext(sprite_index, image_index,
+			x, y, image_xscale, image_yscale, 0, image_blend, image_alpha)
+	}
 }
 
 with RavenFly {
@@ -71,7 +67,7 @@ with Player {
         }
 
         if hammerhead && hammering {
-            draw_sprite(sprHammerHead, -1, x, y)
+            draw_sprite(sprHammerHeadNear, -1, x, y)
         }
     }
 }

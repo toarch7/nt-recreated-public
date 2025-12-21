@@ -1,9 +1,6 @@
 if lockstep_stop
 	exit
 
-with(other) {
-    instance_destroy()
-    instance_create(x, y, FloorExplo)
-}
-break_walls -= 1
-if (break_walls < 0) drive = 0
+scrWallDestroy(other.id)
+
+if ((-- wallbreak) <= 0) drive = false

@@ -116,7 +116,7 @@ for (var i = pg; i < maxpg; i++) {
 	var run_id = keys[i],
 		run = typehistory[$ run_id]
 	
-    var str = month_name_short(run.month) + ". " + string_pad_zeroes(run.day, 1) + " " + area_get_name(run.area, run.subarea, run.loop)
+    var str = month_name_short(run.month) + ". " + string_pad_zeroes(run.day, 1) + " " + scrAreaGetMapName(run.area, run.subarea, run.loop)
 	
     draw_sprite(sprDailyHistorySplat, anim, view_width / 2, yy + 3)
 	
@@ -154,16 +154,27 @@ for (var i = pg; i < maxpg; i++) {
 	        draw_sprite(wep_sprt[run.wep], 0, view_width / 2 + 10, yy + 3)
 	    }
 		
-	    draw_sprite(run.skin ? sprPlayerMapIconSkin : sprMapIcon, run.race, 14, yy + 4)
+	    draw_sprite(sprMapIcon, scr_race_get_skin_subimage(run.race, run.skin), 14, yy + 4)
 	}
 	
 	if anim >= 3 {
 	    var skills = run.skills,
 			len = array_length(skills),
+			ultra_index = -1,
 			px = 0
 		
-	    if run.ultra {
-	        draw_sprite_ext(sprUltraIconHUD, ultr_indx[run.race, run.ultra], 30, yy + 10, 0.5, 0.5, 0, c_white, 1)
+		if (variable_struct_exists(run, "ultra_got")) {
+			var ultras = run.ultra_got[run.race]
+			for(var ultra = 0; ultra < array_length(ultras); ++ultra) {
+				if (ultras[ultra]) ultra_index = (run.race - 1) * 3 + ultra
+			}
+		}
+		else if (variable_struct_exists(run, "ultra")) {
+			ultra_index = (run.race - 1) * 3 + run.ultra - 1
+		}
+		
+	    if ultra_index >= 0 {
+			draw_sprite_ext(sprEGIconHUD, ultra_index, 30, yy + 10, 0.5, 0.5, 0, c_white, 1)
 	        px ++
 	    }
 		

@@ -8,7 +8,7 @@ snd_play_hit_big(sndEliteInspectorFire, 0.2)
 
 with instance_create(x, y, EnemySlash) {
     sprite_index = sprPopoSlash
-    hit_id = sprEliteInspectorIdle
+    hitid = other.hitid
     image_angle = other.gunangle
     motion_add(other.gunangle, 2)
     team = other.team

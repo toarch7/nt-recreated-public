@@ -6,13 +6,12 @@ if instance_exists(Cinematic)
 
 scrDrawSpiral()
 
-var _text_generating;
+var _text_generating = loc("GENERATING...")
 
-if GameCont.race == Race.Venuz && GameCont.level >= 10 {
-    _text_generating = loc("VERIFYING...")
-}
-else {
-	_text_generating = loc("GENERATING...")
+with Player {
+	if scr_player_is_local(index) && race == Race.Venuz && GameCont.level >= 10 {
+	    _text_generating = loc("VERIFYING...")
+	}
 }
 
 var _progress = instance_number(Floor) / goal,

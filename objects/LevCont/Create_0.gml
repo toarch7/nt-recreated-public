@@ -92,45 +92,57 @@ else if GameCont.skillpoints {
 			GameCont.wantheavy = 1
 		}
 	}
-	
-	with SkillIcon {
-		x = view_xview + view_width / 2 - (_num * 16) + num * 32 - 16
-		y = view_yview + view_height - 20
-	}
 }
 else if GameCont.ultrapoints {
-    scrUltras()
-	
-    with instance_create(view_xview_center - 20, view_yview + view_height - 20, UltraIcon) num = 1
-    with instance_create(view_xview_center + 20, view_yview + view_height - 20, UltraIcon) num = 2
-	
-    if scrCrownCheck(crwn_destiny) && !UberCont.opt_griller {
-        instance_destroy(instance_random(UltraIcon))
+    if (player_count > 1) {
+		var _coop_ultra_need = true
 		
-        with UltraIcon {
-            x = view_width / 2
+		for(var i = 0; i < player_count; ++i) {
+			var _pinst = scr_playerinstance_find(i)
+			if (scr_ultra_get_from_race(_pinst.get_race() != -1)) {
+				_coop_ultra_need = false
+				break
+			}
+		}
+		
+		if (_coop_ultra_need) {
+			with instance_create(0, 0, UltraIcon) {
+				race = Race.CoopUltra
+				num = 1
+			}
+			with instance_create(0, 0, UltraIcon) {
+				race = Race.CoopUltra
+				num = 2
+			}
 		}
 	}
-
-    if !instance_exists(CoopController) && scrPlayerCountRace(Race.Horror) {
-        with (UltraIcon) x -= 20
+	
+    with (instance_create(0, 0, UltraIcon)) num = 1
+    with (instance_create(0, 0, UltraIcon)) num = 2
+	
+	// the race of UltraIcon is decided within UltraIcon create event
+	var _any_horror = false
+	with (UltraIcon) {
+		if (race == Race.Horror) _any_horror = true
+	}
+	
+	// ultra C
+    if (_any_horror) {
+		with (instance_create(0, 0, UltraIcon)) num = 3
+	}
+	
+    if scrCrownCheck(crwn_destiny) && !UberCont.opt_griller {
+		var _maxskills = 1 + scrPlayerCountRace(Race.Horror)
 		
-		with instance_create(view_xview + view_width / 2 + 40, view_yview + view_height - 20, UltraIcon) {
-            if (_destiny) x -= 20
-			num = 3
-        }
-    }
-	else {
-        with UltraIcon {
-            sprite_index = sprEGSkillIcon
-            race = 0
-        }
-    }
+        while (instance_number(UltraIcon) > _maxskills) {
+			instance_destroy(instance_random(UltraIcon))
+		}
+	}
 }
 
 if UberCont.daily_run && UberCont.april_fools {
     with SkillIcon {
-        skill = 28
+        skill = mut_open_mind
     }
     
 	if instance_exists(UltraIcon) {
@@ -140,7 +152,7 @@ if UberCont.daily_run && UberCont.april_fools {
 	
     with UltraIcon {
         with instance_create(x, y, SkillIcon) {
-            skill = 28
+            skill = mut_open_mind
             num = other.num
         }
         
@@ -149,7 +161,7 @@ if UberCont.daily_run && UberCont.april_fools {
     
     with CrownIcon {
         with instance_create(x, y, SkillIcon) {
-            skill = 28
+            skill = mut_open_mind
             num = other.num
         }
         
@@ -158,8 +170,13 @@ if UberCont.daily_run && UberCont.april_fools {
 }
 
 splat = 0
-
 appear = view_height / 2
+
+grillpage = -1
+grillpadchange = 0
+overgrilled = false
+
+event_user(0)
 
 if instance_exists(SkillText) {
 	with (SkillText) y -= 40

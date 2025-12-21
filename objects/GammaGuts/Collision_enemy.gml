@@ -1,30 +1,15 @@
-if lockstep_stop
-	exit
+if other.object_index == Van || !scr_can_hit(other.id, false) exit
 
-if other.object_index == Van
-	exit
-
-with other {
-    hp -= 6
-    snd_play(sndGammaGutsProc)
-    sprite_index = spr_hurt
-    image_index = 0
-    motion_add_m(point_direction(other.x, other.y, x, y), 3)
-}
-
-if other.hp <= 0 {
+if scr_hit(other.id, damage) && other.hp <= 0 {
     sprite_index = sprGammaBlast
     image_index = 0
 	
     with enemy {
-        if distance_to_object(other) <= 12 && !inframes {
-            hp -= 8
-            inframes = 5
-            snd_play(snd_hurt)
-            sprite_index = spr_hurt
+        if point_distance(x, y, other.x, other.y) <= 32 {
+			scr_hit_self(8)
         }
     }
-
+	
     image_alpha = 0.2
     snd_play(sndGammaGutsKill)
 }

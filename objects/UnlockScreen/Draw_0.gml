@@ -1,9 +1,4 @@
-if lockstep_stop
-	exit
-
-if !visible exit
-
-var _w = 32
+var _w = 32, _race = race, _bskin = bskin
 
 draw_set_color(c_black)
 draw_set_alpha(0.6)
@@ -11,9 +6,9 @@ draw_rectangle(view_xview, view_yview, (view_xview + view_width), (view_yview + 
 draw_set_alpha(1)
 
 if splatimg > 1 {
-	var _img = scr_race_get_skin_subimage(race, skin)
-    draw_sprite(sprBigPortrait, _img, ((view_xview + (view_width / 2)) - 60), (view_yview + view_height) - 48 + addy)
-    if addy < 2 addy++
+	var _img = scr_race_get_skin_subimage(_race, _bskin)
+    draw_sprite(sprBigPortrait, _img, view_xview_center - 60, view_yview + view_height - 10 + addy)
+    if addy < 2 addy ++
 }
 
 draw_set_color(c_black)
@@ -23,49 +18,65 @@ draw_set_color(c_white)
 
 draw_sprite(sprMutationSplat, splatimg, (view_xview + (view_width / 2)), ((view_yview + view_height) - 20))
 
-var sprt = skin ? sprBigNameCenteredB : sprBigNameCentered
+var _sprite = -1
+
+/**/ if (_bskin == SkinLetter.A) _sprite = sprBigNameCentered
+else if (_bskin == SkinLetter.B) _sprite = sprBigNameCenteredB
 
 if addy > 0 {
-	var name = scrMenuButtonName(sprt, race)
+	var _xpos = view_xview_center,
+		_ypos = view_yview + view_height - 92 - addy,
+		_name = scrMenuButtonName(sprBigNameCentered, _race)
 	
-	if loc_exists(name) {
-		name = loc(name)
+	if (!sprite_exists(_sprite) || loc_exists(_name)) {
+		_name = loc(_name)
 		
-		if sprt == sprBigNameCenteredB {
-			name += loc_exists("unlockscreen_B") ? " " + loc("unlockscreen_B") : " B"
-		}
+		if (_bskin > SkinLetter.A) _name += " " + scr_race_get_skin_letter(_bskin)
 		
-		draw_set_halign(fa_center)
-		draw_set_valign(fa_middle)
-		
-		draw_text_bigname(view_xview + view_width / 2, view_yview + view_height - 62 - addy, name, c_white, 1, 1)
-		
-		draw_set_halign(fa_left)
-		draw_set_valign(fa_top)
+		draw_align(fa_center, fa_middle)
+		draw_text_bigname(_xpos, _ypos + 8, _name, c_white, 1, 1)
+		draw_align()
 	}
     else {
-		draw_sprite_ext(sprt, race, ((view_xview + 1) + (view_width / 2)), ((view_yview + view_height) - 62) - addy, 1, 1, 0, c_black, 1)
-	    draw_sprite_ext(sprt, race, ((view_xview + 1) + (view_width / 2)), (((view_yview + 1) + view_height) - 62) - addy, 1, 1, 0, c_black, 1)
-	    draw_sprite_ext(sprt, race, (view_xview + (view_width / 2)), (((view_yview + 1) + view_height) - 62) - addy, 1, 1, 0, c_black, 1)
-	    draw_sprite(sprt, race, (view_xview + (view_width / 2)), ((view_yview + view_height) - 62) - addy)
+		draw_sprite_ext(_sprite, _race, _xpos + 1, _ypos + 0, 1, 1, 0, c_black, 1)
+	    draw_sprite_ext(_sprite, _race, _xpos + 0, _ypos + 1, 1, 1, 0, c_black, 1)
+	    draw_sprite_ext(_sprite, _race, _xpos + 1, _ypos + 1, 1, 1, 0, c_black, 1)
+	    draw_sprite_ext(_sprite, _race, _xpos + 0, _ypos + 0, 1, 1, 0, c_white, 1)
 	}
 }
 
 if addy > 1 {
-	if loc_exists("UNLOCKED!") {
-		draw_set_halign(fa_center)
-		draw_set_valign(fa_middle)
-		
-		draw_text_bigname(view_xview + view_width / 2, view_yview + view_height - 24 - addy, loc("UNLOCKED!"), c_white, 1)
-		
-		draw_set_halign(fa_left)
-		draw_set_valign(fa_top)
+	var _xpos = view_xview_center,
+		_ypos = view_yview + view_height - 62 - addy
+	
+	if !loc_exists("UNLOCKED!") {
+	    draw_sprite_ext(sprTextUnlocked, 0, _xpos + 1, _ypos + 0, 1, 1, 0, c_black, 1)
+	    draw_sprite_ext(sprTextUnlocked, 0, _xpos + 0, _ypos + 1, 1, 1, 0, c_black, 1)
+	    draw_sprite_ext(sprTextUnlocked, 0, _xpos + 1, _ypos + 1, 1, 1, 0, c_black, 1)
+	    draw_sprite_ext(sprTextUnlocked, 0, _xpos + 0, _ypos + 0, 1, 1, 0, c_white, 1)
 	}
 	else {
-	    draw_sprite_ext(sprTextUnlocked, 0, ((view_xview + 1) + (view_width / 2)), ((view_yview + view_height) - 24) - addy, 1, 1, 0, c_black, 1)
-	    draw_sprite_ext(sprTextUnlocked, 0, ((view_xview + 1) + (view_width / 2)), (((view_yview + 1) + view_height) - 24) - addy, 1, 1, 0, c_black, 1)
-	    draw_sprite_ext(sprTextUnlocked, 0, (view_xview + (view_width / 2)), (((view_yview + 1) + view_height) - 24) - addy, 1, 1, 0, c_black, 1)
-	    draw_sprite(sprTextUnlocked, 0, (view_xview + (view_width / 2)), ((view_yview + view_height) - 24) - addy)
+		draw_align(fa_center, fa_middle)
+		draw_text_bigname(_xpos, _ypos, loc("UNLOCKED!"), c_white, 1)
+		draw_align()
 	}
 }
-if splatimg < 3 splatimg += 1
+
+if can_continue {
+	draw_align(fa_center, fa_middle)
+	
+	var _pointed = (device_mouse_y_to_gui(0) >= (gui_h - LETTERBOX_SIZE)),
+		_color = (addy2 || _pointed) ? c_white : c_uigray
+	
+	if (pointed != _pointed) {
+		if (_pointed) snd_play(sndHover)
+		pointed = _pointed
+	}
+	
+	draw_text_bigname(view_xview_center, view_yview + view_height - 16 - addy2 - _pointed, loc("CONTINUE"), _color)
+	draw_align()
+	
+	if (addy2 > 0) addy2 = approach(addy2, 0, 2)
+}
+
+if (splatimg < 3) splatimg += 1

@@ -12,9 +12,7 @@ if rad > 24 && !charged {
     }
 }
 
-if charged {
-    canim += 0.4
-}
+if (charged) canim += 0.4
 
 if hp < max_hp * 0.7 && hp > 0 {
     if spr_idle == sprPStat1Idle {

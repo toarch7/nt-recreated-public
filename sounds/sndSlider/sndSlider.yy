@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.1195,
+  "duration": 0.119501136,
   "exportDir": "",
   "name": "sndSlider",
   "parent": {

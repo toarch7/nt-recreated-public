@@ -1,7 +1,7 @@
 snd_play(sndNothingDeath2)
 repeat(30) {
     with(instance_create(((x + random(128)) - 64), ((y + random(100)) - 50), GreenExplosion))
-    hit_id = other.hit_id
+    hitid = other.hitid
 }
 snd_play_hit_big(sndExplosionL, 0.1)
 with(InvisiWall)

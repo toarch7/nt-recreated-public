@@ -26,10 +26,10 @@ function scrPlayerGunReloadFX(_weapon) {
 	if (_is_grenade) snd_play(sndNadeReload)
 	
 	if _type == Ammo.Shells {
+		var _shotgun_shoulders = scr_skill_get(mut_shotgun_shoulders)
 		repeat(_cost) {
-			with instance_create(x, y, Shell) {
-				sprite_index = sprShotShell
-				motion_add(other.gunangle + other.right * 100 + random(40) - 20, 2 + random(2))
+			with (scrBulletShotShellFX(Shell, 20)) {
+				sprite_index = (_shotgun_shoulders ? sprShotShellBig : sprShotShell)
 			}
 		}
 		

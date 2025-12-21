@@ -3,11 +3,11 @@ snd_play(sndLilHunterDeath)
 repeat(1 + GameCont.loops) {
     ang = random_angle
     with(instance_create((x + lengthdir_x(12, ang)), (y + lengthdir_y(12, ang)), Explosion))
-    hit_id = other.sprite_index
+    hitid = other.hitid
     with(instance_create((x + lengthdir_x(12, (ang + 120))), (y + lengthdir_y(12, (ang + 180))), Explosion))
-    hit_id = other.sprite_index
+    hitid = other.hitid
     with(instance_create((x + lengthdir_x(12, (ang + 240))), (y + lengthdir_y(12, (ang + 180))), Explosion))
-    hit_id = other.sprite_index
+    hitid = other.hitid
 }
 with(instance_create(x, y, Corpse)) {
     size = 1

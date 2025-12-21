@@ -1,37 +1,36 @@
 if lockstep_stop
 	exit
 
-if !instance_exists(GenCont) && instance_exists(Player) &&
-!instance_exists(SitDown) && !instance_exists(Credits) &&
-!instance_exists(Cinematic) && !instance_exists(GameOver) {
-	tottimer ++
-    timer ++
+if (!(instance_exists(GenCont) || !instance_exists(Player)
+	|| instance_exists(SitDown) || instance_exists(Credits)
+	|| instance_exists(Cinematic) || instance_exists(GameOver))
+) {
+	tottimer += timescale
+    timer += timescale
+
+	if timer >= 30 {
+	    timer = 0
+	    seconds ++
+		
+		if seconds >= 60 {
+		    minutes ++
+			seconds = 0
+		}
+	}
 }
 
-if timer >= 30 {
-    timer = 0
-    seconds ++
-}
-
-if seconds >= 60 {
-    minutes ++
-	seconds = 0
-}
-
-if area != 106 && area != 100 && area != 102 {
+if area != area_hq && area != area_oasis && area != area_pizza_sewers {
     hqarea = area
     hqsubarea = subarea
 }
 
-time = string_pad_zeroes(minutes, 1)
+timer_string = string_pad_zeroes(minutes, 1)
 	+ ":" + string_pad_zeroes(seconds, 1)
 	+ "." + string_pad_zeroes(round(timer / 30 * 100), 1)
 
 max_rad = level * 60
 
-if race == 11 && ultra == 3 {
-	max_rad *= 2
-}
+if (scr_ultra_get(Race.Horror, UltraSkill.Meltdown)) max_rad *= 2
 
 if rad > max_rad {
 	if level < PLAYER_LEVEL_MAX {
@@ -55,9 +54,11 @@ if rad > max_rad {
 			ultrapoints ++
 			snd_play(sndLevelUltra)
 			
-			if race == Race.Skeleton {
-				scrAchievementUnlock(Achievement.UNSTOPPABLE)
-				scrRaceUnlock(Race.Skeleton)
+			with Player {
+				if scr_player_is_local(index) && race == Race.Skeleton {
+					scrAchievementUnlock(Achievement.UNSTOPPABLE)
+					scrRaceUnlock(Race.Skeleton)
+				}
 			}
 			
 			scrAchievementUnlock(Achievement.ULTRA_TIME)

@@ -13,7 +13,7 @@ if charge {
             team = other.team
             motion_add(other.ang, 4)
             image_angle = direction
-            hit_id = other.spr_idle
+            hitid = other.hitid
         }
 
         ang += 24

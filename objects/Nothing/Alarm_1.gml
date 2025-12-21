@@ -1,14 +1,10 @@
 walk = 0
 flame = sprThroneFlameIdle
 
-for (var i = 0; i < ds_list_size(global.lis_walls_visible); i++) {
-    var obj = global.lis_walls_visible[| i]
-
-    with obj {
-        if place_meeting(x, y, other) {
-            instance_destroy()
-            instance_create(x, y, FloorExplo)
-        }
+var _l = global.lis_walls_visible
+for (var i = ds_list_size(_l) - 1; i >= 0; --i) {
+    with (_l[| i]) {
+        if (place_meeting(x, y, other)) scrWallDestroy(id)
     }
 }
 
@@ -61,14 +57,14 @@ if instance_exists(target) && instance_exists(target) {
     if mode == 1 {
         if instance_exists(Player) {
             with instance_create(x - 70, y + 10, BigGuardianBullet) {
-                hit_id = other.hit_id
+                hitid = other.hitid
                 motion_add(point_direction(x, y, other.target.x, other.target.y) + random(50) - 25, 7 + random(1))
                 image_xscale = other.right
                 team = other.team
             }
 
             with instance_create(x + 70, y + 10, BigGuardianBullet) {
-                hit_id = other.hit_id
+                hitid = other.hitid
                 motion_add(point_direction(x, y, other.target.x, other.target.y) + random(50) - 25, 7 + random(1))
                 image_xscale = other.right
                 team = other.team

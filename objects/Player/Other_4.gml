@@ -1,34 +1,36 @@
-if !instance_exists(GameCont)
-	exit
+if (!instance_exists(GameCont)) exit
 
-visible = 1
+visible = true
 sprite_index = spr_idle
-frogcharge = 0
 
 view_xview = x - view_width / 2
 view_yview = y - view_height / 2
 
-if is_me {
-	GameCont.race = race
-	GameCont.bskin = bskin
-	
-	if !UberCont.want_menu && !UberCont.want_restart
+if scr_player_is_local(index) {
+	if (!UberCont.want_menu && !UberCont.want_restart) {
 		scrUnlocksArea()
+	}
+	
+	if (race == Race.Frog && !scrGameIsWeeklyRun()) scrRaceUnlock(Race.Frog)
+	
+    scrPlayerTryUnlockGoldenWeapons(id)
 }
 
 reload = 0
 breload = 0
 
-can_shoot = 1
-bcan_shoot = 1
+can_shoot = true
+bcan_shoot = true
 
 frogcharge = 0
 froggas = 0
 
 if !instance_exists(CrownObject) && GameCont.crown > 1 {
     with instance_create(x, y, CrownObject) {
-        if (GameCont.area > 1) or (GameCont.subarea > 1) or ((GameCont.loops - global.hardmode) > 0) {
-            is_new = 0
+        if (GameCont.area > 1)
+		|| (GameCont.subarea > 1)
+		|| ((GameCont.loops - global.hardmode) > 0) {
+            is_new = false
         }
     }
 }
@@ -41,34 +43,36 @@ with CrownObject {
     spr_walk = asset_get_index("sprCrown" + string(GameCont.crown) + "Walk")
 }
 
-if scrCrownCheck(Crown.Luck) hp = 1
+GameCont.deathcause = HitId.None
 
-if race == Race.Frog && is_me && !UberCont.weekly_run {
-    scrRaceUnlock(Race.Frog)
-}
+if (scrCrownCheck(Crown.Luck)) hp = 1
 
 view_xview = x + view_width / 2
 view_yview = y + view_height / 2
 
-last_hit = -1
 mask_index = mskPlayer
 
-if race == 13 {
+if race == Race.BigDog {
     mask_index = mskScrapBoss
 }
 
-if race == 10 {
+if race == Race.Rebel {
     hp = min(hp + floor((max_hp - hp) / 2), max_hp)
-
-    if bskin && GameCont.area == 5 {
-        spr_idle = sprMutant10CIdle
-        spr_walk = sprMutant10CWalk
-        spr_hurt = sprMutant10CHurt
-        spr_dead = sprMutant10CDead
-    } else if bskin {
-        spr_idle = sprMutant10BIdle
-        spr_walk = sprMutant10BWalk
-        spr_hurt = sprMutant10BHurt
-        spr_dead = sprMutant10BDead
-    }
+	
+	if bskin == SkinLetter.B {
+	    if GameCont.area == area_city {
+	        spr_idle = sprMutant10CIdle
+	        spr_walk = sprMutant10CWalk
+	        spr_hurt = sprMutant10CHurt
+	        spr_dead = sprMutant10CDead
+	    }
+		else {
+	        spr_idle = sprMutant10BIdle
+	        spr_walk = sprMutant10BWalk
+	        spr_hurt = sprMutant10BHurt
+	        spr_dead = sprMutant10BDead
+	    }
+	}
 }
+
+scr_playerinstance_find(index).hp = hp

@@ -22,3 +22,5 @@ motion_add(point_direction(10016, 10016, x, y), 1)
 close = 0
 
 walk = 30
+
+hitid = HitId.Wolf

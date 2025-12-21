@@ -6,7 +6,7 @@ repeat(6) {
     with instance_create(x, y, EnemyBullet3) {
         motion_add(other.gunangle + (random(50) - 25), 10 + random(4))
         creator = other.id
-        hit_id = other.spr_idle
+        hitid = other.hitid
         image_angle = direction
         creator = other.id
         team = other.team

@@ -32,4 +32,6 @@ if (instance_exists(Player) && scrCrownCheck(Crown.Death)
 
 scr_screenshake(7)
 
-if position_meeting(x, y, Floor) && object_index != SmallExplosion instance_create(x, y, Scorch)
+if (position_meeting(x, y, Floor)) {
+	if (object_index != SmallExplosion && object_index != PopoExplosion) instance_create(x, y, Scorch)
+}

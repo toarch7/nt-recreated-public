@@ -1,17 +1,10 @@
-if lockstep_stop
-	exit
-
-if !hp
-	hp = max_hp
-
-inframes = 0
+if (hp <= 0) hp = max_hp
 
 speed = 0
 x = xstart
 y = ystart
 
-if sprite_index == sprNothingActivate
-	BackCont.shake = 5 - drawimg
+if (sprite_index == sprNothingActivate) with (BackCont) shake = 5 - other.drawimg
 
 drawimg += image_speed
 

@@ -5,41 +5,32 @@ repeat (3) {
 	instance_create(x, y, Explosion)
 }
 
-if GameCont.crown == 5 scrDrop(0, 60) repeat 2
-scrDrop(100, 0)
+if scrCrownCheck(crwn_guns) {
+	scrDrop(0, 60)
+}
+else {
+	repeat (2) scrDrop(100, 0)
+}
 
-repeat 5 + irandom(7) {
+repeat (6) {
     with instance_create(x, y + orandom(16), GroundFlame) {
         move_contact_solid(random_angle, 8 + random(12))
     }
 }
 
-do {
-    if raddrop > 15 {
-        raddrop -= 10
-        with instance_create(x, y, BigRad) {
-            motion_add(other.direction, other.speed)
-            motion_add(random_angle, random(other.raddrop / 2) + 2)
-            repeat(speed)
-            speed *= 0.9
-        }
-    }
-} until raddrop <= 15
+var _ang = random_angle;
 
-repeat(raddrop) {
-    with instance_create(x, y, Rad) {
-        motion_add(other.direction, other.speed)
-        motion_add(random_angle, random(other.raddrop / 2) + 2)
-        repeat(speed)
-        speed *= 0.9
-    }
+repeat (10) {
+	scrFX(x, y, Dust, _ang, 3)
+	_ang += 36
+	
+	scrFX(random_range(bbox_left, bbox_right),
+		random_range(bbox_top, bbox_bottom), PortalL, random_angle, 3)
 }
+
+scrRadDrop(x, y, raddrop)
 
 if !GameCont.loops && instance_number(BigGenerator) <= 1 {
     snd_play(sndNothingGenerators)
-
-    with Nothing {
-        hp /= 2
-        hp = round(hp)
-    }
+    with (Nothing) hp = round(hp / 2)
 }

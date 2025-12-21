@@ -33,3 +33,5 @@ spr_shadow = shd64
 spr_shadow_y = 7
 
 image_speed = 0.4
+
+hitid = HitId.DogGuardian

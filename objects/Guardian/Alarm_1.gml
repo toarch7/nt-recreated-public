@@ -7,7 +7,7 @@ if (sprite_index == spr_fire) {
     alarm[1] += 10
 }
 if (instance_exists(target) && ((spr_idle != sprGuardianDisappear) && (spr_idle != sprGuardianAppear))) {
-    if (target > Player) {
+    if (target != noone) {
         if (collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0) {
             direction = ((mcr_target_direction + random(180)) - 90)
             if ((((point_distance(x, y, target.x, target.y) > 96) && (random(3) < 2)) || (random(3) < 1)) && (justfired == 0)) {
@@ -15,19 +15,19 @@ if (instance_exists(target) && ((spr_idle != sprGuardianDisappear) && (spr_idle 
                 alarm[1] = 12
                 snd_play_hit_big(sndGuardianFire, 0.2)
                 with(instance_create((x + (right * 16)), y, GuardianBullet)) {
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     motion_add(point_direction(x, y, other.target.x, other.target.y), 1)
                     image_xscale = other.right
                     team = other.team
                 }
                 with(instance_create((x + (right * 16)), y, GuardianBullet)) {
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     motion_add((point_direction(x, y, other.target.x, other.target.y) - 40), 2)
                     image_xscale = other.right
                     team = other.team
                 }
                 with(instance_create((x + (right * 16)), y, GuardianBullet)) {
-                    hit_id = other.spr_idle
+                    hitid = other.hitid
                     motion_add((point_direction(x, y, other.target.x, other.target.y) + 40), 2)
                     image_xscale = other.right
                     team = other.team

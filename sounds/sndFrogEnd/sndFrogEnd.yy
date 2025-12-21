@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 1.583688,
+  "duration": 1.5787075,
   "exportDir": "",
   "name": "sndFrogEnd",
   "parent": {

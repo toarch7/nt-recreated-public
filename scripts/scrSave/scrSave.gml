@@ -4,6 +4,8 @@ function scrSave() {
 			save = saveData,
 			savepath = game_directory + "NuclearThrone.sav"
 		
+		if (!public) scr_debug_overlay_save()
+		
         if global.cheats && file_exists(savepath) {
 			var f = file_text_open_read(savepath)
 			
@@ -35,6 +37,7 @@ function scrSave() {
 		
 		if stats {
 	        save_set_value("data", "tot_time", tot_time)
+	        save_set_value("data", "tot_banditkills", tot_banditkills)
 	        save_set_value("etc", "protowep", protowep)
 			
 	        for (var _race_id = Race.Fish; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
@@ -77,8 +80,7 @@ function scrSave() {
 					save_set_value("cskingot" + string(_race_id), _skin_id, cskingot[_race_id, _skin_id])
 				}
 				
-				var _crown_max = crownmax + 1
-	            for(var _crown_id = 1; _crown_id < crownmax; _crown_id++) {
+	            for(var _crown_id = 1; _crown_id <= crownmax; _crown_id++) {
 	                save_set_value("crowngot" + string(_race_id), string(_crown_id), crowngot[_race_id, _crown_id])
 	            }
 	        }

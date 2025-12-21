@@ -2,7 +2,7 @@ if lockstep_stop
 	exit
 
 if instance_exists(FloorMaker) {
-	with CampChar {
+	with (CampChar) {
 		x = xprevious
 		y = yprevious
 	}

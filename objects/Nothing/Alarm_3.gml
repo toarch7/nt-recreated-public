@@ -13,7 +13,7 @@ if ammo > 0 {
 
     repeat 10 {
         with instance_create(x + orandom(16), y + 50, NothingBeam) {
-            hit_id = other.hit_id
+            hitid = other.hitid
             motion_add(270, 16)
             motion_add(point_direction(other.x, other.y, other.targetx, other.targety), 12)
             speed = 24

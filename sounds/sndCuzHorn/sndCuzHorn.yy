@@ -10,12 +10,12 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 1.335688,
+  "duration": 1.3307029,
   "exportDir": "",
   "name": "sndCuzHorn",
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+    "name": "Crib",
+    "path": "folders/Sounds/Cuz/Crib.yy"
   },
   "preload": true,
   "resourceType": "GMSound",

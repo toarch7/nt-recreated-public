@@ -1,15 +1,13 @@
-skills = -1
-
 if instance_number(object_index) > 1 {
-    instance_destroy(id, 0) exit
+    instance_destroy(id, false) exit
 }
+
+scrAmmoInit()
 
 area = 1
 subarea = 0
-race = 0
-bskin = 0
 hard = 0
-crown = 0
+crown = crwn_none
 lastarea = 1
 lastsubarea = 1
 loops = 0
@@ -21,7 +19,7 @@ kills = 0
 crownvisits = 0
 junglevisits = 0
 ultrapoints = 0
-last_hit = -1
+deathcause = -1
 rad = 0
 max_rad = 60
 level = 1
@@ -31,7 +29,7 @@ tottimer = 0
 seconds = 0
 minutes = 0
 banditbosses = 0
-give_blacksword = 0
+blackswords = 0
 guitar = false
 horror = false
 vans = 0
@@ -39,9 +37,6 @@ spawn_vans = 0
 destiny = 0
 start = 0
 proto = 0
-// TODO: refactor to support multiple players ultras
-ultra = 0
-coopultra = 0
 heavyheart = false
 wantheavy = false
 triedhq = false
@@ -62,6 +57,11 @@ waylps[0] = 0
 can_advance_stage = true
 hqarea = 1
 hqsubarea = 1
+maxsubarea = 0
+
+hasfiredshots = false
+haspickedweps = false
+swordbosskill = []
 
 popolevel = 0
 novans = true
@@ -72,13 +72,14 @@ if !UberCont.continued_run {
     scrRngStatesInit()
 }
 
+scrUltrasReset()
 scrCrowns()
 scrSkills()
 scrUltras()
 
-if global.hardmode {
-    loops ++
+if scrGameIsHardmode() {
 	hard = 13
+    loops ++
 }
 
 gocrib = false
@@ -90,6 +91,6 @@ is_level_ended = false
 levseed = global.seed
 
 // set tip as seen on new run
-if save_get_value("etc", "saving_tip", 0) == -1 {
+if (save_get_value("etc", "saving_tip", 0) == -1) {
     save_set_value("etc", "saving_tip", 1)
 }

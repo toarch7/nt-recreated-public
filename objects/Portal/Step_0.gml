@@ -66,3 +66,7 @@ if !instance_exists(Player) {
         if type = 3 sprite_index = sprProtoPortalDisappear
     }
 }
+
+if current_frame_active && random(20) < 1 {
+	scrFX(x, y, PortalL, random_angle, 2)
+}

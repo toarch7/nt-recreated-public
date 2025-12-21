@@ -1,6 +1,7 @@
 raddrop = 0
 max_hp = 22
 meleedamage = 5
+creator = noone
 size = 1
 
 spr_idle = sprScrapBossMissileIdle
@@ -17,4 +18,6 @@ raddrop = 0
 givekill = 0
 spr_shadow_y = 3
 
-if GameCont.loops alarm[0] = max(1, 12 - GameCont.loops)
+if (GameCont.loops > 0) {
+	alarm[0] = max(1, 12 - GameCont.loops)
+}

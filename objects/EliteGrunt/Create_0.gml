@@ -33,3 +33,5 @@ angle = 0
 ammo = 3
 fuel = 100
 freeze = 0
+
+hitid = HitId.EliteGrunt

@@ -5,6 +5,7 @@ shank = false
 walled = false
 friction = 0.1
 guitar = false
+electricguitar = false
 canfix = false
 damage = 12
 longarms = 0

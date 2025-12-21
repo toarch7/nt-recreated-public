@@ -15,9 +15,11 @@ if random(3) < 1 {
     ammo = 0
     if random(3 + instance_number(ScrapBossMissile) / 2) < 1 and instance_exists(Player) {
         snd_play(sndBigDogMissile)
-        repeat(3) {
-            with instance_create(x, y, ScrapBossMissile)
-            motion_add(random_angle, 2)
+        repeat (3) {
+            with instance_create(x, y, ScrapBossMissile) {
+				motion_add(random_angle, 2)
+				creator = other.id
+			}
         }
         alarm[0] = 10
     } else {

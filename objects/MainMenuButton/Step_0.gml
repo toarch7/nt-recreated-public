@@ -15,7 +15,7 @@ else if appear {
 
 var press = mouse_ui_clicked()
 
-if mouse_hover {
+if mouse_ui_hovered(id, false) {
 	if !is_gamepad() {
 		if !hover && available {
 			snd_play(sndHover)
@@ -30,4 +30,4 @@ else if !is_gamepad() && hover {
 	hover = 0
 }
 
-splat = lerp(splat, hover * 4, 0.4)
+splat = lerp(splat, hover * 3, 0.4)

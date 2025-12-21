@@ -1,7 +1,7 @@
 alarm[1] = (10 + random(10))
 walk = 0
 scrTarget()
-if (target > Player) {
+if (instance_exists(target)) {
     if ((collision_line(x, y, target.x, target.y, Wall, 0, 0) < 0) && (random(2) < 1)) {
         ammo = 45
         alarm[2] = 5

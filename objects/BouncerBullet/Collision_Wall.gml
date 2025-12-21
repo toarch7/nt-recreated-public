@@ -1,6 +1,6 @@
 if bounce {
     bounce = false
-    move_bounce_solid(00)
+    move_bounce_solid(true)
     instance_create(x, y, Dust)
 	snd_play_hit(sndBouncerBounce)
     exit

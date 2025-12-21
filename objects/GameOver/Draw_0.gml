@@ -1,77 +1,81 @@
 if lockstep_stop
 	exit
 
-var xx = view_xview + view_width / 2,
-	yy = view_yview + view_height / 2
+var _x = view_xview_center, _y = view_yview_center
 
-//GAME OVER
-draw_set_color(c_black)
+// dark overlay
 draw_set_alpha(0.7)
+draw_set_color(c_black)
+
 draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + view_height, 0)
+
 draw_set_alpha(1)
 draw_set_color(c_white)
 
-///ROADMAP
-scrDrawRoadmap(xx - 48, yy - offsety, round(death_pos))
-///
+// roadmap
+scrDrawRoadmap(_x - 48, _y - offsety, round(death_pos))
 
-draw_set_halign(fa_center)
-draw_set_valign(fa_middle)
+// outcome
+draw_align(fa_center, fa_middle)
+draw_sprite(sprKilledBySplat, splatimg, _x + 86, _y - offsety - 32)
 
-
-draw_sprite(sprScoreSplat, 2, xx + 86, yy - offsety - 25)
-
-
-var msg = "KILLED BY"
+var _message = "KILLED BY"
 
 if GameCont.win {
-	msg = "COMPLETION TIME"
+	_message = "COMPLETION TIME"
 
 	draw_set_color(c_uigray)
-	draw_text_shadow(xx + 86, yy - offsety - 10, GameCont.time)
+	draw_text_shadow(_x + 86, _y - offsety - 10, GameCont.timer_string)
 	draw_set_color(c_white)
 }
-if GameCont.last_hit > 0 {
-    draw_sprite(GameCont.last_hit, -1, xx + 86, yy - offsety)
+else {
+	// deathcause
+	var _cause = GameCont.deathcause
+	
+	if scr_death_cause_is_valid(_cause) {
+		var _sprite = scrDeathCauseGetSprite(_cause)
+		if (sprite_exists(_sprite)) draw_sprite(_sprite, -1, _x + 86, _y - offsety)
+		//var _text = scrDeathCauseGetName(_cause)
+		//if (is_string(_text)) draw_text_nt(_x + 86, _y - offsety + 32, _text)
+	}
 }
 
-draw_text_shadow(xx + 86, yy - offsety - 25, loc(msg))
+draw_text_nt(_x + 86, _y - offsety - 25, loc(_message))
 
 draw_set_valign(fa_top)
 
-if death_pos < GameCont.waypoints {
-    death_pos++
-}
+// advance map
+if (death_pos < GameCont.waypoints) death_pos ++
 
-draw_set_color(c_black)
-draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + 32, 0)
-draw_rectangle(view_xview, view_yview + view_height, view_xview + view_width, view_yview + view_height - 32, 0)
+// struggle continues
+draw_text_nt(_x, view_yview + 48, text)
 
-draw_set_color(c_white)
-
-draw_text_shadow(xx, view_yview + 48, text)
-
+// how shameful.
 if UberCont.continued_run {
     draw_set_font(fntSmall)
     draw_set_alpha(0.1)
 	
-	var str = "continued"
+	var _continuation_string = "continued"
 	
-	if global.recontinues > 0
-		str = "continued x" + string(global.recontinues)
+	if global.recontinues > 0 {
+		_sprite = "continued x" + string(global.recontinues)
+	}
 	
-    draw_text(xx, view_yview + 59, str)
+    draw_text(_x, view_yview + 59, _sprite)
     
 	draw_set_alpha(1)
     draw_set_font(fntM1)
 }
 
-draw_set_halign(fa_left)
+draw_align()
 
-draw_sprite(sprGameOverCenterSplat, 2, xx, view_yview + view_height - 32)
-
-if offsety offsety -= 32
-
-with PauseButton {
-    y = ystart + other.offsety
+if (UberCont.letterbox_frame >= 2) {
+	splatimg = approach(splatimg, 2, 0.7 * timescale)
 }
+else splatimg = 0
+
+draw_sprite(sprGameOverCenterSplat, splatimg, _x, view_yview + view_height - 32)
+
+if (offsety > 0) offsety = approach(offsety, 0, 32 * timescale)
+
+with (PauseButton) y = ystart + other.offsety

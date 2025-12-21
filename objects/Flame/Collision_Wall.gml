@@ -1,2 +1,2 @@
-move_bounce_solid(00)
+move_bounce_solid(true)
 speed /= 3

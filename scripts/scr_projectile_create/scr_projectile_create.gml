@@ -23,7 +23,7 @@ function scr_projectile_create(_x, _y, _object_index, _direction = undefined, _s
 			direction = _direction
 		}
 		
-		image_angle = direction
+		if (projectile_direction_changes_angle) image_angle = direction
 		
 		if (team != team_player && scr_skill_get(mut_euphoria)) {
 			with instance_create(x, y, EuphoriaEffectDelay) {
@@ -38,7 +38,7 @@ function scr_projectile_create(_x, _y, _object_index, _direction = undefined, _s
 /// @function scr_projectile_spread
 /// @param spread_angle
 function scr_projectile_spread(_angle) {
-	var _accuracy = instance_is(creator, hitme) ? creator.accuracy : 1
+	var _accuracy = instance_is(creator, Player) ? creator.accuracy : 1
 	direction += orandom(_angle/* / 2*/) * _accuracy
 	image_angle = direction
 }
@@ -55,8 +55,8 @@ function scr_projectile_shift(_angle, _move_amount = 0) {
 	}
 	
 	if _move_amount != 0 {
-		x += ldrx(direction, _move_amount)
-		y += ldry(direction, _move_amount)
+		x += ldrx(_move_amount, direction)
+		y += ldry(_move_amount, direction)
 	}
 }
 
@@ -65,5 +65,9 @@ function scr_projectile_long_arms(_long_arms) {
 		scr_projectile_shift(0, _long_arms * 20)
 		motion_add(direction, _long_arms * 3)
 		longarms = _long_arms
+		xprevious = x
+		yprevious = y
+		xstart = x
+		ystart = y
 	}
 }

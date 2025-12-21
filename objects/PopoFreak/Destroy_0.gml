@@ -10,7 +10,7 @@ with Player {
 if random(4) < 1 {
     repeat 3 {
         with instance_create(x, y, PopoNade) {
-            hit_id = other.hit_id
+            hitid = other.hitid
             motion_add(other.direction, 4)
             motion_add(random_angle, 4)
             image_angle = direction

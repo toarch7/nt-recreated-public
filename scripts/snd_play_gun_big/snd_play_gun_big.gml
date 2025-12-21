@@ -4,7 +4,7 @@
 function snd_play_gun_big(_sound_index, _random_pitch = 0.2) {
     if scr_test_is_fps_uncapped() return -1
 	
-    if (GameCont.area == area_oasis) {
+    if GameCont.underwater {
         _sound_index = sndOasisShoot
     }
 

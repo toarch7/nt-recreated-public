@@ -1,5 +1,8 @@
-if lockstep_stop
-	exit
+if scrPlayerCountRace(Race.Rogue) {
+	instance_create(x, y, RogueAmmo)
+}
+else {
+	scrRadDrop(x, y, 25)
+}
 
-instance_create(x, y, RogueAmmo)
 instance_destroy()

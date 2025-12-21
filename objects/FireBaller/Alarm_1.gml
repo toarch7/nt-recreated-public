@@ -10,7 +10,7 @@ if instance_exists(target) {
         if random(3) < 1 {
             direction = mcr_target_direction + 180
             with instance_create(x, y, Fireball) {
-                hit_id = other.spr_idle
+                hitid = other.hitid
                 motion_add(other.direction + 180 + random(12) - 6, 3)
                 image_angle = direction
                 team = other.team

@@ -1,7 +1,7 @@
 event_inherited()
 
 with instance_create(x, y, GreenExplosion) {
-    hit_id = other.spr_idle
+    hitid = other.hitid
     team = -1
 
     snd_play_hit(sndExplosion, 0.2)

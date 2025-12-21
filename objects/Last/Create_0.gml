@@ -3,7 +3,6 @@ max_hp = 1100
 max_hp *= 1 + GameCont.loops / 3
 meleedamage = 10
 size = 6
-hit_id = sprLastIdle
 intro = 0
 spr_idle = sprLastIdle
 spr_walk = sprLastIdle
@@ -23,7 +22,7 @@ charge = 0
 alarm[1] = 1
 with(instance_create(x, y, PopoExplosion)) {
     team = other.team
-    hit_id = other.hit_id
+    hitid = other.hitid
 }
 wkick = 0
 scrTarget()
@@ -38,3 +37,4 @@ sndtaunt = 0
 tauntdelay = 0
 
 spr_shadow = shd48
+hitid = HitId.Captain

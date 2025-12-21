@@ -30,9 +30,7 @@ if image_index == 0 || image_index == 1 {
 		with instance_create(_left, _bottom, PauseButton) image_index = 4 /* Back */
 		
 	    // setting flag to -1 marks it as seen
-	    if save_get_value("etc", "saving_tip", 0) != -1 {
-	        save_set_value("etc", "saving_tip", -1)
-		}
+	    save_set_value("etc", "saving_tip", -1)
 	}
 	// needs no confirmation if it's gameover screen
 	else {

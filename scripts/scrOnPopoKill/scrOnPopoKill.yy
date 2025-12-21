@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrOnPopoKill",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrOnPopoKill",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

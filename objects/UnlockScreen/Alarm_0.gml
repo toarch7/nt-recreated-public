@@ -1,7 +1,6 @@
-visible = 1
+/// @param Show up
+visible = true
 snd_play(sndCharUnlock)
-snd = asset_get_index("sndMutant" + string(race) + "Cnfm")
-snd_play(snd)
-
-with TopCont
-drawcontrols = 0
+with (TopCont) drawcontrols = false
+snd_play(scr_race_get_sound(race, "Cnfm"))
+alarm[1] = 20

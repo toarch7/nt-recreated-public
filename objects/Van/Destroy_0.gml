@@ -7,7 +7,7 @@ scrDrop(100, 0)
 repeat(3) {
     with(instance_create(((x + random(40)) - 20), ((y + random(20)) - 10), PopoExplosion)) {
         team = other.team
-        hit_id = other.hit_id
+        hitid = other.hitid
     }
 }
 repeat(7)

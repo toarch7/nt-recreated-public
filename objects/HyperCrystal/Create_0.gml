@@ -3,7 +3,6 @@ max_hp = (550 * ((player_count / 2) + 0.5))
 max_hp *= (1 + (GameCont.loops / 3))
 meleedamage = 200
 size = 4
-hit_id = 22
 instance_create((x - 48), y, PortalClear)
 instance_create((x + 48), y, PortalClear)
 instance_create(x, (y - 48), PortalClear)
@@ -13,6 +12,7 @@ spr_walk = sprHyperCrystalIdle
 spr_hurt = sprHyperCrystalHurt
 spr_dead = sprHyperCrystalDead
 event_inherited()
+hitid = HitId.HyperCrystal
 spr_fire = sprHyperCrystalIdle
 snd_hurt = sndHyperCrystalHurt
 snd_dead = sndHyperCrystalDead
@@ -32,3 +32,5 @@ tauntdelay = 0
 
 spr_shadow = shd64
 spr_shadow_y = 16
+
+hitid = HitId.HyperCrystal

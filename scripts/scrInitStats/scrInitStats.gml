@@ -77,7 +77,7 @@ function scrInitStats() {
 	ftime = 0
 	frace = 0
 	
-	for (var dir = 1; dir <= 15; dir++) {
+	for (var dir = Race.Fish; dir < Race.NUM_ALL_RACE_TYPES; dir++) {
 	    if UberCont.cbst_fast[dir] > ftime || (ftime == 0 && UberCont.cbst_fast[dir] > 0) {
 	        ftime = UberCont.cbst_fast[dir]
 	        frace = dir
@@ -86,14 +86,14 @@ function scrInitStats() {
 	
 	ftime = scrTime(ftime)
 	
-	baked_tottime = []
-	baked_fastest = []
-	baked_telekinesis = scrTime(UberCont.ctot_uniq[3])
-	baked_cuztime = scrTime(UberCont.ctot_uniq[6])
-	baked_chicken = scrTime(UberCont.ctot_uniq[9])
-	baked_horror = scrTime(UberCont.ctot_uniq[11])
+	baked_tottime = array_create(Race.NUM_ALL_RACE_TYPES)
+	baked_fastest = array_create(Race.NUM_ALL_RACE_TYPES)
+	baked_telekinesis = scrTime(UberCont.ctot_uniq[Race.Eyes])
+	baked_cuztime = scrTime(UberCont.ctot_uniq[Race.Venuz])
+	baked_chicken = scrTime(UberCont.ctot_uniq[Race.Chicken])
+	baked_horror = scrTime(UberCont.ctot_uniq[Race.Horror])
 	
-	for (var i = 1; i <= 15; i++) {
+	for (var i = Race.Fish; i < Race.NUM_ALL_RACE_TYPES; i++) {
 	    baked_tottime[i] = scrTime(UberCont.ctot_time[i])
 	    baked_fastest[i] = scrTimeSpeedrun(UberCont.cbst_fast[i])
 	}

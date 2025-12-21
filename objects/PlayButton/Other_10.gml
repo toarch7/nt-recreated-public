@@ -47,7 +47,7 @@ if _image == 1 || _image == 2 {
 		UberCont.daily_run = true
 		
 		// mark it weekly if required
-		if _image == 3 {
+		if _image == 2 {
 			UberCont.weekly_run = true
 		}
 	}
@@ -59,9 +59,9 @@ else if _image == 3 {
 
 instance_destroy(PlayButton)
 instance_destroy(MainMenuButton)
-instance_destroy(SpiralCont)
 
 if !(instance_exists(Leaderboards) || instance_exists(NicknameInput)) {
+	instance_destroy(SpiralCont)
 	instance_create(0, 0, GameCont)
 	instance_create(0, 0, MenuGen)
 	snd_play(sndMenuCharSelect)

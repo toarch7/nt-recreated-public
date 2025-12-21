@@ -1,7 +1,7 @@
 if (speed > 6) snd_play_hit(sndShotgunHitWall, 0.2)
 
 sleep(1)
-move_bounce_solid(1)
+move_bounce_solid(true)
 speed *= 0.8
 
 if (wallbounce > 0) {

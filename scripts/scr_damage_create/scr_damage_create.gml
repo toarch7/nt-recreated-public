@@ -25,8 +25,13 @@ function scr_damage_create(_x, _y, _object_index, _struct = undefined) {
 		_team = team
 		_hitid = hitid
 	}
+	else {
+		_creator = noone
+		if (variable_struct_exists(self, "team")) _team = team
+		if (variable_struct_exists(self, "hitid")) _hitid = hitid
+	}
 	
-	with _inst {
+	with (_inst) {
 		if (hitid == HitId.None) {
 			hitid = _hitid
 		}

@@ -5,10 +5,10 @@ if !instance_exists(GenCont) {
     if GameCont.crown == 6 {
         with other {
             hp -= 1
-            last_hit = sprCrown6Idle
+            deathcause = sprCrown6Idle
             sprite_index = spr_hurt
             image_index = 0
-			last_hit = sprCrown6Idle
+			deathcause = sprCrown6Idle
 			
             snd_play(snd_hurt)
             repeat 16 {

@@ -23,3 +23,5 @@ alarm[3] = 900
 givekill = 0
 
 snd_play(sndFastRatSpawn)
+
+hitid = HitId.GreenRat

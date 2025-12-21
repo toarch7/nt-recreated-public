@@ -42,3 +42,5 @@ angle = 0
 ammo = 10
 
 freeze = 20
+
+hitid = HitId.Shielder

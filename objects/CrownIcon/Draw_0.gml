@@ -14,9 +14,11 @@ if !isset("appeary") {
 
 draw_set_color(c_uidark)
 
-draw_sprite_ext(sprite_index,
-	crown, x, y + appeary - sign(selected),
-1, 1, 0, selected ? c_white : c_gray, 1)
+var _tint = selected ? c_white : c_gray,
+	_x = x, _y = y + appeary - sign(selected)
+
+draw_sprite_ext(sprite_index, crown, _x, _y, 1, 1, 0, _tint, 1)
+if (crown == crwn_haste) scrDrawClock(x - 1, y - 2, _tint)
 
 draw_set_halign(fa_center)
 draw_set_valign(fa_middle)

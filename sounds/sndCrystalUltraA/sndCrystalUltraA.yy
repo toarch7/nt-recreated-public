@@ -10,7 +10,7 @@
   "compression": 3,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 4.506338,
+  "duration": 4.5013604,
   "exportDir": "",
   "name": "sndCrystalUltraA",
   "parent": {

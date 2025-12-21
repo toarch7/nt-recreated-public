@@ -1,32 +1,25 @@
 if lockstep_stop
 	exit
 
-var dmg = 1 + scr_skill_get(20)
+var _wrists = scr_skill_get(mut_impact_wrists)
 
-if size >= other.size - 1 && speed > 2 && !other.inframes {
+if size >= other.size - 1 && speed > 2 && scr_can_hit(other.id) {
+	var _damage = round(other.speed * 0.2) + (_wrists ? 2 : 1)
+	
     with other {
-        hp -= round(dmg + other.speed / 5)
-
-        sprite_index = spr_hurt
-        image_index = 0
-
-        motion_add(other.direction, other.speed / 2)
+        scr_hit_self(_damage)
+		motion_add(other.direction, other.speed / 2)
         snd_play_hit(snd_hurt, 0.2)
-
-        inframes = 5
     }
 
-    if scr_skill_get(20) {
+    if _wrists {
         instance_create(x, y, ImpactWrists)
-
-        snd_play_hit(sndImpWristHit, 0.2)
-
+		snd_play_hit(sndImpWristHit, 0.2)
+		
         if !other.hp {
             snd_play_hit(sndImpWristKill, 0.2)
         }
     }
-
-    //sleep(2 * size * size)
-
-    speed /= 2
+	
+    speed *= 0.5
 }

@@ -1,33 +1,29 @@
-if bossintro {
-    if pausespr && sprite_exists(pausespr) {
-        draw_sprite_ext(pausespr, 0, view_xview, view_yview, 1, 1, 0, c_white, 1)
-    }
+letterbox_frame = approach(letterbox_frame, letterbox ? 3 : 0, timescale)
 
-    with TopCont {
-        if darkness && surface_exists(dark) {
-            gpu_set_blendmode(bm_subtract)
-            draw_surface(dark, view_xview, view_yview)
-            gpu_set_blendmode(bm_normal)
-        }
+if bossintro {
+    if (pausespr && sprite_exists(pausespr)) {
+        draw_sprite_ext(pausespr, 0, view_xview, view_yview, 1, 1, 0, c_white, 1)
     }
 	
 	//
     draw_set_color(c_black)
-    draw_set_alpha(0.5)
+    draw_set_alpha(0.7)
     draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + view_height, 0)
     draw_set_alpha(1)
 	
 	//
     draw_set_color(c_white)
 	
+	if (letterbox_frame != 0) scrDrawLetterbox(letterbox_frame)
+	
     if boss != 4 && boss != 6 && boss != 9 && boss != 7 && boss != 8 {
-        draw_sprite(sprBossIntroBackLayer, boss, view_xview + view_width / 2 + bossx * 1.6, view_yview + view_height / 2 - 31)
+        draw_sprite(sprBossIntroBackLayer, boss, view_xview + view_width / 2 + bossx * 1.6, view_yview)// - 31)
     }
 	
-    draw_sprite(sprBossIntro, boss, view_xview + view_width / 2 + bossx, view_yview + view_height / 2 - 31)
+    draw_sprite(sprBossIntro, boss, view_xview + view_width / 2 + bossx, view_yview)// - 31)
 	
     if boss == 4 || boss == 6 || boss == 9 || boss == 7 || boss == 8 {
-        draw_sprite(sprBossIntroBackLayer, boss, view_xview + view_width / 2 + bossx * 0.5, view_yview + view_height / 2 - 31)
+        draw_sprite(sprBossIntroBackLayer, boss, view_xview + view_width / 2 + bossx * 0.5, view_yview)// - 31)
     }
 	
     if bossx > 20 || bossx < 5 {
@@ -74,7 +70,7 @@ else if paused && sprite_exists(pausespr) {
 	scrMenuDrawPlayersOrdered(view_xview, view_yview, scrCampfireMenuDrawRacePortrait)
 	
 	//
-	draw_set_alpha(0.5)
+	draw_set_alpha(0.7)
     draw_set_color(c_black)
     draw_rectangle(view_xview, view_yview, view_xview + view_width, view_yview + view_height, 0)
     draw_set_alpha(1)
@@ -111,9 +107,7 @@ else if paused && sprite_exists(pausespr) {
 	}
 }
 
-letterbox_frame = approach(letterbox_frame, letterbox ? 3 : 0, timescale)
-
-if (letterbox_frame != 0) {
+if (!bossintro && letterbox_frame != 0) {
 	scrDrawLetterbox(letterbox_frame)
 }
 
@@ -124,3 +118,6 @@ if opt_gamepad && instance_exists(ParButton) {
 		}
 	}
 }
+
+//scrDrawRoadmap(mouse_x, mouse_y + 16, 0)
+//draw_sprite(sprMap, 0, mouse_x, mouse_y + 32)

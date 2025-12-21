@@ -6,3 +6,4 @@ spr_from = sprCuzInteractFrom
 spr_heya = sprCuzInteract
 wepsound = 0
 chestsound = 0
+lastsnd = -1

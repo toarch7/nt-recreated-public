@@ -4,7 +4,7 @@ snd_play_hit_big(sndGruntFire, 0.2)
 wkick = 5
 
 with instance_create(x, y, IDPDBullet) {
-    hit_id = sprEliteGruntIdle
+    hitid = other.hitid
     motion_add(other.gunangle + orandom(2), 10)
     image_angle = direction
     team = other.team

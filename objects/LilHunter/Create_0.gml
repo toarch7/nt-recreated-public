@@ -1,17 +1,18 @@
 raddrop = 20
 max_hp = 140 * (1 + (GameCont.loops / 3))
 meleedamage = 0
-hit_id = sprLilHunter
 size = 1
 spr_idle = sprLilHunter
 spr_walk = sprLilHunter
 spr_hurt = sprLilHunterHurt
 spr_dead = sprLilHunterDead
 event_inherited()
+hitid = HitId.LilHunter
 snd_hurt = sndLilHunterHurt
 snd_dead = sndLilHunterDeath
 walk = 0
 gunangle = random_angle
+forceliftoff = false
 wkick = 0
 dodge = 0
 z = 0
@@ -28,3 +29,5 @@ if alarm[2] < 1 {
 sndtaunt = 0
 tauntdelay = 0
 sndhalfhp = 0
+
+hitid = HitId.LilHunter

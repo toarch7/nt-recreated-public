@@ -1,1 +1,5 @@
-if sprite_index == sprBlueFlameDisappear instance_destroy()
+if (sprite_index == sprBlueFlameDisappear
+	|| sprite_index == sprBlueFlameBigDisappear
+) {
+	instance_destroy()
+}

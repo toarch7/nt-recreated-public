@@ -4,7 +4,7 @@ if ammo > 0 {
     motion_add(gunangle + 180, 0.5)
 
     with instance_create(x, y, PopoPlasma) {
-        hit_id = sprEliteShielderIdle
+        hitid = other.hitid
         motion_add(other.gunangle + random_range(-10, 10), 1.5)
         image_angle = direction
         team = other.team

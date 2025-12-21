@@ -2,14 +2,12 @@ if lockstep_stop
 	exit
 
 if !instance_exists(GenCont) {
-	if scrChestOpened()
-		exit
+	if scrChestOpened() exit
 	
-	var num = self.num,
-		p = instance_nearest(x, y, Player)
+	var p = instance_nearest(x, y, Player)
 
 	with other {
-	    if headloses {
+	    if headloses > 0 {
 	        headloses --
 	        max_hp ++
 	    }
@@ -17,25 +15,11 @@ if !instance_exists(GenCont) {
 	
 	instance_create(x, y, FXChestOpen)
 	
-	if scr_skill_get(9) {
-	    snd_play(sndHealthChestBig)
-	}
-	else snd_play(sndHealthChest)
+	snd_play(scr_skill_get(mut_second_stomach) ? sndHealthChestBig : sndHealthChest)
 	
-	instance_create(x, y, HealFX)
+	with (p) instance_create(x, y, HealFX)
+	scrPlayerHeal(p, num, true)
 	
-	p.hp += num
-	
-	if p.hp > p.max_hp
-		p.hp = p.max_hp
-	
-	var dir = instance_create(x, y, PopupText)
-	dir.mytext = "+" + string(num) + " HP"
-	
-	if p.hp >= p.max_hp
-		dir.mytext = "MAX HP"
-	
-	snd_play(sndHealthChest)
 	instance_destroy()
 }
 

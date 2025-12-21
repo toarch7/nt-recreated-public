@@ -14,8 +14,8 @@
   "exportDir": "",
   "name": "sndCuzWep",
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+    "name": "Cuz",
+    "path": "folders/Sounds/Cuz.yy"
   },
   "preload": true,
   "resourceType": "GMSound",

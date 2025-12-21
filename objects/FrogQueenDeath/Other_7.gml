@@ -1,21 +1,15 @@
 if sprite_index == sprFrogQueenDying {
-    var ang = random_angle
-    team = 1
-
+    var _ang = random_angle
+	
     repeat 80 {
-        with instance_create(x, y, EnemyBullet2) {
-            motion_add(ang, 4)
-            image_angle = direction
-            team = other.team
-            hit_id = sprFrogQueenIdle
-        }
-
+		scr_projectile_create(x, y, EnemyBullet2, _ang, 4)
+		
         with instance_create(x, y, AcidStreak) {
-            motion_add(ang, 8)
-            image_angle = direction
+            motion_add(_ang, 8)
+            image_angle = _ang
         }
 
-        ang += 4.5
+        _ang += 4.5
     }
 
     instance_create(x - 32, y - 32, PortalClear)

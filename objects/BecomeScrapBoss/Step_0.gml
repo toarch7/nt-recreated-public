@@ -3,7 +3,7 @@ if lockstep_stop
 
 scrTarget()
 
-if target {
+if instance_exists(target) {
     if !collision_line(x, y, target.x, target.y, Wall, 0, 0) {
         timer++
     }

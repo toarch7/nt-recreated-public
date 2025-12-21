@@ -17,7 +17,7 @@ if sprite_index != sprProtoChestOpen {
     if scrCrownCheck(Crown.Hatred) {
         with other {
             scr_hit_self(1)
-			last_hit = sprCrown6Idle
+			deathcause = sprCrown6Idle
 			
             repeat (16) {
                 with instance_create(x, y, Rad)

@@ -7,4 +7,6 @@ y -= hover
 
 draw_self()
 
+if (hover) scrDrawTooltip(x, bbox_top, loc("JOIN OUR DISCORD!"))
+
 y += hover

@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.301938,
+  "duration": 0.29693878,
   "exportDir": "",
   "name": "sndShielderShieldF",
   "parent": {

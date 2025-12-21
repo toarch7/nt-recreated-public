@@ -3,7 +3,7 @@ function scrEnemyApplyCreationEffects() {
 	if scr_skill_get(mut_scarier_face) {
 		hp = floor(hp * 0.8)
 		
-		if hp > max_hp {
+		if max_hp > hp {
 			max_hp = hp
 		}
 	}
@@ -23,9 +23,5 @@ function scrEnemyApplyCreationEffects() {
 
 function scrEnemyIsBoss(_enemy) {
 	gml_pragma("forceinline")
-	with _enemy {
-		return object_index == BanditBoss || object_index == ScrapBoss || object_index == LilHunter
-			|| object_index == HyperCrystal || object_index == TechnoMancer || object_index == Last
-			|| object_index == Nothing && object_index == Nothing2 || object_index == FrogQueen
-	}
+	return instance_exists(_enemy) && object_is_ancestor(_enemy.object_index, bossenemy)
 }

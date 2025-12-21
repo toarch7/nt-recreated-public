@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.664031,
+  "duration": 0.6640363,
   "exportDir": "",
   "name": "sndRogueAim",
   "parent": {

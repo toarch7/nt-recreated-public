@@ -66,7 +66,7 @@ var scale = 0.67
 
 if global.console_active {
 
-    draw_set_font(fontConsole)
+    draw_set_font(fntConsole)
 
     draw_set_color(c_black)
     draw_set_alpha(0.6)

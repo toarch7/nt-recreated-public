@@ -10,12 +10,12 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.580813,
+  "duration": 0.57582766,
   "exportDir": "",
   "name": "sndCuzOutaway",
   "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+    "name": "Cuz",
+    "path": "folders/Sounds/Cuz.yy"
   },
   "preload": true,
   "resourceType": "GMSound",

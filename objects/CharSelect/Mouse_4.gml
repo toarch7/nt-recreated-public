@@ -4,7 +4,7 @@ if lockstep_stop
 var _race = race
 
 if !can {
-	with Menu {
+	if (is_touch()) with (Menu) {
         unlock_hint = scrRaceGetUnlockDescription(_race)
 		unlock_hint_pop = 2
         alarm[11] = 90
@@ -19,6 +19,11 @@ if instance_exists(DailyList) || scr_network_handle_event(event_type, event_numb
 
 var _is_me = scr_is_authority(),
 	_pinst = scr_playerinstance_find()
+
+with (GoButton) if (!visible) {
+	visible = true
+	addy = 1
+}
 
 if _pinst.race != _race {
     if _is_me {

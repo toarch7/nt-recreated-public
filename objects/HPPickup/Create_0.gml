@@ -7,14 +7,11 @@ image_speed = 0
 
 num = 2
 
-if scr_skill_get(9)
-	num = 4
+if (scr_skill_get(mut_second_stomach)) num = 4
 
-if scrCrownCheck(crwn_haste) {
+if (scrCrownCheck(crwn_haste)) {
 	alarm[0] /= 3
 	num ++
 }
 
-if GameCont.area == 102 {
-	sprite_index = sprSlice
-}
+if (GameCont.area == area_pizza_sewers) sprite_index = sprSlice

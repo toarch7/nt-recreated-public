@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-move_bounce_solid(1)
+move_bounce_solid(true)
 bounced = 1
 
 if leap {

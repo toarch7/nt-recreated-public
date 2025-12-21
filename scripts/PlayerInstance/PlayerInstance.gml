@@ -235,7 +235,7 @@ function scrCreatePlayers(_my_index = global.index) {
     for (var _player_index = 0; _player_index < player_count; _player_index ++) {
         var _pinst = _player_instances[_player_index]
 		
-        if is_undefined(_pinst) continue
+        if (is_undefined(_pinst)) continue
 
         if _pinst.race == Race.Random || _pinst.randchar {
 			var _randrace;
@@ -249,8 +249,8 @@ function scrCreatePlayers(_my_index = global.index) {
 			until (_randrace > 0 && scr_race_is_unlocked(_randrace))
 			
 			_pinst.race = _randrace
-			_pinst.randchar = true
-
+			_pinst.skin = scr_loadout_race_get_skin(_randrace)
+			
             if !instance_exists(CoopController) {
 				if !scrGameIsEventRun() {
                     _pinst.cwep = scr_loadout_race_get_start_weapon(_pinst.race)
@@ -264,11 +264,14 @@ function scrCreatePlayers(_my_index = global.index) {
 				var _start_crown = scr_loadout_race_get_start_crown(_pinst.race)
 				scrCrownSetCurrent(_start_crown, true)
             }
+			
+			_pinst.randchar = true
 		}
 		
 		if !(instance_exists(CoopController) || UberCont.weekly_run) {
 	        if _pinst.race == Race.Skeleton && !scr_race_is_unlocked(_pinst.race) {
 	            _pinst.race = Race.Melting
+				_pinst.skin = scr_loadout_race_get_skin(Race.Melting)
 	        }
 		}
 
@@ -282,7 +285,6 @@ function scrCreatePlayers(_my_index = global.index) {
             is_me = (index == _my_index)
 
             if is_me {
-                GameCont.race = race
 				if !scrGameIsDailyRun() {
 					UberCont.ctot_days[race] ++
 				}
@@ -293,10 +295,10 @@ function scrCreatePlayers(_my_index = global.index) {
                 UberCont.ctot_runs[race] ++
             }
 
-            wep = _pinst.cwep
-            bwep = _pinst.bwep
+            if (scr_weapon_is_valid(_pinst.cwep)) wep = _pinst.cwep
+            if (scr_weapon_is_valid(_pinst.bwep)) bwep = _pinst.bwep
 			
-			if scr_weapon_is_valid(wep) {
+			if (scr_weapon_is_valid(wep)) {
 				var _type = scr_weapon_get_type(wep)
 				
 				scrPlayerGiveAmmo(id, _type, scrAmmoGetPickupAmount(_type) * 3)
@@ -306,7 +308,7 @@ function scrCreatePlayers(_my_index = global.index) {
 				}
 			}
             
-			if scr_weapon_is_valid(bwep) {
+			if (scr_weapon_is_valid(bwep)) {
 				var _type = scr_weapon_get_type(bwep)
 				scrPlayerGiveAmmo(id, _type, scrAmmoGetPickupAmount(_type) * 3)
 				

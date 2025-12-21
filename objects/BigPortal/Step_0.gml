@@ -21,9 +21,9 @@ if instance_exists(Player) {
         with Player {
             if collision_line(x, y, other.x, other.y, Wall, 0, 0) < 0 {
                 dis = 5
+                nexthurt = current_frame + 10
                 sprite_index = spr_hurt
                 image_index = 1
-                inframes = 10
                 depth = -9
                 if place_free(x + lengthdir_x(dis, point_direction(x, y, other.x, other.y)), y) x += lengthdir_x(dis, point_direction(x, y, other.x, other.y))
                 if place_free(x, y + lengthdir_y(dis, point_direction(x, y, other.x, other.y))) y += lengthdir_y(dis, point_direction(x, y, other.x, other.y))

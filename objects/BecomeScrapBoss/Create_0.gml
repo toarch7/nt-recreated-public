@@ -13,3 +13,5 @@ image_speed = 0.4
 timer = 0
 
 spr_shadow = shd96
+
+dropseed = rng_next_int(RNGStates.WeaponDrops)

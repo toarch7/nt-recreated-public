@@ -9,8 +9,6 @@ spr_hurt = sprFrogQueenHurt
 spr_dead = sprFrogQueenDead
 spr_fire = sprFrogQueenFire
 
-hit_id = spr_idle
-
 event_inherited()
 
 snd_hurt = sndBallMamaHurt
@@ -44,8 +42,9 @@ instance_create(x, y + 24, PortalClear)
 instance_create(x - 24, y, PortalClear)
 instance_create(x + 24, y, PortalClear)
 
-hit_id = spr_idle
 friction = 0
 
 spr_shadow = shd64
 spr_shadow_y = 8
+
+hitid = HitId.BallguyMama

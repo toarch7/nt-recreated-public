@@ -5,5 +5,5 @@ with instance_create(x, y, EnemyBullet1) {
     image_angle = direction
     creator = other.id
     team = other.team
-    hit_id = sprScrapBossIdle
+    hitid = HitId.BigDog
 }

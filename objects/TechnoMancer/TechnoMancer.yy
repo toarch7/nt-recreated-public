@@ -18,12 +18,12 @@
   "name":"TechnoMancer",
   "overriddenProperties":[],
   "parent":{
-    "name":"Enemies",
-    "path":"folders/Objects/Enemies.yy",
+    "name":"Bosses",
+    "path":"folders/Objects/Enemies/Bosses.yy",
   },
   "parentObjectId":{
-    "name":"enemy",
-    "path":"objects/enemy/enemy.yy",
+    "name":"bossenemy",
+    "path":"objects/bossenemy/bossenemy.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

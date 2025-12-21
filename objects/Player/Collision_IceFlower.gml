@@ -2,19 +2,17 @@ if lockstep_stop
 	exit
 
 if KeyCont.press_pick[index] {
-    dir = random_angle
-    repeat 2 + random(3) {
+    scr_hit_self(1, HitId.IceFlower)
+	
+	var _dir = random_angle
+    repeat (2 + random(3)) {
         with instance_create(x, y, BloodStreak) {
-            motion_add(other.dir, 5)
+            motion_add(_dir, 5)
             image_angle = direction
         }
-
-        dir += 60 + random(30)
+		
+        _dir += 60 + random(30)
     }
-
-    hp--inframes = 5
-    sprite_index = spr_hurt
-    snd_play_hit(snd_hurt, 0.2)
-    last_hit = sprIceFlowerIdle
-    other.feed++
+	
+	other.feed ++
 }

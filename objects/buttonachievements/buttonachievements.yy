@@ -39,6 +39,9 @@
     "name":"sprButtonAchievements",
     "path":"sprites/sprButtonAchievements/sprButtonAchievements.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"mskButtonAchievements",
+    "path":"sprites/mskButtonAchievements/mskButtonAchievements.yy",
+  },
   "visible":true,
 }

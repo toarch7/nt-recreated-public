@@ -1,77 +1,74 @@
 function scrPopChests() {
 	random_set_seed(rng_next_int(RNGStates.Chest))
-
+	
+	var _max_subarea = scrAreaGetMaxSubareas(GameCont.area)
+	
 	var dir = 0
 	var gol = 1
 	var wgol = 0
 	var agol = 0
 	var rgol = 0
-
-	if instance_exists(Player) && GameCont.area != 107 {
-		if scr_skill_get(mut_open_mind) {
-			dir = choose(1, 2, 3)
-			
-			if dir == 1 wgol = GameCont.openminds
-			if dir == 2 agol = GameCont.openminds
-			if dir == 3 rgol = GameCont.openminds
-		}
-	}
-
-	if GameCont.area == 100 {
+	
+	if GameCont.area == area_vault {
 		if instance_exists(CrownObject) {
 			with instance_furthest(10016, 10016, WeaponChest) {
 				instance_create(x, y, ProtoChest)
 				instance_destroy(id, 0)
 			}
 		}
-
+		
 		gol = 0
-		wgol = 0
-		agol = 0
-		rgol = 0
 	}
-
-	if (GameCont.area == 0) or ((GameCont.area == 107) or (GameCont.area == 106) && GameCont.subarea == 3) {
+	else if (GameCont.area == area_campfire
+		|| (GameCont.area == area_hq && GameCont.subarea == _max_subarea)
+		|| GameCont.area == area_crib) {
+		
 		gol = 0
-		wgol = 0
-		agol = 0
-		rgol = 0
 	}
-
-	if (GameCont.area == 106 or GameCont.area == 7) && GameCont.subarea == 3 {
-		rgol = 0
+	else if (GameCont.area != area_crib) {
+		repeat (scr_skill_get(mut_open_mind)) {
+			dir = choose(1, 2, 3)
+			if (dir == 1) wgol ++
+			if (dir == 2) agol ++
+			if (dir == 3) rgol ++
+		}
 	}
 	
 	#region restrict chest amount
 	
-	if instance_exists(WeaponChest) && GameCont.area != 107 {
-		do {
-			with instance_nearest(10016 + orandom(250), 10016 + orandom(250), WeaponChest)
-				instance_destroy(id, 0)
+	if (gol > 0) {
+		if instance_exists(WeaponChest) && GameCont.area != area_crib {
+			do {
+				with instance_nearest(10016 + orandom(250), 10016 + orandom(250), WeaponChest)
+					instance_destroy(id, false)
+			}
+			until instance_number(WeaponChest) <= gol + wgol
 		}
-		until instance_number(WeaponChest) <= gol + wgol
-	}
-
-	if instance_exists(RadChest) {
-		do {
-			with instance_nearest(10016 + orandom(250), 10016 + orandom(250), RadChest)
-				instance_destroy(id, 0)
+		
+		if instance_exists(RadChest) {
+			do {
+				with instance_nearest(10016 + orandom(250), 10016 + orandom(250), RadChest)
+					instance_destroy(id, false)
+			}
+			until instance_number(RadChest) <= gol + rgol
 		}
-		until instance_number(RadChest) <= gol + rgol
-	}
-	
-	if instance_exists(AmmoChest) {
-		do {
-			with instance_nearest(10016 + orandom(250), 10016 + orandom(250), AmmoChest)
-				instance_destroy(id, 0)
+		
+		if instance_exists(AmmoChest) {
+			do {
+				with instance_nearest(10016 + orandom(250), 10016 + orandom(250), AmmoChest)
+					instance_destroy(id, false)
+			}
+			until instance_number(AmmoChest) <= gol + agol
 		}
-		until instance_number(AmmoChest) <= gol + agol
-	}
-	
-	if (gol) > 0 {
+		
+		// in the case if some chests didn't spawn
 		scrReplacePropWithChest(RadChest)
 		scrReplacePropWithChest(WeaponChest)
 		scrReplacePropWithChest(AmmoChest)
+	}
+	else {
+		instance_destroy(chestprop, false)
+		instance_destroy(RadChest, false)
 	}
 	
 	#endregion
@@ -130,75 +127,63 @@ function scrPopChests() {
 	
 	#region crowns
 	
-	if GameCont.crown == 3 {
+	if scrCrownCheck(crwn_life) {
 		with RadChest {
 			instance_create(x, y, HealthChest)
 			instance_destroy(id, 0)
 		}
 	}
 	
-	if GameCont.crown == 9 {
+	if scrCrownCheck(crwn_love) {
 		with chestprop {
 			if object_index != ProtoChest && object_index != RogueChest {
 				instance_create(x, y, AmmoChest)
-				instance_destroy(id, 0)
+				instance_destroy(id, false)
 			}
 		}
 
 		with RadChest {
 			instance_create(x, y, AmmoChest)
-			instance_destroy(id, 0)
-		}
-
-		with WeaponChest {
-			instance_create(x, y, AmmoChest)
-			instance_destroy(id, 0)
+			instance_destroy(id, false)
 		}
 	}
 	
 	#endregion
 	
-	if instance_exists(Player) {
+	// mimics
+	if instance_exists(Player) && GameCont.area != area_crib {
 		with AmmoChest {
-			if random(11) < 1 && (GameCont.area >= 2 or GameCont.loops) && GameCont.area != 107 {
+			if random(11) < 1 && (GameCont.area >= area_sewers || GameCont.loops) {
 				instance_create(x, y, Mimic)
-				image_speed = 0.4
-				instance_change(Wind, Player)
+				instance_destroy(id, false)
 			}
 		}
 
 		with WeaponChest {
-			if random(4) < GameCont.nochest && GameCont.area != 107 {
-				curse = 0
-				instance_change(BigWeaponChest, Player)
-				event_perform(0, 0)
-				exit
+			if random(4) < GameCont.nochest {
+				instance_create(x, y, BigWeaponChest)
+				instance_destroy(id, false)
+			}
+			else if random(26) < 1 && (GameCont.area >= area_scrapyards || GameCont.loops >= 1) {
+				instance_create(x, y, WepMimic)
+				instance_destroy(id, false)
 			}
 		}
 
 		with HealthChest {
-			if random(51) < 1 && (GameCont.area >= 2 or GameCont.loops >= 1) {
+			if random(51) < 1 && (GameCont.area >= area_sewers || GameCont.loops >= 1) {
 				instance_create(x, y, SuperMimic)
-				image_speed = 0.4
-				instance_change(Wind, Player)
+				instance_destroy(id, false)
 			}
 		}
 	}
 	
-	if global.hardmode && ((GameCont.loops - global.hardmode) <= 0 && GameCont.area == 1 && GameCont.subarea == 1) {
-		with Player {
-			instance_create(x, y, BigWeaponChest)
-		}
+	if global.hardmode && ((GameCont.loops - global.hardmode) <= 0 && GameCont.area == area_desert && GameCont.subarea == 1) {
+		with (Player) instance_create(x, y, BigWeaponChest)
 	}
 	
-	if GameCont.area == 104 {
+	if GameCont.area == area_cursed_caves {
 		with WeaponChest {
-			instance_create(x, y, CursedBigChest)
-			instance_create(x, y, PortalClear)
-			instance_destroy(id, 0)
-		}
-
-		with BigWeaponChest {
 			instance_create(x, y, CursedBigChest)
 			instance_create(x, y, PortalClear)
 			instance_destroy(id, 0)
@@ -206,30 +191,34 @@ function scrPopChests() {
 	}
 }
 
-function scrReplacePropWithChest(obj) {
-	if instance_exists(obj) or GameCont.area == 0 or (GameCont.area == 7 && GameCont.subarea == 3) or GameCont.area >= 100
+function scrReplacePropWithChest(_object) {
+	if (instance_exists(_object) || GameCont.area == area_campfire || GameCont.area >= 100
+		|| (GameCont.area == area_hq && GameCont.subarea == GameCont.maxsubarea)
+	) {
 		exit
-	
-	var furthest = 0,
-		inst = noone
-	
-	with prop {
-		var dis = distance_to_point(10016, 10016)
-		
-		// man that's a lot
-		if object_index == VaultStatue or object_index == ProtoStatue or object_index == IceFlower
-		or object_index == CarVenus or instance_is(self, RadChest) or object_index == BecomeScrapBoss
-		or object_index == MeleeFake or object_index == LastIntro
-			continue
-		
-		if dis > 160 && dis > furthest
-			inst = id
 	}
 	
-	if instance_exists(inst) {
-		with inst {
-			instance_destroy(id, 0)
-			instance_create(x, y, obj)
+	var _distance_max = infinity, _instance = noone
+	
+	with prop {
+		var _distance = distance_to_point(10016, 10016)
+		
+		if (object_index == VaultStatue || object_index == ProtoStatue || object_index == IceFlower
+		|| object_index == CarVenus || instance_is(self, RadChest) || object_index == BecomeScrapBoss
+		|| object_index == MeleeFake || object_index == LastIntro || object_index == VenuzCouch) {
+			continue
+		}
+		
+		if (_distance > 160 && _distance > _distance_max) {
+			_distance_max = _distance
+			_instance = id
+		}
+	}
+	
+	if instance_exists(_instance) {
+		with _instance {
+			instance_destroy(id, false)
+			instance_create(x, y, _object)
 		}
 	}
 }

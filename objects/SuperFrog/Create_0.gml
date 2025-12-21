@@ -22,5 +22,6 @@ close = 0
 alarm[2] = 5
 
 
-repeat(10)
-instance_create(x, y, ToxicGas)
+repeat (10) instance_create(x, y, ToxicGas)
+
+hitid = HitId.SuperFrog

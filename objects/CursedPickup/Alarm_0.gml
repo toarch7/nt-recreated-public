@@ -3,7 +3,8 @@ if blink < 0 {
     snd_play(sndExplosionS)
     snd_play(sndCursedPickupDisappear)
     instance_destroy()
-} else {
+}
+else {
     alarm[0] = 2
     blink -= 1
     if visible = 1 visible = 0

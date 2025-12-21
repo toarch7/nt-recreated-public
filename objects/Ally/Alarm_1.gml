@@ -1,9 +1,9 @@
-if (sprite_index == sprAllyappear) {
-    spr_idle = sprAllyIdle
-    sprite_index = spr_idle
+if (sprite_index == spr_appear) sprite_index = spr_idle
+
+if (instance_number(Ally) > UberCont.ctot_uniq[10]) {
+	UberCont.ctot_uniq[10] = instance_number(Ally)
 }
 
-if (instance_number(Ally) > UberCont.ctot_uniq[10]) UberCont.ctot_uniq[10] = instance_number(Ally)
 alarm[1] = (10 + random(5))
 if instance_exists(enemy) target = instance_nearest(x, y, enemy)
 if ((target >= Player) && instance_exists(target)) {

@@ -1,4 +1,4 @@
-if scrUltraCheck(Race.Plant, UltraSkill.Trapper) {
+if scr_ultra_get(Race.Plant, UltraSkill.Trapper) {
     var _ang = random_angle
 	
 	repeat (5) {

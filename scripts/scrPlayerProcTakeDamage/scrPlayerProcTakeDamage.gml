@@ -1,4 +1,6 @@
-function scrPlayerProcTakeDamage(_amount = 0) {
+function scrPlayerProcTakeDamage(_amount) {
+	totdamagetaken += _amount
+	
 	if scr_skill_get(mut_sharp_teeth) {
 		var _left = view_xview,
 			_top = view_yview,
@@ -19,24 +21,39 @@ function scrPlayerProcTakeDamage(_amount = 0) {
                 }
             }
         }
-		
-		lsthealth = hp
     }
 	
-	if race == Race.Rogue {
-		with scr_projectile_create(x, y, PopoExplosion) image_rescale(0.5)
+	if race == Race.Crystal && totdamagetaken >= 100 && !scr_race_is_skin_unlocked(Race.Crystal, SkinLetter.C) {
+		if (totdamagetaken >= 100) scrRaceUnlockSkin(Race.Crystal, SkinLetter.C)
+	}
+	else if (race == Race.Rogue) {
+		var _sprite = (bskin == SkinLetter.C) ? sprRogueExplosionC : sprRogueExplosion
 		
-		repeat scrUltraCheck(race, UltraSkill.SuperBlastArmor) * 3 {
-			with scr_projectile_create(
-				x + orandom(2), y + orandom(2), PopoExplosion
-			) {
-				image_rescale(0.5)
+		with (scr_damage_create(x, y, PopoExplosion)) {
+			mask_index = mskExplosion
+			sprite_index = _sprite
+		}
+		
+		repeat (scr_ultra_get(Race.Rogue, UltraSkill.SuperBlastArmor) * 3) {
+			with (scr_damage_create(x + orandom(2), y + orandom(2), PopoExplosion)) {
+				mask_index = mskExplosion
+				sprite_index = _sprite
 			}
 		}
 		
 		snd_play(sndIDPDNadeExplo)
 	}
-	else if race == Race.BigDog {
+	else if (race == Race.BigDog) {
 		UberCont.ctot_uniq[Race.BigDog] += _amount
 	}
+	else if (race == Race.Cuz) {
+		if (cuz_ammo < cuz_ammo_max) {
+			if (scr_skill_get(mut_throne_butt)) {
+				cuz_ammo = cuz_ammo_max
+			}
+			else cuz_ammo ++
+		}
+	}
 }
+
+

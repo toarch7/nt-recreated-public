@@ -1,16 +1,12 @@
 snd_stop(sndFishTB)
 
-if race == 4 && KeyCont.activeforever[index] {
+if race == Race.Melting && KeyCont.activeforever[index] {
     instance_create(x, y, MeltGhost)
 }
 
 KeyCont.activeforever[index] = 0
 
-if is_me {
-    GameCont.last_hit = last_hit
-}
-
-if GameCont.crown == 2 {
+if scrCrownCheck(crwn_death) {
     snd_play_hit_big(sndExplosionXL, 0.2)
 
     repeat 10 {
@@ -21,42 +17,22 @@ if GameCont.crown == 2 {
 
 snd_play(snd_dead)
 
-with instance_create(x, y, WepPickup) {
-    wep = other.wep
-    ammo = 0
-
-    curse = other.curse
-    name = wep_name[wep]
-    type = wep_type[wep]
-    sprite_index = wep_sprt[wep]
-    motion_add(other.direction, other.speed)
-    speed += max(0, -other.hp / 5)
-    motion_add(random_angle, 2)
-    speed *= 0.8
+if (wep > 0) with (scrWeaponPickupCreate(x, y, wep)) {
+	motion_add(other.direction, other.hp * -0.2)
+	curse = other.curse
 }
 
-if bwep > 0 {
-    with instance_create(x, y, WepPickup) {
-        wep = other.bwep
-        ammo = 0
-
-        curse = other.bcurse
-        name = wep_name[wep]
-        type = wep_type[wep]
-        sprite_index = wep_sprt[wep]
-        motion_add(other.direction, other.speed)
-        speed += max(0, -other.hp / 5)
-        motion_add(random_angle, 2)
-        speed *= 0.8
-    }
+if (bwep > 0) with (scrWeaponPickupCreate(x, y, bwep)) {
+	motion_add(other.direction, other.hp * -0.2)
+	curse = other.bcurse
 }
 
-if instance_number(Player) > 1 exit
+if (instance_number(Player) > 1) exit
 
 audio_stop_sound(sndFrogLoop)
 audio_stop_sound(sndFrogLoopButt)
 
-if race == 15 {
+if race == Race.Frog {
     var ang = random_angle
 
     repeat 14 {
@@ -78,7 +54,7 @@ snd_stop(sndEyesLoopUpg)
 snd_stop(sndChickenLoop)
 snd_stop(sndChickenHeadlessLoop)
 
-if race != 13 {
+if race != Race.BigDog {
     with instance_create(x, y, CorpseActive) {
         size = 1
 
@@ -105,76 +81,61 @@ with CrownObject {
     persistent = 0
 }
 
-UberCont.ctot_dead[race] += 1
+if scr_player_is_local(index) {
+	var _race = race
+	UberCont.ctot_dead[_race] += 1
+	
+	if !scrGameIsHardmode() {
+	    if GameCont.kills > UberCont.cbst_kill[_race] {
+	        UberCont.cbst_race[_race] = _race
+	        UberCont.cbst_area[_race] = GameCont.area
+	        UberCont.cbst_loop[_race] = GameCont.loops
+	        UberCont.cbst_suba[_race] = GameCont.subarea
+	        UberCont.cbst_kill[_race] = GameCont.kills
+	    }
+		
+	    if UberCont.daily_run && !UberCont.weekly_run {
+	        with UberCont {
+	            race = _race
 
-if !global.hardmode {
-    if GameCont.kills > UberCont.cbst_kill[race] {
-        UberCont.cbst_race[race] = GameCont.race
-        UberCont.cbst_area[race] = GameCont.area
-        UberCont.cbst_loop[race] = GameCont.loops
-        UberCont.cbst_suba[race] = GameCont.subarea
-        UberCont.cbst_kill[race] = GameCont.kills
-    }
-
-    if UberCont.daily_run && !UberCont.weekly_run {
-        with UberCont {
-            race = other.race
-
-            if GameCont.kills > UberCont.dbst_kill[race] {
-                dbst_race[race] = GameCont.race
-                dbst_area[race] = GameCont.area
-                dbst_loop[race] = GameCont.loops
-                dbst_suba[race] = GameCont.subarea
-                dbst_kill[race] = GameCont.kills
-            }
-        }
-    }
-} else {
-    if GameCont.kills > UberCont.hbst_kill[race] {
-        UberCont.hbst_race[race] = GameCont.race
-        UberCont.hbst_area[race] = GameCont.area
-        UberCont.hbst_loop[race] = GameCont.loops
-        UberCont.hbst_suba[race] = GameCont.subarea
-        UberCont.hbst_kill[race] = GameCont.kills
-    }
+	            if GameCont.kills > UberCont.dbst_kill[_race] {
+	                dbst_race[_race] = _race
+	                dbst_area[_race] = GameCont.area
+	                dbst_loop[_race] = GameCont.loops
+	                dbst_suba[_race] = GameCont.subarea
+	                dbst_kill[_race] = GameCont.kills
+	            }
+	        }
+	    }
+	}
+	else {
+	    if GameCont.kills > UberCont.hbst_kill[_race] {
+	        UberCont.hbst_race[_race] = _race
+	        UberCont.hbst_area[_race] = GameCont.area
+	        UberCont.hbst_loop[_race] = GameCont.loops
+	        UberCont.hbst_suba[_race] = GameCont.subarea
+	        UberCont.hbst_kill[_race] = GameCont.kills
+	    }
+	}
+	
+	UberCont.ctot_kill[_race] += GameCont.kills
+	
+	if !UberCont.want_menu && !UberCont.want_restart {
+		scrUnlocksArea()
+	}
+	
+	scrRaceUnlock(Race.Melting)
+	
+	if (!GameCont.win) scrSendDailyData()
 }
 
-UberCont.ctot_kill[race] += GameCont.kills
-
-if !UberCont.want_menu && !UberCont.want_restart
-	scrUnlocksArea()
-
-if !GameCont.win scrSendDailyData()
-
-if race == 11 {
-    do {
-        if GameCont.rad > 15 {
-            GameCont.rad -= 10
-            with instance_create(x, y, BigRad) {
-                motion_add(other.direction, other.speed)
-                motion_add(random_angle, random(GameCont.rad / 2) + 3)
-                repeat(speed)
-                speed *= 0.9
-            }
-        }
-    }
-    until GameCont.rad <= 15
-
-    repeat(GameCont.rad) {
-        with instance_create(x, y, Rad) {
-            motion_add(other.direction, other.speed)
-            motion_add(random_angle, random(GameCont.rad / 2) + 3)
-            repeat(speed)
-            speed *= 0.9
-        }
-        GameCont.rad--
-    }
+if race == Race.Horror {
+	scrRadDrop(x, y, GameCont.rad)
+	GameCont.rad = 0
 }
 
 if GameCont.underwater && race != Race.Fish && race != Race.Robot {
-    with instance_create(x, y, Wind) sprite_index = sprPlayerBubblePop
+    with (instance_create(x, y, Wind)) sprite_index = sprPlayerBubblePop
 }
 
-with instance_find(UnlockScreen, 0) {
-    alarm[0] = 45
-}
+with (instance_find(UnlockScreen, 0)) alarm[0] = 45

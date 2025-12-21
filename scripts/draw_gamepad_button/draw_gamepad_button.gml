@@ -1,12 +1,12 @@
-function draw_gamepad_button(button, big, x, y, col = c_white) {
+function draw_gamepad_button(button, big, _x, _y, col = c_white) {
 	if !UberCont.opt_gamepad
 		exit
 	
-	draw_sprite_ext(big ? gamepad_icon_big : gamepad_icon_small, button - 32769, x, y, 1, 1, 0, col, draw_get_alpha())
+	draw_sprite_ext(big ? gamepad_icon_big : gamepad_icon_small, button - 32769, _x, _y, 1, 1, 0, col, draw_get_alpha())
 }
 
-function gamepad_button_to_image(key) {
-	switch key {
+function gamepad_button_to_image(_key) {
+	switch _key {
 		case gp_face1: return 0
 		case gp_face2: return 1
 		case gp_face3: return 2
@@ -32,39 +32,44 @@ function gamepad_button_to_image(key) {
 	return -1
 }
 
-function gamepad_key_to_nt_text(key, big = false) {
-	return "@(" + string(big ? gamepad_icon_big : gamepad_icon_small) + ":" + string(gamepad_button_to_image(key)) + ")"
+function gamepad_key_to_nt_text(_key, big = false) {
+	return "@(" + string(big ? gamepad_icon_big : gamepad_icon_small) + ":" + string(gamepad_button_to_image(_key)) + ")"
 }
 
-function draw_pickup_button(x, y) {
-	var off = 7
+function draw_pickup_button(_x, _y) {
+	var _offset = 7
 	
-	x = round(x)
-	y = round(y - 7)
+	_x = round(_x)
+	_y = round(_y - 7)
 	
 	if UberCont.opt_gamepad {
-		var key = keymap_get("pick")
+		var _key = keymap_get("pick")
 		
-		draw_sprite(sprEPickup, 1, x, y)
-		draw_sprite(gamepad_icon_small, key - 32769, x, y - 8)
+		draw_sprite(sprEPickup, 1, _x, _y)
+		draw_sprite(gamepad_icon_small, _key - 32769, _x, _y - 8)
 		
-		return off
+		return _offset
 	}
 	
 	if UberCont.opt_keyboard {
-		var key = keymap_get("pick"),
-			c = scrKeyName(key)
+		var _key = keymap_get("pick"),
+			_character = scrKeyName(_key)
 		
-		if string_length(c) == 1 {
+		if string_length(_character) == 1 {
+			if (_character == "E") {
+				draw_sprite(sprEPickup, 0, _x, _y)
+				return _offset
+			}
+			
 			draw_set_color(c_black)
-			draw_rectangle(x - 5, y - 5, x + 5, y - 4, false)
+			draw_rectangle(_x - 6, _y - 5, _x + 5, _y - 4, false)
 			draw_set_color(c_white)
-			draw_rectangle(x - 5, y - 4, x + 5, y - 16, false)
+			draw_rectangle(_x - 6, _y - 4, _x + 5, _y - 16, false)
 			draw_set_color(c_black)
-			draw_rectangle(x - 4, y - 5, x + 4, y - 15, false)
+			draw_rectangle(_x - 5, _y - 5, _x + 4, _y - 15, false)
 			draw_set_color(c_white)
 			
-			draw_sprite(sprEPickup, 1, x, y)
+			draw_sprite(sprEPickup, 1, _x, _y)
 			
 			var h = draw_get_halign(),
 				v = draw_get_valign()
@@ -72,24 +77,21 @@ function draw_pickup_button(x, y) {
 			draw_set_halign(fa_center)
 			draw_set_valign(fa_middle)
 			
-			draw_text_nt(x, y - 9, c)
+			draw_text_nt(_x, _y - 9, _character)
 			
 			draw_set_halign(h)
 			draw_set_valign(v)
 		}
 		else {
-			draw_sprite(sprEPickup, 1, x, y)
-			
-			draw_sprite(sprKeySmall, key, x, y - 8)
-			var w = string_width(c) / 4
-			
-			return ceil(w)
+			draw_sprite(sprEPickup, 1, _x, _y)
+			draw_sprite(sprKeySmall, _key, _x, _y - 8)
+			return ceil(string_width(_character) * 0.25)
 		}
 		
-		return off
+		return _offset
 	}
 	
-	draw_sprite(sprEPickup, 0, x, y)
+	draw_sprite(is_touch(global.index) ? sprMobilePickup : sprEPickup, 0, _x, _y)
 	
-	return off
+	return _offset
 }

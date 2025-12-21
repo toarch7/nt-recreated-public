@@ -1,14 +1,14 @@
 if lockstep_stop
 	exit
 
-wave += 1
+wave += timescale
 
 var spr = -1
 
-if GameCont.area == 102 {
+if (GameCont.area == area_pizza_sewers) {
     spr = sprFog102
 }
-else if (GameCont.area == 2 or UberCont.halloween) {
+else if (GameCont.area == area_sewers || UberCont.halloween) {
     spr = sprFog2
 }
 
@@ -16,14 +16,14 @@ if spr != -1 {
     var fogx = floor(view_xview / 480) * 480 + 480 - fogscroll,
 		fogy = floor(view_yview / 360) * 360
 
-    for (var xx = -1; xx <= 1; xx ++) {
-        for (var yy = -1; yy <= 1; yy ++) {
-            draw_sprite_ext(spr, 0, fogx + xx * 480, fogy + yy * 360, 1, 1, 0, c_white, FOG_ALPHA)
+    for (var _x = -1; _x <= 1; _x ++) {
+        for (var _y = -1; _y <= 1; _y ++) {
+            draw_sprite_ext(spr, 0, fogx + _x * 480, fogy + _y * 360, 1, 1, 0, c_white, FOG_ALPHA)
         }
     }
 
     if !UberCont.paused {
-        fogscroll += 0.5
+        fogscroll += timescale * 0.5
 
         if fogscroll >= 480 {
             fogscroll -= 480
@@ -32,65 +32,49 @@ if spr != -1 {
 }
 
 with Player {
-    if visible {
-		var pinst = scr_playerinstance_find(index),
-			col = c_white
+    if (!visible) continue
+	
+	var _pinst = scr_playerinstance_find(index),
+		_color = ((_pinst != undefined) ? _pinst.color : c_white)
+	
+	if (!instance_exists(PauseImage)) {
+	    var _direction = KeyCont.dir_fire[index]
 		
-		if pinst != undefined
-			col = pinst.color
-		
-		if !instance_exists(PauseImage) {
-	        var ang = KeyCont.dir_fire[index]
+	    if !UberCont.opt_keyboard || index != global.index || is_gamepad(index) {
+			var _distance = KeyCont.dis_fire[index]
 			
-	        if !UberCont.opt_keyboard or index != global.index or is_gamepad(index) {
-				var s = KeyCont.dis_fire[index]
-				
-				if UberCont.opt_fixsight && (index == global.index)
-					s = 1
-				
-				var xx = x + lengthdir_x(64 * s, ang),
-					yy = y + lengthdir_y(64 * s, ang),
-					a = min(1, crosshair_alpha)
-				
-				crosshair_alpha = lerp(crosshair_alpha, (s > 0) * 5, 0.4)
-				
-				if s > 0 {
-					crosshair_x = lerp(crosshair_x, xx, 0.8)
-					crosshair_y = lerp(crosshair_y, yy, 0.8)
-				}
-				
-				if index != global.index
-					a *= 0.5
-				
-	            draw_sprite_ext(sprCrosshair, KeyCont.crosshair[index], crosshair_x, crosshair_y, 1, 1, 0, col ? col : c_white, a)
-	        }
-		}
-		
-        if player_count > 1 {
-			var _x = clamp(x, view_xview + 8, view_xview + view_width - 8),
-				_y = clamp(y - 8, view_yview + 16, view_yview + view_height - 4)
+			if (UberCont.opt_fixsight && (index == global.index)) s = 1
 			
-            draw_sprite_ext(sprPlayerIndicator, index + 1, _x, _y, 1, 1, 0, col, 1)
-        }
+			var _x = x + lengthdir_x(_distance, _direction),
+				_y = y + lengthdir_y(_distance, _direction),
+				_alpha = min(1, crosshair_alpha)
+			
+			crosshair_alpha = lerp(crosshair_alpha, (_distance > 16) ? 5 : 0, 0.4)
+			
+			if (_distance > 16) {
+				crosshair_x = lerp(crosshair_x, _x, 0.8)
+				crosshair_y = lerp(crosshair_y, _y, 0.8)
+			}
+			
+			if (index != global.index) _alpha *= 0.5
+			
+	        draw_sprite_ext(sprCrosshair, KeyCont.crosshair[index],
+				crosshair_x, crosshair_y, 1, 1, 0, (_color ? _color : c_white), _alpha)
+	    }
+	}
+	
+    if (player_count > 1) {
+		var _x = clamp(x, view_xview + 8, view_xview + view_width - 8),
+			_y = clamp(y, view_yview + 28, view_yview + view_height - 4)
+		
+        draw_sprite_ext(sprPlayerIndicator, index + 1, _x, _y, 1, 1, 0, _color, 1)
     }
 }
 
-if darkness && !instance_exists(PauseImage) {
-	if current_frame % 5 == 0 && surface_exists(dark) &&
-	(surface_get_width(dark) != view_width or surface_get_height(dark) != view_height) {
-		surface_resize(dark, view_width, view_height)
-	}
-	
-	if !instance_exists(GenCont) && !UberCont.paused {
-        scrDarkness()
-    }
-
-    gpu_set_blendmode(bm_subtract)
-
-    if surface_exists(dark)
-        draw_surface_ext(dark, view_xview, view_yview, 1, 1, 0, c_white, 1)
-
-    gpu_set_blendmode(bm_normal)
+if darkness && surface_exists(dark) {// && !instance_exists(PauseImage) {
+	gpu_set_blendmode(bm_subtract)
+	draw_surface_ext(dark, view_xview, view_yview, 1, 1, 0, c_white, 1)
+	gpu_set_blendmode(bm_normal)
 }
 
 if instance_exists(Player) {
@@ -119,10 +103,11 @@ if instance_exists(Player) {
 	}
 }
 
+with (WepSwap) draw_self()
 
 if !scrGameIsGenerationScreen() {
-    if !instance_exists(NothingSpiral) {
-		with Spiral {
+    if (!instance_exists(NothingSpiral)) {
+		with (Spiral) {
 	        draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_white, 1)
 	        draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_black, 0.8 - image_xscale)
 	    }
@@ -132,8 +117,7 @@ if !scrGameIsGenerationScreen() {
     draw_set_valign(fa_middle)
 
     with PopupText {
-        if !visible
-			continue
+        if (!visible) continue
 		
 		var _x = clamp(x, view_xview + 20, view_xview + view_width - 20)
 			_y = median(y, view_yview + 5, view_yview + view_height - 5)
@@ -147,38 +131,16 @@ if !scrGameIsGenerationScreen() {
 		scrDrawAlignDefault()
     }
 
-    with LevelUp {
-        draw_sprite(sprite_index, -1, x, y)
-    }
-
+    with (LevelUp) draw_sprite(sprite_index, -1, x, y)
+    
     draw_set_halign(fa_left)
     draw_set_valign(fa_top)
 }
 
-with WepSwap
-	draw_self()
-
-if instance_exists(Portal) {
-    with Portal {
-        if !(x > view_xview && y > view_yview && x < view_xview + view_width && y < view_yview + view_height) {
-            draw_sprite(sprPortalindicator, 0, clamp(x, view_xview + 10, view_xview + view_width - 10), clamp(y, view_yview + 10, view_yview + view_height - 10))
-        }
+with Portal {
+    if !(x > view_xview && y > view_yview && x < view_xview + view_width && y < view_yview + view_height) {
+        draw_sprite(sprPortalindicator, 0,
+			clamp(x, view_xview + 10, view_xview + view_width - 10),
+			clamp(y, view_yview + 10, view_yview + view_height - 10))
     }
 }
-
-/*
-draw_set_alpha(0.5)
-
-draw_set_color(c_blue)
-
-with Floor
-	draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, false)
-
-draw_set_color(c_red)
-
-with Wall
-	draw_rectangle(bbox_left, bbox_top, bbox_right, bbox_bottom, false)
-
-draw_set_color(c_white)
-
-draw_set_alpha(1)*/

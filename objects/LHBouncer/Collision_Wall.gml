@@ -4,7 +4,7 @@ if lockstep_stop
 if bounce {
     instance_create(x, y, Dust)
     snd_play_hit(sndBouncerBounce)
-    move_bounce_solid(00)
+    move_bounce_solid(true)
     bounce = false
 	exit
 }

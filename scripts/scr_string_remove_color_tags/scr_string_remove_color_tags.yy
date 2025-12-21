@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_string_remove_color_tags",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_string_remove_color_tags",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -4,7 +4,7 @@
 function scrFire(_wep, _consume_ammo = true) {
 	var _weapon_type = scr_weapon_get_type(_wep)
 	
-	reload = wep_load[_wep]
+	reload = scr_weapon_get_load(_wep)
 	can_shoot = 0
     
     var oldviewx2 = BackCont.viewx2,
@@ -29,16 +29,15 @@ function scrFire(_wep, _consume_ammo = true) {
     }
 	
 	// Laser brain lightning FX
-    if scr_weapon_get_type(Ammo.Energy) && scr_skill_get(mut_laser_brain) {
+    if scr_weapon_get_type(_wep) == Ammo.Energy && scr_skill_get(mut_laser_brain) {
 		var _count = scr_weapon_get_cost(_wep)
 		
         repeat _count {
-            with instance_create(x, y, AnimParticle) {
+            with instance_create(x, y, LaserBrain) {
                 image_speed = 0.4 - random(0.1)
-                creator = other.id
                 image_angle = random_angle
                 depth = other.depth - 1
-                sprite_index = sprLaserBrain
+                creator = other.id
             }
         }
     }
@@ -57,10 +56,15 @@ function scrFire(_wep, _consume_ammo = true) {
 	    if (GameCont.area == area_oasis) snd_play_gun(sndOasisMelee)
 	}
 	else {
-		drawempty = 10
+		if (!specfiring && race == Race.Steroids) drawempty = 30
 	}
 	
-	if (_is_melee) wepangle *= -1
+	if (!_is_melee) {
+		if (scr_weapon_get_type(_wep) != Ammo.None && wep != wep_jackhammer) {
+			GameCont.hasfiredshots = true
+		}
+	}
+	else wepangle *= -1
 	
 	switch (_wep) {
 		case wep_revolver:
@@ -133,7 +137,7 @@ function scrFire(_wep, _consume_ammo = true) {
 					_pellets --
 				}
 				snd_play(_is_golden ? sndGoldShotgun : sndShotgun)
-				scr_weapon_post(_gunangle, 12, 1, -4)
+				scr_weapon_post(_gunangle, 12, 1, 4)
 			}
 			
 			repeat (_pellets + _is_golden) {
@@ -242,7 +246,10 @@ function scrFire(_wep, _consume_ammo = true) {
 		case wep_golden_laser_pistol:
 		case wep_laser_rifle:
 		case wep_laser_minigun:
-			snd_play_gun(_laser_brain ? sndLaserUpg : sndLaser)
+			snd_play_gun(_is_golden
+					? (_laser_brain ? sndGoldLaserUpg : sndGoldLaser)
+					: (_laser_brain ? sndLaserUpg : sndLaser))
+			
 			if _wep == wep_laser_minigun {
 				scr_weapon_post(_gunangle, 5, 2, 8, 0.6)
 			}
@@ -325,6 +332,7 @@ function scrFire(_wep, _consume_ammo = true) {
 					scr_projectile_spread(5)
 				}
 			}
+		break
 		case wep_golden_splinter_gun:
 			snd_play_gun(sndGoldSplinterGun, 0.2)
 			scr_weapon_post(_gunangle, 15, 3, 3)
@@ -426,7 +434,7 @@ function scrFire(_wep, _consume_ammo = true) {
 				scrBulletShotShellFX(Shell, 35)
 				
 				with scr_projectile_create(x, y, Bullet1, _gunangle, 16) {
-					scr_projectile_shift(floor(i * 8.5))
+					scr_projectile_shift(floor(i * (4.5 + abs(i * 2))))
 					scr_projectile_spread(3)
 				}
 			}
@@ -507,7 +515,7 @@ function scrFire(_wep, _consume_ammo = true) {
 		case wep_lightning_smg:
 			snd_play_gun(_laser_brain ? sndLightningPistolUpg : sndLightningPistol)
 			scrLightningCreate(x, y, _gunangle + orandom(30) * _accuracy, 14)
-			scr_weapon_post(_gunangle, 4, 5, )
+			scr_weapon_post(_gunangle, 4, 5, 5)
 			break
 		case wep_smart_gun:
 			snd_play_gun(sndSmartgun)
@@ -708,7 +716,7 @@ function scrFire(_wep, _consume_ammo = true) {
 			for(var i = -1; i <= 1; ++i) {
 				with scr_projectile_create(x, y, UltraSlash, _gunangle, 3) {
 					damage = 30
-					scr_projectile_long_arms(3)
+					scr_projectile_long_arms(_long_arms)
 					scr_projectile_shift(60 * i)
 				}
 			}
@@ -824,13 +832,17 @@ function scrFire(_wep, _consume_ammo = true) {
 			scr_weapon_post(_gunangle, 18, 8, 8, 2)
 			break
 		case wep_guitar:
-			snd_play_gun(sndGuitar)
+		case wep_electric_guitar:
+			snd_play_gun(_wep == wep_electric_guitar ? sndElectricGuitar : sndGuitar)
 	        instance_create(x, y, Dust)
 	        with scr_projectile_create(x, y, Slash, _gunangle, 2) {
 	            damage = 26
 				scr_projectile_long_arms(_long_arms)
 	            sprite_index = sprHeavySlash
-	            guitar = true
+				if (_wep == wep_electric_guitar) {
+					electricguitar = true
+				}
+				else guitar = true
 	        }
 			scr_weapon_post(_gunangle, 12, 1, -4, -6)
 			break
@@ -844,7 +856,7 @@ function scrFire(_wep, _consume_ammo = true) {
 			break
 		case wep_bouncer_shotgun:
 			snd_play_gun(sndBouncerShotgun)
-			for(var i = -2; i <= 2; ++i) {
+			for(var i = -3; i <= 3; ++i) {
 				with scr_projectile_create(x, y, BouncerBullet, _gunangle, 6) {
 					sprite_index = sprBouncerShell
 					scr_projectile_shift(i * 10)
@@ -905,6 +917,7 @@ function scrFire(_wep, _consume_ammo = true) {
 				motion_add_m(_gunangle, 16)
 				instance_create(x + hspeed, y + vspeed, GunGun)
 				mask_index = mskPlasma
+				friction = 0
 				team = other.team
 				creator = other.id
 			}

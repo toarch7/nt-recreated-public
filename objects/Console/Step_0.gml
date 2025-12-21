@@ -27,7 +27,7 @@ if enemy_test && instance_exists(GameCont) {
 			event_perform(ev_other, ev_animation_end)
 		}
 		
-		GameCont.rads = 0
+		GameCont.rad = 0
 		
 		var types = {}
 		

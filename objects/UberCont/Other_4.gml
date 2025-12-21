@@ -1,8 +1,7 @@
 if !instance_exists(Player) {
-    global.hardmode = 0
-    scrLoadoutMenuInit()
-
+    global.hardmode = false
     SetVolumeControl(false)
+    scrLoadoutMenuInit()
 }
 else if os_type == os_android {
     SetVolumeControl(opt_volumecontrol)

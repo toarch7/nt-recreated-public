@@ -233,10 +233,13 @@ function scr_skill_set(_skill, _value) {
 	
 	#region process application
 	if _value {
-		if (_previous && _value > _previous) scr_skill_set(_skill, 0)
-		
 		var _skill_index = ds_list_find_index(GameCont.skills, _skill)
-		if (_skill_index == -1) ds_list_add(GameCont.skills, _skill)
+		if (_skill_index >= 0) {
+			ds_list_set(GameCont.skills, _skill, _value)
+		}
+		else {
+			ds_list_add(GameCont.skills, _skill)
+		}
 		
 	    if instance_exists(LevCont) && LevCont.placeonpatience {
 	        GameCont.patienceskill = _skill
@@ -267,7 +270,7 @@ function scr_skill_set(_skill, _value) {
 	}
 	#endregion
 	
-	var _effect = _is_removed ? -1 : 1
+	var _effect = _value - _previous
 	
 	switch _skill {
 		case mut_rhino_skin:
@@ -275,6 +278,7 @@ function scr_skill_set(_skill, _value) {
 				max_hp += 4 * _effect
 				hp += 4 * _effect
 				if (!hp) hp = 1
+				lsthealth = hp
 			}
 			break
 		case mut_extra_feet:

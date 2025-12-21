@@ -7,10 +7,10 @@
   },
   "bitDepth": 1,
   "channelFormat": 1,
-  "compression": 1,
+  "compression": 2,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.381063,
+  "duration": 0.3760771,
   "exportDir": "",
   "name": "sndGuitarPickup",
   "parent": {
@@ -22,5 +22,5 @@
   "resourceVersion": "2.0",
   "sampleRate": 44100,
   "soundFile": "sndGuitarPickup.wav",
-  "volume": 0.51
+  "volume": 1
 }

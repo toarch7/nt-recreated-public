@@ -20,13 +20,12 @@ if !leap {
         direction = jumpdir
     }
 
-    speed = 8
-    leap--z += zspeed
-
-    zspeed -= 0.5
-
-    inframes = 0
-
+    leap --
+	speed = 8
+    z += zspeed
+	zspeed -= 0.5
+	nexthurt = 0
+	
     if zspeed < 0 {
         sprite_index = sprDogGuardianJumpUp
         image_index = 0

@@ -1,21 +1,21 @@
 function scrMoveTopPots() {
-    with TopPot {
+    with (TopPot) {
         do {
-            var top = instance_nearest(x, y, TopSmall)
+            var _top = instance_nearest(x, y, TopSmall)
 
-            if !top {
+            if !instance_exists(_top) {
                 instance_destroy()
                 break
             }
 
-            x = top.x
-            y = top.y
+            x = _top.x
+            y = _top.y
 
             xprevious = x
             yprevious = y
 
-            if place_meeting(x, y, Floor) {
-                instance_destroy(top)
+            if (place_meeting(x, y, Floor)) {
+                instance_destroy(_top)
             }
         }
         until !place_meeting(x, y, Floor)

@@ -4,7 +4,7 @@ with MusCont {
 
 drawimg += 1
 alarm[6] = 90
-BackCont.shake += 7
+scr_screenshake(7)
 
 repeat 20 {
     with instance_create(x + (random(32) - 16), y + (random(32) - 16) + 50, Debris) {
