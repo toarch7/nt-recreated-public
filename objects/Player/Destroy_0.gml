@@ -48,6 +48,18 @@ if race == Race.Frog {
         ang += 360 / 14
     }
 }
+else if race == Race.Cuz {
+	var _ultra = scr_ultra_get(Race.Cuz, UltraSkill.Emotional)
+	
+	var _angle = 0,
+		_count = 20 * (1 + _ultra),
+		_step = 360 / _count
+	
+	repeat _count {
+		scr_projectile_create(x, y, CuzTear, _angle, 6)
+		_angle += _step
+	}
+}
 
 snd_stop(sndEyesLoop)
 snd_stop(sndEyesLoopUpg)

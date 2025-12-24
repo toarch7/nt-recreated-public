@@ -4,4 +4,4 @@ repeat (3) {
 
 event_inherited()
 
-with (MusCont) alarm[3] = 1
+with (MusCont) alarm[1] = 1

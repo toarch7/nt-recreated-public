@@ -79,7 +79,7 @@ try {
 			packet_write(buffer_u8, freeid)
 			packet_write(buffer_string, user_signature)
 			packet_write(buffer_string, json_stringify(pinst))
-			packet_write(buffer_string, json_stringify(global.__playerinstance_list))
+			packet_write(buffer_string, json_stringify(global.playerinstance_list))
 			packet_write(buffer_u32, random_get_seed())
 			packet_send()
 			
@@ -102,7 +102,7 @@ try {
 				var _playerinstances = json_parse(buffer_read(data, buffer_string)),
 					_seed = buffer_read(data, buffer_u32)
 				
-				global.__playerinstance_list = {}
+				global.playerinstance_list = {}
 				
 				scr_playerinstances_load_from_list(_playerinstances)
 				
@@ -160,7 +160,7 @@ try {
 			}
 			else self.disconnect(_socket)
 			
-			player_count = variable_struct_names_count(global.__playerinstance_list)
+			player_count = variable_struct_names_count(global.playerinstance_list)
 			
 			break
 		

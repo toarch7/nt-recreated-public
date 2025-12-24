@@ -6,7 +6,9 @@ if instance_exists(GenCont) exit
 if UberCont.opt_bloom {
 	scrDrawBloom()
 }
-	
+
+with (WepSwap) draw_self()
+
 var _list = global.lis_walls_visible,
 	_count = ds_list_size(_list)
 	
@@ -55,20 +57,18 @@ with BigTV {
 with Bubble
 draw_sprite(sprite_index, -1, x, y)
 
-with Player {
-    if visible {
-        if scr_skill_get(27) && !instance_exists(StrongSpiritRefill) && (spirit or spirit_index < 8) {
-            var _y = y - 2 + sin(spirit_anim)
-            draw_sprite(sprStrongSpirit, spirit_index, x, _y)
+with Player if (visible) {
+    if scr_skill_get(mut_strong_spirit) && !instance_exists(StrongSpiritRefill) && (spirit || spirit_index < 8) {
+        var _y = y - 2 + sin(spirit_anim)
+        draw_sprite(sprStrongSpirit, spirit_index, x, _y)
 
-            gpu_set_blendmode(bm_add)
-            draw_sprite(sprStrongSpirit, spirit_index, x, _y)
-            gpu_set_blendmode(bm_normal)
-        }
+        gpu_set_blendmode(bm_add)
+        draw_sprite(sprStrongSpirit, spirit_index, x, _y)
+        gpu_set_blendmode(bm_normal)
+    }
 
-        if hammerhead && hammering {
-            draw_sprite(sprHammerHeadNear, -1, x, y)
-        }
+    if (hammerhead && hammering) {
+        draw_sprite(sprHammerHeadNear, -1, x, y)
     }
 }
 

@@ -1,12 +1,16 @@
 if lockstep_stop
 	exit
 
-with projectile {
-    if point_distance(x, y, view_xview + view_width / 2, view_yview + view_height / 2) > 1000 {
-        instance_destroy()
-    }
+if ((current_frame % 30) < timescale) {
+	var _cx = view_xview + view_width / 2,
+		_cy = view_yview + view_height / 2
+	
+	with (projectile) {
+	    if (point_distance(x, y, _cx, _cy) > 1000) instance_destroy()
+	}
 }
 
-with Wall {
-    instance_change(InvisiWall, 1)
+with (Wall) {
+	instance_create(x, y, InvisiWall)
+    instance_destroy(id, false)
 }

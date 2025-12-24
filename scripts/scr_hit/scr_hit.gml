@@ -4,6 +4,13 @@
 /// @param {Enum.HitId|Array} hitid=HitId.None
 function scr_hit(_instance, _amount, _hitid = HitId.None) {
 	with _instance {
+		if instance_is(self, Player) {
+			if (scrPlayerProcTakeDamage(_amount)) return false
+			if (is_array(_hitid) || (_hitid >= 0 && _hitid != HitId.Player)) {
+				if (scr_player_is_local(index)) GameCont.deathcause = _hitid
+			}
+		}
+		
 		if _amount > 0 {
 			hp -= _amount
 			nexthurt = current_frame + 5
@@ -20,13 +27,6 @@ function scr_hit(_instance, _amount, _hitid = HitId.None) {
 			}
 			else {
 				print(real(id), object_get_name(object_index), $"{hp}/{max_hp}", "was hit by", _amount, "from", _hitid, $"({object_get_name(other.object_index)})")
-			}
-		}
-		
-		if instance_is(self, Player) {
-			scrPlayerProcTakeDamage(_amount)
-			if _hitid >= 0 && _hitid != HitId.Player {
-				if (scr_player_is_local(index)) GameCont.deathcause = _hitid
 			}
 		}
 		

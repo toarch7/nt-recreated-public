@@ -288,6 +288,9 @@ function scr_skill_set(_skill, _value) {
 			}
 			break
 		case mut_back_muscle:
+			with Player if race == Race.Cuz {
+				scrPlayerUpdateCuzAmmo()
+			}
 			scrAmmoUpdateTypeStats()
 			break
 		case mut_last_wish:
@@ -312,6 +315,10 @@ function scr_skill_set(_skill, _value) {
 				if race == Race.Rogue {
 					rogue_ammo = rogue_ammo_max
 				}
+				
+				if race == Race.Cuz {
+					cuz_ammo = cuz_ammo_max
+				}
 			}
 			break
 		case mut_eagle_eyes:
@@ -328,6 +335,19 @@ function scr_skill_set(_skill, _value) {
 			}
 			break
 	}
+}
+
+function scr_skills_clear() {
+	var _list = GameCont.skills,
+		_array = array_create(ds_list_size(_list))
+	
+	for(var i = ds_list_size(_list) - 1; i >= 0; --i) {
+		_array[i] = _list[| i]
+	}
+	
+	array_foreach(_array, function(_skill) {
+		scr_skill_set(_skill, 0)
+	})
 }
 
 /// @description scr_skill_get(skill)

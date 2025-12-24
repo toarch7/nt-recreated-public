@@ -83,7 +83,7 @@ if !instance_exists(MusCont) {
 with MusCont {
 	audio_stop_sound(amb)
 	amb = custom_sound_check(amb0)
-	snd_play_loop(amb)
+	snd_play_ambience(amb, true)
 }
 
 event_user(0)

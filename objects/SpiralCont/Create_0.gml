@@ -10,18 +10,17 @@ fishy = view_height div 2
 
 image_angle = random_angle
 
-bossfight = instance_exists(Nothing2) || instance_exists(Nothing2Appear)
+bossfight = instance_exists(Nothing2) || instance_exists(Nothing2Appear) || instance_exists(NothingSpiral)
+
 type = SpiralType.Normal
 
-active = 0
+active = true
+area = area_campfire
 time = 0
-area = 0
 
 if instance_exists(GameCont) {
 	area = GameCont.area
-}
-
-if instance_exists(GameCont) {
+	
     if area == area_vault {
 		type = SpiralType.Proto
 	}
@@ -49,6 +48,5 @@ repeat 150 {
 
 snd_play_ambience(sndPortalLoop, true)
 
-active = true
 
 if (!instance_exists(NothingSpiral)) scrLetterbox(true)

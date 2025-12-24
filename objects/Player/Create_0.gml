@@ -113,7 +113,7 @@ active_button_forever = 0
 
 aimassist_target = noone
 
-recontinues = 0
+recontinued_times = 0
 
 eyesloop = -1
 horrorloop = -1

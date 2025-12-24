@@ -231,7 +231,7 @@ function scr_ultra_set(_race, _ultra, _value) {
 			_image_index = (_race * 3 + _ultra - 1)
 		
 		if _value {
-			if (_previous && _value > _previous) scr_ultra_set(_race, _value, 0)
+			if (_previous && _value > _previous) scr_ultra_set(_race, _ultra, 0)
 			
 			ultra_got[_race, _ultra] = _value
 			
@@ -264,7 +264,7 @@ function scr_ultra_set(_race, _ultra, _value) {
 			
 			if race == Race.Cuz {
 				if (_ultra == UltraSkill.Arsenal) max_extra_weps += 3 * _effect
-				if (_ultra == UltraSkill.Emotional) cuz_ammo_max += 3 * _effect
+				if (_ultra == UltraSkill.Emotional) scrPlayerUpdateCuzAmmo()
 			}
 		}
 		
@@ -327,11 +327,13 @@ function scr_ultra_get_from_race(_race) {
 	return -1
 }
 
-function scrCoopCheckMoreUltras() {
+function scrNeedMorePlayerUltras() {
 	if (scr_ultra_get_from_race(Race.CoopUltra) != -1) return false
 	
-	with (Player) {
-		if (scr_ultra_get_from_race(race) == -1) {
+	for(var i = 0; i < player_count; ++i) {
+		var _pinst = scr_playerinstance_find(i)
+	
+		if (is_struct(_pinst) && scr_ultra_get_from_race(_pinst.get_race()) == -1) {
 			return true
 		}
 	}

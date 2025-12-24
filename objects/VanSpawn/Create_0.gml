@@ -1,39 +1,36 @@
 var player = instance_random(Player)
 
-if GameCont.area == 100 or (GameCont.area == 7 && GameCont.subarea == 3) {
-	instance_destroy(); exit
+if GameCont.area == area_vault || (GameCont.area == area_palace && GameCont.finalsubarea) {
+	instance_destroy()
+	exit
 }
 
 if instance_exists(player) {
-    var dir = 0,
-		fine = false
+    var dir = 0, fine = false
 
     do {
-        dir ++
-        
-		x = player.x
-        y = player.y
-        
 		flip = choose(1, -1)
         
 		x = player.x + random_range(96, 120) * flip
         y = player.y + orandom(60)
 		
-		var flor = instance_nearest(x, y, Floor)
-        
-		x = flor.x + 16
-        y = flor.y + 16
+		with (instance_nearest(x, y, Floor)) {
+			other.x = bbox_center_x
+			other.y = bbox_center_y
+		}
 		
-		if position_empty(x, y) or !place_meeting(x, y, Floor) or place_meeting(x, y, Van)
-		or place_meeting(x, y, Portal) or distance_to_object(VanSpawn) < 8
+		if (position_empty(x, y) || !place_meeting(x, y, Floor) || place_meeting(x, y, Van)
+			|| place_meeting(x, y, Portal) || distance_to_object(VanSpawn) < 8
+		) {
 			continue
+		}
 		
-		if (distance_to_object(player) > 96 or dir > 250) {
+		if (distance_to_point(player.x, player.y) > 96) {
 			fine = true
 			break
 		}
     }
-	until fine
+	until (fine || (++ dir) >= 250)
 }
 
 instance_create(x, y, PortalClear)

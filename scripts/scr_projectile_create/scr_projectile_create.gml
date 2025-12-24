@@ -6,9 +6,7 @@
 /// @param {Undefined|Real|Array} speed=0
 /// @param default_struct
 function scr_projectile_create(_x, _y, _object_index, _direction = undefined, _speed = undefined, _struct = undefined) {
-	var _inst = scr_damage_create(_x, _y, _object_index, _struct)
-	
-	with (_inst) {
+	with (scr_damage_create(_x, _y, _object_index, _struct)) {
 		if (is_array(_speed)) {
 			speed = random_range(_speed[0], _speed[1])
 		}
@@ -23,16 +21,22 @@ function scr_projectile_create(_x, _y, _object_index, _direction = undefined, _s
 			direction = _direction
 		}
 		
-		if (projectile_direction_changes_angle) image_angle = direction
+		// BUG: sometimes, somehow, this code proceeds way before the object has ran its create event,
+		// which results in unset variable error. It's not very clear how that happens, so it is what it is
+		if (self[$ "projectile_direction_changes_angle"]) {
+			image_angle = direction
+		}
 		
 		if (team != team_player && scr_skill_get(mut_euphoria)) {
 			with instance_create(x, y, EuphoriaEffectDelay) {
 				target = other.id
 			}
 		}
+		
+		return id
 	}
 	
-	return _inst
+	return noone
 }
 
 /// @function scr_projectile_spread

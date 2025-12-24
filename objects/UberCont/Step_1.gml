@@ -1,11 +1,9 @@
 /// @description Control pause states
 
-if want_pause > 0 {
-	want_pause --
-	
-	if want_pause <= 0 && instance_exists(Player) && !instance_exists(GenCont) && !instance_exists(GameOver) {
+if want_pause > 0 && (instance_exists(Player) && !instance_exists(GenCont) && !instance_exists(GameOver)) {
+	if ((-- want_pause) <= 0) {
 	    want_pause = 0
-	
+		
 	    if (!bossintro) scrMakePauseButtons()
 		
 	    with (MobileUI) index = -1

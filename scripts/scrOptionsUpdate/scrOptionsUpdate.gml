@@ -15,7 +15,7 @@ function scrOptionsUpdate() {
         opt_ambvol = save_get_option("volume", "ambient", true)
         opt_sndvol = save_get_option("volume", "sfx", true)
 		opt_3Dsound = save_get_option("volume", "3dsound", true)
-		opt_pauseonpause = save_get_option("volume", "pauseonpause", false)
+		opt_pauseonpause = save_get_option("volume", "pauseonpause", true)
         
 		opt_crosshair = save_get_option("options", "crosshair", false)
         opt_gamepad = save_get_option("options", "gamepad", false)
@@ -46,7 +46,7 @@ function scrOptionsUpdate() {
         opt_bloom = save_get_option("visual", "bloom", true)
         opt_showtimer = save_get_option("visual", "timer", false)
         opt_showarea = save_get_option("visual", "area", false)
-        opt_camera = save_get_option("visual", "camera", true)
+        opt_activecam = save_get_option("visual", "camera", true)
         opt_bossintro = save_get_option("visual", "bossintro", true)
         opt_resolution = save_get_option("visual", "resolution", true)
         opt_shake = save_get_option("visual", "screenshake", true)

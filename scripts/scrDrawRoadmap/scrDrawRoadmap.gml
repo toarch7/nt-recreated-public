@@ -1,8 +1,8 @@
-/// @description scrDrawRoadmap(x,y,pos,_gamecont_data)
+/// @description scrDrawRoadmap(x,y,pos)
 /// @param x
 /// @param y
 /// @param pos
-function scrDrawRoadmap(_drawx, _drawy, _pos, _gamecont_data = GameCont) {
+function scrDrawRoadmap(_drawx, _drawy, _pos) {
 	var _segment_length = 9,
 		_start_area = area_desert,
 		_total_map_size = 0
@@ -16,12 +16,12 @@ function scrDrawRoadmap(_drawx, _drawy, _pos, _gamecont_data = GameCont) {
 	draw_sprite(sprKillsIcon,  0, _drawx + 14, _drawy - 15)
 	
 	var _area_name = scrAreaGetMapName(
-			_gamecont_data.area,
-			_gamecont_data.subarea,
-			_gamecont_data.loops)
+			GameCont.area,
+			GameCont.subarea,
+			GameCont.loops)
 	
 	draw_text_nt(_drawx - 60, _drawy - 14, _area_name)
-	draw_text_nt(_drawx + 23, _drawy - 14, string(_gamecont_data.kills))
+	draw_text_nt(_drawx + 23, _drawy - 14, string(GameCont.kills))
 	
 	draw_set_color(c_white)
 	draw_align()
@@ -59,12 +59,12 @@ function scrDrawRoadmap(_drawx, _drawy, _pos, _gamecont_data = GameCont) {
 	}
 	
 	// waypoints
-	var _waypoint_total = _gamecont_data.waypoints,
+	var _waypoint_total = GameCont.waypoints,
 		_waypoint_count = min(_pos, _waypoint_total),
 			
-		_waypnt = _gamecont_data.waypnt,
-		_waysub = _gamecont_data.waysub,
-		_waylps = _gamecont_data.waylps,
+		_waypnt = GameCont.waypnt,
+		_waysub = GameCont.waysub,
+		_waylps = GameCont.waylps,
 		
 		_odd_length = max(1, scrAreaGetMaxSubareas(1) - 1) * _segment_length,
 		_even_length = scrAreaGetMaxSubareas(2) * _segment_length
@@ -168,7 +168,7 @@ function scrDrawRoadmap(_drawx, _drawy, _pos, _gamecont_data = GameCont) {
 		}
 		else if (_pinst.is_race(Race.Rebel)
 			&& _pinst.get_skin() == SkinLetter.B
-			&& _gamecont_data.area == area_city
+			&& GameCont.area == area_city
 		) {
 			_sprite = sprMapIconRebelBHooded
 			_image = 0

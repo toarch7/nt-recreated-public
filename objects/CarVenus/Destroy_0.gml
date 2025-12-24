@@ -1,5 +1,7 @@
 repeat (5) {
-    instance_create(x + random(6) - 3, y + random(6) - 3, Explosion)
+    with (instance_create(x + random(6) - 3, y + random(6) - 3, Explosion)) {
+		hitid = other.hitid
+	}
 }
 
 corpse = false

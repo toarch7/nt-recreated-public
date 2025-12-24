@@ -1,6 +1,7 @@
 #macro debug_overlay_file "dbg_overlay.ini"
 
 global.__debug_transit_loop = -1
+global.__debug_autoplayer_race = Race.Random
 
 function scr_debug_overlay_load() {
 	static load = function(_global_name, _default) {
@@ -14,6 +15,7 @@ function scr_debug_overlay_load() {
 	load("__debug_camera_display_info", false)
 	load("__debug_hitboxes", false)
 	load("__debug_health", false)
+	load("__debug_immortality", false)
 	ini_close()
 }
 
@@ -36,6 +38,7 @@ function scr_debug_overlay_save() {
 	write("__debug_camera_display_info")
 	write("__debug_hitboxes")
 	write("__debug_health")
+	write("__debug_immortality")
 	ini_close()
 }
 
@@ -51,6 +54,7 @@ function scr_create_debug_overlay_views() {
 		dbg_checkbox(ref_create(global, "__debug_camera_display_info"), "Camera & display info")
 		dbg_checkbox(ref_create(global, "__debug_hitboxes"), "Object hitboxes")
 		dbg_checkbox(ref_create(global, "__debug_health"), "Enemy health")
+		dbg_checkbox(ref_create(global, "__debug_immortality"), "Player immortality")
 		
 		dbg_section("Resources")
 		dbg_button("Give rads", function() {
@@ -214,10 +218,23 @@ function scr_create_debug_overlay_views() {
 		
 		dbg_view("Tests", false)
 		
+		dbg_button("Stop all", function() {
+			instance_destroy(TestCont)
+		})
+		
 		dbg_checkbox(ref_create(global, "__debug_test_framerate_uncapped"), "Unlimited framerate")
 		
 		__create_test_option(TestWeapons)
 		__create_test_option(TestDamageSources)
+		
+		//
+		__create_test_option(TestAutoPlayer)
+		
+		var _list = []
+		for(var i = Race.Random; i < Race.NUM_ALL_RACE_TYPES; ++i) {
+			array_push(_list, $"{scrRaceGetStringID(i, true)}:{i}")
+		}
+		dbg_drop_down(ref_create(global, "__debug_autoplayer_race"), string_join_ext(",", _list), "Auto Player Race")
 		
 		dbg_text("")
 		

@@ -1,5 +1,7 @@
 repeat (3) {
-	with (instance_create(x + orandom(3), y + orandom(3), Explosion)) hitid = other.hitid
+	with (instance_create(x + orandom(3), y + orandom(3), Explosion)) {
+		hitid = other.hitid
+	}
 }
 
 repeat (6) {

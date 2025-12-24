@@ -9,8 +9,6 @@ with Player {
 	yprevious = y
 	xstart = x
 	ystart = y
-	
-	scr_camera_set_position(x, y, fa_center, fa_middle)
 }
 
 background_set_colour(scrAreaGetBackroundColor(GameCont.area))
@@ -59,6 +57,17 @@ with (GameCont) {
 	    skillpoints ++
 		patiencepick = true
 	    patient = true
+	}
+	
+	if (is_array(persistentweps)) {
+		array_foreach(persistentweps, function(_wep_info) {
+			with (scrWeaponPickupCreate(10016, 10016, _wep_info.wep)) {
+				ammo = _wep_info.ammo
+				curse = _wep_info.curse
+				persistent = true
+			}
+		})
+		persistentweps = undefined
 	}
 }
 

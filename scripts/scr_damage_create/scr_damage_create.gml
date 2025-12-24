@@ -32,7 +32,7 @@ function scr_damage_create(_x, _y, _object_index, _struct = undefined) {
 	}
 	
 	with (_inst) {
-		if (hitid == HitId.None) {
+		if (!variable_struct_exists(self, "hitid") || hitid == HitId.None) {
 			hitid = _hitid
 		}
 		

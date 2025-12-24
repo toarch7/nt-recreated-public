@@ -6,6 +6,7 @@ with (Player) {
 }
 
 snd_stop(sndSalamanderFire)
+snd_stop(sndSalamanderFireLoop)
 snd_stop(sndLightningCannonLoop)
 snd_stop(sndEyesLoop)
 snd_stop(sndEyesLoopUpg)
@@ -31,9 +32,11 @@ if (gocrib) {
 }
 
 maxsubarea = scrAreaGetMaxSubareas(area)
+finalsubarea = (subarea == maxsubarea)
 
 if (!can_advance_stage) {
 	can_advance_stage = true
+	scrSavegameSave()
 	exit
 }
 
@@ -146,21 +149,6 @@ if loops >= 2 && !UberCont.hardgot {
     scrShowUnlockPopup("@wHARDMODE UNLOCKED@s#FOR REACHING LOOP 2")
     scrAchievementUnlock(Achievement.GO_HARD)
     UberCont.hardgot = true
-}
-
-if !instance_exists(CoopController) && !UberCont.opt_console {
-    var _is_paused = scrGameIsPaused()
-	
-    if (_is_paused) instance_activate_object(Player)
-	
-    if is_level_ended {
-		global.recontinues --
-        is_level_ended = false
-        scrGameSave()
-    }
-	
-    if (instance_exists(Player)) scrGameSaveInfo()
-    if (_is_paused) instance_deactivate_object(Player)
 }
 
 maxsubarea = scrAreaGetMaxSubareas(area)

@@ -13,6 +13,8 @@ snd_hurt = sndHitMetal
 
 image_xscale = choose(1, -1)
 
+hitid = HitId.VenusCarFixed
+
 if (GameCont.area == area_crib && random(1) < 0.5) {
 	spr_idle = sprVenuzCar2
 	spr_hurt = sprVenuzCar2Hurt

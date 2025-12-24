@@ -27,4 +27,4 @@ with Player {
 
 done = 0
 
-file_delete("gamestate.dat")
+file_delete(savegame_file)

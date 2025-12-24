@@ -34,11 +34,11 @@ hitid = HitId.GunGod
 minigun_side = choose(1, -1)
 can_shoot = true
 
-alarm[1] = 1
+alarm[1] = 20
 
 // Start off shooting
 wep = wep_golden_revolver
-alarm[2] = 2
+alarm[2] = 8
 ammo = 5
 
 change_weapon = function(_wep) {

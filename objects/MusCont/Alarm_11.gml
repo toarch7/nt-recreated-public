@@ -3,9 +3,9 @@ if !instance_exists(GameCont) exit
 
 with Player {
 	if race == Race.BigDog {
-		with other {
-			if song audio_stop_sound(song)
-			if amb audio_stop_sound(amb)
+		with (other) {
+			if (song) snd_stop(song)
+			if (amb) snd_stop(amb)
 			
 		    song = custom_sound_check(musBoss2)
 		    amb = -1
@@ -33,20 +33,21 @@ if oldarea != _area || !audio_is_playing(song) || !audio_is_playing(amb) {
 	if audio_exists(_song) {
 		if GameCont.proto && _area != area_vault {
 			var _songb = asset_get_index(audio_get_name(_song) + "b")
-			
-			if audio_exists(_songb) {
-				_song = _songb
-			}
+			if (audio_exists(_songb)) _song = _songb
 		}
 		
 		song = _song
 	}
-	else song = musBoss4Silence
+	else {
+		song = musBoss4Silence
+	}
 	
 	if audio_exists(_amb) {
 		amb = _amb
 	}
-	else amb = amb0b
+	else {
+		amb = amb0b
+	}
 	
 	// special tunes
     if _area == area_campfire {

@@ -27,7 +27,7 @@ if instance_exists(player) && place_meeting(x, y, Portal) {
 		player = noone
 	
 	with Player {
-		if race == 12 && rogue_ammo < least {
+		if (race == Race.Rogue && rogue_ammo < least) {
 			least = rogue_ammo
 			player = id
 		}
@@ -38,6 +38,8 @@ if instance_exists(player) && place_meeting(x, y, Portal) {
 		y = player.y
 	}
 	
-    event_perform(ev_collision, Player)
+    with (player) with (other) {
+		event_perform(ev_collision, Player)
+	}
 }
 

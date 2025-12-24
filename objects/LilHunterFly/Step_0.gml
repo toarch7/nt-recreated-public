@@ -16,9 +16,15 @@ if sprite_index == sprLilHunterLift {
 				scrRaceUnlockSkin(Race.Rogue, SkinLetter.C)
 			}
 			
-			var _snd = custom_sound_check(musBoss3)
-			if (audio_is_playing(_snd)) {
-				audio_sound_gain(_snd, 0, 2000)
+			if (snd_is_playing(musBoss3)) {
+				with (MusCont) {
+					if (is_numeric(music_sound) && audio_is_playing(music_sound)) {
+						audio_sound_gain(music_sound, 0, 2500)
+					}
+					else break
+					
+					alarm[3] = 85
+				}
 			}
 			
 			instance_destroy(id, false)
@@ -85,7 +91,7 @@ if sprite_index == sprLilHunterLand {
 				alarm[2] = 1
 			
             alarm[4] = 2
-            scrBossIntro(2)
+            if (GameCont.loops == 0) scrBossIntro(2)
             intro = 1
         }
 		

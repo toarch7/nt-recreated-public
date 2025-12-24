@@ -1,9 +1,9 @@
 if lockstep_stop
 	exit
 
-if hp < 0 {
-	hp = 0
-}
+var _is_local = scr_player_is_local(index)
+
+if (hp < 0) hp = 0
 
 if scr_weapon_is_melee(wep) {
 	if wepangle == 0 {
@@ -42,8 +42,9 @@ if KeyCont.press_swap[index] && bwep != 0 {
 if spirit {
 	spirit_anim += 0.1
 
-	if spirit_anim >= 6.2
+	if spirit_anim >= 6.2 {
 		spirit_anim = 0
+	}
 }
 else if scr_skill_get(mut_strong_spirit) && spirit_index < 8 {
 	spirit_index += 0.4
@@ -54,9 +55,7 @@ if fainted {
 	sprite_index = spr_hurt
 	image_alpha = 0.5
 	
-	if hp > 1 {
-		hp = 1
-	}
+	if (hp > 1) hp = 1
 	
 	if !fainted {
 		if scr_skill_get(mut_strong_spirit) {
@@ -125,8 +124,8 @@ if !roll {
 		
 		if (speed < _maxspeed) {
 			if (!KeyCont.precisemovement[index]) {
-				hspeed += _movspeed * (KeyCont.key_east[index] - KeyCont.key_west[index])
-				vspeed += _movspeed * (KeyCont.key_sout[index] - KeyCont.key_nort[index])
+				hspeed += _movspeed * (KeyCont.hold_east[index] - KeyCont.hold_west[index])
+				vspeed += _movspeed * (KeyCont.hold_sout[index] - KeyCont.hold_nort[index])
 			}
 			else {
 				hspeed += ldrx(_movspeed, KeyCont.dir_move[index])
@@ -230,11 +229,14 @@ if bleed > 0 && hp > 0 && visible {
 }
 
 if hp <= 0 {
-	if spirit {
+	if (spirit || (spirit_index > 0 && spirit_index < 2)) {
 		hp = 1
-		snd_play(sndStrongSpiritLost)
-		nexthurt = current_frame + 30
-		spirit = false
+		if (spirit) {
+			snd_play(sndStrongSpiritLost)
+			nexthurt = current_frame + 10
+			spirit_index = 0.4
+			spirit = false
+		}
 	}
 	else if race == Race.Chicken && bleed < 150 && visible {
 		if !bleed {
@@ -267,8 +269,7 @@ if hp <= 0 {
 			
 			with instance_create(x, y, CorpseActive) {
 				mask_index = other.mask_index
-				motion_add(other.direction, other.speed)
-				speed += max(0, -other.hp / 5)
+				motion_add(other.direction, other.speed + 1)
 				/**/ if (_skin == SkinLetter.B) sprite_index = sprMutant9BHeadIdle
 				else if (_skin == SkinLetter.C) sprite_index = sprMutant9CHeadIdle
 				else sprite_index = sprMutant9HeadIdle
@@ -286,10 +287,10 @@ if hp <= 0 {
 			}
 		}
 
-		UberCont.ctot_uniq[9] += timescale
+		if (_is_local) UberCont.ctot_uniq[Race.Chicken] += timescale
 		if (visible) bleed += timescale
 	}
-	else if can_die {
+	else if can_die && !global.__debug_immortality {
 		if race == Race.Melting && place_meeting(x, y, ReviveCircle) && !instance_exists(CoopController) {
 			scrTurnIntoSkeleton()
 			hp = 1

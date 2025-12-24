@@ -146,7 +146,7 @@ current_frame = 0
 
 global.crownpick = 1
 
-global.recontinues = 0
+global.recontinued_times = 0
 
 if os_type == os_android
 	volqueue = ds_queue_create()

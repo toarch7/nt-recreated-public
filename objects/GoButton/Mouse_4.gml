@@ -4,6 +4,6 @@ if lockstep_stop
 if scr_network_handle_event(ev_mouse, ev_left_press)
 	exit
 
-with CharSelect {
-	if selected scrRunStart()
+if (visible) with CharSelect {
+	if (selected) scrRunStart()
 }

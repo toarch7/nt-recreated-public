@@ -15,5 +15,5 @@ growspeed = 0.003 + random(0.002)
 team = 0
 typ = 2
 
-instance_change(ToxicGas, false)
 instance_create(x, y, SuperFrog)
+instance_destroy(id, false)

@@ -19,5 +19,5 @@ switch GameCont.area {
 song = custom_sound_check(song)
 amb = custom_sound_check(amb)
 
-snd_play_music(song)
+snd_play_music(song, true)
 snd_play_ambience(amb)

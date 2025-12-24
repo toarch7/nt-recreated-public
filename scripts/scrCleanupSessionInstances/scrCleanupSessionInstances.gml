@@ -7,6 +7,6 @@ function scrCleanupSessionInstances() {
 			continue
 		}
 		
-		instance_destroy(id, 0)
+		instance_destroy(id, false)
 	}
 }

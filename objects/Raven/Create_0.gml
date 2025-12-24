@@ -24,3 +24,4 @@ z = 0
 nofly = 30
 
 hitid = HitId.Raven
+emergencylanding = 0

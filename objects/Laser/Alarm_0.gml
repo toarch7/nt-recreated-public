@@ -8,6 +8,7 @@ do {
 until (place_meeting(x, y, hitme) && _dir > 16) || place_meeting(x, y, Wall) || _dir > 160
 
 alarm[0] = 2
+direction = image_angle
 
 image_xscale = point_distance(x, y, xstart, ystart) / 2
 instance_create(x, y, Smoke)

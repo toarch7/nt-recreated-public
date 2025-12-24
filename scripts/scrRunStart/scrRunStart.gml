@@ -1,6 +1,8 @@
 function scrRunStart() {
 	if (!instance_exists(GameCont)) instance_create(0, 0, GameCont)
 	
+	scrRngStatesReset()
+	
     random_set_seed(global.seed)
 	
 	print("Run started. Seed:", global.seed)

@@ -57,6 +57,6 @@ if !instance_exists(MenuOptions) {
 	}
 }
 
-file_delete("gamestate.dat")
+file_delete(savegame_file)
 
 scrLetterbox(false)

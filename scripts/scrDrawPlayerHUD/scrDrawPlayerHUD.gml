@@ -1,8 +1,7 @@
 function scrDrawPlayerHUD(_player = noone) {
 	if !((UberCont.opt_hud || instance_exists(MakeGame)) && (is_struct(_player) || instance_exists(_player))) exit
 	
-	var _cont = instance_exists(MakeGame) ? MakeGame.cont : GameCont,
-		_ammo = _player.ammo,
+	var _ammo = _player.ammo,
 		_race = _player.race,
 		_wep = _player.wep,
 		_bwep = _player.bwep,
@@ -51,22 +50,22 @@ function scrDrawPlayerHUD(_player = noone) {
 			
 			if _race == Race.Rogue {
 				var _cskin = (_player.bskin == SkinLetter.C),
-					_ammo_progress = min(1, _player.rogue_ammo / _player.rogue_ammo_max)
-				if scr_ultra_get(Race.Rogue, UltraSkill.SuperPortalStrike) {
-					draw_sprite(_cskin ? sprRogueAmmoHUDCTB : sprRogueAmmoHUDTB, floor(6 * _ammo_progress), 110, 4)
-				}
-				else {
-					draw_sprite(_cskin ? sprRogueAmmoHUDC : sprRogueAmmoHUD, floor(3 * _ammo_progress), 110, 4)
-				}
+					_ammo_progress = min(1, _player.rogue_ammo / _player.rogue_ammo_max),
+					_sprite = scr_ultra_get(Race.Rogue, UltraSkill.SuperPortalStrike)
+						? (_cskin ? sprRogueAmmoHUDCTB : sprRogueAmmoHUDTB)
+						: (_cskin ? sprRogueAmmoHUDC : sprRogueAmmoHUD),
+					_subimage_max = sprite_get_number(_sprite) - 1,
+					_subimage = _player.rogue_ammo ? max(1, floor(_subimage_max * _ammo_progress)) : 0
+				
+				draw_sprite(_sprite, _subimage, 110, 4)
 			}
 			else if _race == Race.Cuz && !cuz_fun {
-				var _ammo_progress = min(1, _player.cuz_ammo / _player.cuz_ammo_max)
-				if scr_ultra_get(Race.Cuz, UltraSkill.Emotional) {
-					draw_sprite(sprCuzAmmoHUDU, floor(6 * _ammo_progress), 110, 4)
-				}
-				else {
-					draw_sprite(sprCuzAmmoHUD, floor(3 * _ammo_progress), 110, 4)
-				}
+				var _ammo_progress = min(1, _player.cuz_ammo / _player.cuz_ammo_max),
+					_sprite = scr_ultra_get(Race.Cuz, UltraSkill.Emotional) ? sprCuzAmmoHUDU : sprCuzAmmoHUD,
+					_subimage_max = sprite_get_number(_sprite) - 1,
+					_subimage = _player.cuz_ammo ? max(1, floor(_subimage_max * _ammo_progress)) : 0
+				
+				draw_sprite(_sprite, _subimage, 110, 4)
 			}
 			
 			if !is_struct(_player) {
@@ -167,12 +166,12 @@ function scrDrawPlayerHUD(_player = noone) {
 	#endregion
 	
 	#region Experience bar
-		if (_cont.skillpoints > 0 || _cont.ultrapoints) draw_sprite(sprExpBarLevel, 0, 4, 4)
+		if (GameCont.skillpoints > 0 || GameCont.ultrapoints) draw_sprite(sprExpBarLevel, 0, 4, 4)
 		
-		draw_sprite(sprExpBar, (_cont.rad / _cont.max_rad) * 16, 4, 4)
+		draw_sprite(sprExpBar, (GameCont.rad / GameCont.max_rad) * 16, 4, 4)
 		
-		if _cont.level < 10 {
-			draw_text_shadow(11, 16 - floor(string_height("A") * 0.5), _cont.level)
+		if GameCont.level < 10 {
+			draw_text_shadow(11, 16 - floor(string_height("A") * 0.5), GameCont.level)
 		}
 		else {
 			draw_sprite(sprUltraLevel, 0, 11, 16)
@@ -261,10 +260,12 @@ function scrDrawPlayerHUD(_player = noone) {
 		draw_set_color(c_white)
 		draw_set_alpha(0.1)
 		
-		if global.recontinues > 1 {
-			draw_text(0, 45, "continued x" + string(global.recontinues))
+		draw_set_halign(fa_left)
+		if global.recontinued_times > 1 {
+			draw_text(0, 45, "continued x" + string(global.recontinued_times))
 		}
 		else draw_text(0, 45, "continued")
+		draw_set_halign(fa_center)
 		
 		draw_reset_font()
 		draw_set_alpha(1)
@@ -273,7 +274,7 @@ function scrDrawPlayerHUD(_player = noone) {
 	draw_set_color(c_white)
 	
 	// Interaction
-	scrDrawInteractionHUD(_player)
+	if (!UberCont.want_pause) scrDrawInteractionHUD(_player)
 }
 
 function scrDrawTypeAmmo(_type, _background_index, _icon_index, _x, _y) {

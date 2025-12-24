@@ -15,7 +15,7 @@ function scrGameRestart(_quit_to_menu = false) {
 	
 	with UberCont {
 		continued_run = false
-		file_delete("gamestate.dat")
+		file_delete(savegame_file)
 		scrCleanupSessionInstances()
 		
 		if _quit_to_menu {
@@ -30,6 +30,7 @@ function scrGameRestart(_quit_to_menu = false) {
 		
 		instance_create(0, 0, MusCont)
 		
+		print("Restart")
 		scrRunStart()
 	}
 }

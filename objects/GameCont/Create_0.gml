@@ -58,6 +58,7 @@ can_advance_stage = true
 hqarea = 1
 hqsubarea = 1
 maxsubarea = 0
+finalsubarea = false
 
 hasfiredshots = false
 haspickedweps = false
@@ -68,9 +69,7 @@ novans = true
 
 underwater = false
 
-if !UberCont.continued_run {
-    scrRngStatesInit()
-}
+if (!UberCont.continued_run) scrRngStatesInit()
 
 scrUltrasReset()
 scrCrowns()
@@ -84,11 +83,12 @@ if scrGameIsHardmode() {
 
 gocrib = false
 fromcrib = false
-openminds = 0
 win = false
 
 is_level_ended = false
 levseed = global.seed
+
+persistentweps = undefined
 
 // set tip as seen on new run
 if (save_get_value("etc", "saving_tip", 0) == -1) {

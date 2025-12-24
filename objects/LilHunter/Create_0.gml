@@ -19,12 +19,8 @@ z = 0
 intro = 0
 spawns = 6
 
-alarm[2] = 210 / (GameCont.loops + 1)
-alarm[1] = alarm[2] + 30
-
-if alarm[2] < 1 {
-    alarm[2] = 1
-}
+alarm[1] = irandom_range(30, 120)
+alarm[2] = 30
 
 sndtaunt = 0
 tauntdelay = 0

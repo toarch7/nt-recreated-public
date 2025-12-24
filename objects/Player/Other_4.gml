@@ -2,9 +2,7 @@ if (!instance_exists(GameCont)) exit
 
 visible = true
 sprite_index = spr_idle
-
-view_xview = x - view_width / 2
-view_yview = y - view_height / 2
+depth = -2
 
 if scr_player_is_local(index) {
 	if (!UberCont.want_menu && !UberCont.want_restart) {
@@ -46,9 +44,6 @@ with CrownObject {
 GameCont.deathcause = HitId.None
 
 if (scrCrownCheck(Crown.Luck)) hp = 1
-
-view_xview = x + view_width / 2
-view_yview = y + view_height / 2
 
 mask_index = mskPlayer
 

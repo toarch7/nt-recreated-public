@@ -33,15 +33,13 @@ function scrDrawSpiral() {
         draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, (image_xscale * 10), (image_yscale * 10), (image_angle + 45), c_black, (0.8 - image_xscale))
     }
 
-    if !_is_menu {
-        with SpiralDebris {
-            if sprite_exists(sprite_index) {
-                draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, image_xscale, image_yscale, image_angle, c_white, 1)
-                draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, image_xscale, image_yscale, image_angle, c_black, (1 - image_xscale))
-            }
+    with SpiralDebris {
+        if sprite_exists(sprite_index) {
+            draw_sprite_ext(sprite_index, image_index, view_xview + x, view_yview + y, image_xscale, image_yscale, image_angle, c_white, 1)
+            draw_sprite_ext(sprite_index, image_index, view_xview + x, view_yview + y, image_xscale, image_yscale, image_angle, c_black, (1 - image_xscale))
         }
     }
-
+    
     with SpiralStar {
         if sprite_exists(sprite_index) {
             draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, image_xscale, image_yscale, image_angle, c_white, 1)

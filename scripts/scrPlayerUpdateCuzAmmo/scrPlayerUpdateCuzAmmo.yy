@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scrGameSave",
+  "%Name":"scrPlayerUpdateCuzAmmo",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scrGameSave",
+  "name":"scrPlayerUpdateCuzAmmo",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

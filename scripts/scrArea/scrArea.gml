@@ -113,6 +113,8 @@ function scrAreaCanHavePopo() {
 function scrAreaGetDifficulty(_area, _subarea, _loops) {
 	var _result = _subarea + _loops * 16
 	
+	_area = floor(_area % 100)
+	
 	for(var n = 1; n < _area; ++n) _result += scrAreaGetMaxSubareas(n)
 	
 	return _result

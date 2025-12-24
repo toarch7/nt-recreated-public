@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if instance_exists(SpiralCont) {
+if (instance_exists(SpiralCont) || scrGameIsPaused()) {
     if (ambfilter > 0.2) ambfilter -= 0.1
 }
 else {

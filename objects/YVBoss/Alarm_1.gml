@@ -28,20 +28,19 @@ gunangle = mcr_target_direction
 
 if (scrTargetIsVisible(target)) {
 	// Blast
-	if (_distance <= 64 && (target.speed < 1 || random(2) < 1)) {
+	if (_distance <= 64 && wep != wep_golden_shotgun && (target.speed < 1 || random(2) < 1)) {
 		self.change_weapon(wep_golden_shotgun)
 		instance_create(x, y, HitWarning)
 		ammo = 1
 		
-		alarm[1] = 10 + irandom(10)
-		alarm[4] = 25 + irandom(15)
-		alarm[2] = 5
+		alarm[4] = irandom_range(30, 40)
+		alarm[2] = 10
 	}
 	else if ((_distance <= 110 || random(3) < 1) && wep != wep_golden_revolver) {
 		self.change_weapon(wep_golden_revolver)
 		ammo = 5
 		
-		alarm[4] = 20
+		alarm[4] = 25 + irandom(15)
 		alarm[2] = 5
 	}
 	else {

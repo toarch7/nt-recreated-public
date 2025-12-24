@@ -13,3 +13,21 @@ function print_error(_text, _can_repeat = false) {
         }
     }
 }
+
+function print_exception(_title, _exception) {
+	var _stacktrace = string_join_ext("\n", _exception.stacktrace),
+		_message = $"{_title}\n\n{_exception.longMessage}\n\n{_stacktrace}"
+	
+	print(_message)
+	
+	show_message_async(_message)
+	
+	if (instance_exists(Player)) {
+		with (UberCont) {
+			if (!scrGameCanPause()) {
+				want_pause = 2
+			}
+			else scrGamePause()
+		}
+	}
+}

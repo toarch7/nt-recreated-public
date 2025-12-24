@@ -2,7 +2,10 @@ if sprite_index == sprPortalSpawn {
     instance_create(x, y, PortalShock)
 	
 	var _sound = snd_play_loop(sndPortalLoop)
-	audio_sound_set_track_position(_sound, random(audio_sound_length(_sound)))
+	
+	if (_sound >= 0) {
+		audio_sound_set_track_position(_sound, random(audio_sound_length(_sound)))
+	}
 	
     /**/ if (type == 2) sprite_index = sprPopoPortal
     else if (type == 3) sprite_index = sprProtoPortal

@@ -17,7 +17,11 @@ if scr_ultra_get(Race.Steroids, UltraSkill.Ambidextrous) {
 	_count ++
 }
 
-repeat (_count) scrWeaponPickupCreate(x + orandom(2), y + orandom(2), _wep, true)
+repeat (_count) {
+	with (scrWeaponPickupCreate(x + orandom(2), y + orandom(2), _wep, true)) {
+		curse = other.curse
+	}
+}
 
 if GameCont.underwater {
 	snd_play(sndOasisChest)

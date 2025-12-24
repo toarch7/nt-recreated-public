@@ -15,15 +15,14 @@ if os_type == os_android {
 	
     //if check == os_permission_denied or request_perm {
 	if request_perm {
-		var str = "The game requires access to read and write files for customization" +
-				  "and to save your progress.\nYou can revoke this permission in the System " +
-				  "Preferences if you experience problems with your game data."
+		var str = "The game needs access to read and write files for customization and saving progress." +
+				  "\nIt is not strictly necessary if you're a regular player - you can deny or revoke this permission" +
+				  "in the System Preferences in case if you experience problems with your game data."
 		
-		if legacy {
-			str = "A previous installation of the game has been detected. Due to recent internal " +
-			      "API migrations, you must grant the application permission to access your file " +
-				  "system in order to preserve savefile progress." + 
-				  "\n\nYou can do this now, then revoke it later and all your data will be kept."
+		if (legacy) {
+			str = "The game needs access to read and write files for customization and saving progress." +
+			      "\nHowever, this permission is only necessary for importing your old progress, so you" +
+			      "can revoke it once your data is confirmed safe."
 		}
 		
 		message = show_message_async(loc(str))
@@ -35,8 +34,7 @@ if os_type == os_android {
     }
 }
 
-if alarm[0] > 0
-    exit
+if (alarm[0] > 0) exit
 
 if os_type == os_android && check {
     game_directory = "/sdcard/games/com.toncho.nuclearthrone/files/"
@@ -51,86 +49,45 @@ else {
 
 my_player = undefined
 
-with instance_create(0, 0, UberCont) scrInitPostGamestart()
+with (instance_create(0, 0, UberCont)) {
+	scrInitPostGamestart()
+}
 
 //
-	var info = os_get_info(),
-		udid = scrGenerateUID(info[? "udid"])
-	
+var info = os_get_info(), udid;
+if (!ds_map_empty(info)) {
+	udid = scrGenerateUID(info[? "udid"])
 	save_set_value("general", "uid", udid)
-	
-	ds_map_destroy(info)
-//
+}
+ds_map_destroy(info)
 
+//
 randomize()
 
-if loading {
-    gamestatebuffer_c = buffer_load("gamestate.dat")
-    gamestatebuffer = buffer_decompress(gamestatebuffer_c)
-	
-	var buff = gamestatebuffer_c
-	
-    scrUltras()
-	scrVolume()
-
-    try {
-        var d = json_parse(buffer_read(buff, buffer_string)) // extra info
-        global.hardmode = d.hardmode
-
-        var a = buffer_read(buff, buffer_string) // globals (don't need)
-        scrGameSaveInfo()
-
-        UberCont.daily_run = d.daily
-        UberCont.weekly_run = d.weekly
-
-        cont = json_parse(buffer_read(buff, buffer_string)) // gamecont
-
-        global.__playerinstance_list = json_parse(buffer_read(buff, buffer_string)) // global.__playerinstance_list
-
-        player = json_parse(buffer_read(buff, buffer_string)) // player
-
-        with player {
-            hp = d.hp
-            ammo = d.ammo
-            spirit = d.spirit
-			
-			//
-			self[$ "fainted"] ??= 0
-        }
-		
-        pos = max(cont.waypoints - 15, 0)
-
-        skills = ds_list_create()
-        ds_list_read(skills, cont.skills)
-
-        player_count = 1
-
-        instance_create(0, 0, SpiralCont)
-		
-        depth = -1000
-    }
-	catch (e) {
-        print_error("Failed to load gamestate:\n" + e.longMessage, 1)
-
-        if file_exists("m_gamestate.dat") {
-            file_delete("m_gamestate.dat")
-        }
-
-        file_rename("gamestate.dat", "m_gamestate.dat")
-
-        with UberCont
-			instance_destroy()
-
-        instance_destroy()
-		
-		instance_activate_all()
-		
-        room_restart()
-    }
-}
-else {
-	if save_get_value("etc", "disclaimer", 0) {
+if (!loading) {
+	if save_get_value("etc", "disclaimer", false) {
 		room_goto(romGame)
 	}
-	else disclaimer = 1
+	else {
+		disclaimer = true
+	}
+	exit
+}
+
+scrVolume()
+
+try {
+	instance_create(0, 0, GameCont)
+	instance_create(0, 0, SpiralCont)
+	instance_create(0, 0, TopCont)
+	
+	scrSavegameLoad()
+	
+	scrLetterbox(true)
+    
+	depth = UberCont.depth - 1
+}
+catch(e) {
+	print_exception($"Failed to write game save.", e)
+	event_user(0)
 }

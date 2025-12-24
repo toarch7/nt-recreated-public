@@ -49,4 +49,4 @@ instance_destroy(MobileUI)
 
 if (instance_exists(Credits)) depth = -102
 
-file_delete("gamestate.dat")
+file_delete(savegame_file)

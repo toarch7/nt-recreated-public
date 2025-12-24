@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scrGameSaveInfo",
+  "%Name":"InputHandling",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scrGameSaveInfo",
+  "name":"InputHandling",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

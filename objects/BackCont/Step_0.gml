@@ -1,82 +1,87 @@
 if lockstep_stop
 	exit
 
-if !instance_exists(LevCont) && !instance_exists(CrownIcon) && !(instance_exists(SpiralCont) && !instance_exists(NothingSpiral)) && !instance_exists(GenCont) {
-    var dir = 0
-    var dis = 0
-    var dir2 = 0
-    var dis2 = 0
-    var o = noone
-    var viewdist = 4
-
+if !scrGameIsGenerationScreen() {
     if instance_exists(Cinematic) {
-        with Cinematic {
-            view_xview = lerp(view_xview, (x - view_width / 2), 0.1)
-            view_yview = lerp(view_yview, (y - view_height / 2), 0.1)
+        with (Cinematic) {
+            view_xview = round(lerp(view_xview, (x - view_width / 2), 0.1))
+            view_yview = round(lerp(view_yview, (y - view_height / 2), 0.1))
         }
-
-        view_xview = round(view_xview)
-        view_yview = round(view_yview)
-
+		
         camera_set_view_pos(view_camera, view_xview, view_yview)
-
+		
         exit
     }
-
-    if instance_exists(Portal) o = Portal
-    else if instance_exists(BecomeNothing) o = BecomeNothing
-    else if instance_exists(BecomeNothing) o = Nothing2Appear
-    else if instance_exists(NothingDeath) o = NothingDeath
-    else if instance_exists(Nothing2Death) o = Nothing2Death
-    else if instance_exists(SitDown) o = SitDown
 	
-	if instance_exists(TutCont) && instance_exists(WeaponChest)
-		o = WeaponChest
+	var _dir = 0,
+		_dis = 0,
+		_dir2 = 0,
+		_dis2 = 0,
+		_poi = noone,
+		_viewdist = 4
+	
+    /**/ if instance_exists(Portal) _poi = Portal
+    else if instance_exists(BecomeNothing) _poi = BecomeNothing
+    else if instance_exists(BecomeNothing) _poi = Nothing2Appear
+    else if instance_exists(NothingDeath) _poi = NothingDeath
+    else if instance_exists(Nothing2Death) _poi = Nothing2Death
+    else if instance_exists(SitDown) _poi = SitDown
+	
+	if instance_exists(TutCont) && instance_exists(WeaponChest) {
+		_poi = WeaponChest
+	}
 
-    with Player if index == global.index {
+    with Player if (index == global.index) {
         if scr_weapon_is_melee(wep) {
-			viewdist = 8
+			_viewdist = 8
 		}
 		else if scr_weapon_get_type(wep) == Ammo.Bolts {
-			viewdist = 3
+			_viewdist = 3
 		}
 		
-		if UberCont.opt_camera {
-	        if instance_exists(o) {
-	            var i = instance_nearest(x, y, o)
-	            dis = point_distance(x, y, i.x, i.y) / 6
-	            dir = point_direction(x, y, i.x, i.y)
+		if UberCont.opt_activecam {
+	        if instance_exists(_poi) {
+	            var _instance = instance_nearest(x, y, _poi)
+	            _dis = point_distance(x, y, _instance.x, _instance.y) / 6
+	            _dir = point_direction(x, y, _instance.x, _instance.y)
 				
-	            if o == Portal || instance_is(o, WeaponChest) {
-	                dis = min(dis, 72)
+	            if (_poi == Portal || instance_is(_poi, WeaponChest)) {
+	                _dis = min(_dis, 72)
 	            }
 	        }
 			
 	        if !UberCont.localcoop {
-	            dir2 = KeyCont.dir_fire[index]
+	            _dir2 = KeyCont.dir_fire[index]
 				
 	            if UberCont.opt_gamepad {
 	                var gpx = gamepad_axis_value(0, gp_axisrh)
 	                var gpy = gamepad_axis_value(0, gp_axisrv)
-	                dis2 = (point_distance(0, 0, gpx, gpy) * 72) / viewdist
+	                _dis2 = (point_distance(0, 0, gpx, gpy) * 72) / _viewdist
 	            }
 				else if UberCont.opt_keyboard {
-	                //dis2 = point_distance(x, y, mouse_x, mouse_y) / viewdist
-					dis2 = KeyCont.dis_fire[index] / viewdist
+	                //_dis2 = point_distance(x, y, mouse_x, mouse_y) / _viewdist
+					_dis2 = KeyCont.dis_fire[index] / _viewdist
 	            }
-				else if instance_exists(JoystickAttack) {
-	                if !save_get_value("contorls", "aimbot", 0) {
-	                    dir2 = KeyCont.dir_fire[index]
-	                    dis2 = JoystickAttack.vdis / viewdist
-	                }
+				else if instance_exists(JoystickAttack) && !save_get_value("contorls", "aimbot", 0) {
+	                _dir2 = KeyCont.dir_fire[index]
+	                _dis2 = JoystickAttack.vdis / _viewdist
 	            }
 	        }
 		}
-
-        if !bleed {
-            view_xview = lerp(view_xview, (x - view_width / 2 + other.viewx2 + (random(other.shake) - other.shake / 2) * UberCont.opt_shake) + lengthdir_x(dis, dir) + lengthdir_x(dis2, dir2), 0.4)
-            view_yview = lerp(view_yview, (y - view_height / 2 + other.viewy2 + (random(other.shake) - other.shake / 2) * UberCont.opt_shake) + lengthdir_y(dis, dir) + lengthdir_y(dis2, dir2), 0.4)
-        }
+		
+        if (bleed) break
+		
+		var _sx = ldrx(_dis, _dir) + ldrx(_dis2, _dir2),
+			_sy = ldry(_dis, _dir) + ldry(_dis2, _dir2)
+		
+		if (UberCont.opt_shake > 0) {
+			var _shake = other.shake * UberCont.opt_shake
+			_sx += orandom(_shake)
+			_sy += orandom(_shake)
+		}
+		
+        view_xview = round(lerp(view_xview, x - view_width * 0.5 + other.viewx2 + _sx, 0.4))
+        view_yview = round(lerp(view_yview, y - view_height * 0.5 + other.viewy2 + _sy, 0.4))
     }
 }
 
@@ -90,21 +95,11 @@ if UberCont.opt_shake <= 0 {
 }
 
 if shake > 10 {
-    shake = shake * 0.8
-} else if shake > 0 {
-    shake--
-
-    if !shake { //set to 0 in case of decimal screenshake
+    shake *= power(0.8, timescale)
+}
+else if shake > 0 {
+    shake -= timescale
+    if shake <= 0 {
         shake = 0
     }
 }
-
-if !instance_exists(Cinematic) {
-    if instance_exists(FloorMaker) && instance_exists(Player) {
-        view_xview = Player.x - view_width / 2
-        view_yview = Player.y - view_width / 2
-    }
-}
-
-view_xview = round(view_xview)
-view_yview = round(view_yview)

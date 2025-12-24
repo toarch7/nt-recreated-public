@@ -122,7 +122,7 @@ function scrCrownApplyEquipEffect(_crown_id, _is_equipped) {
 						destiny = true
 						
 						if instance_exists(LevCont) {
-							scrGameSave()
+							scrSavegameSave()
 						}
 					}
 					break

@@ -1,7 +1,7 @@
 /// @description Update icon statuses
 if weekly exit
 
-var _instances = global.__playerinstance_list
+var _instances = global.playerinstance_list
 
 for (var i = 0; i < player_count; i++) {
     var _pinst = _instances[i]

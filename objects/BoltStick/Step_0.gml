@@ -2,7 +2,7 @@ if instance_exists(target) {
     z = 0
 
     if (variable_instance_exists(target, "z")) {
-        z = target.z
+        z = -target.z
 		if (instance_is(target, DogGuardian)) z *= -1
     }
 

@@ -192,6 +192,7 @@ function scrFire(_wep, _consume_ammo = true) {
 					damage = 16
 					scr_projectile_shift(i * 60)
 					scr_projectile_long_arms(_long_arms)
+					sprite_index = sprHeavySlash
 				}
 			}
 			break

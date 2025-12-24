@@ -1,5 +1,4 @@
 if disclaimer {
-	
 	draw_set_halign(fa_center)
     draw_set_valign(fa_middle)
 	
@@ -40,8 +39,8 @@ if loading {
         var mx = device_mouse_x_to_gui(0)
         var my = device_mouse_y_to_gui(0)
 
-        scrDrawRoadmap(xx, yy, round(pos), cont)
-        scrDrawPlayerHUD(player)
+        scrDrawRoadmap(xx, yy, pos)
+        with (TopCont) scrDrawPlayerHUD(scrPlayerFindLocal())
 
         draw_set_halign(fa_center)
 
@@ -49,14 +48,13 @@ if loading {
 
         yy += 4
 
-        if pos >= cont.waypoints {
-            if posy == 8 snd_play(sndCrownAppear)
-
-            if posy >= 0 posy -= 8
+        if pos >= GameCont.waypoints {
+            if (posy == 8) snd_play(sndCrownAppear)
+            if (posy >= 0) posy -= 8
         }
 		else {
             draw_set_color(c_uidark)
-            pos++
+            pos ++
         }
 		
         draw_text_nt(xx + 48, yy + 32 + posy, "@s" + loc("NO") + "@w")
@@ -70,48 +68,38 @@ if loading {
         draw_set_halign(fa_left)
         draw_set_valign(fa_top)
 
-        with cont {
-            var s = skills
-            skills = other.skills
+        with (GameCont) scrDrawMiscHUD()
 
-            scrDrawMiscHUD()
-
-            skills = s
-        }
-
-        if loading < 15 {
-            loading++
-
+        if (loading < 15) {
+            loading ++
+			
             draw_set_alpha(1 - loading / 15)
             draw_set_color(c_black)
             draw_rectangle(0, 0, view_width, view_height, 0)
             draw_set_color(c_white)
             draw_set_alpha(1)
         }
-
+		
         var p = gamepad_button_check_pressed(0, gp_face1) - gamepad_button_check_pressed(0, gp_face2)
 
-        if mouse_check_button_released(mb_left) or p != 0 {
-            if point_in_circle(mx, my, xx + 48, yy + 28, 16) or p == -1 {
-                // yesn't
-                file_delete("gamestate.dat")
-                game_restart()
-            }
-			else if point_in_circle(mx, my, xx - 48, yy + 28, 16) or p == 1 {
+        if mouse_check_button_released(mb_left) || p != 0 {
+            if (point_in_circle(mx, my, xx - 48, yy + 28, 16) || p == 1) {
                 // yes
+				instance_destroy(GameCont, false)
+				instance_destroy(Player, false)
                 room_goto(romGame)
                 instance_destroy()
             }
+			else if (point_in_circle(mx, my, xx + 48, yy + 28, 16) || p == -1) {
+                // yesn't
+                file_delete(savegame_file)
+                game_restart()
+            }
         }
-    } catch (e) {
-        print_error("Failed to load gamestate:\n" + e.longMessage, 1)
-
-        if file_exists("m_gamestate.dat") {
-            file_delete("m_gamestate.dat")
-        }
-
-        file_rename("gamestate.dat", "m_gamestate.dat")
-
-        game_restart()
+    }
+	catch (e) {
+        print_exception("Unable to continue run - data corrupt", e)
+		if (GM_build_type == "run") file_rename(savegame_file, "m_gamestate.dat")
+		event_user(0)
     }
 }

@@ -15,23 +15,12 @@ scr_debug_overlay_load()
 
 alarm[0] = 1
 
-loading = 0
-cont = undefined
+disclaimer = false
 
 pos = 0
 posy = 8
 
-skills = -1
-player = -1
-
-disclaimer = 0
-
-gamestatebuffer_c = -1
-gamestatebuffer = -1
-
-if file_exists("gamestate.dat") {
-    loading = 1
-}
+loading = file_exists(savegame_file)
 
 game_directory = "/files/"
 

@@ -9,7 +9,7 @@
   "option_android_attribute_allow_backup":false,
   "option_android_build_tools":"34.0.0",
   "option_android_compile_sdk":"36",
-  "option_android_device_support":0,
+  "option_android_device_support":1,
   "option_android_display_layout":"LAYOUT_IN_DISPLAY_CUTOUT_MODE_DEFAULT",
   "option_android_display_name":"Nuclear Throne",
   "option_android_edge_to_edge_display":false,

@@ -3,6 +3,7 @@ event_inherited()
 creator = noone
 team = team_player
 right = choose(1, -1)
+size = 1
 
 image_speed = 0.4
 friction = 0.1

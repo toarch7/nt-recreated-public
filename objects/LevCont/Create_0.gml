@@ -6,7 +6,8 @@ var _destiny = scrCrownCheck(crwn_destiny)
 
 for(var i = 0; i <= 15; i ++) mutseed[i] = irandom(999999)
 
-random_set_seed(mutseed[(GameCont.level - GameCont.skillpoints)] + GameCont.wasskeleton * 10203)
+var _index = clamp(GameCont.level - GameCont.skillpoints, 0, 15)
+random_set_seed(mutseed[_index] + GameCont.wasskeleton * 10203)
 
 wave = 0
 view_xview = 0

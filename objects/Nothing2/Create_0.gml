@@ -32,8 +32,8 @@ with(MusCont)
 alarm[2] = 1
 snd_hurt = sndNothing2Hurt
 snd_dead = sndNothing2Dead
-instance_create(x, y, SpiralCont)
 instance_create(x, y, NothingSpiral)
+instance_create(x, y, SpiralCont)
 snd_play_hit_big(sndNothing2Appear, 0)
 flip = choose(1, -1)
 attack = 1

@@ -441,3 +441,5 @@ ObjectDepth[Logo] = -10000
 ObjectDepth[MenuOptions] = -10000
 ObjectDepth[DrawStats] = -10000
 ObjectDepth[AnimParticle] = -2
+ObjectDepth[YVBoss] = -2
+ObjectDepth[YVBullet] = 0

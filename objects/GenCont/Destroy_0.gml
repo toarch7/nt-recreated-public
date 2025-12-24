@@ -3,8 +3,9 @@
 var _area = GameCont.area,
 	_subarea = GameCont.subarea,
 	_loops = GameCont.loops,
-	_actual_loops = global.hardmode ? (_loops - 1) : _loops,
-	_is_throne_arena = (_area == area_palace && _subarea == 3)
+	_max_subareas = scrAreaGetMaxSubareas(_area),
+	_actual_loops = _loops - scrGameIsHardmode(),
+	_is_throne_arena = (_area == area_palace && _subarea == _max_subareas)
 
 scrCreateMobileControls()
 
@@ -96,6 +97,13 @@ if instance_exists(Player) {
 	}
 }
 
+with (PortalClear) {
+	var _instance = instance_nearest(x, y, TopPot)
+	if (instance_exists(_instance) && distance_to_point(_instance.x, _instance.y) <= 20) {
+		instance_destroy(_instance, false)
+	}
+}
+
 if _area == area_city && _subarea == 1 && scr_skill_get(mut_last_wish) {
     if (instance_exists(prop)) {
         with (instance_furthest(10016, 10016, prop)) {
@@ -165,11 +173,6 @@ if _area == area_desert && _actual_loops > 0 && GameCont.blackswords {
 	}
 	
 	GameCont.blackswords = 0
-}
-
-with WepPickup {
-    x = 10016
-    y = 10016
 }
 
 instance_destroy(ChestOpen)

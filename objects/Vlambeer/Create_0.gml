@@ -5,42 +5,28 @@ y = view_height / 2
 
 scr_camera_set_position(0, 0)
 
-if !instance_exists(GameCont) && file_exists("gamestate.dat") {
-    instance_create(0, 0, GameCont)
-    instance_create(0, 0, Player)
+var _just_loaded = false
 
-    instance_create(0, 0, MusCont)
-
-    UberCont.continued_run = true
-
-    if !scrGameLoad() {
-        file_delete("gamestate.dat")
-        game_restart()
-
+if (!instance_exists(GameCont) && file_exists(savegame_file)) {
+	instance_create(0, 0, GameCont)
+	instance_create(0, 0, MusCont)
+	
+	UberCont.continued_run = true
+	var _success = scrSavegameLoad()
+	
+	file_delete(savegame_file)
+    
+	if (!_success) {
+		game_restart()
         exit
     }
 	
-	global.recontinues ++
-	print("Recontinued", global.recontinues, "times")
+	_just_loaded = true
 	
-	with Player {
-		if global.recontinues > 1 {
-			headloses += 2
-			max_hp -= 2
-		}
-		
-		hp = min(hp, max_hp)
-		
-		lsthealth = min(lsthealth, hp)
-	}
-
-    random_set_seed(global.seed)
-
-    scrVolume()
-	
-	print("Saving", global.recontinues)
-	
-	scrGameSave()
+	global.recontinued_times ++
+	print("Recontinued", global.recontinued_times, "times")
+	scrRngStatesReset()
+	scrVolume()
 }
 
 if UberCont.want_quit_to_menu {
@@ -81,6 +67,7 @@ if UberCont.want_quit_to_menu {
 
 	instance_destroy(MusCont)
 	instance_create(x, y, MusCont)
+	file_delete(savegame_file)
     instance_destroy()
 	
     exit
@@ -100,10 +87,14 @@ else if instance_exists(GameCont) {
         instance_create(0, 0, BackCont)
         instance_create(x, y, GenCont)
     }
-
+	
+	if (!_just_loaded) scrSavegameSave()
+	
     instance_destroy()
 }
 else {
+	instance_create(0, 0, MainMenu)
+	
 	scrLetterbox(true)
 	
 	instance_destroy(MusCont)

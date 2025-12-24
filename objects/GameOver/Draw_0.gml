@@ -57,8 +57,8 @@ if UberCont.continued_run {
 	
 	var _continuation_string = "continued"
 	
-	if global.recontinues > 0 {
-		_sprite = "continued x" + string(global.recontinues)
+	if global.recontinued_times > 0 {
+		_sprite = "continued x" + string(global.recontinued_times)
 	}
 	
     draw_text(_x, view_yview + 59, _sprite)

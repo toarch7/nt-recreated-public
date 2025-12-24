@@ -173,7 +173,7 @@ function scrMenuPrepareWeeklyLoadout() {
 	assert(is_numeric(_weekly_data) && ds_exists(_weekly_data, ds_type_map))
 	
 	//
-	array_foreach(global.__playerinstance_list, function(_inst) {
+	array_foreach(global.playerinstance_list, function(_inst) {
 		if (is_undefined(_inst)) exit
 		
 		var _weekly_data = UberCont.weekly_data,

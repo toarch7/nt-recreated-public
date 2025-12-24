@@ -1,4 +1,8 @@
 with MusCont {
+	if (alarm[0] == -1 || snd_is_playing(musThemeB)) {
+		break
+	}
+	snd_stop(song)
     event_perform(ev_alarm, 0)
     alarm[0] = -1
 }

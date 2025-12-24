@@ -1,13 +1,10 @@
 function scrPopChests() {
-	random_set_seed(rng_next_int(RNGStates.Chest))
 	
-	var _max_subarea = scrAreaGetMaxSubareas(GameCont.area)
-	
-	var dir = 0
-	var gol = 1
-	var wgol = 0
-	var agol = 0
-	var rgol = 0
+	var _tot_chests = 1,
+		_weapon_chests = 0,
+		_ammo_chests = 0,
+		_rad_chests = 0,
+		_max_subarea = GameCont.maxsubarea
 	
 	if GameCont.area == area_vault {
 		if instance_exists(CrownObject) {
@@ -17,32 +14,31 @@ function scrPopChests() {
 			}
 		}
 		
-		gol = 0
+		_tot_chests = 0
 	}
-	else if (GameCont.area == area_campfire
+	else if (GameCont.area == area_campfire || GameCont.area == area_crib
 		|| (GameCont.area == area_hq && GameCont.subarea == _max_subarea)
-		|| GameCont.area == area_crib) {
-		
-		gol = 0
+	) {
+		_tot_chests = 0
 	}
 	else if (GameCont.area != area_crib) {
-		repeat (scr_skill_get(mut_open_mind)) {
-			dir = choose(1, 2, 3)
-			if (dir == 1) wgol ++
-			if (dir == 2) agol ++
-			if (dir == 3) rgol ++
+		repeat (scr_skill_get(mut_open_mind) * 2) {
+			var _kind = choose(1, 2, 3)
+			if (_kind == 1) _weapon_chests ++
+			if (_kind == 2) _ammo_chests ++
+			if (_kind == 3) _rad_chests ++
 		}
 	}
 	
 	#region restrict chest amount
 	
-	if (gol > 0) {
+	if (_tot_chests > 0) {
 		if instance_exists(WeaponChest) && GameCont.area != area_crib {
 			do {
 				with instance_nearest(10016 + orandom(250), 10016 + orandom(250), WeaponChest)
 					instance_destroy(id, false)
 			}
-			until instance_number(WeaponChest) <= gol + wgol
+			until instance_number(WeaponChest) <= _tot_chests + _weapon_chests
 		}
 		
 		if instance_exists(RadChest) {
@@ -50,7 +46,7 @@ function scrPopChests() {
 				with instance_nearest(10016 + orandom(250), 10016 + orandom(250), RadChest)
 					instance_destroy(id, false)
 			}
-			until instance_number(RadChest) <= gol + rgol
+			until instance_number(RadChest) <= _tot_chests + _rad_chests
 		}
 		
 		if instance_exists(AmmoChest) {
@@ -58,7 +54,7 @@ function scrPopChests() {
 				with instance_nearest(10016 + orandom(250), 10016 + orandom(250), AmmoChest)
 					instance_destroy(id, false)
 			}
-			until instance_number(AmmoChest) <= gol + agol
+			until instance_number(AmmoChest) <= _tot_chests + _ammo_chests
 		}
 		
 		// in the case if some chests didn't spawn
@@ -72,9 +68,6 @@ function scrPopChests() {
 	}
 	
 	#endregion
-	
-	instance_destroy(ChestOpen)
-	instance_destroy(FXChestOpen)
 	
 	#region rad chest permutations
 	
@@ -150,7 +143,7 @@ function scrPopChests() {
 	
 	#endregion
 	
-	// mimics
+	#region mimics
 	if instance_exists(Player) && GameCont.area != area_crib {
 		with AmmoChest {
 			if random(11) < 1 && (GameCont.area >= area_sewers || GameCont.loops) {
@@ -178,7 +171,9 @@ function scrPopChests() {
 		}
 	}
 	
-	if global.hardmode && ((GameCont.loops - global.hardmode) <= 0 && GameCont.area == area_desert && GameCont.subarea == 1) {
+	#endregion
+	
+	if global.hardmode && ((GameCont.loops - scrGameIsHardmode()) <= 0 && GameCont.area == area_desert && GameCont.subarea == 1) {
 		with (Player) instance_create(x, y, BigWeaponChest)
 	}
 	
@@ -186,7 +181,7 @@ function scrPopChests() {
 		with WeaponChest {
 			instance_create(x, y, CursedBigChest)
 			instance_create(x, y, PortalClear)
-			instance_destroy(id, 0)
+			instance_destroy(id, false)
 		}
 	}
 }

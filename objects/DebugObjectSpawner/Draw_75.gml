@@ -56,11 +56,6 @@ shake = approach(shake, 0, 0.5)
 splatindex = approach(splatindex, 2, 0.5)
 
 //
-sprite_set_offset(sprScoreSplat, 45, 11)
-draw_sprite_ext(sprScoreSplat, splatindex,
-	x, y, string_width(keyboard_string) / 70 + 0.1, 1, 0, c_white, 1)
-sprite_set_offset(sprScoreSplat, 5, 13)
-
 draw_set_color(_valid ? c_white : c_gray)
 draw_text_shadow(_dx, _dy, keyboard_string + cursor)
 

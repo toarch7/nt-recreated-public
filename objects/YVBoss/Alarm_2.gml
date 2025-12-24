@@ -12,6 +12,7 @@ if ((ammo --) <= 0) {
 switch (wep) {
 	case wep_golden_revolver:
 		scrBulletShotShellFX(Shell)
+		if (instance_exists(target)) gunangle = mcr_target_direction
 		if (!ammo) {
 			gunangle -= 2
 			repeat (2) {
@@ -22,7 +23,6 @@ switch (wep) {
 			if (!intro) alarm[5] = 10
 		}
 		else {
-			if (instance_exists(target)) gunangle = mcr_target_direction
 			scr_projectile_create(x, y, YVBullet, gunangle, 16)
 		}
 		scr_screenshake(5)
@@ -56,6 +56,7 @@ switch (wep) {
 		snd_play_gun(sndGoldRocket)
 		break
 	case wep_minigun:
+		with (scrBulletShotShellFX(Shell, 40)) speed *= random(1) + 1
 		scr_projectile_create(x, y, YVBullet, gunangle + orandom(5), 16)
 		gunangle += minigun_side * random_range(0.8, 1)
 		scr_screenshake(3)

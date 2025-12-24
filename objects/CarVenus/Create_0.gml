@@ -11,4 +11,6 @@ spr_dead = sprScorchmark
 
 snd_hurt = sndHitMetal
 
+hitid = HitId.VenusCar
+
 image_xscale = 1

@@ -2,11 +2,6 @@
 > This is a temporary solution for tracking the list of tasks list. Ideally this should be fixed to use GitHub issues & milestones...
 
 # Main priority
-- [ ] A proper state serialization system for saving/loading
-- [ ] Implement automated testing
-    - [x] `scrFire` test
-    - [x] `damagesource` test
-    - [ ] Random run test
 - [ ] Implement freezeframes
     - [x] Implement `sleep`
     - [ ] Go over all cases where `Sleep()` is called in the base game and introduce these calls in this project.
@@ -23,6 +18,10 @@
     - [ ] Implement `lang.csv` localization support (directly related to the previous paragraph)
     - [ ] Introduce localization tokens to simplify localization
 - [ ] Revisit the enemy/prop animation logic 
+- [x] Implement automated testing
+    - [x] `scrFire` test
+    - [x] `damagesource` test
+    - [x] Random run test
 - [x] Replace `inframes` mechanism with `nexthurt` akin to base NT
 - [x] Loadout menu refactoring
     - [x] Campfire menu refactoring

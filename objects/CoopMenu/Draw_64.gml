@@ -52,7 +52,7 @@ if menu == noone {
 	scrOptionsMenuChangeCategory(OptionCategory.Coop_Menu, false)
 }
 else if !instance_exists(menu) {
-	var _player_instances = struct_keys(global.__playerinstance_list)
+	var _player_instances = struct_keys(global.playerinstance_list)
 	
 	if connected {
 		var _dy = view_height / 2,
@@ -64,7 +64,7 @@ else if !instance_exists(menu) {
 		
 		for(var i = 0; i < _length; i ++) {
 			var _index = _player_instances[i],
-				_pinst = global.__playerinstance_list[$ _index]
+				_pinst = global.playerinstance_list[$ _index]
 			
 			scr_draw_multiplayer_player_card(_pinst.index, view_width / 2, _dy, 160, fa_center)
 			

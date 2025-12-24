@@ -129,11 +129,12 @@ function scr_race_get_skin_letter(_skin_id, _return_a = false) {
 
 /// @function scrRaceGetStringID
 /// @param {Real|Enum.Race} race_numeric_id
-/// @param include_capitalization
+/// @param include_capitalization=false
 function scrRaceGetStringID(_race_number_id, _capitalization = false) {
 	var _result = undefined
 	
 	switch _race_number_id {
+		case Race.Random: _result = "Random" break
 		case Race.Fish: _result = "Fish" break
 		case Race.Crystal: _result = "Crystal" break
 		case Race.Eyes: _result = "Eyes" break
@@ -280,7 +281,7 @@ function scrRaceGetActiveSkillDescription(_race) {
         case Race.Rogue: return "@bPORTAL STRIKE@s"
         case Race.BigDog: return "MISSILES"
         case Race.Skeleton: return "BLOOD GAMBLE"
-        case Race.Frog: return "FROG ACTIVE"
+        case Race.Frog: return "@gTOXIC@w CLOUD"
         case Race.Cuz: return "@bCRY"
     }
 

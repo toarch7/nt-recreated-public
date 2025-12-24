@@ -12,6 +12,9 @@ surface_reset_target()
 
 shadow_color = c_black
 
+playerx = 10016
+playery = 10016
+
 area = GameCont.area
 
 if area == 2 shadow_color = 68872

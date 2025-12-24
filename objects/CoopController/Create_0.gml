@@ -197,7 +197,7 @@ event_handlers[$ "crown"] = function(_index, _data) {
 event_handlers[$ "my_player"] = function(_index, _data) {
 	var pinst = _data[2]
 	
-	player_set_struct(global.__playerinstance_list[$ _index], pinst, true)
+	player_set_struct(global.playerinstance_list[$ _index], pinst, true)
 	
 	if instance_exists(Menu) {
 		var _is_me = scr_is_authority()

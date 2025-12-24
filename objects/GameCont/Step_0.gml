@@ -1,9 +1,8 @@
 if lockstep_stop
 	exit
 
-if (!(instance_exists(GenCont) || !instance_exists(Player)
-	|| instance_exists(SitDown) || instance_exists(Credits)
-	|| instance_exists(Cinematic) || instance_exists(GameOver))
+if (!(instance_exists(GenCont) || !instance_exists(Player) || instance_exists(SitDown)
+	|| instance_exists(Credits) || instance_exists(Cinematic) || instance_exists(GameOver) || room == romInit)
 ) {
 	tottimer += timescale
     timer += timescale

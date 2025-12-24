@@ -1,4 +1,4 @@
-global.__playerinstance_list = array_create(INPUT_MAX_PLAYERS, undefined)
+global.playerinstance_list = array_create(INPUT_MAX_PLAYERS, undefined)
 
 globalvar my_player, player_count;
 my_player = undefined
@@ -120,10 +120,10 @@ function PlayerInstance(_index = 0) constructor {
 }
 
 function scr_playerinstance_create(_index) {
-	assert(is_undefined(global.__playerinstance_list[_index]))
+	assert(is_undefined(global.playerinstance_list[_index]))
 	
 	var _playerinstance = new PlayerInstance(_index)
-	global.__playerinstance_list[_index] = _playerinstance
+	global.playerinstance_list[_index] = _playerinstance
 	
 	scr_playerinstances_recollect()
 	
@@ -131,7 +131,7 @@ function scr_playerinstance_create(_index) {
 }
 
 function scr_playerinstance_destroy(_index, _remove_player_object = false) {
-    global.__playerinstance_list[_index] = undefined
+    global.playerinstance_list[_index] = undefined
 	
 	if _remove_player_object {
 		with Player {
@@ -142,18 +142,18 @@ function scr_playerinstance_destroy(_index, _remove_player_object = false) {
 	
 	scr_playerinstances_recollect()
 	
-    show_debug_message("PlayerInstace" + string(_index) + " was removed. Current list state: " + string(global.__playerinstance_list))
+    show_debug_message("PlayerInstace" + string(_index) + " was removed. Current list state: " + string(global.playerinstance_list))
 }
 
 function scr_playerinstance_find(_index = global.index) {
-	if _index >= 0 && _index < array_length(global.__playerinstance_list)
-		return global.__playerinstance_list[_index]
+	if _index >= 0 && _index < array_length(global.playerinstance_list)
+		return global.playerinstance_list[_index]
 	
 	return undefined
 }
 
 function scr_playerinstance_add(_index, _playerinstance) {
-	global.__playerinstance_list[_index] = _playerinstance
+	global.playerinstance_list[_index] = _playerinstance
 	scr_playerinstances_recollect()
 	
 	return _playerinstance
@@ -169,7 +169,7 @@ function scr_playerinstance_reset(_index = global.index) {
 }
 
 function scr_playerinstances_recollect() {
-	var _list = global.__playerinstance_list,
+	var _list = global.playerinstance_list,
 		_count = array_length(_list),
 		_slot_index = 0
 	
@@ -191,12 +191,12 @@ function scr_playerinstances_recollect() {
 
 function scr_playerinstances_get_all() {
 	var _result = array_create(player_count, undefined)
-	array_copy(_result, 0, global.__playerinstance_list, 0, player_count)
+	array_copy(_result, 0, global.playerinstance_list, 0, player_count)
 	return _result
 }
 
 function scr_playerinstances_reset_all() {
-	global.__playerinstance_list = array_create(INPUT_MAX_PLAYERS, undefined)
+	global.playerinstance_list = array_create(INPUT_MAX_PLAYERS, undefined)
 	
 	global.index = 0
 	
@@ -213,7 +213,7 @@ function scr_playerinstances_reset_all() {
 }
 
 function scr_player_is_local(_index) {
-	return global.__playerinstance_list[_index].is_local()
+	return global.playerinstance_list[_index].is_local()
 }
 
 function scr_playerinstances_load_from_list(_pinstlist) {
@@ -230,7 +230,7 @@ function scr_playerinstances_load_from_list(_pinstlist) {
 }
 
 function scrCreatePlayers(_my_index = global.index) {
-    var _player_instances = global.__playerinstance_list
+    var _player_instances = global.playerinstance_list
 
     for (var _player_index = 0; _player_index < player_count; _player_index ++) {
         var _pinst = _player_instances[_player_index]
@@ -277,6 +277,7 @@ function scrCreatePlayers(_my_index = global.index) {
 
         if _pinst[$ "cwep"] == wep_golden_frog_pistol {
             _pinst.race = Race.Frog
+			_pinst.skin = scr_loadout_race_get_skin(Race.Frog)
         }
 		
 		KeyCont.activeforever[_pinst.index] = false

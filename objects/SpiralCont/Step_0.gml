@@ -1,18 +1,16 @@
-if lockstep_stop
-	exit
-
-if type == 2 {
-    image_angle += 10 + sin(image_angle / 300) * 2 + random(1)
+if type == SpiralType.Proto {
+    image_angle += 10 + sin(image_angle / 300) * 2 + orandom(1)
 }
 else {
     image_angle += 8 + sin(image_angle / 300) * 1
 }
 
-time++
+time ++
 
-var _cx = view_width div 2, _cy = view_height div 2
+var _cx = view_width div 2,
+	_cy = view_height div 2
 
-if type == SpiralType.IDPD || type == SpiralType.Venuz {
+if (type == SpiralType.IDPD || type == SpiralType.Venuz) {
     x = _cx
     y = _cy
 }
@@ -21,14 +19,11 @@ else {
 	y = _cy + cos(image_angle / 583) * sin(image_angle / 500) * 50
 }
 
-if random(16) < 1 && type != 4 {
-    if (type == SpiralType.IDPD || (random(3) < 1)) && !bossfight {
-        with instance_create(x, y, SpiralDebris) {
-            depth = other.image_angle
-        }
+if current_frame_active && random(16) < 1 && type != SpiralType.Venuz {
+    if (type == SpiralType.Proto || random(3) < 1) && !bossfight {
+        with (instance_create(x, y, SpiralDebris)) depth = other.image_angle
     }
 }
-
 
 if type != SpiralType.Venuz {
     with instance_create(x, y, Spiral) {
@@ -60,9 +55,8 @@ else {
 	instance_create(x, y, SpiralStar)
 }
 
-if (area == 0 && !instance_exists(NothingSpiral)) or area != 0 {
-	if !instance_exists(LevCont) && !instance_exists(GenCont)
-	&& !instance_exists(SitDown) && instance_exists(BackCont)
-	&& !instance_exists(Credits) && active
+if !instance_exists(NothingSpiral) && !instance_exists(MainMenu) {
+	if !active && (!scrGameIsGenerationScreen() && !instance_exists(Credits)) {
 		instance_destroy()
+	}
 }

@@ -1,32 +1,27 @@
 dist = random(135) + 10
 angle = random_angle
-turnspeed = random(8) - 4
-rotspeed = random(16) - 8
+turnspeed = orandom(4)
+rotspeed = orandom(8)
 sound = false
 
 image_index = random(image_number)
 image_speed = 0
+
 if instance_exists(GameCont) {
-    sprite_index = asset_get_index("sprDebris" + string(GameCont.area))
+	var _area = GameCont.area
+    sprite_index = asset_get_index("sprDebris" + string(_area))
 
     if random(50) < 1 {
-
-        if GameCont.area = 1 sprite_index = sprBanditHurt
-
-        if GameCont.area = 2 sprite_index = sprRatHurt
-
-        if GameCont.area = 3 sprite_index = sprCarIdle
-
-        if GameCont.area = 4 sprite_index = sprSpiderHurt
-
-        if GameCont.area = 5 sprite_index = sprFrozenCar
-
-        if GameCont.area = 6 sprite_index = sprFreak1Hurt
-
-        if GameCont.area = 102 sprite_index = sprSlice
+        /**/ if (_area == area_desert) sprite_index = sprBanditHurt
+        else if (_area == area_sewers) sprite_index = sprRatHurt
+        else if (_area == area_scrapyards) sprite_index = sprCarIdle
+        else if (_area == area_caves) sprite_index = sprSpiderHurt
+        else if (_area == area_city) sprite_index = sprFrozenCar
+        else if (_area == area_labs) sprite_index = sprFreak1Hurt
+        else if (_area == area_pizza_sewers) sprite_index = sprSlice
 
         image_index = 1
-        rotspeed = (10 + random(20)) * choose(1, -1)
+        rotspeed = random_range(20, 30) * choose(1, -1)
     }
 
 }

@@ -29,10 +29,10 @@ if index != -1 {
     KeyCont.dir_move[global.index] = dir
     KeyCont.moving[global.index] = min(1, dis / rad)
 	
-	KeyCont.key_east[global.index] = (mh == 1)
-	KeyCont.key_west[global.index] = (mh == -1)
-	KeyCont.key_sout[global.index] = (mv == 1)
-	KeyCont.key_nort[global.index] = (mv == -1)
+	KeyCont.hold_east[global.index] = (mh == 1)
+	KeyCont.hold_west[global.index] = (mh == -1)
+	KeyCont.hold_sout[global.index] = (mv == 1)
+	KeyCont.hold_nort[global.index] = (mv == -1)
 
     if device_mouse_check_button_released(index, mb_left) {
 		index = -1

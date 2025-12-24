@@ -3,6 +3,7 @@ event_inherited()
 max_hp = INT_MAX
 hp = max_hp
 meleedamage = 0
+raddrop = 0
 size = 8
 
 spr_idle = sprNothingOn

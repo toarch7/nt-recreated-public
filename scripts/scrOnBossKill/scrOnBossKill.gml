@@ -79,13 +79,14 @@ function scrOnBossKill() {
 			}
 		
 			if (_any) {
-				var _list = GameCont.swordbosskill
+				var _list = GameCont.swordbosskill,
+					_object_name = object_get_name(_object_name)
 				
-				if (!array_contains(_list, _object)) array_push(_list, _object)
+				if (!array_contains(_list, _object_name)) array_push(_list, _object_name)
 				
-				if (array_contains(_list, BanditBoss) && array_contains(_list, ScrapBoss) && array_contains(_list, LilHunter)
-					&& array_contains(_list, Nothing) && array_contains(_list, Nothing2) && array_contains(_list, FrogQueen)
-					&& array_contains(_list, HyperCrystal) && array_contains(_list, Last)
+				if (array_contains(_list, nameof(BanditBoss)) && array_contains(_list, nameof(ScrapBoss)) && array_contains(_list, nameof(LilHunter))
+					&& array_contains(_list, nameof(Nothing)) && array_contains(_list, nameof(Nothing2)) && array_contains(_list, nameof(FrogQueen))
+					&& array_contains(_list, nameof(HyperCrystal)) && array_contains(_list, nameof(Last))
 				) {
 					scrRaceUnlockSkin(Race.Chicken, SkinLetter.C)
 				}

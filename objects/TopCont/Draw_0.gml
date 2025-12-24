@@ -103,13 +103,11 @@ if instance_exists(Player) {
 	}
 }
 
-with (WepSwap) draw_self()
-
 if !scrGameIsGenerationScreen() {
     if (!instance_exists(NothingSpiral)) {
 		with (Spiral) {
-	        draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_white, 1)
-	        draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, image_xscale * 5, image_yscale * 5, image_angle, c_black, 0.8 - image_xscale)
+	        draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, (image_xscale * 10), (image_yscale * 10), (image_angle + 45), c_white, 1)
+	        draw_sprite_ext(sprite_index, -1, view_xview + x, view_yview + y, (image_xscale * 10), (image_yscale * 10), (image_angle + 45), c_black, (0.8 - image_xscale))
 	    }
 	}
 	

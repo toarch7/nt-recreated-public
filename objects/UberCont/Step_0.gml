@@ -20,8 +20,14 @@ if (instance_exists(CoopController)) {
 if (splatindex < 3 && paused) splatindex ++
 
 if (!KeyCont.press_paus[_index]) {
-	KeyCont.press_paus[_index] = (!paused && !want_pause && ((opt_autopause && !instance_exists(CoopController) && is_desktop && !window_has_focus()) || os_is_paused()))
-		|| scr_keyboard_check_pressed(vk_escape) || scr_keyboard_check_pressed(vk_backspace) || gamepad_button_check_pressed(0, gp_start)
+	KeyCont.press_paus[_index] = scr_keyboard_check_pressed(vk_escape)
+		|| scr_keyboard_check_pressed(vk_backspace) || gamepad_button_check_pressed(0, gp_start)
+	
+	if !paused && !want_pause && (!is_desktop || (!instance_exists(CoopController) && opt_autopause)) {
+		if (is_desktop ? (!window_has_focus()) : os_is_paused()) {
+			KeyCont.press_paus[_index] = true
+		}
+	}
 }
 
 
@@ -136,6 +142,9 @@ if (instance_exists(TestCont) && global.__debug_test_framerate_uncapped) {
 		}
 		test_framerate_uncapped = true
 	}
+	else if (is_desktop) {
+		draw_enable_drawevent(((current_frame % 30) < timescale) || window_has_focus())
+	}
 }
 else if (test_framerate_uncapped) {
 	if (game_get_speed(gamespeed_fps) == game_speed_uncaped) {
@@ -143,6 +152,10 @@ else if (test_framerate_uncapped) {
 		game_set_speed(30, gamespeed_fps)
 	}
 	test_framerate_uncapped = false
+}
+
+if instance_exists(TestCont) {
+	with (TestCont) event_user(0)
 }
 
 if (is_desktop) {

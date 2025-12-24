@@ -1,6 +1,6 @@
 
-if file_exists("gamestate.dat")
-	file_delete("gamestate.dat")
+if file_exists(savegame_file)
+	file_delete(savegame_file)
 
 scr_camera_set_position(0, 0)
 

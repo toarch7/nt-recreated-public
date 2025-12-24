@@ -1,7 +1,9 @@
 function scrPlayerProcTakeDamage(_amount) {
+	var _has_inframes = (nexthurt > current_frame)
+	
 	totdamagetaken += _amount
 	
-	if scr_skill_get(mut_sharp_teeth) {
+	if scr_skill_get(mut_sharp_teeth) && _amount {
 		var _left = view_xview,
 			_top = view_yview,
 			_right = _left + view_width,
@@ -26,7 +28,7 @@ function scrPlayerProcTakeDamage(_amount) {
 	if race == Race.Crystal && totdamagetaken >= 100 && !scr_race_is_skin_unlocked(Race.Crystal, SkinLetter.C) {
 		if (totdamagetaken >= 100) scrRaceUnlockSkin(Race.Crystal, SkinLetter.C)
 	}
-	else if (race == Race.Rogue) {
+	else if (race == Race.Rogue && !_has_inframes) {
 		var _sprite = (bskin == SkinLetter.C) ? sprRogueExplosionC : sprRogueExplosion
 		
 		with (scr_damage_create(x, y, PopoExplosion)) {
@@ -34,10 +36,18 @@ function scrPlayerProcTakeDamage(_amount) {
 			sprite_index = _sprite
 		}
 		
-		repeat (scr_ultra_get(Race.Rogue, UltraSkill.SuperBlastArmor) * 3) {
-			with (scr_damage_create(x + orandom(2), y + orandom(2), PopoExplosion)) {
-				mask_index = mskExplosion
-				sprite_index = _sprite
+		var _super_blast_armor = scr_ultra_get(Race.Rogue, UltraSkill.SuperBlastArmor)
+		if (_super_blast_armor) {
+			var _ang = random_angle
+			
+			repeat (_super_blast_armor * 3) {
+				var _x = x + ldrx(32, _ang) + orandom(2),
+					_y = y + ldry(32, _ang) + orandom(2)
+				
+				with (scr_damage_create(_x, _y, PopoExplosion)) {
+					mask_index = mskExplosion
+					sprite_index = _sprite
+				}
 			}
 		}
 		

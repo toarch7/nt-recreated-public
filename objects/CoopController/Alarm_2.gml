@@ -21,4 +21,4 @@ for (var i = 0; i < len; i++) {
 	else network_send_packet(_socket, pingbuffer, buffer_tell(pingbuffer))
 }
 
-player_count = variable_struct_names_count(global.__playerinstance_list)
+player_count = variable_struct_names_count(global.playerinstance_list)

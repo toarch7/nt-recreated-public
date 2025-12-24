@@ -20,5 +20,5 @@ function scrLevelUpScreenSubmit(_selection_text=undefined) {
 	
 	with (Player) scrUnlocksPlayerEquipment(id)
 	
-	scrGameSave()
+	scrSavegameSave()
 }
