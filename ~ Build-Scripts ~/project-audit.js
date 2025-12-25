@@ -5,6 +5,7 @@ const path = require("node:path");
 const overrides = require("./sprite-overrides.json");
 const Options = require("./options.json");
 
+const gameInstallationDirectory = project.locateSteamLibraryGame("Nuclear Throne");
 const projectSpriteNames = project.readResourceDir("sprites");
 const projectSoundNames = project.readResourceDir("sounds");
 
@@ -166,6 +167,24 @@ function performCompletenesAudit() {
     }
     else console.log("All project sounds were regenerated successfully!");
 }
+
+function performLangFolderCheck() {
+    let langPath = project.locate("datafiles/lang/");
+    if (!fs.existsSync(langPath)) fs.mkdirSync(langPath);
+    if (!fs.existsSync(gameInstallationDirectory + "/lang")) {
+        console.log("No \"lang\" directory found at", gameInstallationDirectory);
+        return;
+    }
+    try {
+        fs.cpSync(gameInstallationDirectory + "lang/", langPath, { recursive: true, force: true });
+    }
+    catch (e) {
+        console.log("Exception occured while copying localization files. Won't crash.", e.message);
+    }
+}
+
+console.log("\x1b[32mCopying language files...\x1b[0m");
+performLangFolderCheck();
 
 console.log("\x1b[32mValidating sprite names...\x1b[0m");
 performSpriteAudit();

@@ -14,8 +14,8 @@
   "exportDir": "",
   "name": "sndChickenReturn",
   "parent": {
-    "name": "Pickups Chests",
-    "path": "folders/Objects/Pickups Chests.yy"
+    "name": "Sounds",
+    "path": "folders/Sounds.yy"
   },
   "preload": false,
   "resourceType": "GMSound",

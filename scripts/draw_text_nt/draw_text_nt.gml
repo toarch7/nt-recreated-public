@@ -115,7 +115,9 @@ function render_parse_text(_text) {
 			if _char == "@" {
 				var _tag = ""
 				
-				if string_char_at(_text, _string_index) == "(" {
+				if (string_char_at(_text, _string_index) == "("
+					&& string_char_at(_text, _string_index + 2) != ")"
+				) {
 					var _index = 0,
 						_xoffset = 0,
 						_yoffset = 0
@@ -161,9 +163,13 @@ function render_parse_text(_text) {
 					}
 					until false
 					
-					var _spr = asset_get_index(_tag)
+					var _spr = handle_parse(_tag)
 					
-					if !sprite_exists(_spr) {
+					if (!sprite_exists(_spr == -1)) {
+						_spr = asset_get_index(_tag)
+					}
+					
+					if (!sprite_exists(_spr)) {
 						print("Unknown sprite:", _tag)
 						_spr = mskNone
 					}
@@ -200,8 +206,15 @@ function render_parse_text(_text) {
 				}
 				else {
 					// parse _tag
-					var _tag = string_lower(string_char_at(_text, _string_index ++)),
-						_color = -1, _formatting = -1
+					var _tag, _color = -1, _formatting = -1
+					
+					if (string_char_at(_text, _string_index + 2) == ")") {
+						_tag = string_lower(string_char_at(_text, ++_string_index))
+						_string_index ++
+					}
+					else {
+						_tag = string_lower(string_char_at(_text, _string_index ++))
+					}
 					
 					switch _tag {
 						case "s": _color = make_color_rgb(125, 131, 141); break // silver (gray)

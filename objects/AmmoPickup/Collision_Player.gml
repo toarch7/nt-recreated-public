@@ -9,7 +9,7 @@ with (scr_ultra_get(Race.CoopUltra, 1) ? Player : _player) {
 	var _ammo_type = scrAmmoDecideType(id, false),
 		_give_amount = typ_ammo[_ammo_type]
 	
-	if instance_is(self, CursedPickup) {
+	if instance_is(other, CursedPickup) {
 		_give_amount = round(_give_amount * 1.5)
 	}
 	

@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"loc",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"Language",
+    "path":"folders/Scripts/Language.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

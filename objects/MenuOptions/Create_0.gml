@@ -3,12 +3,24 @@
 
 scr_network_instance()
 
-languages = struct_keys(global.language_list)
+languages = struct_keys(global.language_store)
+full_system_language_name = scrLanguageGetSystemLangName()
 array_sort(languages, true)
 
-var _index = array_get_index(languages, "en")
+//array_sort(languages, function(a, b) {
+//	if (a == full_system_language_name || b == full_system_language_name) {
+//		return real(a == full_system_language_name) - real(b == full_system_language_name)
+//	}
+	
+//	a = loc_lang(a, "Init.Name", a)
+//	b = loc_lang(b, "Init.Name", b)
+	
+//	return ((a == b) ? 0 : ((a > b) ? 1 : -1))
+//})
+
+var _index = array_get_index(languages, language_default)
 if (_index != -1) array_delete(languages, _index, 1)
-array_insert(languages, 0, "en")
+array_insert(languages, 0, language_default)
 
 enum OptionCategory {
 	Main,
@@ -56,7 +68,7 @@ text_input_shake = 0
 await_input = 0
 await_keybind = undefined
 
-category = 0
+category = OptionCategory.Main
 category_stack = ds_stack_create()
 
 slider = undefined
@@ -64,7 +76,7 @@ slider_change = 0
 slider_x = 0
 
 pointed_item = 0
-item_count = -1
+item_count = 0
 
 mouse_active = true
 mx_last = 0
@@ -87,6 +99,13 @@ option_list_max = 0
 
 debris = noone
 
+scroll = 0
+scroll_min = 0
+scroll_max = 0
+scroll_check = false
+scroll_speed = 0
+dragging = false
+
 wait = true
 press = 0
 
@@ -95,6 +114,7 @@ disclaimer_pop = 0
 options = []
 option_list = undefined
 option_number = -1
+items = []
 
 last_change = 0
 
@@ -211,7 +231,7 @@ scrOptionsMenuCreateElements(
 			draw_sprite(sprCrosshair, opt.value, drawx + 90, drawy)
 		},
 		
-		value_get: function(opt) {
+		get_value: function(opt) {
 			return opt.value + 1
 		}
 	},
@@ -224,7 +244,7 @@ scrOptionsMenuCreateElements(
 			return !UberCont.opt_resolution
 		},
 		
-		value_get: function(opt) {
+		get_value: function(opt) {
 			if opt.value == 0
 				return loc("NONE")
 			
@@ -283,7 +303,7 @@ scrOptionsMenuCreateElements(
 			
 		},
 		
-		value_get: function(opt) {
+		get_value: function(opt) {
 			return window_get_fullscreen()
 		}
 	},
@@ -383,13 +403,13 @@ scrOptionsMenuCreateElements(
 		},
 		
 		awake: function(opt) {
-			opt.value = opt.value_get(opt)
+			opt.value = opt.get_value(opt)
 			opt.previous = opt.value
 			
 			colorpicker_update_scales(global.player_color)
 		},
 		
-		value_get: function(opt) {
+		get_value: function(opt) {
 			return UberCont.opt_color
 		},
 		
@@ -482,7 +502,7 @@ scrOptionsMenuCategoryBegin(OptionCategory.Game_Profile)
 
 scrOptionsMenuCreateElements(
 	{ type: "button", name: "ID", key: "general_uid",
-		value_get: function(opt) {
+		get_value: function(opt) {
 			var value = scrSavedatascrGetUID(),
 				copied = opt[$ "__copied"]
 			
@@ -517,7 +537,7 @@ scrOptionsMenuCreateElements(
 			return scrValidateUsername(opt, str, confirm)
 		},
 		
-		name_get: function(opt) {
+		get_name: function(opt) {
 			return text_input_element == opt ? "ENTER YOUR NICKNAME" : opt.name
 		}
 	},
@@ -528,7 +548,7 @@ scrOptionsMenuCreateElements(
 			scrOptionsMenuChangeCategory(OptionCategory.Game_Color)
 		},
 		
-		value_get: function(opt) {
+		get_value: function(opt) {
 			if !global.player_color
 				return "DEFAULT"
 			
@@ -593,7 +613,7 @@ scrOptionsMenuCreateElements(
 			}
 		},
 		
-		value_get: function(opt) {
+		get_value: function(opt) {
 			return loc(gamepad_types[opt.value])
 		}
 	},
@@ -611,7 +631,7 @@ scrOptionsMenuCreateElements(
 	{ type: "slider", name: "SIZE SCALE", key: "controls_scale", mobile_only: true },
 	
 	{ type: "button", name: "REMAP CONTROLS",
-		name_get: function(opt) {
+		get_name: function(opt) {
 			var str = opt.name
 			
 			if is_gamepad()
@@ -650,22 +670,33 @@ scrOptionsMenuCategoryEnd()
 scrOptionsMenuCategoryBegin(OptionCategory.Language)
 
 array_foreach(languages, function(_language_key) {
-	var _language_data = global.language_list[$ _language_key]
+	var _language_data = global.language_store[$ _language_key]
 	
 	if (is_undefined(_language_data)) exit
-	var _language_name = _language_data[$ "_LANGUAGE_NAME"]
-	if (!is_string(_language_name)) _language_name = string_upper(_language_key)
-	if (_language_name == "EN") _language_name = "ENGLISH"
 	
-	scrOptionsMenuCreateElement(
-		{ type: "button", name: _language_name, language: _language_key,
-			click: function(_opt) {
-				snd_play(sndClick)
-				save_set_value("etc", "language", _opt.language)
-				scrOptionsUpdate()
-			}
-		},
-	)
+	var _language_name = _language_data[$ "Init.Name"],
+		_language_label = _language_data[$ "Init.LabelSprite"]
+	
+	if (!is_string(_language_name)) {
+		_language_name = string_upper(_language_key)
+	}
+	
+	var _opt = {
+		type: "button",
+		name: _language_name,
+		language: _language_key,
+		click: function(_opt) {
+			snd_play(sndClick)
+			save_set_value("etc", "language", _opt.language)
+			scrOptionsUpdate()
+		}
+	}
+	
+	if (sprite_exists(_language_label)) {
+		_opt.sprite = [ _language_label, 0 ]
+	}
+	
+	scrOptionsMenuCreateElement(_opt)
 })
 
 scrOptionsMenuCategoryEnd()
@@ -752,28 +783,28 @@ cpref_name = function(opt) { return (!UberCont.ctot_time[opt.char]) ? "@d- LOCKE
 
 scrOptionsMenuCreateElements(
 	{ type: "switch", name: "AUTO TELEKINESIS",      key: "cprefs_eyes", char: Race.Eyes,
-			condition: cpref_condition, name_get: cpref_name },
+			condition: cpref_condition, get_name: cpref_name },
 		
 	{ type: "switch", name: "AUTO EXPLOSIONS",       key: "cprefs_melting", char: Race.Melting,
-			condition: cpref_condition, name_get: cpref_name },
+			condition: cpref_condition, get_name: cpref_name },
 		
 	{ type: "switch", name: "AUTO SNARE",            key: "cprefs_plant", char: Race.Plant,
-			condition: cpref_condition, name_get: cpref_name },
+			condition: cpref_condition, get_name: cpref_name },
 		
 	{ type: "switch", name: "POP-POP SWITCH",        key: "cprefs_yv", char: Race.Venuz,
-			condition: cpref_condition, name_get: cpref_name },
+			condition: cpref_condition, get_name: cpref_name },
 		
 	{ type: "switch", name: "DUAL WEILD SWITCH",     key: "cprefs_steroids", char: Race.Steroids,
-			condition: cpref_condition, name_get: cpref_name },
+			condition: cpref_condition, get_name: cpref_name },
 		
 	{ type: "switch", name: "USE WEAPON BEAMING",    key: "cprefs_horror", char: Race.Horror,
-			condition: cpref_condition, name_get: cpref_name },
+			condition: cpref_condition, get_name: cpref_name },
 		
 	{ type: "switch", name: "SWIPE BOMBING",         key: "cprefs_rogue", char: Race.Rogue,
-			condition: cpref_condition, name_get: cpref_name },
+			condition: cpref_condition, get_name: cpref_name },
 	
 	{ type: "switch", name: "GAMBLE SWITCH",         key: "cprefs_skeleton", char: Race.Skeleton,
-			condition: cpref_condition, name_get: cpref_name },
+			condition: cpref_condition, get_name: cpref_name },
 )
 
 
@@ -790,7 +821,7 @@ scrOptionsMenuCreateElements(
 	{ type: "switch", name: "STICK REGIONS",    key: "controls_stickregions" },
 	
 	{ type: "switch", name: "HIDE JOYSTICKS",   key: "controls_hiddensticks",
-		value_get: function(opt) {
+		get_value: function(opt) {
 			if UberCont.opt_stickregions
 				return true
 			
@@ -1004,7 +1035,7 @@ element_functions[$ "list"] = function(opt) {
 }
 
 element_functions[$ "input"] = function(opt) {
-	var v = method_execute(opt.value_get, opt) ?? opt.value
+	var v = method_execute(opt.get_value, opt) ?? opt.value
 	
 	opt.previous = v
 	keyboard_string = v

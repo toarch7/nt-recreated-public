@@ -8,7 +8,7 @@ with (other) {
 	
 	rogue_ammo += _amount
 	
-	var _str = loc_sfmt("+% PORTAL STRIKE" + (_amount > 1 ? "S" : ""), string(_amount))
+	var _str = loc_fmt("+% PORTAL STRIKE" + (_amount > 1 ? "S" : ""), string(_amount))
 	
 	if (rogue_ammo >= rogue_ammo_max) {
 		_str = loc("MAX PORTAL STRIKES")

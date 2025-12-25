@@ -14,7 +14,7 @@ image_speed = 0
 if instance_exists(Player) {
 	var _curse = scrPlayerCountCursed(all)
 	
-	if _curse && random(_curse + 3) < _curse {
+	if _curse >= 2 && random(2) < 1 {
 		instance_create(x, y, CursedPickup)
 		instance_destroy(id, false)
 	}

@@ -7,11 +7,11 @@ function scrDrawGameModeIndication() {
 			var _subimage = scrGameIsWeeklyRun() ? 2 : 1,
 				_name = scrMenuButtonName(sprPlayButtons, _subimage)
 			
-			if loc_exists(_name) {
+			if is_string(_name) {
 				draw_set_halign(fa_center)
 				draw_set_valign(fa_middle)
 				
-				draw_text_bigname(_x, _y, loc(_name))
+				draw_text_bigname(_x, _y, _name)
 				
 				draw_set_halign(fa_left)
 				draw_set_valign(fa_top)

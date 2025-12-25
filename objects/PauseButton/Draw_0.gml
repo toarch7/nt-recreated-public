@@ -6,18 +6,9 @@ var _color = hover ? c_white : c_uigray,
 	_dx = x, _dy = y + appear
 
 if appear < 2 {
-	if loc_exists(_button_name) {
-		// currently unused
-		var _angle = 0
-		
+	if is_string(_button_name) {
 		draw_set_halign(fa_center)
-		
-		draw_text_bigname(
-			_dx + sign(_angle) * 8,
-			_dy - 8,
-			loc(_button_name),
-			_color, _angle, 0.65)
-		
+		draw_text_bigname(_dx, _dy - 8, _button_name, _color, 1, 0.65)
 		draw_set_halign(fa_left)
 	}
 	else {

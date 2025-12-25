@@ -20,11 +20,13 @@ function scrPlayerHeal(_player, _amount, _create_popup=false) {
 		}
 		else scr_hit_self(-_amount)
 		
-		if _create_popup {
-			if _is_full && _amount > 0 {
-				scrPopupCreate(x, y, loc("MAX HP"))
+		if _create_popup && _amount > 0{
+			if _is_full {
+				scrPopupCreate(x, y, loc("Pickups:MaxHealth", "MAX HP"))
 			}
-			else scrPopupCreate(x, y, scrAmountChangeString(_amount) + " " + loc("HP"))
+			else {
+				scrPopupCreate(x, y, loc_fmt("Pickups:AddHealth", "+% HP", _amount))
+			}
 		}
 	}
 }

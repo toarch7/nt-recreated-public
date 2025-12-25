@@ -280,8 +280,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Control_Icons",
-    "path":"folders/Sprites/UIs/Control_Icons.yy",
+    "name":"Controls",
+    "path":"folders/Sprites/UIs/Controls.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

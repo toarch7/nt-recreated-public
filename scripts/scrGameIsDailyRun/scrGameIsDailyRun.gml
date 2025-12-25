@@ -17,3 +17,9 @@ function scrGameIsWeeklyRun() {
 function scrGameIsHardmode() {
 	return global.hardmode
 }
+
+function scrGameIsContinuedRun() {
+	with UberCont {
+		return continued_run
+	}
+}

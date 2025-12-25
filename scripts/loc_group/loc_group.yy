@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"loc_sfmt",
+  "%Name":"loc_group",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"loc_sfmt",
+  "name":"loc_group",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"Language",
+    "path":"folders/Scripts/Language.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

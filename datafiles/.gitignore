@@ -1,1 +1,3 @@
 *.dll
+lang/*
+!lang/.gitkeep

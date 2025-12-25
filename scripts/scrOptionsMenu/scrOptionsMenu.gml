@@ -52,8 +52,8 @@ function scrOptionsMenuCreateElement(_opt, _to_current_category = false) {
 		
 		_opt[$ "draw"] ??= undefined
 		_opt[$ "click"] ??= undefined
-		_opt[$ "name_get"] ??= undefined
-		_opt[$ "value_get"] ??= undefined
+		_opt[$ "get_name"] ??= undefined
+		_opt[$ "get_value"] ??= undefined
 		_opt[$ "condition"] ??= undefined
 		_opt[$ "sprite"] ??= undefined
 		_opt[$ "key"] ??= undefined
@@ -82,6 +82,18 @@ function scrOptionsMenuCreateElement(_opt, _to_current_category = false) {
 			}
 		}
 		
+		_opt.has_value = method(_opt, function() {
+			if (type == "keybind") {
+				return true
+			}
+			
+			if ((type == "category" || type == "button") && value != "") {
+				return false
+			}
+			
+			return (value != "")
+		})
+		
 		if !is_undefined(_opt.sprite) {
 			_opt.height = max(_opt.height, sprite_get_height(_opt.sprite[0]))
 		}
@@ -90,10 +102,14 @@ function scrOptionsMenuCreateElement(_opt, _to_current_category = false) {
 			_opt.value = UberCont.saveData[? _opt.key]
 		}
 		
-		if _to_current_category {
+		if (!_opt.has_value()) _opt.width *= 0.5
+		
+		if (_to_current_category) {
 			array_push(options[category], _opt)
 		}
-		else array_push(option_list, _opt)
+		else {
+			array_push(option_list, _opt)
+		}
 	}
 }
 
@@ -132,34 +148,46 @@ function scrOptionsMenuChangeCategory(_category, _queue = true) {
 			print("Can't change category to", _category, ", ID number exceeded", array_length(options))
 			exit
 		}
-	
-		if category != _category && _queue
+		
+		if category != _category && _queue {
 			ds_stack_push(category_stack, category)
-	
+		}
+		
 		category = _category
-	
-		var items = options[_category]
-	
+		
+		var _options = options[_category],
+			_option_count = array_length(_options)
+		
+		items = []
+		scroll_check = true
 		last_change = current_frame + 3
 		pointed_item = -1
-		item_count = -1
-	
-		for(var i = 0; i < array_length(items); i ++) {
-			var _item = items[i]
+		item_count = 0
 		
-			_item.appear = 0
-		
-			if _item[$ "awake"] != undefined
-				method_execute(_item.awake, _item)
+		for(var i = 0; i < _option_count; i ++) {
+			var _opt = _options[i]
 			
-			if _item.type == "keybind" {
-				if _item.condition != undefined {
-					_item.available = method_execute(_item.condition, _item)
+			_opt.appear = 0
+			
+			if _opt[$ "awake"] != undefined {
+				method_execute(_opt.awake, _opt)
+			}
+			
+			if _opt.type == "keybind" {
+				if _opt.condition != undefined {
+					_opt.available = method_execute(_opt.condition, _opt)
 				}
 				
-				_item.visible = _item.available
+				_opt.visible = _opt.available
+			}
+			
+			if _opt.visible {
+				array_push(items, _opt)
+				item_count ++
 			}
 		}
+		
+		draw_step_size = (item_count >= 12) ? 14 : 16
 		
 		if !is_desktop {
 			mousex = -1000

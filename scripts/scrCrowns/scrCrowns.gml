@@ -141,7 +141,7 @@ function scrCrownUnlock(_race_id, _crown_id) {
 	
 	scr_loadout_race_unlock_crown(_race_id, _crown_id)
 	
-    scrShowUnlockPopup(loc_sfmt("@w%@s UNLOCKED#FOR @w%",
+    scrShowUnlockPopup(loc_fmt("@w%@s UNLOCKED#FOR @w%",
 		loc(scr_crown_get_name(_crown_id)), loc(scrRaceGetName(_race_id))))
     
 	scrSave()

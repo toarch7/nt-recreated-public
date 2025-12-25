@@ -5,6 +5,8 @@ var _is_local = scr_player_is_local(index)
 
 if (hp < 0) hp = 0
 
+if (lsthealth >= max_hp) lsthealth = max_hp
+
 if scr_weapon_is_melee(wep) {
 	if wepangle == 0 {
 		wepangle = choose(120, -120)
@@ -512,12 +514,18 @@ if reload > 0 || (breload > 0 && race == Race.Steroids) {
 #endregion
 
 if lsthealth != hp {
-	if (lsthealth > hp) drawlowhp = 30
-	lsthealth = approach(lsthealth, hp, 0.5 * timescale)
-}
-
-if lsthealth >= max_hp {
-	lsthealth = max_hp
+	if (lsthealth > hp && hp <= 4
+		&& (!snd_is_playing(snd_lowh) || snd_track_position(snd_lowh) > 0.05)
+	) {
+		snd_play(snd_lowh)
+	}
+	
+	if (abs(hp - lsthealth) > 20) {
+		lsthealth = t_lerp(lsthealth, hp, 0.2)
+	}
+	else {
+		lsthealth = approach(lsthealth, hp, 0.5 * timescale)
+	}
 }
 
 if sprite_index != spr_hurt && lsthealth > hp {
@@ -602,7 +610,7 @@ if infammo {
 			image_speed = 0.4
 		}
 		
-		snd_play(sndFishWarrantEnd)
+		snd_play_hit_big(sndFishWarrantEnd)
 	}
 }
 
@@ -665,6 +673,18 @@ if race == Race.Frog {
 		}
 
 		froggas = 0
+	}
+}
+
+if (global.__debug_noreload) {
+	if (reload > 0) {
+		can_shoot = true
+		reload = 0
+	}
+	
+	if (breload > 0) {
+		bcan_shoot = true
+		breload = 0
 	}
 }
 

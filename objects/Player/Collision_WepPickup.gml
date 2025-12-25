@@ -71,8 +71,8 @@ if ((other.autopick && (!other.speed || other.slowreturn == 2)) || KeyCont.press
         if (!other.autopick) {
 			snd_play(wep_swap[wep])
 			
-			// TODO: localized string
-			scrPopupCreate(x, y, loc(wep_name[wep]) + "!")
+			var _name = loc("Weapons", wep, "Name", scr_weapon_get_name(wep))
+			scrPopupCreate(x, y, loc_fmt("HUD:GotWeapon", "%!", _name))
 		}
 		
 		if scr_weapon_is_melee(wep) {

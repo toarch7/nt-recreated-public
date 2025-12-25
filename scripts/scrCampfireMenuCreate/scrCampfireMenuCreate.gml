@@ -378,9 +378,9 @@ function scrCampfireMenuDrawCharText(_x, _y, _index, _race, _skin, _halign = fa_
 	
 	#region Name
 		
-		var _race_name = scrRaceGetName(race)
+		var _race_name = scrRaceGetName(_race)
 		
-		if !loc_exists(_race_name) && player_count == 1 {
+		if (!loc_exists("Races", _race, "Name") xor player_count == 1) {
 			var _drawx = _x + _bigname_x,
 				_drawy = _y + _bigname_y - sprite_get_height(sprBigName)
 			
@@ -394,7 +394,7 @@ function scrCampfireMenuDrawCharText(_x, _y, _index, _race, _skin, _halign = fa_
 			draw_sprite_ext(sprBigName, _race, _drawx, _drawy, 1, 1, 0, c_white, 1)
 		}
 		else {
-			draw_text_bigname(_x + _bigname_x, _y + _bigname_y, string_upper(loc(_race_name)), c_white, 1, 1)
+			draw_text_bigname(_x + _bigname_x, _y + _bigname_y, loc("Races", _race, "Name", _race_name), c_white, 1, 1)
 		}
 		
 	#endregion
@@ -404,11 +404,11 @@ function scrCampfireMenuDrawCharText(_x, _y, _index, _race, _skin, _halign = fa_
 		var _appear = textappear[_index]
 		
 		if _race != Race.Random && _appear != 2 {
-			var _passive_text = loc(scrRaceGetPassiveSkillDescription(_race)),
-				_active_text = loc(scrRaceGetActiveSkillDescription(_race)),
+			var _passive_text = loc("Races", _race, "Passive", scrRaceGetPassiveSkillDescription(_race)),
+				_active_text = loc("Races", _race, "Active", scrRaceGetActiveSkillDescription(_race)),
 				_skills_text, _skills_y = _bigname_y;
 			
-			_skills_text = $"{string_replace_all(_passive_text, ", ", "#")}\n{string_replace_all(_active_text, ", ", "#")}"
+			_skills_text = $"{_passive_text}\n{_active_text}"
 			
 			if _valign == fa_bottom {
 				_skills_y += (string_height(_skills_text) div 2) + _appear + 8
@@ -627,14 +627,14 @@ function scrMenuDrawLoadout(_pinst) {
 		
 		var _tooltip_always_visible = !is_keyboard(_pinst.index)
 		if scrGameIsWeeklyRun() && (_tooltip_always_visible || _splat_pointed) {
-			_tooltip = loc(scr_crown_get_name(GameCont.crown)) + "\n"
-					+ "@s" + loc(scr_crown_get_text(GameCont.crown)) + "@w"
+			_tooltip = loc("Crowns", _crown_current, "Name", scr_crown_get_name(_crown_current)) + "\n"
+			  + "@s" + loc("Crowns", _crown_current, "Text", scr_crown_get_text(_crown_current)) + "@w"
 			
 			if (scr_weapon_is_valid(_primary_weapon)) {
-				_tooltip += "\n" + loc(scr_weapon_get_name(_primary_weapon))
+				_tooltip += "\n" + loc("Weapons", _primary_weapon, "Name", scr_weapon_get_name(_primary_weapon))
 			}
 			if (scr_weapon_is_valid(_secondary_weapon)) {
-				_tooltip += "\n" + loc(scr_weapon_get_name(_secondary_weapon))
+				_tooltip += "\n" + loc("Weapons", _primary_weapon, "Name", scr_weapon_get_name(_secondary_weapon))
 			}
 			
 			_tooltip_x = _splat_x - 55
@@ -721,7 +721,8 @@ function scrMenuDrawLoadout(_pinst) {
 				
 				if _unlocked {
 					//
-					_tooltip = loc(scr_crown_get_name(_crown_id)) + "\n@s" + loc(scr_crown_get_text(_crown_id))
+					_tooltip = loc("Crowns", _crown_id, "Name", scr_crown_get_name(_crown_id))
+					+ "\n@s" + loc("Crowns", _crown_id, "Text", scr_crown_get_text(_crown_id))
 					
 					_tooltip_x = _crown_x
 					_tooltip_y = _crown_y - 16
@@ -740,14 +741,14 @@ function scrMenuDrawLoadout(_pinst) {
 				}
 				else {
 					if (!_is_touch) {
-						_tooltip = loc("LOCKED")
+						_tooltip = loc("Loadout:CrownLocked", "LOCKED")
 						_tooltip_x = _crown_x
 						_tooltip_y = _crown_y - 16
 					}
 					
 					if _press {
 						if (_is_touch) with (Menu) {
-							unlock_hint = "LOCKED"
+							unlock_hint = loc("Loadout:CrownLocked", "LOCKED")
 							unlock_hint_pop = 2
 							alarm[11] = 90
 						}
@@ -774,7 +775,8 @@ function scrMenuDrawLoadout(_pinst) {
 			
 			for(var _skin_id = 0; _skin_id < _skin_count; ++_skin_id) {
 				var _is_pointed = point_in_circle(_mx, _my, _skins_x, _skins_y, 10),
-					_unlocked = scr_race_is_skin_unlocked(_race, _skin_id)
+					_unlocked = scr_race_is_skin_unlocked(_race, _skin_id),
+					_letter = scr_race_get_skin_letter(_skin_id, true)
 				
 				if _is_pointed {
 					if _unlocked {
@@ -783,7 +785,7 @@ function scrMenuDrawLoadout(_pinst) {
 							snd_play(sndHover)
 						}
 						
-						_tooltip = loc_sfmt("% SKIN", scr_race_get_skin_letter(_skin_id, true))
+						_tooltip = loc("Loadout:Skin" + _letter, _letter + " SKIN")
 						_tooltip_x = _skins_x
 						_tooltip_y = _skins_y - 16
 						
@@ -793,10 +795,10 @@ function scrMenuDrawLoadout(_pinst) {
 								portrait_offsets[_pinst.get_index()] = 180
 								_pinst.skin = _skin_id
 								
-								if _skin_id == 2 {
+								if _skin_id == SkinLetter.C {
 									snd_play(sndMenuCSkin, random_range(0.95, 1.05))
 								}
-								else if _skin_id > 0 {
+								else if _skin_id == SkinLetter.B {
 									snd_play(sndMenuBSkin, 1 + (_skin_id - 1) * random_range(0.05, 0.1))
 								}
 								else snd_play(sndMenuASkin, 0.95 + random(0.1))
@@ -805,15 +807,25 @@ function scrMenuDrawLoadout(_pinst) {
 						}
 					}
 					else {
+						var _suffix = "SkinUnlock"
+						
+						if (_skin_id > SkinLetter.B) {
+							_suffix = _letter + _suffix
+						}
+						
+						var _string = loc("Races", _race,
+								(_skin_id > SkinLetter.B ? (_letter + _suffix) : _suffix),
+								scrRaceGetSkinUnlockDescription(_race, _skin_id))
+						
 						if (!_is_touch) {
-							_tooltip = scrRaceGetSkinUnlockDescription(_race, _skin_id)
+							_tooltip = _string
 							_tooltip_x = _skins_x
 							_tooltip_y = _skins_y - 16
 						}
 						
-						if _press {
-							if (_is_touch) with Menu {
-								unlock_hint = scrRaceGetSkinUnlockDescription(_race, _skin_id)
+						if (_press) {
+							if (_is_touch) with (Menu) {
+								unlock_hint = _string
 								unlock_hint_pop = 2
 								alarm[11] = 90
 							}
@@ -866,7 +878,7 @@ function scrMenuDrawLoadout(_pinst) {
 				scrLoadoutDrawWeapon(_weapon, _weapons_x, _weapons_y - _offset, _color)
 				
 				if _is_pointed {
-					_tooltip = loc(scr_weapon_get_name(_weapon))
+					_tooltip = loc("Weapons", _weapon, "Name", scr_weapon_get_name(_weapon))
 					_tooltip_x = _weapons_x
 					_tooltip_y = _weapons_y - 16
 					

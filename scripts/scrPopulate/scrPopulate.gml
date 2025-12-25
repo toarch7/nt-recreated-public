@@ -226,11 +226,13 @@ function scrPopulate() {
 	// Bandits camping near chests
 	if ((_area < area_city || _area > area_vault) && _area != area_mansion && _area != area_hq) {
 		with (chestprop) {
-			if (place_free(x, y)) instance_create(x, y, Bandit)
+			if (place_free(x, y) && (!instance_is(self, WeaponChest) || object_index == WeaponChest)) {
+				instance_create(x, y, Bandit)
+			}
 		}
 		
 		with (RadChest) {
-			if (place_free(x, y)) instance_create(x, y, Bandit)
+			if (place_free(x, y) && !instance_is(self, RadMaggotChest)) instance_create(x, y, Bandit)
 		}
 	}
 	#endregion

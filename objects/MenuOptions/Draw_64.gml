@@ -3,5 +3,4 @@ if lockstep_stop
 
 event_user(1)
 
-with BackButton
-	event_perform(ev_draw, ev_gui)
+with (BackButton) event_perform(ev_draw, ev_gui)

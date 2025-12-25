@@ -45,5 +45,6 @@
     "sprMobilePickup": { "custom": true },
     "sprSliderEndHorizontal": { "custom": true },
     "sprTextLinkURLfound": { "custom": true },
+    "sprContinuedRunIcon": { "custom": true },
     "sprTextLinkURL": { "custom": true }
 }

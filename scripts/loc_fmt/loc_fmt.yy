@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scrLoadLocalizations",
+  "%Name":"loc_fmt",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scrLoadLocalizations",
+  "name":"loc_fmt",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"Language",
+    "path":"folders/Scripts/Language.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

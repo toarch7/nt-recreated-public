@@ -28,9 +28,7 @@ if addy > 0 {
 		_ypos = view_yview + view_height - 92 - addy,
 		_name = scrMenuButtonName(sprBigNameCentered, _race)
 	
-	if (!sprite_exists(_sprite) || loc_exists(_name)) {
-		_name = loc(_name)
-		
+	if (!sprite_exists(_sprite) || is_string(_name)) {
 		if (_bskin > SkinLetter.A) _name += " " + scr_race_get_skin_letter(_bskin)
 		
 		draw_align(fa_center, fa_middle)

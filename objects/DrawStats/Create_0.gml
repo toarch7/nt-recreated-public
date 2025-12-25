@@ -18,6 +18,10 @@ for(var _race_id = Race.Random; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) 
         num = _race_id
 		image_index = _race_id
         pos = _slot_index++
+		
+		if (_race_id == Race.Random) {
+			sprite_index = sprGeneralStats
+		}
     }
 	
     _x += 20

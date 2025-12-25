@@ -9,6 +9,7 @@ function scr_hit(_instance, _amount, _hitid = HitId.None) {
 			if (is_array(_hitid) || (_hitid >= 0 && _hitid != HitId.Player)) {
 				if (scr_player_is_local(index)) GameCont.deathcause = _hitid
 			}
+			drawlowhp = 30
 		}
 		
 		if _amount > 0 {

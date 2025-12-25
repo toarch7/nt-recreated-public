@@ -1,39 +1,20 @@
 if lockstep_stop
 	exit
 
-var p = instance_nearest(x, y, Player)
+var _player, _give_amount = num;
 
-instance_create(x, y, HealFX)
+if !instance_is(other, Player) {
+	_player = instance_nearest(x, y, Player)
+}
+else _player = other.id
 
-instance_destroy()
-
-if p.max_hp > 1 {
-	p.hp += num
-	
-	if p.hp > p.max_hp
-		p.hp = p.max_hp
-	
-	dir = instance_create(x,y,PopupText)
-	dir.mytext = "+" + string(num) + " HP"
-	
-	if p.hp >= p.max_hp
-		dir.mytext = loc("MAX HP")
+with (scr_ultra_get(Race.CoopUltra, 1) ? Player : _player) {
+	scrPlayerHeal(id, _give_amount, true)
+	instance_create(x, y, HealFX)
 }
 
 instance_create(x, y, SmallChestPickup)
 
 snd_play(scr_skill_get(mut_second_stomach) ? sndHPPickupBig : sndHPPickup)
 
-if scr_ultra_get(Race.CoopUltra, UltraSkill.BloodBond) && alarm[0] != -1 {
-	var plr = p.id
-	alarm[0] = -1
-	
-	with Player {
-		if id != plr {
-			hp += p.num
-			
-			if hp > max_hp
-				hp = max_hp
-		}
-	}
-}
+instance_destroy()

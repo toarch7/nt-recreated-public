@@ -14,11 +14,12 @@ if (!instance_exists(GameCont) && file_exists(savegame_file)) {
 	UberCont.continued_run = true
 	var _success = scrSavegameLoad()
 	
-	file_delete(savegame_file)
+	//file_delete(savegame_file)
     
 	if (!_success) {
-		game_restart()
-        exit
+		file_delete(savegame_file)
+        game_restart()
+		exit
     }
 	
 	_just_loaded = true

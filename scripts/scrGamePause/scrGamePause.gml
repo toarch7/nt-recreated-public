@@ -82,5 +82,5 @@ function scrGameIsPaused() {
 
 function scrGameCanPause() {
 	return !(instance_exists(GenCont) || instance_exists(Credits) || instance_exists(Cinematic)
-		|| !instance_exists(Player) || instance_exists(GameOver) || UberCont.want_pause)
+		|| !instance_exists(Player) || instance_exists(GameOver) || UberCont.want_pause || room == romInit)
 }

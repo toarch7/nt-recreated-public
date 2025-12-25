@@ -1,156 +1,92 @@
-function scrMenuButtonName(spr = sprite_index, img = image_index) {
-    switch spr {
+function scrMenuButtonName(_sprite_index = sprite_index, _image_index = image_index) {
+	static _L = function(_key, _default) {
+		for(var i = 1; i < argument_count - 1; ++i) {
+			_key += ":" + string(argument[i])
+		}
+		
+		return loc_exists(_key) ? undefined : loc(_key, _default)
+	}
+	
+    switch _sprite_index {
         case sprMainMenuButtons:
-            switch img {
-                case 0:
-                    return "PLAY"
-                case 1:
-                    return "CO-OP"
-                case 2:
-                    return "SETTINGS"
-                case 3:
-                    return "STATS"
-                case 4:
-                    return "QUIT"
-                case 5:
-                    return "ACHIEVS"
+            switch _image_index {
+                case 0: return loc("MainMenu:Play", "PLAY")
+                case 1: return loc("MainMenu:Coop", "CO-OP")
+                case 2: return loc("MainMenu:Settings", "SETTINGS")
+                case 3: return loc("MainMenu:Stats", "STATS")
+                case 4: return loc("MainMenu:Quit", "QUIT")
             }
             break
 
         case sprPlayButtons:
-            switch img {
-                case 0:
-                    return "NORMAL"
-                case 1:
-                    return "DAILY"
-                case 2:
-                    return "WEEKLY"
-                case 3:
-                    return "HARD"
+            switch _image_index {
+                case 0: return loc("PlayMenu:Normal", "NORMAL")
+                case 1: return loc("PlayMenu:Daily", "DAILY")
+                case 2: return loc("PlayMenu:Weekly", "WEEKLY")
+                case 3: return loc("PlayMenu:Hardmode", "HARD")
+                case 4: return loc("PlayMenu:Custom", "CUSTOM")
             }
             break
 
         case sprBigName:
         case sprBigNameCentered:
         case sprBigNameCenteredB:
-            switch img {
-                case 0:
-                    return "RANDOM"
-                case 1:
-                    return "FISH"
-                case 2:
-                    return "CRYSTALL"
-                case 3:
-                    return "EYES"
-                case 4:
-                    return "MELTING"
-                case 5:
-                    return "PLANT"
-                case 6:
-                    return "Y.V."
-                case 7:
-                    return "STEROIDS"
-                case 8:
-                    return "ROBOT"
-                case 9:
-                    return "CHICKEN"
-                case 10:
-                    return "REBEL"
-                case 11:
-                    return "HORROR"
-                case 12:
-                    return "ROGUE"
-                case 13:
-                    return "BIG DOG"
-                case 14:
-                    return "SKELETON"
-                case 15:
-                    return "FROG"
-                case 16:
-                    return "CUZ"
-            }
+			return loc("Races", _image_index, "Name", scrRaceGetName(_image_index))
             break
 
         case sprPauseButton:
-            switch img {
-                case 0:
-                    return "MENU"
-                case 1:
-                    return "RETRY"
-                case 6:
-                    return "RETRY"
-                case 2:
-                    return "SETTINGS"
-                case 3:
-                    return "CONTINUE"
-				case 4:
-					return "BACK"
-				case 5:
-					return "QUIT"
-				case 7:
-					return "BOK!"
+            switch _image_index {
+                case 0: return loc("PauseMenu:BackToMenu", "MENU")
+                case 1: return loc("PauseMenu:Retry", "RETRY")
+                case 6: return loc("PauseMenu:Retry2", "RETRY")
+                case 2: return loc("PauseMenu:Settings", "SETTINGS")
+                case 3: return loc("PauseMenu:Continue", "CONTINUE")
+				case 4: return loc("PauseMenu:Back", "BACK")
+				case 5: return loc("PauseMenu:Quit", "QUIT")
+				case 7: return loc("PauseMenu:Bok", "BOK!")
             }
             break
 
         case sprOptionsButtons:
-            switch img {
-                case 0:
-                    return "AUDIO"
-                case 1:
-                    return "VIDEO"
-                case 2:
-                    return "GAME"
-                case 3:
-                    return "CONTROLS"
+            switch _image_index {
+                case 0: return loc("Options:AudioOptions", "AUDIO")
+                case 1: return loc("Options:VideoOptions", "VIDEO")
+                case 2: return loc("Options:GameOptions", "GAME")
+                case 3: return loc("Options:ControlsOptions", "CONTROLS")
             }
             break
 
         case sprCoopButton:
-            switch img {
-                case 0:
-                    return "HOST"
-                case 1:
-                    return "JOIN"
+            switch _image_index {
+                case 0: return loc("R:CoopLobby:Host", "HOST")
+                case 1: return loc("R:CoopLobby:Join", "JOIN")
             }
             break
 		
 		case sprBossName:
-			switch img {
-				case 0:
-					return "BIG# BANDIT"
-				case 1:
-					return "BIG# DOG"
-				case 2:
-					return "LIL# HUNTER"
-				case 3:
-					return "THRONE"
-				case 4:
-					return "THRONE# II"
-				case 5:
-					return "MOM"
-				case 6:
-				case 9:
-					return "HYPER# CRYSTAL"
-				case 7:
-					return "TECHNO#MANCER"
-				case 8:
-					return "CAPTAIN"
+            var _boss_name = "???"
+			switch _image_index {
+				        case 0:  _boss_name = loc("Bosses:BigBandit", "BIG#BANDIT") break
+				        case 1:  _boss_name = loc("Bosses:BigDog", "BIG#DOG") break
+				        case 2:  _boss_name = loc("Bosses:LilHunter", "LIL#HUNTER") break
+				        case 3:  _boss_name = loc("Bosses:Throne1", "THRONE") break
+				        case 4:  _boss_name = loc("Bosses:Throne2", "THRONE#II") break
+				        case 5:  _boss_name = loc("Bosses:BallMom", "MOM") break
+				case 6: case 9:  _boss_name = loc("Bosses:HyperCrystal", "HYPER#CRYSTAL") break
+				        case 7:  _boss_name = loc("Bosses:TechnoMancer", "TECHNO#MANCER") break
+				        case 8:  _boss_name = loc("Bosses:Captain", "CAPTAIN") break
+				        case 10: _boss_name = loc("Bosses:GunGod", "HYPER#CRYSTAL") break
 			}
-			
-			break
+			return string_replace(_boss_name, "#", "# ")
 		
-		case sprGameOverResult:
-			return "RESULTS"
+		case sprGameOverResult: return loc("R:GameOver:Results", "RESULTS")
 		
-		case sprLevelUpText:
-			return "LEVEL UP"
+		case sprLevelUpText: return loc("LevCont:LevelUp", "LEVEL UP")
 		
-		case sprPickCrownText:
-			return "PICK A CROWN"
+		case sprLevelUltraText: return loc("LevCont:LevelUltra", "LEVEL ULTRA")
 		
-		case sprLevelUltraText:
-			return "LEVEL ULTRA"
+		case sprPickCrownText: return loc("LevCont:SelectCrown:1", "PICK A CROWN")
     }
 
-    return ""
+    return undefined
 }

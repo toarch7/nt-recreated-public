@@ -4,8 +4,9 @@ var _area = GameCont.area,
 	_subarea = GameCont.subarea,
 	_loops = GameCont.loops,
 	_max_subareas = scrAreaGetMaxSubareas(_area),
+	_is_last = (_subarea == _max_subareas),
 	_actual_loops = _loops - scrGameIsHardmode(),
-	_is_throne_arena = (_area == area_palace && _subarea == _max_subareas)
+	_is_throne_arena = (_area == area_palace && _is_last)
 
 scrCreateMobileControls()
 
@@ -118,7 +119,7 @@ if _area == area_city && _subarea == 1 && scr_skill_get(mut_last_wish) {
 	}
 }
 
-if (_area == area_palace && _subarea == 3) || _area == area_campfire || _area == area_crib {
+if (_area == area_palace && _is_last) || _area == area_campfire || _area == area_crib {
     with Wall {
         if (place_meeting(x, y, Floor)) instance_destroy()
     }
@@ -205,11 +206,9 @@ with GameCont {
     enemies = instance_number(enemy)
 }
 
-if _area == area_hq && _subarea != 3 {
+if _area == area_hq && !_is_last {
 	with Wall {
-	    if place_meeting(x, y, Floor) {
-	        instance_destroy()
-	    }
+	    if (place_meeting(x, y, Floor)) instance_destroy()
 	}
 }
 

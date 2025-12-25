@@ -494,7 +494,7 @@ function scrRaceUnlock(_race) {
 	var _cause = scrRaceGetUnlockCauseText(_race)
 	
 	if _cause != "" {
-		scrShowUnlockPopup(loc_sfmt($"@w% UNLOCKED#@s%", loc(scrRaceGetName(_race)), loc(_cause)))
+		scrShowUnlockPopup(loc_fmt($"@w% UNLOCKED#@s%", loc(scrRaceGetName(_race)), loc(_cause)))
 	}
 	
 	var _achievement_id = scrRaceGetUnlockAchievement(_race)
@@ -505,8 +505,11 @@ function scrRaceUnlock(_race) {
 /// @param {Real|Enum.Race} race_id
 /// @param {Real|Enum.SkinLetter} skin
 function scrRaceUnlockSkin(_race, _skin_id) {
+	if (GM_build_type == "run") {
+		print(scrRaceGetName(_race), scr_race_get_skin_letter(_skin_id, true), "unlock triggered")
+	}
+	
 	if scr_race_is_unlocked(_race) && !scr_race_is_skin_unlocked(_race, _skin_id) {
-		
 		scr_race_set_skin_unlocked(_race, _skin_id, true)
 		
 		scrUnlockScreenCreate(_race, _skin_id)
@@ -514,7 +517,7 @@ function scrRaceUnlockSkin(_race, _skin_id) {
 		var _cause = scrRaceGetSkinUnlockCauseText(_race, _skin_id)
 		
 		if _cause != "" {
-			scrShowUnlockPopup(loc_sfmt($"@w% %-SKIN UNLOCKED#@s%",
+			scrShowUnlockPopup(loc_fmt($"@w% %-SKIN UNLOCKED#@s%",
 				loc(scrRaceGetName(_race)), scr_race_get_skin_letter(_skin_id, true), loc(_cause)))
 		}
 		

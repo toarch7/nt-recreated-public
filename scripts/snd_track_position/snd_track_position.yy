@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"scrEmptyB",
+  "%Name":"snd_track_position",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scrEmptyB",
+  "name":"snd_track_position",
   "parent":{
-    "name":"Scripts",
-    "path":"folders/Scripts.yy",
+    "name":"Sound",
+    "path":"folders/Scripts/Sound.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

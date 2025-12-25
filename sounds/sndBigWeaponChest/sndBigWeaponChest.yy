@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 0.70267576,
+  "duration": 0.7026984,
   "exportDir": "",
   "name": "sndBigWeaponChest",
   "parent": {

@@ -6,12 +6,15 @@ if !instance_exists(Player) scrDrawGameModeIndication()
 event_user(1)
 
 with (CharSelect) if (tooltip) {
-	var _str = can ? scrRaceGetName(race) : scrRaceGetUnlockDescription(race)
+	var _str = can
+		? loc("Races", race, "Name", scrRaceGetName(race))
+		: loc("Races", race, "Unlock", scrRaceGetUnlockDescription(race))
+	
 	scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc(_str), true)
 }
 
 with (GoButton) if (tooltip) {
-	scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc("START RUN"), true)
+	scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc("MainMenu:Start", "START RUN"), true)
 }
 
 

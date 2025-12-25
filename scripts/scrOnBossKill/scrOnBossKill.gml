@@ -59,11 +59,13 @@ function scrOnBossKill() {
 				break
 		}
 		
-		if (_race == Race.Chicken) {
+		#region Black Sword boss hit list
+			// apparently you don't need to play as Chicken for this achievement. Oh well
+			
 			var _any = false
 			
 			with (Player) {
-				if (race == Race.Chicken && scrPlayerHasWeapon(id, wep_black_sword)) {
+				if (/*race == Race.Chicken && */scrPlayerHasWeapon(id, wep_black_sword)) {
 					_any = true
 					break
 				}
@@ -80,7 +82,7 @@ function scrOnBossKill() {
 		
 			if (_any) {
 				var _list = GameCont.swordbosskill,
-					_object_name = object_get_name(_object_name)
+					_object_name = object_get_name(_object)
 				
 				if (!array_contains(_list, _object_name)) array_push(_list, _object_name)
 				
@@ -91,6 +93,6 @@ function scrOnBossKill() {
 					scrRaceUnlockSkin(Race.Chicken, SkinLetter.C)
 				}
 			}
-		}
+		#endregion
 	}
 }

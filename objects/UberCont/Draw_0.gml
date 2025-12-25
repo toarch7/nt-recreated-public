@@ -40,13 +40,13 @@ if bossintro {
             splatindex++
         }
 		
-		var name = scrMenuButtonName(sprBossName, boss)
+		var _boss_name = scrMenuButtonName(sprBossName, boss)
 		
-		if loc_exists(name) {
+		if is_string(_boss_name) {
 	        draw_set_halign(fa_left)
 			draw_set_valign(fa_middle)
 			
-			draw_text_bigname(view_xview + view_width / 2 + bossnamex, view_yview + view_height / 2, loc(name), c_white, 1)
+			draw_text_bigname(view_xview + view_width / 2 + bossnamex, view_yview + view_height / 2, _boss_name, c_white, 1, 1)
 			
 			draw_set_halign(fa_left)
 			draw_set_valign(fa_top)

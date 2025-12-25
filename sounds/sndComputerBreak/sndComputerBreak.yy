@@ -14,8 +14,8 @@
   "exportDir": "",
   "name": "sndComputerBreak",
   "parent": {
-    "name": "Props",
-    "path": "folders/Objects/Props.yy"
+    "name": "Sounds",
+    "path": "folders/Sounds.yy"
   },
   "preload": false,
   "resourceType": "GMSound",

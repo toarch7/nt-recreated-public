@@ -69,8 +69,7 @@ function scrSendDailyData() {
                 area: GameCont.area,
                 subarea: GameCont.subarea,
                 loop: GameCont.loops,
-
-                killed_by: sprite_exists(deathcause) ? sprite_get_name(deathcause) : mskNone,
+                killed_by: GameCont.deathcause,
                 kills: GameCont.kills
             }
 

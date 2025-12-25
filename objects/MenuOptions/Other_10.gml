@@ -19,7 +19,7 @@ option_can_change = true
 
 if text_input_element != undefined {
 	var _opt = text_input_element,
-		_name = method_execute(_opt.name_get, _opt) ?? _opt.name,
+		_name = method_execute(_opt.get_name, _opt) ?? _opt.name,
 		_value = _opt.value
 	
 	if _value == undefined
@@ -161,9 +161,9 @@ if erasing_progress {
     var _x = 0,
         _y = 0
 
-    if erasing_progress == 1 && self.press > 2 {
-        _x = orandom(self.press - 2)
-        _y = orandom(self.press - 2)
+    if erasing_progress == 1 && self._press > 2 {
+        _x = orandom(self._press - 2)
+        _y = orandom(self._press - 2)
     }
 
     var o = 32
@@ -173,10 +173,10 @@ if erasing_progress {
     }
 	else draw_text_nt(view_width / 2 + _x, view_height / 2 - 64 + disclaimer_pop + _y, loc("@rWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET ALL OF YOUR#CHARACTERS, UNLOCKS, STATS, ACHIEVEMENTS AND#IT IS NOT UNDOABLE.###ARE YOU SURE?@w"))
 
-    draw_text_nt(view_width / 2, view_height / 2 - disclaimer_pop + o, (wait ? "@d" : "@w") + loc("YES") + (erasing_progress == 1 ? " (" + string(5 - self.press) + ")" : ""))
+    draw_text_nt(view_width / 2, view_height / 2 - disclaimer_pop + o, (wait ? "@d" : "@w") + loc("YES") + (erasing_progress == 1 ? " (" + string(5 - self._press) + ")" : ""))
     draw_text_nt(view_width / 2, view_height / 2 - disclaimer_pop + o + 16, (wait ? "@d" : "@w") + loc("NO"))
 
-    if self.press >= 5 or (erasing_progress == 2 && self.press > 0) {
+    if self._press >= 5 or (erasing_progress == 2 && self._press > 0) {
         if erasing_progress == 2 {
             with MenuOptions {
                 foreach(options, function(_value) {
@@ -227,9 +227,9 @@ if erasing_progress {
                     wait = 30
 
 					disclaimer_pop = 1
-                    self.press ++
+                    self._press ++
 
-                    if erasing_progress == 1 && self.press == 3 {
+                    if erasing_progress == 1 && self._press == 3 {
                         with SpiralCont
 							visible = 0
 
@@ -263,7 +263,7 @@ if erasing_progress {
                     }
 
                     erasing_progress = 0
-                    self.press = 0
+                    self._press = 0
                 }
             }
         }
@@ -295,14 +295,10 @@ if editing_mode {
 	}
 }
 
-if instance_exists(ResourcepackManager)
-	exit
+if (instance_exists(ResourcepackManager)) exit
 
-if sliderheld {
-    sliderheld --
-
-    if !sliderheld
-        snd_play(sndSliderLetGo)
+if (sliderheld > 0) if (-- sliderheld) <= 0 {
+    snd_play(sndSliderLetGo)
 }
 
 var _name = "SETTINGS"
@@ -318,31 +314,30 @@ if category != OptionCategory.Main {
 
 draw_text_bigname(view_width / 2, 24, loc(_name), c_uigray)
 
-var press = mouse_ui_clicked()
+var _press = mouse_ui_clicked()
 		|| (UberCont.opt_gamepad && gamepad_button_check_pressed(0, gp_face1))
 		|| (UberCont.opt_keyboard && scr_keyboard_check_pressed(vk_enter)),
 	
 	yoff = 6 * (category != 0),
-	
-	items = options[category]
+	_has_scrollbar = false,
+	_items = items
 
-if scr_keyboard_check_held(vk_alt) or wait
-	press = 0
+if (scr_keyboard_check_held(vk_alt) || wait) _press = false
 
-if _mx != mx_last or _my != my_last or mouse_check_button_pressed(mb_any)
+if _mx != mx_last || _my != my_last || mouse_check_button_pressed(mb_any) {
 	mouse_active = true
-
-mx_last = _mx
-my_last = _my
+}
 
 var kv = scr_keyboard_check_pressed(vk_down) - scr_keyboard_check_pressed(vk_up),
 	kh = scr_keyboard_check_pressed(vk_right) - scr_keyboard_check_pressed(vk_left)
 
-if kv == 0
+if kv == 0 {
 	kv = gamepad_button_check_pressed(0, gp_padd) - gamepad_button_check_pressed(0, gp_padu)
+}
 
-if kh == 0
+if kh == 0 {
 	kh = gamepad_button_check_pressed(0, gp_padr) - gamepad_button_check_pressed(0, gp_padl)
+}
 
 if item_count != -1 {
 	if kv != 0 {
@@ -355,7 +350,7 @@ if item_count != -1 {
 			if pointed_item < 0
 				pointed_item = item_count - 1
 		}
-		until items[pointed_item].visible
+		until _items[pointed_item].visible
 		
 		mouse_active = false
 		
@@ -363,9 +358,9 @@ if item_count != -1 {
 	}
 }
 
+#region Keybind change
 if await_input {
-	var k = -1,
-		type = 0
+	var k = -1, type = 0
 	
 	if text_input_timer > 5 {
 		if is_gamepad() {
@@ -373,8 +368,6 @@ if await_input {
 			type = 1
 		}
 		else if is_keyboard() {
-			type = 0
-			
 			if keyboard_lastkey != -1 && scr_keyboard_check_pressed(keyboard_lastkey) {
 				k = keyboard_lastkey
 			}
@@ -404,36 +397,98 @@ if await_input {
 	if text_input_timer > 60
 		text_input_timer = 0
 	
-	press = 0
+	_press = false
 }
-
-draw_step_size = 16
-
-if item_count > 10
-	draw_step_size -= item_count - 10
+#endregion
 
 drawx = gui_w / 2
 drawy = 0
 
-var _count = 0
-
-for (var i = 0; i < array_length(items); i ++) {
-	var _opt = items[i]
-
-    if _opt == undefined or (_opt != undefined && !_opt.visible)
-		continue
-	
-	drawy += max(_opt.height, draw_step_size)
-	
-	_count ++
+for(var i = 0; i < item_count; i ++) {
+	var _opt = _items[i]
+	if is_struct(_opt) && _opt.visible {
+		drawy += max(_opt.height, draw_step_size)
+	}
 }
 
-item_count = _count
-
-if editing_mode {
-	drawy = gui_h - 48
+if drawy > (gui_h - (LETTERBOX_SIZE * 2)) {
+	scroll_max = (drawy - (gui_h - (LETTERBOX_SIZE * 2))) div 2
+	scroll_min = -scroll_max
+	
+	if (scroll_check) {
+		scroll = scroll_min
+		scroll_check = false
+		scroll_speed = 0
+	}
 }
-else drawy = gui_h / 2 - drawy / 2 + 8
+else if (scroll_check) {
+	scroll = 0
+	scroll_min = 0
+	scroll_max = 0
+	scroll_check = false
+	scroll_speed = 0
+}
+
+if !(scroll_max == 0 && scroll_min == 0) {
+	var _wheel = mouse_wheel_down() - mouse_wheel_up()
+	
+	if (_wheel != 0) scroll_speed = 10 * _wheel
+	
+	if (is_struct(slider)) scroll_speed = 0
+	
+	if (scroll_speed != 0) {
+		scroll = approach(scroll, scroll_speed ? scroll_max : scroll_min, abs(scroll_speed))
+		scroll_speed = approach(scroll_speed, 0, 1)
+	}
+	
+	_has_scrollbar = true
+	
+	#region Slider element
+	
+	var _slider_size = 80,
+		_slider_bottom = view_height - _slider_size,
+		_progress = (scroll - scroll_min) / scroll_max * 0.5
+	
+	draw_sprite_ext(sprOptionSlider, 0, view_width - 16, 36, 1.6, 1, 270, c_white, 1)
+	
+	draw_sprite_ext(sprSliderEndHorizontal, 0,
+		view_width - 20 + (dragging > 0), 40 + _slider_bottom * _progress,
+		1, 1, 0, dragging ? c_uigray : c_white, 1)
+	
+	if is_undefined(slider) && mouse_check_button(mb_left) {
+		if (dragging != -1) for(var i = 0; i < 4; i ++) {
+			if (!device_mouse_check_button(i, mb_left)) continue
+			
+			var mx = device_mouse_x_to_gui(i),
+				my = device_mouse_y_to_gui(i)
+			
+			if (mx >= view_width - 32 && mx <= view_width) || dragging {
+				var _p = clamp((my - LETTERBOX_SIZE) / _slider_bottom, 0, 1)
+				scroll = scroll_min + scroll_max * _p * 2
+				
+				if !dragging {
+					snd_play(sndSlider)
+					dragging = true
+				}
+				
+				speed = 0
+			}
+			
+			break
+		}
+	}
+	else if (dragging) {
+		snd_play(sndSliderLetGo)
+		dragging = false
+	}
+	
+	#endregion
+}
+
+if !editing_mode {
+	drawy = gui_h * 0.5 - drawy * 0.5 + 8 - scroll
+}
+else drawy = gui_h - 48
 
 startdrawy = drawy
 
@@ -441,8 +496,8 @@ draw_set_color(c_white)
 
 var _any = false
 
-for (var i = 0; i < item_count; i++) {
-    var _opt = items[i]
+for (var i = 0; i < array_length(_items); i++) {
+    var _opt = _items[i]
 	
     if !(is_struct(_opt) && _opt.visible) continue
 	
@@ -462,24 +517,42 @@ for (var i = 0; i < item_count; i++) {
 	var _w = _opt.width * 0.5,
 		_h = _opt.height
 	
-	if !is_desktop {
+	if is_touch() {
 		_h *= 0.5
 		
 		if _opt.type != "category" {
 			_h += 3
 		}
 	}
-	else _h *= 0.33
+	else _h *= 0.4
 	
-	var pointed = 0
+	var _pointed = false,
+		_should_draw = true
 	
-	if _opt.condition != undefined
+	if ((drawy - _h * 0.5) < LETTERBOX_SIZE
+		|| (drawy + _h * 0.5) > (gui_h - LETTERBOX_SIZE)
+	) {
+		_should_draw = false
+	}
+	else {
+		if _opt.splat > 0 {
+			draw_sprite(sprMainMenuSplat, _opt.splat, drawx, drawy)
+		}
+		
+		if _opt.draw && method_execute(_opt.draw, _opt) {
+			_should_draw = false
+		}
+	}
+	
+	if _opt.condition != undefined {
 		_opt.available = method_execute(_opt.condition, _opt)
+	}
 	
 	if mouse_active {
-		pointed = point_in_rectangle(_mx, _my, drawx - _w, drawy - _h, drawx + _w + (_opt.type == "slider" ? 96 : 0), drawy + _h)
+		_pointed = (!dragging && (scroll_speed == 0 || scroll == scroll_max || scroll == scroll_min))
+				&& point_in_rectangle(_mx, _my, drawx - _w, drawy - _h, drawx + _w + (_opt.type == "slider" ? 96 : 0), drawy + _h)
 		
-		if (!slider && pointed && _opt.available) or (slider == _opt) {
+		if _should_draw && ((is_undefined(slider) && _pointed && _opt.available) || (slider == _opt)) {
 			_any = true
 			
 			if pointed_item != i {
@@ -493,17 +566,19 @@ for (var i = 0; i < item_count; i++) {
 		option_selected = (pointed_item == i)
 		
 		if slider == undefined {
-			if _opt.type == "slider" && pointed && mouse_ui_clicked() {
+			if _opt.type == "slider" && _pointed && mouse_ui_clicked() {
 				option_selected = true
 			}
 		}
-		else option_selected = (_opt == slider)
+		else {
+			option_selected = (_opt == slider)
+		}
 	}
 	else {
 		option_selected = (pointed_item == i)
-			
+		
 		if option_selected {
-			pointed = true
+			_pointed = true
 			_any = true
 				
 			if _opt.type == "slider" {
@@ -530,11 +605,14 @@ for (var i = 0; i < item_count; i++) {
 		else option_selected = false
 	}
 	
-	drawy -= _opt.anim
+	if (_should_draw) drawy -= _opt.anim
 	
 	draw_set_color(_opt.available ? c_uigray : c_uidark)
 	
-	if option_selected {
+	if !option_selected {
+		if (_opt.splat > 0) _opt.splat --
+	}
+	else if _should_draw {
 		draw_set_color(c_white)
 		
 		_opt.splat = approach(_opt.splat, sprite_get_number(sprMainMenuSplat) - 1, timescale)
@@ -546,15 +624,15 @@ for (var i = 0; i < item_count; i++) {
 				snd_play(sndSlider)
 			}
 		}
-		else if _opt.available && (press or slider_change) && !wait {
-			var r = undefined
+		else if _opt.available && (_press || slider_change) && !wait {
+			var _result = undefined
 			
 			if is_method(_opt.click) {
-				r = method_execute(_opt.click, _opt)
+				_result = method_execute(_opt.click, _opt)
 			}
 			
-			if is_undefined(r) {
-				r = method_execute(element_functions[$ _opt.type], _opt)
+			if is_undefined(_result) {
+				_result = method_execute(element_functions[$ _opt.type], _opt)
 			}
 			
 			if _opt.key != undefined && option_can_change {
@@ -567,48 +645,64 @@ for (var i = 0; i < item_count; i++) {
 				slider_change = false
 				slider = undefined
 			}
-			else if !slider_change
+			else if !slider_change {
 				snd_play(sndClick)
+			}
 		}
 	}
-	else if _opt.splat > 0
-		_opt.splat --
 	
-	var draw = true
-	
-	if _opt.splat > 0
-		draw_sprite(sprMainMenuSplat, _opt.splat, drawx, drawy)
-	
-	if _opt.draw && method_execute(_opt.draw, _opt)
-		draw = false
-	
-	if draw {
+	if _should_draw {
 		if !is_undefined(_opt.sprite) {
-			var sprite = _opt.sprite,
-				
-				spr = sprite[0],
-				img = sprite[1],
-				
-				n = scrMenuButtonName(spr, img)
+			var _sprite_info = _opt.sprite, _sprite, _image;
 			
-			if !loc_exists(n) {
-				draw_sprite_ext(spr, img, drawx + 1, drawy + 1, 1, 1, 0, c_black, 1)
-				draw_sprite_ext(spr, img, drawx + 1, drawy, 1, 1, 0, c_black, 1)
-				draw_sprite_ext(spr, img, drawx, drawy + 1, 1, 1, 0, c_black, 1)
-				
-				draw_sprite_ext(spr, img, drawx, drawy, 1, 1, 0, draw_get_color(), 1)
+			if (is_array(_sprite_info)) {
+				_sprite = _sprite_info[0]
+				_image = _sprite_info[1]
 			}
-			else draw_text_bigname(drawx, drawy, loc(n))
+			else if (sprite_exists(_sprite_info)) {
+				_sprite = _sprite_info
+				_image = 0
+			}
+			else continue
+			
+			var _name = scrMenuButtonName(_sprite, _image)
+			
+			if is_undefined(_name) {
+				var _ox = sprite_get_xoffset(_sprite),
+					_oy = sprite_get_yoffset(_sprite)
+				
+				if (draw_get_halign() == fa_center) {
+					sprite_set_offset(_sprite,
+						sprite_get_width(_sprite) div 2,
+						sprite_get_yoffset(_sprite))
+				}
+				
+				if (draw_get_valign() == fa_middle) {
+					sprite_set_offset(_sprite,
+						sprite_get_xoffset(_sprite),
+						sprite_get_height(_sprite) div 2)
+				}
+				
+				draw_sprite_ext(_sprite, _image, drawx + 1, drawy + 1, 1, 1, 0, c_black, 1)
+				draw_sprite_ext(_sprite, _image, drawx + 1, drawy + 0, 1, 1, 0, c_black, 1)
+				draw_sprite_ext(_sprite, _image, drawx + 0, drawy + 1, 1, 1, 0, c_black, 1)
+				draw_sprite_ext(_sprite, _image, drawx, drawy, 1, 1, 0, draw_get_color(), 1)
+				
+				sprite_set_offset(_sprite, _ox, _oy)
+			}
+			else {
+				draw_text_bigname(drawx, drawy, _name)
+			}
 		}
 		else {
-			var has_value = (_opt.value != undefined && _opt.value != "" && _opt.type != "category") or _opt.type == "keybind"
+			var _has_value = is_struct(_opt) && _opt.has_value(), _name;
 			
-			var _name = _opt.name
+			if is_callable(_opt.get_name) {
+				_name = method_execute(_opt.get_name, _opt)
+			}
+			else _name = _opt.name
 			
-			if _opt.name_get != undefined
-				_name = method_execute(_opt.name_get, _opt)
-			
-			if has_value {
+			if _has_value {
 				drawx -= _opt.width / 2
 				
 				var _text_scale = 1,
@@ -642,8 +736,8 @@ for (var i = 0; i < item_count; i++) {
 				
 				option_list_max = _opt.type == "list" ? array_length(_opt.list) : 0
 				
-				if is_method(_opt.value_get) {
-					_value = method_execute(_opt.value_get, _opt)
+				if is_method(_opt.get_value) {
+					_value = method_execute(_opt.get_value, _opt)
 				}
 				
 				if !is_undefined(_value) {
@@ -706,14 +800,12 @@ for (var i = 0; i < item_count; i++) {
 		method_execute(element_functions[$ _opt.type + "_draw"], _opt)
 	}
 	
-	drawy += _opt.anim + max(_opt.height, draw_step_size)
+	drawy += (_should_draw ? _opt.anim : 0) + max(_opt.height, draw_step_size)
 	
-	if _opt.anim > 0 {
-		_opt.anim --
-	}
-	
-    draw_set_valign(fa_top)
+	if (_opt.anim > 0) _opt.anim --
 }
+
+draw_set_valign(fa_top)
 
 if slider != undefined {
 	var _width = sprite_get_width(sprSlider) - 10
@@ -731,7 +823,23 @@ if slider != undefined {
 	}
 }
 
-if !_any {
+if (!_any) {
+	if (_has_scrollbar && is_touch()
+		&& !dragging && (dragging == -1 || (_press && abs(_mx - drawx) > 60))
+	) {
+		if (mouse_check_button(mb_left)) {
+			scroll_speed = clamp((_my - my_last) * -1, -10, 10)
+			
+			if (dragging != -1) {
+				snd_play(sndSlider)
+				dragging = -1
+			}
+		}
+		else if (dragging == -1) {
+			dragging = false
+		}
+	}
+	
 	pointed_item = -1
 }
 
@@ -740,6 +848,9 @@ draw_set_color(c_white)
 draw_set_halign(fa_left)
 draw_set_valign(fa_top)
 
-if !mouse_check_button(mb_left) wait = 0
+if (!mouse_check_button(mb_left)) wait = false
 
 back_pressed = false
+
+mx_last = _mx
+my_last = _my

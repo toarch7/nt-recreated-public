@@ -12,4 +12,6 @@ if _race == Race.Venuz || _race == Race.Cuz {
     room_restart()
 }
 
-scrLevelUpScreenSubmit(scrRaceGetUltraSkillName(race, num))
+var _name = loc("Races", race, "Ultra", num, "Name", scrRaceGetUltraSkillName(race, num))
+
+scrLevelUpScreenSubmit(_name)

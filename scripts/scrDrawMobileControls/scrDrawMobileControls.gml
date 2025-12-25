@@ -348,14 +348,10 @@ function scrDrawMobileControls(_player = noone, _scale_option = UberCont.opt_con
 					_current_weapon = _bwep
 					_current_reload = _breload
 					draw_set_color(_bcurse ? #8f6db0 : c_ltgray)
-					draw_set_alpha(0.5)
 				}
 				
 				_weapon_index ++
 	        }
-			
-			draw_set_alpha(1)
-			draw_set_color(c_white)
 		}
 		else {
 			draw_circle_width(x, y, rad * _scale_multiplier, _width)

@@ -16,7 +16,8 @@ else {
 }
 
 var _x = x, _y = y + appeary - sign(selected),
-	_blend = (selected ? c_white : c_gray)
+	_blend = (selected ? c_white : c_gray),
+	txt2;
 
 if (race != Race.CoopUltra) {
 	var _index = (race - 1) * 3 + num - 1
@@ -28,7 +29,8 @@ else {
 
 draw_align(fa_center, fa_middle)
 
-var txt2 = string("@w" + loc(ultr_name[race, num])) + "#@s" + string(loc(ultr_text[race, num]))
+txt2 = "@w" + loc("Races", race, "Ultra", num, "Name", scrRaceGetUltraSkillName(race, num)) + "#"
+	 + "@s" + loc("Races", race, "Ultra", num, "Text", scrRaceGetUltraSkillText(race, num)) + "@s"
 
 if selected {
     draw_text_nt(view_width / 2, view_height - 61 - selected, txt2)

@@ -16,6 +16,7 @@ function scr_debug_overlay_load() {
 	load("__debug_hitboxes", false)
 	load("__debug_health", false)
 	load("__debug_immortality", false)
+	load("__debug_noreload", false)
 	ini_close()
 }
 
@@ -39,6 +40,7 @@ function scr_debug_overlay_save() {
 	write("__debug_hitboxes")
 	write("__debug_health")
 	write("__debug_immortality")
+	write("__debug_noreload")
 	ini_close()
 }
 
@@ -55,6 +57,7 @@ function scr_create_debug_overlay_views() {
 		dbg_checkbox(ref_create(global, "__debug_hitboxes"), "Object hitboxes")
 		dbg_checkbox(ref_create(global, "__debug_health"), "Enemy health")
 		dbg_checkbox(ref_create(global, "__debug_immortality"), "Player immortality")
+		dbg_checkbox(ref_create(global, "__debug_noreload"), "Disable reload")
 		
 		dbg_section("Resources")
 		dbg_button("Give rads", function() {

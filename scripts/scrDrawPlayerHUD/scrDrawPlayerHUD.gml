@@ -17,14 +17,16 @@ function scrDrawPlayerHUD(_player = noone) {
 		draw_set_color(c_white)
 		draw_sprite(sprHealthBar, 2, 20, 4)
 		
+		var _health_string = loc_fmt("HUD:Health", "%1/%2", _hp, _max_hp)
+		
 		if _player.fainted {
 			var _color = merge_color(c_black, c_red, 0.5 + sin(current_time / 250) * 0.3)
 			draw_sprite_ext(sprBleedHUD, 2, 22, 7, 84 - max(0, 84 * (1 - _player.fainted / CHEAT_PRACTICE_FAINTED_TIME)), 1, 0, _color, 1)
-			draw_text_nt(23 + 44, 7, "FAINTED")
+			draw_text_nt(23 + 44, 7, loc("HUD:Fainted", "FAINTED"))
 		}
 		else if _player.bleed {
 			draw_sprite_ext(sprBleedHUD, 2, 22, 7, 84 - max(0, 84 * (_player.bleed / 150)), 1, 0, c_gray, 1)
-			draw_text_shadow(23 + 44, 7, $"{_hp}/{_max_hp}")
+			draw_text_shadow(23 + 44, 7, _health_string)
 		}
 		else {
 			var _healthbar_color = UberCont.opt_healthcol,
@@ -74,11 +76,11 @@ function scrDrawPlayerHUD(_player = noone) {
 				if (_hurt) draw_sprite_ext(sprHealthFill, 0, 22, 7, max(0, 84 * (_hp / _max_hp)), 1, 0, c_white, 1)
 				
 				if (!_hurt || sin(wave) > 0) || scrGameIsGenerationScreen() {
-					draw_text_shadow(23 + 44, 7, $"{_hp}/{_max_hp}")
+					draw_text_shadow(23 + 44, 7, _health_string)
 				}
 			}
 			else {
-				draw_text_shadow(23 + 44, 7, $"{_hp}/{_max_hp}")
+				draw_text_shadow(23 + 44, 7, _health_string)
 			}
 		}
 	#endregion
@@ -144,7 +146,7 @@ function scrDrawPlayerHUD(_player = noone) {
 						else if (_player.ammo[_type] <= scrAmmoGetPickupAmount(_type)) {
 							draw_set_color(_is_active_ammo ? c_red : c_gray)
 						}
-					
+						
 						draw_text_shadow(_dx + 18, _dy + 5, string(_player.ammo[_type]))
 						draw_set_halign(fa_center)
 						draw_set_color(c_white)
@@ -202,8 +204,11 @@ function scrDrawPlayerHUD(_player = noone) {
 		}
 		
 		if scrGameIsEventRun() {
-			var _frame = scrGameIsWeeklyRun() ? 1 : 0
-			draw_sprite(sprDailyIcon, _frame, 56, 32)
+			draw_sprite(scrGameIsWeeklyRun() ? sprWeeklyIcon : sprDailyIcon, 0, 56, 33)
+		}
+		
+		if UberCont.continued_run {
+			draw_sprite(sprContinuedRunIcon, 0, 56 + (scrGameIsEventRun() * 12), 33)
 		}
 	#endregion
 	
@@ -217,23 +222,26 @@ function scrDrawPlayerHUD(_player = noone) {
 				var _pickup_amount = scrAmmoGetPickupAmount(_type)
 				
 				if _player.drawempty > 0 && _type && (_ammo[_type] <= _pickup_amount || GameCont.rad < _rads) && sin(wave) > 0 {
-					var _txt = loc_sfmt("LOW %", loc(typ_name[wep_type[_check_weapon]]))
+					var _txt = loc_fmt_either($"HUD:LowAmmo:{_type}", "HUD:LowAmmo",
+							"LOW %", loc("Ammo:Type", _type, typ_name[wep_type[_check_weapon]]))
 					
 					if _ammo[_type] < scr_weapon_get_cost(_check_weapon) {
 						if _ammo[_type] > 0 {
-							var _type_name = loc(typ_name[wep_type[_check_weapon]])
-							_txt = loc_sfmt("NOT ENOUGH %", loc(_type_name))
+							var _type_name = loc("Ammo:Type", _type, typ_name[_type])
+							_txt = loc_fmt_either($"HUD:InsAmmo:{_type}", "HUD:InsAmmo", "NOT ENOUGH %", _type_name)
 						}
-						else _txt = loc("EMPTY")
+						else _txt = loc("HUD:NoAmmo", "EMPTY")
 					}
 					else if GameCont.rad < _rads {
-						_txt = loc("NOT ENOUGH RADS")
+						_txt = loc("HUD:InsRads", "NOT ENOUGH RADS")
 					}
 					
 					draw_set_color(c_red)
 					draw_set_halign(fa_left)
 					
-					draw_text_shadow(54, 35, loc(string(_txt)))
+					var _icon_count = scrGameIsEventRun() + scrGameIsContinuedRun()
+					
+					draw_text_shadow(55 + _icon_count * 12, 35, loc(string(_txt)))
 					
 					draw_set_color(c_white)
 					draw_set_halign(fa_center)
@@ -245,36 +253,20 @@ function scrDrawPlayerHUD(_player = noone) {
 			}
 
 			if _hp <= 4 && _hp != _max_hp && sin(wave) > 0 && _player.drawlowhp > 0 {
-				var _txt = loc("LOW HP")
+				var _txt = loc("HUD:LowHealth", "LOW HP")
 
 				draw_set_color(c_red)
 				draw_set_halign(fa_left)
-				draw_text_shadow(110, 7, loc(string(_txt)))
+				draw_text_shadow(110, 7, string(_txt))
 				draw_set_halign(fa_center)
 			}
 		}
 	#endregion
 	
-	if UberCont.continued_run {
-		draw_set_font(fntSmall)
-		draw_set_color(c_white)
-		draw_set_alpha(0.1)
-		
-		draw_set_halign(fa_left)
-		if global.recontinued_times > 1 {
-			draw_text(0, 45, "continued x" + string(global.recontinued_times))
-		}
-		else draw_text(0, 45, "continued")
-		draw_set_halign(fa_center)
-		
-		draw_reset_font()
-		draw_set_alpha(1)
-	}
-	
 	draw_set_color(c_white)
 	
 	// Interaction
-	if (!UberCont.want_pause) scrDrawInteractionHUD(_player)
+	if (!scrGameIsPaused()) scrDrawInteractionHUD(_player)
 }
 
 function scrDrawTypeAmmo(_type, _background_index, _icon_index, _x, _y) {
@@ -328,24 +320,29 @@ function scrDrawInteractionHUD(_player) {
 			
 			var _text_offset = draw_pickup_button(_x, _y)
 			
-			draw_text_shadow(_x, _y - 31, loc(_name))
-			
 			if instance_is(self, WepPickup) {
 				var _type_capacity = scrAmmoGetTypeCapacity(type),
 					_frames = sprite_get_number(sprBulletIcon) - 1,
 					_percentage = _player.ammo[type] / _type_capacity,
 					_icon_index = ceil(_frames * _percentage)
 				
+				draw_text_shadow(_x, _y - 31, loc("Weapons", wep, "Name", _name))
+				
 				if (type == Ammo.None) _text_offset = 0
 				
 				scrDrawTypeAmmo(type, 2, _frames - _icon_index, _x + _text_offset, _y - 21)
 			}
+			else {
+				var _object_name = object_get_name(object_index)
+				if (object_is_ancestor(object_index, Car)) _object_name = "Car"
+				draw_text_shadow(_x, _y - 31, loc("HUD", $"Prompt{_object_name}", _name))
+			}
 			
 			if is_touch(_player.index) {
-				if instance_is(self, WepPickup) _name = "PICK UP"
+				if instance_is(self, WepPickup) _name = loc("R:HUD:PickUpAction", "PICK UP")
 				
 				with ButtonAct {
-					draw_text_shadow(x, y + ((y < 40) ? 36 : -36), loc(_name))
+					draw_text_shadow(x, y + ((y < 40) ? 36 : -36), _name)
 					
 					var _sprite = other.sprite_index,
 						_xoffset = sprite_get_xoffset(_sprite),
