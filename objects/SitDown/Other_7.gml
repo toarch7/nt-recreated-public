@@ -9,22 +9,10 @@ with (Player) if (scr_player_is_local(index)) {
 		snd_play(GameCont.area == area_hq ? snd_cptn : snd_thrn)
 		_sound_played = true
 	}
-		
-	var _race = race
-	with UberCont {
-		ctot_wins[_race] ++
-		ctot_strk[_race] ++
-			
-		if (ctot_strk[_race] > cbst_strk[_race]) {
-			cbst_strk[_race] = ctot_strk[_race]
-		}
-			
-		if (GameCont.tottimer < cbst_fast[_race] || cbst_fast[_race] <= 0) {
-			cbst_fast[_race] = GameCont.tottimer
-		}
-	}
-		
-	if (race == Race.Chicken && _player.hp <= 0) {
+	
+	scrPlayerUpdateBestRunStats(race, true)
+	
+	if (race == Race.Chicken && hp <= 0) {
 		scrAchievementUnlock(Achievement.IMPOSSIBLE)
 	}
 }

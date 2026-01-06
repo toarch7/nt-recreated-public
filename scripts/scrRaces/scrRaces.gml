@@ -491,10 +491,24 @@ function scrRaceUnlock(_race) {
 	
 	scrUnlockScreenCreate(_race)
 	
-	var _cause = scrRaceGetUnlockCauseText(_race)
+	var _race_name = loc("Races", _race, "Name", scrRaceGetName(_race)),
+		_cause = scrRaceGetUnlockCauseText(_race),
+		_key_title, _key_text;
 	
-	if _cause != "" {
-		scrShowUnlockPopup(loc_fmt($"@w% UNLOCKED#@s%", loc(scrRaceGetName(_race)), loc(_cause)))
+	if (_race == Race.Melting)  {
+		_key_title = $"Unlock:Char:{_race}:1"
+		_key_text = $"Unlock:Char:{_race}:2"
+	}
+	else {
+		_key_title = $"Unlock:Race:{_race}:1"
+		_key_text = $"Unlock:Race:{_race}:2"
+	}
+	
+	if (loc_exists(_key_title) && loc_exists(_key_text)) {
+		scrShowUnlockPopup(loc(_key_title, $"@w{_race_name} UNLOCKED"), loc(_key_text, "@s" + _cause))
+	}
+	else if _cause != "" {
+		scrShowUnlockPopup(loc_fmt("R:Unlock:GenericRace", $"@w% UNLOCKED#@s%", _race_name, _cause))
 	}
 	
 	var _achievement_id = scrRaceGetUnlockAchievement(_race)
@@ -514,11 +528,19 @@ function scrRaceUnlockSkin(_race, _skin_id) {
 		
 		scrUnlockScreenCreate(_race, _skin_id)
 		
-		var _cause = scrRaceGetSkinUnlockCauseText(_race, _skin_id)
+		var _race_name = loc("Races", _race, "Name", scrRaceGetName(_race)),
+			_cause = scrRaceGetSkinUnlockCauseText(_race, _skin_id),
+			_letter = scr_race_get_skin_letter(_skin_id, true),
+			_section = (_skin_id >= SkinLetter.C) ? $"Unlock{_letter}" : "Unlock",
+			_key_title = $"{_section}:Skin:{_race}:1",
+			_key_text = $"{_section}:Skin:{_race}:2"
 		
-		if _cause != "" {
-			scrShowUnlockPopup(loc_fmt($"@w% %-SKIN UNLOCKED#@s%",
-				loc(scrRaceGetName(_race)), scr_race_get_skin_letter(_skin_id, true), loc(_cause)))
+		if (loc_exists(_key_title) && loc_exists(_key_text)) {
+			scrShowUnlockPopup(loc(_key_title, $"@w{_race_name} {_letter}-SKIN UNLOCKED"), loc(_key_text, "@s" + _cause))
+		}
+		else if _cause != "" {
+			scrShowUnlockPopup(loc_fmt("R:Unlock:GenericSkin",
+				$"@w% %-SKIN UNLOCKED#@s%", _race_name, _letter, _cause))
 		}
 		
 		var _achievement_id = scrRaceGetSkinUnlockAchievement(_race, _skin_id)

@@ -28,7 +28,7 @@ txt2 = "@w" + loc("Crowns", crown, "Name", scr_crown_get_name(crown)) + "#"
 	 + "@s" + loc("Crowns", crown, "Text", scr_crown_get_text(crown)) + "@s"
 
 if selected && !appeary {
-    draw_text_nt(view_width / 2 + 1, view_height - 61 - selected, txt2)
+    draw_text_nt(round(view_width / 2 + 1), round(view_height - 61 - selected), txt2)
 }
 
 draw_set_halign(fa_left)

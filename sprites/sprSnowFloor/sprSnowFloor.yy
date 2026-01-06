@@ -32,8 +32,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Env",
-    "path":"folders/Sprites/Env.yy",
+    "name":"FrozenCity",
+    "path":"folders/Sprites/Env/FrozenCity.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -5,11 +5,10 @@ draw_sprite(sprMainMenuSplat, splat, x, y)
 
 var col = (available ? (hover ? c_white : c_uigray) : c_uidark),
 	
-	name = scrMenuButtonName(),
+	name = scrMenuButtonName(sprite_index, num),
 	offset = appear + hover
 
-if image_blend != c_white
-	col = image_blend
+if (image_blend != c_white) col = image_blend
 
 y -= offset
 

@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":4,
   "parent":{
-    "name":"Decals",
-    "path":"folders/Sprites/Env/Decals.yy",
+    "name":"Scrapyards",
+    "path":"folders/Sprites/Env/Scrapyards.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

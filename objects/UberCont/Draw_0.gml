@@ -43,13 +43,12 @@ if bossintro {
 		var _boss_name = scrMenuButtonName(sprBossName, boss)
 		
 		if is_string(_boss_name) {
-	        draw_set_halign(fa_left)
-			draw_set_valign(fa_middle)
+	        draw_align(fa_left, fa_middle)
 			
+			draw_set_color(c_white)
 			draw_text_bigname(view_xview + view_width / 2 + bossnamex, view_yview + view_height / 2, _boss_name, c_white, 1, 1)
 			
-			draw_set_halign(fa_left)
-			draw_set_valign(fa_top)
+			draw_align()
 		}
 		else {
 			draw_sprite_ext(sprBossName, boss, view_xview + view_width / 2 + 1 + bossnamex, view_yview + view_height / 2, 1, 1, 0, c_black, 1)
@@ -79,11 +78,13 @@ else if paused && sprite_exists(pausespr) {
 	//
     var yoff = (scrGameIsEventRun() || scrGameIsHardmode()) ? 4 : 0
 	
-	if loc_exists("PAUSED") {
+	if loc_exists("PauseMenu:Paused") {
 		draw_set_halign(fa_center)
 		draw_set_valign(fa_middle)
 		
-		draw_text_bigname(view_xview + view_width / 2 + 1, view_yview + 52 + 1 - yoff, loc("PAUSED"), c_white)
+		draw_text_bigname(
+			round(view_xview + view_width / 2 + 1),
+			round(view_yview + 52 + 1 - yoff), loc("PauseMenu:Paused", "PAUSED"),  c_white)
 		
 		draw_set_halign(fa_left)
 		draw_set_valign(fa_top)

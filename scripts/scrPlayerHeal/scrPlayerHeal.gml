@@ -14,6 +14,7 @@ function scrPlayerHeal(_player, _amount, _create_popup=false) {
 				hp += _amount
 				if hp >= max_hp {
 					_is_full = true
+					hp = max_hp
 				}
 			}
 			else _is_full = true

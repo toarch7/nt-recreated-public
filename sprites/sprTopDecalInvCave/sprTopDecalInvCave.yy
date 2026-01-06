@@ -26,8 +26,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Decals",
-    "path":"folders/Sprites/Env/Decals.yy",
+    "name":"CursedCaves",
+    "path":"folders/Sprites/Env/CursedCaves.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -66,3 +66,8 @@ function scr_weapon_has_assist_disabled(_weapon) {
 function scr_weapon_is_hyper(_weapon) {
 	return _weapon == wep_hyper_launcher || _weapon == wep_hyper_rifle || _weapon == wep_hyper_slugger
 }
+
+function scr_weapon_get_text(_weapon) {
+	gml_pragma("forceinline")
+	return scr_weapon_is_valid(_weapon) ? wep_text[_weapon] : ""
+}

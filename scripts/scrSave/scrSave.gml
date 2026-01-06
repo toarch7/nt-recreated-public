@@ -38,7 +38,10 @@ function scrSave() {
 		if stats {
 	        save_set_value("data", "tot_time", tot_time)
 	        save_set_value("data", "tot_banditkills", tot_banditkills)
-	        save_set_value("etc", "protowep", protowep)
+			
+			if (!(scrGameIsEventRun() || scrGameIsCustomMode())) {
+				save_set_value("etc", "protowep", protowep)
+			}
 			
 	        for (var _race_id = Race.Fish; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
 	            save_set_value("ctotkill", string(_race_id), ctot_kill[_race_id])

@@ -28,8 +28,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Env",
-    "path":"folders/Sprites/Env.yy",
+    "name":"Campfire",
+    "path":"folders/Sprites/Env/Campfire.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

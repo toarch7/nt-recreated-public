@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"draw_text_shadow",
+  "%Name":"scr_text",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"draw_text_shadow",
+  "name":"scr_text",
   "parent":{
     "name":"draw_text_custom",
     "path":"folders/Scripts/draw_text_custom.yy",

@@ -1,14 +1,10 @@
 if lockstep_stop
 	exit
 
-if scr_race_is_unlocked(num) {
+if UberCont.ctot_time[num] > 0 {
+	with (StatChar) selected = (id == other.id)
+    with (DrawStats) select = other.num
     snd_play(sndClick)
-	
-    with StatChar {
-        selected = (id == other.id)
-    }
-	
-    DrawStats.select = num
 }
 else {
 	snd_play(sndNoSelect)

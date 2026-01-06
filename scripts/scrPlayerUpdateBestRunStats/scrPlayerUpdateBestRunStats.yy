@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scrPlayerUpdateBestRunStats",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scrPlayerUpdateBestRunStats",
+  "parent":{
+    "name":"Scripts",
+    "path":"folders/Scripts.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

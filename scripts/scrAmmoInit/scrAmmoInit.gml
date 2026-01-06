@@ -51,7 +51,7 @@ function scrAmmoDecideType(_player, _prioritize_primary = false) {
 			}
 			
 			if (_btype != Ammo.None && ammo[_btype] < typ_amax[_btype]) {
-				return choose(_atype, _btype)
+				return (_atype != Ammo.None) ? choose(_atype, _btype) : _btype
 			}
 		}
 		else {

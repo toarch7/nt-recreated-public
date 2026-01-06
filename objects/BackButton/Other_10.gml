@@ -31,16 +31,15 @@ else if instance_exists(PlayButton) or instance_exists(DailyList) {
 }
 
 if instance_exists(Credits) && !instance_exists(GameCont) {
-	with Credits
-		instance_destroy()
+	instance_destroy(Credits)
+	instance_destroy(Logo)
 	
-	with Logo
-		instance_destroy()
-	
-	with instance_create(0, 0, MenuOptions)
+	with (instance_create(0, 0, MenuOptions)) {
 		scrOptionsMenuChangeCategory(OptionCategory.Game)
+	}
+	
+	scrLetterbox(true, 3)
 }
-
 
 if instance_exists(DailyList) {
     with DailyList
@@ -55,11 +54,12 @@ else if instance_exists(Menu) && scr_is_authority() {
 		
 		scr_camera_set_position(0, 0)
 		
-	    with instance_create(0, 0, Logo)
+	    with (instance_create(0, 0, Logo)) {
 			event_perform(ev_alarm, 1)
+		}
 		
-	    UberCont.daily_run = 0
-	    UberCont.weekly_run = 0
+	    UberCont.daily_run = false
+	    UberCont.weekly_run = false
 		
 		scr_playerinstance_reset(global.index)
 		

@@ -289,7 +289,7 @@ function scrCreatePlayers(_my_index = global.index) {
 				if !scrGameIsDailyRun() {
 					UberCont.ctot_days[race] ++
 				}
-				else if global.hardmode {
+				else if UberCont.hardmode {
                     UberCont.ctot_hard[race] ++
                 }
 
@@ -315,6 +315,13 @@ function scrCreatePlayers(_my_index = global.index) {
 				
 				if _pinst.start_bcurse {
 					bcurse = true
+				}
+				
+				if (!scr_weapon_is_valid(wep)) {
+					wep = bwep
+					curse = bcurse
+					bwep = wep_none
+					bcurse = false
 				}
 			}
         }
@@ -342,19 +349,19 @@ function scr_draw_multiplayer_player_card(_index, _x, _y, _width = 160, _halign 
 	draw_set_font(fntSmall)
 	
 	draw_set_color(c_uigray)
-	draw_text_shadow(_x + 32, _y, "Player " + string(_inst.index + 1))
+	draw_text_nt(_x + 32, _y, "Player " + string(_inst.index + 1))
 	
 	var _latency_string = _inst.is_local() ? string(round(_inst.latency)) + "ms." : "(You)"
 	
 	draw_set_halign(fa_right)
-	draw_text_shadow(_x + _width - 12, _y + _height div 2 - 4, _latency_string)
+	draw_text_nt(_x + _width - 12, _y + _height div 2 - 4, _latency_string)
 	
 	draw_set_halign(fa_left)
 	draw_set_color(_inst.color)
-	draw_text_shadow(_x + 32, _y + _height div 2 - 4, _inst.name)
+	draw_text_nt(_x + 32, _y + _height div 2 - 4, _inst.name)
 	
 	draw_set_valign(fa_top)
-	draw_set_font(fntM1)
+	draw_reset_font()
 }
 
 function scr_player_pref(_pinst, _name) {

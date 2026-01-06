@@ -1,8 +1,3 @@
-if GameCont.area == 0 {
-	instance_destroy(id, 0)
-	exit
-}
-
 friction = 0.4
 
 team = 0
@@ -17,6 +12,7 @@ spr_dead = sprRadChestBigDead
 
 snd_hurt = sndHitMetal
 
+right = choose(1, -1)
 
 max_hp = 20
 hp = max_hp

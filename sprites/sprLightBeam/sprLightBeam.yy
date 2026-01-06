@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":3,
   "parent":{
-    "name":"Env",
-    "path":"folders/Sprites/Env.yy",
+    "name":"Oasis",
+    "path":"folders/Sprites/Env/Oasis.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

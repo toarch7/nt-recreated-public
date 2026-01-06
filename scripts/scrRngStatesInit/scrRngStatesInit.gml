@@ -23,7 +23,7 @@ function scrRngStatesInit() {
 	if global.custom_seed {
 		global.seed = global.custom_seed
 	}
-    else if !global.coop {
+    else if !UberCont.coop {
         global.seed = irandom(rng_m)
 	}
 	

@@ -2,12 +2,12 @@ raddrop = 11
 max_hp = 70
 meleedamage = 0
 size = 3
-spr_idle = sprGuardianIdle
-spr_walk = sprGuardianIdle
-spr_hurt = sprGuardianHurt
-spr_dead = sprGuardianDead
+spr_idle = sprCrownGuardianIdle
+spr_walk = sprCrownGuardianIdle
+spr_hurt = sprCrownGuardianHurt
+spr_dead = sprCrownGuardianDead
 event_inherited()
-spr_fire = sprGuardianFire
+spr_fire = sprCrownGuardianFire
 snd_hurt = sndCrownGuardianHurt
 snd_dead = sndCrownGuardianDead
 alarm[1] = (40 + random(10))

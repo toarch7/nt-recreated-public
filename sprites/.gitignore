@@ -1,4 +1,4 @@
-# Generated at Thu Dec 25 2025 04:46:33 GMT+0300 (Москва, стандартное время)
+# Generated at Tue Jan 06 2026 21:17:30 GMT+0300 (Москва, стандартное время)
 #
 # This file excludes all image assets from the repo that are unallowed to be used.
 # The only assets that are present here are the ones exclusive to NTM.
@@ -168,6 +168,8 @@ sprBigNameCentered/*.png
 sprBigNameCentered/layers/*
 sprBigNameCenteredB/*.png
 sprBigNameCenteredB/layers/*
+sprBigNameFont/*.png
+sprBigNameFont/layers/*
 sprBigPortal/*.png
 sprBigPortal/layers/*
 sprBigPortalDisappear/*.png
@@ -3146,6 +3148,10 @@ sprSpookyBanditWalk/*.png
 sprSpookyBanditWalk/layers/*
 sprStats/*.png
 sprStats/layers/*
+sprSteamDeckBig/*.png
+sprSteamDeckBig/layers/*
+sprSteamDeckSmall/*.png
+sprSteamDeckSmall/layers/*
 sprSteroidsMenu/*.png
 sprSteroidsMenu/layers/*
 sprSteroidsMenuDeselect/*.png

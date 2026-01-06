@@ -40,12 +40,7 @@ function scrSwapWeps(_swap_extra = true) {
 	
     drawempty = 30
 	
-	with TutCont {
-		if pos == 2 && !step_complete {
-			step_complete = true
-			alarm[0] = 30
-		}
-	}
+	with (TutCont) complete_step(TutorialStep.Swapping)
 	
 	if instance_exists(WepstickAttack) && index == global.index {
 		with (WepstickAttack) scrWepstickUpdateSprite(other.id)

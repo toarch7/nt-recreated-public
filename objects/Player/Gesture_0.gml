@@ -1,3 +1,3 @@
-if race == 6 && index == global.index {
-    KeyCont.press_horn[index] = 1
+if (scr_player_is_local(index)) {
+    KeyCont.press_horn[index] = true
 }

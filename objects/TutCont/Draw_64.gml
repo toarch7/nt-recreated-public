@@ -1,101 +1,114 @@
 if lockstep_stop
 	exit
 
-if pos >= array_length(text) or instance_exists(Spiral)
-	exit
+if (step_current >= TutorialStep.NUM_TUTORIAL_STEPS || instance_exists(Spiral)) exit
 
-if !instance_exists(Portal) {
+if (instance_exists(TopCont)) depth = TopCont.depth - 1
+
+if (!instance_exists(Portal)) {
     draw_set_color(c_black)
-    draw_rectangle(0, view_height, view_width, view_height - 32, 0)
+    draw_rectangle(0, view_height, view_width, view_height - LETTERBOX_SIZE, 0)
     draw_set_color(c_white)
 
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_middle)
+    draw_align(fa_center, fa_middle)
 	
-	var str = text[pos],
-		sub = 0
+	var _strings = text[step_current],
+		_key = "Tutorial:Touch",
+		_input_index = 0,
+		_string;
 	
-	if is_keyboard(global.index)
-		sub = 1
+	if is_keyboard(global.index) {
+		_key = "Tutorial:Default"
+		_input_index = 1
+	}
+	else if is_gamepad(global.index) {
+		_key = "Tutorial:Gamepad"
+		_input_index = 2
+	}
 	
-	if is_gamepad(global.index)
-		sub = 2
+	if (_input_index >= array_length(_strings)) {
+		_input_index = array_length(_strings) - 1
+	}
 	
-	if pos < 4
-		str = text[pos, sub]
+	if (step_current < TutorialStep.NUM_TUTORIAL_STEPS) {
+		_string = loc(_key, step_current, _strings[_input_index])
+	}
 	
-	str = loc(str)
+	var _keys = [ "move", "pick", "fire", "swap", "spec" ]
 	
-	if scr_keyboard_check_pressed(ord("T")) && UberCont.opt_console && alarm[0] == -1
-		alarm[0] = 30
-	
-	if pos == 0 {
-		if sub == 1 {
-			var keys = ""
-			
-			keys += loc(scrKeyName(Key.north[0])) + ", "
-			keys += loc(scrKeyName(Key.west[0])) + ", "
-			keys += loc(scrKeyName(Key.south[0])) + loc(" @sAND@w ")
-			keys += loc(scrKeyName(Key.east[0])) + "@s"
-			
-			str = string_replace(str, "%", keys)
+	if (_input_index == 1) {
+		if step_current == TutorialStep.Walking {
+			_string = loc_fmt($"{_key}:{step_current}", _strings[_input_index],
+				scrKeyName(Key.north[0]), scrKeyName(Key.west[0]), scrKeyName(Key.south[0]), scrKeyName(Key.east[0]))
 		}
-		else if sub == 2 {
-			str = string_replace(str, "%", gamepad_key_to_nt_text("stickl"))
+		else if step_current < TutorialStep.Fin {
+			var _key_code = keymap_get(_keys[step_current - 1]),
+				_key_name = scrKeyName(_key_code)
+			
+			_string = loc_fmt($"{_key}:{step_current}", _string, _key_name)
 		}
 	}
-	else if pos < 4 {
-		var keys = [ "pick", "swap", "spec" ],
-			key_code = keymap_get(keys[pos - 1]),
-			key_name = scrKeyName(key_code)
+	else if (_input_index == 2) {
+		var _key_code = keymap_get(_keys[step_current - 1])
 		
-		if sub == 2 {
-			str = string_replace(str, "%", gamepad_key_to_nt_text(key_code))
+		if (step_current == TutorialStep.Walking) {
+			_string = string_replace_all(_string, "@1(butsmall:move)", gamepad_key_to_nt_text(gp_stickl, false))
 		}
-		else str = string_replace(str, "%", "@w" + loc(key_name) + "@s")
+		else if (step_current == TutorialStep.PickingUp) {
+			_string = string_replace_all(_string, "@1(butsmall:pick)", gamepad_key_to_nt_text(_key_code, false))
+		}
+		else if (step_current == TutorialStep.Shooting) {
+			_string = string_replace_all(_string, "@1(butsmall:fire)", gamepad_key_to_nt_text(_key_code, false))
+			_string = string_replace_all(_string, "@1(butsmall:aim)", gamepad_key_to_nt_text(gp_stickr, false))
+		}
+		else if (step_current == TutorialStep.Swapping) {
+			_string = string_replace_all(_string, "@1(butsmall:swap)", gamepad_key_to_nt_text(_key_code, false))
+		}
+		else if (step_current == TutorialStep.Power) {
+			_string = string_replace_all(_string, "@1(butsmall:spec)", gamepad_key_to_nt_text(_key_code, false))
+		}
 	}
 	
-    draw_text_nt(view_width / 2, view_height - 18, "@s" + str)
-
-    draw_set_halign(fa_left)
-    draw_set_valign(fa_top)
+	draw_text_nt(view_width / 2, view_height - 18, "@s" + string(_string))
+	
+    draw_align()
 }
 
 draw_set_color(c_lime)
 
-if !is_keyboard() && !is_gamepad() {
-	var obj = noone
+if (is_touch()) {
+	var _poi = noone
 	
-	switch pos {
-		case 0: obj = JoystickMove break
+	switch step_current {
+		case TutorialStep.Walking: _poi = JoystickMove break
 		
-        case 1:
-			with ButtonAct if alpha > 0
-				obj = ButtonAct
-			
+        case TutorialStep.PickingUp:
+			with ButtonAct {
+				if (alpha > 0) _poi = ButtonAct
+			}
 			break
         
-        case 2: obj = ButtonSwap break
-        case 3: obj = ButtonActive break
+        case TutorialStep.Swapping: _poi = ButtonSwap break
+		case TutorialStep.Power: _poi = ButtonActive break
     }
 	
 	var w = sin(wave) * 4
 	
-	if instance_exists(obj) {
+	if instance_exists(_poi) {
 		if circle_active {
-			drawx = lerp(drawx, obj.x, 0.4)
-			drawy = lerp(drawy, obj.y, 0.4)
+			drawx = lerp(drawx, _poi.x, 0.4)
+			drawy = lerp(drawy, _poi.y, 0.4)
 		}
 		else {
-			drawx = obj.x
-			drawy = obj.y
+			drawx = _poi.x
+			drawy = _poi.y
 		}
 		
-		draw_circle_part(drawx, drawy, obj.rad * 1.25 + w, 2, 1)
+		draw_circle_part(drawx, drawy, _poi.rad * 1.25 + w, 2, 1)
 		
 		circle_active = true
 	}
-	else if pos == 1 {
+	else if step_current == TutorialStep.PickingUp {
 		draw_set_color(c_red)
 		
 		with WepPickup {
@@ -114,7 +127,6 @@ if !is_keyboard() && !is_gamepad() {
 
 wave += 0.1
 
-if wave > 6.2
-	wave = 0
+if (wave > 6.2) wave = 0
 
 draw_set_color(c_white)

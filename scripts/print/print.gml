@@ -48,9 +48,9 @@ function scr_debug_print_stacktrace(_message = undefined, _start = 0) {
 	
 	var _string = string_join_ext("\n|- ", _trace, _start)
 	if is_string(_message) {
-		print("|---" + string(_message) + "\n|- "+ _string)
+		show_debug_message("|---" + string(_message) + "\n|- " + _string)
 	}
 	else {
-		print("\n|- " + string(_string))
+		show_debug_message("\n|- " + string(_string))
 	}
 }

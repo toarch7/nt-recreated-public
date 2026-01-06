@@ -26,13 +26,6 @@ if KeyCont.press_swap[index] && bwep != 0 {
 		}
 	}
 	
-	with TutCont {
-		if pos == 2 && !step_complete {
-			step_complete = true
-			alarm[0] = 30
-		}
-	}
-
 	scrSwapWeps()
 	swapanim = 1
 
@@ -137,12 +130,7 @@ if !roll {
 			if (speed > _maxspeed) speed = _maxspeed
 		}
 		
-		with (TutCont) {
-			if pos == 0 && !step_complete {
-				step_complete = true
-				alarm[0] = 90
-			}
-		}
+		with (TutCont) complete_step(TutorialStep.Walking)
 	}
 
 	if place_meeting(x, y, NothingDeath) && instance_exists(SitDown) {

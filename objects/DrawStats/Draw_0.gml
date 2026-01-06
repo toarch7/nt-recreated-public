@@ -1,9 +1,10 @@
 if lockstep_stop
 	exit
 
-scrDrawAlignCenter()
-draw_text_bigname(view_xview + view_width / 2, view_yview + 24, loc("STATS"), c_uigray)
-scrDrawAlignDefault()
+draw_align(fa_center, fa_middle)
+var _name = loc("MainMenu:Stats", "STATS")
+draw_text_bigname(view_xview_center, view_yview + 24, _name, c_uigray)
+draw_align()
 
 if select == 0 {
     scrDrawStats()

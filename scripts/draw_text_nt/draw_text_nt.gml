@@ -24,25 +24,32 @@ function render_text_reset() {
 /// @ignore
 function render_parse_text(_text) {
 	var _def_width = 0,
-		_def_height = string_height(" "),
+		_def_height = 0,
 		_length = string_length(_text),
 		_line_width = _def_width,
 		_line_height = _def_height,
 		_str = "", _string_index = 1,
 		_escape = false
 	
+	for(var i = _length; i >= 1; --i) {
+		var _char = string_char_at(_text, i)
+		if (_char != " ") {
+			_def_height = max(_def_height, font_get_string_height(_char))
+		}
+	}
+	
 	var _lines = [],
 		_strings = [],
 		_itsover = false,
 		_line_sprite_width = 0,
-		_space_width = string_width(" "),
+		_space_width = font_get_string_width(" "),
 		_width = 0,
 		_height = 0
 	
 	static __render_parse_move_lines = function(_lines, _xoffset, _yoffset) {
 		var _count = array_length(_lines)
 		
-		for(var _string_index = _count = 1; _string_index >= 0; _string_index --) {
+		for(var _string_index = _count - 1; _string_index >= 0; _string_index --) {
 			var _line = _lines[_string_index]
 			_line.x += _xoffset
 			_line.y += _yoffset
@@ -80,8 +87,8 @@ function render_parse_text(_text) {
 				_str += _char
 			}
 			
-			var _w = string_width(_str),
-				_h = string_height(_str)
+			var _w = font_get_string_width(_str),
+				_h = font_get_string_height(_str)
 			
 			array_push(_strings, {
 				"type" : TextRenderFragment.String,
@@ -133,39 +140,24 @@ function render_parse_text(_text) {
 						_tag += _char
 					}
 					
-					var _parameter_number = 0
+					var _parameters = string_split(_tag, ",", false, 3),
+						_parameter_count = array_length(_parameters)
 					
-					do {
-						var _comma = string_pos(",", _tag)
-						
-						if _comma == 0 || _parameter_number == 3
-							break
-						
+					for(var i = _parameter_count - 1; i >= 1; --i) {
 						try {
-							var _extra = (string_length(_tag) - _comma + 1),
-								_index_str = string_copy(_tag, _comma + 1, _extra)
-							
-							if _parameter_number == 0 {
-								_index = real(_index_str)
-							}
-							else if _parameter_number == 1 {
-								_xoffset = real(_index_str)
-							}
-							else if _parameter_number == 2 {
-								_yoffset = real(_index_str)
-							}
+							var _index_str = _parameters[i]
+							/**/ if (i == 1) _index = real(_index_str)
+							else if (i == 2) _xoffset = real(_index_str)
+							else if (i == 3) _yoffset = real(_index_str)
 						}
 						catch(e) { /* ... */ }
-						
-						_tag = string_copy(_tag, 1, _comma - 1)
-						
-						_parameter_number ++
 					}
-					until false
+					
+					if (_parameter_count > 1) _tag = array_first(_parameters)
 					
 					var _spr = handle_parse(_tag)
 					
-					if (!sprite_exists(_spr == -1)) {
+					if (!sprite_exists(_spr)) {
 						_spr = asset_get_index(_tag)
 					}
 					
@@ -176,15 +168,13 @@ function render_parse_text(_text) {
 					
 					var _w = sprite_get_width(_spr),
 						_h = sprite_get_height(_spr),
-						_xoffset = sprite_get_xoffset(_spr),
-						_yoffset = sprite_get_yoffset(_spr),
 						_left = sprite_get_bbox_left(_spr),
 						_top = sprite_get_bbox_top(_spr)
 					
 					_w = sprite_get_bbox_right(_spr) - _left
 					_h = sprite_get_bbox_bottom(_spr) - _top
 					
-					if _xoffset < 0 or _yoffset < 0 {
+					if _xoffset < 0 || _yoffset < 0 {
 						__render_parse_move_lines(_lines, _xoffset, _yoffset)
 					}
 					
@@ -194,8 +184,6 @@ function render_parse_text(_text) {
 						"height"       : _h,
 						"sprite_index" : _spr,
 						"image_index"  : _index,
-						"left"         : _left,
-						"top"          : _top,
 						"xoffset"      : _xoffset,
 						"yoffset"      : _yoffset
 					})
@@ -280,10 +268,10 @@ function render_parse_text(_text) {
 /// @param {Real} y
 /// @param {String} text
 /// @param {Real} [xscale=1]
-/// @param {Real} [yscale=_xscale]
-/// @param {Real} [_angle=0]
-/// @param {Real} [col=draw_get_color]
-/// @param {Real} [_alpha=draw_get_alpha]
+/// @param {Real} [yscale=xscale]
+/// @param {Real} [angle=0]
+/// @param {Real} [color=draw_get_color]
+/// @param {Real} [alpha=draw_get_alpha]
 function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0, _blend = draw_get_color(), _alpha = draw_get_alpha()) {
 	static __surface = -1
 	
@@ -291,29 +279,39 @@ function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0,
 		exit
 	}
 	
-	if string_pos("@", _text) == 0 {
-		return draw_text_shadow(_x, _y, _text, _xscale, _yscale, 0)
-	}
-	
 	_text = string_hash_to_newline(string(_text))
 	
-	//print("Text (real)", _text)
+	//_text = string(font_get_name(draw_get_font())) + " " + _text
+	///**/ if (draw_get_valign() == fa_top) _text = "t | " + _text
+	//else if (draw_get_valign() == fa_middle) _text = "m | " + _text
+	//else if (draw_get_valign() == fa_bottom) _text = "b | " + _text
+	
+	if string_pos("@", _text) == 0 && string_pos("\n", _text) == 0 {
+		draw_text_transformed_color(_x + 1, _y, _text, _xscale, _yscale, 0, c_black, c_black, c_black, c_black, _alpha)
+		draw_text_transformed_color(_x, _y + 1, _text, _xscale, _yscale, 0, c_black, c_black, c_black, c_black, _alpha)
+		draw_text_transformed_color(_x + 1, _y + 1, _text, _xscale, _yscale, 0, c_black, c_black, c_black, c_black, _alpha)
+		draw_text_transformed_color(_x, _y, _text, _xscale, _yscale, 0, _blend, _blend, _blend, _blend, _alpha)
+		
+		exit
+	}
 	
 	var _halign = draw_get_halign(),
 		_valign = draw_get_valign(),
 		_last_color = draw_get_color(),
-		_shadows = __render_text_shadows
+		_last_alpha = draw_get_alpha(),
+		_shadows = __render_text_shadows,
+		_key = $"{font_get_name(draw_get_font())}:{_text}"
 	
 	draw_set_color(_blend)
 	
 	draw_set_halign(fa_left)
 	draw_set_valign(fa_top)
 	
-	var _info = __render_text_cache_normal[$ _text]
+	var _info = __render_text_cache_normal[$ _key]
 		
 	if is_undefined(_info) {
 		_info = render_parse_text(_text)
-		__render_text_cache_normal[$ _text] = _info
+		__render_text_cache_normal[$ _key] = _info
 	}
 	
 	var _lines = _info.lines,
@@ -399,15 +397,12 @@ function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0,
 				if _xmove == 1 _xpos += _fragment.width
 			}
 			else if _fragment.type == TextRenderFragment.Sprite {
-				var _spr = _fragment.sprite_index,
-					_xoff = sprite_get_xoffset(_spr) + _fragment.xoffset,
-					_yoff = sprite_get_yoffset(_spr) + _fragment.yoffset
-				
 				draw_sprite_ext(
-					_fragment.sprite_index, _fragment.image_index,
+					_fragment.sprite_index,
+					_fragment.image_index,
 					
-					_dx + _xoff * 0.5,
-					_dy + _yoff * 0.5,
+					_dx + _fragment.xoffset + (_fragment.width - 8) + 1,
+					_dy + _fragment.yoffset + (_fragment.height - 8) + font_get_height_diff() + 1,
 					
 					1, 1, 0, c_white, draw_get_alpha())
 				
@@ -468,6 +463,7 @@ function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0,
 	}
 	
 	draw_set_color(_last_color)
+	draw_set_alpha(_last_alpha)
 	
 	draw_set_halign(_halign)
 	draw_set_valign(_valign)

@@ -88,6 +88,15 @@ function scrSavegameSession(_buffer, _is_load) {
 		with (UberCont) {
 			daily_run = _session_info.daily_run
 			weekly_run = _session_info.weekly_run
+			custom_options = _session_info.custom_options
+			
+			if (is_string(_session_info.weekly_data)) {
+				if (!ds_exists(weekly_data, ds_type_map)) {
+					weekly_data = ds_map_create()
+				}
+				
+				ds_map_read(weekly_data, _session_info.weekly_data)
+			}
 		}
 		
 		GameCont.persistentweps = _session_info.persistentweps
@@ -103,11 +112,13 @@ function scrSavegameSession(_buffer, _is_load) {
 			// GameCont data
 			session_data: [],
 			
-	        hardmode: global.hardmode,
+	        hardmode: UberCont.hardmode,
 			recontinued_times: global.recontinued_times,
 			
 	        daily_run: UberCont.daily_run,
 	        weekly_run: UberCont.weekly_run,
+			weekly_data: undefined,
+			custom_options: UberCont.custom_options,
 			
 			persistentweps: [],
 			unlockscreens: [],
@@ -118,6 +129,10 @@ function scrSavegameSession(_buffer, _is_load) {
 			max_hp: undefined,
 			headloses: undefined
 	    }
+		
+		with (UberCont) if (is_numeric(weekly_data) && ds_exists(weekly_data, ds_type_map)) {
+			_session_info.weekly_data = ds_map_write(weekly_data)
+		}
 		
 		with (GameCont) {
 			var _keys = variable_struct_get_names(id),
@@ -176,8 +191,8 @@ function scrSavegameGlobals(_buffer, _is_load) {
 		
 	    var _global_keys = [
 			"rng_state", "index", "seed", "is_server", "custom_seed",
-			"hardmode", "current_frame", "party_gun_special_drop",
-			"crownpick", "recontinued_times",
+			"current_frame", "party_gun_special_drop", "crownpick",
+			"recontinued_times",
 		]
 		
 		with (_globals) array_foreach(_global_keys, function(_vname) {

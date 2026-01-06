@@ -207,7 +207,7 @@ function scrPopulate() {
 		var _f = noone, _distance_max = -infinity
 		with (Floor) {
 			var _distance = point_distance(x, y, 10016, 10016)
-			if (_distance > _distance_max && !place_meeting(x, y, __props)) {
+			if (_distance > _distance_max && !place_meeting(x, y, __props) && !place_meeting(x, y, Wall)) {
 				_distance_max = _distance
 				_f = id
 			}

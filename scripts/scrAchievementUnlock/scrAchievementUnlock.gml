@@ -7,10 +7,10 @@ function scrAchievementUnlock(_achievement_id) {
 	
 	if UberCont.opt_achievs {
 	    with instance_create(instance_number(AchievementSplash), 0, AchievementSplash) {
-	        str1 = chiev_name[_achievement_id]
-	        str2 = chiev_text[_achievement_id]
+	        str1 = loc("Achievements", _achievement_id, "name", chiev_name[_achievement_id])
+	        str2 = loc("Achievements", _achievement_id, "text", chiev_text[_achievement_id])
 	        ok = instance_number(AchievementSplash) <= 1
-	        achiev = _achievement_id
+	        achievement_id = _achievement_id
 	    }
 	}
 	

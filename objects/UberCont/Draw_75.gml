@@ -31,7 +31,7 @@ if global.__debug_camera_display_info {
 	
 	draw_set_color(c_white)
 	var _scale = scr_window_get_fullscreen() ? 0.5 : 1
-	draw_text_shadow_scale(0, 0, _str, _scale, _scale, 0)
+	draw_text_nt(0, 0, _str, _scale, _scale, 0)
 }
 
 //if instance_exists(TestCont) {

@@ -8,7 +8,7 @@ function scrEnemyApplyCreationEffects() {
 		}
 	}
 	
-	if global.hardmode {
+	if UberCont.hardmode {
 		raddrop = floor(raddrop * 0.5)
 	}
 	

@@ -1,20 +1,20 @@
 scrLetterbox(true)
 
-text = loc("YOU DID NOT REACH THE NUCLEAR THRONE")
+text = loc("GameOver:Text:0", "YOU DID NOT REACH THE NUCLEAR THRONE")
 
-if GameCont.area == area_palace && GameCont.subarea == 3 {
-	text = loc("YOU ALMOST REACHED THE NUCLEAR THRONE")
+if GameCont.area == area_palace && GameCont.subarea == GameCont.maxsubarea {
+	text = loc("GameOver:Text:1", "YOU ALMOST REACHED THE NUCLEAR THRONE")
 }
 else if GameCont.loops > 0 {
-	text = loc("THE STRUGGLE CONTINUES")
+	text = loc("GameOver:Text:3", "THE STRUGGLE CONTINUES")
 }
 
 if GameCont.win {
     if instance_exists(Cinematic) {
-        text = loc("YOU HAVE REACHED THE NUCLEAR THRONE")
+        text = loc("GameOver:Text:2", "YOU REACHED THE NUCLEAR THRONE")
     }
 	else if GameCont.area == 106 && GameCont.subarea == 3 {
-        text = loc("THE STRUGGLE IS OVER")
+        text = loc("GameOver:Text:4", "THE STRUGGLE IS OVER")
     }
 }
 

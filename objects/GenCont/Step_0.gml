@@ -8,7 +8,8 @@ with (Floor) {
 	if (distance_to_point(10016, 10016) <= _safedis) _numfloors ++
 }
 
-if (_numfloors < 5) exit
+var _maxfloors = ceil((_safedis / 32) * 2.5)
+if (_numfloors < _maxfloors) exit
 
 alarm[0] = 3
 alarm[2] = 2

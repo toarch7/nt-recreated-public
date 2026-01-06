@@ -33,7 +33,7 @@ if (flags & 4) == 4 {
 		str += object_get_name(object_index) + "\n"
 		
 		if string_height(str) > bottom {
-			draw_text_shadow(dx, 48, str)
+			draw_text_nt(dx, 48, str)
 			
 			dx += string_width(str) + 14
 			
@@ -42,7 +42,7 @@ if (flags & 4) == 4 {
 	}
 	
 	if str != "" {
-		draw_text_shadow(dx, 48, str)
+		draw_text_nt(dx, 48, str)
 		dx += string_width(str) + 14
 	}
 }
@@ -59,7 +59,7 @@ if (flags & 8) == 8 {
 	str += "\n color: " + string(global.player_color)
 	str += "\n      : " + string(UberCont.opt_color)
 	
-	draw_text_shadow(dx, 48, str)
+	draw_text_nt(dx, 48, str)
 }
 
 var scale = 0.67
@@ -109,7 +109,7 @@ if global.console_active {
 
 display_set_gui_size(width, height)
 
-draw_set_font(fntM1)
+draw_reset_font()
 
 if os_type == os_android && (!read or global.console_active) {
     draw_set_color(c_black)
@@ -120,7 +120,7 @@ if os_type == os_android && (!read or global.console_active) {
 
     draw_set_halign(fa_center)
     draw_set_valign(fa_middle)
-    draw_text_shadow(view_width - 26, 28 + 12, "~")
+    draw_text_nt(view_width - 26, 28 + 12, "~")
     draw_set_halign(fa_left)
     draw_set_valign(fa_top)
 

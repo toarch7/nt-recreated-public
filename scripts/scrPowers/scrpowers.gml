@@ -274,6 +274,8 @@ function scrPowers() {
 				horrortime += 0.03
 				horrornorad = 40
 				
+				if (_is_local) UberCont.ctot_uniq[Race.Horror] ++
+				
 				var _sound = _tb ? sndHorrorLoopTB : sndHorrorLoop
 				if !(audio_is_playing(horrorloop) || snd_is_playing(_sound)) {
 					horrorloop = snd_play_loop(_sound)
@@ -437,11 +439,8 @@ function scrPowers() {
 			break
 	}
 	
-	if (_press) with (TutCont) {
-		if pos == 3 && !step_complete {
-			step_complete = true
-			alarm[0] = 30
-		}
+	with (TutCont) {
+		if (_press) complete_step(TutorialStep.Power)
 	}
 }
 
@@ -477,7 +476,9 @@ function scrMeltingCorpseExplosion(_is_local, _tb) {
 		instance_create(x, y, MeatExplosion)
 	}
 	
-	if (UberCont.ctot_uniq[Race.Melting]) ++
+	if (instance_is(other, Player) && scr_player_is_local(other.index)) {
+		UberCont.ctot_uniq[Race.Melting] ++
+	}
 	
 	snd_play(sndExplosion)
 	

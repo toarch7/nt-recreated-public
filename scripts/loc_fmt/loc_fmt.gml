@@ -25,7 +25,7 @@ function loc_fmt(_key, _default) {
 	
 	return _str
 	
-	// trick gamemaker into thinking
+	// trick the gamemaker ide into thinking
 	if (false) delete argument[0]
 }
 
@@ -41,6 +41,6 @@ function loc_fmt_either(_key1, _key2, _default) {
 	var _format_argument_index = 3; mcr_loc_fmt;
 	return _str
 	
-	// trick gamemaker into thinking
+	// trick the gamemaker ide into thinking
 	if (false) delete argument[0]
 }

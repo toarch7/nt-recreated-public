@@ -31,7 +31,7 @@ function scrUnlocksArea() {
 	switch GameCont.area {
 		case area_sewers:
 			scrRaceUnlock(Race.Eyes)
-			if (global.hardmode) {
+			if (UberCont.hardmode) {
 				try_unlock_skin(Race.Chicken, SkinLetter.B)
 			}
 			break
@@ -71,7 +71,7 @@ function scrUnlocksArea() {
 	if _loops >= 3 && !UberCont.opt_cheats {
 		UberCont.opt_cheats = true
 		save_set_value("cheats", "unlocked", true)
-		scrShowUnlockPopup("@wCHEATS UNLOCKED#@sCHECK OUT THE MAIN MENU SETTINGS!")
+		scrShowUnlockPopup(loc("R:Unlock:Cheats", "@wCHEATS UNLOCKED#@sCHECK OUT THE MAIN MENU SETTINGS!"))
 		scrSave()
 	}
 }
@@ -271,7 +271,8 @@ function scrPlayerTryUnlockGoldenWeapons(_player) {
 			
 			scr_loadout_race_set_stored_weapon(race, _store)
 			
-	        scrShowUnlockPopup("@y" + loc(wep_name[_store]) + loc("#@sSTORED"))
+			var _name = loc("Weapons", _store, "Name", wep_name[_store])
+	        scrShowUnlockPopup(loc_fmt("Unlock:GoldWeapon:1", "@w%", _name), loc("Unlock:GoldWeapon:2", "@sSTORED"))
 			
 			scrAchievementUnlock(Achievement.GOOD_FIND)
 			

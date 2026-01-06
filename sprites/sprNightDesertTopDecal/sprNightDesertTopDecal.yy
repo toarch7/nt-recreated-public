@@ -27,8 +27,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Decals",
-    "path":"folders/Sprites/Env/Decals.yy",
+    "name":"Campfire",
+    "path":"folders/Sprites/Env/Campfire.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

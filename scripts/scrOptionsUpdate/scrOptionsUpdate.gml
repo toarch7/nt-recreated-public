@@ -107,7 +107,14 @@ function scrOptionsUpdate() {
 		if opt_stickregions
 			opt_hiddensticks = true
 		
-        if (_language_last != opt_language) scrLanguageSet(opt_language)
+        if (_language_last != opt_language) {
+			var _last_font = draw_get_font()
+			
+			scrLanguageSet(opt_language)
+			draw_reset_font()
+			
+			with (MenuOptions) event_user(10)
+		}
 		
         if res != undefined && (res != opt_resolution || scaling != opt_scaling) {
             scrSetViewSize(false)
@@ -142,20 +149,22 @@ function scrOptionsUpdate() {
 		globalvar gamepad_types, gamepad_icon_small, gamepad_icon_big;
 		
 		global.gamepad_types = [
-			"Xbox", "PS4", "Switch"
+			"XBONE", "PS4", "Switch", "SteamDeck"
 		]
 		
-		if opt_gamepad_type < 0 or opt_gamepad_type >= array_length(global.gamepad_types)
+		if opt_gamepad_type < 0 || opt_gamepad_type >= array_length(global.gamepad_types) {
 			opt_gamepad_type = 0
+		}
 		
 		var pad = global.gamepad_types[opt_gamepad_type]
 		
 		global.gamepad_icon_small = asset_get_index("spr" + pad + "Small")
 		global.gamepad_icon_big = asset_get_index("spr" + pad + "Big")
 		
-		//if os_type == os_android && !instance_exists(GameCont)
-		//	SetVolumeControl(opt_volumecontrol)
+		if (!sprite_exists(global.gamepad_icon_small)) global.gamepad_icon_small = sprXBONESmall
+		if (!sprite_exists(global.gamepad_icon_big)) global.gamepad_icon_big = sprXBONEBig
 		
+		//
 		var type = save_get_value("etc", "last_os", -1)
 		
 		if os_type != type {
@@ -203,5 +212,26 @@ function scrOptionsUpdateNativeCursor() {
 			window_set_cursor(cr_arrow)
 		}
 		else window_set_cursor(cr_none)
+	}
+}
+
+function scrOptionsEraseSettings() {
+	with (MenuOptions) {
+	    array_foreach(options, function(_categories) {
+			array_foreach(_categories, function(_opt) {
+				if (is_string(_opt[$ "key"]) && _opt.key != "game_tutorial") {
+					ds_map_delete(UberCont.saveData, _opt.key)
+				}
+			})
+	    })
+		
+		save_set_value("etc", "rp_warning", false)
+		scrOptionsUpdate()
+		scrSave()
+		
+	    snd_play(sndClick)
+	    snd_play(sndMutant0Cnfm)
+		
+	    event_perform(ev_create, 0)
 	}
 }

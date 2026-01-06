@@ -15,11 +15,15 @@ function scrGameIsWeeklyRun() {
 }
 
 function scrGameIsHardmode() {
-	return global.hardmode
+	return UberCont.hardmode
 }
 
 function scrGameIsContinuedRun() {
-	with UberCont {
-		return continued_run
-	}
+	return UberCont.continued_run
 }
+
+function scrGameIsCustomMode() {
+	return UberCont.custom
+}
+
+

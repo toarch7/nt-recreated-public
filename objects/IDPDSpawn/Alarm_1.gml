@@ -5,7 +5,7 @@ if GameCont.loops - (GameCont.area == 0) >= 3 {
     exit
 }
 
-hrd = GameCont.hard - (13 * global.hardmode)
+hrd = GameCont.hard - (13 * UberCont.hardmode)
 
 do {
     dir = rng_choose(1, 1, 2, 3)

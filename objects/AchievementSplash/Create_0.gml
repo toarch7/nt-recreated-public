@@ -4,4 +4,4 @@ sprite_index = sprGameOverCenterSplat
 alarm[0] = 90
 ok = 1
 index = 0
-achiev = 0
+achievement_id = 0

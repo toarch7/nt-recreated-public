@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Decals",
-    "path":"folders/Sprites/Env/Decals.yy",
+    "name":"HQ",
+    "path":"folders/Sprites/Env/HQ.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

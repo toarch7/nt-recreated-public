@@ -21,12 +21,16 @@ vans = 0
 
 if (gocrib) {
     gocrib = false
+	if (area != area_crib) {
+		lastarea = area
+		lastsubarea = subarea
+	}
     area = area_crib
     subarea = 1
-    //waypnt[waypoints] = area
-    //waysub[waypoints] = subarea
-    //waylps[waypoints] = loops
-    //waypoints++
+    waypnt[waypoints] = area
+    waysub[waypoints] = subarea
+    waylps[waypoints] = loops
+    waypoints++
 	scrRaceUnlock(Race.Cuz)
 	_went_crib = true
 }
@@ -36,7 +40,6 @@ finalsubarea = (subarea == maxsubarea)
 
 if (!can_advance_stage) {
 	can_advance_stage = true
-	scrSavegameSave()
 	exit
 }
 
@@ -45,8 +48,8 @@ var _is_secret = (area >= 100)
 if (_is_secret && !_went_crib) {
 	if (subarea == 1) {
 	    if area == area_crib {
-	        area = hqarea
-	        subarea = hqsubarea
+	        area = lastarea
+	        subarea = lastsubarea
 	        fromcrib = true
 	    }
 		
@@ -71,7 +74,7 @@ if (_is_secret && !_went_crib) {
 	    }
 	}
 }
-else if (!_went_crib) {
+else if (!_went_crib && area != area_crib) {
     lastarea = area
     lastsubarea = subarea
 }

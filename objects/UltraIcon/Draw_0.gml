@@ -33,7 +33,7 @@ txt2 = "@w" + loc("Races", race, "Ultra", num, "Name", scrRaceGetUltraSkillName(
 	 + "@s" + loc("Races", race, "Ultra", num, "Text", scrRaceGetUltraSkillText(race, num)) + "@s"
 
 if selected {
-    draw_text_nt(view_width / 2, view_height - 61 - selected, txt2)
+    draw_text_nt(round(view_width / 2), round(view_height - 61 - selected), txt2)
 	if (selected < 3) selected ++
 }
 

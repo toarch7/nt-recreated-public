@@ -16,10 +16,10 @@ draw_align(fa_center, fa_middle)
 
 var _string = "@y" + loc(str1) + "#" + "@s" + loc(str2), _y = _height - 28
 	
-if achiev == Achievement.BOSS_CAPTAIN {
+if achievement_id == Achievement.BOSS_CAPTAIN {
     _string = "@b" + loc(str1) + "#" + "@w" + loc(str2)
 }
-else if achiev == Achievement.BOSS_THRONE || achiev == Achievement.BOSS_THRONE2 {
+else if achievement_id == Achievement.BOSS_THRONE || achievement_id == Achievement.BOSS_THRONE2 {
     _string = "@g" + loc(str1) + "#" + "@w" + loc(str2)
 }
 

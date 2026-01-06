@@ -57,6 +57,7 @@ if display < display_max {
 	anim[display] = 2
 }
 
+draw_set_font(fntM1)
 draw_set_valign(fa_middle)
 
 for(var i = start; i < count; i ++) {
@@ -75,20 +76,31 @@ for(var i = start; i < count; i ++) {
 	}
 	
 	draw_set_halign(fa_right)
-	draw_text_shadow(20 + xoff, yy, string(i + 1) + ".")
+	draw_text_nt(16 + xoff, yy, string(i + 1) + ".")
 	
-	var _name = item.name
+	var _name = item.name,
+		_special_characters = false
 	
 	if _gap_size < 260 {
 		_name = string_copy(_name, 1, 12)
 	}
 	
-	var _image = scr_race_get_skin_subimage(item.char, item.skin)
-	_name = $"@(sprMapIcon:{_image})  " + _name
+	var _image = scr_race_get_skin_subimage(item.char, item.skin),
+		_use_cjk_font = string_supported_info[$ _name]
+	
+	if (_use_cjk_font == undefined) {
+		_use_cjk_font = font_string_check_unsupported_chars(fntM1, string_upper(_name))
+		string_supported_info[$ _name] = _use_cjk_font
+	}
+	
+	draw_sprite(sprMapIcon, _image, 58, yy)
 	
 	draw_set_halign(fa_left)
 	
-	draw_text_nt(32 + xoff, yy, _name)
+	if (_use_cjk_font) draw_set_font(global.language_font_cjk)
+	draw_text_nt(40 + xoff, yy, _name)
+	
+	draw_set_font(fntM1)
 	
 	draw_sprite(sprKillsIcon, 0, 160 + (full * 30) + xoff, yy)
 	draw_text_nt(172 + (full * 30) + xoff, yy, item.kills)
@@ -99,9 +111,10 @@ for(var i = start; i < count; i ++) {
 }
 
 draw_set_valign(fa_top)
+draw_reset_font()
 
 event_user(0)
 
-scrDrawAlignCenter()
-draw_text_bigname(view_width / 2, 18, loc("LEADERBOARDS"), c_uigray)
-scrDrawAlignDefault()
+draw_align(fa_center, fa_middle)
+draw_text_bigname(view_width / 2, 18, loc("R:MainMenu:Leaderboards", "LEADERBOARDS"), c_uigray)
+draw_align()

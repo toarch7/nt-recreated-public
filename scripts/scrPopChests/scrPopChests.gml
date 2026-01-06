@@ -173,7 +173,7 @@ function scrPopChests() {
 	
 	#endregion
 	
-	if global.hardmode && ((GameCont.loops - scrGameIsHardmode()) <= 0 && GameCont.area == area_desert && GameCont.subarea == 1) {
+	if UberCont.hardmode && ((GameCont.loops - scrGameIsHardmode()) <= 0 && GameCont.area == area_desert && GameCont.subarea == 1) {
 		with (Player) instance_create(x, y, BigWeaponChest)
 	}
 	

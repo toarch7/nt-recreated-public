@@ -16,16 +16,21 @@ if os_type == os_android {
     //if check == os_permission_denied or request_perm {
 	if request_perm {
 		var str = "The game needs access to read and write files for customization and saving progress." +
-				  "\nIt is not strictly necessary if you're a regular player - you can deny or revoke this permission" +
-				  "in the System Preferences in case if you experience problems with your game data."
+				  "\nIt is not strictly necessary if you're just a regular player - you can deny or revoke this permission" +
+				  "in the System Preferences in case if you experience problems with your game data.",
+			
+			key = "Intro:FilesystemAccess";
 		
 		if (legacy) {
-			str = "The game needs access to read and write files for customization and saving progress." +
-			      "\nHowever, this permission is only necessary for importing your old progress, so you" +
-			      "can revoke it once your data is confirmed safe."
+			str = "Previous game installation detected. Due to internal API version changes, the game now" +
+				  "requires you to provide file a system access permission in order to import your current game progress." +
+				  "\n\nYou can do this now and revoke the permission shortly after the game is loaded," +
+				  "in case if you don't need to edit your save file."
+			
+			key = "Intro:FilesystemAccessV3Update"
 		}
 		
-		message = show_message_async(loc(str))
+		message = show_message_async(loc(key, str))
 		
         request_perm = false
         alarm[0] = -1
@@ -65,8 +70,8 @@ ds_map_destroy(info)
 randomize()
 
 if (!loading) {
-	if save_get_value("etc", "disclaimer", false) {
-		room_goto(romGame)
+	if (save_get_value("etc", "disclaimer", false)) {
+		if (!disclaimer) room_goto(romGame)
 	}
 	else {
 		disclaimer = true
@@ -78,16 +83,17 @@ scrVolume()
 
 try {
 	instance_create(0, 0, GameCont)
-	instance_create(0, 0, SpiralCont)
-	instance_create(0, 0, TopCont)
 	
 	scrSavegameLoad()
+	
+	instance_create(0, 0, SpiralCont)
+	instance_create(0, 0, TopCont)
 	
 	scrLetterbox(true)
     
 	depth = UberCont.depth - 1
 }
 catch(e) {
-	print_exception($"Failed to write game save.", e)
+	print_exception(loc("R:Intro:LoadGameFailure", "Failed to load saved run."), e)
 	event_user(0)
 }

@@ -13,10 +13,12 @@ function scr_debug_overlay_load() {
 	ini_open(debug_overlay_file)
 	load("__debug_test_framerate_uncapped", false)
 	load("__debug_camera_display_info", false)
+	load("__debug_menu_options", false)
 	load("__debug_hitboxes", false)
 	load("__debug_health", false)
 	load("__debug_immortality", false)
 	load("__debug_noreload", false)
+	load("__debug_infammo", false)
 	ini_close()
 }
 
@@ -37,10 +39,12 @@ function scr_debug_overlay_save() {
 	ini_open(debug_overlay_file)
 	write("__debug_test_framerate_uncapped")
 	write("__debug_camera_display_info")
+	write("__debug_menu_options")
 	write("__debug_hitboxes")
 	write("__debug_health")
 	write("__debug_immortality")
 	write("__debug_noreload")
+	write("__debug_infammo")
 	ini_close()
 }
 
@@ -54,29 +58,18 @@ function scr_create_debug_overlay_views() {
 		
 		dbg_section("Toggles")
 		dbg_checkbox(ref_create(global, "__debug_camera_display_info"), "Camera & display info")
+		dbg_checkbox(ref_create(global, "__debug_menu_options"), "Show all settings")
 		dbg_checkbox(ref_create(global, "__debug_hitboxes"), "Object hitboxes")
 		dbg_checkbox(ref_create(global, "__debug_health"), "Enemy health")
 		dbg_checkbox(ref_create(global, "__debug_immortality"), "Player immortality")
 		dbg_checkbox(ref_create(global, "__debug_noreload"), "Disable reload")
+		dbg_checkbox(ref_create(global, "__debug_infammo"), "Infinite ammo")
 		
-		dbg_section("Resources")
-		dbg_button("Give rads", function() {
-			with (GameCont) {
-				rad = max_rad
-				event_perform(ev_step, ev_step_normal)
-			}
-		})
-		dbg_same_line()
-		dbg_button("Level Ultra", function() {
-			with (GameCont) {
-				if (level >= 10) break
-				ultrapoints = 1
-				var _skillpoints = max(0, 8 - ds_list_size(skills) - level)
-				if (_skillpoints > 0) skillpoints = _skillpoints
-				level = 10
-				event_perform(ev_step, ev_step_normal)
-				rad = max_rad
-				room_restart()
+		dbg_section("Technical")
+		dbg_button("Reload languges", function() {
+			with (UberCont) {
+				scrLanguagesLoad()
+				scrLanguageSet(opt_language)
 			}
 		})
 		

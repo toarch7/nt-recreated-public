@@ -66,9 +66,11 @@ loadout_weapon_pointed = false
 
 weekly = false
 
-if scrGameIsWeeklyRun() {
+if (scrGameIsCustomMode()) {
+	scrMenuPrepareCustomLoadout()
+}
+else if (scrGameIsWeeklyRun()) {
 	scrMenuPrepareWeeklyLoadout()
-	weekly = true
 }
 
 unlock_hint = ""
@@ -109,11 +111,6 @@ mousex = gui_w / 2
 mousey = gui_h / 2
 
 event_perform(ev_step, ev_step_begin)
-
-seed_prompt = -1
-seed_pointed = false
-seed_splat = 0
-seed_text = "random"
 
 if global.custom_seed {
 	seed_text = string(global.custom_seed)

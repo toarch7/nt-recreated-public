@@ -13,6 +13,8 @@ typ = 1
 attract = 0
 raddrop = 8
 
+damage = 40
+
 attract_flash = 0
 
 knockback_speed = 18

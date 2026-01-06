@@ -11,6 +11,11 @@ function scrGameRestart(_quit_to_menu = false) {
 		exit
 	}
 	
+	with (Player) if (scr_player_is_local(index)) {
+		scrPlayerUpdateBestRunStats(race, true)
+	}
+	
+	audio_resume_all()
 	audio_stop_all()
 	
 	with UberCont {

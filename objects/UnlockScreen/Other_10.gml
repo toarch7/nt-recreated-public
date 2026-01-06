@@ -1,3 +1,4 @@
+/// @description Draw
 var _w = 32, _race = race, _bskin = bskin
 
 draw_set_color(c_black)
@@ -47,16 +48,16 @@ if addy > 1 {
 	var _xpos = view_xview_center,
 		_ypos = view_yview + view_height - 62 - addy
 	
-	if !loc_exists("UNLOCKED!") {
+	if loc_exists("Unlock:Unlocked") {
+		draw_align(fa_center, fa_middle)
+		draw_text_bigname(_xpos, _ypos + 10, loc("Unlock:Unlocked", "UNLOCKED!"), c_white, 1, 1)
+		draw_align()
+	}
+	else {
 	    draw_sprite_ext(sprTextUnlocked, 0, _xpos + 1, _ypos + 0, 1, 1, 0, c_black, 1)
 	    draw_sprite_ext(sprTextUnlocked, 0, _xpos + 0, _ypos + 1, 1, 1, 0, c_black, 1)
 	    draw_sprite_ext(sprTextUnlocked, 0, _xpos + 1, _ypos + 1, 1, 1, 0, c_black, 1)
 	    draw_sprite_ext(sprTextUnlocked, 0, _xpos + 0, _ypos + 0, 1, 1, 0, c_white, 1)
-	}
-	else {
-		draw_align(fa_center, fa_middle)
-		draw_text_bigname(_xpos, _ypos, loc("UNLOCKED!"), c_white, 1)
-		draw_align()
 	}
 }
 
@@ -71,7 +72,7 @@ if can_continue {
 		pointed = _pointed
 	}
 	
-	draw_text_bigname(view_xview_center, view_yview + view_height - 16 - addy2 - _pointed, loc("CONTINUE"), _color)
+	draw_text_bigname(view_xview_center, view_yview + view_height - 16 - addy2 - _pointed, loc("GameOver:Unlock", "CONTINUE"), _color)
 	draw_align()
 	
 	if (addy2 > 0) addy2 = approach(addy2, 0, 2)

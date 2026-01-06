@@ -1,6 +1,4 @@
 # Nuclear Throne Mobile
-> [!CAUTION]
-> The project is currently undergoing a significant partial rewrite. As of this moment, it is extremely likely that the game is very much unfunctional. You can contribute to this repo in order to speed up the process.
 
 Open Source Rebuild and a Free [Android Port](https://toncho.itch.io/nuclear-throne-mobile/) of Nuclear Throne, a Video Game Created by [Vlambeer](https://vlambeer.com/).
 
@@ -8,7 +6,7 @@ This rebuild is based on a decompiled source code of the Nuclear Throne Update #
 
 # Building
 > [!WARNING]
-> This repo doesn't come with any assets from the original game. In order to build this game, you will need to extract all the assets from your own copy of Nuclear Throne.
+> This repo doesn't come with any assets from the original game. In order to make this project buildable, you will need to extract all the assets from your own copy of Nuclear Throne.
 
 This project is built with the GameMaker engine, much so is the original game - therefore, an installation of GameMaker is required.
 

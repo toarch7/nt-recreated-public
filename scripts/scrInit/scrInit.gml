@@ -151,7 +151,8 @@ function scrInit() {
 	
 	#endregion
 	
-    protowep = save_get_value("etc", "protowep", 56)
+    protowep = save_get_value("etc", "protowep", wep_rusty_revolver)
+	protocurse = false
 	
 	if _fix_inconsistent_weapon_ids && protowep == 255 {
 		save_set_value("etc", "protowep", wep_golden_frog_pistol)

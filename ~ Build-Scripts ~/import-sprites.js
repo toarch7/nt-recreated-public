@@ -335,8 +335,8 @@ function performSpriteImport(isForce) {
             const layers = resourceInfo.layers;
             const frames = resourceInfo.frames;
             
-            if (!(spriteName in spriteOverridesMap)) {
-                assert.equal(frames.length, sprite.imageNumber, spriteName + " has a varying amount of frames than it's resource file specifies");
+            if (!(spriteName in spriteOverridesMap) && frames.length != sprite.imageNumber) {
+                console.log("Warning:", spriteName + " has a varying amount of frames than it's resource file specifies");
             }
 
             let frameCount = Math.min(sprite.imageNumber, frames.length);

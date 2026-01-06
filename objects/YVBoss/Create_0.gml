@@ -1,5 +1,5 @@
 raddrop = 0
-max_hp = ceil(350 * (1 + GameCont.loops / 3))
+max_hp = ceil(700 * (1 + GameCont.loops / 3))
 if player_count > 1 {
     max_hp = round(max_hp * (1 + player_count / 2))
 }

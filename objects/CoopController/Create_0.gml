@@ -22,7 +22,7 @@ ready = false
 
 clients_ready = [ false, false, false, false ]
 
-global.coop = 1
+UberCont.coop = 1
 
 socket = -1
 broadcast_socket = -1
@@ -112,7 +112,8 @@ enum event {
 	brutesync
 }
 
-protowep = 56
+protowep = wep_rusty_revolver
+protocurse = false
 
 loading_text = ""
 

@@ -104,8 +104,10 @@ function scrGamepadKeyName(key) {
     }
 }
 
-function scrKeyName(key) {
-	switch key {
+function scrKeyName(_key) {
+	if (loc_exists("KeyName", _key)) return loc("KeyName", _key, "N/A")
+	
+	switch _key {
 		case mb_left:
 			return "LMB"
 		case mb_right:
@@ -146,13 +148,13 @@ function scrKeyName(key) {
 			return "RIGHT"
 	}
 	
-	if key >= ord("A") && key <= ord("Z")
-	or key >= ord("0") && key <= ord("9")
-	or key == ord("/")
-		return chr(key)
+	if (_key >= ord("A") && _key <= ord("Z"))
+	|| (_key >= ord("0") && _key <= ord("9"))
+	|| _key == ord("/")
+		return chr(_key)
 	
-	if key >= vk_f1 && key <= vk_f12 {
-		var f = key - vk_f1
+	if _key >= vk_f1 && _key <= vk_f12 {
+		var f = _key - vk_f1
 		return "F" + string(f + 1)
 	}
 	
@@ -220,7 +222,7 @@ function scrHandleInputsGeneral(_index) {
 	
 	_k.press_horn[_index] = 0
 	_k.gamepad[_index] = opt_gamepad
-	_k.keyboard[_index] = opt_keyboard
+	_k.keyboard[_index] = opt_keyboard && !opt_gamepad
 	_k.aimassist[_index] = opt_assist
 	_k.crosshair[_index] = opt_crosshair
 	
@@ -326,28 +328,7 @@ function scrHandleInputsGeneral(_index) {
 	}
 }
 
-function scrSetGamepadInputs(_index = 0) {
-	var _kh, _kv;
-	
-    _kh = gamepad_axis_value(0, gp_axislh)
-	_kv = gamepad_axis_value(0, gp_axislv)
-	
-    if !(abs(_kh) == 0 && abs(_kv) == 0) {
-        KeyCont.dir_move[_index] = point_direction(0, 0, _kh, _kv)
-        KeyCont.moving[_index] = true
-    }
-	else KeyCont.moving[_index] = false
-	
-    _kh = gamepad_axis_value(0, gp_axisrh)
-	_kv = gamepad_axis_value(0, gp_axisrv)
-
-    if !(abs(_kh) == 0 && abs(_kv) == 0) {
-        KeyCont.dir_fire[_index] = point_direction(0, 0, _kh, _kv)
-		KeyCont.dis_fire[_index] = point_distance(0, 0, _kh, _kv)
-    }
-}
-
-function scrSetKeyboardInputs(_index = 0) {
+function scrSetCardinalDirectionInputs(_index) {
 	KeyCont.hold_east[_index] = key_check("east", keystate_hold)
 	KeyCont.press_east[_index] = key_check("east", keystate_press)
 	KeyCont.release_east[_index] = key_check("east", keystate_release)
@@ -363,6 +344,102 @@ function scrSetKeyboardInputs(_index = 0) {
 	KeyCont.hold_nort[_index] = key_check("north", keystate_hold)
 	KeyCont.press_nort[_index] = key_check("north", keystate_press)
 	KeyCont.release_nort[_index] = key_check("north", keystate_release)
+	
+	if (is_keyboard(_index)) {
+		if (scr_keyboard_check_held(vk_right)) KeyCont.hold_east[_index] = true
+		if (scr_keyboard_check_pressed(vk_right)) KeyCont.press_east[_index] = true
+		if (scr_keyboard_check_released(vk_right)) KeyCont.release_east[_index] = true
+		
+		if (scr_keyboard_check_held(vk_left)) KeyCont.hold_west[_index] = true
+		if (scr_keyboard_check_pressed(vk_left)) KeyCont.press_west[_index] = true
+		if (scr_keyboard_check_released(vk_left)) KeyCont.release_west[_index] = true
+		
+		if (scr_keyboard_check_held(vk_up)) KeyCont.hold_nort[_index] = true
+		if (scr_keyboard_check_pressed(vk_up)) KeyCont.press_nort[_index] = true
+		if (scr_keyboard_check_released(vk_up)) KeyCont.release_nort[_index] = true
+		
+		if (scr_keyboard_check_held(vk_down)) KeyCont.hold_sout[_index] = true
+		if (scr_keyboard_check_pressed(vk_down)) KeyCont.press_sout[_index] = true
+		if (scr_keyboard_check_released(vk_down)) KeyCont.release_sout[_index] = true
+	}
+}
+
+function scrSetGamepadInputs(_index = 0) {
+	#region Left stick
+		
+	    var _kh = gamepad_axis_value(0, gp_axislh)
+			_kv = gamepad_axis_value(0, gp_axislv)
+		
+		KeyCont.press_west[_index] = false
+		KeyCont.press_east[_index] = false
+		KeyCont.press_nort[_index] = false
+		KeyCont.press_sout[_index] = false
+		
+		if (_kh != 0) {
+			if (_kh > 0) {
+				if (!KeyCont.hold_east[_index]) {
+					KeyCont.press_east[_index] = true
+				}
+				KeyCont.hold_east[_index] = true
+			}
+			else if (_kh < 0) {
+				if (!KeyCont.hold_west[_index]) {
+					KeyCont.press_west[_index] = true
+				}
+				KeyCont.hold_west[_index] = true
+			}
+		}
+		else {
+			KeyCont.hold_east[_index] = false
+			KeyCont.hold_west[_index] = false
+		}
+		
+		if (_kv != 0) {
+			if (_kv < 0) {
+				if (!KeyCont.hold_nort[_index]) {
+					KeyCont.press_nort[_index] = true
+				}
+				KeyCont.hold_nort[_index] = true
+			}
+			else if (_kv > 0) {
+				if (!KeyCont.hold_sout[_index]) {
+					KeyCont.press_sout[_index] = true
+				}
+				KeyCont.hold_sout[_index] = true
+			}
+		}
+		else {
+			KeyCont.hold_nort[_index] = false
+			KeyCont.hold_sout[_index] = false
+		}
+		
+	    if (abs(_kh) != 0 || abs(_kv) != 0) {
+	        KeyCont.dir_move[_index] = point_direction(0, 0, _kh, _kv)
+	        KeyCont.moving[_index] = true
+	    }
+		else {
+			scrSetCardinalDirectionInputs(_index)
+			KeyCont.moving[_index] = false
+		}
+		
+	#endregion
+	
+	#region Right stick
+	    
+		var _kh = gamepad_axis_value(0, gp_axisrh),
+			_kv = gamepad_axis_value(0, gp_axisrv)
+		
+	    if (abs(_kh) != 0 || abs(_kv) != 0) {
+			var _d = min(view_width, view_height) * 0.4
+	        KeyCont.dir_fire[_index] = point_direction(0, 0, _kh, _kv)
+			KeyCont.dis_fire[_index] = point_distance(0, 0, _kh, _kv) * _d
+	    }
+		
+	#endregion
+}
+
+function scrSetKeyboardInputs(_index = 0) {
+	scrSetCardinalDirectionInputs(_index)
 	
     var _kh = (KeyCont.hold_east[_index] - KeyCont.hold_west[_index]),
 		_kv = (KeyCont.hold_sout[_index] - KeyCont.hold_nort[_index])

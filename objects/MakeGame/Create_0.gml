@@ -1,6 +1,9 @@
 globalvar game_directory;
 game_directory = ""
 
+scrLanguagesInit()
+scrLanguagesLoad()
+
 legacy = false
 request_perm = false
 
@@ -20,6 +23,8 @@ disclaimer = false
 pos = 0
 posy = 8
 
+pointed_item = -1
+
 loading = file_exists(savegame_file)
 
 game_directory = "/files/"
@@ -27,8 +32,6 @@ game_directory = "/files/"
 message = -1
 
 date_set_timezone(timezone_utc)
-
-scrLanguagesLoad()
 
 display_set_timing_method(tm_sleep)
 display_set_sleep_margin(33)

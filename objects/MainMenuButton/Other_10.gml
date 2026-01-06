@@ -16,13 +16,13 @@ switch image_index {
         var _play_buttons = [ 0 ]
 		
         if !UberCont.showtutorial {
-	        if os_is_network_connected() {
-	            array_push(_play_buttons, 1, 2)
-			}
-		
+	        array_push(_play_buttons, 1, 2)
+			
 	        if UberCont.hardgot {
 				array_push(_play_buttons, 3)
 			}
+			
+			array_push(_play_buttons, 4)
 		}
 		
 		var _button_count = array_length(_play_buttons),
@@ -30,18 +30,20 @@ switch image_index {
 		
         for (var i = 0; i < _button_count; i++) {
             with instance_create(view_xview_center, _ypos, PlayButton) {
-				var _button_index = _play_buttons[i]
-                image_index = _button_index
+				num = _play_buttons[i]
+				image_index = num
 				
 				// Daily & Weekly
-				if _button_index == 1 || _button_index == 2 {
+				if num == 1 || num == 2 {
 					if global.cheats {
 						available = false
 					}
 					
-	                if _button_index == 1 && !UberCont.can_daily
-					|| _button_index == 2 && !UberCont.can_weekly
+	                if ((num == 1 && !UberCont.can_daily)
+						|| (num == 2 && !UberCont.can_weekly)
+					) {
 						image_blend = c_uidark
+					}
 				}
             }
 

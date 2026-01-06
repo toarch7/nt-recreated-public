@@ -43,18 +43,22 @@ with Player {
 	    if !UberCont.opt_keyboard || index != global.index || is_gamepad(index) {
 			var _distance = KeyCont.dis_fire[index]
 			
-			if (UberCont.opt_fixsight && (index == global.index)) s = 1
+			//if (UberCont.opt_fixsight && (index == global.index)) s = 1
 			
-			var _x = x + lengthdir_x(_distance, _direction),
-				_y = y + lengthdir_y(_distance, _direction),
+			var _x = x + lengthdir_x(16 + _distance, _direction),
+				_y = y + lengthdir_y(16 + _distance, _direction),
+				_is_active = (is_gamepad(index) || _distance > 16),
 				_alpha = min(1, crosshair_alpha)
 			
-			crosshair_alpha = lerp(crosshair_alpha, (_distance > 16) ? 5 : 0, 0.4)
-			
-			if (_distance > 16) {
-				crosshair_x = lerp(crosshair_x, _x, 0.8)
-				crosshair_y = lerp(crosshair_y, _y, 0.8)
+			if (scr_player_is_local(index)) {
+				crosshair_alpha = lerp(crosshair_alpha, _is_active ? 5 : 0, 0.4)
 			}
+			else {
+				crosshair_alpha = 1
+			}
+			
+			crosshair_x = lerp(crosshair_x, _x, 0.8)
+			crosshair_y = lerp(crosshair_y, _y, 0.8)
 			
 			if (index != global.index) _alpha *= 0.5
 			
@@ -111,28 +115,19 @@ if !scrGameIsGenerationScreen() {
 	    }
 	}
 	
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_middle)
+	draw_align(fa_center, fa_middle)
 
-    with PopupText {
-        if (!visible) continue
-		
+    with (PopupText) if (visible) {
 		var _x = clamp(x, view_xview + 20, view_xview + view_width - 20)
 			_y = median(y, view_yview + 5, view_yview + view_height - 5)
 		
 		draw_set_color(c_white)
-		
-		scrDrawAlignCenter()
-		
-		draw_text_nt(_x, _y, loc(mytext))
-		
-		scrDrawAlignDefault()
-    }
-
-    with (LevelUp) draw_sprite(sprite_index, -1, x, y)
-    
-    draw_set_halign(fa_left)
-    draw_set_valign(fa_top)
+		draw_text_nt(_x, _y, mytext)
+	}
+	
+	with (LevelUp) draw_sprite(sprite_index, -1, x, y)
+	
+	draw_align()
 }
 
 with Portal {
@@ -141,4 +136,8 @@ with Portal {
 			clamp(x, view_xview + 10, view_xview + view_width - 10),
 			clamp(y, view_yview + 10, view_yview + view_height - 10))
     }
+}
+
+with (UnlockScreen) if (visible) {
+	event_user(0)
 }

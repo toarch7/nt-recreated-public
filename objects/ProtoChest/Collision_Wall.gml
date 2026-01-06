@@ -1,9 +1,12 @@
-if lockstep_stop
-	exit
+/// @description Teleport away
 
-flor = instance_nearest(x, y, Floor)
-if instance_exists(flor) {
-    direction = point_direction(x, y, flor.x, flor.y)
-    x += lengthdir_x(8, direction)
-    y += lengthdir_y(8, direction)
+var _floor = instance_nearest(x, y, Floor)
+
+with (_floor) {
+	other.x = bbox_center_x
+	other.y = bbox_center_y
+}
+
+if (place_meeting(x, y, Wall)) {
+	with (instance_create(x, y, PortalClear)) image_rescale(0.5)
 }

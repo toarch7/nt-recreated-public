@@ -6,7 +6,5 @@ if other.object_index == ProtoStatue {
     instance_destroy()
 }
 else if scr_projectile_generic_hit(true, false) {
-	with (other) {
-		if (team == team_enemy) raddrop ++
-	}
+	with (other) raddrop ++
 }

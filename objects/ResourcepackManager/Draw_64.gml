@@ -7,7 +7,7 @@ var mx = device_mouse_x_to_gui(0),
 time += 0.4
 
 if error != "" {
-	scrDrawAlignCenter()
+	draw_align(fa_center, fa_middle)
 	
 	var str = loc(error)
 	
@@ -27,18 +27,18 @@ if error != "" {
 	
 	error_shake = lerp(error_shake, 0, 0.4)
 	
-	scrDrawAlignDefault()
+	draw_align()
 	
 	exit
 }
 
 if !loaded {
 	if time > 4 {
-		scrDrawAlignCenter()
+		draw_align(fa_center, fa_middle)
 		
 		draw_text_nt(gui_w / 2, gui_h / 2 - 24, loc("LIST IS LOADING..."))
 		
-		scrDrawAlignDefault()
+		draw_align()
 		
 		gpu_set_fog(true, c_black, 0, 0)
 		draw_sprite(sprDailyLoad, time, gui_w / 2 + 1, gui_h / 2 + 9)
@@ -134,7 +134,7 @@ if loaded {
 with BackButton
 	event_perform(ev_draw, ev_gui)
 
-scrDrawAlignCenter()
+draw_align(fa_center, fa_middle)
 
 if downloading {
 	var side = " ~ "
@@ -173,9 +173,9 @@ if downloading {
 			draw_sprite(sprOptionSlider, 0, view_width / 2 - sw / 2 + 10, view_height / 2 + 12)
 			draw_sprite_part(sprOptionSlider, 1, 0, 0, sw * p, sh, view_width / 2 - sw / 2, view_height / 2 + 3)
 			
-			scrDrawAlignCenter()
-			draw_text_shadow(view_width / 2, view_height / 2 + 12, string(p * 100) + "%")
-			scrDrawAlignDefault()
+			draw_align(fa_center, fa_middle)
+			draw_text_nt(view_width / 2, view_height / 2 + 12, string(p * 100) + "%")
+			draw_align()
 		}
 		else {
 			draw_text_nt(view_width / 2, view_height / 2, string(download_size / 1024) + " KB.")
@@ -220,17 +220,17 @@ var dx = pack_width * 0.75 + 18
 if loaded && !downloading {
 	if browsing {
 		draw_set_color(c_uigray)
-		draw_text_shadow_scale(dx - 6, 24, loc("RATING"), 0.67)
-		draw_text_shadow_scale(dx + 52, 24, loc("UPDATED"), 0.67)
+		draw_text_nt(dx - 6, 24, loc("RATING"), 0.67)
+		draw_text_nt(dx + 52, 24, loc("UPDATED"), 0.67)
 		draw_set_color(c_white)
 	}
 	else if !browsing {
-		scrDrawAlignCenter()
-		draw_text_shadow_scale(dx - 32, 36, loc("LOAD PRIORITY"), 0.5)
-		scrDrawAlignDefault()
+		draw_align(fa_center, fa_middle)
+		draw_text_nt(dx - 32, 36, loc("LOAD PRIORITY"), 0.5)
+		draw_align()
 	}
 	
-	scrDrawAlignDefault()
+	draw_align()
 	
 	if browsing {
 		var str = loc("SORT") + ": ",

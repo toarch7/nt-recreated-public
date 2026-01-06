@@ -44,6 +44,8 @@
 #macro MultiplayerTesting:DevelopmentMode true
 #macro MultiplayerTesting:MultiplayerConfig true
 
+global.__disable_sandboxing = false
+
 //
 
 #macro mcr_floor_make_walls { \
@@ -93,6 +95,8 @@ view_width_max = game_screen_height * scr_display_get_aspect_ratio()
 window_min_width = game_screen_width * 2
 window_min_height = game_screen_height * 2
 
+global.index = 0
+
 function scrSetViewSize(_resize_window = true) {
 	with UberCont {
 	    var _width = game_screen_width,
@@ -107,12 +111,10 @@ function scrSetViewSize(_resize_window = true) {
 			}
 		}
 		
-		if _height % 2 != 0 {
-			_height = floor(_height + 1)
-		}
-		
 		_width = floor(_width)
 		_height = floor(_height)
+		
+		if (_width % 2 != 0) _width ++
 		
 		var _render_width = _width * _render_scale,
 			_render_height = _height * _render_scale
@@ -160,12 +162,6 @@ function scrWindowUpdateWindowedPosition() {
 		window_enable_borderless_fullscreen(false)
 	}
 }
-
-function scrDrawAlignCenter() { draw_set_halign(fa_center); draw_set_valign(fa_middle) }
-function scrDrawAlignDefault() { draw_set_halign(fa_left); draw_set_valign(fa_top) }
-
-global.index = 0
-
 
 function month_name_short(month) {
     switch month {

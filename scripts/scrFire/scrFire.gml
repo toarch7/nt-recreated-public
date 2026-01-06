@@ -43,11 +43,11 @@ function scrFire(_wep, _consume_ammo = true) {
     }
 	
 	// Consume ammo
-    if !infammo && _consume_ammo {
+    if !infammo && _consume_ammo && !global.__debug_infammo {
         ammo[_weapon_type] -= scr_weapon_get_cost(_wep)
 		
 		var _wep_rads = scr_weapon_get_rads(_wep)
-        if _wep_rads && GameCont.rad >= _wep_rads {
+        if (_wep_rads > 0 && GameCont.rad >= _wep_rads) {
             GameCont.rad -= _wep_rads
 		}
     }

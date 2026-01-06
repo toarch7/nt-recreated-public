@@ -3,25 +3,26 @@
 if !ingame {
     scr_camera_set_position(0, 0)
 	
-	var handled = false
+	var _handled = false
 	
-	if instance_exists(NicknameInput) {
+	if (instance_exists(NicknameInput)) {
 		with NicknameInput {
-			if (index == 1 && UberCont.can_daily )
-			or (index == 2 && UberCont.can_weekly) {
-				with instance_create(0, 0, PlayButton) {
-					image_index = other.index
-					event_user(0)
-				}
+			if ((index == 1 && UberCont.can_daily) || (index == 2 && UberCont.can_weekly)) {
+				call_after(1, function() {
+					with instance_create(0, 0, PlayButton) {
+						num = other.index
+						event_user(0)
+					}
+				})
 				
-				handled = true
+				_handled = true
 			}
 			
 			instance_destroy()
 		}
 	}
 	
-	if !handled {
+	if !_handled {
 	    with instance_create(0, 0, Logo)
 			event_perform(ev_alarm, 1)
 		

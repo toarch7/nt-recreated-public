@@ -8,15 +8,23 @@ scr_camera_set_position(0, 0)
 var _just_loaded = false
 
 if (!instance_exists(GameCont) && file_exists(savegame_file)) {
+	instance_destroy(SpiralCont, true)
+	instance_destroy(Spiral, true)
+	instance_destroy(SpiralDebris, true)
+	
 	instance_create(0, 0, GameCont)
 	instance_create(0, 0, MusCont)
 	
 	UberCont.continued_run = true
 	var _success = scrSavegameLoad()
 	
-	//file_delete(savegame_file)
-    
-	if (!_success) {
+	if (_success) {
+		// don't allow more than three recontinuation per level
+		if (global.recontinued_times > 2) {
+			file_delete(savegame_file)
+		}
+	}
+	else if (!_success) {
 		file_delete(savegame_file)
         game_restart()
 		exit
@@ -26,9 +34,10 @@ if (!instance_exists(GameCont) && file_exists(savegame_file)) {
 	
 	global.recontinued_times ++
 	print("Recontinued", global.recontinued_times, "times")
-	scrRngStatesReset()
 	scrVolume()
 }
+
+scrRngStatesReset()
 
 if UberCont.want_quit_to_menu {
     if !instance_exists(CoopController) {

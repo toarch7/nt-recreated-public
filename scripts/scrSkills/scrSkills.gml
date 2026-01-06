@@ -142,7 +142,7 @@ function scrSkills() {
     skill_tips[27] = "NOT TODAY"
 
     skill_name[28] = "OPEN MIND"
-    skill_text[28] = "EXTRA CHEST SPAWN"
+    skill_text[28] = "EXTRA @wCHESTS@s SPAWN"
     skill_msnd[28] = sndMutOpenMind
     skill_tips[28] = "DID YOU WAIT FOR IT?"
 
@@ -152,27 +152,6 @@ function scrSkills() {
     skill_tips[29] = ""
 
     maxskill = 29
-	
-	if instance_exists(Player) && instance_exists(GameCont) {
-        var _thronebutt_text = ""
-		
-        if instance_exists(CoopController) {
-			with Player {
-				var _race_name = loc(scrRaceGetName(race)),
-					_butt_text = loc(scrRaceGetThroneButtDescription(race))
-				
-				_thronebutt_text = _race_name + " - " + _butt_text + "\n"
-			}
-			_thronebutt_text = string_trim_end(_thronebutt_text)
-        }
-		else {
-			with Player {
-				_thronebutt_text = loc(scrRaceGetThroneButtDescription(race))
-			}
-		}
-		
-        skill_text[mut_throne_butt] = _thronebutt_text
-    }
 }
 
 function scrSkillIsWeaponMutation(_skill) {

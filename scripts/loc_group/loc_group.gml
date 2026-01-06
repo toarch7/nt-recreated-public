@@ -1,4 +1,4 @@
-// humbly borrowed from YellowAfterlife's cmnloc: https://yal.cc/cmn-loc/
+// inspired by YellowAfterlife's cmnloc: https://yal.cc/cmn-loc/
 #macro LF loc_group
 
 function loc_group(_prefix) {

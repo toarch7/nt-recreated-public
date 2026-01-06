@@ -239,7 +239,7 @@ with (Player) {
 				continue
 			}
 			var _str = $"{x} {y} {object_get_name(object_index)}"
-			draw_text_shadow_scale(_dx, _dy, _str, 0.5)
+			draw_text_nt(_dx, _dy, _str, 0.5)
 			_dy += string_height(_str) * 0.5
 			var _w = string_width(_str)
 			if (_widest < _w) {

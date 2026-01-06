@@ -1,61 +1,60 @@
 function scrGamepadUIControl() {
-    gamepad_v = gamepad_button_check_pressed(0, gp_padd) - gamepad_button_check_pressed(0, gp_padu)
-    gamepad_h = gamepad_button_check_pressed(0, gp_padr) - gamepad_button_check_pressed(0, gp_padl)
+    gamepad_h = KeyCont.press_east[global.index] - KeyCont.press_west[global.index]
+	gamepad_v = KeyCont.press_sout[global.index] - KeyCont.press_nort[global.index]
 	
-	if scrGamepadUIConrolMainMenu(MainMenuButton) exit
-	if scrGamepadUIConrolMainMenu(PlayButton) exit
+	if (gamepad_h == 0 && gamepad_v == 0) exit
 	
-	if scrGamepadUIConrolCharSelect(CharSelect) exit
-	if scrGamepadUIConrolCharSelect(StatChar) exit
+	if (scrGamepadUIConrolMainMenu(MainMenuButton)) exit
+	if (scrGamepadUIConrolMainMenu(PlayButton)) exit
 	
-	if scrGamepadUIConrolSkillIcon(SkillIcon) exit
-	if scrGamepadUIConrolSkillIcon(CrownIcon) exit
-	if scrGamepadUIConrolSkillIcon(UltraIcon) exit
+	if (scrGamepadUIConrolCharSelect(CharSelect)) exit
+	if (scrGamepadUIConrolCharSelect(StatChar)) exit
 	
-	if instance_exists(PauseButton) {
-		var v = gamepad_v,
-			h = gamepad_h,
-			
-			count = instance_number(PauseButton),
-			button = noone,
-			sel = gamepad_sel
+	if (scrGamepadUIConrolSkillIcon(SkillIcon)) exit
+	if (scrGamepadUIConrolSkillIcon(CrownIcon)) exit
+	if (scrGamepadUIConrolSkillIcon(UltraIcon)) exit
+	
+	if (!instance_exists(PauseButton)) {
+		gamepad_sel = 0
+		exit
+	}
+	
+	var count = instance_number(PauseButton)
+	if ((count > 2 && gamepad_h != 0) || gamepad_v != 0) {
+		var button = noone
 		
-		if h != 0 && count > 2 {
-			gamepad_sel += h * 2
+		if gamepad_h != 0 && count > 2 {
+			gamepad_sel += gamepad_h * 2
 		}
-		else if v != 0
-			gamepad_sel += v
+		else if gamepad_v != 0 {
+			gamepad_sel += gamepad_v
+		}
 		
-		if gamepad_sel != sel {
-			if gamepad_sel < 0
-				gamepad_sel = count - 1
-			
-			if gamepad_sel >= count
-				gamepad_sel = 0
-			
-			button = instance_find(PauseButton, gamepad_sel)
-			
-			with PauseButton {
-				if id == button {
-					if !hover {
-						snd_play(sndHover)
-						hover = 1
-					}
-				}
-				else if hover
-					hover = 0
-			}
-		}
+		if (gamepad_sel < 0) gamepad_sel = count - 1
+		if (gamepad_sel >= count) gamepad_sel = 0
+		
+		button = instance_find(PauseButton, gamepad_sel)
+		
+		print("Selection", gamepad_sel)
 		
 		with PauseButton {
-			if hover && gamepad_button_check_pressed(0, gp_face1)
-				event_user(0)
+			if id == button {
+				if !hover {
+					snd_play(sndHover)
+					hover = true
+				}
+			}
+			else if hover {
+				hover = false
+			}
 		}
-		
-		exit
-    }
+	}
 	
-	gamepad_sel = 0
+	with PauseButton {
+		if hover && gamepad_button_check_pressed(0, gp_face1) {
+			event_user(0)
+		}
+	}
 }
 
 function scrGamepadUIConrolMainMenu(object) {
@@ -94,8 +93,7 @@ function scrGamepadUIConrolMainMenu(object) {
 }
 
 function scrGamepadUIConrolCharSelect(object) {
-	if !instance_exists(object)
-		return 0
+	if (!instance_exists(object)) return 0
 	
 	gamepad_sel += gamepad_h
 
@@ -114,9 +112,10 @@ function scrGamepadUIConrolCharSelect(object) {
             }
         }
 
-		if instance_exists(Menu) && Menu.loadout
-			return 1
-	
+		with (Menu) if (loadout_open) {
+			return true
+		}
+		
         with object {
             if gamepad_button_check_pressed(0, gp_face1) && selected
                 event_perform(ev_mouse, ev_left_press)

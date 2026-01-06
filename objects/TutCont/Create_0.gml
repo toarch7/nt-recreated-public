@@ -1,26 +1,19 @@
-pos = 0
+enum TutorialStep {
+	Walking = 1,
+	PickingUp,
+	Shooting,
+	Swapping,
+	Power,
+	Fin,
+	
+	NUM_TUTORIAL_STEPS
+}
 
-text[0, 0] = "WALK USING @wMOVEMENT STICK"
-text[0, 1] = "WALK USING @w% KEYS"
-text[0, 2] = "WALK USING @w% LEFT JOYSTICK"
+letterbox = false
+step_current = TutorialStep.Walking
+step_complete = false
 
-text[1, 0] = "PICK UP NEW WEAPON WITH @wACT. BUTTON"
-text[1, 1] = "PICK UP NEW WEAPON WITH @w% KEY"
-text[1, 2] = "PICK UP NEW WEAPON WITH @w% BUTTON"
-
-text[2, 0] = "SWAP WEAPONS USING @wSWAP BUTTON#TRY IT A FEW TIMES!"
-text[2, 1] = "SWAP WEAPONS USING @w%#TRY IT A FEW TIMES!"
-text[2, 2] = "SWAP WEAPONS USING @w% BUTTON#TRY IT A FEW TIMES!"
-
-text[3, 0] = "@wABILITY BUTTON@s USES YOUR SPECIAL SKILL#@wGIVE IT A GO!"
-text[3, 1] = "@w%@s USES YOUR ABILITY#@wGIVE IT A GO!"
-text[3, 2] = "@w% BUTTON@s USES YOUR ABILITY#@wGIVE IT A GO!"
-
-text[4] = "COOL, WE'RE DONE HERE!"
-
-letterbox = 0
-
-step_complete = 0
+#region Generate area
 
 var w = choose(3, 4),
 	h = choose(3, 4)
@@ -46,9 +39,40 @@ repeat 4 {
 	ang += 90
 }
 
+#endregion
+
+complete_step = function(_step) {
+	if (step_current == _step && !step_complete) {
+		step_complete = true
+		alarm[0] = 30
+	}
+}
+
 
 circle_active = false
 drawx = view_width / 2
 drawy = view_height / 2
 
 wave = 0
+
+text[TutorialStep.Walking, 0] = "WALK USING @wMOVEMENT STICK"
+text[TutorialStep.Walking, 1] = "WALK USING @w%1,%2,%3,%4#@s OR THE @wARROW KEYS"
+text[TutorialStep.Walking, 2] = "WALK USING @w% LEFT JOYSTICK"
+
+text[TutorialStep.PickingUp, 0] = "PICK UP NEW WEAPON USING THE @wINTERACT BUTTON"
+text[TutorialStep.PickingUp, 1] = "PICK UP A NEW WEAPON WITH @w%"
+text[TutorialStep.PickingUp, 2] = "PICK UP NEW WEAPON WITH @w% BUTTON"
+
+text[TutorialStep.Shooting, 0] = "AIM USING THE @wATTACK JOYSTICK@s#TOUCHING THEN RELEASING WILL FIRE"
+text[TutorialStep.Shooting, 1] = "AIM USING THE MOUSE, @wLEFT BUTTON@s FIRES"
+text[TutorialStep.Shooting, 2] = "AIM USING @1(butsmall:aim), @1(butsmall:fire) FIRES"
+
+text[TutorialStep.Swapping, 0] = "SWAP WEAPONS USING THE @wSWAP BUTTON#TRY IT A FEW TIMES!"
+text[TutorialStep.Swapping, 1] = "SWAP WEAPONS WITH @w%@s#TRY IT A FEW TIMES!"
+text[TutorialStep.Swapping, 2] = "SWAP WEAPONS WITH @1(butsmall:swap)#TRY IT A FEW TIMES!"
+
+text[TutorialStep.Power, 0] = "@wABILITY BUTTON@s USES YOUR SPECIAL SKILL#@wGIVE IT A GO!"
+text[TutorialStep.Power, 1] = "@wRIGHT MOUSE BUTTON@s USES YOUR ABILITY#GIVE IT A GO!"
+text[TutorialStep.Power, 2] = "(butsmall:spec) USES YOUR ABILITY#GIVE IT A GO!"
+
+text[TutorialStep.Fin, 0] = "COOL, WE'RE DONE HERE!"

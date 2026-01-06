@@ -195,7 +195,7 @@ function scrDrawMobileControls(_player = noone, _scale_option = UberCont.opt_con
             draw_set_valign(fa_middle)
 			
 			draw_set_alpha(_alpha * 1.25)
-            draw_text_shadow(x, y, loc("SCREEN#SWIPE"))
+            draw_text_nt(x, y, loc("SCREEN#SWIPE"))
 			
 			draw_set_alpha(1)
             

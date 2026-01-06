@@ -8,7 +8,10 @@ snd_play(GameCont.underwater ? sndOasisShoot : scrRaceGetUltraSkillSound(_race, 
 if (!scrNeedMorePlayerUltras()) GameCont.ultrapoints --
 
 if _race == Race.Venuz || _race == Race.Cuz {
-    GameCont.gocrib = true
+    with (GameCont) {
+		can_advance_stage = false
+		gocrib = true
+	}
     room_restart()
 }
 

@@ -17,7 +17,7 @@ if string_length(keyboard_string) {
 			_dx = _x - string_width(_name) div 2,
 			_dy = _y
 		
-		draw_text_shadow(_x, _y - 12, "LMB to spawn")
+		draw_text_nt(_x, _y - 12, "LMB to spawn")
 		
 		if sprite_exists(_sprite) {
 			var _ox = sprite_get_xoffset(_sprite),
@@ -40,13 +40,13 @@ if string_length(keyboard_string) {
 			draw_sprite_ext(_sprite, 0, _dx - (_dw * 0.5) - 2, _dy, _dw / _w, _dh / _h, 0, c_white, 1)
 			sprite_set_offset(_sprite, _ox, _oy)
 		}
-		else draw_text_shadow(_dx - 6, _dy, "??")
+		else draw_text_nt(_dx - 6, _dy, "??")
 	}
 }
 else {
 	draw_set_font(fntSmaller)
 	draw_set_color(c_silver)
-	draw_text_shadow(_x, _y - 10, "Type to spawn")
+	draw_text_nt(_x, _y - 10, "Type to spawn")
 	draw_set_font(_font)
 }
 
@@ -57,7 +57,7 @@ splatindex = approach(splatindex, 2, 0.5)
 
 //
 draw_set_color(_valid ? c_white : c_gray)
-draw_text_shadow(_dx, _dy, keyboard_string + cursor)
+draw_text_nt(_dx, _dy, keyboard_string + cursor)
 
 //
 if (keyboard_check(vk_anykey)) last_input = current_time

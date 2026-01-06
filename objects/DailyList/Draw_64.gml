@@ -33,7 +33,7 @@ draw_set_valign(fa_middle)
 if !array_length(keys) {
     draw_set_halign(fa_center)
     draw_set_valign(fa_middle)
-    draw_text_nt(view_width / 2, view_height / 2, loc("@wNOTHING TO SHOW... YET"))
+    draw_text_nt(view_width / 2, view_height / 2, loc("@wNOTHING HERE YET..."))
     draw_set_halign(fa_left)
     draw_set_valign(fa_top)
 

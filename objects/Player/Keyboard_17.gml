@@ -19,16 +19,16 @@ if (_weapon_change != 0) {
 	wep -= _weapon_change
 	
 	if !scr_weapon_is_valid(wep) {
-		if (wep <= 0) wep = maxwep - 1
+		if (wep <= 0) wep = maxwep
 		else wep = wep_revolver
 	}
-		
+	
 	var _type = scr_weapon_get_type(wep)
-		
+	
 	if (_type) ammo[_type] = scrAmmoGetTypeCapacity(_type)
 	with (instance_create(x, y, WepSwap)) target = other.id
 	with (PopupText) if (self[$ "__from_debug"]) instance_destroy()
-	with (scrPopupCreate(x, y, scr_weapon_get_name(wep) + "!")) {
+	with (scrPopupCreate(x, y, loc("Weapons", wep, "Name", scr_weapon_get_name(wep)) + "!")) {
 		self[$ "__from_debug"] = true
 	}
 	snd_play(wep_swap[wep])

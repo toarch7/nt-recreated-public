@@ -20,26 +20,26 @@ str += string(inputs[1][$ netframe]) + "\n"
 draw_set_font(fntSmall)
 draw_set_halign(fa_left)
 
-draw_text_shadow(72, 10, str)
+draw_text_nt(72, 10, str)
 
 if desynced {
 	draw_set_color(c_red)
-	draw_text_shadow(view_width / 2, 24, "DESYNCED!")
+	draw_text_nt(view_width / 2, 24, "DESYNCED!")
 	draw_set_color(c_white)
 }
 
-scrDrawAlignCenter()
+draw_align(fa_center, fa_middle)
 
 with Player {
 	var _x = bbox_center_x - view_xview,
 		_y = bbox_bottom - view_yview + 4
 	
-	draw_text_shadow(_x, _y, string(round(x)) + " " + string(round(y)))
+	draw_text_nt(_x, _y, string(round(x)) + " " + string(round(y)))
 }
 
-scrDrawAlignDefault()
+draw_align()
 
-draw_set_font(fntM1)
+draw_reset_font()
 
 
 if !instance_exists(CoopMenu) {
@@ -51,19 +51,19 @@ if !instance_exists(CoopMenu) {
 	
 	draw_sprite_stretched_ext(sprAchievementSplash, 0, 0, 0, w, 8, c_black, 0.8)
 	
-	scrDrawAlignCenter()
+	draw_align(fa_center, fa_middle)
 	
     if !global.is_server {
 		var host = scr_playerinstance_find(0)
 		
 		if host != undefined
-			draw_text_shadow(w / 2, 4, string(round(host.latency)) + "ms")
+			draw_text_nt(w / 2, 4, string(round(host.latency)) + "ms")
     }
-	else draw_text_shadow(w / 2, 4, string(array_length(sockets) + 1) + "/4")
+	else draw_text_nt(w / 2, 4, string(array_length(sockets) + 1) + "/4")
 	
-	scrDrawAlignDefault()
+	draw_align()
 
-    draw_set_font(fntM1)
+    draw_reset_font()
     draw_set_color(c_white)
 	
     exit

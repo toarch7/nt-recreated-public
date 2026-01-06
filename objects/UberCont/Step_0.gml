@@ -5,13 +5,9 @@ if native_cursor_inst != -1
 
 input_tick()
 
-if (opt_gamepad) {
-	scrGamepadUIControl()
-}
+scrHandleInputsGeneral(global.index)
 
-if (!paused && !want_pause && !instance_exists(PauseButton)) {
-	scrHandleInputsGeneral(global.index)
-}
+scrGamepadUIControl()
 
 if (instance_exists(CoopController)) {
 	with (CoopController) event_user(0)

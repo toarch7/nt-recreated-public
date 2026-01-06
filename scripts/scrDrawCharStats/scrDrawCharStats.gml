@@ -1,67 +1,70 @@
 function scrDrawCharStats() {
-    if (UberCont.cgot[select] == 1) {
-        unlock = race_prog[select]
-        unlockmax = maxraceprogress
-
-        statx = view_xview + 110
-        staty = view_yview + 52
+	var L = LF("Stats")
+	
+	unlock = race_prog[select]
+    unlockmax = race_prog_max[select]
+	
+    statx = view_xview + 110
+    staty = view_yview + LETTERBOX_SIZE + 4
+    line = 0
+    draw_stat_header(loc("Races", select, "Name", scrRaceGetName(select)))
+    draw_stat(L("Kills", "kills"), string(UberCont.ctot_kill[select]))
+    draw_stat(L("Loops", "loops"), string(UberCont.ctot_loop[select]))
+    draw_stat(L("Runs", "runs"), string(UberCont.ctot_runs[select]))
+    draw_stat(L("Deaths", "deaths"), string(UberCont.ctot_dead[select]))
+    draw_stat(L("Wins", "wins"), string(UberCont.ctot_wins[select]))
+    draw_stat(L("Time", "time"), scrTime(ctot_time[select]))
+    if (unlockmax > 0) draw_stat(L("Unlocks", "unlocks"), (string_pad_zeroes(round(((unlock / unlockmax) * 100)), 2) + "%"))
+	if (UberCont.ctot_uniq[select]) {
+		var _n = UberCont.ctot_uniq[select]
+	    /**/ if (select == Race.Fish) draw_stat(L("Uniq1", "ROLLS"), _n)
+	    else if (select == Race.Crystal) draw_stat(L("Uniq2", "DEFLECTS"), _n)
+	    else if (select == Race.Eyes) draw_stat(L("Uniq3", "TELEKINESIS"), scrTime(_n / 30))
+	    else if (select == Race.Melting) draw_stat(L("Uniq4", "EXPLODED"), _n)
+	    else if (select == Race.Plant) draw_stat(L("Uniq5", "SNARE KILLS"), _n)
+	    else if (select == Race.Venuz) draw_stat(L("Uniq6", "CUZ TIME"), scrTime(_n/ 30))
+	    else if (select == Race.Steroids) draw_stat(L("Uniq7", "FIRING"), string((_n / 30) / _n * 100) + "%")
+	    else if (select == Race.Robot) draw_stat(L("Uniq8", "EATEN"), _n)
+	    else if (select == Race.Chicken) draw_stat(L("Uniq9", "HEADLESS"), scrTime(_n/ 30))
+	    else if (select == Race.Rebel) draw_stat(L("Uniq10", "MOST ALLIES"), _n)
+	    else if (select == Race.Horror) draw_stat(L("Uniq11", "BEAM TIME"), scrTime(_n / 30))
+	    else if (select == Race.Rogue) draw_stat(L("Uniq12", "IDPD KILLS"), _n)
+	    else if (select == Race.BigDog) draw_stat(L("R:Uniq13", "DAMAGED"), _n)
+	    else if (select == Race.Skeleton) draw_stat(L("R:Uniq14", "LUCK STREAK"), _n)
+	    else if (select == Race.Frog) draw_stat(L("R:Uniq15", "GAS VOLUMES"), string(_n / 1000))
+	    else if (select == Race.Cuz) draw_stat(L("Uniq16", "TEARS CRIED"), _n)
+	}
+	if (UberCont.ctot_runs[select] > 0) {
+        draw_stat_header("")
+        draw_stat_header(L("BestRun", "BEST RUN"))
+        draw_stat(L("Area", "area"), scrAreaGetMapName(UberCont.cbst_area[select], UberCont.cbst_suba[select], UberCont.cbst_loop[select]))
+        draw_stat(L("Kills", "kills"), string(UberCont.cbst_kill[select]))
+        statx = view_xview + view_width - 70
+        staty = view_yview + LETTERBOX_SIZE + 4
         line = 0
-        draw_stat_header(scrRaceGetName(select))
-        draw_stat("kills", string(UberCont.ctot_kill[select]))
-        draw_stat("loops", string(UberCont.ctot_loop[select]))
-        draw_stat("runs", string(UberCont.ctot_runs[select]))
-        draw_stat("deaths", string(UberCont.ctot_dead[select]))
-        draw_stat("wins", string(UberCont.ctot_wins[select]))
-        draw_stat("time", baked_tottime[select])
-        draw_stat("unlocks", (string_pad_zeroes(round(((unlock / unlockmax) * 100)), 2) + "%"))
-        if ((select == 1) && (UberCont.ctot_uniq[1] > 0)) draw_stat("ROLLS", string(UberCont.ctot_uniq[1]))
-        else if ((select == 2) && (UberCont.ctot_uniq[2] > 0)) draw_stat("DEFLECTS", string(UberCont.ctot_uniq[2]))
-        else if ((select == 3) && (UberCont.ctot_uniq[3] > 0)) draw_stat("TELEKINESIS", baked_telekinesis)
-        else if ((select == 4) && (UberCont.ctot_uniq[4] > 0)) draw_stat("EXPLODED", string(UberCont.ctot_uniq[4]))
-        else if ((select == 5) && (UberCont.ctot_uniq[5] > 0)) draw_stat("SNARE KILLS", string(UberCont.ctot_uniq[5]))
-        else if ((select == 6) && (UberCont.ctot_uniq[6] > 0)) draw_stat("CUZ TIME", baked_cuztime)
-        else if ((select == 7) && (UberCont.ctot_uniq[7] > 0)) draw_stat("FIRING", (string((((UberCont.ctot_uniq[7] / 30) / UberCont.ctot_time[7]) * 100)) + "%"))
-        else if ((select == 8) && (UberCont.ctot_uniq[8] > 0)) draw_stat("EATEN", string(UberCont.ctot_uniq[8]))
-        else if ((select == 9) && (UberCont.ctot_uniq[9] > 0)) draw_stat("HEADLESS", baked_chicken)
-        else if ((select == 10) && (UberCont.ctot_uniq[10] > 0)) draw_stat("MOST ALLIES", string(UberCont.ctot_uniq[10]))
-        else if ((select == 11) && (UberCont.ctot_uniq[11] > 0)) draw_stat("BEAM TIME", baked_horror)
-        else if ((select == 12) && (UberCont.ctot_uniq[12] > 0)) draw_stat("IDPD KILLS", string(UberCont.ctot_uniq[12]))
-        else if ((select == 13) && (UberCont.ctot_uniq[13] > 0)) draw_stat("DAMAGED", string(UberCont.ctot_uniq[13]))
-        else if ((select == 14) && (UberCont.ctot_uniq[14] > 0)) draw_stat("LUCK STREAK", string(UberCont.ctot_uniq[14]))
-        else if ((select == 15) && (UberCont.ctot_uniq[15] > 0)) draw_stat("GAS VOLUMES", string(UberCont.ctot_uniq[15] / 1000))
-        else if ((select == 16) && (UberCont.ctot_uniq[16] > 0)) draw_stat("TEARS CRIED", string(UberCont.ctot_uniq[15] / 1000))
-        if (UberCont.ctot_runs[select] > 0) {
-            draw_stat_header("")
-            draw_stat_header("BEST RUN")
-            draw_stat("area", scrAreaGetMapName(UberCont.cbst_area[select], UberCont.cbst_suba[select], UberCont.cbst_loop[select]))
-            draw_stat("kills", string(UberCont.cbst_kill[select]))
-            statx = ((view_xview + view_width) - 70)
-            staty = (view_yview + 52)
-            line = 0
-            if (UberCont.ctot_wins[select] > 0) {
-                draw_stat("FASTEST", baked_fastest[select])
-                draw_stat_header("")
-            }
-            if (UberCont.cbst_strk[select] > 0) {
-                draw_stat_header("STREAKS")
-                draw_stat("current", string(UberCont.ctot_strk[select]))
-                draw_stat("best", string(UberCont.cbst_strk[select]))
-                draw_stat_header("")
-            }
-        }
-        if (UberCont.ctot_days[select] > 0) {
-            draw_stat_header("DAILY")
-            draw_stat("area", scrAreaGetMapName(UberCont.dbst_area[select], UberCont.dbst_suba[select], UberCont.dbst_loop[select]))
-            draw_stat("kills", string(UberCont.dbst_kill[select]))
-            draw_stat("runs", string(UberCont.ctot_days[select]))
+        if (UberCont.ctot_wins[select] > 0) {
+            draw_stat(L("Fastest", "FASTEST"), scrTimeSpeedrun(cbst_fast[select]))
             draw_stat_header("")
         }
-        if ((UberCont.hardgot == 1) && (UberCont.ctot_hard[select] > 0)) {
-            draw_stat_header("HARD")
-            draw_stat("area", scrAreaGetMapName(UberCont.hbst_area[select], UberCont.hbst_suba[select], UberCont.hbst_loop[select]))
-            draw_stat("kills", string(UberCont.hbst_kill[select]))
-            draw_stat("runs", string(UberCont.ctot_hard[select]))
+        if (UberCont.cbst_strk[select] > 0) {
+            draw_stat_header(L("Streaks", "STREAKS"))
+            draw_stat(L("StreakCurrent", "current"), string(UberCont.ctot_strk[select]))
+            draw_stat(L("StreakBest", "best"), string(UberCont.cbst_strk[select]))
             draw_stat_header("")
         }
+    }
+    if (UberCont.ctot_days[select] > 0) {
+        draw_stat_header(L("BestDaily", "DAILY"))
+        draw_stat(L("Area", "area"), scrAreaGetMapName(UberCont.dbst_area[select], UberCont.dbst_suba[select], UberCont.dbst_loop[select]))
+        draw_stat(L("Kills", "kills"), string(UberCont.dbst_kill[select]))
+        draw_stat(L("Runs", "runs"), string(UberCont.ctot_days[select]))
+        draw_stat_header("")
+    }
+    if ((UberCont.hardgot == 1) && (UberCont.ctot_hard[select] > 0)) {
+        draw_stat_header(L("BestHard", "HARD"))
+        draw_stat(L("Area", "area"), scrAreaGetMapName(UberCont.hbst_area[select], UberCont.hbst_suba[select], UberCont.hbst_loop[select]))
+        draw_stat(L("Kills", "kills"), string(UberCont.hbst_kill[select]))
+        draw_stat(L("Runs", "runs"), string(UberCont.ctot_hard[select]))
+        draw_stat_header("")
     }
 }

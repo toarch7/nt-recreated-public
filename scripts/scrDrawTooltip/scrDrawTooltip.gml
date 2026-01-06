@@ -18,6 +18,8 @@ function scrDrawTooltip(_x, _y, _text, _is_gui = false) {
 		_half_w = _w div 2 + 1,
 		_half_h = _h div 2
 	
+	//print(_text, _w, _h)
+	
 	var _left = _is_gui ? 0 : view_xview,
 		_top = _is_gui ? 0 : view_yview,
 		_right = _left + view_width,
@@ -40,6 +42,7 @@ function scrDrawTooltip(_x, _y, _text, _is_gui = false) {
 	draw_rectangle(_x - _half_w - 1, _y - _h - 1, _x + _half_w + 1, _y + 1, false)
 	
 	draw_set_color(c_white)
+	if (font_get_height_diff() != 0 && string_pos("\n", _text) == 0) _y += 2
 	draw_text_nt(_x, _y - _half_h + 1, _text)
 	
 	draw_set_color(_last_color)

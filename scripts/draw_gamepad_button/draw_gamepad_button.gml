@@ -1,8 +1,12 @@
-function draw_gamepad_button(button, big, _x, _y, col = c_white) {
-	if !UberCont.opt_gamepad
-		exit
-	
-	draw_sprite_ext(big ? gamepad_icon_big : gamepad_icon_small, button - 32769, _x, _y, 1, 1, 0, col, draw_get_alpha())
+function draw_gamepad_button(_button_index, _is_big, _x, _y, _color = c_white, _alpha = draw_get_alpha()) {
+	if (UberCont.opt_gamepad) {
+		var _sprite = _is_big ? gamepad_icon_big : gamepad_icon_small,
+			_subimage = _button_index - 32769
+		
+		if (_subimage >= 0) {
+			draw_sprite_ext(_sprite, _subimage, _x, _y, 1, 1, 0, _color, _alpha)
+		}
+	}
 }
 
 function gamepad_button_to_image(_key) {
@@ -33,7 +37,7 @@ function gamepad_button_to_image(_key) {
 }
 
 function gamepad_key_to_nt_text(_key, big = false) {
-	return "@(" + string(big ? gamepad_icon_big : gamepad_icon_small) + ":" + string(gamepad_button_to_image(_key)) + ")"
+	return "@(" + string(big ? gamepad_icon_big : gamepad_icon_small) + "," + string(gamepad_button_to_image(_key)) + ")"
 }
 
 function draw_pickup_button(_x, _y) {

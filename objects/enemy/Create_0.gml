@@ -26,3 +26,5 @@ snd_dead = sndEnemyDie
 snd_mele = sndMaggotBite
 
 dropseed = rng_next_int(RNGStates.WeaponDrops)
+
+busycollisions = GameCont.loops <= 3

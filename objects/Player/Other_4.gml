@@ -27,7 +27,7 @@ if !instance_exists(CrownObject) && GameCont.crown > 1 {
     with instance_create(x, y, CrownObject) {
         if (GameCont.area > 1)
 		|| (GameCont.subarea > 1)
-		|| ((GameCont.loops - global.hardmode) > 0) {
+		|| ((GameCont.loops - UberCont.hardmode) > 0) {
             is_new = false
         }
     }

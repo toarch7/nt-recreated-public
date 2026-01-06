@@ -12,10 +12,10 @@ function scrKeymapsSetup() {
 		
 		// kb
 		chat: [ ord("T") ],
-		north: [ ord("W") ],
-		south: [ ord("S") ],
-		west: [ ord("A") ],
-		east: [ ord("D") ],
+		north: [ ord("W"), gp_padu ],
+		south: [ ord("S"), gp_padd ],
+		west: [ ord("A"), gp_padl ],
+		east: [ ord("D"), gp_padr ],
 		console: [ vk_tilde ]
 	}
 }

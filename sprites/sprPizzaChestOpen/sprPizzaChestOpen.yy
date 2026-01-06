@@ -26,7 +26,7 @@
   "origin":4,
   "parent":{
     "name":"PizzaChest",
-    "path":"folders/PizzaChest.yy",
+    "path":"folders/Sprites/Pickups/HP/PizzaChest.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

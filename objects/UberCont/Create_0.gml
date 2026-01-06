@@ -16,6 +16,7 @@ want_pause = false
 quit_pause = false
 pauseimg = -1
 pause_portrait_anim = 0
+timer_last_time = current_time
 alarm[0] = 30
 
 // non-public when running through GameMaker IDE
@@ -36,26 +37,30 @@ if (is_undefined(my_player)) scr_playerinstances_reset_all()
 letterbox = 0
 letterbox_frame = 0
 
+coop = false
+hardmode = false
+custom = false
+custom_options = undefined
+custom_mode_slots = array_create(max_custom_mode_slots, undefined)
+custom_mode_disclaimer = true
+custom_mode_slot_index = 0
+global.is_server = false
+
 scrInit()
 
 tot_time = save_get_value("data", "tot_time", 0)
 checksettings = save_get_value("etc", "checksettings", 0)
 tot_banditkills = save_get_value("data", "tot_banditkills", 0)
 
-xmas = 0
-halloween = 0
-april_fools = 0
-birthday = 0
+xmas = false
+halloween = false
+april_fools = false
+birthday = false
 
 scrSetViewSize()
 
 draw_unlock = 0
 unlock_text = ""
-
-if (current_day == 1 && current_month == 4) april_fools = true
-if (current_day >= 27 && current_month == 12) xmas = true
-if (current_day >= 30 && current_month == 10) halloween = true
-if (current_day == 7 && current_month == 8) birthday = true
 
 //daily
 namereq = -1
@@ -81,15 +86,9 @@ splatindex = 0
 
 pausespr = -1
 
-global.coop = 0
-global.is_server = 0
+device_mouse_dbclick_enable(0)
 
-device_mouse_dbclick_enable(0) //os_type == os_android)
-
-hp = 1
-global.hardmode = 0
-
-dont_save = 0
+dont_save = false
 
 // restart countdown variable
 want_restart = 0
@@ -116,10 +115,6 @@ outsound = 0
 // check for potential achievement sync-up
 scrUnlocksCharacterStats()
 
-font = fntM1
-big_font = fntBig
-
-draw_set_font(font)
 device_mouse_dbclick_enable(0)
 //mp_potential_settings(90, 5, 5, 0)
 gamepad_set_axis_deadzone(0, 0.1)
@@ -127,10 +122,9 @@ gamepad_set_axis_deadzone(0, 0.1)
 localcoop = 0
 gamepad_sel = 0
 
-if opt_updates {
-	update_request = scrHttpGet("https://raw.githubusercontent.com/toarch7/torcherdev/main/ntmobile.json")
-}
-else update_request = -1
+update_request_since_last = -1
+update_request = scrGameQueryUpdateVersion()
+update_notified = false
 
 update_info = undefined
 update_message = -1

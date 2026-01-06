@@ -1,5 +1,3 @@
-scrRngStatesReset()
-
 novans = false
 	
 if (area == area_palace && subarea == 3) || (area == area_hq && subarea == 3)

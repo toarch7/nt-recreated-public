@@ -19,13 +19,13 @@ scrDrawRoadmap(_x - 48, _y - offsety, round(death_pos))
 draw_align(fa_center, fa_middle)
 draw_sprite(sprKilledBySplat, splatimg, _x + 86, _y - offsety - 32)
 
-var _message = "KILLED BY"
+var _message = loc("GameOver:KilledBy", "KILLED BY")
 
 if GameCont.win {
-	_message = "COMPLETION TIME"
+	_message = loc("GameOver:Time", "COMPLETION TIME")
 
 	draw_set_color(c_uigray)
-	draw_text_shadow(_x + 86, _y - offsety - 10, GameCont.timer_string)
+	draw_text_nt(_x + 86, _y - offsety - 10, GameCont.timer_string)
 	draw_set_color(c_white)
 }
 else {
@@ -49,23 +49,6 @@ if (death_pos < GameCont.waypoints) death_pos ++
 
 // struggle continues
 draw_text_nt(_x, view_yview + 48, text)
-
-// how shameful.
-if UberCont.continued_run {
-    draw_set_font(fntSmall)
-    draw_set_alpha(0.1)
-	
-	var _continuation_string = "continued"
-	
-	if global.recontinued_times > 0 {
-		_sprite = "continued x" + string(global.recontinued_times)
-	}
-	
-    draw_text(_x, view_yview + 59, _sprite)
-    
-	draw_set_alpha(1)
-    draw_set_font(fntM1)
-}
 
 draw_align()
 

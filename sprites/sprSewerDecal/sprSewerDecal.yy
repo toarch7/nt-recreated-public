@@ -25,8 +25,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"Env",
-    "path":"folders/Sprites/Env.yy",
+    "name":"Sewers",
+    "path":"folders/Sprites/Env/Sewers.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

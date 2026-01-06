@@ -34,13 +34,8 @@ if ((other.autopick && (!other.speed || other.slowreturn == 2)) || KeyCont.press
 			else snd_play(sndPickupDisappear, 1.2)
 		}
 		
-		with TutCont {
-	        if pos == 1 && !step_complete {
-	            step_complete = true
-	            alarm[0] = 30
-	        }
-		}
-
+		with (TutCont) complete_step(TutorialStep.PickingUp)
+		
         if scr_weapon_is_valid(bwep) {
 			if max_extra_weps && array_length(extra_weps) < max_extra_weps {
 				scrExtraWepStoreCurrent()

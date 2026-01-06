@@ -13,9 +13,6 @@ unlocks = 0
 anim = []
 
 for(var i = 0; i <= achievementmax; i ++) {
-	chiev_name[i] = loc(chiev_name[i])
-	chiev_text[i] = loc(chiev_text[i])
-	
 	if scrAchievementIsUnlocked(i) {
         unlocks ++
     }
@@ -23,6 +20,8 @@ for(var i = 0; i <= achievementmax; i ++) {
 	max_height += 40
 	anim[i] = -120
 }
+
+wrapped_strings = {}
 
 max_height -= 40 * 4 + 7
 

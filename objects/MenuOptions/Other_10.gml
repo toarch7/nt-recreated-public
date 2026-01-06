@@ -3,6 +3,13 @@
 draw_set_valign(fa_middle)
 draw_set_halign(fa_center)
 
+if category == OptionCategory.Language {
+	draw_set_font(fntM1)
+}
+else {
+	draw_reset_font()
+}
+
 if mouse_check_button(mb_left) or is_desktop {
 	mousex = device_mouse_x_to_gui(0)
 	mousey = device_mouse_y_to_gui(0)
@@ -12,7 +19,8 @@ else {
 	mousey = -1000
 }
 
-var _mx = mousex,
+var _current_category = category,
+	_mx = mousex,
 	_my = mousey
 
 option_can_change = true
@@ -45,13 +53,25 @@ if text_input_element != undefined {
 			text_input_shake = 0
 	}
 	
-	if _opt.key == "etc_name"
-		draw_set_font(fntConsole)
+	var _last_font = -1
+	if (_opt.key == "etc_name") {
+		_last_font = draw_get_font()
+		
+		if (!font_exists(global.language_font_cjk)) {
+			scrLanguageTryLoadTTFs()
+		}
+		
+		if (font_exists(global.language_font_cjk)) {
+			draw_set_font(global.language_font_cjk)
+		}
+		else {
+			draw_set_font(fntConsole)
+		}
+	}
 	
-	draw_text_shadow(drawx, drawy, loc(string(_value)) + text_input_cursor)
+	draw_text_nt(drawx, drawy, loc(string(_value)) + text_input_cursor)
 	
-	if _opt.key == "etc_name"
-		draw_set_font(fntM1)
+	if (_last_font != -1) draw_set_font(_last_font)
 	
 	if keyboard_string != _value {
 		text_input_cursor = "|"
@@ -70,9 +90,8 @@ if text_input_element != undefined {
 		}
 	}
 	
-	if scr_keyboard_check_pressed(vk_enter) or back_pressed {
-		if !is_desktop
-			keyboard_virtual_hide()
+	if scr_keyboard_check_pressed(vk_enter) || back_pressed {
+		if (!is_desktop) keyboard_virtual_hide()
 		
 		if !method_execute(_opt.validate, _opt, _opt.value, true) {
 			if option_can_change {
@@ -81,6 +100,8 @@ if text_input_element != undefined {
 			}
 		}
 		else _opt.value = _opt.previous
+		
+		if (_last_font != draw_get_font()) event_user(10)
 		
 		scrOptionsMenuChangeCategory(category, false)
 		
@@ -140,142 +161,132 @@ if erasing_progress {
 	_mx = device_mouse_x_to_gui(0)
 	_my = device_mouse_y_to_gui(0)
 	
-    if self[$ "funnysound"] != undefined or alarm[1] {
+    if (self[$ "funnysound"] != undefined || alarm[1] > 0) {
         with MusCont {
-            if alarm[0] < 5 {
-                alarm[0] = 5
-            }
+            if (alarm[0] < 5) alarm[0] = 5
         }
 
         draw_set_color(c_black)
         draw_rectangle(0, 0, view_width, view_height, 0)
         draw_set_color(c_white)
-
-        if alarm[1] exit
+		
+        if (alarm[1] > 0) exit
     }
-
-    draw_set_valign(fa_top)
+	
+	draw_align(fa_center, fa_middle)
     draw_set_color(c_ltgray)
-    draw_text_shadow(view_width / 2, 8, erasing_progress == 2 ? loc("RESET OPTIONS") : loc("ERASE PROGRESS"))
+	
+    draw_text_nt(gui_w div 2, 8, erasing_progress == 2
+		? loc("DataOptions:OptionsReset", "RESET OPTIONS")
+		: loc("DataOptions:ProgressReset", "ERASE PROGRESS"))
 
-    var _x = 0,
-        _y = 0
+    var _dx = gui_w div 2,
+        _dy = LETTERBOX_SIZE + disclaimer_pop + 56
 
-    if erasing_progress == 1 && self._press > 2 {
-        _x = orandom(self._press - 2)
-        _y = orandom(self._press - 2)
+    if erasing_progress == 1 && press > 2 {
+        _dx += orandom(press - 2)
+        _dy += orandom(press - 2)
     }
 
-    var o = 32
+    var _option_offset = 48, _disclaimer_height = 0;
 
     if erasing_progress == 2 {
-        draw_text_nt(view_width / 2 + _x, view_height / 2 - 64 + disclaimer_pop + _y, loc("@wWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET#ALL OF YOUR PREFERENCES.###ARE YOU SURE?@w"))
+		var _msg = "@wWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET#ALL OF YOUR PREFERENCES.###ARE YOU SURE?@w",
+			_string = loc("DataOptions:OptionsResetDisclaimer", _msg)
+        
+		_disclaimer_height = font_get_string_height(_string)
+		draw_text_nt(_dx, _dy, _string)
     }
-	else draw_text_nt(view_width / 2 + _x, view_height / 2 - 64 + disclaimer_pop + _y, loc("@rWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET ALL OF YOUR#CHARACTERS, UNLOCKS, STATS, ACHIEVEMENTS AND#IT IS NOT UNDOABLE.###ARE YOU SURE?@w"))
+	else {
+		var _msg = "@rWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET ALL OF YOUR#CHARACTERS, UNLOCKS, STATS, ACHIEVEMENTS AND#IT IS NOT UNDOABLE.###ARE YOU SURE?@w",
+			_string = loc("DataOptions:ProgressResetDisclaimer", _msg)
+		
+		_disclaimer_height = font_get_string_height(_string)
+		draw_text_nt(_dx, _dy, _string)
+	}
+	
+	var _option_x = gui_w div 2,
+		
+		_option_yes_y = _dy + _disclaimer_height + _option_offset,
+		_option_no_y = _option_yes_y + 16,
+		
+		_erasure_progress = (erasing_progress == 1 ? " (" + string(5 - press) + ")" : "")
+	
+    draw_text_nt(_option_x, _option_yes_y, (wait ? "@d" : "@w") + loc("Options:Yes", "YES") + _erasure_progress)
+    draw_text_nt(_option_x, _option_no_y, (wait ? "@d" : "@w") + loc("Options:No", "NO"))
 
-    draw_text_nt(view_width / 2, view_height / 2 - disclaimer_pop + o, (wait ? "@d" : "@w") + loc("YES") + (erasing_progress == 1 ? " (" + string(5 - self._press) + ")" : ""))
-    draw_text_nt(view_width / 2, view_height / 2 - disclaimer_pop + o + 16, (wait ? "@d" : "@w") + loc("NO"))
-
-    if self._press >= 5 or (erasing_progress == 2 && self._press > 0) {
-        if erasing_progress == 2 {
-            with MenuOptions {
-                foreach(options, function(_value) {
-                    for (var i = 0; i < array_length(_value); i++) {
-                        var v = _value[i]
-						
-						if is_undefined(v[$ "key"]) or v.key == "game_tutorial"
-							continue
-						
-                        ds_map_delete(UberCont.saveData, v.key)
-                    }
-                })
-				
-                save_set_value("etc", "rp_warning", 0)
-				
-                scrOptionsUpdate()
-				
-                scrSave()
-				
-                event_perform(ev_create, 0)
-				
-                snd_play(sndClick)
-                snd_play(sndMutant0Cnfm)
-				
-                break
-            }
-        }
-		else {
-            if alarm[1] == -1
-				alarm[1] = 60
-
-            with BackButton
-				instance_destroy()
-
-            if self[$ "funnysound"] != undefined {
+    if (press >= 5 || (erasing_progress == 2 && press > 0)) {
+        if (erasing_progress == 1) {
+			instance_destroy(BackButton)
+			
+			if (alarm[1] == -1) alarm[1] = 60
+			
+			if (self[$ "funnysound"] != undefined) {
                 audio_stop_sound(self[$ "funnysound"])
                 self[$ "funnysound"] = undefined
             }
 			
             audio_stop_all()
         }
+		else if erasing_progress == 2 {
+			scrOptionsEraseSettings()
+        }
     }
 	else {
-        if (mouse_ui_clicked() || back_pressed) {
-            if !wait {
-                if point_in_rectangle(_mx, _my, view_width / 2 - 10, view_height / 2 + o - 8, view_width / 2 + 10, view_height / 2 + o + 8) {
-                    snd_play(sndClick)
-                    wait = 30
-
-					disclaimer_pop = 1
-                    self._press ++
-
-                    if erasing_progress == 1 && self._press == 3 {
-                        with SpiralCont
-							visible = 0
-
-                        with MusCont {
-                            audio_pause_sound(song)
-                            audio_pause_sound(amb)
-                        }
-
-                        self[$ "funnysound"] = audio_play_sound(sndBecomeNothingIdle, 1000, 1)
-                        audio_sound_pitch(self[$ "funnysound"], 0.5)
-                    }
-                }
-
-                if point_in_rectangle(_mx, _my, view_width / 2 - 10, view_height / 2 + o + 12, view_width / 2 + 10, view_height / 2 + o + 20) or back_pressed {
-                    snd_play(sndClickBack)
+        if (!wait && (mouse_ui_clicked() || back_pressed)) {
+			// No
+            if point_in_circle(_mx, _my, _option_x, _option_no_y, 14) || back_pressed {
+                snd_play(sndClickBack)
+				
+                if (self[$ "funnysound"] != undefined) {
+                    with (SpiralCont) visible = true
 					
-                    if self[$ "funnysound"] != undefined {
-                        with SpiralCont
-							visible = 1
-
-                        background_set_colour(c_black)
-
-                        with MusCont {
-                            audio_resume_sound(song)
-                            audio_resume_sound(amb)
-                        }
-
-
-                        audio_stop_sound(self[$ "funnysound"])
-                        self[$ "funnysound"] = undefined
+                    background_set_colour(c_black)
+					
+                    with MusCont {
+                        audio_resume_sound(song)
+                        audio_resume_sound(amb)
                     }
-
-                    erasing_progress = 0
-                    self._press = 0
+					
+                    audio_stop_sound(self[$ "funnysound"])
+                    self[$ "funnysound"] = undefined
+                }
+				
+                erasing_progress = 0
+                press = 0
+            }
+			// Yes
+			else if point_in_circle(_mx, _my, _option_x, _option_yes_y, 14) {
+                snd_play(sndClick)
+				
+                wait = 30
+				disclaimer_pop = 1
+                press ++
+				
+                if erasing_progress == 1 && press == 3 {
+                    with (SpiralCont) visible = false
+					
+					with (MusCont) {
+                        audio_pause_sound(song)
+                        audio_pause_sound(amb)
+                    }
+					
+                    self[$ "funnysound"] = audio_play_sound(sndBecomeNothingIdle, 1000, true, 1, 0, 0.5)
+                    audio_sound_pitch(self[$ "funnysound"], 0.5)
                 }
             }
         }
 
-        if wait > 0
+        if wait > 0 {
 			wait --
+		}
     }
 	
-	if disclaimer_pop && !wait
+	if disclaimer_pop && !wait {
 		disclaimer_pop --
+	}
 
-    draw_set_halign(fa_left)
+    draw_align()
 
     exit
 }
@@ -301,24 +312,11 @@ if (sliderheld > 0) if (-- sliderheld) <= 0 {
     snd_play(sndSliderLetGo)
 }
 
-var _name = "SETTINGS"
-
-if category != OptionCategory.Main {
-	var _main_options = options[OptionCategory.Main],
-		_category = category - 1
-	
-	if _category < array_length(_main_options) {
-		_name = _main_options[_category].name
-	}
-}
-
-draw_text_bigname(view_width / 2, 24, loc(_name), c_uigray)
-
 var _press = mouse_ui_clicked()
 		|| (UberCont.opt_gamepad && gamepad_button_check_pressed(0, gp_face1))
 		|| (UberCont.opt_keyboard && scr_keyboard_check_pressed(vk_enter)),
 	
-	yoff = 6 * (category != 0),
+	yoff = 6 * (_current_category != 0),
 	_has_scrollbar = false,
 	_items = items
 
@@ -328,16 +326,8 @@ if _mx != mx_last || _my != my_last || mouse_check_button_pressed(mb_any) {
 	mouse_active = true
 }
 
-var kv = scr_keyboard_check_pressed(vk_down) - scr_keyboard_check_pressed(vk_up),
-	kh = scr_keyboard_check_pressed(vk_right) - scr_keyboard_check_pressed(vk_left)
-
-if kv == 0 {
-	kv = gamepad_button_check_pressed(0, gp_padd) - gamepad_button_check_pressed(0, gp_padu)
-}
-
-if kh == 0 {
-	kh = gamepad_button_check_pressed(0, gp_padr) - gamepad_button_check_pressed(0, gp_padl)
-}
+var kv = KeyCont.press_sout[global.index] - KeyCont.press_nort[global.index],
+	kh = KeyCont.press_east[global.index] - KeyCont.press_west[global.index]
 
 if item_count != -1 {
 	if kv != 0 {
@@ -402,7 +392,7 @@ if await_input {
 #endregion
 
 drawx = gui_w / 2
-drawy = 0
+drawy = font_get_height_diff()
 
 for(var i = 0; i < item_count; i ++) {
 	var _opt = _items[i]
@@ -411,22 +401,31 @@ for(var i = 0; i < item_count; i ++) {
 	}
 }
 
-if drawy > (gui_h - (LETTERBOX_SIZE * 2)) {
+if (instance_exists(CustomModeMenu)) {
+	with (CustomModeMenu) {
+		other.scroll_max = height * 0.5
+	}
+	scroll_min = -scroll_max
+	_has_scrollbar = true
+}
+else if (drawy > (gui_h - (LETTERBOX_SIZE * 2) + 5)) {
 	scroll_max = (drawy - (gui_h - (LETTERBOX_SIZE * 2))) div 2
 	scroll_min = -scroll_max
-	
-	if (scroll_check) {
+	_has_scrollbar = true
+}
+
+if (scroll_check) {
+	if (_has_scrollbar) {
 		scroll = scroll_min
-		scroll_check = false
 		scroll_speed = 0
 	}
-}
-else if (scroll_check) {
-	scroll = 0
-	scroll_min = 0
-	scroll_max = 0
-	scroll_check = false
+	else {
+		scroll = 0
+		scroll_min = 0
+		scroll_max = 0
+	}
 	scroll_speed = 0
+	scroll_check = false
 }
 
 if !(scroll_max == 0 && scroll_min == 0) {
@@ -486,7 +485,7 @@ if !(scroll_max == 0 && scroll_min == 0) {
 }
 
 if !editing_mode {
-	drawy = gui_h * 0.5 - drawy * 0.5 + 8 - scroll
+	drawy = gui_h * 0.5 - drawy * 0.5 + 8 - floor(scroll) + font_get_height_diff()
 }
 else drawy = gui_h - 48
 
@@ -496,7 +495,13 @@ draw_set_color(c_white)
 
 var _any = false
 
-for (var i = 0; i < array_length(_items); i++) {
+if (instance_exists(CustomModeMenu)) {
+	with (CustomModeMenu) {
+		scroll = other.scroll - other.scroll_min
+		event_user(0)
+	}
+}
+else for (var i = 0; i < array_length(_items); i++) {
     var _opt = _items[i]
 	
     if !(is_struct(_opt) && _opt.visible) continue
@@ -527,22 +532,28 @@ for (var i = 0; i < array_length(_items); i++) {
 	else _h *= 0.4
 	
 	var _pointed = false,
-		_should_draw = true
+		_should_draw = true,
+		_out_of_scope = false
 	
-	if ((drawy - _h * 0.5) < LETTERBOX_SIZE
-		|| (drawy + _h * 0.5) > (gui_h - LETTERBOX_SIZE)
-	) {
-		_should_draw = false
+	if (drawy < LETTERBOX_SIZE || drawy > (gui_h - LETTERBOX_SIZE)) {
+		_out_of_scope = true
+		
+		if (drawy < 0 || drawy >= gui_h) {
+			_should_draw = false
+		}
 	}
 	else {
 		if _opt.splat > 0 {
-			draw_sprite(sprMainMenuSplat, _opt.splat, drawx, drawy)
+			var _splat_x = drawx - ((is_method(_opt.get_value) && method_execute(_opt.get_value, _opt) == "") ? 60 : 0)
+			draw_sprite(sprMainMenuSplat, _opt.splat, _splat_x, drawy)
 		}
 		
 		if _opt.draw && method_execute(_opt.draw, _opt) {
 			_should_draw = false
 		}
 	}
+	
+	var _tangible = (_should_draw && !_out_of_scope)
 	
 	if _opt.condition != undefined {
 		_opt.available = method_execute(_opt.condition, _opt)
@@ -552,7 +563,7 @@ for (var i = 0; i < array_length(_items); i++) {
 		_pointed = (!dragging && (scroll_speed == 0 || scroll == scroll_max || scroll == scroll_min))
 				&& point_in_rectangle(_mx, _my, drawx - _w, drawy - _h, drawx + _w + (_opt.type == "slider" ? 96 : 0), drawy + _h)
 		
-		if _should_draw && ((is_undefined(slider) && _pointed && _opt.available) || (slider == _opt)) {
+		if _tangible && ((is_undefined(slider) && _pointed && _opt.available) || (slider == _opt)) {
 			_any = true
 			
 			if pointed_item != i {
@@ -595,6 +606,15 @@ for (var i = 0; i < array_length(_items); i++) {
 					_opt.value = clamp(_opt.value + _step, 0, _max)
 				}
 			}
+			
+			if (_has_scrollbar) {
+				var _top = LETTERBOX_SIZE * 2 + 5,
+					_bottom = gui_h - LETTERBOX_SIZE * 2 + 5,
+					_spd = abs(scroll_max) * 0.5
+				
+				/**/ if (drawy > _bottom) scroll = approach(scroll, scroll_max, _spd)
+				else if (drawy < _top) scroll = approach(scroll, scroll_min, _spd)
+			}
 		}
 	}
 	
@@ -624,7 +644,7 @@ for (var i = 0; i < array_length(_items); i++) {
 				snd_play(sndSlider)
 			}
 		}
-		else if _opt.available && (_press || slider_change) && !wait {
+		else if _tangible && (_opt.available && (_press || slider_change) && !wait) {
 			var _result = undefined
 			
 			if is_method(_opt.click) {
@@ -714,7 +734,7 @@ for (var i = 0; i < array_length(_items); i++) {
 				
 				drawx += _opt.width / 2
 				
-				var _size = category == OptionCategory.Controls_Preferences ? 60 : 32
+				var _size = _current_category == OptionCategory.Controls_Preferences ? 60 : 32
 				
 				drawx += _size
 				
@@ -790,7 +810,7 @@ for (var i = 0; i < array_length(_items); i++) {
 				
 				drawx -= _size
 			}
-			else if _opt.type == "category" && category == OptionCategory.Main {
+			else if _opt.type == "category" && _current_category == OptionCategory.Main {
 				draw_text_bigname(drawx, drawy, loc(_name))
 				drawy += 2
 			}

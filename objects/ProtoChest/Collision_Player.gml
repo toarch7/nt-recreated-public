@@ -1,31 +1,24 @@
-if lockstep_stop
-	exit
+/// @description Open chest
 
-if sprite_index != sprProtoChestOpen {
-    sprite_index = sprProtoChestOpen
-    
-    with instance_create(x, y, WepPickup) {
-        wep = other.wep
-        name = wep_name[wep]
-        type = wep_type[wep]
-        
-        sprite_index = wep_sprt[wep]
-    }
-    
-    instance_create(x, y, FXChestOpen)
-    
-    if scrCrownCheck(Crown.Hatred) {
-        with other {
-            scr_hit_self(1)
-			deathcause = sprCrown6Idle
-			
-            repeat (16) {
-                with instance_create(x, y, Rad)
-                motion_add(random_angle, 2 + random(4))
-            }
-        }
-    }
-    
-    snd_play(sndWeaponChest)
+if (sprite_index == sprProtoChestOpen) exit
+
+sprite_index = sprProtoChestOpen
+
+with (scrWeaponPickupCreate(x, y, WepPickup, other.wep)) {
+	curse = other.curse
 }
+
+instance_create(x, y, FXChestOpen)
+
+if scrCrownCheck(Crown.Hatred) with (other) {
+    scr_hit_self(1, HitId.CrownOfHatred)
+	
+	repeat (16) {
+        with (instance_create(x, y, Rad)) {
+	        motion_add(random_angle, 2 + random(4))
+	    }
+	}
+}
+
+snd_play(sndWeaponChest)
 

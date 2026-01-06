@@ -12,12 +12,28 @@
     - [x] Clean up projectile collision damage code
     - [x] Introduce `HitId`s
     - [x] Make the "Killed By" in the Game Over use hitid to display information
-    - [ ] Assign all enemies & damage sourcers their proper `hitid`s 
-- [ ] Implement full support of NTT and u100 localization formats
-    - [ ] Implement `.ini` localization file support
-    - [ ] Implement `lang.csv` localization support (directly related to the previous paragraph)
-    - [ ] Introduce localization tokens to simplify localization
+    - [ ] Assign all enemies & damage sourcers their proper `hitid`s
 - [ ] Revisit the enemy/prop animation logic 
+- [ ] Localize NTM-exclusive strings to all supported languages:
+    - [x] English
+    - [x] Russian
+    - [ ] Brazilian Portuguese
+    - [ ] Dutch
+    - [ ] European Spanish
+    - [ ] French
+    - [ ] German
+    - [ ] Italian
+    - [ ] Japanese
+    - [ ] Korean
+    - [ ] Polish
+    - [ ] Simplified Chinese
+    - [ ] Traditional Chinese
+    - [ ] Turkish
+    - [ ] Ukrainian
+- [x] Implement full support of NTT and u100 localization formats
+    - [x] Implement `.ini` localization file support
+    - [x] Implement `lang.csv` localization support (directly related to the previous paragraph)
+    - [x] Introduce localization tokens to simplify localization
 - [x] Implement automated testing
     - [x] `scrFire` test
     - [x] `damagesource` test
@@ -44,11 +60,13 @@
     - [ ] *TBD*
 
 # Medium priority
+- [ ] Make resourcepack loader utilize custom texture groups for greater performance
+- [ ] Introduce backwards-compatible resourcepack loader mode
 - [ ] 60+ FPS and timescale support
     - [ ] Figure out a replacement system for alarms that introduces minimal overhead
     - [ ] Refactor all object logic to not use alarms
-    - [ ] Implement custom 2D physics that allows seamless transition from the current GameMaker physics engine
-- [ ] Console refactoring (currently considering to use GameMaker's ImGui debug overlay)
+    - [ ] (?) Implement custom 2D physics that allows seamless transition from the current GameMaker physics engine
+- [x] Console refactoring (currently considering to use GameMaker's ImGui debug overlay)
 - [ ] Full support of the base NT savefile format
     - [ ] Implement automatic conversion of the current NTM save file structure
     - [ ] Make NTM savefiles 100% interchangible with base NT
@@ -62,8 +80,5 @@
 - [ ] Implement resource extraction in runtime for easier redistribution of prebuilt game binaries
 
 # Experimental ideas for potential improvements (debatable, lowest priority)
-- [ ] Custom collision system via grids, tilesets & co.
+- [ ] Custom terrain collision system via grids, tilesets & co.
 - [ ] Implement content registery system for weapons, skills, races, crowns, ultras, etc.
-
-# Complete
-Nothing here yet.

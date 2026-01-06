@@ -3,7 +3,7 @@ if local_wait
 
 if UberCont.showtutorial {
 	draw_align(fa_center, fa_middle)
-    draw_text_shadow(view_width / 2, view_height / 2, "YOU HAVEN'T COMPLETED TUTORIAL LEVEL YET")
+    draw_text_nt(view_width / 2, view_height / 2, "YOU HAVEN'T COMPLETED TUTORIAL LEVEL YET")
     draw_align()
 	
 	exit

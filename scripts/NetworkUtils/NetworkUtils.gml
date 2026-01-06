@@ -59,7 +59,7 @@ function buffer_send(buffer) {
 }
 
 function scrGameNetplayDisable() {
-	global.coop = false
+	UberCont.coop = false
 	global.is_server = true
 	
 	with GameCont {

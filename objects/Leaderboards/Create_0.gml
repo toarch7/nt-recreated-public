@@ -4,8 +4,7 @@ max_height = 0
 
 friction = 0.4
 
-if is_desktop
-	friction = 1
+if (is_desktop) friction = 1
 
 dragging = -1
 wait = 10
@@ -36,3 +35,5 @@ display = 0
 draw_step_size = 20
 
 history_pointed = false
+
+string_supported_info = {}

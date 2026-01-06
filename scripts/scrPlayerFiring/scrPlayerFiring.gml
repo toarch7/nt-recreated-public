@@ -38,8 +38,12 @@ function scrPlayerFiring() {
 		if (can_shoot && (clicked || KeyCont.press_fire[index]
 			|| (KeyCont.hold_fire[index] && (wep_auto[wep] || race == Race.Steroids)))
 		) {
-	        scrFire(wep)
+			scrFire(wep)
 			clicked = false
+			
+			with (TutCont) {
+				complete_step(TutorialStep.Shooting)
+			}
 		}
     }
 }

@@ -1,9 +1,18 @@
 /// @description click
 
 global.index = 0
-global.hardmode = false
 global.is_server = true
-global.coop = false
+
+with (UberCont) {
+	coop = false
+	hardmode = false
+	
+	if (!(scrGameIsEventRun() || scrGameIsCustomMode())) {
+		protowep = save_get_value("etc", "protowep", wep_rusty_revolver)
+	}
+}
+
+scrGameCustomModeReset()
 
 with UberCont {
     daily_run = false
@@ -11,26 +20,39 @@ with UberCont {
 	scr_playerinstance_reset()
 }
 
-var _image = floor(image_index)
+var _image = floor(num)
 
 // if chose either Daily or Weekly 
 if _image == 1 || _image == 2 {
 	var _name = scrSavedataGetUsername(),
-		_digits = string_length(string_digits(_name))
+		_digits = string_length(string_digits(_name)),
+		_suggest = false
 	
-	// see if the player has changed their username
-	if !(_name == "unknown" || _name == "null" || _name == "undefined")
-	&& !(_digits == 3 && (string_starts_with(_name, "Seeker") || string_starts_with(_name, "Throneseeker"))) {
+	if (!save_get_value("etc", "suggestnickname", false)) {
+		// see if the player has changed their username
+		if ((_name == "unknown" || _name == "null" || _name == "undefined")
+			|| (_digits == 3 && (string_starts_with(_name, "Seeker") || string_starts_with(_name, "Throneseeker")))
+		) {
+			if (_name == "null") {
+				var _number = string(string_pad_zeroes(irandom(999), 2))
+				save_set_value("etc", "name", "Seeker" + _number)
+			}
+			
+			_suggest = true
+		}
 		
 		save_set_value("etc", "suggestnickname", true)
 	}
 	
 	// if not, suggest changing
-	if !save_get_value("etc", "suggestnickname", false) {
-		with instance_create(0, 0, MenuOptions) event_user(3)
+	if (_suggest) {
 		save_get_value("etc", "suggestnickname", true)
 		
-		with instance_create(0, 0, NicknameInput) {
+		with (instance_create(0, 0, MenuOptions)) {
+			event_user(3)
+		}
+		
+		with (instance_create(0, 0, NicknameInput)) {
 			image_index = _image
 		}
 	}
@@ -54,13 +76,32 @@ if _image == 1 || _image == 2 {
 }
 // enable hardmode
 else if _image == 3 {
-	global.hardmode = true
+	UberCont.hardmode = true
+}
+else if _image == 4 {
+	instance_destroy(PlayButton)
+	instance_destroy(MainMenuButton)
+	
+	scrCustomModeLoadPresets()
+	
+	with (UberCont) {
+		custom_options = custom_mode_slots[custom_mode_slot_index]
+		custom = true
+	}
+	
+	with instance_create(0, 0, MenuOptions) {
+		scrOptionsMenuChangeCategory(OptionCategory.CustomMode, false)
+		dispose_on_empty = true
+	}
 }
 
 instance_destroy(PlayButton)
 instance_destroy(MainMenuButton)
 
-if !(instance_exists(Leaderboards) || instance_exists(NicknameInput)) {
+if !(instance_exists(Leaderboards)
+	|| instance_exists(NicknameInput)
+	|| instance_exists(MenuOptions)
+) {
 	instance_destroy(SpiralCont)
 	instance_create(0, 0, GameCont)
 	instance_create(0, 0, MenuGen)

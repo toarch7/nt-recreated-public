@@ -57,10 +57,13 @@ function scrOptionsMenuCreateElement(_opt, _to_current_category = false) {
 		_opt[$ "condition"] ??= undefined
 		_opt[$ "sprite"] ??= undefined
 		_opt[$ "key"] ??= undefined
-		_opt[$ "width"] ??= 240
-		_opt[$ "height"] ??= string_height(string_hash_to_newline(_opt.name))
+		_opt[$ "width"] ??= 260
+		_opt[$ "height"] ??= font_get_string_height(string_hash_to_newline(_opt.name))
 		_opt[$ "anim"] = 0
 		_opt[$ "splat"] = 0
+		
+		var _newlines = string_count("\n", string_hash_to_newline(_opt.name))
+		if (_newlines > 0) _opt.height += 5
 		
 		if _opt.type == "category" || is_undefined(_opt.key) {
 			_opt[$ "halign"] ??= fa_center
@@ -83,7 +86,7 @@ function scrOptionsMenuCreateElement(_opt, _to_current_category = false) {
 		}
 		
 		_opt.has_value = method(_opt, function() {
-			if (type == "keybind") {
+			if (is_method(self[$ "get_value"]) || type == "keybind") {
 				return true
 			}
 			
@@ -145,7 +148,7 @@ function scrOptionsMenuRemoveLocalGames() {
 function scrOptionsMenuChangeCategory(_category, _queue = true) {
 	with MenuOptions {
 		if _category >= array_length(options) {
-			print("Can't change category to", _category, ", ID number exceeded", array_length(options))
+			print($"Can't change category to {_category}, number exceeds max amount of defined categories ({array_length(options)})")
 			exit
 		}
 		
@@ -187,7 +190,11 @@ function scrOptionsMenuChangeCategory(_category, _queue = true) {
 			}
 		}
 		
-		draw_step_size = (item_count >= 12) ? 14 : 16
+		draw_step_size = 8 + font_get_string_height("Aa")
+		
+		if (item_count >= 12) {
+			draw_step_size = floor(draw_step_size * 0.85)
+		}
 		
 		if !is_desktop {
 			mousex = -1000

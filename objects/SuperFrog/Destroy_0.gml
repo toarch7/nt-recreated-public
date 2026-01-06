@@ -1,5 +1,7 @@
 event_inherited()
 
+scrDrop(80, 0)
+
 repeat (40) scr_projectile_create(x, y, ToxicGas)
 
 snd_play(sndToxicBarrelGas)

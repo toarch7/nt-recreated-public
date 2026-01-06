@@ -11,7 +11,7 @@ var xx = 8 - splat * 100,
 	
 	stepY = height + 4
 
-scrDrawAlignDefault()
+draw_align()
 
 var start = ypos div 40,
 	count = min(array_length(items), start + 5)
@@ -94,7 +94,7 @@ for(var i = start; i < count; i ++) {
 	if string_length(name) >= 23
 		name = string_copy(name, 1, 23) + "..."
 	
-	draw_text_shadow(xx + 8 + offset, _y + 8, name)
+	draw_text_nt(xx + 8 + offset, _y + 8, name)
 	
 	draw_set_color(c_white)
 	
@@ -137,16 +137,16 @@ for(var i = start; i < count; i ++) {
 			
 			draw_sprite_stretched_ext(sprAchievementSplash, 0, dx + 52 - w / 2, _y + 2, w, 14, c_aqua, 0.3)
 			
-			draw_text_shadow_scale(dx + 54, _y + 9, str, 0.75)
+			draw_text_nt(dx + 54, _y + 9, str, 0.75)
 		}
 		else {
 			draw_sprite_ext(sprResourcepackBrowserSort, 1, dx + 36, _y + 8, 0.75, 0.75, 0, c_white, 1)
-			draw_text_shadow_scale(dx + 64, _y + 9, loc(update_text), 0.67)
+			draw_text_nt(dx + 64, _y + 9, loc(update_text), 0.67)
 		}
 		
 		// Stars
 		draw_sprite_ext(sprResourcepackBrowserSort, 0, dx, _y + 8, 0.75, 0.75, 0, c_white, 1)
-		draw_text_shadow_scale(dx + 12, _y + 9, string(min(99, item.stars)), 0.67)
+		draw_text_nt(dx + 12, _y + 9, string(min(99, item.stars)), 0.67)
 	}
 	
 	draw_set_halign(fa_left)
@@ -173,7 +173,7 @@ for(var i = start; i < count; i ++) {
 	}
 	
 	draw_sprite_ext(avatar, 0, dx - 12, _y + 20, 12 / sprite_get_width(avatar), 12 / sprite_get_height(avatar), 0, c_white, 1)
-	draw_text_shadow_scale(dx + 4, _y + 28, item.owner, 0.65)
+	draw_text_nt(dx + 4, _y + 28, item.owner, 0.65)
 	
 	if !browsing && item[$ "priority"] != undefined {
 		var change = 0
@@ -202,7 +202,7 @@ for(var i = start; i < count; i ++) {
 		
 		draw_set_halign(fa_right)
 		draw_set_valign(fa_middle)
-		draw_text_shadow(dx - 44, _y + 18, string(item.priority))
+		draw_text_nt(dx - 44, _y + 18, string(item.priority))
 		draw_set_halign(fa_left)
 	}
 	

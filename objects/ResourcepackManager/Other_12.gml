@@ -52,7 +52,7 @@ open_time ++
 
 #region Text & descriptions
 draw_set_color(c_white)
-scrDrawAlignDefault()
+draw_align()
 
 var w = view_width / 1.75
 
@@ -149,14 +149,14 @@ var created = unix_to_datatime(item.created div 1000),
 	str2 = date_ddmmYY_string(updated)
 
 draw_set_color(c_white)
-draw_text_shadow(dx, dy - 5 , loc("PACK INFO"))
+draw_text_nt(dx, dy - 5 , loc("PACK INFO"))
 
 draw_set_color(c_uigray)
-draw_text_shadow(dx, dy + 10, loc("CREATED ON:") + "\n " + str1)
+draw_text_nt(dx, dy + 10, loc("CREATED ON:") + "\n " + str1)
 
 if str1 != str2 {
 	dy += 30
-	draw_text_shadow(dx, dy, loc("LAST UPDATED:") + "\n " + str2)
+	draw_text_nt(dx, dy, loc("LAST UPDATED:") + "\n " + str2)
 }
 
 if item[$ "installtime"] {
@@ -166,10 +166,10 @@ if item[$ "installtime"] {
 	dy += 30
 	
 	draw_set_color(c_uigray)
-	draw_text_shadow(dx, dy, loc("INSTALLED ON:") + "\n " + str1)
+	draw_text_nt(dx, dy, loc("INSTALLED ON:") + "\n " + str1)
 }
 
-draw_text_shadow(dx, dy + 30, loc("STARS:") + "\n " + string(item.stars))
+draw_text_nt(dx, dy + 30, loc("STARS:") + "\n " + string(item.stars))
 
 #endregion
 
@@ -221,6 +221,6 @@ else if download_pointed
 
 draw_set_color(c_white)
 draw_set_halign(fa_left)
-draw_set_font(fntM1)
+draw_reset_font()
 
 #endregion

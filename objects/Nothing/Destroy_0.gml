@@ -3,7 +3,6 @@ instance_create(x, y, NothingDeath)
 with (MusCont) alarm[1] = 1
 
 snd_play(sndNothingDeath1)
-scrAchievementUnlock(33)
 audio_stop_sound(sndNothingBeamLoop)
 
 with (enemy) hp = 0

@@ -22,8 +22,8 @@ function scrOnBossKill() {
 				scrAchievementUnlock(Achievement.BOSS_LILHUNTER)
 				break
 			case Nothing:
-				scrUnlocksThroneDefeat()
 				scrAchievementUnlock(Achievement.BOSS_THRONE)
+				scrUnlocksThroneDefeat()
 				break
 			case Nothing2:
 				scrAchievementUnlock(Achievement.BOSS_THRONE2)

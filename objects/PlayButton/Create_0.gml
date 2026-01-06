@@ -8,6 +8,7 @@ available = 1
 
 appear = 2
 
+num = 0
 image_speed = 0
 depth = -1000
 

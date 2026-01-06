@@ -11,8 +11,6 @@ function scr_window_set_fullscreen(_fullscreen) {
 	if is_mobile/* || (global.option_force_fullscreen && !_fullscreen && scr_window_get_fullscreen())*/
 		exit
 	
-	print("Fullscreen switch requested:", _fullscreen)
-	
 	// TODO: implement borderless fullscreen toggle
 	if !global.__window_borderless_fs_enabled {
 		window_enable_borderless_fullscreen(false)
@@ -21,8 +19,6 @@ function scr_window_set_fullscreen(_fullscreen) {
 	}
 	
 	if global.__window_borderless_fs_active == _fullscreen exit
-	
-	//print("Fullscreen", window_has_focus(), os_is_paused())
 	
 	if (!global.__window_borderless_fs_requested
 		|| global.__window_borderless_fs_target != _fullscreen

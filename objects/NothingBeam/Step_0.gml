@@ -32,7 +32,7 @@ repeat (1024) {
 	}
 }
 
-instance_create(x + orandom(20), y + orandom(1) + image_yscale, NothingBeamHit)
+instance_create(x + orandom(20), bbox_bottom + orandom(1), NothingBeamHit)
 
 with (BackCont) shake = min(shake, 3)
 

@@ -1,4 +1,4 @@
-var _broke_batch = (nexthurt > current_frame)
+var _broke_batch = ((nexthurt - current_frame) > 2)
 
 if (_broke_batch) gpu_set_fog(1, c_white, depth, depth + 1)
 

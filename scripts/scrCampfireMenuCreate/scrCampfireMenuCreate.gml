@@ -243,8 +243,67 @@ function scrMenuPrepareWeeklyLoadout() {
 		if (sprite_index == sprGoButtonSymbolic) instance_destroy()
 	}
 	
-    weekly = true
+    with (Menu) weekly = true
+}
+
+function scrMenuPrepareCustomLoadout() {
+	if (!scrGameIsCustomMode()) exit
 	
+	var _race = scrCustomParam("race", 0),
+		_skin = scrCustomParam("bskin", -1),
+		_crown = scrCustomParam("crown", 0),
+		_wep = scrCustomParam("wep", -1),
+		_bwep = scrCustomParam("bwep", -1),
+		_pinst = scr_playerinstance_find(global.index)
+	
+	if (_race != 0 && _race < Race.NUM_ALL_RACE_TYPES) {
+		_pinst.race = _race
+		
+		if (_skin >= 0 && _skin < scrRaceGetMaxSkinCount(_race)) {
+			_pinst.skin = _skin
+		}
+		
+		with CharSelect {
+			if race == Race.Random && slot_index == 0 {
+				with instance_create(x, y, CharSelect) {
+				    race = _race
+				    selected = true
+				}
+			}
+			
+			instance_destroy()
+		}
+		
+		with (GoButton) {
+			if (sprite_index == sprGoButtonSymbolic) instance_destroy()
+		}
+	}
+	
+	if (scr_crown_is_valid(_crown)) {
+		scrCrownSetCurrent(_crown, true)
+	}
+	
+	if (_wep >= 0) {
+		if (scrCustomParam("curse")) {
+			_pinst.start_curse = true
+		}
+		_pinst.cwep = _wep
+	}
+	
+	if (_bwep >= 0) {
+		if (scrCustomParam("bcurse")) {
+			_pinst.start_bcurse = true
+		}
+		_pinst.bwep = _bwep
+	}
+	
+	with (UberCont) {
+		protowep = scrCustomParam("protowep")
+		if (!scr_weapon_is_valid(protowep)) {
+			protowep = scrCustomParam("protowep_s")
+		}
+		protocurse = scrCustomParam("protocurse")
+	}
 }
 
 /// @function scrMenuLoadoutGetPlayerDrawAlignment
@@ -380,7 +439,7 @@ function scrCampfireMenuDrawCharText(_x, _y, _index, _race, _skin, _halign = fa_
 		
 		var _race_name = scrRaceGetName(_race)
 		
-		if (!loc_exists("Races", _race, "Name") xor player_count == 1) {
+		if (loc("Races", _race, "Name", _race_name) == _race_name && player_count > 1) {
 			var _drawx = _x + _bigname_x,
 				_drawy = _y + _bigname_y - sprite_get_height(sprBigName)
 			
@@ -418,7 +477,8 @@ function scrCampfireMenuDrawCharText(_x, _y, _index, _race, _skin, _halign = fa_
 				_skills_y += sprite_get_height(sprBigName)
 			}
 			
-			draw_text_nt(_x + _bigname_x + (8 * _xscale), _y + _skills_y, _skills_text)
+			var _offset = font_get_height_diff()
+			draw_text_nt(_x + _bigname_x + (8 * _xscale), _y + _skills_y - _offset, _skills_text)
 		}
 	
 	#endregion
@@ -476,20 +536,24 @@ function scrCampfireMenuSelectionChange(_player_index, _race) {
 		textappear[_player_index] = 2
 		
 		if _pinst.is_local() && _pinst.race != _race {
-			_pinst.skin = scr_loadout_race_get_skin(_race)
+			if (scrCustomParam("bskin", -1) == -1) {
+				_pinst.skin = scr_loadout_race_get_skin(_race)
+			}
 			
-			if scrGameIsDailyRun() {
-				_pinst.cwep = scrRaceGetStarterWeapon(_race)
-		    }
-			else if !scrGameIsWeeklyRun() {
-				_pinst.cwep = scr_loadout_race_get_start_weapon(_race)
-		    }
+			if (scrCustomParam("wep", -1) == -1) {
+				if scrGameIsDailyRun() {
+					_pinst.cwep = scrRaceGetStarterWeapon(_race)
+			    }
+				else if !scrGameIsWeeklyRun() {
+					_pinst.cwep = scr_loadout_race_get_start_weapon(_race)
+			    }
+			}
 			
 			if is_touch(_player_index) {
 				with (GoButton) alarm[0] = 30
 			}
 			
-			if !scrGameIsEventRun() && global.is_server {
+			if !scrGameIsEventRun() && scrCustomParam("crown", 0) <= 0 && global.is_server {
 				var _start_crown = scr_loadout_race_get_start_crown(_race)
 				
 				if scr_loadout_race_is_crown_unlocked(_race, _start_crown) {
@@ -558,6 +622,7 @@ function scrMenuDrawLoadout(_pinst) {
 		_weaponsize = 44,
 		_weapons_x = (_crownright + _crownleft) div 2 - (_weaponsize * 0.5) * _weapon_count + 18,
 		_weapons_y = _crownbottom + _crownsize div 2 - 14,
+		_is_custom_weapon = (scrCustomParam("wep", -1) >= 0 || scrCustomParam("bwep", -1) >= 0),
 		
 		_skin_count = scrRaceGetMaxSkinCount(_race),
 		_skinsize = sprite_get_width(sprLoadoutSkin) - 4,
@@ -592,49 +657,62 @@ function scrMenuDrawLoadout(_pinst) {
 	
 	#region Loadout arrow
 	
-	if _race != Race.Random && scr_loadout_is_available_for_race(_race) && !scrGameIsEventRun() {
-		if scr_keyboard_check_pressed(vk_space) || (_press && _splat_pointed) {
-			snd_play(loadout_open ? sndClickBack : sndMenuLoadout)
-			loadout_open ^= 1
-			_press = false
+	if _race != Race.Random {
+		if scr_loadout_is_available_for_race(_race) && !scrGameIsEventRun() {
+			if scr_keyboard_check_pressed(vk_space) || (_press && _splat_pointed) {
+				snd_play(loadout_open ? sndClickBack : sndMenuLoadout)
+				loadout_open ^= 1
+				_press = false
+			}
+			
+			if _splat_pointed {
+				if !loadout_arrow_pointed {
+					loadout_arrow_pointed = true
+					snd_play(sndHover)
+				}
+			}
+			else loadout_arrow_pointed = false
+			
+			if loadout_frame > 0 {
+				var _xscale = max(1, (_w - _skins_x) / (sprite_get_width(sprLoadoutOpen) - _crownsize * 2)),
+					_yscale = (_splat_y - LETTERBOX_SIZE) / sprite_get_height(sprLoadoutOpen) + 0.05
+				
+				draw_sprite_ext(sprLoadoutOpen, loadout_frame,
+					_splat_x - 2, _splat_y, _xscale, _yscale, 0, c_white, 1)
+			}
+			
+			draw_sprite_ext(sprLoadoutArrow, loadout_open,
+				_splat_x - 16, _splat_y - _splat_pointed - 16, 1, 1, 0, _splat_pointed ? c_white : c_uigray, 1)
 		}
-		
-		if _splat_pointed {
-			if !loadout_arrow_pointed {
-				loadout_arrow_pointed = true
-				snd_play(sndHover)
+		else {
+			loadout_open = false
+			if _fullview {
+				_fullview = false
+				loadout_frame = 0
 			}
 		}
-		else loadout_arrow_pointed = false
 		
-		if loadout_frame > 0 {
-			var _xscale = max(1, (_w - _skins_x) / (sprite_get_width(sprLoadoutOpen) - _crownsize * 2)),
-				_yscale = (_splat_y - LETTERBOX_SIZE) / sprite_get_height(sprLoadoutOpen) + 0.05
-			
-			draw_sprite_ext(sprLoadoutOpen, loadout_frame,
-				_splat_x - 2, _splat_y, _xscale, _yscale, 0, c_white, 1)
-		}
-		
-		draw_sprite_ext(sprLoadoutArrow, loadout_open,
-			_splat_x - 16, _splat_y - _splat_pointed - 16, 1, 1, 0, _splat_pointed ? c_white : c_uigray, 1)
-	}
-	else {
-		loadout_open = false
-		if _fullview {
-			_fullview = false
-			loadout_frame = 0
-		}
-		
+		//
 		var _tooltip_always_visible = !is_keyboard(_pinst.index)
-		if scrGameIsWeeklyRun() && (_tooltip_always_visible || _splat_pointed) {
-			_tooltip = loc("Crowns", _crown_current, "Name", scr_crown_get_name(_crown_current)) + "\n"
-			  + "@s" + loc("Crowns", _crown_current, "Text", scr_crown_get_text(_crown_current)) + "@w"
+		
+		if !_fullview && ((_is_custom_weapon || scrGameIsWeeklyRun()) && (_tooltip_always_visible || _splat_pointed)) {
+			if scrCustomParam("crown", 0) > 0 {
+				_tooltip = loc("Crowns", _crown_current, "Name", scr_crown_get_name(_crown_current)) + "\n"
+					+ "@s" + loc("Crowns", _crown_current, "Text", scr_crown_get_text(_crown_current)) + "@w"
+			}
+			else _tooltip = ""
 			
 			if (scr_weapon_is_valid(_primary_weapon)) {
+				if (_tooltip != "") {
+					_tooltip += "\n"
+				}
 				_tooltip += "\n" + loc("Weapons", _primary_weapon, "Name", scr_weapon_get_name(_primary_weapon))
 			}
 			if (scr_weapon_is_valid(_secondary_weapon)) {
-				_tooltip += "\n" + loc("Weapons", _primary_weapon, "Name", scr_weapon_get_name(_secondary_weapon))
+				if (_tooltip != "") {
+					_tooltip += "\n"
+				}
+				_tooltip += "\n" + loc("Weapons", _secondary_weapon, "Name", scr_weapon_get_name(_secondary_weapon))
 			}
 			
 			_tooltip_x = _splat_x - 55
@@ -665,15 +743,19 @@ function scrMenuDrawLoadout(_pinst) {
 			if (_crown_current == crwn_haste) scrDrawClock(_crown_x - 2, _crown_y - 1)
 		}
 		
-		if scr_weapon_is_valid(_primary_weapon) && scr_weapon_is_valid(_secondary_weapon) {
+		if _primary_weapon >= 0 && _secondary_weapon >= 0 {
 			scrLoadoutDrawWeapon(_secondary_weapon,
 				_loadout_x - _splat_pointed + 16, _loadout_y + _splat_pointed, c_silver)
 			
 			scrLoadoutDrawWeapon(_primary_weapon,
 				_loadout_x - _splat_pointed - 8, _loadout_y + _splat_pointed, c_white)
 		}
-		else if scr_weapon_is_valid(_primary_weapon) {
+		else if _primary_weapon >= 0 {
 			scrLoadoutDrawWeapon(_primary_weapon,
+				_loadout_x - _splat_pointed, _loadout_y + _splat_pointed, c_white)
+		}
+		else if _secondary_weapon >= 0 {
+			scrLoadoutDrawWeapon(_secondary_weapon,
 				_loadout_x - _splat_pointed, _loadout_y + _splat_pointed, c_white)
 		}
 	}
@@ -809,10 +891,6 @@ function scrMenuDrawLoadout(_pinst) {
 					else {
 						var _suffix = "SkinUnlock"
 						
-						if (_skin_id > SkinLetter.B) {
-							_suffix = _letter + _suffix
-						}
-						
 						var _string = loc("Races", _race,
 								(_skin_id > SkinLetter.B ? (_letter + _suffix) : _suffix),
 								scrRaceGetSkinUnlockDescription(_race, _skin_id))
@@ -855,7 +933,7 @@ function scrMenuDrawLoadout(_pinst) {
 	
 	#region Weapons
 		
-		if _weapon_count >= 1 {
+		if _weapon_count >= 1 && !_is_custom_weapon {
 			var _default_weapon = scrRaceGetStarterWeapon(_race),
 				_unlocked_cwep = scr_loadout_race_get_stored_weapon(_race),
 				_current_weapon = scr_loadout_race_get_start_weapon(_race),

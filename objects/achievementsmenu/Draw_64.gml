@@ -13,7 +13,7 @@ for(var i = 0; i <= achievementmax; i ++) {
 		
 		if chiev_hide[i] && !scrAchievementIsUnlocked(i) {
 			draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_black, 1)
-			draw_text_nt(xx, yy - ypos + 5, "@d" + loc("HIDDEN"))
+			draw_text_nt(xx, yy - ypos + 5, "@d" + loc("R:MainMenu:AchievementHidden", "HIDDEN"))
 		}
 		else {
 			draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 11 - ypos, 1, 1, 0, c_black, 1)
@@ -30,11 +30,28 @@ for(var i = 0; i <= achievementmax; i ++) {
 				draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_uidark, 1)
 			}
 			
-			var _scale = min(1, 1 - (string_width(string_hash_to_newline(chiev_text[i])) / (view_width - 32) - 0.5)),
-				_offset = floor(string_height(chiev_text[i]) * _scale * 0.5)
+			var _name = loc("Achievements", i, "name", chiev_name[i]),
+				_text = loc("Achievements", i, "text", chiev_text[i])
 			
-			draw_text_nt(xx, yy - ypos - _offset, c + loc(chiev_name[i]))
-			draw_text_nt(xx, yy - ypos - _offset + (1 - _scale) + 8, "@s" + loc(chiev_text[i]), _scale)
+			if (!variable_struct_exists(wrapped_strings, _text)) {
+				var _wrapped = string_insert_wordwraps(_text, view_width - xx - 80)
+				wrapped_strings[$ _text] = _wrapped
+				_text = _wrapped
+			}
+			else {
+				_text = wrapped_strings[$ _text]
+			}
+			
+			var _name_height = font_get_string_height(_name),
+				_scale = 1,//clamp(1 - (font_get_string_width(string_hash_to_newline(_text)) / (view_width - 32) - 0.5), 1, 0.8),
+				_offset = floor(font_get_string_height(_text) * _scale * 0.5)
+			
+			draw_text_nt(xx, yy - ypos - _offset, c + _name)
+			
+			draw_set_color(c_silver)
+			draw_text_nt(xx, yy - ypos - _offset + (1 - _scale) + _name_height, "@s" + _text, _scale)
+			
+			draw_set_color(c_white)
 		}
 	}
 	
@@ -54,7 +71,7 @@ draw_rectangle(0, -2, view_width, 36, 0)
 draw_set_halign(fa_center)
 
 draw_set_color(c_white)
-draw_text_shadow(view_width / 2, 12, loc("ACHIEVEMENTS"))
+draw_text_nt(view_width / 2, 12, loc("R:MainMenu:Achievements", "ACHIEVEMENTS"))
 
 draw_set_color(c_uisilver)
 var _progress = unlocks / achievementmax

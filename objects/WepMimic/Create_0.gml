@@ -1,6 +1,6 @@
-raddrop = 6
-max_hp = 4
-meleedamage = 3
+raddrop = 15
+max_hp = 15
+meleedamage = 4
 size = 0
 
 spr_idle = sprWepMimicIdle

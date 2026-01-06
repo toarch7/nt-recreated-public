@@ -31,16 +31,16 @@ function scr_string_sanitize(_string) {
 /// @param string
 function string_width_pure(_string) {
 	if (string_pos("@", _string) == 0) {
-		return string_width(_string)
+		return font_get_string_width(_string)
 	}
-	return string_width(scr_string_sanitize(_string))
+	return font_get_string_width(scr_string_sanitize(_string))
 }
 
 /// @function string_height_pure
 /// @param string
 function string_height_pure(_string) {
 	if (string_pos("@", _string) == 0) {
-		return string_height(_string)
+		return font_get_string_height(_string)
 	}
-	return string_height(scr_string_sanitize(_string))
+	return font_get_string_height(scr_string_sanitize(_string))
 }

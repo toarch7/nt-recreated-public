@@ -5,10 +5,14 @@ if instance_exists(ResourcepackManager) or global.console_active
 or text_input_element != undefined or erasing_progress
 	exit
 
-if !editing_mode {
+if (!editing_mode) {
     if category == OptionCategory.Main or (dispose_on_empty && ds_stack_empty(category_stack)) {
         event_user(2)
     }
+	else if instance_exists(CustomModeMenu) {
+		last_change = current_frame + 3
+		instance_destroy(CustomModeMenu)
+	}
 	else {
 		scrOptionsMenuChangeCategory(
 			!ds_stack_empty(category_stack)
@@ -20,8 +24,7 @@ if !editing_mode {
     snd_play(sndClickBack)
 }
 else {
-    with MobileUI
-		instance_destroy()
+	instance_destroy(MobileUI)
 	
     editing_mode = false
 	

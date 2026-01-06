@@ -21,6 +21,7 @@ for(var _race_id = Race.Random; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) 
 		
 		if (_race_id == Race.Random) {
 			sprite_index = sprGeneralStats
+			selected = true
 		}
     }
 	

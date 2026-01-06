@@ -136,8 +136,9 @@ function scr_projectile_generic_plasma_hit() {
 /// @param can_overkill_pierce=false
 function scr_projectile_generic_grenade_hit(_pierce = false) {
 	if scr_can_hit(other.id, false) {
+		var _hp = other.hp
 		if scr_projectile_hit(other.id, damage, knockback_speed) {
-			if !_pierce || other.hp > damage {
+			if !_pierce || _hp > damage {
 				instance_destroy()
 			}
 			
@@ -213,7 +214,7 @@ function scr_projectile_generic_bolt_hit(_pierce=true) {
 		
 		if (!scr_projectile_hit(other.id, damage, knockback_speed)) return false
 		
-		if !_pierce || _hp_last > (damage * 0.5) {
+		if !_pierce || _hp_last >= (damage * 0.5) {
 			var _target = other.id
 			
 			with instance_create(x, y, BoltStick) {
