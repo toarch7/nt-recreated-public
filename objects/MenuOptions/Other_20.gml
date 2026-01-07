@@ -27,6 +27,7 @@ scrOptionsMenuCreateElements
 		}
 	},
 	
+	/// @loc:token [Options] CheatOptions "CHEATS"
 	{ type: "button", name: L("CheatOptions", "CHEATS"), ingame: false,
 		click: function() {
 			scrOptionsMenuChangeCategory(OptionCategory.Cheats)
@@ -96,6 +97,7 @@ L = LF("VideoOptions")
 scrOptionsMenuCategoryBegin(OptionCategory.Video)
 
 scrOptionsMenuCreateElements(
+	/// @loc:token [VideoOptions] WideScreen WIDESCREEN
 	{ type: "switch", name: L("Widescreen", "WIDESCREEN"), key: "visual_resolution", mobile_only: true },
 	
 	{
@@ -135,7 +137,9 @@ scrOptionsMenuCreateElements(
 	{ type: "slider",  name: L("Screenshake", "SCREENSHAKE"),    key: "visual_screenshake"  },
 	{ type: "slider",  name: L("FreezeFrames", "FREEZE FRAMES"), key: "visual_freezeframes" },
 	
+	/// @loc:token [VideoOptions] Bloom "BLOOM"
 	{ type: "switch",  name: L("Bloom", "BLOOM"),         key: "visual_bloom"        },
+	/// @loc:token [VideoOptions] Particles "PARTICLES"
 	{ type: "switch",  name: L("Particles", "PARTICLES"), key: "visual_particles",   states: [ OPTION_ON, OPTION_OFF ] },
 	{ type: "switch",  name: L("HideHUD", "HIDE HUD"),    key: "visual_hud",         states: [ OPTION_ON, OPTION_OFF ] },
 	
@@ -161,6 +165,7 @@ scrOptionsMenuCreateElements(
 		}
 	},
 	
+	/// @loc:token [VideoOptions] DisplayOptions "DISPLAY SETTINGS"
 	{ type: "category", name: L("DisplayOptions", "DISPLAY SETTINGS"), category: OptionCategory.Video_Display, desktop_only: true }
 )
 
@@ -171,6 +176,7 @@ L = LF("VideoOptions")
 scrOptionsMenuCategoryBegin(OptionCategory.Video_Display)
 
 scrOptionsMenuCreateElements(
+	/// @loc:token [VideoOptions] WideScreen "WIDESCREEN"
 	{ type: "switch",  name: L("Widescreen", "WIDESCREEN"), key: "visual_resolution"   },
 	{ type: "switch",  name: L("Fullscreen", "FULLSCREEN"), key: "options_fullscreen",
 		click: function (_opt) {
@@ -206,18 +212,21 @@ scrOptionsMenuCreateElements(
 	{ type: "switch", name: L("Timer", "SHOW TIMER"), key: "visual_timer" },
 	{ type: "switch", name: L("Area", "SHOW AREA"), key: "visual_area" },
 	//{
-	//	type: "switch", name: "CURSOR", desktop_only: true,
-	//	states: [ "DEFAULT", "NATIVE" ], key: "options_cursor",
+	/// @loc:token [GameOptions] NativeCursor "NATIVE CURSOR"
+	//	type: "switch", name: "CURSOR", desktop_only: true, key: "options_cursor",
 		
 	//	condition: function(_opt) {
 	//		return native_cursor_dll_status
 	//	}
 	//},
 	
+	/// @loc:token [GameOptions] MouseLock "MOUSELOCK"
 	//{ type: "switch",   name: "MOUSELOCK",          key: "options_mouselock", desktop_only: true },
 	
+	/// @loc:token [GameOptions] PauseButton "PAUSE BUTTON"
 	{ type: "switch",   name: L("PauseButton", "PAUSE BUTTON"), key: "options_pausebutton", mobile_only: true },
 	
+	/// @loc:token [GameOptions] AchievementPopups "ACHIEVEMENT#POPUPS"
 	{ type: "switch",   name: L("AchievementPopups", "ACHIEVEMENT#POPUPS"), key: "options_achievements" },
 	
 	{ type: "switch",   name: L("AutoPause", "AUTO PAUSE"), key: "options_autopause", desktop_only: true },
@@ -233,6 +242,7 @@ scrOptionsMenuCreateElements(
 		}
 	},
 	
+	/// @loc:token [GameOptions] ProfileOptions "PROFILE"
 	{ type: "category", name: L("ProfileOptions", "PROFILE"), category: OptionCategory.Game_Profile }
 )
 
@@ -244,6 +254,7 @@ scrOptionsMenuCategoryBegin(OptionCategory.Game_Color)
 
 scrOptionsMenuCreateElements(
 	{
+		/// @loc:token [ProfileOptions] ColorHEX "EDIT HEX"
 		type: "input", name: L("ColorHEX", "EDIT HEX"), key: undefined, halign: fa_left,
 		
 		draw: function(_opt) {
@@ -253,7 +264,8 @@ scrOptionsMenuCreateElements(
 				w = 72 + _opt.anim,
 				h = 6,
 				
-				val = "NONE"
+				/// @loc:token [ProfileOptions] ColorSelectorNone "NONE"
+				val = loc("ProfileOptions", "ColorSelectorNone", "NONE")
 			
 			if global.player_color {
 				draw_set_color(c_black)
@@ -330,6 +342,7 @@ scrOptionsMenuCreateElements(
 	},
 	
 	{
+		/// @loc:token [ProfileOptions] ColorRed "RED"
 		type: "slider", name: L("ColorRed", "RED"), value: 0, key: "options_color",
 		click: function(_opt) {
 			var col = global.player_color
@@ -345,6 +358,7 @@ scrOptionsMenuCreateElements(
 	},
 	
 	{
+		/// @loc:token [ProfileOptions] ColorGreen "GREEN"
 		type: "slider", name: L("ColorGreen", "GREEN"), value: 0, key: "options_color",
 		click: function(_opt) {
 			var col = global.player_color
@@ -360,6 +374,7 @@ scrOptionsMenuCreateElements(
 	},
 	
 	{
+		/// @loc:token [ProfileOptions] ColorBlue "BLUE"
 		type: "slider", name: L("ColorBlue", "BLUE"), value: 0, key: "options_color",
 		click: function(_opt) {
 			var col = global.player_color
@@ -382,6 +397,7 @@ L = LF("ProfileOptions")
 scrOptionsMenuCategoryBegin(OptionCategory.Game_Profile)
 
 scrOptionsMenuCreateElements(
+	/// @loc:token [ProfileOptions] ID "ID"
 	{ type: "button", name: L("ID", "ID"), key: "general_uid",
 		get_value: function(_opt) {
 			var value = scrSavedatascrGetUID(),
@@ -392,8 +408,10 @@ scrOptionsMenuCreateElements(
 					return string_copy(value, 1, 5) + "..."
 			}
 			
-			if copied - current_frame > 0
+			if copied - current_frame > 0 {
+				/// @loc:token [ProfileOptions] IDCopied "@g[COPIED]"
 				return loc("ProfileOptions:IDCopied", "@g[COPIED]")
+			}
 			
 			return value
 		},
@@ -413,7 +431,8 @@ scrOptionsMenuCreateElements(
 		}
 	},
 	
-	{ type: "input", name: L("ProfileName", "NICKNAME"), key: "etc_name", ingame: false,
+	/// @loc:token [ProfileOptions] ProfileName "PROFILE NAME"
+	{ type: "input", name: L("ProfileName", "PROFILE NAME"), key: "etc_name", ingame: false,
 		validate: function(_opt, str, confirm) {
 			return scrValidateUsername(_opt, str, confirm)
 		},
@@ -424,6 +443,7 @@ scrOptionsMenuCreateElements(
 		}
 	},
 	
+	/// @loc:token [ProfileOptions] ColorOptions "COLOR"
 	{ type: "button", name: L("ColorOptions", "COLOR"), key: "options_color", ingame: false,
 		click: function () {
 			option_can_change = false
@@ -431,8 +451,10 @@ scrOptionsMenuCreateElements(
 		},
 		
 		get_value: function(_opt) {
-			if !global.player_color
-				return "DEFAULT"
+			if !global.player_color {
+				/// @loc:token [ProfileOptions] ColorDefault "DEFAULT"
+				return loc("ProfileOptions:ColorDefault", "DEFAULT")
+			}
 			
 			draw_set_color(global.player_color)
 			
@@ -441,6 +463,7 @@ scrOptionsMenuCreateElements(
 	},
 	
 	{
+		/// @loc:token [ProfileOptions] DataOptions "DATA"
 		type: "category", name: L("DataOptions", "DATA"), category: OptionCategory.Game_Data, ingame: false,
 		
 		awake: function(_opt) {
@@ -457,6 +480,7 @@ L = LF("DataOptions")
 scrOptionsMenuCategoryBegin(OptionCategory.Game_Data)
 
 scrOptionsMenuCreateElements(
+	/// @loc:token [DataOptions] OptionsReset "RESET OPTIONS"
 	{
 		type: "button", name: L("OptionsReset", "RESET OPTIONS"),
 		
@@ -466,6 +490,7 @@ scrOptionsMenuCreateElements(
 		}
 	},
 	
+	/// @loc:token [DataOptions] ProgressReset "ERASE PROGRESS"
 	{
 		type: "button", name: L("ProgressReset", "ERASE PROGRESS"), ingame: false,
 		
@@ -483,8 +508,10 @@ L = LF("ControlOptions")
 scrOptionsMenuCategoryBegin(OptionCategory.Controls)
 
 scrOptionsMenuCreateElements(
+	/// @loc:token [ControlOptions] GamepadOn "GAMEPAD"
 	{ type: "switch", name: L("GamepadOn", "GAMEPAD"), key: "options_gamepad" },
 	
+	/// @loc:token [ControlOptions] GamepadStyle "GAMEPAD STYLE"
 	{ type: "list", name: L("GamepadStyle", "GAMEPAD STYLE"), key: "options_gamepad_type", list: range(0, array_length(gamepad_types) - 1),
 		condition: function() {
 			return is_gamepad(global.index)
@@ -504,18 +531,28 @@ scrOptionsMenuCreateElements(
 		}
 	},
 	
+	/// @loc:token [ControlOptions] AimAssist "AIM ASSIST"
 	{ type: "switch", name: L("AimAssist", "AIM ASSIST"),               key: "controls_assist",       mobile_only: true },
+	/// @loc:token [ControlOptions] AutoAim "FULL AUTOAIM"
 	{ type: "switch", name: L("AutoAim", "FULL AUTOAIM"),               key: "controls_aimbot",       mobile_only: true },
+	/// @loc:note [ControlOptions] Allows swapping and using abilities by pressing volume buttons
+	/// @loc:token [ControlOptions] VolumeControls "VOLUME CONTROLS"
 	{ type: "switch", name: L("VolumeControls", "VOLUME CONTROLS"),     key: "options_volumecontrol", mobile_only: true },
+	/// @loc:note [ControlOptions] Split aim & fire into two separate control elements
+	/// @loc:token [ControlOptions] SplitFireControls "SPLIT AIM & FIRE"
 	{ type: "switch", name: L("SplitFireControls", "SPLIT AIM & FIRE"), key: "controls_splitfire",    mobile_only: true,
 		condition: function() {
 			return !UberCont.opt_aimbot
 		}
 	},
+	/// @loc:note [ControlOptions] Force player aim crosshair to be always visible
+	/// @loc:token [ControlOptions] FixedSight "FIXED SIGHT"
 	{ type: "switch", name: L("FixedSight", "FIXED SIGHT"),      key: "controls_fixsight",     mobile_only: true },
 	
+	/// @loc:token [ControlOptions] TouchControlScale "SIZE SCALE"
 	{ type: "slider", name: L("TouchControlScale", "SIZE SCALE"), key: "controls_scale", mobile_only: true },
 	
+	/// @loc:token [ControlOptions] Remap "REMAP CONTROLS"
 	{ type: "button", name: L("Remap", "REMAP CONTROLS"),
 		get_name: function(_opt) {
 			var str = _opt.name
@@ -547,8 +584,10 @@ scrOptionsMenuCreateElements(
 		}
 	},
 	
+	/// @loc:token [Options] CharacterPrefOptions "CHARACTER PREFERENCES"
 	{ type: "category", name: loc("Options:CharacterPrefOptions", "CHARACTER PREFERENCES"), category: OptionCategory.Controls_Preferences, mobile_only: true },
 	
+	/// @loc:token [Options] ExperimentalOptions "EXPERIMENTAL OPTIONS"
 	{ type: "category", name: loc("Options:ExperimentalOptions", "EXPERIMENTAL OPTIONS"), category: OptionCategory.Controls_Experimental, mobile_only: true }
 )
 
@@ -597,7 +636,8 @@ scrOptionsMenuCategoryEnd()
 scrOptionsMenuCategoryBegin(OptionCategory.Controls_Remapping)
 
 scrOptionsMenuCreateElements(
-	{ type: "button", name: "DEFAULT PRESET",
+	/// @loc:token [ControlOptions] ResetTouchLayout "RESET LAYOUT"
+	{ type: "button", name: loc("ControlOptions", "ResetTouchLayout", "RESET LAYOUT"),
 		click: function() {
 			var saveData = UberCont.saveData
 			
@@ -626,6 +666,7 @@ scrOptionsMenuCreateElements(
 		}
 	},
 	
+	/// @loc:token [ControlOptions] SimpleTouchControls "SIMPLIFY"
 	{ type: "switch", name: loc("ControlOptions:SimpleTouchControls", "SIMPLIFY"), halign: fa_center, key: "visual_simplify", draw: draw_inline_switch }
 )
 #endregion Controls_Remapping
@@ -638,25 +679,36 @@ condition_keyboard = function() { return (is_keyboard() && !is_gamepad()) }
 condition_gamepad = function() { return is_gamepad() }
 
 scrOptionsMenuCreateElements(
+	/// @loc:token [ControlOptions] ButtonFire "FIRE"
 	{ type: "keybind", name: L("ButtonFire", "FIRE"), key: "fire" },
+	/// @loc:token [ControlOptions] ButtonActive "ACTIVE"
 	{ type: "keybind", name: L("ButtonActive", "ACTIVE"), key: "spec" },
+	/// @loc:token [ControlOptions] ButtonSwap "SWAP"
 	{ type: "keybind", name: L("ButtonSwap", "SWAP"), key: "swap" },
+	/// @loc:token [ControlOptions] ButtonPick "PICK/USE"
 	{ type: "keybind", name: L("ButtonPick", "PICK/USE"), key: "pick" },
 	
-	{ type: "keybind", name: L("ButtonChat", "COOP CHAT"), key: "chat", condition: condition_keyboard },
+	/// @loc:token [ControlOptions] ButtonChat "CO-OP CHAT"
+	{ type: "keybind", name: L("ButtonChat", "CO-OP CHAT"), key: "chat", condition: condition_keyboard },
+	/// @loc:token [ControlOptions] ButtonUp "WALK UP"
 	{ type: "keybind", name: L("ButtonUp", "WALK UP"), key: "north", condition: condition_keyboard },
+	/// @loc:token [ControlOptions] ButtonDown "WALK DOWN"
 	{ type: "keybind", name: L("ButtonDown", "WALK DOWN"), key: "south", condition: condition_keyboard },
+	/// @loc:token [ControlOptions] ButtonLeft "WALK LEFT"
 	{ type: "keybind", name: L("ButtonLeft", "WALK LEFT"), key: "west", condition: condition_keyboard },
+	/// @loc:token [ControlOptions] ButtonRight "WALK RIGHT"
 	{ type: "keybind", name: L("ButtonRight", "WALK RIGHT"), key: "east", condition: condition_keyboard },
 	
+	/// @loc:token [ControlOptions] DebugOverlay "DEBUG OVERLAY"
 	{ type: "keybind", name: L("DebugOverlay", "DEBUG OVERLAY"), key: "console",
 		awake: function(_opt) {
-			_opt.visible = UberCont.opt_cheats or (ingame && !global.cheats)
+			_opt.visible = UberCont.opt_cheats || (ingame && !global.cheats)
 		},
 		
 		condition: condition_keyboard
 	},
 	
+	/// @loc:token [ControlOptions] ResetDefaults "DEFAULT PRESET"
 	{ type: "button", name: L("ResetDefaults", "DEFAULT PRESET"),
 		click: function() {
 			scrKeymapsSetup()
@@ -677,32 +729,41 @@ scrOptionsMenuCategoryBegin(OptionCategory.Controls_Preferences)
 cpref_condition = function(_opt) { return UberCont.ctot_time[_opt.char] > 0 }
 
 cpref_name = function(_opt) {
+	/// @loc:token [CharacterPrefOptions] CharacterLocked "LOCKED"
 	return (!UberCont.ctot_time[_opt.char]) ? "@d- " + loc("CharacterPrefOptions:CharacterLocked", "LOCKED") + " -"
 		: "@(sprMapIcon," + string(scr_race_get_skin_subimage(_opt.char, 0)) + ") " + _opt.name
 }
 
 scrOptionsMenuCreateElements(
+	/// @loc:token [CharacterPrefOptions] AutoTelekinesis "AUTO TELEKINESIS"
 	{ type: "switch", name: L("AutoTelekinesis", "AUTO TELEKINESIS"), key: "cprefs_eyes", char: Race.Eyes,
 			condition: cpref_condition, get_name: cpref_name },
 		
+	/// @loc:token [CharacterPrefOptions] AutoExplosions "AUTO EXPLOSIONS"
 	{ type: "switch", name: L("AutoExplosions", "AUTO EXPLOSIONS"), key: "cprefs_melting", char: Race.Melting,
 			condition: cpref_condition, get_name: cpref_name },
-		
+	
+	/// @loc:token [CharacterPrefOptions] AutoSnare "AUTO SNARE"
 	{ type: "switch", name: L("AutoSnare", "AUTO SNARE"), key: "cprefs_plant", char: Race.Plant,
 			condition: cpref_condition, get_name: cpref_name },
-		
+	
+	/// @loc:token [CharacterPrefOptions] PopPopToggle "POP-POP TOGGLE"
 	{ type: "switch", name: L("PopPopToggle", "POP-POP TOGGLE"), key: "cprefs_yv", char: Race.Venuz,
 			condition: cpref_condition, get_name: cpref_name },
-		
+	
+	/// @loc:token [CharacterPrefOptions] DualWieldToggle "DUAL WIELD TOGGLE"
 	{ type: "switch", name: L("DualWieldToggle", "DUAL WEILD TOGGLE"), key: "cprefs_steroids", char: Race.Steroids,
 			condition: cpref_condition, get_name: cpref_name },
-		
+	
+	/// @loc:token [CharacterPrefOptions] UseWeaponWhenBeaming "USE WEAPON BEAMING"
 	{ type: "switch", name: L("UseWeaponWhenBeaming", "USE WEAPON BEAMING"), key: "cprefs_horror", char: Race.Horror,
 			condition: cpref_condition, get_name: cpref_name },
-		
+	
+	/// @loc:token [CharacterPrefOptions] SwipeBombing "SWIPE BOMBING"
 	{ type: "switch", name: L("SwipeBombing", "SWIPE BOMBING"), key: "cprefs_rogue", char: Race.Rogue,
 			condition: cpref_condition, get_name: cpref_name },
 	
+	/// @loc:token [CharacterPrefOptions] GambleToggle "GAMBLE TOGGLE"
 	{ type: "switch", name: L("GambleToggle", "GAMBLE Toggle"), key: "cprefs_skeleton", char: Race.Skeleton,
 			condition: cpref_condition, get_name: cpref_name },
 )
@@ -715,10 +776,13 @@ L = LF("ExperimentalOptions")
 scrOptionsMenuCategoryBegin(OptionCategory.Controls_Experimental)
 
 scrOptionsMenuCreateElements(
+	/// @loc:token [ExperimentalOptions] KeyboardMode "KEYBOARD MODE"
 	{ type: "switch", name: L("KeyboardMode", "KEYBOARD MODE"),    key: "options_keyboard" },
 	
+	/// @loc:token [ExperimentalOptions] JoystickRegions "STICK REGIONS"
 	{ type: "switch", name: L("JoystickRegions", "STICK REGIONS"),    key: "controls_stickregions" },
 	
+	/// @loc:token [ExperimentalOptions] HideJoysticks "HIDE JOYSTICKS"
 	{ type: "switch", name: L("HideJoysticks", "HIDE JOYSTICKS"),   key: "controls_hiddensticks",
 		get_value: function(_opt) {
 			if UberCont.opt_stickregions
@@ -741,6 +805,7 @@ scrOptionsMenuCategoryBegin(OptionCategory.Resourcepacks)
 
 scrOptionsMenuCreateElements(
 	{
+		/// @loc:token [ResourcepackOptions] ViewInstalled "VIEW INSTALLED"
 		type: "button", name: L("ViewInstalled", "VIEW INSTALLED"), ingame: false,
 		
 		click: function() {
@@ -752,6 +817,7 @@ scrOptionsMenuCreateElements(
 	},
 	
 	{
+		/// @loc:token [ResourcepackOptions] Browse "BROWSE DOWNLOAD"
 		type: "button", name: L("Browse", "BROWSE AND DOWNLOAD"), ingame: false,
 		
 		click: function() {
@@ -763,6 +829,7 @@ scrOptionsMenuCreateElements(
 	},
 	
 	{
+		/// @loc:token [ResourcepackOptions] DirectDownload "DIRECT DOWNLOAD"
 		type: "input", name: L("DirectDownload", "DIRECT DOWNLOAD"), value: "",
 		
 		validate: function(_opt, str, confirm) {
@@ -813,8 +880,16 @@ L = LF("CheatOptions")
 scrOptionsMenuCategoryBegin(OptionCategory.Cheats)
 
 scrOptionsMenuCreateElements(
+	/// @loc:note [CheatOptions] Developer debug overlay
+	/// @loc:token [CheatOptions] Console "CONSOLE"
 	{ type: "switch", name: L("Console", "CONSOLE"), key: "cheats_console" },
+	
+	/// @loc:note [CheatOptions] Unlimited skill selection range
+	/// @loc:token [CheatOptions] GrillerMode "GRILLER MODE"
 	{ type: "switch", name: L("GrillerMode", "GRILLER MODE"), key: "cheats_griller" },
+	
+	/// @loc:note [CheatOptions] Player gets timed out for 45sec instead of dying
+	/// @loc:token [CheatOptions] Practice "PRACTICE"
 	{ type: "switch", name: L("Practice", "PRACTICE"), key: "cheats_practice" }
 )
 

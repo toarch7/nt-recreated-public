@@ -83,7 +83,7 @@ if loading {
 			
 			/// @loc:token [R:Intro] LoadGameYes "YES"
 			_text_yes = loc("R:Intro:LoadGameYes", "YES"),
-			/// @loc:token [R:Intro] LodGameNo "NO"
+			/// @loc:token [R:Intro] LoadGameNo "NO"
 			_text_no = loc("R:Intro:LoadGameNo", "NO")
 		
         scrDrawRoadmap(_cx, _cy, pos)

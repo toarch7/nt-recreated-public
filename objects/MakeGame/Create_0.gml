@@ -18,7 +18,7 @@ scr_debug_overlay_load()
 
 alarm[0] = 1
 
-disclaimer = true
+disclaimer = false
 disclaimer_setup = true
 disclaimer_continue_pointed = false
 
