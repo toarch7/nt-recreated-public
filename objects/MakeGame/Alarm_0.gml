@@ -94,6 +94,7 @@ try {
 	depth = UberCont.depth - 1
 }
 catch(e) {
-	print_exception(loc("R:Intro:LoadGameFailure", "Failed to load saved run."), e)
+	/// @loc:token [R:Intro] LoadGameFailure "Failed to load saved run."
+    print_exception(loc("R:Intro:LoadGameFailure", "Failed to load saved run."), e)
 	event_user(0)
 }

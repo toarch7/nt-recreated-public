@@ -13,6 +13,7 @@ for(var i = 0; i <= achievementmax; i ++) {
 		
 		if chiev_hide[i] && !scrAchievementIsUnlocked(i) {
 			draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_black, 1)
+			/// @loc:token [R:MainMenu] AchievementHidden "HIDDEN"
 			draw_text_nt(xx, yy - ypos + 5, "@d" + loc("R:MainMenu:AchievementHidden", "HIDDEN"))
 		}
 		else {
@@ -71,6 +72,7 @@ draw_rectangle(0, -2, view_width, 36, 0)
 draw_set_halign(fa_center)
 
 draw_set_color(c_white)
+/// @loc:token [R:MainMenu] Achievements "ACHIEVEMENTS"
 draw_text_nt(view_width / 2, 12, loc("R:MainMenu:Achievements", "ACHIEVEMENTS"))
 
 draw_set_color(c_uisilver)

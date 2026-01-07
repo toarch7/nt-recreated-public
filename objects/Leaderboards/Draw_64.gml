@@ -116,5 +116,6 @@ draw_reset_font()
 event_user(0)
 
 draw_align(fa_center, fa_middle)
+/// @loc:token [R:MainMenu] Leaderboards "LEADERBOARDS"
 draw_text_bigname(view_width / 2, 18, loc("R:MainMenu:Leaderboards", "LEADERBOARDS"), c_uigray)
 draw_align()

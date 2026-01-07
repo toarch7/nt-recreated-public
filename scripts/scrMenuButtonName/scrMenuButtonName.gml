@@ -64,13 +64,6 @@ function scrMenuButtonName(_sprite_index = sprite_index, _image_index = image_in
             }
             break
 
-        case sprCoopButton:
-            switch _image_index {
-                case 0: return _L("R:CoopLobby:Host", "HOST")
-                case 1: return _L("R:CoopLobby:Join", "JOIN")
-            }
-            break
-		
 		case sprBossName:
             var _boss_name = "???"
 			switch _image_index {
@@ -83,10 +76,13 @@ function scrMenuButtonName(_sprite_index = sprite_index, _image_index = image_in
 				case 6: case 9:  _boss_name = _L("Bosses:HyperCrystal", "HYPER#CRYSTAL") break
 				        case 7:  _boss_name = _L("Bosses:TechnoMancer", "TECHNO#MANCER") break
 				        case 8:  _boss_name = _L("Bosses:Captain", "CAPTAIN") break
+						/// @loc:note [Bosses] "GUN GOD's" name isn't translated in the base game as of right now
+						/// @loc:token [Bosses] GunGod "GUN#GOD"
 				        case 10: _boss_name = _L("Bosses:GunGod", "GUN#GOD") break
 			}
 			return is_string(_boss_name) ? string_replace(_boss_name, "#", "# ") : undefined
 		
+		/// @loc:token [R:GameOver] Results "RESULTS"
 		case sprGameOverResult: return _L("R:GameOver:Results", "RESULTS")
 		
 		case sprLevelUpText: return _L("LevCont:LevelUp", "LEVEL UP")

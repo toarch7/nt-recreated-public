@@ -508,6 +508,7 @@ function scrRaceUnlock(_race) {
 		scrShowUnlockPopup(loc(_key_title, $"@w{_race_name} UNLOCKED"), loc(_key_text, "@s" + _cause))
 	}
 	else if _cause != "" {
+		/// @loc:token [R:Unlock] GenericRace "@w% UNLOCKED#@s%"
 		scrShowUnlockPopup(loc_fmt("R:Unlock:GenericRace", $"@w% UNLOCKED#@s%", _race_name, _cause))
 	}
 	
@@ -539,6 +540,7 @@ function scrRaceUnlockSkin(_race, _skin_id) {
 			scrShowUnlockPopup(loc(_key_title, $"@w{_race_name} {_letter}-SKIN UNLOCKED"), loc(_key_text, "@s" + _cause))
 		}
 		else if _cause != "" {
+			/// @loc:token [R:Unlock] GenericSkin "@w% %-SKIN UNLOCKED#@s%"
 			scrShowUnlockPopup(loc_fmt("R:Unlock:GenericSkin",
 				$"@w% %-SKIN UNLOCKED#@s%", _race_name, _letter, _cause))
 		}

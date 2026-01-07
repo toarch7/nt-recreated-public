@@ -13,14 +13,14 @@ function string_insert_wordwraps(_string, _width) {
 	buffer_seek(_buffer, buffer_seek_start, 0)
 	
 	with (_ctx) string_foreach(_string, function(_char, _index) {
-		var _ww = font_get_string_width(word)
+		var _ww = font_get_string_width(word), _nw = _ww + 14
 		if (_char == "\n") {
 			buffer_write(buffer, buffer_text, word + "\n")
 			word = ""
 			size = 0
 		}
-		else if (_char == " " || _index == length || ((_ww + 12) >= width)) {
-			if (_ww >= width) {
+		else if (_char == " " || _index == length || _nw >= width) {
+			if (_nw >= width) {
 				buffer_write(buffer, buffer_text, word)
 				buffer_write(buffer, buffer_text, "\n")
 				word = ""
@@ -29,7 +29,7 @@ function string_insert_wordwraps(_string, _width) {
 			}
 			if (string_length(word)) {
 				size += _ww
-				if (size >= width) {
+				if ((size + 14) >= width) {
 					buffer_write(buffer, buffer_text, "\n")
 					size = 0
 				}

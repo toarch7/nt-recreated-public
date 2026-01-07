@@ -15,6 +15,7 @@ draw_sprite_ext(sprite_index, image_index, x, y - hover,
 if (hover) {
 	draw_align(fa_right, fa_middle)
 	draw_set_color(_img == 3 ? c_white : c_silver)
+	/// @loc:token [R:MainMenu:Achievements] Achievements "ACHIEVEMENTS"
 	var _string = $"{loc("R:MainMenu:Achievements", "ACHIEVEMENTS")}\n@s{unlocks}/{achievementmax} ({floor(progress * 100)}%)"
 	draw_text_nt(x - 20, y + _img - 3, _string)
 	draw_set_color(c_white)

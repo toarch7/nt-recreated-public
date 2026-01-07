@@ -1,5 +1,6 @@
 /// @function font_string_measure
-/// @param component_index=-1
+/// @param string
+/// @param component_return_index=-1
 function font_string_measure(_string, _component = -1) {
 	static buffer = buffer_create(1024, buffer_grow, 1)
 	static __font_info_cache = {}
@@ -51,6 +52,7 @@ function font_string_measure(_string, _component = -1) {
 	var _ctx = {
 		font: draw_get_font(),
 		glyphs: _info.glyphs,
+		fixed_line_height: 0,
 		
 		current_width: 0,
 		max_width: 0,
@@ -58,6 +60,8 @@ function font_string_measure(_string, _component = -1) {
 		max_character_height: 0,
 		total_height: 0
 	}
+	
+	if (_ctx.font == fntM1) _ctx.fixed_line_height = 8
 	
 	with (_ctx) string_foreach(_string, function(_char) {
 		var _g = glyphs[$ _char]
@@ -75,25 +79,19 @@ function font_string_measure(_string, _component = -1) {
 		}
 		// fallback
 		else if (!variable_struct_exists(_g, "shift")) {
-			//var _sw = string_width(_char),
-			//	_sh = string_height(_char),
-			//	_sz = max(_sw, _sh)
-			
 			_g.shift = string_width(_char)
 			_g.h = string_height(_char)
-			
-			print("Missing character info", _char, "substituted with", _g, "in font", font)
 		}
 		
 		var _w = _g.shift,
-			_h = _g.h + 1
+			_h = (fixed_line_height ? fixed_line_height : (_g.h + 1))
 		
 		if (_char == "\n") {
 			max_width = max(current_width, max_width)
 			current_width = 0
 			
 			total_height += max_character_height
-			max_character_height = 0
+			max_character_height = fixed_line_height
 		}
 		else {
 			current_width += _w
@@ -127,7 +125,6 @@ function font_get_string_width(_string) {
 function font_get_string_height(_string) {
 	gml_pragma("forceinline")
 	return font_string_measure(string(_string), 1)
-	
 }
 
 function font_get_height_diff() {

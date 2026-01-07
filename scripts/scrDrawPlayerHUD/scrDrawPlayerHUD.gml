@@ -364,7 +364,10 @@ function scrDrawInteractionHUD(_player) {
 			}
 			
 			if is_touch(_player.index) {
-				if instance_is(self, WepPickup) _name = loc("R:HUD:PickUpAction", "PICK UP")
+				if instance_is(self, WepPickup) {
+					/// @loc:token [R:HUD] PickUpAction "PICK UP"
+					_name = loc("R:HUD:PickUpAction", "PICK UP")
+				}
 				
 				with ButtonAct {
 					draw_text_nt(x, y + ((y < 40) ? 36 : -36), _name)

@@ -162,7 +162,7 @@ function render_parse_text(_text) {
 					}
 					
 					if (!sprite_exists(_spr)) {
-						print("Unknown sprite:", _tag)
+						print("draw_text_nt: Unknown sprite:", _tag)
 						_spr = mskNone
 					}
 					
@@ -489,5 +489,5 @@ function render_text_sanitize_string(_string) {
 	
 	buffer_write(_buffer, buffer_u8, 0)
 	
-	return buffer_peek(_buffer, 0, buffer_string)
+	return string_hash_to_newline(buffer_peek(_buffer, 0, buffer_string))
 }

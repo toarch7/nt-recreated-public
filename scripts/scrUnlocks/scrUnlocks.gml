@@ -71,6 +71,7 @@ function scrUnlocksArea() {
 	if _loops >= 3 && !UberCont.opt_cheats {
 		UberCont.opt_cheats = true
 		save_set_value("cheats", "unlocked", true)
+		/// @loc:token [R:Unlock] Cheats "@wCHEATS UNLOCKED#@sCHECK OUT THE MAIN MENU SETTINGS!"
 		scrShowUnlockPopup(loc("R:Unlock:Cheats", "@wCHEATS UNLOCKED#@sCHECK OUT THE MAIN MENU SETTINGS!"))
 		scrSave()
 	}

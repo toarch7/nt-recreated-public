@@ -1239,6 +1239,8 @@ function scrWeapons() {
     wep_gold[127] = true
     wep_swap[127] = sndSwapPistol
 	
+	/// @loc:note [Weapons] Electric Guitar isn't translated in the basegame as of right now
+	/// @loc:token [Weapons] 128:Name "ELECTRIC GUITAR"
     wep_name[128] = "ELECTRIC GUITAR"
     wep_type[128] = 0
     wep_cost[128] = 0
@@ -1246,6 +1248,8 @@ function scrWeapons() {
     wep_area[128] = -1
     wep_auto[128] = false
     wep_load[128] = 21
+	/// @loc:note [Weapons] Electric Guitar also uses the same description as the regular Guitar. NTM simply just adds a little sprinkle of detail to it
+	/// @loc:token [Weapons] 128:Text "fish can rock and roll"
     wep_text[128] = "fish can rock and roll"
 
     wep_swap[0] = sndSwapPistol

@@ -2572,7 +2572,6 @@
     {"name":"sprConfetti","order":75,"path":"sprites/sprConfetti/sprConfetti.yy",},
     {"name":"sprConfettiBall","order":74,"path":"sprites/sprConfettiBall/sprConfettiBall.yy",},
     {"name":"sprContinuedRunIcon","order":69,"path":"sprites/sprContinuedRunIcon/sprContinuedRunIcon.yy",},
-    {"name":"sprCoopButton","order":76,"path":"sprites/sprCoopButton/sprCoopButton.yy",},
     {"name":"sprCoopSkillIcon","order":3,"path":"sprites/sprCoopSkillIcon/sprCoopSkillIcon.yy",},
     {"name":"sprCoral","order":8,"path":"sprites/sprCoral/sprCoral.yy",},
     {"name":"sprCornerThing","order":8,"path":"sprites/sprCornerThing/sprCornerThing.yy",},

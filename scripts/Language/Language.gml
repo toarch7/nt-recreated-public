@@ -251,8 +251,6 @@ function scrLanguageProcess(_language) {
 	if (file_exists(_path)) {
 		var _ini_contents = scrIniToJSON(_path)
 		
-		print(_path, json_stringify(_ini_contents, true))
-		
 		with (_language) struct_foreach(_ini_contents, function(_key, _value) {
 			self[$ _key] = _value
 		})

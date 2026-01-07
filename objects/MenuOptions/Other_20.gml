@@ -823,9 +823,11 @@ scrOptionsMenuCreateElements(
 scrOptionsMenuCategoryBegin(OptionCategory.Coop_Menu)
 
 scrOptionsMenuCreateElements(
+	/// @loc:token [Options] ProfileOptions "PROFILE"
 	{ type: "category", name: loc("Options:ProfileOptions", "PROFILE"), category: OptionCategory.Game_Profile },
 	
 	{
+		/// @loc:token [R:CoopLobby] Host "HOST GAME"
 		type: "button", name: loc("R:CoopLobby:Host", "HOST GAME"),
 		
 		click: function() {
@@ -853,9 +855,11 @@ scrOptionsMenuCreateElements(
 		}
 	},
 	
+	/// @loc:token [R:CoopLobby] RemoteAddress "REMOTE ADDRESS"
 	{ type: "input", name: loc("R:CoopLobby:RemoteAddress", "REMOTE ADDRESS"), key: "coop_lastip" },
 	
 	{
+		/// @loc:token [R:CoopLobby] RemotePort "REMOTE PORT"
 		type: "input", name: loc("R:CoopLobby:RemotePort", "REMOTE PORT"), key: "coop_lastport",
 		
 		validate: function(_opt, str, confirm) {
@@ -867,7 +871,8 @@ scrOptionsMenuCreateElements(
 		}
 	},
 	
-	{ type: "button", name: loc("R:CoopLobby:RefreshLocal", "REFRESH LOCAL"),
+	/// @loc:token [R:CoopLobby] RemoteAddress "REFRESH LOCAL GAMES"
+	{ type: "button", name: loc("R:CoopLobby:RefreshLocal", "REFRESH LOCAL GAMES"),
 		condition: function (_opt) {
 			with CoopMenu {
 				if local_wait

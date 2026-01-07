@@ -30,4 +30,4 @@ else if !is_gamepad() && hover {
 	hover = 0
 }
 
-splat = lerp(splat, hover * 3, 0.4)
+splat = approach(splat, hover * 3, timescale * 0.8)

@@ -1,38 +1,64 @@
 if disclaimer {
-	draw_set_halign(fa_center)
-    draw_set_valign(fa_middle)
-	
-	var str = (get_timer() / 33333) % 60 > 30 ? "@r!!!" : "@s!!!"
-	
+	draw_align(fa_center, fa_middle)
 	draw_reset_font()
     
-	var _disclaimer = loc("@w###THIS IS AN UNOFFICIAL FAN-MADE RECREATION,#NOT AFFILIATED WITH @yVLAMBEER@w.##IT IS DISTRIBUTED FREELY ON ITCH.IO#"
-		+ "AND IS OPEN SOURCE ON GITHUB.##IF YOU PAID OR SEE ADS, IT'S RECOMMENDED TO#UNINSTALL THE APPLICATION FOR YOUR OWN SAFETY.")
+	var _dx = view_width div 2,
+		_dy = view_height div 2,
+		
+		_exclamation = (get_timer() / 33333) % 60 > 30 ? "@r!!!" : "@s!!!"
 	
-	draw_text_nt(view_width / 2, view_height / 2,
-		str + " " + loc("R:Intro:ProjectDisclaimerTitle", "DISCLAIMER") + " " + str
-				  + loc("R:Intro:ProjectDisclaimerText", _disclaimer))
+	if (disclaimer_setup) {
+		disclaimer_message = string_insert_wordwraps(string_hash_to_newline(
+			loc("R:Intro:ProjectDisclaimerText", disclaimer_message)), game_screen_width - 80)
+		
+		disclaimer_setup = false
+	}
+	
+	/// @loc:token [R:Intro] ProjectDisclaimerTitle "DISCLAIMER"
+	var _title = _exclamation + " " + loc("R:Intro:ProjectDisclaimerTitle", "DISCLAIMER") + " " + _exclamation + "@w",
+		_disclaimer_message = disclaimer_message
+	
+	if (!string_starts_with(_disclaimer_message, "\n")) {
+		_disclaimer_message = "\n" + _disclaimer_message
+	}
+	
+	var _disclaimer_text = _title + _disclaimer_message
+	draw_text_nt(_dx, _dy, _disclaimer_text)
 	
 	disclaimer ++
 	
 	if disclaimer >= 90 {
-		str = loc("R:Intro:DisclaimerContinue", "CLICK TO CONTINUE")
+		/// @loc:token [R:Intro] DisclaimerContinue "CLICK TO CONTINUE"
+		var _continue_string = loc("R:Intro:DisclaimerContinue", "CLICK TO CONTINUE"),
+			_offset = ceil(font_get_string_height(_disclaimer_text) * 0.5),
+			_button_y = min(_dy + _offset + 16, view_height - 14)
 		
-		if disclaimer == 90 {
-			snd_play(sndHover)
-			str = "@w" + str
+		if (disclaimer == 90 || device_mouse_y_to_gui(0) > _button_y) {
+			if (!disclaimer_continue_pointed) {
+				disclaimer_continue_pointed = true
+				snd_play(sndHover)
+			}
+			_continue_string = "@w" + _continue_string
+			_button_y += (disclaimer == 90) ? 2 : 1
+			draw_set_color(c_white)
 		}
 		else {
-			str = "@s" + str
+			_continue_string = "@s" + _continue_string
+			disclaimer_continue_pointed = false
+			draw_set_color(c_silver)
 		}
 		
-		draw_text_nt(view_width / 2, view_height - 48 + (disclaimer == 90) * 2, str)
+		draw_set_valign(fa_top)
+		draw_text_nt(_dx, _button_y, _continue_string)
 		
-		if mouse_ui_clicked() || keyboard_anykey() || scrGamepadAnykey() != -1 {
+		if ((mouse_ui_clicked() && disclaimer_continue_pointed) || keyboard_anykey() || scrGamepadAnykey() != -1) {
 			save_set_value("etc", "disclaimer", true)
 			event_perform(ev_alarm, 0)
 		}
 	}
+	
+	draw_set_color(c_white)
+	draw_align()
 	
 	exit
 }
@@ -55,13 +81,16 @@ if loading {
 			_point_left = point_in_circle(_mx, _my, _left, _options_y, 16),
 			_point_right = point_in_circle(_mx, _my, _right, _options_y, 16),
 			
+			/// @loc:token [R:Intro] LoadGameYes "YES"
 			_text_yes = loc("R:Intro:LoadGameYes", "YES"),
+			/// @loc:token [R:Intro] LodGameNo "NO"
 			_text_no = loc("R:Intro:LoadGameNo", "NO")
 		
         scrDrawRoadmap(_cx, _cy, pos)
         with (TopCont) scrDrawPlayerHUD(scrPlayerFindLocal())
 		
         draw_set_halign(fa_center)
+		/// @loc:token [R:Intro] LoadGameContinue "@sCONTINUE THIS SAVED RUN?@w"
         draw_text_nt(_cx, _cy - 54, loc("R:Intro:LoadGameContinue", "@sCONTINUE THIS SAVED RUN?@w"))
 		
         _cy += 4
@@ -135,6 +164,7 @@ if loading {
         }
     }
 	catch (e) {
+		/// @loc:token [R:Intro] LoadGameFailure "Failed to load saved run."
         print_exception(loc("R:Intro:LoadGameFailure", "Failed to load saved run."), e)
 		event_user(0)
     }

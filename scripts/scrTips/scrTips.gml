@@ -160,6 +160,7 @@ function scrTips() {
 		}
 		
 		if (scrGameIsContinuedRun()) {
+			/// @loc:token [R:Tips] ContinuedRun "welcome back!"
 			array_push(_pool, loc("R:Tips:ContinuedRun", "welcome back!"))
 			__load_user_tips(_pool, "ContinuedRun", 0)
 		}
