@@ -43,7 +43,7 @@ function scrLanguageTryLoadTTFs() {
 	if (!font_exists(global.language_font_bigname_cyrillic)) {
 		var _sprite = sprite_add(scrProjectPath("lang/BigNameFont_Cyrillic.png"), 35, false, false, 0, 0),
 			_charset = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯЁІЇ",
-			_f = font_add_sprite_ext(_f, _charset, true, -14)
+			_f = font_add_sprite_ext(_sprite, _charset, true, -14)
 		
 		global.language_font_bigname_cyrillic = _f
 	}
