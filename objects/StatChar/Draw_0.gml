@@ -27,7 +27,7 @@ if (is_keyboard()) {
 		}
 		else _str = loc("Stats:Total", "Total")
 		
-		scrDrawTooltip(bbox_center_x, y - tooltip_pop - 1, _str)
+		scrDrawTooltip(bbox_center_x, y - 1, _str, tooltip_pop)
 	}
 	
 	tooltip_pop = approach(tooltip_pop, _hover ? 1 : 0, timescale)

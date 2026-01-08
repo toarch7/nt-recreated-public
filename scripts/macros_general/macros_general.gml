@@ -17,6 +17,9 @@
 #macro gui_w (display_get_gui_width())
 #macro gui_h (display_get_gui_height())
 
+#macro gui_x (device_mouse_x_to_gui(0))
+#macro gui_y (device_mouse_y_to_gui(0))
+
 #macro ldrx lengthdir_x
 #macro ldry lengthdir_y
 

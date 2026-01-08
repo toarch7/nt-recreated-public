@@ -11,9 +11,9 @@ function scrGamePause() {
 		
 	    splatindex = 0
 		
-		pause_portrait_anim = 180
+		audio_pause_all()
 		
-		if (opt_pauseonpause) audio_pause_all()
+		pause_portrait_anim = 180
 		
 		audio_resume_sound(sndClick)
 		audio_resume_sound(sndHover)

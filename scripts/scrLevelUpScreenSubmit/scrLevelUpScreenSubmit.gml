@@ -2,7 +2,7 @@
 /// @param selection_text
 function scrLevelUpScreenSubmit(_selection_text=undefined) {
 	if is_string(_selection_text) {
-		var _ypos = view_yview + view_height - string_height(_selection_text) - 76
+		var _ypos = view_yview + view_height - font_get_string_height(_selection_text) - 76
 		with (instance_create(view_xview_center, _ypos, SkillText)) txt = _selection_text
 	}
 	

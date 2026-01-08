@@ -30,7 +30,7 @@ draw_sprite_stretched_ext(sprAchievementSplash, 0, 0, _y - 6,
 draw_set_color(c_white)
 
 if index > 1 {
-    if string_width(string_hash_to_newline(_string)) < _width * 0.8 {
+    if font_get_string_width(string_hash_to_newline(_string)) < _width * 0.8 {
         var _scale = 0.75, _color = merge_color(c_white, _shadow_color, 0.75)
         draw_sprite_ext(sprButtonAchievements, 0, 32, _y + index * 2 - _scale, _scale, _scale, 0, c_black, 1)
         draw_sprite_ext(sprButtonAchievements, 0, 32, _y + index * 2, _scale, _scale, 0, _color, 1)

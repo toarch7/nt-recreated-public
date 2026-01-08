@@ -15,7 +15,6 @@ function scrOptionsUpdate() {
         opt_ambvol = save_get_option("volume", "ambient", true)
         opt_sndvol = save_get_option("volume", "sfx", true)
 		opt_3Dsound = save_get_option("volume", "3dsound", true)
-		opt_pauseonpause = save_get_option("volume", "pauseonpause", true)
         
 		opt_crosshair = save_get_option("options", "crosshair", false)
         opt_gamepad = save_get_option("options", "gamepad", false)
@@ -225,7 +224,7 @@ function scrOptionsEraseSettings() {
 			})
 	    })
 		
-		save_set_value("etc", "rp_warning", false)
+		save_set_value("etc", "resourcepack_disclaimer", false)
 		scrOptionsUpdate()
 		scrSave()
 		

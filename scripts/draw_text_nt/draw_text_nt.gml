@@ -174,9 +174,9 @@ function render_parse_text(_text) {
 					_w = sprite_get_bbox_right(_spr) - _left
 					_h = sprite_get_bbox_bottom(_spr) - _top
 					
-					if _xoffset < 0 || _yoffset < 0 {
-						__render_parse_move_lines(_lines, _xoffset, _yoffset)
-					}
+					//if _xoffset < 0 || _yoffset < 0 {
+					//	__render_parse_move_lines(_lines, _xoffset, _yoffset)
+					//}
 					
 					array_push(_strings, {
 						"type"         : TextRenderFragment.Sprite,
@@ -197,8 +197,8 @@ function render_parse_text(_text) {
 					var _tag, _color = -1, _formatting = -1
 					
 					if (string_char_at(_text, _string_index + 2) == ")") {
-						_tag = string_lower(string_char_at(_text, ++_string_index))
-						_string_index ++
+						_tag = string_lower(string_char_at(_text, _string_index + 1))
+						_string_index += 3
 					}
 					else {
 						_tag = string_lower(string_char_at(_text, _string_index ++))

@@ -39,35 +39,33 @@ if !scrGameIsGenerationScreen() {
 			_viewdist = 3
 		}
 		
-		if UberCont.opt_activecam {
-	        if instance_exists(_poi) {
-	            var _instance = instance_nearest(x, y, _poi)
-	            _dis = point_distance(x, y, _instance.x, _instance.y) / 6
-	            _dir = point_direction(x, y, _instance.x, _instance.y)
-				
-	            if (_poi == Portal || instance_is(_poi, WeaponChest)) {
-	                _dis = min(_dis, 72)
-	            }
-	        }
+	    if instance_exists(_poi) {
+	        var _instance = instance_nearest(x, y, _poi)
+	        _dis = point_distance(x, y, _instance.x, _instance.y) / 6
+	        _dir = point_direction(x, y, _instance.x, _instance.y)
 			
-	        if !UberCont.localcoop {
-	            _dir2 = KeyCont.dir_fire[index]
-				
-	            if UberCont.opt_gamepad {
-	                var gpx = gamepad_axis_value(0, gp_axisrh)
-	                var gpy = gamepad_axis_value(0, gp_axisrv)
-	                _dis2 = (point_distance(0, 0, gpx, gpy) * 72) / _viewdist
-	            }
-				else if UberCont.opt_keyboard {
-	                //_dis2 = point_distance(x, y, mouse_x, mouse_y) / _viewdist
-					_dis2 = KeyCont.dis_fire[index] / _viewdist
-	            }
-				else if instance_exists(JoystickAttack) && !save_get_value("contorls", "aimbot", 0) {
-	                _dir2 = KeyCont.dir_fire[index]
-	                _dis2 = JoystickAttack.vdis / _viewdist
-	            }
+	        if (_poi == Portal || instance_is(_poi, WeaponChest)) {
+	            _dis = min(_dis, 72)
 	        }
-		}
+	    }
+		
+	    if !UberCont.localcoop {
+	        _dir2 = KeyCont.dir_fire[index]
+			
+	        if UberCont.opt_gamepad {
+	            var gpx = gamepad_axis_value(0, gp_axisrh)
+	            var gpy = gamepad_axis_value(0, gp_axisrv)
+	            _dis2 = (point_distance(0, 0, gpx, gpy) * 72) / _viewdist
+	        }
+			else if UberCont.opt_keyboard {
+	            //_dis2 = point_distance(x, y, mouse_x, mouse_y) / _viewdist
+				_dis2 = KeyCont.dis_fire[index] / _viewdist
+	        }
+			else if instance_exists(JoystickAttack) && !save_get_value("contorls", "aimbot", 0) {
+	            _dir2 = KeyCont.dir_fire[index]
+	            _dis2 = JoystickAttack.vdis / _viewdist
+	        }
+	    }
 		
         if (bleed) break
 		

@@ -1,6 +1,8 @@
 if lockstep_stop
 	exit
 
+var L = LF("ResourcepackBrowser")
+
 var mx = device_mouse_x_to_gui(0),
 	my = device_mouse_y_to_gui(0)
 
@@ -9,7 +11,7 @@ time += 0.4
 if error != "" {
 	draw_align(fa_center, fa_middle)
 	
-	var str = loc(error)
+	var str = error
 	
 	if !error_active {
 		snd_play(sndCrownRandom, 0.6 + random(0.3))
@@ -36,7 +38,8 @@ if !loaded {
 	if time > 4 {
 		draw_align(fa_center, fa_middle)
 		
-		draw_text_nt(gui_w / 2, gui_h / 2 - 24, loc("LIST IS LOADING..."))
+		/// @loc:token [ResourcepackBrowser] LoadingList "THE LIST IS LOADING..."
+		draw_text_nt(gui_w / 2, gui_h / 2 - 24, L("LoadingList", "THE LIST IS LOADING..."))
 		
 		draw_align()
 		
@@ -144,7 +147,12 @@ if downloading {
 	
 	if downloaded {
 		if downloaded == 2 {
-			draw_text_nt(view_width / 2, view_height / 2, "@g" + string_replace(loc("%#INSTALLED SUCCESSFULLY!##CLICK ANYWHERE TO CONTINUE"), "%", clicked_item.full_name))
+			/// @loc:token [ResourcepackBrowser] InstallationSuccess "@g%#INSTALLED SUCCESSFULLY!##CLICK ANYHWHERE TO CONTINUE"
+			
+			var str = loc_fmt("ResourcepackBrowser:InstallationSuccess",
+					"%#INSTALLED SUCCESSFULLY!##CLICK ANYWHERE TO CONTINUE", clicked_item.full_name)
+			
+			draw_text_nt(view_width / 2, view_height / 2, "@g" + str)
 			
 			if mouse_ui_clicked() {
 				if !download_destroy {
@@ -155,14 +163,16 @@ if downloading {
 			}
 		}
 		else {
-			draw_text_nt(view_width / 2, view_height / 2, side + loc("INSTALLING") + side)
+			/// @loc:token [ResourcepackBrowser] Installing "INSTALLING %"
+			draw_text_nt(view_width / 2, view_height / 2, side + L("Installing", "INSTALLING") + side)
 		}
 	}
 	else if download_repo_req != -1 && pack_download == -1 {
-		draw_text_nt(view_width / 2, view_height / 2 - 10, "@d" + side + loc("QUERYING REPO INFO") + side)
+		/// @loc:token [ResourcepackBrowser] InformationQuerying "QUERYING REPO INFO"
+		draw_text_nt(view_width / 2, view_height / 2 - 10, "@d" + side + L("InformationQuerying") + side)
 	}
 	else {
-		draw_text_nt(view_width / 2, view_height / 2 - 10, side + loc("DOWNLOADING") + side)
+		draw_text_nt(view_width / 2, view_height / 2 - 10, side + L("Downloading", "DOWNLOADING") + side)
 		
 		if download_length > 0 {
 			var sw = sprite_get_width(sprOptionSlider),
@@ -178,11 +188,15 @@ if downloading {
 			draw_align()
 		}
 		else {
-			draw_text_nt(view_width / 2, view_height / 2, string(download_size / 1024) + " KB.")
+			var str = loc_fmt("ResourcepackBrowser", "% KB.", download_size / 1024)
+			draw_text_nt(view_width / 2, view_height / 2, str)
 		}
 	}
 }
-else draw_text_bigname(view_width / 2 - (48 * browsing), 24, loc("RESOURCEPACKS"), c_uigray)
+else {
+	var str = loc("ResourcepackOptions", "ResourcepackOptions", "RESOURCEPACKS")
+	draw_text_bigname(view_width / 2 - (48 * browsing), 24, str, c_uigray)
+}
 
 if show_details {
 	if screenshot_view {
@@ -220,20 +234,27 @@ var dx = pack_width * 0.75 + 18
 if loaded && !downloading {
 	if browsing {
 		draw_set_color(c_uigray)
-		draw_text_nt(dx - 6, 24, loc("RATING"), 0.67)
-		draw_text_nt(dx + 52, 24, loc("UPDATED"), 0.67)
+		/// @loc:note [ResourcepackBrowser] Max. 8 characters
+		/// @loc:token [ResourcepackBrowser] ListRatingLabel "RATING"
+		draw_text_nt(dx - 6, 24, L("ListRatingLabel", "RATING"), 0.67)
+		/// @loc:note [ResourcepackBrowser] Max. 8 characters
+		/// @loc:token [ResourcepackBrowser] ListUpdateLabel "UPDATED"
+		draw_text_nt(dx + 52, 24, L("ListUpdateLabel", "UPDATED"), 0.67)
 		draw_set_color(c_white)
 	}
 	else if !browsing {
 		draw_align(fa_center, fa_middle)
-		draw_text_nt(dx - 32, 36, loc("LOAD PRIORITY"), 0.5)
+		/// @loc:note [ResourcepackBrowser] Installed resourcepack load order setting
+		/// @loc:token [ResourcepackBrowser] LoadPriority "LOAD PRIORITY"
+		draw_text_nt(dx - 32, 36, L("LoadPriority", "LOAD PRIORITY"), 0.5)
 		draw_align()
 	}
 	
 	draw_align()
 	
 	if browsing {
-		var str = loc("SORT") + ": ",
+		/// @loc:token [ResourcepackBrowser] SortMode "SORT"
+		var str = L("SortMode", "SORT") + ": ",
 			img = sort + sort_mode * 2
 	
 		var xx = 8,
@@ -263,8 +284,16 @@ if loaded && !downloading {
 		}
 		else if sort_pointed
 			sort_pointed = false
-	
-		str += "#" + loc(sort ? "BY UPDATES" : "BY RATING") + " (" + (sort_mode ? "V" : "^") + ")"
+		
+		var sort_kind_string = sort
+			/// @loc:note [ResourcepackBrowser] Max. 8 characters
+			/// @loc:token [ResourcepackBrowser] SortByUpdate "UPDATED"
+			? L("SortByUpdate", "UPDATE")
+			/// @loc:note [ResourcepackBrowser] Max. 8 characters
+			/// @loc:token [ResourcepackBrowser] SortByRating "RATING"
+			: L("SortByRating", "RATING")
+		
+		str += "#" + sort_kind_string + " (" + (sort_mode ? "V" : "^") + ")"
 	
 		draw_set_halign(fa_left)
 		draw_set_valign(fa_middle)

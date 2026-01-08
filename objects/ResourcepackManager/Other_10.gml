@@ -17,7 +17,8 @@ items = Resourcepacks
 
 if !array_length(items) {
 	error_active = true
-	error = "YOU DON'T HAVE ANY PACKS INSTALLED."
+	/// @loc:token [ResourcepackBrowser] NoPacksInstalled "NO RESOURCEPACKS ARE CURRENTLY INSTALLED."
+	error = loc("ResourcepackBrowser:NoPacksInstalled", "NO RESOURCEPACKS ARE CURRENTLY INSTALLED.")
 	time = 2
 }
 

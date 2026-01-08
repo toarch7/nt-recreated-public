@@ -22,7 +22,13 @@ if instance_exists(Menu) {
 else {
     draw_set_halign(fa_center)
     draw_set_valign(fa_middle)
-    draw_text_bigname(view_width / 2, 18, loc(string_upper(viewtype)), c_uigray)
+	
+	/// @loc:token [R:MainMenu] RunHistory:daily "DAILY"
+	/// @loc:token [R:MainMenu] RunHistory:weekly "WEEKLY"
+	var _viewtype_string = loc(
+		"R:MainMenu", "RunHistory" + string_lower(viewtype), string_upper(viewtype))
+    
+	draw_text_bigname(view_width / 2, 18, _viewtype_string, c_uigray)
     draw_set_halign(fa_left)
     draw_set_valign(fa_top)
 }
@@ -42,7 +48,8 @@ if !array_length(keys) {
 
 var avg = kills / len
 
-draw_text_nt(38, 14, loc("@dAVERAGE SCORE") + ":#" + string(avg), 0.67)
+/// @loc:token [R:MainMenu] RunHistoryScoreAVG "@dAVERAGE SCORE"
+draw_text_nt(38, 14, loc("R:MainMenu:RunHistoryScoreAVG", "@dAVERAGE SCORE") + ":#" + string(avg), 0.67)
 
 draw_set_color(c_white)
 

@@ -10,11 +10,11 @@ with (CharSelect) if (tooltip) {
 		? loc("Races", race, "Name", scrRaceGetName(race))
 		: loc("Races", race, "Unlock", scrRaceGetUnlockDescription(race))
 	
-	scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc(_str), true)
+	scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc(_str), 0, true)
 }
 
 with (GoButton) if (tooltip) {
-	scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc("MainMenu:Start", "START RUN"), true)
+	scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc("MainMenu:Start", "START RUN"), 0, true)
 }
 
 //

@@ -8,7 +8,7 @@ if opt_gamepad && (instance_exists(MainMenuButton) or instance_exists(PlayButton
 	
 	draw_text_nt(dx, dy, "@s" + str)
 	
-	draw_gamepad_button(gp_face1, 0, dx - 9 - string_width(str), dy)
+	draw_gamepad_button(gp_face1, 0, dx - 9 - font_get_string_width(str), dy)
 	
 	draw_set_halign(fa_left)
 	draw_set_valign(fa_top)
@@ -33,9 +33,3 @@ if global.__debug_camera_display_info {
 	var _scale = scr_window_get_fullscreen() ? 0.5 : 1
 	draw_text_nt(0, 0, _str, _scale, _scale, 0)
 }
-
-//if instance_exists(TestCont) {
-//	draw_set_font(fntSmall)
-//	with (TestCont) event_user(0)
-//	draw_reset_font()
-//}

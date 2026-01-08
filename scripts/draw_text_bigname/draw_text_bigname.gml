@@ -46,7 +46,10 @@ function draw_text_bigname(_x, _y, _text, _color = draw_get_color(), _alpha = dr
 		draw_set_valign(_valign)
 		draw_set_alpha(_last_alpha)
 		
-		surface_save(_surface, "bigname/" + _text + ".png")
+		if (GM_build_type == "run") {
+			// debug
+			surface_save(_surface, "bigname/" + _text + ".png")
+		}
 		
 		struct_set_from_hash(global.__bigname_surface_cache, _key, _surface)
 	}

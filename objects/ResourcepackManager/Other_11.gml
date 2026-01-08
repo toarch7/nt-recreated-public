@@ -9,7 +9,9 @@ var xx = 8 - splat * 100,
 	width = pack_width,
 	height = 36,
 	
-	stepY = height + 4
+	stepY = height + 4,
+	
+	L = LF("ResourcepackBrowser")
 
 draw_align()
 
@@ -88,11 +90,14 @@ for(var i = start; i < count; i ++) {
 	
 	var name = meta.name
 	
-	if !browsing && !item[$ "active"]
-		name = "(" + loc("DISABLED") + ") " + name
+	if !browsing && !item[$ "active"] {
+		/// @loc:token [ResourcepackBrowser] PackDisabled "DISABLED"
+		name = "(" + loc("PackDisabled", "DISABLED") + ") " + name
+	}
 	
-	if string_length(name) >= 23
+	if string_length(name) >= 23 {
 		name = string_copy(name, 1, 23) + "..."
+	}
 	
 	draw_text_nt(xx + 8 + offset, _y + 8, name)
 	
@@ -100,29 +105,43 @@ for(var i = start; i < count; i ++) {
 	
 	draw_text_ext_transformed(xx + 12 + offset, _y + 20, meta.descriptionShort, 8, width - 8, 0.5, 0.5, 0)
 	
-	var update_text = "LONG#AGO"
+	/// @loc:note [ResourcepackBrowser] Should be as short as possible
+	/// @loc:token [ResourcepackBrowser] UpdatedLongAgo "LONG#AGO"
+	var update_text = L("UpdatedLongAgo", "LONG#AGO")
 	
 	var updated = item.updated / 1000,
 		time_current = unix_timestamp(),
 		diff = time_current - updated
 	
-	if item[$ "promoted"]
-		update_text = "NEW!"
-	else if diff < 10800
-		update_text = "JUST NOW"
-	else if diff < 86400
-		update_text = "TODAY"
-	else if diff < 172800
-		update_text = "YESTERDAY"
-	else if diff < 259200
-		update_text = "RECENTLY"
-	else if diff < 604800
-		update_text = "THIS#WEEK"
+	if item[$ "promoted"] {
+		/// @loc:token [ResourcepackBrowser] NewPackPromotion "NEW!"
+		update_text = L("NewPackPromotion", "NEW!")
+	}
+	else if diff < 10800 {
+		/// @loc:token [ResourcepackBrowser] UpdatedJustNow "JUST NOW"
+		update_text = L("UpdatedJustNow", "JUST NOW")
+	}
+	else if diff < 86400 {
+		/// @loc:token [ResourcepackBrowser] UpdatedToday "TODAY"
+		update_text = L("UpdatedToday", "TODAY")
+	}
+	else if diff < 172800 {
+		/// @loc:token [ResourcepackBrowser] UpdatedYesterday "YESTERDAY"
+		update_text = L("UpdatedYesterday", "YESTERDAY")
+	}
+	else if diff < 259200 {
+		/// @loc:token [ResourcepackBrowser] UpdatedRecently "RECENTLY"
+		update_text = L("UpdatedRecently", "RECENTLY")
+	}
+	else if diff < 604800 {
+		/// @loc:token [ResourcepackBrowser] UpdatedThisWeek "THIS#WEEK"
+		update_text = L("UpdatedThisWeek", "THIS#WEEK")
+	}
 	else {
 		var days = round(diff / 86400)
 		
 		if days < 365 {
-			update_text = string_replace(loc("% D.#AGO"), "%", string(days))
+			update_text = loc_fmt("ResourcepackBrowser:UpdatedDaysAgo", "% D.#AGO", days)
 		}
 	}
 	
@@ -133,7 +152,7 @@ for(var i = start; i < count; i ++) {
 		// Update
 		if item.promoted {
 			var str = loc(update_text),
-				w = string_width(str)
+				w = font_get_string_width(str)
 			
 			draw_sprite_stretched_ext(sprAchievementSplash, 0, dx + 52 - w / 2, _y + 2, w, 14, c_aqua, 0.3)
 			
@@ -225,7 +244,8 @@ if touch_duration {
 			if !directory_exists(clicked_item.path) {
 				array_delete(Resourcepacks, array_indexof(Resourcepacks, clicked_item), 1)
 				
-				error = "PACK FILES ARE AMISS"
+				/// @loc:token [ResourcepackBrowser] ErrorMissingFiles "MISSING RESOURCEPACK FILES"
+				error = L("ErrorMissingFiles", "MISSING RESOURCEPACK FILES")
 				
 				exit
 			}

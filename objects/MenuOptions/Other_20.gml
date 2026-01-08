@@ -16,13 +16,14 @@ scrOptionsMenuCreateElements
 	{ type: "category", name: L("LANGUAGE", "LANGUAGE"),       category: OptionCategory.Language },
 	
 	{
+		/// @loc:token [ResourcepackOptions] ResourcepackOptions "RESOURCEPACKS"
 		type: "button", name: L("ResourcepackOptions", "RESOURCEPACKS"), ingame: false,
 		
 		click: function() {
 			scrOptionsMenuChangeCategory(OptionCategory.Resourcepacks)
 			
-			if (!save_get_value("etc", "rp_warning", false)) {
-				rp_warning = true
+			if (!save_get_value("etc", "resourcepack_disclaimer", false)) {
+				resourcepack_disclaimer = true
 			}
 		}
 	},
@@ -85,9 +86,9 @@ scrOptionsMenuCreateElements(
 	{ type: "slider",  name: L("MasterVolume", "MASTER VOLUME"),     key: "volume_master"       },
 	{ type: "slider",  name: L("MusicVolume", "MUSIC VOLUME"),       key: "volume_music"        },
 	{ type: "slider",  name: L("AmbienceVolume", "AMBIENCE VOLUME"), key: "volume_ambient"      },
+	/// @loc:token [AudioOptions] SoundsVolume "EFFECTS VOLUME"
 	{ type: "slider",  name: L("SoundsVolume", "EFFECTS VOLUME"),    key: "volume_sfx"          },
-	{ type: "switch",  name: L("3dSound", "3D SOUND"),               key: "volume_3dsound"      },
-	{ type: "switch",  name: L("PauseOnPause", "STOP ON PAUSE"),     key: "volume_pauseonpause" }
+	{ type: "switch",  name: L("3dSound", "3D SOUND"),               key: "volume_3dsound"      }
 )
 
 #endregion
@@ -97,8 +98,8 @@ L = LF("VideoOptions")
 scrOptionsMenuCategoryBegin(OptionCategory.Video)
 
 scrOptionsMenuCreateElements(
-	/// @loc:token [VideoOptions] WideScreen WIDESCREEN
-	{ type: "switch", name: L("Widescreen", "WIDESCREEN"), key: "visual_resolution", mobile_only: true },
+	/// @loc:token [VideoOptions] WideScreen "WIDESCREEN"
+	{ type: "switch", name: L("WideScreen", "WIDESCREEN"), key: "visual_resolution", mobile_only: true },
 	
 	{
 		type: "list", name: L("Crosshair", "CROSSHAIR"), key: "options_crosshair",
@@ -177,7 +178,7 @@ scrOptionsMenuCategoryBegin(OptionCategory.Video_Display)
 
 scrOptionsMenuCreateElements(
 	/// @loc:token [VideoOptions] WideScreen "WIDESCREEN"
-	{ type: "switch",  name: L("Widescreen", "WIDESCREEN"), key: "visual_resolution"   },
+	{ type: "switch",  name: L("WideScreen", "WIDESCREEN"), key: "visual_resolution"   },
 	{ type: "switch",  name: L("Fullscreen", "FULLSCREEN"), key: "options_fullscreen",
 		click: function (_opt) {
 			_opt.value = !window_get_fullscreen()
@@ -207,7 +208,6 @@ scrOptionsMenuCategoryBegin(OptionCategory.Game)
 
 scrOptionsMenuCreateElements(
 	{ type: "switch", name: L("BossIntros", "BOSS INTROS"), key: "visual_bossintro" },
-	{ type: "switch", name: L("DynamicCamera", "DYNAMIC CAMERA"), key: "visual_camera" },
 	{ type: "switch", name: L("PlayTutorial", "PLAY TUTORIAL"), key: "game_tutorial", ingame: false },
 	{ type: "switch", name: L("Timer", "SHOW TIMER"), key: "visual_timer" },
 	{ type: "switch", name: L("Area", "SHOW AREA"), key: "visual_area" },
@@ -439,7 +439,8 @@ scrOptionsMenuCreateElements(
 		
 		get_name: function(_opt) {
 			return text_input_element == _opt
-				? loc("ProfileOptions:ProfileNameInput", "ENTER YOUR NICKNAME") : _opt.name
+				/// @loc:token [ProfileOptions] ProfileNameInput "ENTER PROFILE NAME"
+				? loc("ProfileOptions:ProfileNameInput", "ENTER PROFILE NAME") : _opt.name
 		}
 	},
 	

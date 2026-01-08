@@ -120,37 +120,52 @@ if text_input_element != undefined {
 	exit
 }
 
-if rp_warning {
-	if back_pressed
-		rp_warning = 0
+if resourcepack_disclaimer {
+	if (back_pressed) resourcepack_disclaimer = false
+	
+	draw_align(fa_center, fa_middle)
 	
 	_mx = device_mouse_x_to_gui(0)
 	_my = device_mouse_y_to_gui(0)
 	
-    draw_text_nt(view_width / 2, view_height / 2 - 44, loc("@yWARNING"))
-
+	var _dx = gui_w div 2,
+		_dy = gui_h div 2,
+		_height = font_get_string_height(resourcepack_disclaimer_message),
+		_scale = (_height >= view_height - (LETTERBOX_SIZE * 3)) ? 0.85 : 1,
+		_line_height = font_get_string_height("A")
+	
     // resourcepack warning
-    draw_text_nt(view_width / 2, view_height / 2 + disclaimer_pop - 16, loc("@sRESOURCEPACKS ARE ONLY UNIQUE TO THIS RECREATION.#THESE ARE COLLECTION OF CUSTOM SPRITES, SOUNDS AND LANGUAGES#MADE BY COMMUNITY TO ADD NEW COLORS TO YOUR GAME.##THIS MAY AFFECT YOUR GAMING EXPERIENCE#IN A NOT INTENDED WAY."), 0.67)
-    
-    if rp_warning < 90 {
-        draw_text_nt(view_width / 2, view_height / 2 + 16 - disclaimer_pop, "@sOK (" + string(ceil((90 - rp_warning) / 30)) + "S.)")
-    }
-	else draw_text_nt(view_width / 2, view_height / 2 + 16 - disclaimer_pop, "OK")
-
-    if rp_warning < 90 rp_warning++
-
-    if mouse_ui_clicked() && rp_warning >= 90 && point_in_circle(_mx, _my, view_width / 2, view_height / 2, 16) {
-        snd_play(sndClickBack)
-        save_set_value("etc", "rp_warning", 1)
-        rp_warning = 0
-    }
-
-    draw_set_valign(fa_top)
-    draw_set_halign(fa_left)
+    draw_text_nt(_dx, _dy + disclaimer_pop - 10, resourcepack_disclaimer_message, _scale)
 	
-	if disclaimer_pop
-		disclaimer_pop --
+	var _button_y = min(gui_h - LETTERBOX_SIZE + _line_height div 2,
+			_dy - disclaimer_pop + (_height div 2) * _scale + _line_height)
 	
+	if (resourcepack_disclaimer < 90) {
+		/// @loc:note [ResourcepackOptions] Delay before the user is able to proceed to resourcepack options
+		/// @loc:token [ResourcepackOptions] DisclaimerProceedWait "@sPROCEED (%)"
+		var _delay = ceil((90 - resourcepack_disclaimer) / 30)
+        draw_text_nt(_dx, _button_y, loc_fmt("ResourcepackOptions:DisclaimerProceedWait", "@sPROCEED (% SEC.)", _delay))
+    }
+	else {
+		/// @loc:token [ResourcepackOptions] DisclaimerProceed "@yPROCEED"
+		draw_text_nt(_dx, _button_y, loc("ResourcepackOptions", "DisclaimerProceed", "@yPROCEED"))
+	}
+	
+    if (resourcepack_disclaimer < 90) resourcepack_disclaimer ++
+	
+    if mouse_ui_clicked() && resourcepack_disclaimer >= 90 && point_in_circle(_mx, _my, _dx, _button_y, 16) {
+        save_set_value("etc", "resourcepack_disclaimer", true)
+		last_change = current_frame + 3
+        resourcepack_disclaimer = 0
+        snd_play(sndMutant0Cnfm)
+		scrSave()
+    }
+	
+	draw_align()
+	
+	if (disclaimer_pop > 0) {
+		disclaimer_pop -= timescale
+	}
     exit
 }
 

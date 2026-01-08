@@ -35,8 +35,8 @@ else {
     snd_play(sndClickBack)
 }
 
-if rp_warning {
-    rp_warning = 0
+if resourcepack_disclaimer {
+    resourcepack_disclaimer = 0
     category = 0
 }
 

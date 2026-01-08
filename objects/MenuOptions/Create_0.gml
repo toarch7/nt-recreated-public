@@ -45,7 +45,7 @@ if (!instance_exists(BackButton)) {
 	instance_create(0, 0, BackButton)
 }
 
-rp_warning = 0
+resourcepack_disclaimer = false
 erasing_progress = 0
 
 back_pressed = false
@@ -115,9 +115,13 @@ last_change = 0
 
 debug = global.__debug_menu_options
 ingame = instance_exists(GameCont)
-default_viewx = view_xview // o, the burden of legacy crutches
+default_viewx = view_xview
 default_viewy = view_yview
 depth = -9999
+
+resourcepack_disclaimer_message = "RESOURCEPACKS ARE AN EXCLUSIVE FEATURE OF#NUCLEAR THRONE MOBILE.##A RESOURCEPACK IS A USER-CREATED ASSET COLLECTION (TEXTURES, SOUNDS, TEXT) FOR DECORATIVE PURPOSES ONLY, WITH NO GAMEPLAY BENEFITS.##RESOURCEPACK BROWSER, DESPITE BING MODERATED,#MAY STILL CONTAIN QUESTIONABLE CONTENT.##THE DEVELOPER IS NOT LIABLE FOR ANY HARMFUL MATERIAL."
+/// @loc:token [ResourcepackOptions] DisclaimerText "RESOURCEPACKS ARE AN EXCLUSIVE FEATURE OF#NUCLEAR THRONE MOBILE.##A RESOURCEPACK IS A USER-CREATED ASSET COLLECTION (TEXTURES, SOUNDS, TEXT) FOR DECORATIVE PURPOSES ONLY, WITH NO GAMEPLAY BENEFITS.##RESOURCEPACK BROWSER, DESPITE BING MODERATED,#MAY STILL CONTAIN QUESTIONABLE CONTENT.##THE DEVELOPER IS NOT LIABLE FOR ANY HARMFUL MATERIAL."
+resourcepack_disclaimer_message = string_insert_wordwraps(string_hash_to_newline(loc("ResourcepackOptions", "DisclaimerText", resourcepack_disclaimer_message)), game_screen_width - 115)
 
 colorpicker_update_scales = function(_color) {
 	var _r = color_get_red(_color),

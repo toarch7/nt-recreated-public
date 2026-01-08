@@ -2,14 +2,19 @@
 
 
 var mx = device_mouse_x_to_gui(0),
-	my = device_mouse_y_to_gui(0)
+	my = device_mouse_y_to_gui(0),
+	
+	L = LF("ResourcepackBrowser")
 
 var item = clicked_item,
 	owner = string(item.owner),
 	meta = browsing ? item.meta : item,
 	off = (1 - splat / (sprite_get_number(sprLoadoutOpen) - 1)) * 5,
 	xoff = off * 90,
-	scale = off / 30
+	scale = off / 30,
+	tooltip = undefined,
+	tooltip_x = 0,
+	tooltip_y = 0
 
 var icon = icon_map[$ item.full_name] ?? mskNone,
 	avatar = icon_map[$ "avatar:" + owner] ?? mskNone
@@ -28,13 +33,18 @@ var fname = item.full_name
 if string_length(fname) > 50
 	fname = string_copy(fname, 1, 47) + "..."
 
-var width = string_width(fname) * 0.75
+var width = font_get_string_width(fname) * 0.75
 
 if item.external {
-	draw_text_nt(lx, ly - 8 - url_pointed, fname + " @(sprTextLinkURL)", 0.75)
-	draw_sprite_stretched_ext(sprPixel, 0, lx, ly - 2, width, 1, draw_get_color(), 1)
+	draw_text_nt(lx, ly - 8 - url_pointed, fname + " @(sprTextLinkURL,0,0,-2)", 0.75)
+	draw_sprite_stretched_ext(sprPixel, 0, lx, ly + 1, width, 1, draw_get_color(), 1)
 
 	if !screenshot_view && point_in_rectangle(mx, my + 8, lx, ly, lx + width, ly + 8) {
+		/// @loc:token [ResourcepackBrowser] FullviewOpenGitHub "SEE GITHUB PAGE"
+		tooltip = L("FullviewOpenGitHub", "SEE GITHUB PAGE")
+		tooltip_x = clamp(mx, lx, lx + width)
+		tooltip_y = ly - 8 - url_pointed
+		
 		if !url_pointed {
 			url_pointed = true
 			snd_play(sndHover)
@@ -128,8 +138,9 @@ if screenshot_image == -1 {
 else if !array_length(screenshots) && open_time > 30 {
 	draw_set_halign(fa_center)
 	
-	var str = loc("@dNO SCREENSHOTS :("),
-		dx = view_height / 3 + string_width(str) / 2
+	/// @loc:token [ResourcepackBrowser] ViewNoScreenshots "@dNO SCREENSHOTS :("
+	var str = L("FullviewNoScreenshots", "@dNO SCREENSHOTS :("),
+		dx = view_height / 3 + font_get_string_width(str) / 2
 	
 	draw_text_nt(dx - off, view_height / 2 + 32, str)
 }
@@ -149,14 +160,17 @@ var created = unix_to_datatime(item.created div 1000),
 	str2 = date_ddmmYY_string(updated)
 
 draw_set_color(c_white)
-draw_text_nt(dx, dy - 5 , loc("PACK INFO"))
+/// @loc:token [ResourcepackBrowser] FullviewPackInfo "PACK INFO"
+draw_text_nt(dx, dy - 5, L("FullviewPackInfo", "PACK INFO"))
 
 draw_set_color(c_uigray)
-draw_text_nt(dx, dy + 10, loc("CREATED ON:") + "\n " + str1)
+/// @loc:token [ResourcepackBrowser] FullviewCreationInfo "CREATED ON:"
+draw_text_nt(dx, dy + 10, L("FullviewCreationInfo", "CREATED ON:") + "\n " + str1)
 
 if str1 != str2 {
 	dy += 30
-	draw_text_nt(dx, dy, loc("LAST UPDATED:") + "\n " + str2)
+	/// @loc:token [ResourcepackBrowser] FullviewLastUpdate "LAST UPDATED:"
+	draw_text_nt(dx, dy, L("FullviewLastUpdate", "LAST UPDATED:") + "\n " + str2)
 }
 
 if item[$ "installtime"] {
@@ -166,31 +180,42 @@ if item[$ "installtime"] {
 	dy += 30
 	
 	draw_set_color(c_uigray)
-	draw_text_nt(dx, dy, loc("INSTALLED ON:") + "\n " + str1)
+	/// @loc:token [ResourcepackBrowser] FullviewInstallationDate "INSTALLED ON:"
+	draw_text_nt(dx, dy, L("FullviewInstallationDate", "INSTALLED ON:") + "\n " + str1)
 }
 
-draw_text_nt(dx, dy + 30, loc("STARS:") + "\n " + string(item.stars))
+/// @loc:token [ResourcepackBrowser] FullviewStars "STARS:"
+draw_text_nt(dx, dy + 30, L("FullviewStars", "STARS:") + "\n " + string(item.stars))
 
 #endregion
 
-#region Download
+#region Download/Disable/Enable
 draw_set_halign(fa_right)
 draw_set_color(download_pointed ? c_white : c_uigray)
 
-draw_set_font(fntBig)
+draw_set_font(global.language_font_bigname_default)
 
-var str = loc("DOWNLOAD")
+/// @loc:token [ResourcepackBrowser] ButtonDownload "DOWNLOAD"
+var str = L("ButtonDownload", "DOWNLOAD")
 
-if !browsing
-	str = item.active ? loc("DISABLE") : loc("ENABLE")
+if !browsing {
+	
+	str = item.active
+		/// @loc:token [ResourcepackBrowser] ButtonDisable "DISABLE"
+		? L("ButtonDisable", "DISABLE")
+		/// @loc:token [ResourcepackBrowser] ButtonEnable "ENABLE"
+		: L("ButtonEnable", "ENABLE")
+	
+}
 
-var width = string_width(str) / 2
+var width = font_get_string_width(str) / 2
 
 var dx = view_width - 26,
 	dy = view_height - 48
 
-if browsing && item.external	
+if browsing && item.external {
 	draw_sprite_ext(sprResourcepackDownload, 0, dx - width - 32, dy - 2 - download_pointed, 0.75, 0.75, 0, draw_get_color(), 1)
+}
 
 draw_text_bigname(dx + 26, dy - download_pointed, str)
 
@@ -224,3 +249,5 @@ draw_set_halign(fa_left)
 draw_reset_font()
 
 #endregion
+
+if (is_string(tooltip)) scrDrawTooltip(tooltip_x, tooltip_y, tooltip)

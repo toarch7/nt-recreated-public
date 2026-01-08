@@ -56,11 +56,21 @@ if !instance_exists(Player) {
         draw_set_color(c_white)
 
         draw_set_halign(fa_right)
-        draw_text_nt(view_width - 24, 7, (_pointed ? "@w" : "@s") + loc("RUN HISTORY"))
+		
+		/// @loc:token [R:MainMenu] RunHistory "RUN HISTORY"
+        draw_text_nt(view_width - 24, 7,
+			(_pointed ? "@w" : "@s") + loc("R:MainMenu:RunHistory", "RUN HISTORY"))
 
-        if instance_exists(DailyList) {
-            draw_text_nt(view_width - 24, 8 + string_height("A"),
-				(_pointed ? "@w" : "@s") + "(" + loc(string_upper(DailyList.viewtype)) + ")")
+        if (instance_exists(DailyList)) {
+			var _viewtype = DailyList.viewtype
+			
+			/// @loc:token [R:MainMenu] RunHistory:daily "DAILY"
+			/// @loc:token [R:MainMenu] RunHistory:weekly "DAILY"
+			var _viewtype_string = loc(
+				"R:MainMenu", "RunHistory" + string_lower(_viewtype), string_upper(_viewtype))
+			
+            draw_text_nt(view_width - 24, 8 + font_get_string_height("A"),
+				(_pointed ? "@w" : "@s") + "(" + _viewtype_string + ")")
         }
 
         draw_set_halign(fa_left)

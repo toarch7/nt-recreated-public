@@ -89,7 +89,7 @@ function draw_pickup_button(_x, _y) {
 		else {
 			draw_sprite(sprEPickup, 1, _x, _y)
 			draw_sprite(sprKeySmall, _key, _x, _y - 8)
-			return ceil(string_width(_character) * 0.25)
+			return ceil(font_get_string_width(_character) * 0.25)
 		}
 		
 		return _offset

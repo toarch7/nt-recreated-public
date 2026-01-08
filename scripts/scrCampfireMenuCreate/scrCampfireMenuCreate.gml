@@ -470,7 +470,7 @@ function scrCampfireMenuDrawCharText(_x, _y, _index, _race, _skin, _halign = fa_
 			_skills_text = $"{_passive_text}\n{_active_text}"
 			
 			if _valign == fa_bottom {
-				_skills_y += (string_height(_skills_text) div 2) + _appear + 8
+				_skills_y += (font_get_string_height(_skills_text) div 2) + _appear + 8
 				draw_set_valign(fa_middle)
 			}
 			else if _valign == fa_top {
@@ -584,7 +584,7 @@ function scrMenuDrawLoadout(_pinst) {
 					tooltip_pop --
 				}
 				
-				scrDrawTooltip(_tooltip_x, _tooltip_y + tooltip_pop, _tooltip, true)
+				scrDrawTooltip(_tooltip_x, _tooltip_y, _tooltip, tooltip_pop, true)
 			}
 			else if (!is_undefined(tooltip)) {
 				tooltip = undefined

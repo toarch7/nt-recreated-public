@@ -11,7 +11,7 @@ if appear < 2 {
 		
 		var	_scale = 0.65,
 			_subimage = floor(image_index),
-			_half_w = floor(string_width(_button_name) * _scale * 0.5),
+			_half_w = floor(font_get_string_width(_button_name) * _scale * 0.5),
 			_halign = fa_center
 		
 		if ((_subimage >= 0 && _subimage <= 1) || _subimage == 4 || _subimage == 7) {
