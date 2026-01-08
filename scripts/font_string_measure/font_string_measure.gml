@@ -30,6 +30,7 @@ function font_string_measure(_string, _component = -1) {
 	
 	if (_length == 1) {
 		var _g = _info.glyphs[$ _string]
+		
 		if (is_struct(_g)) {
 			if (variable_struct_exists(_g, "shift")) {
 				return _component ? _g.h : _g.shift
@@ -44,7 +45,7 @@ function font_string_measure(_string, _component = -1) {
 		else if (_string == "\n") {
 			return _component ? 8 : 1
 		}
-		return 0
+		return _component ? string_height(_string) : string_width(_string)
 	}
 	
 	#endregion
@@ -66,7 +67,7 @@ function font_string_measure(_string, _component = -1) {
 	with (_ctx) string_foreach(_string, function(_char) {
 		var _g = glyphs[$ _char]
 		
-		if (is_undefined(_g)) {
+		if (is_undefined(_g) || !variable_struct_exists(_g, "shift")) {
 			if (_char == "\n") {
 				static __newline_struct = {
 					shift: 1,
@@ -75,12 +76,12 @@ function font_string_measure(_string, _component = -1) {
 				
 				_g = __newline_struct
 			}
-			else exit
-		}
-		// fallback
-		else if (!variable_struct_exists(_g, "shift")) {
-			_g.shift = string_width(_char)
-			_g.h = string_height(_char)
+			else {
+				static __reusable_struct = {}
+				__reusable_struct.shift = string_width(_char)
+				__reusable_struct.h = string_height(_char)
+				_g = __reusable_struct
+			}
 		}
 		
 		var _w = _g.shift,
