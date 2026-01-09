@@ -26,7 +26,7 @@ function scrPowers() {
 			}
 			break
 		case Race.Crystal:
-			if _press {
+			if _press && visible {
 				var _any = false
 				
 				with (CrystalShield) if (creator == other.id) {

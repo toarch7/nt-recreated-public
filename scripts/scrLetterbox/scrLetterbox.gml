@@ -14,14 +14,16 @@ function scrLetterbox(_state, _frame=-1) {
 /// @function scrDrawLetterbox
 /// @param frame
 /// @param size=LETTERBOX_SIZE
-function scrDrawLetterbox(_frame = -1, _size = LETTERBOX_SIZE) {
-	var _left = view_xview,
-		_top = view_yview - 1,
-		_right = _left + view_width,
-		_bottom = _top + view_height + 1
+/// @param gui=false
+function scrDrawLetterbox(_frame = -1, _is_gui = false) {
+	var _left = _is_gui ? 0 : view_xview,
+		_top = (_is_gui ? 0 : view_yview) - 1,
+		_right = _left + (_is_gui ? gui_w : view_width),
+		_bottom = _top + (_is_gui ? gui_h : view_height) + 1,
+		_size = LETTERBOX_SIZE
 	
 	var _width = sprite_get_width(sprLetterbox),
-		_margin = view_width - _width
+		_margin = (_is_gui ? gui_w : view_width) - _width
 	
 	if (_margin != 0) {
 	    draw_set_color(c_black)

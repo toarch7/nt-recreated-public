@@ -33,8 +33,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"sprPortalShock",
-    "path":"sprites/sprPortalShock/sprPortalShock.yy",
+    "name":"sprPortalClear",
+    "path":"sprites/sprPortalClear/sprPortalClear.yy",
   },
   "spriteMaskId":null,
   "visible":false,

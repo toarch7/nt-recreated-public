@@ -10,6 +10,8 @@ dir = 0
 
 clicked = 0
 
+current_move_direction_time = 0
+
 button_name = "MOVE JOYSTICK"
 
 if UberCont.opt_hiddensticks && !instance_exists(MenuOptions) {

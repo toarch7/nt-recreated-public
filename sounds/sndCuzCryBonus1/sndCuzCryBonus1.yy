@@ -1,26 +1,26 @@
 {
-  "$GMSound": "v2",
-  "%Name": "sndCuzCryBonus1",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndCuzCryBonus1",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "channelFormat": 0,
-  "compression": 2,
-  "compressionQuality": 4,
-  "conversionMode": 0,
-  "duration": 2.1546712,
-  "exportDir": "",
-  "name": "sndCuzCryBonus1",
-  "parent": {
-    "name": "Cry",
-    "path": "folders/Sounds/Cuz/Cry.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":2,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.1546712,
+  "exportDir":"",
+  "name":"sndCuzCryBonus1",
+  "parent":{
+    "name":"Cry",
+    "path":"folders/Sounds/Cuz/Cry.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndCuzCryBonus1.ogg",
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndCuzCryBonus1.ogg",
+  "volume":1.0,
 }

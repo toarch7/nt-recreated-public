@@ -70,9 +70,8 @@ if image_index == 3 {
 	instance_destroy(PauseButton)
 	instance_destroy(BackButton)
 	
-	with MenuOptions {
-		event_user(2)
-	}
+	with (MenuOptions) event_user(2)
+	with (UberCont) block_input_frames = 1
 	
 	scrGameUnpause()
 }

@@ -37,8 +37,8 @@ if instance_exists(creator) && sprite_index != spr_disappear {
 
 draw_sprite(sprite_index, -1, x + (time >= 28 ? orandom(time / 28) : 0), y + yoff)
 
-if instance_exists(creator) {
-	if _juggernaut && sprite_index != spr_disappear {
+if (instance_exists(creator) && sprite_index != spr_disappear) {
+	if (_juggernaut) {
 		var _front_idle = sprCrystalShieldIdleFront,
 			_front_walk = sprCrystalShieldWalkFront,
 			_skin = creator.bskin
@@ -52,7 +52,7 @@ if instance_exists(creator) {
 			_front_walk = sprCrystalShieldCWalkFront
 		}
 		
-		if creator.speed != 0 {
+		if (creator.speed != 0) {
 			draw_sprite_ext(_front_walk, walk, x, y, shieldright, 1, 0, c_white, 1)
 		}
 		else {

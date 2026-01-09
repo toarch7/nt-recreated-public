@@ -1,18 +1,18 @@
 if !roll && race != Race.Frog {
 	move_contact_solid(direction, clamp(speed, 1, maxspeed))
 	
-	if place_meeting(x + hspeed, y, Wall) {
+	if place_meeting(x + hspeed, y, InvisiWall) {
 		hspeed /= 2
 		
-		if place_meeting(x + hspeed, y, Wall) {
+		if place_meeting(x + hspeed, y, InvisiWall) {
 			hspeed = 0
 		}
 	}
 	
-	if place_meeting(x, y + vspeed, Wall) {
+	if place_meeting(x, y + vspeed, InvisiWall) {
 		vspeed /= 2
 		
-		if place_meeting(x, y + vspeed, Wall) {
+		if place_meeting(x, y + vspeed, InvisiWall) {
 			vspeed = 0
 		}
 	}

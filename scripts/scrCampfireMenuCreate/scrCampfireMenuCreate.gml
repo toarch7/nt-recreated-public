@@ -696,7 +696,7 @@ function scrMenuDrawLoadout(_pinst) {
 		var _tooltip_always_visible = !is_keyboard(_pinst.index)
 		
 		if !_fullview && ((_is_custom_weapon || scrGameIsWeeklyRun()) && (_tooltip_always_visible || _splat_pointed)) {
-			if scrCustomParam("crown", 0) > 0 {
+			if (scrCustomParam("crown", 0) > 0 || scrGameIsWeeklyRun()) {
 				_tooltip = loc("Crowns", _crown_current, "Name", scr_crown_get_name(_crown_current)) + "\n"
 					+ "@s" + loc("Crowns", _crown_current, "Text", scr_crown_get_text(_crown_current)) + "@w"
 			}

@@ -82,7 +82,6 @@ trigger_fingers_shine = 0
 spirit = scr_skill_get(mut_strong_spirit)
 spirit_anim = 0
 spirit_index = 0
-aimassist_wait = 0
 wepangle = 0
 horrorbeam = 0
 skeletongamble = 0
@@ -111,7 +110,10 @@ fainted = false
 
 active_button_forever = 0
 
+aimassist_wait = 0
 aimassist_target = noone
+aimassist_direction = 0
+aimbot_target = noone
 
 recontinued_times = 0
 

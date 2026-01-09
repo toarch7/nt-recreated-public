@@ -370,7 +370,7 @@ function scrDrawInteractionHUD(_player) {
 				}
 				
 				with ButtonAct {
-					draw_text_nt(x, y + ((y < 40) ? 36 : -36), _name)
+					draw_text_nt(x, y + (((y - rad * 0.5) < 40) ? 36 : -36), _name)
 					
 					var _sprite = other.sprite_index,
 						_xoffset = sprite_get_xoffset(_sprite),

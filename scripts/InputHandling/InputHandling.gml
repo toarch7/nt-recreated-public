@@ -236,6 +236,15 @@ function scrHandleInputsGeneral(_index) {
 	    _k.press_fire[_index] = key_check("fire", keystate_press)
 	    _k.release_fire[_index] = key_check("fire", keystate_release)
 		
+		if (block_input_fire) {
+			if (opt_keyboard && _k.hold_fire[_index]) {
+				_k.hold_fire[_index] = false
+				_k.press_fire[_index] = false
+				_k.release_fire[_index] = false
+			}
+			else block_input_fire = false
+		}
+		
 	    _k.hold_spec[_index] = key_check("spec", keystate_hold)
 	    _k.press_spec[_index] = key_check("spec", keystate_press)
 	    _k.release_spec[_index] = key_check("spec", keystate_release)
@@ -284,7 +293,7 @@ function scrHandleInputsGeneral(_index) {
 	}
 	// mobile touchscreen
 	else {
-		// reset swap inputs in case of using wepsticks
+		// reset `swap` inputs when using wepsticks
 		if opt_wepstick {
 			KeyCont.hold_swap[_index] = false
 			KeyCont.press_swap[_index] = false

@@ -12,7 +12,7 @@ function scrPopProps() {
     if random(5) < 1 && _spawn_distance > 100 && !place_meeting(x, y, NOWALLSHEREPLEASE)
 		&& !(_area == area_hq || _area == area_vault || (_area == area_campfire && _loops == 0) || _area == area_crib || _area == area_labs)
 		&& (_area != area_pizza_sewers || (random(3) < 1) && !(_area == area_scrapyards && _is_last) && !(_area == area_palace && _is_last)
-		&& (_area != area_city || random(3) < 1) && _area != area_pizza_sewers
+		&& (_area != area_city || random(3) < 1) && _area != area_pizza_sewers && sprite_index != sprFloor2B
 	) {
         var _small_x = (random_range(bbox_left, bbox_right) div 16) * 16,
 			_small_y = (random_range(bbox_top, bbox_bottom) div 16) * 16

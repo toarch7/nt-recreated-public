@@ -42,3 +42,8 @@ date_set_timezone(timezone_utc)
 
 display_set_timing_method(tm_sleep)
 display_set_sleep_margin(33)
+
+texture_prefetch("bosses")
+texture_prefetch("portraits")
+texture_prefetch("rare")
+texture_prefetch("ui")

@@ -1,26 +1,26 @@
 {
-  "$GMSound": "v2",
-  "%Name": "sndLilHunterHalfHP",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndLilHunterHalfHP",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "channelFormat": 0,
-  "compression": 0,
-  "compressionQuality": 4,
-  "conversionMode": 0,
-  "duration": 2.410375,
-  "exportDir": "",
-  "name": "sndLilHunterHalfHP",
-  "parent": {
-    "name": "Frog",
-    "path": "folders/Sounds/Frog.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":2.410375,
+  "exportDir":"",
+  "name":"sndLilHunterHalfHP",
+  "parent":{
+    "name":"Frog",
+    "path":"folders/Sounds/Frog.yy",
   },
-  "preload": true,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndLilHunterHalfHP.wav",
-  "volume": 1
+  "preload":true,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndLilHunterHalfHP.wav",
+  "volume":1.0,
 }

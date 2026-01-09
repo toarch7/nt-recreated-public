@@ -1,26 +1,26 @@
 {
-  "$GMSound": "v2",
-  "%Name": "sndEliteGruntEnter",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndEliteGruntEnter",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "channelFormat": 0,
-  "compression": 0,
-  "compressionQuality": 4,
-  "conversionMode": 0,
-  "duration": 0.482687,
-  "exportDir": "",
-  "name": "sndEliteGruntEnter",
-  "parent": {
-    "name": "EliteGrunt",
-    "path": "folders/Sounds/Enemies/IDPD/EliteGrunt.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.482687,
+  "exportDir":"",
+  "name":"sndEliteGruntEnter",
+  "parent":{
+    "name":"EliteGrunt",
+    "path":"folders/Sounds/Enemies/IDPD/EliteGrunt.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndEliteGruntEnter.wav",
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndEliteGruntEnter.wav",
+  "volume":1.0,
 }

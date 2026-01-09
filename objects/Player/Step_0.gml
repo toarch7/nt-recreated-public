@@ -118,13 +118,14 @@ if !roll {
 		}
 		
 		if (speed < _maxspeed) {
-			if (!KeyCont.precisemovement[index]) {
-				hspeed += _movspeed * (KeyCont.hold_east[index] - KeyCont.hold_west[index])
-				vspeed += _movspeed * (KeyCont.hold_sout[index] - KeyCont.hold_nort[index])
+			if (KeyCont.precisemovement[index]) {
+				var _m = _movspeed * KeyCont.moving[index]
+				hspeed += ldrx(_m, KeyCont.dir_move[index])
+				vspeed += ldry(_m, KeyCont.dir_move[index])
 			}
 			else {
-				hspeed += ldrx(_movspeed, KeyCont.dir_move[index])
-				vspeed += ldry(_movspeed, KeyCont.dir_move[index])
+				hspeed += _movspeed * (KeyCont.hold_east[index] - KeyCont.hold_west[index])
+				vspeed += _movspeed * (KeyCont.hold_sout[index] - KeyCont.hold_nort[index])
 			}
 			
 			if (speed > _maxspeed) speed = _maxspeed
@@ -326,18 +327,21 @@ if !aimassist_wait || KeyCont.press_fire[index] || KeyCont.release_fire[index] {
 }
 else aimassist_wait -= 1
 
-if (KeyCont.press_fire[index] || (KeyCont.hold_fire[index] && (wep_auto[wep] || race == Race.Steroids))
-	|| clicked || (KeyCont.press_spec[index] && (race == Race.Plant || race == Race.Venuz || Race.Steroids || race == Race.Skeleton))
-) {
-	if (!instance_exists(aimassist_target)) aimassist_target = noone
+if (KeyCont.aimassist[index] && scr_weapon_get_type(wep) != Ammo.None && !scr_weapon_has_assist_disabled(wep) && can_aim) {
+	var _is_specshooting = KeyCont.press_spec[index] && (race == Race.Plant || race == Race.Venuz || Race.Steroids || race == Race.Skeleton),
+		_is_shooting = KeyCont.press_fire[index] || clicked || _is_specshooting
 	
-	if KeyCont.aimassist[index] && scr_weapon_get_type(wep) != Ammo.None && !scr_weapon_has_assist_disabled(wep) && can_aim {
-		var _area_w = 480,
-			_area_h = 180,
-			_aim_target = noone,
+	if (!instance_exists(aimassist_target)) {
+		aimassist_target = noone
+	}
+	
+	if (_is_shooting || KeyCont.hold_fire[index]) {
+		var _area_w = game_screen_width * 0.67,
+			_area_h = game_screen_height * 0.5,
+			_aim_target = aimassist_target,
 			_aim_tracer_length = _area_w * 0.5
 
-		with instance_create(x, y, AimAssist) {
+		if (!instance_exists(_aim_target)) with (instance_create(x, y, AimAssist)) {
 			image_angle = other.gunangle
 			image_xscale = view_width
 			image_yscale *= 5
@@ -353,7 +357,9 @@ if (KeyCont.press_fire[index] || (KeyCont.hold_fire[index] && (wep_auto[wep] || 
 					var _distance = point_distance(x, y, other.x, other.y)
 					
 					// make it so that props are less likely to be targeted
-					if (instance_is(self, prop)) _distance *= 2
+					if (instance_is(self, prop)) {
+						_distance = 64 + _distance * 4
+					}
 					
 					if _distance < _distance_max {
 						_distance_max = _distance
@@ -363,29 +369,33 @@ if (KeyCont.press_fire[index] || (KeyCont.hold_fire[index] && (wep_auto[wep] || 
 			}
 		}
 		
-		//if (!instance_exists(_aim_target)) {
-		//	_aim_target = instance_nearest(x, y, enemy)
-		//}
-		
 		if scrTargetIsVisible(_aim_target) && _aim_target.object_index != Nothing && _aim_target.object_index != Nothing2 {
 			var _direction = point_direction(x, y, _aim_target.x, _aim_target.y),
 				_snap_angle = 35
-
+			
 			if (_aim_target.x > (x - _area_w)
 				&& _aim_target.y > (y - _area_h)
 				&& _aim_target.x < (x + _area_w)
 				&& _aim_target.y < (y + _area_h)
 			) {
-				var _diff = abs(angle_difference(gunangle, _direction))
+				var _diff = abs(angle_difference(_direction, gunangle))
+				
 				if (_diff <= _snap_angle) {
-					//gunangle = angle_lerp(gunangle, _direction, _diff / _snap_angle)
 					aimassist_target = _aim_target
-					gunangle = _direction
+					
+					if (_is_shooting) {
+						aimassist_direction = _direction
+						gunangle = aimassist_direction
+					}
+					else {
+						aimassist_direction = angle_lerp(
+							gunangle, _direction, 1 - _diff / _snap_angle)
+					}
 				}
+				else aimassist_target = noone
 			}
 		}
 	}
-	else aimassist_target = noone
 }
 
 if !(race == Race.Crystal && KeyCont.hold_spec[index]) && hp >= 0 {

@@ -16,10 +16,9 @@ function scrKeyboardHandleKeyPress(_keycode) {
 		case vk_tilde:
 			#region Opening & closing debug overlay
 			with (UberCont) {
-				if (public) break
+				if (public && !opt_console) break
 				
 				scr_debug_overlay_toggle()
-				keyboard_string = ""
 				
 				if (is_debug_overlay_open()) {
 					if (keyboard_check_pressed(vk_escape)

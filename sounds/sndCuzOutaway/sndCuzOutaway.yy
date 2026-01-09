@@ -1,26 +1,26 @@
 {
-  "$GMSound": "v2",
-  "%Name": "sndCuzOutaway",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndCuzOutaway",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "channelFormat": 1,
-  "compression": 0,
-  "compressionQuality": 4,
-  "conversionMode": 0,
-  "duration": 0.57582766,
-  "exportDir": "",
-  "name": "sndCuzOutaway",
-  "parent": {
-    "name": "Cuz",
-    "path": "folders/Sounds/Cuz.yy"
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.57582766,
+  "exportDir":"",
+  "name":"sndCuzOutaway",
+  "parent":{
+    "name":"Cuz",
+    "path":"folders/Sounds/Cuz.yy",
   },
-  "preload": true,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndCuzOutaway.wav",
-  "volume": 0.5
+  "preload":true,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndCuzOutaway.wav",
+  "volume":0.5,
 }

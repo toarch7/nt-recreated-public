@@ -1,26 +1,26 @@
 {
-  "$GMSound": "v2",
-  "%Name": "sndTechnomancerAppear",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndTechnomancerAppear",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "channelFormat": 1,
-  "compression": 0,
-  "compressionQuality": 4,
-  "conversionMode": 0,
-  "duration": 1.40075,
-  "exportDir": "",
-  "name": "sndTechnomancerAppear",
-  "parent": {
-    "name": "Sounds",
-    "path": "folders/Sounds.yy"
+  "bitDepth":1,
+  "channelFormat":1,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":1.40075,
+  "exportDir":"",
+  "name":"sndTechnomancerAppear",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
   },
-  "preload": true,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndTechnomancerAppear.wav",
-  "volume": 0.77
+  "preload":true,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndTechnomancerAppear.wav",
+  "volume":0.77,
 }

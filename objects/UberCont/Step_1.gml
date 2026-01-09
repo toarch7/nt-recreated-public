@@ -21,7 +21,7 @@ if want_pause > 0 && (instance_exists(Player) && !instance_exists(GenCont) && !i
 }
 
 if quit_pause {
-	if !instance_exists(GenCont) && !instance_exists(LevCont) {
+	if (!instance_exists(GenCont) && !instance_exists(LevCont)) {
 		with (MobileUI) instance_destroy()
 		scrCreateMobileControls()
 	}

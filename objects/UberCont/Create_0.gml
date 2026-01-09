@@ -16,6 +16,8 @@ want_pause = false
 quit_pause = false
 pauseimg = -1
 pause_portrait_anim = 0
+block_input_frames = 0
+block_input_fire = false
 timer_last_time = current_time
 alarm[0] = 30
 

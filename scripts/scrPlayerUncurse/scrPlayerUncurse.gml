@@ -21,9 +21,9 @@ function scrPlayerCountCursed(_player=all) {
 function scrPlayerUncurse(_player=all) {
 	var _any = false
 	with (_player == all ? Player : _player) {
-		if scrPlayerCountCursed(id) {
+		if (scrPlayerCountCursed(id)) {
 			curse = false
-			bcurse = true
+			bcurse = false
 			
 			var _extra_count = array_length(extra_weps)
 			for(var i = _extra_count - 1; i >= 0; --i) {

@@ -1,26 +1,26 @@
 {
-  "$GMSound": "v2",
-  "%Name": "sndSnowTankHurt",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndSnowTankHurt",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "channelFormat": 0,
-  "compression": 0,
-  "compressionQuality": 4,
-  "conversionMode": 0,
-  "duration": 0.523685,
-  "exportDir": "",
-  "name": "sndSnowTankHurt",
-  "parent": {
-    "name": "SnowTank",
-    "path": "folders/Sounds/SnowTank.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.523685,
+  "exportDir":"",
+  "name":"sndSnowTankHurt",
+  "parent":{
+    "name":"SnowTank",
+    "path":"folders/Sounds/SnowTank.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndSnowTankHurt.wav",
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndSnowTankHurt.wav",
+  "volume":1.0,
 }

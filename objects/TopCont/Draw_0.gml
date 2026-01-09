@@ -45,9 +45,10 @@ with Player {
 			
 			//if (UberCont.opt_fixsight && (index == global.index)) s = 1
 			
-			var _x = x + lengthdir_x(16 + _distance, _direction),
+			var _r = 32 * ATTACK_BUTTON_DEADZONE,
+				_x = x + lengthdir_x(16 + _distance, _direction),
 				_y = y + lengthdir_y(16 + _distance, _direction),
-				_is_active = (is_gamepad(index) || _distance > 16),
+				_is_active = (is_gamepad(index) || _distance > _r),
 				_alpha = min(1, crosshair_alpha)
 			
 			if (scr_player_is_local(index)) {
@@ -57,8 +58,8 @@ with Player {
 				crosshair_alpha = 1
 			}
 			
-			crosshair_x = lerp(crosshair_x, _x, 0.8)
-			crosshair_y = lerp(crosshair_y, _y, 0.8)
+			crosshair_x = lerp(crosshair_x, _x, _is_active ? 0.8 : 0.1)
+			crosshair_y = lerp(crosshair_y, _y, _is_active ? 0.8 : 0.1)
 			
 			if (index != global.index) _alpha *= 0.5
 			

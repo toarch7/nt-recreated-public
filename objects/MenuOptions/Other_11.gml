@@ -9,7 +9,7 @@ with (ResourcepackManager) {
 event_user(0)
 
 with (UberCont) if (letterbox_frame != 0) {
-	scrDrawLetterbox(letterbox_frame)
+	scrDrawLetterbox(letterbox_frame, true)
 }
 
 #region Header

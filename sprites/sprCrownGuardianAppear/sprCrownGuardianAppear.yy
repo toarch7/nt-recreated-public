@@ -159,8 +159,8 @@
   "swatchColours":null,
   "swfPrecision":2.525,
   "textureGroupId":{
-    "name":"Default",
-    "path":"texturegroups/Default",
+    "name":"bosses",
+    "path":"texturegroups/bosses",
   },
   "type":0,
   "VTile":false,

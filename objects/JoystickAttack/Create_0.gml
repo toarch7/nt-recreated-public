@@ -1,4 +1,4 @@
-#macro ATTACK_BUTTON_DEADZONE 0.42
+#macro ATTACK_BUTTON_DEADZONE 0.4125
 
 x = view_width + (global.view_width_max - view_width) / 2 - 64
 y = view_height - 64
@@ -37,4 +37,20 @@ wep_spr = mskNone
 
 if UberCont.opt_hiddensticks && !instance_exists(MenuOptions) {
 	image_alpha = 0
+}
+
+is_player_crystaltb = function() {
+	with (scrPlayerFindLocal()) {
+		if (race == Race.Crystal && instance_exists(CrystalShield) && scr_skill_get(mut_throne_butt)) {
+			with (CrystalShield) if (creator == other.id) {
+				return sprite_index != spr_disappear
+			}
+		}
+	}
+	
+	return false
+}
+
+can_full_autoaim = function() {
+	return UberCont.opt_aimbot && !self.is_player_crystaltb()
 }

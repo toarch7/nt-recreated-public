@@ -107,6 +107,40 @@ if paused && !want_pause && !instance_exists(CoopController) {
 	}
 }
 
+if (is_touch(global.index) && (opt_console || !public)) {
+	var _size = 24,
+		_left = view_width - 32,
+		_top = 16,
+		_right = _left + _size,
+		_bottom = _top + _size
+	
+	if (opt_pausebutton) {
+		_bottom += 32
+		_top += 32
+	}
+	
+    draw_set_color(c_black)
+    draw_set_alpha(0.5)
+    
+	draw_rectangle(_left, _top, _right, _bottom, 0)
+	
+	draw_set_color(c_white)
+    draw_set_alpha(1)
+	
+	draw_align(fa_center, fa_middle)
+	draw_set_font(fntBig)
+	
+    draw_text_nt((_left + _right) * 0.5, (_top + _bottom) * 0.5, "~")
+    
+	draw_reset_font()
+	draw_align()
+    
+    if (mouse_check_button_pressed(mb_left) && !is_mouse_over_debug_overlay()) {
+        if (point_in_rectangle(gui_x, gui_y, _left, _top, _right, _bottom)) {
+			scr_debug_overlay_toggle()
+		}
+    }
+}
 
 if MultiplayerConfig && false {
 	draw_set_font(fntSmall)

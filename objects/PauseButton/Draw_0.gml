@@ -7,7 +7,7 @@ var _color = hover ? c_white : c_uigray,
 
 if appear < 2 {
 	if is_string(_button_name) {
-		draw_set_font(fntBig)
+		draw_set_font(global.language_font_bigname_default)
 		
 		var	_scale = 0.65,
 			_subimage = floor(image_index),
@@ -18,13 +18,13 @@ if appear < 2 {
 			_halign = fa_left
 			var _overlap = min(0, _dx - _half_w - view_xview)
 			if (_overlap > 0) _dx -= _overlap
-			_dx -= _half_w
+			_dx -= _half_w - 10
 		}
 		else if ((_subimage >= 2 && _subimage <= 3) || (_subimage >= 5 && _subimage <= 6)) {
 			_halign = fa_right
 			var _overlap = max(0, _dx + _half_w - (view_xview + view_width))
 			if (_overlap > 0) _dx -= _overlap
-			_dx += _half_w
+			_dx += _half_w + 10
 		}
 		
 		draw_set_halign(_halign)
@@ -34,7 +34,7 @@ if appear < 2 {
 		draw_reset_font()
 	}
 	else {
-		// backdrop
+		//
 		draw_sprite_ext(sprite_index, image_index, _dx, _dy + 1, 1, 1, 0, c_black, 1)
 		draw_sprite_ext(sprite_index, image_index, _dx + 1, _dy + 1, 1, 1, 0, c_black, 1)
 		draw_sprite_ext(sprite_index, image_index, _dx + 1, _dy, 1, 1, 0, c_black, 1)

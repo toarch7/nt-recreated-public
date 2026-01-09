@@ -1,26 +1,26 @@
 {
-  "$GMSound": "v2",
-  "%Name": "sndEliteShielderEnter",
-  "audioGroupId": {
-    "name": "audiogroup_default",
-    "path": "audiogroups/audiogroup_default"
+  "$GMSound":"v2",
+  "%Name":"sndEliteShielderEnter",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
   },
-  "bitDepth": 1,
-  "channelFormat": 0,
-  "compression": 0,
-  "compressionQuality": 4,
-  "conversionMode": 0,
-  "duration": 0.672031,
-  "exportDir": "",
-  "name": "sndEliteShielderEnter",
-  "parent": {
-    "name": "EliteShielder",
-    "path": "folders/Sounds/Enemies/IDPD/EliteShielder.yy"
+  "bitDepth":1,
+  "channelFormat":0,
+  "compression":0,
+  "compressionQuality":4,
+  "conversionMode":0,
+  "duration":0.672031,
+  "exportDir":"",
+  "name":"sndEliteShielderEnter",
+  "parent":{
+    "name":"EliteShielder",
+    "path":"folders/Sounds/Enemies/IDPD/EliteShielder.yy",
   },
-  "preload": false,
-  "resourceType": "GMSound",
-  "resourceVersion": "2.0",
-  "sampleRate": 44100,
-  "soundFile": "sndEliteShielderEnter.wav",
-  "volume": 1
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sndEliteShielderEnter.wav",
+  "volume":1.0,
 }

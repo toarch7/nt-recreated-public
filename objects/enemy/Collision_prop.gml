@@ -17,6 +17,6 @@ if (busycollisions) {
 	if (speed > 16) speed = 16
 }
 
-if size > other.size && meleedamage > 0 && scr_can_hit(other.id) {
+if (size > other.size && meleedamage > 0 && scr_can_hit(other.id)) {
 	scr_hit(other.id, meleedamage, hitid)
 }

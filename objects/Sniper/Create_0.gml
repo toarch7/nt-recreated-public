@@ -19,3 +19,5 @@ gunangle = random_angle
 alarm[1] = 60 + random(90)
 gonnafire = 0
 wkick = 0
+
+hitid = HitId.Sniper

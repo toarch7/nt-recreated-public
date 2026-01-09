@@ -1,6 +1,6 @@
 letterbox_frame = approach(letterbox_frame, letterbox ? 3 : 0, timescale)
 
-if bossintro {
+if (bossintro) {
     if (pausespr && sprite_exists(pausespr)) {
         draw_sprite_ext(pausespr, 0, view_xview, view_yview, 1, 1, 0, c_white, 1)
     }

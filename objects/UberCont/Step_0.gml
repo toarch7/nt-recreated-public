@@ -5,9 +5,14 @@ if native_cursor_inst != -1
 
 input_tick()
 
-scrHandleInputsGeneral(global.index)
-
-scrGamepadUIControl()
+if (!block_input_frames) {
+	scrHandleInputsGeneral(global.index)
+	scrGamepadUIControl()
+}
+else {
+	block_input_fire = true
+	block_input_frames --
+}
 
 if (instance_exists(CoopController)) {
 	with (CoopController) event_user(0)
@@ -169,7 +174,7 @@ if (is_desktop) {
 // because gamemaker automatically puts you into typing mode
 // once it opens the `scrKeyboardHandleKeyPress` doesn't get
 // run from Keypress - Any becuse the event is suppressed
-if (is_debug_overlay_open()
+if (is_debug_overlay_open() && (opt_console || !public)
 	&& (keyboard_check_pressed(vk_escape) || (!is_keyboard_used_debug_overlay() && keyboard_check_pressed(vk_backspace)))
 ) {
 	scr_debug_overlay_toggle()

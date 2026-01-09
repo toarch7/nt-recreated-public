@@ -35,6 +35,8 @@ if (!instance_exists(GameCont) && file_exists(savegame_file)) {
 	global.recontinued_times ++
 	print("Recontinued", global.recontinued_times, "times")
 	scrVolume()
+	
+	scrSavegameSave()
 }
 
 scrRngStatesReset()

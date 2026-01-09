@@ -192,11 +192,11 @@ function scrOptionsMenuChangeCategory(_category, _queue = true) {
 		
 		draw_step_size = 8 + font_get_string_height("Aa")
 		
-		if (item_count >= 12) {
+		if (item_count >= 12 && item_count < 14) {
 			draw_step_size = floor(draw_step_size * 0.85)
 		}
 		
-		if !is_desktop {
+		if (!is_desktop) {
 			mousex = -1000
 			mousey = -1000
 		}
