@@ -103,7 +103,8 @@ for(var i = start; i < count; i ++) {
 	
 	draw_set_color(c_white)
 	
-	draw_text_ext_transformed(xx + 12 + offset, _y + 20, meta.descriptionShort, 8, width - 8, 0.5, 0.5, 0)
+	var sep = font_get_string_height("Aa")
+	draw_text_ext_transformed(xx + 12 + offset, _y + 20, meta.descriptionShort, sep, width - 8, 0.5, 0.5, 0)
 	
 	/// @loc:note [ResourcepackBrowser] Should be as short as possible
 	/// @loc:token [ResourcepackBrowser] UpdatedLongAgo "LONG#AGO"
@@ -141,6 +142,7 @@ for(var i = start; i < count; i ++) {
 		var days = round(diff / 86400)
 		
 		if days < 365 {
+			/// @loc:token [ResourcepackBrowser] UpdatedDaysAgo "% D.#AGO"
 			update_text = loc_fmt("ResourcepackBrowser:UpdatedDaysAgo", "% D.#AGO", days)
 		}
 	}

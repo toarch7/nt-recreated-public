@@ -6,14 +6,15 @@ function scrSave() {
 		
 		if (!public) scr_debug_overlay_save()
 		
-        if scr_debug_cheats_enabled() && file_exists(savepath) {
-			var f = file_text_open_read(savepath)
+        if (public && scr_debug_cheats_enabled()) {
+			var data;
 			
-	        var raw = file_text_read_string(f)
-	        
-			file_text_close(f)
-			
-	        var data = json_decode(raw)
+			if file_exists(savepath) {
+				data = json_decode(file_read(savepath))
+			}
+			else {
+				data = ds_map_create()
+			}
 			
 			var options = [
 				"cheats_console", "cheats_griller", "cheats_practice", "options_gamepad", "options_keyboard",

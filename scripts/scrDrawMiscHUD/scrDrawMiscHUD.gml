@@ -5,21 +5,21 @@ function scrDrawMiscHUD() {
 		var _cheat_scale = 0.67,
 			_font_offset = font_get_height_diff(),
 			_low_x = 16 * _cheat_scale,
-			_low_y = view_height - (_font_offset + 16) * _cheat_scale,
+			_low_y = view_height - (_font_offset + 15) * _cheat_scale,
 			_gamecont_text_drawn = false
 		
 		draw_set_color(c_white)
 		
 		draw_align(fa_right, fa_top)
 		if UberCont.opt_showtimer {
-			draw_text_nt(view_width - 1, _low_y, timer_string)
+			draw_text_nt(view_width - 2, _low_y, timer_string)
 			_low_y -= font_get_string_height(timer_string)
 			_gamecont_text_drawn = true
 		}
 		
 		if UberCont.opt_showarea && !instance_exists(GenCont) && !scrGameIsPaused() && room == romGame {
 			var _area_string = scrAreaGetMapName(GameCont.area, GameCont.subarea, GameCont.loops)
-			draw_text_nt(view_width - 1, _low_y, _area_string)
+			draw_text_nt(view_width - 2, _low_y, _area_string)
 			_low_y -= font_get_string_height(_area_string)
 			_gamecont_text_drawn = true
 		}

@@ -216,11 +216,11 @@ function scrLanguagesLoad() {
 		#endregion
 		
 		array_foreach(_language_list, function(_lang) {
+			scrLanguageProcess(_lang)
+			
 			if (GM_build_type == "run") {
 				if (is_struct(_lang)) file_write("languages/" + _lang[$ "Init:Id"] + ".json", json_stringify(_lang, true))
 			}
-			
-			scrLanguageProcess(_lang)
 		})
 		
 		if (ds_exists(_lang_csv, ds_type_grid)) ds_grid_destroy(_lang_csv)

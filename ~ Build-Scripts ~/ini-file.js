@@ -104,37 +104,44 @@ class IniFile {
         return result.trimEnd();
     }
     safeMerge(iniFile, overrideNulls=false) {
-        const sections = this.sections
-        const entries2 = Object.entries(iniFile.sections);
+        const mySections = this.sections;
+        const mergeSectionEntries = Object.entries(iniFile.sections);
 
-        for (const [ name, entries ] of entries2) {
-            if (!(name in sections)) {
+        for (const [ msectName, msectEntries ] of mergeSectionEntries) {
+            if (!(msectName in mySections)) {
                 let newSection = [];
-                for(let entry of entries) {
-                    newSection.push([ ...entry ]);
-                }
-                sections[name] = newSection;
+                for(let entry of msectEntries) newSection.push([ ...entry ]);
+                mySections[msectName] = newSection;
+                continue;
             }
-            for(let j in entries) {
+            
+            for(let j = 0; j < msectEntries.length; ++j) {
                 let any = false;
-                let newSection = sections[name];
-                let newEntry = entries[j];
-                for(let i in newSection) {
+                let newSection = mySections[msectName];
+                let newEntry = msectEntries[j];
+                for(let i = 0; i < newSection.length; ++i) {
                     let currentEntry = newSection[i];
                     if (currentEntry[0] == newEntry[0]) {
+                        if ((typeof currentEntry[0] === "string")
+                            && currentEntry[0].startsWith("#")
+                        ) {
+                            continue;
+                        }
                         if (overrideNulls && (currentEntry[1] === null || currentEntry[1] === "")) {
-                            sections[name].splice(j, 1);
+                            newSection.splice(i --, 1);
                             break;
                         }
                         // try match the order from merged .ini file so that
-                        // comments are located in their expected locations
-                        sections[name].splice(i, 1);
-                        sections[name].splice(j, 0, currentEntry);
+                        // comments are placed in their expected locations
+                        mySections[msectName].splice(i, 1);
+                        mySections[msectName].splice(j, 0, currentEntry);
                         any = true;
                         break;
                     }
                 }
-                if (!any) sections[name].splice(j, 0, newEntry);
+                if (!any) {
+                    mySections[msectName].splice(j, 0, newEntry);
+                }
             }
         }
 

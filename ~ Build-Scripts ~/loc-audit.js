@@ -55,10 +55,10 @@ function generateTemplateFiles() {
         if (fs.existsSync(mobileTemplatePath)) {
             let contents = fs.readFileSync(mobileTemplatePath, "utf-8");
             let ini = IniFile.fromString(contents);
-            
+
             // update the ini with new fields
             generateTemplateIni(ini);
-
+            
             fs.writeFileSync(mobileTemplatePath, header + "\n" + ini.toIniFileString());
         }
         else {

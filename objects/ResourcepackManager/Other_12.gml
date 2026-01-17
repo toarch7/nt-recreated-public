@@ -36,7 +36,7 @@ if string_length(fname) > 50
 var width = font_get_string_width(fname) * 0.75
 
 if item.external {
-	draw_text_nt(lx, ly - 8 - url_pointed, fname + " @(sprTextLinkURL,0,0,-2)", 0.75)
+	draw_text_nt(lx, ly - font_get_string_height("Aa") - url_pointed, fname + " @(sprTextLinkURL,0,0,-2)", 0.75)
 	draw_sprite_stretched_ext(sprPixel, 0, lx, ly + 1, width, 1, draw_get_color(), 1)
 
 	if !screenshot_view && point_in_rectangle(mx, my + 8, lx, ly, lx + width, ly + 8) {
@@ -64,19 +64,19 @@ open_time ++
 draw_set_color(c_white)
 draw_align()
 
-var w = view_width / 1.75
+var w = view_width / 1.75, sep = font_get_string_height("Aa")
 
-draw_text_ext_transformed(55 - xoff, 50, meta.name, 8, w, 1 + scale, 1 - scale, 0)
+draw_text_ext_transformed(55 - xoff, 50, meta.name, sep, w, 1 + scale, 1 - scale, 0)
 
 draw_set_color(c_uigray)
-draw_text_ext_transformed(56 - xoff, 65, meta.descriptionShort, 8, w, 0.75 + scale, 0.75 - scale, 0)
+draw_text_ext_transformed(56 - xoff, 65, meta.descriptionShort, sep, w, 0.75 + scale, 0.75 - scale, 0)
 
 draw_set_color(c_white)
 
 if !surface_exists(text_surface)
 	text_surface = surface_create(description_width, description_height)
 
-var desch = string_height_ext(meta.description, 8, description_width),
+var desch = string_height_ext(meta.description, sep, description_width),
 	yy = 0, time_max = 90
 
 if desch > description_height && open_time > time_max {
@@ -94,7 +94,8 @@ text_scroll = lerp(text_scroll, yy, 0.3)
 
 surface_set_target(text_surface)
 draw_clear_alpha(c_black, 0)
-draw_text_ext(0, text_scroll, meta.description, 8, description_width)
+var sep = font_get_string_height("Aa")
+draw_text_ext(0, text_scroll, meta.description, sep, description_width)
 surface_reset_target()
 
 draw_surface_ext(text_surface, 12 - xoff, 96, 0.75 + scale, 0.75 - scale, 0, c_white, 1)
@@ -157,18 +158,23 @@ var created = unix_to_datatime(item.created div 1000),
 	updated = unix_to_datatime(item.updated div 1000),
 	
 	str1 = date_ddmmYY_string(created),
-	str2 = date_ddmmYY_string(updated)
+	str2 = date_ddmmYY_string(updated),
+	
+	step_size = 5 + (font_get_string_height("Aa") - 8),
+	step_size_big = step_size * 6
+
+print(step_size)
 
 draw_set_color(c_white)
 /// @loc:token [ResourcepackBrowser] FullviewPackInfo "PACK INFO"
-draw_text_nt(dx, dy - 5, L("FullviewPackInfo", "PACK INFO"))
+draw_text_nt(dx, dy - step_size, L("FullviewPackInfo", "PACK INFO"))
 
 draw_set_color(c_uigray)
 /// @loc:token [ResourcepackBrowser] FullviewCreationInfo "CREATED ON:"
-draw_text_nt(dx, dy + 10, L("FullviewCreationInfo", "CREATED ON:") + "\n " + str1)
+draw_text_nt(dx, dy + step_size * 2, L("FullviewCreationInfo", "CREATED ON:") + "\n " + str1)
 
 if str1 != str2 {
-	dy += 30
+	dy += step_size_big
 	/// @loc:token [ResourcepackBrowser] FullviewLastUpdate "LAST UPDATED:"
 	draw_text_nt(dx, dy, L("FullviewLastUpdate", "LAST UPDATED:") + "\n " + str2)
 }
@@ -177,7 +183,7 @@ if item[$ "installtime"] {
 	var date = unix_to_datatime(item.installtime div 1000),
 		str = date_ddmmYY_string(date)
 	
-	dy += 30
+	dy += step_size_big
 	
 	draw_set_color(c_uigray)
 	/// @loc:token [ResourcepackBrowser] FullviewInstallationDate "INSTALLED ON:"
@@ -185,7 +191,7 @@ if item[$ "installtime"] {
 }
 
 /// @loc:token [ResourcepackBrowser] FullviewStars "STARS:"
-draw_text_nt(dx, dy + 30, L("FullviewStars", "STARS:") + "\n " + string(item.stars))
+draw_text_nt(dx, dy + step_size_big, L("FullviewStars", "STARS:") + "\n " + string(item.stars))
 
 #endregion
 

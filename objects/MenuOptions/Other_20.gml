@@ -1,5 +1,9 @@
 /// @description Define options
 
+resourcepack_disclaimer_message = "RESOURCEPACKS ARE AN EXCLUSIVE FEATURE OF#NUCLEAR THRONE MOBILE.##A RESOURCEPACK IS A USER-CREATED ASSET COLLECTION (TEXTURES, SOUNDS, TEXT) FOR DECORATIVE PURPOSES ONLY, WITH NO GAMEPLAY BENEFITS.##RESOURCEPACK BROWSER, DESPITE BEING MODERATED,#MAY STILL CONTAIN QUESTIONABLE CONTENT.##THE DEVELOPER IS NOT LIABLE FOR ANY HARMFUL MATERIAL."
+/// @loc:token [ResourcepackOptions] DisclaimerText "RESOURCEPACKS ARE AN EXCLUSIVE FEATURE OF#NUCLEAR THRONE MOBILE.##A RESOURCEPACK IS A USER-CREATED ASSET COLLECTION (TEXTURES, SOUNDS, TEXT) FOR DECORATIVE PURPOSES ONLY, WITH NO GAMEPLAY BENEFITS.##RESOURCEPACK BROWSER, DESPITE BEING MODERATED,#MAY STILL CONTAIN QUESTIONABLE CONTENT.##THE DEVELOPER IS NOT LIABLE FOR ANY HARMFUL MATERIAL."
+resourcepack_disclaimer_message = string_insert_wordwraps(string_hash_to_newline(loc("ResourcepackOptions:DisclaimerText", resourcepack_disclaimer_message)), game_screen_width)
+
 #region define categories
 
 #region Main
@@ -17,7 +21,7 @@ scrOptionsMenuCreateElements
 	
 	{
 		/// @loc:token [ResourcepackOptions] ResourcepackOptions "RESOURCEPACKS"
-		type: "button", name: L("ResourcepackOptions", "RESOURCEPACKS"), ingame: false,
+		type: "button", name: loc("ResourcepackOptions:ResourcepackOptions", "RESOURCEPACKS"), ingame: false,
 		
 		click: function() {
 			scrOptionsMenuChangeCategory(OptionCategory.Resourcepacks)
