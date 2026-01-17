@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if !scrGameIsGenerationScreen() {
+if (!scrGameIsGenerationScreen() && !instance_exists(GameOver)) {
     if instance_exists(Cinematic) {
         with (Cinematic) {
             view_xview = round(lerp(view_xview, (x - view_width / 2), 0.1))

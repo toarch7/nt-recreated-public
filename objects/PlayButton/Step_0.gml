@@ -27,11 +27,11 @@ if !wait && available {
 		if press
 			event_user(0)
 	}
-	else if !is_gamepad() && hover
+	else if !is_gamepad() && hover {
 		hover = 0
+	}
 }
 
-if wait
-	wait --
+if (wait) wait --
 
 splat = lerp(splat, hover * 4, 0.4)

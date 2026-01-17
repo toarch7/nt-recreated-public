@@ -62,7 +62,7 @@ function draw_text_bigname(_x, _y, _text, _color = draw_get_color(), _alpha = dr
 	
 	var _f = draw_get_font()
 	draw_set_font(global.language_font_bigname_default)
-	draw_surface_ext(_surface, _x, _y - font_get_height_diff(), 1, 1, _angle, _color, _alpha)
+	draw_surface_ext(_surface, round(_x), round(_y - font_get_height_diff()), 1, 1, _angle, _color, _alpha)
 	draw_set_font(_f)
 }
 

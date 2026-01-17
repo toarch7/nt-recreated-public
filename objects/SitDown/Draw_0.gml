@@ -12,6 +12,8 @@ with (player) {
 			draw_sprite_ext(_sprite, 0, x, y, 1, 1, 90 + i * 15, _color, 1)
 		}
 	}
+	
+	depth = other.depth - 1
 }
 
 if sprite_exists(sprite_index) draw_self()

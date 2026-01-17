@@ -987,7 +987,6 @@
     {"name":"scrMoveTopPots","order":117,"path":"scripts/scrMoveTopPots/scrMoveTopPots.yy",},
     {"name":"scrOnBanditKill","order":188,"path":"scripts/scrOnBanditKill/scrOnBanditKill.yy",},
     {"name":"scrOnBossKill","order":196,"path":"scripts/scrOnBossKill/scrOnBossKill.yy",},
-    {"name":"scrOnOff","order":44,"path":"scripts/scrOnOff/scrOnOff.yy",},
     {"name":"scrOnPopoKill","order":183,"path":"scripts/scrOnPopoKill/scrOnPopoKill.yy",},
     {"name":"scrOptionsKeymaps","order":2,"path":"scripts/scrOptionsKeymaps/scrOptionsKeymaps.yy",},
     {"name":"scrOptionsMenu","order":155,"path":"scripts/scrOptionsMenu/scrOptionsMenu.yy",},

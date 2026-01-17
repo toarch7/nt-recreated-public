@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndSnowBotHurt",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndSnowBotHurt",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":0.482868,
-  "exportDir":"",
-  "name":"sndSnowBotHurt",
-  "parent":{
-    "name":"SnowBot",
-    "path":"folders/Sounds/SnowBot.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 0.482868,
+  "exportDir": "",
+  "name": "sndSnowBotHurt",
+  "parent": {
+    "name": "SnowBot",
+    "path": "folders/Sounds/SnowBot.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndSnowBotHurt.wav",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndSnowBotHurt.wav",
+  "volume": 1
 }

@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndRobotEatUpg",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndRobotEatUpg",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":1.299649,
-  "exportDir":"",
-  "name":"sndRobotEatUpg",
-  "parent":{
-    "name":"Robot",
-    "path":"folders/Sounds/Mutant/Robot.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 1.299649,
+  "exportDir": "",
+  "name": "sndRobotEatUpg",
+  "parent": {
+    "name": "Robot",
+    "path": "folders/Sounds/Mutant/Robot.yy"
   },
-  "preload":true,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndRobotEatUpg.wav",
-  "volume":1.0,
+  "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndRobotEatUpg.wav",
+  "volume": 1
 }

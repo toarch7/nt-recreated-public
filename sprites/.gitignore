@@ -1,4 +1,4 @@
-# Generated at Tue Jan 06 2026 21:17:30 GMT+0300 (Москва, стандартное время)
+# Generated at Sat Jan 17 2026 19:47:55 GMT+0300 (Москва, стандартное время)
 #
 # This file excludes all image assets from the repo that are unallowed to be used.
 # The only assets that are present here are the ones exclusive to NTM.
@@ -2630,8 +2630,6 @@ sprPortalL5/*.png
 sprPortalL5/layers/*
 sprPortalLightning/*.png
 sprPortalLightning/layers/*
-sprPortalShock/*.png
-sprPortalShock/layers/*
 sprPortalSpawn/*.png
 sprPortalSpawn/layers/*
 sprProtoChest/*.png

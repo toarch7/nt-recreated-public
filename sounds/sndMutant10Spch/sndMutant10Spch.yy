@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndMutant10Spch",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndMutant10Spch",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":3,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":8.704014,
-  "exportDir":"",
-  "name":"sndMutant10Spch",
-  "parent":{
-    "name":"Speech",
-    "path":"folders/Sounds/Mutant/Speech.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 3,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 8.704014,
+  "exportDir": "",
+  "name": "sndMutant10Spch",
+  "parent": {
+    "name": "Speech",
+    "path": "folders/Sounds/Mutant/Speech.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndMutant10Spch.ogg",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndMutant10Spch.ogg",
+  "volume": 1
 }

@@ -703,7 +703,7 @@ scrOptionsMenuCreateElements(
 	/// @loc:token [ControlOptions] DebugOverlay "DEBUG OVERLAY"
 	{ type: "keybind", name: L("DebugOverlay", "DEBUG OVERLAY"), key: "console",
 		awake: function(_opt) {
-			_opt.visible = UberCont.opt_cheats || (ingame && !global.cheats)
+			_opt.visible = UberCont.opt_cheats || (ingame && !scr_debug_cheats_enabled())
 		},
 		
 		condition: condition_keyboard

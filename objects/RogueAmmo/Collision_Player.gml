@@ -8,10 +8,10 @@ with (other) {
 	
 	rogue_ammo += _amount
 	
-	var _str = loc_fmt("+% PORTAL STRIKE" + (_amount > 1 ? "S" : ""), string(_amount))
+	var _str = loc($"Pickups:AddStrikes:{_amount}", $"+{_amount} PORTAL STRIKE{(_amount > 1 ? "S": "")}")
 	
 	if (rogue_ammo >= rogue_ammo_max) {
-		_str = loc("MAX PORTAL STRIKES")
+		_str = loc("Pickups:MaxStrikes", "MAX PORTAL STRIKES")
 		rogue_ammo = rogue_ammo_max
 	}
 	

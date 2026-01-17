@@ -33,10 +33,13 @@ function scrDrawPlayerHUD(_player = noone) {
 		else {
 			var _healthbar_color = UberCont.opt_healthcol,
 				_healthbar_bg = max(0, 84 * (_player.lsthealth / _max_hp)),
-				_healthbar_fg = max(0, 84 * (_hp / _max_hp))
+				_healthbar_fg = max(0, 84 * (_hp / _max_hp)),
+				_shift = (is_desktop ? 0.01 : 0)
 			
 			if (_healthbar_color != c_white) {
-				var _bg_hue = color_get_hue(_healthbar_color) - 5
+				var _bg_hue = color_get_hue(_healthbar_color) - 5,
+					_x = 22 + _shift,
+					_y = 7 + _shift
 				
 				if (_bg_hue < 0) _bg_hue = 255 + _bg_hue
 				
@@ -44,12 +47,13 @@ function scrDrawPlayerHUD(_player = noone) {
 						color_get_saturation(_healthbar_color),
 						color_get_value(_healthbar_color) * 0.5)
 				
-				draw_sprite_ext(sprHealthFill, 0, 22, 7, _healthbar_bg, 1, 0, _bg_color, 1)
-				draw_sprite_ext(sprHealthFill, 0, 22, 7, _healthbar_fg, 1, 0, _healthbar_color, 1)
+				draw_sprite_ext(sprHealthFill, 0, _x, _y, _healthbar_bg, 1, 0, _bg_color, 1)
+				draw_sprite_ext(sprHealthFill, 0, _x, _y, _healthbar_fg, 1, 0, _healthbar_color, 1)
 			}
 			else {
-				draw_sprite_ext(sprHealthFill, 2, 22, 7, _healthbar_bg, 1, 0, _healthbar_color, 1)
-				draw_sprite_ext(sprHealthFill, 1, 22, 7, _healthbar_fg, 1, 0, _healthbar_color, 1)
+				var _index = (UberCont.coop ? (global.index + 1) * 2 : 0)
+				draw_sprite_ext(sprHealthFill, _index + 2, _x, _y, _healthbar_bg, 1, 0, _healthbar_color, 1)
+				draw_sprite_ext(sprHealthFill, _index + 1, _x, _y, _healthbar_fg, 1, 0, _healthbar_color, 1)
 			}
 			
 			if _race == Race.Rogue {
@@ -263,7 +267,7 @@ function scrDrawPlayerHUD(_player = noone) {
 					
 					var _icon_count = scrGameIsEventRun() + scrGameIsContinuedRun()
 					
-					draw_text_nt(55 + _icon_count * 12, 35, loc(string(_txt)))
+					draw_text_nt(55 + _icon_count * 12, 35, string(_txt))
 					
 					draw_set_color(c_white)
 					draw_set_halign(fa_center)

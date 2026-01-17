@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndSpawnSuperAlly",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndSpawnSuperAlly",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":2.853005,
-  "exportDir":"",
-  "name":"sndSpawnSuperAlly",
-  "parent":{
-    "name":"Rebel",
-    "path":"folders/Sounds/Mutant/Rebel.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 2.853005,
+  "exportDir": "",
+  "name": "sndSpawnSuperAlly",
+  "parent": {
+    "name": "Rebel",
+    "path": "folders/Sounds/Mutant/Rebel.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndSpawnSuperAlly.wav",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndSpawnSuperAlly.wav",
+  "volume": 1
 }

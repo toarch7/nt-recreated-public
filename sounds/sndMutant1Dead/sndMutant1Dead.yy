@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndMutant1Dead",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndMutant1Dead",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":2,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":1.487676,
-  "exportDir":"",
-  "name":"sndMutant1Dead",
-  "parent":{
-    "name":"Fish",
-    "path":"folders/Sounds/Mutant/Fish.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 2,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 1.487676,
+  "exportDir": "",
+  "name": "sndMutant1Dead",
+  "parent": {
+    "name": "Fish",
+    "path": "folders/Sounds/Mutant/Fish.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndMutant1Dead.wav",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndMutant1Dead.wav",
+  "volume": 1
 }

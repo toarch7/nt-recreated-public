@@ -212,7 +212,8 @@ function mouse_ui_clicked() {
 /// @function mouse_ui_hovered
 /// @param instance
 /// @param is_gui=false
-function mouse_ui_hovered(_instance, _gui = false) {
+/// @param only_active_cursors=false
+function mouse_ui_hovered(_instance, _gui = false, _check_active_cursor = true) {
 	if (is_mouse_over_debug_overlay()) {
 		return false
 	}
@@ -223,7 +224,7 @@ function mouse_ui_hovered(_instance, _gui = false) {
 				|| device_mouse_check_button_pressed(i, mb_left)
 				|| device_mouse_check_button_released(i, mb_left))
 			) {
-				continue
+				if (_check_active_cursor) continue
 			}
 			
 			var _mx = _gui ? device_mouse_x_to_gui(i) : device_mouse_x(i),

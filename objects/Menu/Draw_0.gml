@@ -2,7 +2,7 @@ if lockstep_stop
 	exit
 
 scrDrawSpiral()
-	
+
 // will draw portraits and the letterbox
 scrMenuDrawPlayersOrdered(view_xview, view_yview, scrCampfireMenuDrawRacePortrait)
 

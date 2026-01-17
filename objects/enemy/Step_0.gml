@@ -1,62 +1,43 @@
 if lockstep_stop
 	exit
 
-if wkick > 0 {
-    wkick -= 1
-}
-else if wkick < 0 {
-    wkick += 1
-}
+if (wkick != 0) wkick = approach(wkick, 0, timescale)
 
-if hp <= 0 {
-    instance_destroy()
-}
+if (hp <= 0) instance_destroy()
 
-
-if spr_chrg != -1 {
-    if sprite_index != spr_hurt && sprite_index != spr_chrg {
+if (spr_chrg != -1) {
+    if (sprite_index != spr_hurt && sprite_index != spr_chrg) {
         sprite_index = spr_idle
     }
 
-    if sprite_index == spr_hurt or sprite_index == spr_chrg {
-        if image_index > 2 {
-            sprite_index = spr_idle
-        }
+    if (sprite_index == spr_hurt || sprite_index == spr_chrg) {
+        if (image_index > 2) sprite_index = spr_idle
+    }
+}
+else if (spr_fire != -1) {
+    if (speed <= 0) {
+		if (sprite_index != spr_hurt && sprite_index != spr_fire) {
+			sprite_index = spr_idle
+		}
+    }
+	else if (sprite_index != spr_hurt && sprite_index != spr_fire) {
+		sprite_index = spr_walk
+    }
+	
+    if (sprite_index == spr_hurt) {
+        if (image_index > 2) sprite_index = spr_idle
     }
 }
 else {
-    if spr_fire != -1 {
-        if speed <= 0 {
-            if sprite_index != spr_hurt && sprite_index != spr_fire {
-                sprite_index = spr_idle
-            }
-        }
-		else {
-            if sprite_index != spr_hurt && sprite_index != spr_fire {
-                sprite_index = spr_walk
-            }
-        }
-
-        if sprite_index == spr_hurt {
-            if image_index > 2 {
-                sprite_index = spr_idle
-            }
-        }
-    } else {
-        if speed <= 0 {
-            if sprite_index != spr_hurt {
-                sprite_index = spr_idle
-            }
-        } else {
-            if sprite_index != spr_hurt {
-                sprite_index = spr_walk
-            }
-        }
-        if sprite_index == spr_hurt {
-            if image_index > 2 {
-                sprite_index = spr_idle
-            }
-        }
+	if (speed <= 0) {
+        if (sprite_index != spr_hurt) sprite_index = spr_idle
+    }
+	else if (sprite_index != spr_hurt) {
+        sprite_index = spr_walk
+    }
+    
+	if (sprite_index == spr_hurt) {
+        if (image_index > 2) sprite_index = spr_idle
     }
 }
 

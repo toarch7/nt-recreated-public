@@ -74,18 +74,40 @@ with Player {
 		
 	//
     if scr_skill_get(mut_trigger_fingers) {
-		if reload > 0 {
-			reload = max(1, floor(reload * 0.6))
+		if (reload > 0 || !can_shoot) {
+			reload = floor(reload * 0.6)
 			trigger_fingers_shine = 6
+			
+			if (!reload) {
+				can_shoot = true
+				scrPlayerGunReloadFX(wep)
+				reload = true
+			}
 		}
 		
-		if breload > 0 {
-			breload = max(1, floor(breload * 0.6))
+		if (breload > 0 || !bcan_shoot) {
+			breload = floor(breload * 0.6)
+			trigger_fingers_shine = 6
+			
+			if (!breload) {
+				bcan_shoot = true
+				scrPlayerGunReloadFX(bwep)
+				breload = 0
+			}
 		}
 		
 		var _extra_count = array_length(extra_weps)
 		for(var i = _extra_count - 1; i >= 0; --i) {
-			extra_weps_reload[i] = max(1, floor(extra_weps_reload[i] * 0.6))
+			if (extra_weps_reload[i] <= 0 || extra_weps_can_shoot[i]) continue
+			
+			extra_weps_reload[i] = floor(extra_weps_reload[i] * (1 - power(0.4, i + 1)))
+			trigger_fingers_shine = 6
+			
+			if (!extra_weps_reload[i]) {
+				extra_weps_can_shoot[i] = true
+				scrPlayerGunReloadFX(extra_weps[i])
+				extra_weps_reload[i] = 0
+			}
 		}
 	}
 }

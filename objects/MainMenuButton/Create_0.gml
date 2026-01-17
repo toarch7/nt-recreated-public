@@ -8,6 +8,9 @@ available = 1
 
 appear = 2
 
+tooltip = false
+tooltip_pop = 0
+
 image_speed = 0
 depth = -1000
 

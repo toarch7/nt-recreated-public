@@ -68,7 +68,7 @@ for(var i = start; i < count; i ++) {
 	
 	if item == my_entry {
 		var splat_num = sprite_get_number(sprDailySplat)
-		splat = lerp(splat, splat_num, 0.4)
+		splat = approach(splat, splat_num - 1, 0.4)
 		
 		draw_sprite(sprDailySplat, splat, 24 + xoff, yy)
 		
@@ -93,7 +93,7 @@ for(var i = start; i < count; i ++) {
 		string_supported_info[$ _name] = _use_cjk_font
 	}
 	
-	draw_sprite(sprMapIcon, _image, 58, yy)
+	draw_sprite(sprMapIcon, _image, 42, yy)
 	
 	draw_set_halign(fa_left)
 	

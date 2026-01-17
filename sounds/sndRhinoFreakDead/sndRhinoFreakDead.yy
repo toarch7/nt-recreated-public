@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndRhinoFreakDead",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndRhinoFreakDead",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":1.029014,
-  "exportDir":"",
-  "name":"sndRhinoFreakDead",
-  "parent":{
-    "name":"Freaks",
-    "path":"folders/Sounds/Freaks.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 1.029014,
+  "exportDir": "",
+  "name": "sndRhinoFreakDead",
+  "parent": {
+    "name": "Freaks",
+    "path": "folders/Sounds/Freaks.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndRhinoFreakDead.wav",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndRhinoFreakDead.wav",
+  "volume": 1
 }

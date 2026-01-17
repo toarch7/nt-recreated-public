@@ -4,7 +4,7 @@ if opt_gamepad && (instance_exists(MainMenuButton) or instance_exists(PlayButton
 	
 	var dx = gui_w - 8,
 		dy = gui_h - 40,
-		str = loc("CONFIRM")
+		str = loc("MainMenu:Confirm", "CONFIRM")
 	
 	draw_text_nt(dx, dy, "@s" + str)
 	

@@ -2,6 +2,10 @@ function scr_debug_overlay_toggle() {
 	static __overlay_views_init = true
 	static __last_open_timestamp = -1
 	
+	if (UberCont.public) {
+		if (!is_debug_overlay_open() && scrGameIsEventRun()) exit
+	}
+	
 	if __overlay_views_init {
 		scr_create_debug_overlay_views()
 		__overlay_views_init = false
@@ -13,7 +17,7 @@ function scr_debug_overlay_toggle() {
 	
 	show_debug_log(!is_debug_overlay_open())
 	
-	if !is_debug_overlay_open() {
+	if (!is_debug_overlay_open()) {
 		if ((current_time - __last_open_timestamp) >= 2_000) {
 			scr_debug_overlay_save()
 		}

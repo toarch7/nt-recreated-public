@@ -6,7 +6,7 @@ function scrSave() {
 		
 		if (!public) scr_debug_overlay_save()
 		
-        if global.cheats && file_exists(savepath) {
+        if scr_debug_cheats_enabled() && file_exists(savepath) {
 			var f = file_text_open_read(savepath)
 			
 	        var raw = file_text_read_string(f)

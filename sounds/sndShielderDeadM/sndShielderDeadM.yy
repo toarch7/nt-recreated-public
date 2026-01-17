@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndShielderDeadM",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndShielderDeadM",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":0.740563,
-  "exportDir":"",
-  "name":"sndShielderDeadM",
-  "parent":{
-    "name":"Male",
-    "path":"folders/Sounds/Enemies/IDPD/Shielder/Male.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 0.740563,
+  "exportDir": "",
+  "name": "sndShielderDeadM",
+  "parent": {
+    "name": "Male",
+    "path": "folders/Sounds/Enemies/IDPD/Shielder/Male.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndShielderDeadM.wav",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndShielderDeadM.wav",
+  "volume": 1
 }

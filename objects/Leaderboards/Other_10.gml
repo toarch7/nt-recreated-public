@@ -9,7 +9,8 @@ draw_set_color(c_white)
 
 var mx = device_mouse_x_to_gui(0),
 	my = device_mouse_y_to_gui(0),
-	str = loc("RUN HISTORY")
+	
+	str = loc("R:MainMenu:RunHistory", "RUN HISTORY")
 
 var pointed = point_in_rectangle(mx, my, 32, view_height - 36, view_width - 32, view_height)
 

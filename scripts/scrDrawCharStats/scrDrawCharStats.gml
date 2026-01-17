@@ -31,8 +31,8 @@ function scrDrawCharStats() {
 	    else if (select == Race.Rogue) draw_stat(L("Uniq12", "IDPD KILLS"), _n)
 		/// @loc:note [R:Stats] Important! Stat entries should be as short as possible.
 		/// @loc:note [R:Stats] Total damage taken
-		/// @loc:token [R:Stats] Uniq13 "DAMAGED"
-	    else if (select == Race.BigDog) draw_stat(L("R:Stats:Uniq13", "DAMAGED"), _n)
+		/// @loc:token [R:Stats] Uniq13 "DAMAGE TAKEN"
+	    else if (select == Race.BigDog) draw_stat(L("R:Stats:Uniq13", "DAMAGE TAKEN"), _n)
 		/// @loc:note [R:Stats] Blood gamble luck streak
 		/// @loc:token [R:Stats] Uniq14 "LUCK STREAK"
 	    else if (select == Race.Skeleton) draw_stat(L("R:Stats:Uniq14", "LUCK STREAK"), _n)

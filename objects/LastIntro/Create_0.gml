@@ -6,4 +6,8 @@ spr_dead = sprDeskDead
 event_inherited()
 transtime = 0
 
-if instance_exists(Cinematic) instance_create(x - 40, y + 32, Messenger)
+if (instance_exists(Cinematic)) {
+	instance_create(x - 40, y + 32, Messenger)
+}
+
+spr_shadow_y += 4

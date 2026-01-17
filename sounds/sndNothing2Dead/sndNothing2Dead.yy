@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndNothing2Dead",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndNothing2Dead",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":2,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":6.0,
-  "exportDir":"",
-  "name":"sndNothing2Dead",
-  "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 2,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 6,
+  "exportDir": "",
+  "name": "sndNothing2Dead",
+  "parent": {
+    "name": "Sounds",
+    "path": "folders/Sounds.yy"
   },
-  "preload":true,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndNothing2Dead.wav",
-  "volume":1.0,
+  "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndNothing2Dead.wav",
+  "volume": 1
 }

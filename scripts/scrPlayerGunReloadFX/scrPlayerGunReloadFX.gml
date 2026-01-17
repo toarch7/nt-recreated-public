@@ -1,11 +1,13 @@
 function scrPlayerGunReloadFX(_weapon) {
+	if (!scr_weapon_is_valid(_weapon)) exit
+	
 	var _type = scr_weapon_get_type(_weapon),
 		_cost = scr_weapon_get_cost(_weapon)
 	
 	if (ammo[_type] < _cost && _type != Ammo.None) scrEmpty()
 		
-	/**/ if _type == Ammo.None snd_play(sndMeleeFlip)
-	else if _type == Ammo.Bolts snd_play(sndCrossReload)
+	/**/ if (_type == Ammo.None) snd_play(sndMeleeFlip)
+	else if (_type == Ammo.Bolts) snd_play(sndCrossReload)
 	
 	var _name = scr_weapon_get_name(_weapon),
 		_is_plasma = string_starts_with(_name, "PLASMA"),
@@ -33,7 +35,7 @@ function scrPlayerGunReloadFX(_weapon) {
 			}
 		}
 		
-		wkick = -min(5, _cost)
+		if (wep == _weapon) wkick = -min(5, _cost)
 		
 		snd_play(sndShotReload)
 	}

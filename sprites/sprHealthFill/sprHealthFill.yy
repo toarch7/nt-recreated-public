@@ -109,7 +109,31 @@
     }
   ],
   "name": "sprHealthFill",
-  "nineSlice": null,
+  "nineSlice": {
+    "$GMNineSliceData": "",
+    "bottom": 0,
+    "enabled": false,
+    "guideColour": [
+      4294902015,
+      4294902015,
+      4294902015,
+      4294902015
+    ],
+    "highlightColour": 1728023040,
+    "highlightStyle": 0,
+    "left": 0,
+    "resourceType": "GMNineSliceData",
+    "resourceVersion": "2.0",
+    "right": 0,
+    "tileMode": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "top": 0
+  },
   "origin": 0,
   "parent": {
     "name": "UIs",

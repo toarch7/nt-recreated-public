@@ -139,7 +139,7 @@ function scrOptionsUpdate() {
 			gamepad_set_color(0, global.player_color)
 		}
 		
-		global.cheats = (opt_console or opt_griller or opt_practice)
+		global.cheats = (opt_console || opt_griller || opt_practice)
 		
 		audio_falloff_set_model(opt_3Dsound ? audio_falloff_linear_distance : audio_falloff_none)
 		//apparentlythat didn't work maybe im stupid

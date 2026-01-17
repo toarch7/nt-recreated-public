@@ -5,7 +5,8 @@ function scrDrawMiscHUD() {
 		var _cheat_scale = 0.67,
 			_font_offset = font_get_height_diff(),
 			_low_x = 16 * _cheat_scale,
-			_low_y = view_height - (_font_offset + 16) * _cheat_scale
+			_low_y = view_height - (_font_offset + 16) * _cheat_scale,
+			_gamecont_text_drawn = false
 		
 		draw_set_color(c_white)
 		
@@ -13,26 +14,48 @@ function scrDrawMiscHUD() {
 		if UberCont.opt_showtimer {
 			draw_text_nt(view_width - 1, _low_y, timer_string)
 			_low_y -= font_get_string_height(timer_string)
+			_gamecont_text_drawn = true
 		}
 		
 		if UberCont.opt_showarea && !instance_exists(GenCont) && !scrGameIsPaused() && room == romGame {
 			var _area_string = scrAreaGetMapName(GameCont.area, GameCont.subarea, GameCont.loops)
 			draw_text_nt(view_width - 1, _low_y, _area_string)
 			_low_y -= font_get_string_height(_area_string)
+			_gamecont_text_drawn = true
 		}
 		draw_align()
 	
-		if global.cheats {
+		if (global.cheats || scr_debug_cheats_enabled()) {
 			var _cheats;
 			
-			with (UberCont) _cheats = [ opt_griller, opt_practice ]
+			with (UberCont) _cheats = [
+				global.__debug_immortality,
+				global.__debug_infammo,
+				global.__debug_noreload,
+				opt_griller,
+				opt_practice
+			]
 			
 			var _count = array_length(_cheats)
 			
-			_low_y -= 4
+			_low_y -= (!_gamecont_text_drawn && (scrGameIsPaused() || UberCont.version_text_drawn)) ? 12 : 4
 			
-			for(var i = 0; i < _count; i ++) {
-				if _cheats[i] {
+			if (_count == 0) {
+				draw_set_font(fntSmaller)
+				draw_align(fa_right, fa_middle)
+				
+				var _string = "[cheats]"
+				draw_text_nt(view_width - _low_x, _low_y, _string)
+				
+				_low_x -= font_get_string_width(_string)
+				
+				draw_reset_font()
+				draw_align()
+			}
+			else {
+				for(var i = 0; i < _count; i ++) {
+					if (!_cheats[i]) continue
+					
 					draw_sprite_ext(sprCheatIndicatorHUD, i,
 						view_width - _low_x, _low_y, _cheat_scale, _cheat_scale, 0, c_white, 1)
 					

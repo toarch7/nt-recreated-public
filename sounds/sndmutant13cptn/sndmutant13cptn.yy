@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndMutant13Cptn",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndMutant13Cptn",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":2,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":2.428688,
-  "exportDir":"",
-  "name":"sndMutant13Cptn",
-  "parent":{
-    "name":"Speech",
-    "path":"folders/Sounds/Mutant/Speech.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 2,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 2.428688,
+  "exportDir": "",
+  "name": "sndMutant13Cptn",
+  "parent": {
+    "name": "Speech",
+    "path": "folders/Sounds/Mutant/Speech.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndMutant13Cptn.wav",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndMutant13Cptn.wav",
+  "volume": 1
 }

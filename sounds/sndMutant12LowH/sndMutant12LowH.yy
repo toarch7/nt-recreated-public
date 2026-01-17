@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndMutant12LowH",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndMutant12LowH",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":2,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":1.414433,
-  "exportDir":"",
-  "name":"sndMutant12LowH",
-  "parent":{
-    "name":"Sounds",
-    "path":"folders/Sounds.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 2,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 1.414433,
+  "exportDir": "",
+  "name": "sndMutant12LowH",
+  "parent": {
+    "name": "Sounds",
+    "path": "folders/Sounds.yy"
   },
-  "preload":true,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndMutant12LowH.wav",
-  "volume":1.0,
+  "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndMutant12LowH.wav",
+  "volume": 1
 }

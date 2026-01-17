@@ -35,7 +35,7 @@ switch image_index {
 				
 				// Daily & Weekly
 				if num == 1 || num == 2 {
-					if global.cheats {
+					if (scr_debug_cheats_enabled() && UberCont.public) {
 						available = false
 					}
 					
@@ -43,6 +43,14 @@ switch image_index {
 						|| (num == 2 && !UberCont.can_weekly)
 					) {
 						image_blend = c_uidark
+					}
+				}
+				else if num == 4 {
+					if global.__debug_menu_options {
+						image_blend = c_uidark
+					}
+					else {
+						available = false
 					}
 				}
             }

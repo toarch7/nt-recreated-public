@@ -10,9 +10,16 @@ var kills = history.kills[viewtype == "weekly"]
 var perpage = 6
 var maxpages = ceil(len / perpage)
 
-if instance_exists(Menu) {
-    if alpha < 0.5 alpha += 0.1
-
+if (instance_exists(Menu)) {
+    if (alpha < 0.8) {
+		if (alpha >= 0.5) {
+			alpha += 0.1
+		}
+		else {
+			alpha = 0.5
+		}
+	}
+	
     draw_set_color(c_black)
     draw_set_alpha(alpha)
     draw_rectangle(0, 0, view_width, view_height, 0)
@@ -20,46 +27,34 @@ if instance_exists(Menu) {
     draw_set_color(c_white)
 }
 else {
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_middle)
+    draw_align(fa_center, fa_middle)
 	
 	/// @loc:token [R:MainMenu] RunHistory:daily "DAILY"
 	/// @loc:token [R:MainMenu] RunHistory:weekly "WEEKLY"
 	var _viewtype_string = loc(
 		"R:MainMenu", "RunHistory" + string_lower(viewtype), string_upper(viewtype))
     
-	draw_text_bigname(view_width / 2, 18, _viewtype_string, c_uigray)
-    draw_set_halign(fa_left)
-    draw_set_valign(fa_top)
+	draw_text_bigname(view_width / 2, 16, _viewtype_string, c_uigray)
+	
+    draw_align()
 }
 
-draw_set_halign(fa_left)
-draw_set_valign(fa_middle)
-
-if !array_length(keys) {
-    draw_set_halign(fa_center)
-    draw_set_valign(fa_middle)
-    draw_text_nt(view_width / 2, view_height / 2, loc("@wNOTHING HERE YET..."))
-    draw_set_halign(fa_left)
-    draw_set_valign(fa_top)
-
+if (!array_length(keys)) {
+    draw_align(fa_center, fa_middle)
+    draw_text_nt(view_width / 2, view_height / 2, loc("R:MainMenu:RunHistoryEmpty", "@wRUN HISTORY IS EMPTY"))
+    draw_align()
     exit
 }
 
 var avg = kills / len
 
-/// @loc:token [R:MainMenu] RunHistoryScoreAVG "@dAVERAGE SCORE"
-draw_text_nt(38, 14, loc("R:MainMenu:RunHistoryScoreAVG", "@dAVERAGE SCORE") + ":#" + string(avg), 0.67)
+draw_align(fa_center, fa_top)
+/// @loc:token [R:MainMenu] RunHistoryScoreAVG "@dSCORE AVG."
+draw_text_nt(view_width div 2, 22, loc("R:MainMenu:RunHistoryScoreAVG", "@dAVG. SCORE") + ":" + string(avg))
 
-draw_set_color(c_white)
-
-draw_set_valign(fa_top)
-
-draw_set_halign(fa_center)
+#region Page controls
 
 draw_text_nt(view_width / 2, view_height - 18, string(page + 1) + "/" + string(maxpages))
-
-draw_set_halign(fa_left)
 
 var touchr = 0,
     touchl = 0
@@ -111,38 +106,41 @@ if maxpages > 1 {
 var pg = page * perpage
 var maxpg = pg + perpage
 
-if maxpg > len {
-    maxpg = len
-}
+if (maxpg > len) maxpg = len
+
+#endregion
 
 time ++
 
+draw_align()
 for (var i = pg; i < maxpg; i++) {
     var anim = clamp(time - (i - pg), 0, 3)
 	
 	var run_id = keys[i],
-		run = typehistory[$ run_id]
+		run = typehistory[$ run_id],
+		has_skills = array_length(run.skills),
+		has_ultra = is_array(run[$ "ultra_hud"]) || variable_struct_exists(run, "ultra")
 	
     var str = month_name_short(run.month) + ". " + string_pad_zeroes(run.day, 1) + " " + scrAreaGetMapName(run.area, run.subarea, run.loop)
 	
     draw_sprite(sprDailyHistorySplat, anim, view_width / 2, yy + 3)
 	
-	if anim >= 1
-		draw_text_nt(27, yy + 2 - 6 * (array_length(run.skills) > 0), str)
+	if (anim >= 1) draw_text_nt(27, yy + 2 - 6 * (has_skills || has_ultra), str)
 	
 	if anim >= 2 {
-	    if run.killed_by != mskNone && is_string(run.killed_by) {
-	        var spr = asset_get_index(run.killed_by)
+	    if (variable_struct_exists(run, "deathcause") || is_string(run.killed_by)) {
+	        var spr;
 			
-	        if !sprite_exists(spr)
-				spr = mskNone
+			if (variable_struct_exists(run, "deathcause")) {
+				spr = scrDeathCauseGetSprite(run.deathcause)
+			}
+			else {
+				spr = asset_get_index(run.killed_by)
+		        if (!sprite_exists(spr)) spr = mskNone
+			}
 			
-	        if spr == sprNothing2Idle {
-	            spr = sprKilledByThrone2
-	        }
-			else if spr == sprNothingMiddle {
-	            spr = sprKilledByThrone
-	        }
+			/**/ if (spr == sprNothing2Idle) spr = sprKilledByThrone2
+			else if (spr == sprNothingMiddle) spr = sprKilledByThrone
 			
 	        draw_sprite_ext(spr, frame, view_width - 96, yy + 3, 0.7, 0.7, 0, c_white, 1)
 	    }
@@ -150,15 +148,44 @@ for (var i = pg; i < maxpg; i++) {
 	    draw_sprite(sprKillsIcon, 0, view_width - 72, yy + 3)
 	    draw_text_nt(view_width - 56, yy, string(run.kills))
 		
-	    if run.bwep {
-	        draw_sprite(wep_sprt[run.bwep], 0, view_width / 2 + 10 + 4, yy + 4)
-	        draw_sprite(wep_sprt[run.wep], 0, view_width / 2 + 10 - 4, yy - 2)
+		var _extra_weps = run[$ "extra_weps"]
+		
+		if (is_array(_extra_weps) && array_length(_extra_weps)) {
+			var _wep_list = array_union([ run.wep, run.bwep ], _extra_weps),
+				_count = array_length(_wep_list),
+				_dx = view_width * 0.5 - _count * 3 + 10,
+				_dy = yy - _count * 2 + 6
 			
-	        draw_sprite_ext(sprLoadoutCrown, run.crown, view_width / 2 - 4, yy, 0.5, 0.5, 0, c_white, 1)
+			for(var i = 0; i < _count; ++i) {
+				draw_set_alpha(i >= 2 ? power(0.8, i - 2) : 1)
+				self.__draw_weapon(_wep_list[i], _dx + i, _dy)
+				
+				_dx += 5
+				_dy += 3
+			}
+			
+			draw_set_alpha(1)
+			
+	        draw_sprite_ext(
+				sprLoadoutCrown, run.crown,
+				
+				view_width div 2 + min(3, _count) - 12,
+				yy + min(3, _count) * 0.5 + 2,
+				
+				0.5, 0.5, 0, c_white, 1)
+		}
+	    else if (run.bwep) {
+	        self.__draw_weapon(run.bwep, view_width / 2 + 10 + 4, yy + 4)
+	        self.__draw_weapon(run.wep, view_width / 2 + 10 - 4, yy - 2)
+			
+	        draw_sprite_ext(sprLoadoutCrown, run.crown,
+				view_width div 2 - 4, yy, 0.5, 0.5, 0, c_white, 1)
 	    }
 		else {
-	        draw_sprite_ext(sprLoadoutCrown, run.crown, view_width / 2 - 4, yy + 3, 0.5, 0.5, 0, c_white, 1)
-	        draw_sprite(wep_sprt[run.wep], 0, view_width / 2 + 10, yy + 3)
+	        draw_sprite_ext(sprLoadoutCrown, run.crown,
+				view_width div 2 - 4, yy + 3, 0.5, 0.5, 0, c_white, 1)
+	        
+			self.__draw_weapon(run.wep, view_width div 2 + 10, yy + 3)
 	    }
 		
 	    draw_sprite(sprMapIcon, scr_race_get_skin_subimage(run.race, run.skin), 14, yy + 4)
@@ -167,23 +194,22 @@ for (var i = pg; i < maxpg; i++) {
 	if anim >= 3 {
 	    var skills = run.skills,
 			len = array_length(skills),
-			ultra_index = -1,
 			px = 0
 		
-		if (variable_struct_exists(run, "ultra_got")) {
-			var ultras = run.ultra_got[run.race]
-			for(var ultra = 0; ultra < array_length(ultras); ++ultra) {
-				if (ultras[ultra]) ultra_index = (run.race - 1) * 3 + ultra
+		if (is_array(run[$ "ultra_hud"])) {
+			var ultras = run.ultra_hud,
+				ultra_count = array_length(ultras)
+			
+			for(var i = 0; i < ultra_count; ++i) {
+				draw_sprite_ext(sprEGIconHUD, ultras[i], 30 + px * 8, yy + 10, 0.5, 0.5, 0, c_white, 1)
+				px ++
 			}
 		}
 		else if (variable_struct_exists(run, "ultra")) {
-			ultra_index = (run.race - 1) * 3 + run.ultra - 1
+			var _img = run.race * 3 + run.ultra
+			draw_sprite_ext(sprEGIconHUD, _img, 30 + px * 8, yy + 10, 0.5, 0.5, 0, c_white, 1)
+			px ++
 		}
-		
-	    if ultra_index >= 0 {
-			draw_sprite_ext(sprEGIconHUD, ultra_index, 30, yy + 10, 0.5, 0.5, 0, c_white, 1)
-	        px ++
-	    }
 		
 	    for (var j = 0; j < len; j++) {
 	        var skill = skills[j]

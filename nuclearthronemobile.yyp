@@ -1134,7 +1134,6 @@
     {"id":{"name":"scrMoveTopPots","path":"scripts/scrMoveTopPots/scrMoveTopPots.yy",},},
     {"id":{"name":"scrOnBanditKill","path":"scripts/scrOnBanditKill/scrOnBanditKill.yy",},},
     {"id":{"name":"scrOnBossKill","path":"scripts/scrOnBossKill/scrOnBossKill.yy",},},
-    {"id":{"name":"scrOnOff","path":"scripts/scrOnOff/scrOnOff.yy",},},
     {"id":{"name":"scrOnPopoKill","path":"scripts/scrOnPopoKill/scrOnPopoKill.yy",},},
     {"id":{"name":"scrOptionsKeymaps","path":"scripts/scrOptionsKeymaps/scrOptionsKeymaps.yy",},},
     {"id":{"name":"scrOptionsMenu","path":"scripts/scrOptionsMenu/scrOptionsMenu.yy",},},

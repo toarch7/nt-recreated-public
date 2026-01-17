@@ -1,5 +1,7 @@
 /// @description Unlock, version, pause, etc
 
+version_text_drawn = false
+
 if (!instance_exists(Player) or instance_exists(GenCont)) && room == romGame {
 	var _menu_credits = instance_exists(Credits) && !instance_exists(GameCont)
 	
@@ -22,6 +24,8 @@ if (!instance_exists(Player) or instance_exists(GenCont)) && room == romGame {
 		draw_set_halign(fa_left)
 		draw_set_valign(fa_top)
 		draw_reset_font()
+		
+		version_text_drawn = true
     }
 }
 else if MultiplayerConfig or (global.custom_seed or opt_practice) {

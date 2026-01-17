@@ -48,6 +48,13 @@ function scr_debug_overlay_save() {
 	ini_close()
 }
 
+function scr_debug_cheats_enabled() {
+	gml_pragma("forceinline")
+	return global.__debug_menu_options || global.__debug_hitboxes
+		|| global.__debug_health || global.__debug_immortality
+		|| global.__debug_noreload || global.__debug_infammo || global.cheats
+}
+
 function scr_create_debug_overlay_views() {
 	
 	scr_debug_overlay_load()
@@ -73,11 +80,27 @@ function scr_create_debug_overlay_views() {
 			}
 		})
 		
+		dbg_button("Dump all sprites", function() {
+			var _dir = game_directory + "exportsprites"
+            if (!directory_exists(_dir)) directory_create(_dir)
+
+            _dir += "/"
+			
+			print("Exporting sprites to", _dir, "...")
+			
+			call_after(1, method({dir: _dir}, function() {
+				array_foreach(asset_get_ids(asset_sprite), function(_sprite) {
+	                sprite_strip_save(_sprite, $"{dir}/{sprite_get_name(_sprite)}.png")
+	            })
+			
+	            print("Export finished.")
+			}))
+		})
+		
 	#endregion
 	
 	#region Transit
 		
-		dbg_view("Goto")
 		static __area_transit_button = function(_area, _subarea) {
 			return method({ area: _area, subarea: _subarea }, function() {
 				if (!instance_exists(GameCont)) {
@@ -117,6 +140,7 @@ function scr_create_debug_overlay_views() {
 			})
 		}
 		
+		dbg_view("Goto", false)
 		dbg_section("Area", true)
 		
 		dbg_slider_int(ref_create(global, "__debug_transit_loop"), -1, 10, "Loop")
@@ -157,11 +181,12 @@ function scr_create_debug_overlay_views() {
 					__area_transit_button(_area + 100, 1), 110)
 			}
 		}
+		
 	#endregion
 	
 	#region Mutations
 	
-		dbg_view("Mutations")
+		dbg_view("Mutations", false)
 		dbg_section("Skills", true)
 		
 		for(var i = 1; i <= maxskill; ++i) {

@@ -1,5 +1,5 @@
 function scrSendDailyData() {
-    if (!scrGameIsEventRun() || is_undefined(UberCont.update_info) || global.cheats) exit
+    if (!scrGameIsEventRun() || is_undefined(UberCont.update_info) || (!UberCont.public || scr_debug_cheats_enabled())) exit
 	
 	if (scrGameIsDailyRun()) UberCont.can_daily = false
 	
@@ -19,10 +19,8 @@ function scrSendDailyData() {
             }
         }
 
-        if is_undefined(d[$ "kills"]) {
-            d.kills = [0, 0]
-        }
-
+        if (is_undefined(d[$ "kills"])) d.kills = [0, 0]
+        
         var skillsarr = []
         var l = GameCont.skills
         var runs = 0
@@ -37,21 +35,32 @@ function scrSendDailyData() {
         }
 
         var list = UberCont.weekly_run ? d.weekly : d.daily
+		
         var _d = list[$ string(global.seed)]
 
         if is_undefined(_d) or (!is_undefined(_d) && _d.kills < GameCont.kills) {
-            if UberCont.weekly_run {
+            if scrGameIsWeeklyRun() {
                 if !is_undefined(_d) {
                     d.kills[1] += max(0, GameCont.kills - _d.kills)
                 }
-				else d.kills[1] += GameCont.kills
-            }
+				else {
+					d.kills[1] += GameCont.kills
+				}
+			}
 			else d.kills[0] += GameCont.kills
+			
+			var _deathcause_sprite = scrDeathCauseGetSprite(GameCont.deathcause),
+				_deathcause_sprite_name = undefined
+			
+			if (sprite_exists(_deathcause_sprite)) {
+				_deathcause_sprite_name = sprite_get_name(_deathcause_sprite)
+			}
 
             list[$ string(global.seed)] = {
                 race: race,
                 skin: bskin,
                 ultra_got: GameCont.ultra_got,
+                ultra_hud: GameCont.ultra_hud,
 				ultra: 0,
 
                 skills: skillsarr,
@@ -59,6 +68,7 @@ function scrSendDailyData() {
 
                 wep: wep,
                 bwep: bwep,
+				extra_weps: extra_weps,
                 crown: GameCont.crown,
 
                 day: current_day,
@@ -69,7 +79,8 @@ function scrSendDailyData() {
                 area: GameCont.area,
                 subarea: GameCont.subarea,
                 loop: GameCont.loops,
-                killed_by: GameCont.deathcause,
+                killed_by: _deathcause_sprite_name,
+				deathcause: GameCont.deathcause,
                 kills: GameCont.kills
             }
 
@@ -111,19 +122,17 @@ function scrSendDailyData() {
             if ds_list_size(GameCont.skills) {
                 mut_list = "\n**Muts**:\n" + mut_list
             }
-
-            if GameCont.level >= 10 {
-				var _icons = ulticon
-				with (GameCont) {
-	                var _ultras = ultra_got[_race],
-						_count = array_length(_ultras)
+			
+			var _icons = ulticon
+			with (GameCont) {
+	            var _ultras = ultra_got[_race],
+					_count = array_length(_ultras)
 					
-					for(var i = 1; i < _count; ++i) {
-						if (_ultras[i]) mut_list += _icons[_race, i]
-		            }
-				}
+				for(var i = 1; i < _count; ++i) {
+					if (_ultras[i]) mut_list += _icons[_race, i]
+		        }
 			}
-
+			
             var week = 0
 
             if UberCont.weekly_run {
@@ -146,13 +155,24 @@ function scrSendDailyData() {
 				
 				_gap = "<:none:763720063140233226> <:none:763720063140233226> <:none:763720063140233226> <:Kills:763751370901159979>",
 				
-				_weapons = "\n\n**Weapons**:\n"
-					+ string_lower_camel(scr_weapon_get_name(wep), true)
-					+ (bwep ? ", " + string_lower_camel(scr_weapon_get_name(bwep), true) : ""),
+				var _weapon_list = scrPlayerGetWeapons(id),
+					_weapon_count = array_length(_weapon_list),
+					_weapons = "\n\n**Weapons**:\n",
+					_crown = "\n**Crown**: " + _crown_icon,
+					_time = "\n**Time**: " + time,
+			
+			if (_weapon_count) {
+				var _weapon_name = scr_weapon_get_name(array_first(_weapon_list))
+				_weapons += string_lower_camel(_weapon_name, true)
 				
-				_crown = "\n**Crown**: " + _crown_icon,
-				
-				_time = "\n**Time**: " + time,
+				for(var i = 1; i < _weapon_count; ++i) {
+					if (scr_weapon_is_valid(_weapon_list[i])) {
+						var _weapon_name = scr_weapon_get_name(_weapon_list[i])
+						_weapons += ", " + string_lower_camel(_weapon_name, true)
+					}
+				}
+			}
+			else _weapons += "**\*none\***"
 			
             var result = {
                 embeds: [{

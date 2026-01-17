@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndAreaLoaded",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndAreaLoaded",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":1.965351,
-  "exportDir":"",
-  "name":"sndAreaLoaded",
-  "parent":{
-    "name":"SFX",
-    "path":"folders/Sounds/SFX.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 1.965351,
+  "exportDir": "",
+  "name": "sndAreaLoaded",
+  "parent": {
+    "name": "SFX",
+    "path": "folders/Sounds/SFX.yy"
   },
-  "preload":true,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndAreaLoaded.wav",
-  "volume":1.0,
+  "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndAreaLoaded.wav",
+  "volume": 1
 }

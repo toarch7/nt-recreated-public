@@ -1,45 +1,39 @@
 if lockstep_stop
 	exit
 
-if image_index < 1
-image_index += random(0.04)
-else
-image_index += 0.4
+scrFirstFrameAnim(0.4)
 
-var player = instance_nearest(x, y, Player)
+var _least_strikes = 100,
+	_player = noone
 
-if instance_exists(player) {
-	if point_distance(x,y,player.x,player.y) < 32 + (scr_skill_get(3) * 64) or instance_exists(Portal) {
-		var dir = point_direction(x, y, player.x, player.y),
-			xx = ldrx(6, dir),
-			yy = ldry(6, dir)
-		
-		if place_free(x + xx, y)
-			x += xx
-		
-		if place_free(x, y + yy)
-			y += yy
+with (Player) {
+	if (race == Race.Rogue && rogue_ammo < _least_strikes) {
+		_least_strikes = rogue_ammo
+		_player = id
 	}
 }
 
-if instance_exists(player) && place_meeting(x, y, Portal) {
-	var least = 100,
-		player = noone
+if (instance_exists(_player)) {
+	var _distance = 32 + scr_skill_get(mut_plutonium_hunger) * 64
 	
-	with Player {
-		if (race == Race.Rogue && rogue_ammo < least) {
-			least = rogue_ammo
-			player = id
+	if (point_distance(x, y, _player.x, _player.y) < _distance || instance_exists(Portal)) {
+		var _direction = point_direction(x, y, _player.x, _player.y),
+			_x = ldrx(6, _direction),
+			_y = ldry(6, _direction)
+		
+		if (place_free(x + _x, y)) x += _x
+		if (place_free(x, y + _y)) y += _y
+	}
+	
+	if (place_meeting(x, y, Portal)) {
+		if (instance_exists(_player)) {
+			x = _player.x
+			y = _player.y
 		}
-	}
-	
-	if instance_exists(player) {
-		x = player.x
-		y = player.y
-	}
-	
-    with (player) with (other) {
-		event_perform(ev_collision, Player)
+		
+	    with (_player) with (other) {
+			event_perform(ev_collision, _player)
+		}
 	}
 }
 

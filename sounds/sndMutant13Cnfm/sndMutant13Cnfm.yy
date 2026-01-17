@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndMutant13Cnfm",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndMutant13Cnfm",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":3,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":1.0773923,
-  "exportDir":"",
-  "name":"sndMutant13Cnfm",
-  "parent":{
-    "name":"BigDog",
-    "path":"folders/Sounds/Mutant/BigDog.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 3,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 1.0773923,
+  "exportDir": "",
+  "name": "sndMutant13Cnfm",
+  "parent": {
+    "name": "BigDog",
+    "path": "folders/Sounds/Mutant/BigDog.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndMutant13Cnfm.ogg",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndMutant13Cnfm.ogg",
+  "volume": 1
 }

@@ -15,3 +15,12 @@ with (Player) if (is_me) {
 }
 
 if (daily_time) daily_time -= _elapsed
+
+if (public && scrGameIsEventRun()
+	&& (is_debug_overlay_open() || scr_debug_cheats_enabled())
+) {
+	global.__debug_immortality = false
+	global.__debug_noreload = false
+	global.__debug_infammo = false
+	scr_debug_overlay_toggle()
+}

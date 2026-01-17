@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndEyesLoop",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndEyesLoop",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":4.005,
-  "exportDir":"",
-  "name":"sndEyesLoop",
-  "parent":{
-    "name":"Eyes",
-    "path":"folders/Sounds/Mutant/Eyes.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 4.005,
+  "exportDir": "",
+  "name": "sndEyesLoop",
+  "parent": {
+    "name": "Eyes",
+    "path": "folders/Sounds/Mutant/Eyes.yy"
   },
-  "preload":true,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndEyesLoop.wav",
-  "volume":1.0,
+  "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndEyesLoop.wav",
+  "volume": 1
 }

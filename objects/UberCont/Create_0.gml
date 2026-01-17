@@ -5,6 +5,7 @@
 global.string_split_list = ds_list_create()
 
 version = GAME_VERSION
+version_text_drawn = false
 public = true
 
 native_cursor_inst = -1

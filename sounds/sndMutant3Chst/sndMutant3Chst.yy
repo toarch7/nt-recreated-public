@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndMutant3Chst",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndMutant3Chst",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":2,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":0.69568,
-  "exportDir":"",
-  "name":"sndMutant3Chst",
-  "parent":{
-    "name":"Eyes",
-    "path":"folders/Sounds/Mutant/Eyes.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 2,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 0.69568,
+  "exportDir": "",
+  "name": "sndMutant3Chst",
+  "parent": {
+    "name": "Eyes",
+    "path": "folders/Sounds/Mutant/Eyes.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndMutant3Chst.wav",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndMutant3Chst.wav",
+  "volume": 1
 }

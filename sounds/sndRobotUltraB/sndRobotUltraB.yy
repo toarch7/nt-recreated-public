@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndRobotUltraB",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndRobotUltraB",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":3,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":4.519014,
-  "exportDir":"",
-  "name":"sndRobotUltraB",
-  "parent":{
-    "name":"Ultras",
-    "path":"folders/Sounds/Ultras.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 3,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 4.519014,
+  "exportDir": "",
+  "name": "sndRobotUltraB",
+  "parent": {
+    "name": "Ultras",
+    "path": "folders/Sounds/Ultras.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndRobotUltraB.ogg",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndRobotUltraB.ogg",
+  "volume": 1
 }

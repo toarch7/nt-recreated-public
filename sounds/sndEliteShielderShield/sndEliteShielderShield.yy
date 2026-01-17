@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndEliteShielderShield",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndEliteShielderShield",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":0.80269843,
-  "exportDir":"",
-  "name":"sndEliteShielderShield",
-  "parent":{
-    "name":"EliteShielder",
-    "path":"folders/Sounds/Enemies/IDPD/EliteShielder.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 0.80269843,
+  "exportDir": "",
+  "name": "sndEliteShielderShield",
+  "parent": {
+    "name": "EliteShielder",
+    "path": "folders/Sounds/Enemies/IDPD/EliteShielder.yy"
   },
-  "preload":true,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndEliteShielderShield.wav",
-  "volume":1.0,
+  "preload": true,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndEliteShielderShield.wav",
+  "volume": 1
 }

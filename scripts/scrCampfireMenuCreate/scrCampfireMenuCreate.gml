@@ -330,6 +330,8 @@ function scrMenuLoadoutGetPlayerDrawAlignment(_index) {
 function scrCampfireMenuDrawRacePortrait(_x, _y, _index, _race, _skin, _halign, _valign) {
 	assert(!(_halign == fa_center || _valign == fa_middle))
 	
+	if (instance_exists(DailyList)) exit
+	
 	var _w = gui_w,
 		_h = gui_h,
 		
@@ -706,13 +708,13 @@ function scrMenuDrawLoadout(_pinst) {
 				if (_tooltip != "") {
 					_tooltip += "\n"
 				}
-				_tooltip += "\n" + loc("Weapons", _primary_weapon, "Name", scr_weapon_get_name(_primary_weapon))
+				_tooltip += loc("Weapons", _primary_weapon, "Name", scr_weapon_get_name(_primary_weapon))
 			}
 			if (scr_weapon_is_valid(_secondary_weapon)) {
 				if (_tooltip != "") {
 					_tooltip += "\n"
 				}
-				_tooltip += "\n" + loc("Weapons", _secondary_weapon, "Name", scr_weapon_get_name(_secondary_weapon))
+				_tooltip += loc("Weapons", _secondary_weapon, "Name", scr_weapon_get_name(_secondary_weapon))
 			}
 			
 			_tooltip_x = _splat_x - 55

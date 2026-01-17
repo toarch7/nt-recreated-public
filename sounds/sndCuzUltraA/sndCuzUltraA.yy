@@ -1,26 +1,26 @@
 {
-  "$GMSound":"v2",
-  "%Name":"sndCuzUltraA",
-  "audioGroupId":{
-    "name":"audiogroup_default",
-    "path":"audiogroups/audiogroup_default",
+  "$GMSound": "v2",
+  "%Name": "sndCuzUltraA",
+  "audioGroupId": {
+    "name": "audiogroup_default",
+    "path": "audiogroups/audiogroup_default"
   },
-  "bitDepth":1,
-  "channelFormat":0,
-  "compression":0,
-  "compressionQuality":4,
-  "conversionMode":0,
-  "duration":2.2506576,
-  "exportDir":"",
-  "name":"sndCuzUltraA",
-  "parent":{
-    "name":"Cuz",
-    "path":"folders/Sounds/Cuz.yy",
+  "bitDepth": 1,
+  "channelFormat": 0,
+  "compression": 0,
+  "compressionQuality": 4,
+  "conversionMode": 0,
+  "duration": 2.2506576,
+  "exportDir": "",
+  "name": "sndCuzUltraA",
+  "parent": {
+    "name": "Cuz",
+    "path": "folders/Sounds/Cuz.yy"
   },
-  "preload":false,
-  "resourceType":"GMSound",
-  "resourceVersion":"2.0",
-  "sampleRate":44100,
-  "soundFile":"sndCuzUltraA.wav",
-  "volume":1.0,
+  "preload": false,
+  "resourceType": "GMSound",
+  "resourceVersion": "2.0",
+  "sampleRate": 44100,
+  "soundFile": "sndCuzUltraA.wav",
+  "volume": 1
 }
