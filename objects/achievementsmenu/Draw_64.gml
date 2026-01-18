@@ -1,66 +1,69 @@
 if lockstep_stop
 	exit
 
-var xx = 56, yy = 48
+var _visible_area_height = view_height - LETTERBOX_SIZE * 2,
+	_scroll = ypos,
+	_drawx = 56,
+	_drawy = 48
 
 draw_set_valign(fa_top)
 
 for(var i = 0; i <= achievementmax; i ++) {
-	if view_height - (yy - ypos) > 0 {
-		draw_sprite_stretched_ext(sprAchievementSplash, 0, 8, yy - ypos - 10, max(0, anim[i]), 38, c_black, 0.75)
+	if ((_drawy - _scroll) > view_height) break
+	if ((_drawy + _visible_area_height - LETTERBOX_SIZE) < _scroll) {
+		_drawy += 40
+		continue
+	}
+	
+	draw_sprite_stretched_ext(sprAchievementSplash, 0, 8, _drawy - _scroll - 10, max(0, anim[i]), 38, c_black, 0.75)
+	
+	anim[i] = lerp(anim[i], view_width - 32, 0.4)
+	
+	if chiev_hide[i] && !scrAchievementIsUnlocked(i) {
+		draw_sprite_ext(sprButtonAchievements, 0, _drawx - 28, _drawy + 10 - _scroll, 1, 1, 0, c_black, 1)
+		/// @loc:token [R:MainMenu] AchievementHidden "HIDDEN"
+		draw_text_nt(_drawx, _drawy - _scroll + 5, "@d" + loc("R:MainMenu:AchievementHidden", "HIDDEN"))
+	}
+	else {
+		draw_sprite_ext(sprButtonAchievements, 0, _drawx - 28, _drawy + 11 - _scroll, 1, 1, 0, c_black, 1)
+		draw_sprite_ext(sprButtonAchievements, 0, _drawx - 27, _drawy + 11 - _scroll, 1, 1, 0, c_black, 1)
+		draw_sprite_ext(sprButtonAchievements, 0, _drawx - 27, _drawy + 10 - _scroll, 1, 1, 0, c_black, 1)
 		
-		anim[i] = lerp(anim[i], view_width - 32, 0.4)
+		var c = "@s"
 		
-		if chiev_hide[i] && !scrAchievementIsUnlocked(i) {
-			draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_black, 1)
-			/// @loc:token [R:MainMenu] AchievementHidden "HIDDEN"
-			draw_text_nt(xx, yy - ypos + 5, "@d" + loc("R:MainMenu:AchievementHidden", "HIDDEN"))
+		if scrAchievementIsUnlocked(i) {
+			draw_sprite(sprButtonAchievements, 0, _drawx - 28, _drawy + 10 - _scroll)
+			c = "@y"
 		}
 		else {
-			draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 11 - ypos, 1, 1, 0, c_black, 1)
-			draw_sprite_ext(sprButtonAchievements, 0, xx - 27, yy + 11 - ypos, 1, 1, 0, c_black, 1)
-			draw_sprite_ext(sprButtonAchievements, 0, xx - 27, yy + 10 - ypos, 1, 1, 0, c_black, 1)
-			
-			var c = "@s"
-			
-			if scrAchievementIsUnlocked(i) {
-				draw_sprite(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos)
-				c = "@y"
-			}
-			else {
-				draw_sprite_ext(sprButtonAchievements, 0, xx - 28, yy + 10 - ypos, 1, 1, 0, c_uidark, 1)
-			}
-			
-			var _name = loc("Achievements", i, "name", chiev_name[i]),
-				_text = loc("Achievements", i, "text", chiev_text[i])
-			
-			if (!variable_struct_exists(wrapped_strings, _text)) {
-				var _wrapped = string_insert_wordwraps(_text, view_width - xx - 80)
-				wrapped_strings[$ _text] = _wrapped
-				_text = _wrapped
-			}
-			else {
-				_text = wrapped_strings[$ _text]
-			}
-			
-			var _name_height = font_get_string_height(_name),
-				_scale = 1,//clamp(1 - (font_get_string_width(string_hash_to_newline(_text)) / (view_width - 32) - 0.5), 1, 0.8),
-				_offset = floor(font_get_string_height(_text) * _scale * 0.5)
-			
-			draw_text_nt(xx, yy - ypos - _offset, c + _name)
-			
-			draw_set_color(c_silver)
-			draw_text_nt(xx, yy - ypos - _offset + (1 - _scale) + _name_height, "@s" + _text, _scale)
-			
-			draw_set_color(c_white)
+			draw_sprite_ext(sprButtonAchievements, 0, _drawx - 28, _drawy + 10 - _scroll, 1, 1, 0, c_uidark, 1)
 		}
+		
+		var _name = loc("Achievements", i, "name", chiev_name[i]),
+			_text = loc("Achievements", i, "text", chiev_text[i])
+		
+		if (!variable_struct_exists(wrapped_strings, _text)) {
+			var _wrapped = string_insert_wordwraps(_text, view_width - _drawx - 80)
+			wrapped_strings[$ _text] = _wrapped
+			_text = _wrapped
+		}
+		else {
+			_text = wrapped_strings[$ _text]
+		}
+		
+		var _name_height = font_get_string_height(_name),
+			_scale = 1,//clamp(1 - (font_get_string_width(string_hash_to_newline(_text)) / (view_width - 32) - 0.5), 1, 0.8),
+			_offset = floor(font_get_string_height(_text) * _scale * 0.5)
+		
+		draw_text_nt(_drawx, _drawy - _scroll - _offset, c + _name)
+		
+		draw_set_color(c_silver)
+		draw_text_nt(_drawx, _drawy - _scroll - _offset + (1 - _scale) + _name_height, "@s" + _text, _scale)
+		
+		draw_set_color(c_white)
 	}
 	
-	yy += 40
-	
-	if yy - ypos > view_height {
-		break
-	}
+	_drawy += 40
 }
 
 draw_set_color(c_black)
@@ -88,7 +91,7 @@ draw_sprite_ext(sprOptionSlider, 0, view_width - 16, 36, 1.6, 1, 270, c_white, 1
 var _slider_size = 80,
 	_slider_bottom = view_height - _slider_size
 
-draw_sprite_ext(sprSliderEndHorizontal, 0, view_width - 20 + (dragging > 0), 40 + _slider_bottom * (ypos / max_height), 1, 1, 0, dragging ? c_uigray : c_white, 1)
+draw_sprite_ext(sprSliderEndHorizontal, 0, view_width - 20 + (dragging > 0), 40 + _slider_bottom * (_scroll / max_height), 1, 1, 0, dragging ? c_uigray : c_white, 1)
 
 if (wait > 0) wait --
 
