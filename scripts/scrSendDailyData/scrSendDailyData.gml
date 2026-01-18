@@ -1,5 +1,5 @@
 function scrSendDailyData() {
-    if (!scrGameIsEventRun() || is_undefined(UberCont.update_info) || (!UberCont.public || scr_debug_cheats_enabled())) exit
+    if (!scrGameIsEventRun() || is_undefined(UberCont.update_info) || (UberCont.public && scr_debug_cheats_enabled())) exit
 	
 	if (scrGameIsDailyRun()) UberCont.can_daily = false
 	
