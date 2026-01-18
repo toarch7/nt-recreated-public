@@ -1,35 +1,38 @@
 > [!NOTE]
 > This is a temporary solution for tracking the list of tasks list. Ideally this should be fixed to use GitHub issues & milestones...
 
+# Release requirements
+- [ ] Credits screen rework
+- [ ] Proper gamepad controls in the loadout menu
+- [ ] Assign all enemies & damage sourcers their proper `hitid`s
+- [ ] Introduce backwards-compatible resourcepack loader mode
+
 # Main priority
 - [ ] Implement freezeframes
     - [x] Implement `sleep`
-    - [ ] Go over all cases where `Sleep()` is called in the base game and introduce these calls in this project.
+    - [ ] Go over all cases where `Sleep()` is called in the base game and introduce these calls in the project.
 - [ ] Drop Input library support, as it was only used because of its handy-dandy gamepad mappings
-- [ ] Proper gamepad controls in the loadout menu
 - [ ] Damage & projectile system refactoring
     - [x] Refactor object-based damage dealing
     - [x] Clean up projectile collision damage code
     - [x] Introduce `HitId`s
     - [x] Make the "Killed By" in the Game Over use hitid to display information
-    - [ ] Assign all enemies & damage sourcers their proper `hitid`s
-- [ ] Revisit the enemy/prop animation logic 
 - [ ] Localize NTM-exclusive strings to all supported languages:
     - [x] English
     - [x] Russian
-    - [ ] Brazilian Portuguese
+    - [x] Brazilian Portuguese
     - [ ] Dutch
-    - [ ] European Spanish
+    - [x] European Spanish
     - [ ] French
     - [ ] German
     - [ ] Italian
     - [ ] Japanese
     - [ ] Korean
     - [ ] Polish
-    - [ ] Simplified Chinese
-    - [ ] Traditional Chinese
+    - [x] Simplified Chinese
+    - [x] Traditional Chinese
     - [ ] Turkish
-    - [ ] Ukrainian
+    - [x] Ukrainian
 - [x] Implement full support of NTT and u100 localization formats
     - [x] Implement `.ini` localization file support
     - [x] Implement `lang.csv` localization support (directly related to the previous paragraph)
@@ -61,7 +64,7 @@
 
 # Medium priority
 - [ ] Make resourcepack loader utilize custom texture groups for greater performance
-- [ ] Introduce backwards-compatible resourcepack loader mode
+- [ ] Fully custom skins via resourcepacks
 - [ ] 60+ FPS and timescale support
     - [ ] Figure out a replacement system for alarms that introduces minimal overhead
     - [ ] Refactor all object logic to not use alarms
