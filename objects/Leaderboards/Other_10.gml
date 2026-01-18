@@ -5,8 +5,6 @@ draw_rectangle(0, -4, view_width, 36, 0)
 draw_rectangle(0, view_height - 36, view_width, view_height + 4, 0)
 draw_set_color(c_white)
 
-
-
 var mx = device_mouse_x_to_gui(0),
 	my = device_mouse_y_to_gui(0),
 	

@@ -73,4 +73,4 @@ with (GameCont) {
 
 with (MusCont) alarm[11] = 1
 
-scrLetterbox(true, 3)
+scrLetterbox(true)

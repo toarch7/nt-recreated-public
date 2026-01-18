@@ -4,11 +4,9 @@ draw_sprite_ext(sprOptionSlider, 0, view_width - 16, 48, 1.6, 1, 270, c_white, 1
 
 draw_sprite_ext(sprSliderEnd, 0, view_width - 18 + (dragging > 0), 48 + (view_height - 96) * (ypos / max_height), 1, 1, 90, dragging ? c_uigray : c_white, 1)
 
-if wait
-	wait --
+if (wait) wait --
 
-if dragging == -1 or wait
-	exit
+if (dragging == -1 || wait) exit
 
 if mouse_check_button(mb_left) {
 	for(var i = 0; i < 4; i ++) {
@@ -38,8 +36,8 @@ if mouse_check_button(mb_left) {
 	}
 }
 else {
-	if dragging
+	if dragging {
 		snd_play(sndSliderLetGo)
-	
+	}
 	dragging = false
 }

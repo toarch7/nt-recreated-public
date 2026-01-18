@@ -112,16 +112,25 @@ if paused && !want_pause && !instance_exists(CoopController) {
 	
 	// run saving tip
 	if (!instance_exists(CoopController)) with (PauseButton) {
-		if (image_index == 5 && !save_get_value("etc", "saving_tip", 0)) {
+		//if (image_index == 5 && !save_get_value("etc", "saving_tip", 0)) {
+		if (true) {
 			draw_set_color(c_white)
 			
 			var _icon_x = gui_w div 2,
 				_icon_y = gui_h - LETTERBOX_SIZE - 30
 			
 			if (appear <= 2) {
-				draw_sprite(sprContinuedRunIcon, 0,
-					_icon_x - sprite_get_width(sprContinuedRunIcon) * 0.5,
-					_icon_y + max(0, appear - 1) + 1)
+				var _dx = _icon_x - sprite_get_width(sprContinuedRunIcon) * 0.5,
+					_dy = _icon_y + max(0, appear - 1) + 1
+				
+				gpu_set_fog(true, c_white, 0, 0)
+				draw_sprite(sprContinuedRunIcon, 0, _dx - 1, _dy - 1)
+				draw_sprite(sprContinuedRunIcon, 0, _dx + 1, _dy + 1)
+				draw_sprite(sprContinuedRunIcon, 0, _dx - 1, _dy + 1)
+				draw_sprite(sprContinuedRunIcon, 0, _dx + 1, _dy - 1)
+				gpu_set_fog(0, 0, 0, 0)
+				
+				draw_sprite(sprContinuedRunIcon, 0, _dx, _dy)
 			}
 			
 			if (appear <= 1) {

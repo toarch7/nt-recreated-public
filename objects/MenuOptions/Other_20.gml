@@ -473,7 +473,7 @@ scrOptionsMenuCreateElements(
 	
 	{
 		/// @loc:token [ProfileOptions] DataOptions "DATA"
-		type: "category", name: L("DataOptions", "DATA"), category: OptionCategory.Game_Data, ingame: false,
+		type: "category", name: loc("Options:DataOptions", "DATA"), category: OptionCategory.Game_Data, ingame: false,
 		
 		awake: function(_opt) {
 			if instance_exists(NicknameInput)

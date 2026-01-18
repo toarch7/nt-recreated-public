@@ -43,8 +43,10 @@ function scrDrawTooltip(_x, _y, _text, _offset = 0, _is_gui = false) {
 	
 	_y += sprite_get_height(sprTooltip) * (_yflip ? 1 : -1) - _offset
 	
-	if ((_x + _box_w) > _right) _x -= ((_x + _box_w) - _right)
-	else if ((_x - _box_w) < _left) _x -= ((_x - _box_w) - _left)
+	if (_w < view_width) {
+		if ((_x + _box_w) > _right) _x -= ((_x + _box_w) - _right)
+		else if ((_x - _box_w) < _left) _x -= ((_x - _box_w) - _left)
+	}
 	
 	draw_set_color(c_tooltip)
 	draw_rectangle(_x - _half_w, _y - _h - 2, _x + _half_w, _y + 2, false)

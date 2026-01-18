@@ -25,7 +25,7 @@ function scrDrawMiscHUD() {
 		}
 		draw_align()
 	
-		if (global.cheats || scr_debug_cheats_enabled()) {
+		if (UberCont.public && (global.cheats || scr_debug_cheats_enabled())) {
 			var _cheats;
 			
 			with (UberCont) _cheats = [
