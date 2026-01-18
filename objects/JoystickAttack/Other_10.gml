@@ -108,11 +108,6 @@ if (!_is_autoaim) {
 			dis = min(rad, mdis) * 2
 		}
 		
-		//with (scrPlayerFindLocal()) if (UberCont.opt_assist) {
-		with (scrPlayerFindLocal()) if (instance_exists(aimassist_target)) {
-			other.dir = angle_lerp(other.dir, aimassist_direction, 0.5)
-		}
-		
         KeyCont.dir_fire[global.index] = dir
         KeyCont.dis_fire[global.index] = dis
 		

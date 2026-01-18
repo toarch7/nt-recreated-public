@@ -352,6 +352,14 @@ if (KeyCont.aimassist[index] && scr_weapon_get_type(wep) != Ammo.None && !scr_we
 			
 			with (hitme) {
 				if (place_meeting(x, y, other) && team != other.team) {
+					if (object_index == Nothing
+						|| object_index == Nothing2
+						|| object_index == VenuzCouch
+						|| object_index == IceFlower
+					) {
+						continue
+					}
+					
 					if (collision_line(other.x, other.y, x, y, Wall, true, false) != noone) continue
 					
 					var _distance = point_distance(x, y, other.x, other.y)
@@ -369,7 +377,7 @@ if (KeyCont.aimassist[index] && scr_weapon_get_type(wep) != Ammo.None && !scr_we
 			}
 		}
 		
-		if scrTargetIsVisible(_aim_target) && _aim_target.object_index != Nothing && _aim_target.object_index != Nothing2 {
+		if (scrTargetIsVisible(_aim_target)) {
 			var _direction = point_direction(x, y, _aim_target.x, _aim_target.y),
 				_snap_angle = 35
 			
@@ -624,8 +632,12 @@ if curse && current_frame_active && random(6) < 1 {
 if (can_spec) scrPowers()
 
 if race == Race.Frog {
-	if current_frame_active && scr_ultra_get(Race.Frog, UltraSkill.Intimacy) && random(1) < 0.5 {
-		with (instance_create(x, y, ToxicGas)) scrFrogGasStat()
+	if (current_frame_active && scr_ultra_get(Race.Frog, UltraSkill.Intimacy) && random(1) < 0.5) {
+		var _is_me = scr_player_is_local(index)
+		
+		with (instance_create(x, y, ToxicGas)) {
+			if (_is_me) scrFrogGasStat()
+		}
 	}
 
 	speed = maxspeed
@@ -646,21 +658,26 @@ if race == Race.Frog {
 			froggas += timescale
 		}
 
-		if current_frame_active && scr_ultra_get(Race.Frog, UltraSkill.Intimacy) && random(1) < 0.5 {
-			with (instance_create(x, y, ToxicGas)) scrFrogGasStat()
+		if (current_frame_active && scr_ultra_get(Race.Frog, UltraSkill.Intimacy) && random(1) < 0.5) {
+			var _is_me = scr_player_is_local(index)
+			
+			with (instance_create(x, y, ToxicGas)) {
+				if (_is_me) scrFrogGasStat()
+			}
 		}
 
 		speed = 0
 		sprite_index = spr_idle
 	}
 	else if froggas > 0 {
-		snd_stop(sndFrogLoopButt)
-		snd_stop(sndFrogLoop)
-
-		repeat froggas {
-			with (instance_create(x, y, ToxicGas)) scrFrogGasStat()
+		var _is_me = scr_player_is_local(index)
+		
+		repeat (froggas) {
+			with (instance_create(x, y, ToxicGas)) {
+				if (_is_me) scrFrogGasStat()
+			}
 		}
-
+		
 		if froggas >= 25 {
 			snd_play(sndFrogGasRelease)
 
@@ -669,6 +686,9 @@ if race == Race.Frog {
 			}
 			else snd_play(sndFrogEnd)
 		}
+		
+		snd_stop(sndFrogLoopButt)
+		snd_stop(sndFrogLoop)
 
 		froggas = 0
 	}
@@ -702,7 +722,7 @@ if KeyCont.press_horn[index] {
 		scr_screenshake(5)
 		
 		if (!GameCont.underwater) {
-			snd_play(UberCont.birthday ? sndVenuz : sndPartyHorn)
+			snd_play(UberCont.birthday ? sndPartyHorn : sndVenuz)
 		}
 		else {
 			snd_play(sndOasisHorn)
