@@ -5,24 +5,35 @@
 /// @param big_chunks=true
 /// @param proc_stalker=true
 function scrRadDrop(_x, _y, _amount, _can_big = true, _can_stalker = true) {
-	var _high = instance_is(self, RadChest) ? 26 : 15
+	var _high = instance_is(self, RadChest) ? 26 : 15, _speed, _direction;
+	
+	if (instance_is(self, prop)) {
+		_direction = random_angle
+		_speed = 16
+	}
+	else {
+		_direction = direction
+		_speed = speed
+	}
 	
 	if (_can_big) while (_amount > _high) {
 		_amount -= 10
 		
 		with instance_create(_x, _y, BigRad) {
-			motion_add(other.direction, other.speed)
+			motion_add(_direction, _speed)
 			motion_add(random_angle, random(_amount * 0.5) + 5)
 			
 			repeat (speed) speed *= 0.9
 			
-			repeat (4) scrStalkerProc()
+			if (_can_stalker) {
+				repeat (4) scrStalkerProc()
+			}
 		}
 	}
 	
 	repeat (_amount) {
 		with instance_create(_x, _y, Rad) {
-			motion_add(other.direction, other.speed)
+			motion_add(_direction, _speed)
 			motion_add(random_angle, random(_amount * 0.5) + 5)
 			
 			repeat (speed) speed *= 0.9
