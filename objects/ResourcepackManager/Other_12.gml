@@ -163,8 +163,6 @@ var created = unix_to_datatime(item.created div 1000),
 	step_size = 5 + (font_get_string_height("Aa") - 8),
 	step_size_big = step_size * 6
 
-print(step_size)
-
 draw_set_color(c_white)
 /// @loc:token [ResourcepackBrowser] FullviewPackInfo "PACK INFO"
 draw_text_nt(dx, dy - step_size, L("FullviewPackInfo", "PACK INFO"))

@@ -32,8 +32,10 @@ else {
 	/// @loc:token [R:MainMenu] RunHistory:daily "DAILY"
 	/// @loc:token [R:MainMenu] RunHistory:weekly "WEEKLY"
 	var _viewtype_string = loc(
-		"R:MainMenu", "RunHistory" + string_lower(viewtype), string_upper(viewtype))
+		"R:MainMenu", "RunHistory:" + string_lower(viewtype), string_upper(viewtype))
     
+	print("VT", _viewtype_string)
+	
 	draw_text_bigname(view_width / 2, 16, _viewtype_string, c_uigray)
 	
     draw_align()

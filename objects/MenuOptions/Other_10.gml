@@ -207,6 +207,7 @@ if erasing_progress {
 
     if erasing_progress == 2 {
 		var _msg = "@wWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET#ALL OF YOUR PREFERENCES.###ARE YOU SURE?@w",
+			/// @loc:token [DataOptions] OptionsResetDisclaimer "@wWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET#ALL OF YOUR PREFERENCES.###ARE YOU SURE?@w"
 			_string = loc("DataOptions:OptionsResetDisclaimer", _msg)
         
 		_disclaimer_height = font_get_string_height(_string)
@@ -214,6 +215,7 @@ if erasing_progress {
     }
 	else {
 		var _msg = "@rWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET ALL OF YOUR#CHARACTERS, UNLOCKS, STATS, ACHIEVEMENTS AND#IT IS NOT UNDOABLE.###ARE YOU SURE?@w",
+			/// @loc:token [DataOptions] ProgressResetDisclaimer "@rWARNING!!!##@sTHIS ACTION WILL COMPLETELY RESET ALL OF YOUR#CHARACTERS, UNLOCKS, STATS, ACHIEVEMENTS AND#IT IS NOT UNDOABLE.###ARE YOU SURE?@w"
 			_string = loc("DataOptions:ProgressResetDisclaimer", _msg)
 		
 		_disclaimer_height = font_get_string_height(_string)
@@ -227,7 +229,9 @@ if erasing_progress {
 		
 		_erasure_progress = (erasing_progress == 1 ? " (" + string(5 - press) + ")" : "")
 	
+	/// @loc:token [Options] Yes "YES"
     draw_text_nt(_option_x, _option_yes_y, (wait ? "@d" : "@w") + loc("Options:Yes", "YES") + _erasure_progress)
+	/// @loc:token [Options] No "NO"
     draw_text_nt(_option_x, _option_no_y, (wait ? "@d" : "@w") + loc("Options:No", "NO"))
 
     if (press >= 5 || (erasing_progress == 2 && press > 0)) {
