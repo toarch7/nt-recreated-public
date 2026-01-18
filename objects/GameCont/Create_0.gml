@@ -64,6 +64,9 @@ hasfiredshots = false
 haspickedweps = false
 swordbosskill = []
 
+same_weapon_signature = -1
+same_weapons_for = 0
+
 popolevel = 0
 novans = true
 

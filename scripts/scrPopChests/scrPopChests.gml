@@ -144,22 +144,24 @@ function scrPopChests() {
 	#endregion
 	
 	#region mimics
-	if instance_exists(Player) && GameCont.area != area_crib {
+	if instance_exists(Player) {
 		with AmmoChest {
 			if random(11) < 1 && (GameCont.area >= area_sewers || GameCont.loops) {
 				instance_create(x, y, Mimic)
 				instance_destroy(id, false)
 			}
 		}
-
+		
 		with WeaponChest {
-			if random(4) < GameCont.nochest {
+			if (random(4) < GameCont.nochest && !instance_exists(BigWeaponChest)) {
 				instance_create(x, y, BigWeaponChest)
 				instance_destroy(id, false)
 			}
-			else if random(26) < 1 && (GameCont.area >= area_scrapyards || GameCont.loops >= 1) {
-				instance_create(x, y, WepMimic)
-				instance_destroy(id, false)
+			else if (random(100) < (GameCont.same_weapons_for - 4)) {
+				if (GameCont.area != area_crib || random(3) < 3) {
+					instance_create(x, y, WepMimic)
+					instance_destroy(id, false)
+				}
 			}
 		}
 

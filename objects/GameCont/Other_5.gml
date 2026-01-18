@@ -1,8 +1,16 @@
 var _race = Race.Random,
 	_went_crib = false
 
-with (Player) {
-	if (scr_player_is_local(index)) _race = race
+if (instance_exists(Player)) {
+	same_weapons_for ++
+	
+	with (Player) {
+		if (scr_player_is_local(index)) _race = race
+		
+		if (scrPlayerUpdateSameWeaponsFor(id)) {
+			GameCont.same_weapons_for = 0
+		}
+	}
 }
 
 snd_stop(sndSalamanderFire)

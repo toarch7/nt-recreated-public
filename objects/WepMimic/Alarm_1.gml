@@ -4,6 +4,8 @@ spr_idle = sprWepMimicTell
 sprite_index = spr_idle
 image_index = 0
 
+snd_play_hit(sndHPMimicTaunt)
+
 if (image_speed > 0) {
 	alarm[2] = image_number / image_speed
 }

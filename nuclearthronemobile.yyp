@@ -1214,6 +1214,7 @@
     {"id":{"name":"snd_track_position","path":"scripts/snd_track_position/snd_track_position.yy",},},
     {"id":{"name":"sprite_replace_frames","path":"scripts/sprite_replace_frames/sprite_replace_frames.yy",},},
     {"id":{"name":"sprite_strip_save","path":"scripts/sprite_strip_save/sprite_strip_save.yy",},},
+    {"id":{"name":"string_crc32","path":"scripts/string_crc32/string_crc32.yy",},},
     {"id":{"name":"string_extract","path":"scripts/string_extract/string_extract.yy",},},
     {"id":{"name":"string_insert_wordwraps","path":"scripts/string_insert_wordwraps/string_insert_wordwraps.yy",},},
     {"id":{"name":"string_is_real","path":"scripts/string_is_real/string_is_real.yy",},},

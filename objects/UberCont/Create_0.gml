@@ -1,5 +1,5 @@
 #macro GAME_VERSION "beta-3.0.0"
-#macro GAME_BUILD 3000
+#macro GAME_BUILD 3001
 #macro BETA true
 
 global.string_split_list = ds_list_create()

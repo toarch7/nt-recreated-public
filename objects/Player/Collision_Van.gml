@@ -26,7 +26,7 @@ if KeyCont.press_pick[index] && is_me && other.can_hq && other.drawspr = sprVanD
 	
 	nexthurt = current_frame + 5
 	
-	with instance_create(x, y, Portal) type = 2
-	
-	mask_index = mskNone
+	with (instance_create(x, y, Portal)) {
+		type = 2
+	}
 }

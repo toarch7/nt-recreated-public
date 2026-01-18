@@ -120,6 +120,8 @@ recontinued_times = 0
 eyesloop = -1
 horrorloop = -1
 
+last_weapon_signature = -1
+
 pref = function(name) {
 	var _pinst = scr_playerinstance_find(index)
 	return is_struct(_pinst) ? scr_player_pref(_pinst, name) : undefined

@@ -1062,6 +1062,7 @@
     {"name":"snd_track_position","order":11,"path":"scripts/snd_track_position/snd_track_position.yy",},
     {"name":"sprite_replace_frames","order":8,"path":"scripts/sprite_replace_frames/sprite_replace_frames.yy",},
     {"name":"sprite_strip_save","order":7,"path":"scripts/sprite_strip_save/sprite_strip_save.yy",},
+    {"name":"string_crc32","order":210,"path":"scripts/string_crc32/string_crc32.yy",},
     {"name":"string_extract","order":2,"path":"scripts/string_extract/string_extract.yy",},
     {"name":"string_insert_wordwraps","order":206,"path":"scripts/string_insert_wordwraps/string_insert_wordwraps.yy",},
     {"name":"string_is_real","order":86,"path":"scripts/string_is_real/string_is_real.yy",},

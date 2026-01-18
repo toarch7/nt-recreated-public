@@ -1,4 +1,4 @@
-if sprite_index == sprPortalSpawn {
+if (sprite_index == sprPortalSpawn) {
     instance_create(x, y, PortalShock)
 	
 	var _sound = snd_play_loop(sndPortalLoop)

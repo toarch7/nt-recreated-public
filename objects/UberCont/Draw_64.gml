@@ -112,8 +112,7 @@ if paused && !want_pause && !instance_exists(CoopController) {
 	
 	// run saving tip
 	if (!instance_exists(CoopController)) with (PauseButton) {
-		//if (image_index == 5 && !save_get_value("etc", "saving_tip", 0)) {
-		if (true) {
+		if (image_index == 5 && !save_get_value("etc", "saving_tip", 0)) {
 			draw_set_color(c_white)
 			
 			var _icon_x = gui_w div 2,

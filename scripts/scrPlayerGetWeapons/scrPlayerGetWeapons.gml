@@ -46,3 +46,34 @@ function scrPlayerCountGoldenWeapons(_player) {
 	
 	return _result
 }
+
+/// @function scrPlayerGetWeaponSignature
+/// @param player
+function scrPlayerGetWeaponSignature(_player) {
+	var _weapons = array_filter(scrPlayerGetWeapons(_player), function(_wep) {
+		return scr_weapon_is_valid(_wep)
+	})
+	
+	if (array_length(_weapons)) {
+		array_sort(_weapons, true)
+		return string_crc32(string_join_ext(":", _weapons))
+	}
+	
+	return -1
+}
+
+/// @function scrPlayerUpdateSameWeaponsFor
+/// @param player
+/// @description Returns `true` when signature is updated.
+function scrPlayerUpdateSameWeaponsFor(_player) {
+	with (_player) {
+		var _signature = scrPlayerGetWeaponSignature(id)
+		
+		if (_signature != last_weapon_signature || last_weapon_signature == -1) {
+			last_weapon_signature = _signature
+			return true
+		}
+	}
+	
+	return false
+}
