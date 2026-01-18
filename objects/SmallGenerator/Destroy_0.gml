@@ -9,4 +9,3 @@ with instance_create(x, y, GreenExplosion) {
 }
 
 repeat 6 instance_create(x + random(64) - 32, y + random(64) - 32, GroundFlame)
-repeat 5 instance_create(x, y, Rad)
