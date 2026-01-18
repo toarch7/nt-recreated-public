@@ -1,7 +1,7 @@
 function scrPopProps() {
     if (place_meeting(x, y, hitme) || place_meeting(x, y, chestprop)) exit
 	
-	var _area = GameCont.area,
+	var _area = spawnarea,
 		_subarea = GameCont.subarea,
 		_loops = GameCont.loops,
 		_is_last = (_subarea == GameCont.maxsubarea),
@@ -9,9 +9,9 @@ function scrPopProps() {
 			bbox_center_x, bbox_center_y, 10016, 10016)
 	
 	// Small walls
-    if random(5) < 1 && _spawn_distance > 100 && !place_meeting(x, y, NOWALLSHEREPLEASE)
+    if (random(5) < 1 && _spawn_distance > 100 && !place_meeting(x, y, NOWALLSHEREPLEASE)
 		&& !(_area == area_hq || _area == area_vault || (_area == area_campfire && _loops == 0) || _area == area_crib || _area == area_labs)
-		&& (_area != area_pizza_sewers || (random(3) < 1) && !(_area == area_scrapyards && _is_last) && !(_area == area_palace && _is_last)
+		&& (_area != area_pizza_sewers || random(3) < 1) && !(_area == area_scrapyards && _is_last) && !(_area == area_palace && _is_last)
 		&& (_area != area_city || random(3) < 1) && _area != area_pizza_sewers && sprite_index != sprFloor2B
 	) {
         var _small_x = (random_range(bbox_left, bbox_right) div 16) * 16,
@@ -20,7 +20,10 @@ function scrPopProps() {
         if !place_meeting(_small_x, _small_y, hitme) {
             instance_create(_small_x, _small_y, Wall)
             instance_create(x, y, NOWALLSHEREPLEASE)
-            if random(4) < 1 && _spawn_distance > 64 && spawnarea == 3 && _small_x == x && _small_y == y && !place_meeting(_small_x, _small_y, chestprop) {
+            
+			if (_area == area_scrapyards && random(4) < 1 && _spawn_distance > 64
+				&& _small_x == x && _small_y == y && !place_meeting(_small_x, _small_y, chestprop)
+			) {
                 instance_create(_small_x, _small_y, Trap)
             }
         }
