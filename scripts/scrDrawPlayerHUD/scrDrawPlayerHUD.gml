@@ -122,9 +122,9 @@ function scrDrawPlayerHUD(_player = noone) {
 					_is_active_weapon = (_hud_weapon_index == 0 || _is_steroids)
 				
 				// Gun
-				/**/ if (_is_golden) gpu_set_fog(true, c_gold, 0, 0)
-				else if (_is_cursed) gpu_set_fog(true, c_curse, 0, 0)
+				/**/ if (_is_cursed) gpu_set_fog(true, c_curse, 0, 0)
 				else if (_is_ultra) gpu_set_fog(true, c_ultra, 0, 0)
+				else if (_is_golden) gpu_set_fog(true, c_gold, 0, 0)
 				
 				var _anim = instance_exists(_player) ? _player.swapanim : 0,
 					_xoffset = sprite_get_xoffset(_sprite),

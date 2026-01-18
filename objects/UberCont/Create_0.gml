@@ -23,9 +23,7 @@ timer_last_time = current_time
 alarm[0] = 30
 
 // non-public when running through GameMaker IDE
-if GM_build_type == "run" {
-	public = false
-}
+if (GM_build_type == "run") public = false
 
 saving = 0
 saving_index = 0

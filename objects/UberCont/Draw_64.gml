@@ -109,41 +109,28 @@ if paused && !want_pause && !instance_exists(CoopController) {
 		
 	    instance_deactivate_object(Player)
 	}
-}
-
-if (is_touch(global.index) && (opt_console || !public)) {
-	var _size = 24,
-		_left = view_width - 32,
-		_top = 16,
-		_right = _left + _size,
-		_bottom = _top + _size
 	
-	if (opt_pausebutton) {
-		_bottom += 32
-		_top += 32
-	}
-	
-    draw_set_color(c_black)
-    draw_set_alpha(0.5)
-    
-	draw_rectangle(_left, _top, _right, _bottom, 0)
-	
-	draw_set_color(c_white)
-    draw_set_alpha(1)
-	
-	draw_align(fa_center, fa_middle)
-	draw_set_font(fntBig)
-	
-    draw_text_nt((_left + _right) * 0.5, (_top + _bottom) * 0.5, "~")
-    
-	draw_reset_font()
-	draw_align()
-    
-    if (mouse_check_button_pressed(mb_left) && !is_mouse_over_debug_overlay()) {
-        if (point_in_rectangle(gui_x, gui_y, _left, _top, _right, _bottom)) {
-			scr_debug_overlay_toggle()
+	// run saving tip
+	if (!instance_exists(CoopController)) with (PauseButton) {
+		if (image_index == 5 && !save_get_value("etc", "saving_tip", 0)) {
+			draw_set_color(c_white)
+			
+			var _icon_x = gui_w div 2,
+				_icon_y = gui_h - LETTERBOX_SIZE - 30
+			
+			if (appear <= 2) {
+				draw_sprite(sprContinuedRunIcon, 0,
+					_icon_x - sprite_get_width(sprContinuedRunIcon) * 0.5,
+					_icon_y + max(0, appear - 1) + 1)
+			}
+			
+			if (appear <= 1) {
+				/// @loc:token [PauseMenu] RunSavingTip "YOU CAN SAVE AND CONTINUE THIS RUN LATER#IF YOU EXIT WITHOUT QUITTING TO MAIN MENU"
+				scrDrawTooltip(_icon_x, _icon_y,
+					loc("PauseMenu:RunSavingTip", "YOU CAN SAVE AND CONTINUE THIS RUN LATER#IF YOU EXIT WITHOUT QUITTING TO MAIN MENU"), appear, true)
+			}
 		}
-    }
+	}
 }
 
 if MultiplayerConfig && false {

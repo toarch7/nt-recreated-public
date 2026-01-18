@@ -26,11 +26,13 @@ if image_index == 0 || image_index == 1 {
 		
 	    instance_destroy(PauseButton)
 		
-	    with instance_create(_right, _bottom, PauseButton) image_index = _confirm_index
-		with instance_create(_left, _bottom, PauseButton) image_index = 4 /* Back */
+	    with (instance_create(_right, _bottom, PauseButton)) image_index = _confirm_index
+		with (instance_create(_left, _bottom, PauseButton)) image_index = 4 /* Back */
 		
 	    // setting flag to -1 marks it as seen
-	    save_set_value("etc", "saving_tip", -1)
+		if (!save_get_value("etc", "saving_tip")) {
+			save_set_value("etc", "saving_tip", -1)
+		}
 	}
 	// needs no confirmation if it's gameover screen
 	else {

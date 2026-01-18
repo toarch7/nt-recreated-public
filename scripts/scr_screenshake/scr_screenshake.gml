@@ -21,7 +21,7 @@ function scr_weapon_post(_direction, _shift, _shake = 0, _recoil = 0, _knockback
 			shake += _shake * _screenshake_factor
 		}
 		
-		if instance_is(self, Player) wkick = max(wkick, _recoil)
+		if instance_is(self, Player) wkick = _recoil
 		if _knockback != 0 motion_add(_direction + 180, _knockback)
 	}
 }

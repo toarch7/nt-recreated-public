@@ -2,7 +2,7 @@ if lockstep_stop
 	exit
 
 var _race = num,
-	_unlocked = UberCont.ctot_time[_race] != 0,
+	_unlocked = (!_race || UberCont.ctot_time[_race] != 0),
 	_pop_frame = start + floor(pos * 0.5),
 	_hover = (mouse_ui_hovered(id, false) && !selected),
 	_color = selected ? c_white : c_gray

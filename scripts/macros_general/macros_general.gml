@@ -167,34 +167,35 @@ function scrWindowUpdateWindowedPosition() {
 }
 
 function month_name_short(month) {
+	var L = LF("MonthNameShort")
     switch month {
-        case 1:
-            return "JAN"
-        case 2:
-            return "FEB"
-        case 3:
-            return "MAR"
-        case 4:
-            return "APR"
-        case 5:
-            return "MAY"
-        case 6:
-            return "JUN"
-        case 7:
-            return "JUL"
-        case 8:
-            return "AUG"
-        case 9:
-            return "SEP"
-        case 10:
-            return "OCT"
-        case 11:
-            return "NOV"
-        case 12:
-            return "DEC"
+		/// @loc:token [MonthNameShort] 1 "JAN"
+        case  1: return L(month, "JAN")
+		/// @loc:token [MonthNameShort] 2 "FEB"
+        case  2: return L(month, "FEB")
+		/// @loc:token [MonthNameShort] 3 "MAR"
+        case  3: return L(month, "MAR")
+		/// @loc:token [MonthNameShort] 4 "APR"
+        case  4: return L(month, "APR")
+		/// @loc:token [MonthNameShort] 5 "MAY"
+        case  5: return L(month, "MAY")
+		/// @loc:token [MonthNameShort] 6 "JUN"
+        case  6: return L(month, "JUN")
+		/// @loc:token [MonthNameShort] 7 "JUL"
+        case  7: return L(month, "JUL")
+		/// @loc:token [MonthNameShort] 8 "AUG"
+        case  8: return L(month, "AUG")
+		/// @loc:token [MonthNameShort] 9 "SEP"
+        case  9: return L(month, "SEP")
+		/// @loc:token [MonthNameShort] 10 "OCT"
+        case 10: return L(month, "OCT")
+		/// @loc:token [MonthNameShort] 11 "NOV"
+        case 11: return L(month, "NOV")
+		/// @loc:token [MonthNameShort] 12 "DEC"
+        case 12: return L(month, "DEC")
     }
 
-    return "??"
+    return "N/A"
 }
 
 function mouse_ui_clicked() {

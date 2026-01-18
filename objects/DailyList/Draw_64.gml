@@ -34,8 +34,6 @@ else {
 	var _viewtype_string = loc(
 		"R:MainMenu", "RunHistory:" + string_lower(viewtype), string_upper(viewtype))
     
-	print("VT", _viewtype_string)
-	
 	draw_text_bigname(view_width / 2, 16, _viewtype_string, c_uigray)
 	
     draw_align()
@@ -52,7 +50,7 @@ var avg = kills / len
 
 draw_align(fa_center, fa_top)
 /// @loc:token [R:MainMenu] RunHistoryScoreAVG "@dSCORE AVG."
-draw_text_nt(view_width div 2, 22, loc("R:MainMenu:RunHistoryScoreAVG", "@dAVG. SCORE") + ":" + string(avg))
+draw_text_nt(view_width div 2, 27, loc("R:MainMenu:RunHistoryScoreAVG", "@dAVG. SCORE") + ":" + string(avg))
 
 #region Page controls
 

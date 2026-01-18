@@ -32,13 +32,13 @@ function scrDrawCharStats() {
 		/// @loc:note [R:Stats] Important! Stat entries should be as short as possible.
 		/// @loc:note [R:Stats] Total damage taken as Big Dog
 		/// @loc:token [R:Stats] Uniq13 "DAMAGE TAKEN"
-	    else if (select == Race.BigDog) draw_stat(L("R:Stats:Uniq13", "DAMAGE TAKEN"), _n)
+	    else if (select == Race.BigDog) draw_stat(loc("R:Stats:Uniq13", "DAMAGE TAKEN"), _n)
 		/// @loc:note [R:Stats] Skeleton's Blood gamble luck streak
 		/// @loc:token [R:Stats] Uniq14 "LUCK STREAK"
-	    else if (select == Race.Skeleton) draw_stat(L("R:Stats:Uniq14", "LUCK STREAK"), _n)
+	    else if (select == Race.Skeleton) draw_stat(loc("R:Stats:Uniq14", "LUCK STREAK"), _n)
 		/// @loc:note [R:Stats] Amount of gas produced by Frog
 		/// @loc:token [R:Stats] Uniq15 "GAS VOLUMES"
-	    else if (select == Race.Frog) draw_stat(L("R:Stats:Uniq15", "GAS VOLUMES"), string(_n / 1000))
+	    else if (select == Race.Frog) draw_stat(loc("R:Stats:Uniq15", "GAS VOLUMES"), string(_n / 1000))
 	    else if (select == Race.Cuz) draw_stat(L("Uniq16", "TEARS CRIED"), _n)
 	}
 	if (UberCont.ctot_runs[select] > 0) {

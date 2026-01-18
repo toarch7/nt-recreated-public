@@ -50,7 +50,11 @@ scrOptionsMenuCreateElements
 	{ type: "category", name: L("ColorOptions", "COLOR"), category: OptionCategory.Game_Color,    visible: false },
 	{ type: "category", name: L("DataOptions", "DATA"), category: OptionCategory.Game_Data,     visible: false },
 	
+	/// @loc:note [Options] Touch controls
+	/// @loc:token [Options] TouchRemappingOptions "REMAPPING"
 	{ type: "category", name: L("TouchRemappingOptions", "REMAPPING"), category: OptionCategory.Controls_Remapping, visible: false },
+	/// @loc:note [Options] Keyboard/gamepad controls
+	/// @loc:token [Options] KeyRemappingOptions "REMAPPING"
 	{ type: "category", name: L("KeyRemappingOptions", "REMAPPING"), category: OptionCategory.Controls_Remapping_Keys, visible: false },
 	{ type: "category", name: L("CharacterPrefOptions", "CHAR PREFS"), category: OptionCategory.Controls_Preferences, visible: false },
 	{ type: "category", name: L("ExperimentalOptions", "EXPERIMENTAL OPTIONS"), category: OptionCategory.Controls_Experimental, visible: false },

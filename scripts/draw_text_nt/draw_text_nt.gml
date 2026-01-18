@@ -273,11 +273,7 @@ function render_parse_text(_text) {
 /// @param {Real} [color=draw_get_color]
 /// @param {Real} [alpha=draw_get_alpha]
 function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0, _blend = draw_get_color(), _alpha = draw_get_alpha()) {
-	static __surface = -1
-	
-	if string_length(_text) == 0 {
-		exit
-	}
+	if (string_length(_text) == 0) exit
 	
 	_text = string_hash_to_newline(string(_text))
 	
@@ -286,7 +282,7 @@ function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0,
 	//else if (draw_get_valign() == fa_middle) _text = "m | " + _text
 	//else if (draw_get_valign() == fa_bottom) _text = "b | " + _text
 	
-	if string_pos("@", _text) == 0 && string_pos("\n", _text) == 0 {
+	if (string_pos("@", _text) == 0 && string_pos("\n", _text) == 0) {
 		draw_text_transformed_color(_x + 1, _y, _text, _xscale, _yscale, 0, c_black, c_black, c_black, c_black, _alpha)
 		draw_text_transformed_color(_x, _y + 1, _text, _xscale, _yscale, 0, c_black, c_black, c_black, c_black, _alpha)
 		draw_text_transformed_color(_x + 1, _y + 1, _text, _xscale, _yscale, 0, c_black, c_black, c_black, c_black, _alpha)
@@ -317,51 +313,39 @@ function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0,
 	var _lines = _info.lines,
 		_line_count = array_length(_lines),
 		
-		_width = _info.width + 24,
-		_height = _info.height + 8
-	
-	if surface_exists(__surface) {
-		if !(surface_get_width(__surface) == _width && surface_get_height(__surface) == _height) {
-			surface_resize(__surface, _width, _height)
-		}
-	}
-	else {
-		__surface = surface_create(_width, _height)
-	}
-	
-	var _is_bold = false,
+		_width = _info.width,
+		_height = _info.height,
+		
+		_is_bold = false,
 		_shaking_text = 0,
 		_xmove = sign(_xscale),
-		_ymove = sign(_yscale),
-		_max_line_width = 0,
-		_xpos = 2,
-		_ypos = 4
+		_ymove = sign(_yscale)
 	
-	if _halign == fa_right {
-		_xmove *= -1
+	if (_halign == fa_right) _xmove *= -1
+	
+	if (_valign == fa_middle) {
+		_y -= _height * 0.5 * _yscale
 	}
-	
-	if _valign == fa_bottom {
-		_ypos = _height
+	else if (_valign == fa_bottom) {
+		_y += _height
 		_ymove *= -1
 	}
 	
-	surface_set_target(__surface)
-	
-	draw_clear_alpha(c_black, 0)
+	var _ypos = _y, _xpos;
 	
 	for(var _line_index = 0; _line_index < _line_count; _line_index ++) {
 		var _line = _lines[_line_index],
 			_string_list = _line.strings,
-			_string_count = array_length(_string_list),
-			_xpos = 0
+			_string_count = array_length(_string_list)
 		
 		if _halign == fa_center {
-			_xpos += _width * 0.5 - _line.width * 0.5
+			_xpos = _x - _width * 0.5 + (_width - _line.width) * 0.5
 		}
 		else if _halign == fa_right {
-			_max_line_width = max(_max_line_width, _line.width)
-			_xpos = _width - _line.width
+			_xpos = _x - _width + (_width - _line.width)
+		}
+		else {
+			_xpos = _x
 		}
 		
 		for(var _string_index = 0; _string_index < _string_count; _string_index ++) {
@@ -431,35 +415,6 @@ function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0,
 		}
 		
 		_ypos += _line.height * _ymove
-	}
-	
-	surface_reset_target()
-	
-	var _shader = false
-	
-	if _halign == fa_center {
-		_x -= _width * 0.5 * _xscale
-	}
-	else if _halign == fa_right {
-		_x -= _width
-	}
-	
-	if _valign == fa_middle {
-		_y -= _height * 0.5 * _yscale
-	}
-	//else if _valign == fa_bottom {
-	//	_y -= _height * _yscale
-	//}
-	
-	draw_surface_ext(
-		__surface,
-		_x,// + font_xoffset,
-		_y,// + font_yoffset,
-		_xscale, _yscale, _angle,
-		c_white, _alpha)
-	
-	if _shader {
-		shader_reset()
 	}
 	
 	draw_set_color(_last_color)

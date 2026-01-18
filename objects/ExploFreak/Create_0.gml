@@ -10,12 +10,13 @@ spr_dead = sprExploFreakDead
 
 event_inherited()
 
-
 snd_hurt = sndExploFreakHurt
 snd_dead = sndExploFreakDead
 snd_mele = sndExploFreakKillself
 
 //behavior
 alarm[1] = 20 + random(10)
+
+hitid = HitId.ExploFreak
 
 walk = 0

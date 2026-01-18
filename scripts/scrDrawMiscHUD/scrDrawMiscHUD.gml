@@ -2,10 +2,10 @@ function scrDrawMiscHUD() {
 	if (!instance_exists(Menu) && !(instance_exists(GameOver) && win)
 		&& !instance_exists(MenuOptions) && !(instance_exists(Credits) && Credits.visible)
 	) {
-		var _cheat_scale = 0.67,
+		var _cheat_scale = 1,
 			_font_offset = font_get_height_diff(),
 			_low_x = 16 * _cheat_scale,
-			_low_y = view_height - (_font_offset + 15) * _cheat_scale,
+			_low_y = view_height - (_font_offset + 10), //10) * _cheat_scale,
 			_gamecont_text_drawn = false
 		
 		draw_set_color(c_white)
@@ -17,7 +17,7 @@ function scrDrawMiscHUD() {
 			_gamecont_text_drawn = true
 		}
 		
-		if UberCont.opt_showarea && !instance_exists(GenCont) && !scrGameIsPaused() && room == romGame {
+		if UberCont.opt_showarea && !instance_exists(GenCont) && (!scrGameIsPaused() || UberCont.bossintro) && room == romGame {
 			var _area_string = scrAreaGetMapName(GameCont.area, GameCont.subarea, GameCont.loops)
 			draw_text_nt(view_width - 2, _low_y, _area_string)
 			_low_y -= font_get_string_height(_area_string)
@@ -38,7 +38,7 @@ function scrDrawMiscHUD() {
 			
 			var _count = array_length(_cheats)
 			
-			_low_y -= (!_gamecont_text_drawn && (scrGameIsPaused() || UberCont.version_text_drawn)) ? 12 : 4
+			_low_y -= (!_gamecont_text_drawn && (scrGameIsPaused() || UberCont.version_text_drawn)) ? 16 : 8
 			
 			if (_count == 0) {
 				draw_set_font(fntSmaller)

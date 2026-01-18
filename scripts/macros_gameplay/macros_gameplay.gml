@@ -7,6 +7,8 @@
 #macro c_tooltip  #31293d
 #macro c_uidark   #333333
 #macro c_uigray   #999999
+#macro c_menugray #7d838d
+#macro c_menudark #3b3e43
 #macro c_uilight  #dcdcdc
 #macro c_uisilver #7d838d
 

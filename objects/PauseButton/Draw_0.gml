@@ -18,13 +18,13 @@ if appear < 2 {
 			_halign = fa_left
 			var _overlap = min(0, _dx - _half_w - view_xview)
 			if (_overlap > 0) _dx -= _overlap
-			_dx -= _half_w - 10
+			_dx -= _half_w
 		}
 		else if ((_subimage >= 2 && _subimage <= 3) || (_subimage >= 5 && _subimage <= 6)) {
 			_halign = fa_right
 			var _overlap = max(0, _dx + _half_w - (view_xview + view_width))
 			if (_overlap > 0) _dx -= _overlap
-			_dx += _half_w + 10
+			_dx += _half_w
 		}
 		
 		draw_set_halign(_halign)
@@ -44,21 +44,4 @@ if appear < 2 {
 	}
 }
 
-// draw the `Quit` option hint
-if image_index == 5 && !instance_exists(CoopController) && !save_get_value("etc", "saving_tip", 0) {
-    draw_align(fa_center, fa_bottom)
-	
-	if appear >= 2 draw_set_color(c_gray)
-	else if appear == 1 draw_set_color(c_dkgray)
-    else draw_set_color(#3b3e43)
-	
-	draw_text_nt(view_xview_center, view_yview + view_height + appear - 12,
-		loc("YOU CAN SAVE AND CONTINUE LATER#IF YOU EXIT WITHOUT QUITTING TO MAIN MENU"))
-	
-	draw_set_color(c_white)
-	draw_align()
-}
-
-if appear {
-	appear --
-}
+if (appear) appear -= timescale

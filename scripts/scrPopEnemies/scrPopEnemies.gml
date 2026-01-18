@@ -92,7 +92,7 @@ function scrPopEnemies() {
             instance_create(x + 16 + orandom(2), y + 16 + orandom(2), JungleBandit)
         }
 		else {
-			instance_create(x + 16, y + 16, choose(JungleBandit, JungleBandit, JungleBandit, JungleBandit, JungleBandit, JungleBandit, Maggot, MeleeFake, MeleeFake))
+			instance_create(x + 16, y + 16, choose(JungleBandit, JungleBandit, JungleBandit, JungleBandit, JungleBandit, JungleBandit, Maggot, JungleAssassinHide, JungleAssassinHide))
 		}
 	}
 

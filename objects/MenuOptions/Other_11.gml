@@ -8,8 +8,10 @@ with (ResourcepackManager) {
 // Draw
 event_user(0)
 
-with (UberCont) if (letterbox_frame != 0) {
-	scrDrawLetterbox(letterbox_frame, true)
+if (!editing_mode) {
+	with (UberCont) if (letterbox_frame != 0) {
+		scrDrawLetterbox(letterbox_frame, true)
+	}
 }
 
 #region Header
@@ -33,7 +35,7 @@ if _current_category != OptionCategory.Main {
 	}
 }
 
-draw_text_bigname(gui_w div 2, 24, _name, c_uigray)
+draw_text_bigname(gui_w div 2, 20, _name, c_uigray)
 draw_align()
 
 #endregion

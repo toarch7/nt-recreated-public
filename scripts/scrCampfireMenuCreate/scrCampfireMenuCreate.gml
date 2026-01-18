@@ -723,6 +723,10 @@ function scrMenuDrawLoadout(_pinst) {
 			if (_tooltip_always_visible) _tooltip_y -= 15
 		}
 	}
+	else if (_fullview || loadout_open) {
+		loadout_open = false
+		_fullview = false
+	}
 	
 	#endregion
 	

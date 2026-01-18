@@ -506,7 +506,9 @@ if !(scroll_max == 0 && scroll_min == 0) {
 if !editing_mode {
 	drawy = gui_h * 0.5 - drawy * 0.5 + 8 - floor(scroll) + font_get_height_diff()
 }
-else drawy = gui_h - 48
+else {
+	drawy = gui_h - LETTERBOX_SIZE - 14 * item_count
+}
 
 startdrawy = drawy
 
@@ -552,27 +554,21 @@ else for (var i = 0; i < array_length(_items); i++) {
 	
 	var _pointed = false,
 		_should_draw = true,
-		_out_of_scope = false
+		_in_vision = true
 	
 	if (drawy < LETTERBOX_SIZE || drawy > (gui_h - LETTERBOX_SIZE)) {
-		_out_of_scope = true
+		_in_vision = false
 		
 		if (drawy < 0 || drawy >= gui_h) {
 			_should_draw = false
 		}
 	}
-	else {
-		if _opt.splat > 0 {
-			var _splat_x = drawx - ((is_method(_opt.get_value) && method_execute(_opt.get_value, _opt) == "") ? 60 : 0)
-			draw_sprite(sprMainMenuSplat, _opt.splat, _splat_x, drawy)
-		}
-		
-		if _opt.draw && method_execute(_opt.draw, _opt) {
-			_should_draw = false
-		}
+	else if _opt.splat > 0 {
+		var _splat_x = drawx - ((is_method(_opt.get_value) && method_execute(_opt.get_value, _opt) == "") ? 60 : 0)
+		draw_sprite(sprMainMenuSplat, _opt.splat, _splat_x, drawy)
 	}
 	
-	var _tangible = (_should_draw && !_out_of_scope)
+	var _tangible = _in_vision
 	
 	if _opt.condition != undefined {
 		_opt.available = method_execute(_opt.condition, _opt)
@@ -611,19 +607,17 @@ else for (var i = 0; i < array_length(_items); i++) {
 			_pointed = true
 			_any = true
 				
-			if _opt.type == "slider" {
-				if kh != 0 {
-					slider_change = 2
-					slider = _opt
-					
-					var _max = 1,
-						_step = kh * 0.1
-					
-					if _opt.key == "visual_screenshake"
-						_max = 2
-					
-					_opt.value = clamp(_opt.value + _step, 0, _max)
+			if _opt.type == "slider" && kh != 0 {
+				slider_change = 2
+				slider = _opt
+				
+				var _max = 1, _step = kh * 0.1;
+				
+				if (_opt.key == "visual_screenshake") {
+					_max = 2
 				}
+				
+				_opt.value = clamp(_opt.value + _step, 0, _max)
 			}
 			
 			if (_has_scrollbar) {
@@ -646,12 +640,17 @@ else for (var i = 0; i < array_length(_items); i++) {
 	
 	if (_should_draw) drawy -= _opt.anim
 	
-	draw_set_color(_opt.available ? c_uigray : c_uidark)
+	if (_current_category == OptionCategory.Main) {
+		draw_set_color(_opt.available ? c_uigray : c_uidark)
+	}
+	else {
+		draw_set_color(_opt.available ? c_menugray : c_menudark)
+	}
 	
-	if !option_selected {
+	if (!option_selected) {
 		if (_opt.splat > 0) _opt.splat --
 	}
-	else if _should_draw {
+	else if (_tangible) {
 		draw_set_color(c_white)
 		
 		_opt.splat = approach(_opt.splat, sprite_get_number(sprMainMenuSplat) - 1, timescale)
@@ -663,7 +662,7 @@ else for (var i = 0; i < array_length(_items); i++) {
 				snd_play(sndSlider)
 			}
 		}
-		else if _tangible && (_opt.available && (_press || slider_change) && !wait) {
+		else if (_opt.available && (_press || slider_change) && !wait) {
 			var _result = undefined
 			
 			if is_method(_opt.click) {
@@ -690,7 +689,11 @@ else for (var i = 0; i < array_length(_items); i++) {
 		}
 	}
 	
-	if _should_draw {
+	if (_should_draw && is_method(_opt.draw) && method_execute(_opt.draw, _opt)) {
+		_should_draw = false
+	}
+	
+	if (_should_draw) {
 		if !is_undefined(_opt.sprite) {
 			var _sprite_info = _opt.sprite, _sprite, _image;
 			
@@ -830,7 +833,7 @@ else for (var i = 0; i < array_length(_items); i++) {
 				drawx -= _size
 			}
 			else if _opt.type == "category" && _current_category == OptionCategory.Main {
-				draw_text_bigname(drawx, drawy, loc(_name))
+				draw_text_bigname(drawx, drawy - 4, loc(_name))
 				drawy += 2
 			}
 			else draw_text_nt(drawx, drawy, loc(_name))

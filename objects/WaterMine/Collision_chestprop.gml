@@ -1,1 +1,0 @@
-if (instance_exists(GenCont)) instance_destroy(id, false);

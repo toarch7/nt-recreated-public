@@ -138,7 +138,7 @@ colorpicker_update_options = function(_color) {
 }
 
 draw_inline_switch = function(_opt) {
-	draw_text_nt(drawx, drawy, loc(_opt.name) + ": " + loc(_opt.states[_opt.value ?? 0]))
+	draw_text_nt(drawx, drawy, _opt.name + ": " + _opt.states[_opt.value ?? 0])
 	
 	return true
 }

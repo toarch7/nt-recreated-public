@@ -32,8 +32,8 @@ enum HitId {
 	LilHunter,
 	LilHunterDie,
 	Freak,
-	Explofreak,
-	Rhinofreak,
+	ExploFreak,
+	RhinoFreak,
 	Necromancer,
 	Technomancer,
 	Guardian,
@@ -147,8 +147,8 @@ function scrDeathCauses() {
     scrDeathCauseDefine(HitId.LilHunter, sprLilHunter, "LIL HUNTER")
     scrDeathCauseDefine(HitId.LilHunterDie, sprLilHunterHurt, "LIL HUNTER'S EXPLOSION")
     scrDeathCauseDefine(HitId.Freak, sprFreak1Idle, "FREAK")
-    scrDeathCauseDefine(HitId.Explofreak, sprExploFreakIdle, "EXPLOFREAK")
-    scrDeathCauseDefine(HitId.Rhinofreak, sprRhinoFreakIdle, "RHINOFREAK")
+    scrDeathCauseDefine(HitId.ExploFreak, sprExploFreakIdle, "EXPLOFREAK")
+    scrDeathCauseDefine(HitId.RhinoFreak, sprRhinoFreakIdle, "RHINOFREAK")
     scrDeathCauseDefine(HitId.Necromancer, sprNecromancerIdle, "NECROMANCER")
     scrDeathCauseDefine(HitId.Technomancer, sprTechnoMancer, "TECHNOMANCER")
     scrDeathCauseDefine(HitId.Guardian, sprGuardianIdle, "GUARDIAN")

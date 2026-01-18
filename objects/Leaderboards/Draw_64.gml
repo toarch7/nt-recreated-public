@@ -93,7 +93,7 @@ for(var i = start; i < count; i ++) {
 		string_supported_info[$ _name] = _use_cjk_font
 	}
 	
-	draw_sprite(sprMapIcon, _image, 42, yy)
+	draw_sprite(sprMapIcon, _image, xoff + 26, yy)
 	
 	draw_set_halign(fa_left)
 	

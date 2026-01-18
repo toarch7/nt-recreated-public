@@ -26,8 +26,8 @@ function draw_text_bigname(_x, _y, _text, _color = draw_get_color(), _alpha = dr
 		draw_set_valign(fa_top)
 		draw_set_alpha(1)
 		
-		var _w = ceil(font_get_string_width(_text) * _scale) + 6,
-			_h = ceil(font_get_string_height(_text) * _scale) + 2
+		var _w = ceil(font_get_string_width(_text) * _scale),
+			_h = ceil(font_get_string_height(_text) * _scale)
 		
 		_surface = surface_create(_w, _h)
 		
@@ -46,10 +46,7 @@ function draw_text_bigname(_x, _y, _text, _color = draw_get_color(), _alpha = dr
 		draw_set_valign(_valign)
 		draw_set_alpha(_last_alpha)
 		
-		if (GM_build_type == "run") {
-			// debug
-			surface_save(_surface, "bigname/" + _text + ".png")
-		}
+		if (GM_build_type == "run") surface_save(_surface, "bigname/" + _text + ".png")
 		
 		struct_set_from_hash(global.__bigname_surface_cache, _key, _surface)
 	}

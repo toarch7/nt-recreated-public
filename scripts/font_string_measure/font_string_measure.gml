@@ -140,7 +140,7 @@ function font_get_height_diff() {
 	}
 	else if (_f == global.language_font_noto) {
 		switch (draw_get_valign()) {
-			case fa_top: return 4
+			case fa_top: return 2
 			case fa_middle: return -2
 			case fa_bottom: return 0
 		}
