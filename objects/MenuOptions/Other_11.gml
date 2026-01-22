@@ -35,7 +35,7 @@ if _current_category != OptionCategory.Main {
 	}
 }
 
-draw_text_bigname(gui_w div 2, 20, _name, c_uigray)
+draw_text_bigname(gui_w div 2, 24, _name, c_uigray)
 draw_align()
 
 #endregion

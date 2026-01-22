@@ -1,6 +1,7 @@
 alarm[3] = -1
+alarm[6] = -1
 
-if !instance_exists(Player) && !instance_exists(Menu) {
+if !instance_exists(GameCont) && !instance_exists(Menu) {
     alarm[0] = 1268
     
 	snd_stop(song)

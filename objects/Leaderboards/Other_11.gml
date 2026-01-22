@@ -10,8 +10,7 @@ if (dragging == -1 || wait) exit
 
 if mouse_check_button(mb_left) {
 	for(var i = 0; i < 4; i ++) {
-		if !device_mouse_check_button(i, mb_left)
-			continue
+		if (!device_mouse_check_button(i, mb_left)) continue
 		
 		var mx = device_mouse_x_to_gui(i),
 			my = device_mouse_y_to_gui(i)

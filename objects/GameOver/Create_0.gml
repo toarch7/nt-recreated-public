@@ -28,7 +28,10 @@ repeat 2 {
 }
 
 if scrGameIsEventRun() {
-	with (instance_find(PauseButton, 1)) sprite_index = sprGameOverResult
+	with (instance_find(PauseButton, 1)) {
+		sprite_index = sprGameOverResult
+		y -= 6
+	}
 	
 	if !scrGameIsWeeklyRun() {
 	    instance_destroy(instance_find(PauseButton, 0))

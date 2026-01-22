@@ -589,9 +589,13 @@ function scrCuzThrowAllAbility() {
 
 function scrRobotEat(_wep, _auto_collect = false) {
 	static __spawn_pickup = function(_object, _auto_collect) {
-		with instance_create(x, y, _object) {
-			if (_auto_collect) event_perform(ev_collision, Player)
+		var _instance = instance_create(x, y, _object)
+		
+		if (_auto_collect) with (instance_nearest(x, y, Player)) {
+			with (_instance) event_perform(ev_collision, Player)
 		}
+		
+		return _instance
 	}
 	
 	var _tb = scr_skill_get(mut_throne_butt),

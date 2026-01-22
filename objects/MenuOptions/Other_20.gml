@@ -408,7 +408,7 @@ scrOptionsMenuCreateElements(
 	/// @loc:token [ProfileOptions] ID "ID"
 	{ type: "button", name: L("ID", "ID"), key: "general_uid",
 		get_value: function(_opt) {
-			var value = scrSavedatascrGetUID(),
+			var value = scrSavedataGetUID(),
 				copied = _opt[$ "__copied"]
 			
 			if copied == undefined {
@@ -425,7 +425,7 @@ scrOptionsMenuCreateElements(
 		},
 		
 		click: function(_opt) {
-			_opt.value = scrSavedatascrGetUID()
+			_opt.value = scrSavedataGetUID()
 			
 			if is_desktop {
 				clipboard_set_text(_opt.value)

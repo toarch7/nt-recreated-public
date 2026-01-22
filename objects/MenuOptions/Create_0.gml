@@ -160,7 +160,7 @@ element_functions[$ "switch"] = function(_opt) {
 
 element_functions[$ "list"] = function(_opt) {
 	var list = _opt.list,
-		index = array_indexof(list, _opt.value)
+		index = array_get_index(list, _opt.value)
 	
 	if index != -1 && array_length(list) > index + 1 {
 		_opt.value = list[index + 1]

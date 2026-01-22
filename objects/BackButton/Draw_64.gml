@@ -1,10 +1,16 @@
 if lockstep_stop
 	exit
 
-var _x = 16, _y = 19
+if (setup) {
+	setup = false
+	exit
+}
 
-draw_sprite_ext(sprite_index, image_index, _x, _y, 1, 1, 0, c_black, 1)
-draw_sprite_ext(sprite_index, image_index, _x, _y, 1, 1, 0, c_black, 1)
+var _x = drawx, _y = drawy
+
+//
+draw_sprite_ext(sprite_index, image_index, _x + 1, _y + 0, 1, 1, 0, c_black, 1)
+draw_sprite_ext(sprite_index, image_index, _x + 1, _y + 1, 1, 1, 0, c_black, 1)
 
 //
 draw_sprite_ext(sprite_index, image_index, _x, _y, 1, 1, 0, c_white, 1)

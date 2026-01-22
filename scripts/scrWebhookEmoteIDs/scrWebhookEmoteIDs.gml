@@ -74,6 +74,9 @@ function scrWebhookEmoteIDs() {
     ulticon[15, 1] = "<:distance:763743180310970408>"
     ulticon[15, 2] = "<:intimacy:763743180469436416>"
 
+    ulticon[16, 1] = "<:arsenal:1464031110827610276>"
+    ulticon[16, 2] = "<:emotional:1464031167509692587>"
+
 	//
     chricon[1, 1] = "<:FISHA:763750012605431808>"
     chricon[1, 2] = "<:FISHB:763750013129850880>"

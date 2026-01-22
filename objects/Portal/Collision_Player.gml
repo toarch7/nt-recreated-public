@@ -13,12 +13,18 @@ if (endgame > 30) {
 	alarm[1] = 90
 	
 	if (scr_ultra_get_from_race(Race.Robot) != -1) {
-	    with (WepPickup) if (visible && ammo) {
+		var _tb = scr_skill_get(mut_throne_butt)
+		
+	    with (WepPickup) if (visible && !curse) {
 			with (Player) if (race == Race.Robot) {
 				scrRobotEat(other.wep, true)
 			}
 			
-			snd_play_hit(sndRobotEat)
+			with (instance_create(x, y, RobotEat)) {
+				if (_tb) sprite_index = sprRobotEatTB
+			}
+			
+			instance_create(x, y, Smoke)
 			ammo = false
 		}
 	}

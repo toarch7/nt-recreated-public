@@ -833,7 +833,7 @@ else for (var i = 0; i < array_length(_items); i++) {
 				drawx -= _size
 			}
 			else if _opt.type == "category" && _current_category == OptionCategory.Main {
-				draw_text_bigname(drawx, drawy - 4, loc(_name))
+				draw_text_bigname(drawx, drawy, loc(_name))
 				drawy += 2
 			}
 			else draw_text_nt(drawx, drawy, loc(_name))

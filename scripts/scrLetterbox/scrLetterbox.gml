@@ -13,7 +13,6 @@ function scrLetterbox(_state, _frame=-1) {
 
 /// @function scrDrawLetterbox
 /// @param frame
-/// @param size=LETTERBOX_SIZE
 /// @param gui=false
 function scrDrawLetterbox(_frame = -1, _is_gui = false) {
 	var _left = _is_gui ? 0 : view_xview,

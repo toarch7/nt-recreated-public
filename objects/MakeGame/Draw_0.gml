@@ -5,17 +5,22 @@ if disclaimer {
 	var _dx = view_width div 2,
 		_dy = view_height div 2,
 		
-		_exclamation = (get_timer() / 33333) % 60 > 30 ? "@r!!!" : "@s!!!"
+		_exclamation_color = (get_timer() / 33333) % 60 > 30 ? "@r" : "@s"
 	
 	if (disclaimer_setup) {
 		disclaimer_message = string_insert_wordwraps(string_hash_to_newline(
-			loc("R:Intro:ProjectDisclaimerText", disclaimer_message)), game_screen_width - 80)
+			loc("R:Intro:ProjectDisclaimerText", disclaimer_message)), game_screen_width)
 		
 		disclaimer_setup = false
 	}
 	
+	/// @loc:token [R:Intro] ProjectDisclaimerExclamationsLeft "!!!"
+	/// @loc:token [R:Intro] ProjectDisclaimerExclamationsRight "!!!"
+	var _left = _exclamation_color + loc("R:Intro:ProjectDisclaimerExclamationsLeft", "!!!"),
+		_right = _exclamation_color + loc("R:Intro:ProjectDisclaimerExclamationsRight", "!!!")
+	
 	/// @loc:token [R:Intro] ProjectDisclaimerTitle "DISCLAIMER"
-	var _title = _exclamation + " " + loc("R:Intro:ProjectDisclaimerTitle", "DISCLAIMER") + " " + _exclamation + "@w",
+	var _title = _left + " " + loc("R:Intro:ProjectDisclaimerTitle", "DISCLAIMER") + " " + _right + "@w",
 		_disclaimer_message = disclaimer_message
 	
 	if (!string_starts_with(_disclaimer_message, "\n")) {

@@ -17,7 +17,7 @@ if appear < 2 {
 		if ((_subimage >= 0 && _subimage <= 1) || _subimage == 4 || _subimage == 7) {
 			_halign = fa_left
 			var _overlap = min(0, _dx - _half_w - view_xview)
-			if (_overlap > 0) _dx -= _overlap
+			if (_overlap < 0) _dx -= _overlap
 			_dx -= _half_w
 		}
 		else if ((_subimage >= 2 && _subimage <= 3) || (_subimage >= 5 && _subimage <= 6)) {

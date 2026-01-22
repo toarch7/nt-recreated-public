@@ -32,7 +32,7 @@ if (instance_exists(_player)) {
 		}
 		
 	    with (_player) with (other) {
-			event_perform(ev_collision, _player)
+			event_perform(ev_collision, Player)
 		}
 	}
 }

@@ -343,6 +343,7 @@ function scrDrawInteractionHUD(_player) {
 			var _x = floor(x - view_xview),
 				_y = floor(y - view_yview),
 				_offset = font_get_height_diff(),
+				_prompt_text = undefined,
 				_name = name
 			
 			var _text_offset = draw_pickup_button(_x, _y)
@@ -364,18 +365,17 @@ function scrDrawInteractionHUD(_player) {
 			else {
 				var _object_name = object_get_name(object_index)
 				if (object_is_ancestor(object_index, Car)) _object_name = "Car"
-				draw_text_nt(_x, _y - 31, loc("HUD", $"Prompt{_object_name}", _name))
+				_prompt_text = loc("HUD", $"Prompt{_object_name}", _name)
+				draw_text_nt(_x, _y - 31, _prompt_text)
 			}
 			
 			if is_touch(_player.index) {
 				if instance_is(self, WepPickup) {
 					/// @loc:token [R:HUD] PickUpAction "PICK UP"
-					_name = loc("R:HUD:PickUpAction", "PICK UP")
+					_prompt_text = loc("R:HUD:PickUpAction", "PICK UP")
 				}
 				
 				with ButtonAct {
-					draw_text_nt(x, y + (((y - rad * 0.5) < 40) ? 36 : -36), _name)
-					
 					var _sprite = other.sprite_index,
 						_xoffset = sprite_get_xoffset(_sprite),
 						_yoffset = sprite_get_yoffset(_sprite),
@@ -386,6 +386,11 @@ function scrDrawInteractionHUD(_player) {
 					draw_sprite_ext(_sprite, other.image_index, x, y,
 						other.image_xscale * 1.6, other.image_yscale * 1.6, other.image_angle, other.image_blend, other.image_alpha)
 					sprite_set_offset(_sprite, _xoffset, _yoffset)
+					
+					if (is_string(_prompt_text)) {
+						var _height = font_get_string_height(_prompt_text)
+						draw_text_nt(x, max(_height, y - rad * 0.5 - _height - 12), _prompt_text)
+					}
 					
 					alpha = approach(alpha, 1.1, 0.4)
 					active = true

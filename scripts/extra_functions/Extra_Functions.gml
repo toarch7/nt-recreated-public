@@ -1,16 +1,3 @@
-/// @description array_push(array,item)
-/// @param array
-/// @param item
-
-function array_indexof(array, value) {
-    for (var i = 0; i < array_length(array); i ++) {
-        if array[i] == value
-            return i
-    }
-
-    return -1
-}
-
 function struct_clone(_struct, _keep_undefineds = true) {
     var names = variable_struct_get_names(_struct)
 	

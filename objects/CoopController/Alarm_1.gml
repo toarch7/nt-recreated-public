@@ -7,7 +7,7 @@
 
 buffer_write(global.mpbuffer, buffer_u8, event.tcp_connect)
 buffer_write(global.mpbuffer, buffer_string, string(GAME_BUILD))
-buffer_write(global.mpbuffer, buffer_string, scrSavedatascrGetUID())
+buffer_write(global.mpbuffer, buffer_string, scrSavedataGetUID())
 buffer_write(global.mpbuffer, buffer_string, json_stringify(my_player))
 
 var send = network_send_udp(socket, ip, global.port, global.mpbuffer, buffer_tell(global.mpbuffer))

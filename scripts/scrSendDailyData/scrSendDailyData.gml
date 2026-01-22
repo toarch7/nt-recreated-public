@@ -238,7 +238,7 @@ function scrSendDailyData() {
 				skills: _skills,
 				crown: GameCont.crown,
 				version: UberCont.version,
-				uid: scrSavedatascrGetUID()
+				uid: scrSavedataGetUID()
 			}
 			
 			my_entry.runId = runId

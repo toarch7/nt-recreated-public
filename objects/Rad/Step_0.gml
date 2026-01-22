@@ -15,9 +15,9 @@ else if distance_to_object(HostileHorror) < 170 && HostileHorror.charge <= 0 && 
 }
 else if instance_exists(Player) {
 	var p = instance_nearest(x, y, Player),
-		d = 80 + scr_skill_get(mut_plutonium_hunger)
-		
-    if (distance_to_object(p) < d && !p.horrornorad) || instance_exists(Portal) {
+		d = 80 + (60 * scr_skill_get(mut_plutonium_hunger))
+	
+    if ((distance_to_object(p) < d && !p.horrornorad) || instance_exists(Portal)) {
         target = instance_nearest(x, y, Player)
     }
 }

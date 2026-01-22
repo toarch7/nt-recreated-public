@@ -3,7 +3,7 @@ function string_insert_wordwraps(_string, _width) {
 	
 	var _length = string_length(_string),
 		_ctx = {
-			width: _width,
+			width: _width div 2,
 			buffer: _buffer,
 			word: "",
 			size: 0,

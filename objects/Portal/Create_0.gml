@@ -30,26 +30,28 @@ attract_objects = function(_object_index, _attract_distance) {
 		var _is_player = instance_is(self, Player),
 			_distance = point_distance(x, y, _px, _py)
 		
-        if (_distance < _attract_distance && !collision_line(x, y, _px, _py, Wall, 0, 0)) {
-			var _spd = (_is_player && _distance > _half) ? 2 : 5,
+        if (_distance <= _attract_distance && !collision_line(x, y, _px, _py, Wall, 0, 0)) {
+			var _spd = (_distance > _half ? 2 : 5),
 				_direction = point_direction(x, y, _px, _py),
 				_tx = x + ldrx(_spd, _direction),
 				_ty = y + ldry(_spd, _direction)
 			
-			if (place_free(_tx, x)) x = _tx
+			if (place_free(_tx, y)) x = _tx
 			if (place_free(x, _ty)) y = _ty
 			
-			if (_is_player) {
+			if (_is_player && _distance <= _half) {
 				angle -= 30 * right
-	            sprite_index = spr_hurt
-	            image_index = 1
+		        sprite_index = spr_hurt
+		        image_index = 1
 			}
 			else if (object_index == WepPickup) {
+				mp_potential_step_object(_px, _py, 1, Wall)
 				image_angle -= 15 * rotspeed
 			}
-			
-			mp_potential_step_object(x, y, 1, Wall)
         }
-		else if (_is_player && !roll && angle != 0) angle = 0
-    }
+		
+		if (_is_player && _distance > _half && !roll && angle != 0) {
+			angle = 0
+		}
+	}
 }

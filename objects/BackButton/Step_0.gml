@@ -1,13 +1,15 @@
 if lockstep_stop
 	exit
 
-x = view_xview + 14
-y = view_yview + 14
+drawx = is_touch() ? 24 : 20
+drawy = 20
+
+x = view_xview + drawx
+y = view_yview + drawy
 
 depth = -1000
 
-if !visible
-	exit
+if (!visible) exit
 
 var press = mouse_ui_clicked(),
 	backspace = scr_keyboard_check_pressed(vk_backspace)
@@ -18,7 +20,7 @@ with MenuOptions {
 }
 
 if ((gamepad_button_check_pressed(0, gp_face2) || scr_keyboard_check_pressed(vk_escape) || backspace)
-	|| (is_desktop && mouse_check_button_pressed(mb_right) && !(instance_exists(CoopController) && instance_exists(Menu)))
+	|| (is_keyboard() && mouse_check_button_pressed(mb_right) && !(instance_exists(CoopController) && instance_exists(Menu)))
 ) {
 	if (!instance_exists_var(MenuOptions, "await_input", true)) event_user(0)
 }
