@@ -61,6 +61,7 @@ function scrOptionsMenuCreateElement(_opt, _to_current_category = false) {
 		_opt[$ "height"] ??= font_get_string_height(string_hash_to_newline(_opt.name))
 		_opt[$ "anim"] = 0
 		_opt[$ "splat"] = 0
+		_opt[$ "scalar_slider"] ??= true
 		
 		var _newlines = string_count("\n", string_hash_to_newline(_opt.name))
 		if (_newlines > 0) _opt.height += 5
@@ -189,6 +190,12 @@ function scrOptionsMenuChangeCategory(_category, _queue = true) {
 				item_count ++
 			}
 		}
+		
+		array_foreach(items, function(_item) {
+			if (is_method(_item[$ "awake"])) {
+				method_execute(_item[$ "awake"], _item)
+			}
+		})
 		
 		draw_step_size = 8 + font_get_string_height("Aa")
 		

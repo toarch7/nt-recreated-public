@@ -1,18 +1,14 @@
 if lockstep_stop
 	exit
 
-if GameCont.area == 7 && GameCont.subarea == 3 {
+if GameCont.area == area_palace && GameCont.subarea == GameCont.maxsubarea {
     styleb = 0
 
     with GenCont {
         alarm[0] = 3
         alarm[2] = 2
     }
-
-    with MenuGen {
-        alarm[1] = 3
-    }
-
+	
     dix = -4
     diy = 0
 
@@ -51,6 +47,20 @@ if GameCont.area == 7 && GameCont.subarea == 3 {
     with instance_create(x - 160 + 16, y + diy * 32 + 384 + 64, BigGeneratorInactive) {
         image_xscale = 1
     }
+	
+	with (BigGeneratorInactive) {
+		for(var yy = 0; yy <= 2; yy ++) {
+			var _py = ((bbox_top div 32) + yy) * 32
+			
+			for(var xx = 0; xx <= 1; xx ++) {
+				var _px = ((x div 32) + xx - 1) * 32
+				instance_create(_px, _py, Floor)
+			}
+		}
+		y -= 16
+		yprevious = y
+		ystart = y
+	}
 
     instance_destroy()
     exit

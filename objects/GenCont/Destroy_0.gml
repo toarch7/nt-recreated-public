@@ -78,7 +78,7 @@ if instance_exists(Player) {
 			}
 		}
 		
-		if _area == area_palace && _subarea != 3 && random(2) < 1 {
+		if _area == area_palace && !_is_last && random(2) < 1 {
 	        repeat (4) instance_create(x, y, IDPDSpawn)
 	    }
 		
@@ -119,7 +119,7 @@ if _area == area_city && _subarea == 1 && scr_skill_get(mut_last_wish) {
 	}
 }
 
-if (_area == area_palace && _is_last) || _area == area_campfire || _area == area_crib {
+if ((_area == area_palace && _is_last) || _area == area_campfire || _area == area_crib) {
     with Wall {
         if (place_meeting(x, y, Floor)) instance_destroy()
     }
@@ -134,7 +134,7 @@ if (_area == area_palace && _is_last) || _area == area_campfire || _area == area
     instance_destroy(RadChestBig, false)
     instance_destroy(enemy, false)
 
-    if _area == area_palace && _subarea == 3 {
+    if (_area == area_palace && _is_last) {
 		with (UberCont) {
 			if (scrGameIsDailyRun()) scrAchievementUnlock(Achievement.NOT_BAD)
 		}
@@ -144,7 +144,7 @@ if (_area == area_palace && _is_last) || _area == area_campfire || _area == area
 		var _num = 0
 		repeat (1 + scr_skill_get(mut_open_mind)) {
 			if (_num > 0) {
-				var _offset = 32 * _num + 1
+				var _offset = 36 * _num + 1
 				instance_create(10016 - 32, 10016 - _offset, choose(WeaponChest, RadChest, AmmoChest))
 				instance_create(10016 + 32, 10016 - _offset, choose(WeaponChest, RadChest, AmmoChest))
 			}

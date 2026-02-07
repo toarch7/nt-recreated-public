@@ -2,8 +2,9 @@
 /// @param area
 /// @param subarea
 /// @param loop
-/// @param is_hardmode
-function scrAreaGetMapName(_area, _subarea, _loop, _is_hardmode=undefined) {
+/// @param is_hardmode=false
+/// @param localized=true
+function scrAreaGetMapName(_area, _subarea, _loop, _is_hardmode=undefined, _localize=true) {
     var _area_string = "",
 		_subarea_string = undefined,
 		_result = ""
@@ -30,10 +31,7 @@ function scrAreaGetMapName(_area, _subarea, _loop, _is_hardmode=undefined) {
     }
 
     if (instance_exists(GameCont) && GameCont.win) {
-        _area_string = "END"
-		_subarea_string = undefined
-		
-		// END1 - Throne
+        // END1 - Throne
         if instance_exists(Cinematic) {
             _area_string = loc("Area:End1", "END1")
         }
@@ -41,8 +39,6 @@ function scrAreaGetMapName(_area, _subarea, _loop, _is_hardmode=undefined) {
 		else if (GameCont.area == area_hq && GameCont.subarea == GameCont.maxsubarea) {
 			_area_string = loc("Area:End2", "END2")
         }
-		
-        _loop = 0
     }
 	
 	if (_area_string != "") {

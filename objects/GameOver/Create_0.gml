@@ -13,7 +13,7 @@ if GameCont.win {
     if instance_exists(Cinematic) {
         text = loc("GameOver:Text:2", "YOU REACHED THE NUCLEAR THRONE")
     }
-	else if GameCont.area == 106 && GameCont.subarea == 3 {
+	else if GameCont.area == area_hq && GameCont.subarea == GameCont.maxsubarea {
         text = loc("GameOver:Text:4", "THE STRUGGLE IS OVER")
     }
 }

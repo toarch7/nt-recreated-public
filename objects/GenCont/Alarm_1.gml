@@ -4,7 +4,7 @@ scrMoveTopPots()
 
 if (instance_exists(Player)) {
     with (CrownObject) if (is_new) {
-        if (!(GameCont.area == area_palace && GameCont.subarea == 3)) {
+        if (!(GameCont.area == area_palace && GameCont.subarea == GameCont.maxsubarea)) {
             instance_create(x, y, IDPDSpawn)
         }
 		

@@ -52,7 +52,7 @@ function scrInitStats() {
 			progress ++
 		}
 		
-		var _max_skins = scrRaceGetMaxSkinCount(_race_id)
+		var _max_skins = scrRaceGetMaxSkinCount(_race_id, false)
 		
 		for(var _skin_id = 1; _skin_id < _max_skins; ++_skin_id) {
 			maxprogress ++

@@ -543,10 +543,10 @@ function scrCampfireMenuSelectionChange(_player_index, _race) {
 			}
 			
 			if (scrCustomParam("wep", -1) == -1) {
-				if scrGameIsDailyRun() {
+				if (scrGameIsDailyRun() || scrGameIsCustomMode()) {
 					_pinst.cwep = scrRaceGetStarterWeapon(_race)
 			    }
-				else if !scrGameIsWeeklyRun() {
+				else if (!scrGameIsWeeklyRun()) {
 					_pinst.cwep = scr_loadout_race_get_start_weapon(_race)
 			    }
 			}
@@ -622,8 +622,8 @@ function scrMenuDrawLoadout(_pinst) {
 		
 		_weapon_count = 2,
 		_weaponsize = 44,
-		_weapons_x = (_crownright + _crownleft) div 2 - (_weaponsize * 0.5) * _weapon_count + 18,
-		_weapons_y = _crownbottom + _crownsize div 2 - 14,
+		_weapons_x = (_crownright + _crownleft) div 2 - (_weaponsize * 0.5) * _weapon_count + 20,
+		_weapons_y = _crownbottom + _crownsize div 2 - 19,
 		_is_custom_weapon = (scrCustomParam("wep", -1) >= 0 || scrCustomParam("bwep", -1) >= 0),
 		
 		_skin_count = scrRaceGetMaxSkinCount(_race),
@@ -858,7 +858,7 @@ function scrMenuDrawLoadout(_pinst) {
 	
 	#region Skins
 		
-		if _skin_count > 1 {
+		if _skin_count > 0 {
 			var _any = false
 			
 			for(var _skin_id = 0; _skin_id < _skin_count; ++_skin_id) {

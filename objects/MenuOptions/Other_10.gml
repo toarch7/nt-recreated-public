@@ -38,7 +38,9 @@ if text_input_element != undefined {
 	
 	if !is_desktop {
 		if !keyboard_virtual_status() {
-			scrShowVirtualKeyboard()
+			if (is_numeric(_opt[$ "keyboard_type"])) {
+				scrShowVirtualKeyboard(_opt.keyboard_type)
+			}
 		}
 		else drawy -= 48
 	}
@@ -131,7 +133,8 @@ if resourcepack_disclaimer {
 	var _dx = gui_w div 2,
 		_dy = gui_h div 2,
 		_height = font_get_string_height(resourcepack_disclaimer_message),
-		_scale = (_height >= view_height - (LETTERBOX_SIZE * 3)) ? 0.85 : 1,
+		//_scale = (_height >= view_height - (LETTERBOX_SIZE * 3)) ? 0.85 : 1,
+		_scale = resourcepack_disclaimer_scale,
 		_line_height = font_get_string_height("A")
 	
     // resourcepack warning
@@ -420,9 +423,14 @@ for(var i = 0; i < item_count; i ++) {
 	}
 }
 
+var _custom_mode_menu_called = false
+
 if (instance_exists(CustomModeMenu)) {
 	with (CustomModeMenu) {
-		other.scroll_max = height * 0.5
+		if (other.scroll_check) {
+			event_user(0)
+		}
+		other.scroll_max = max(0, (height - (gui_h div 2) - LETTERBOX_SIZE) div 2)
 	}
 	scroll_min = -scroll_max
 	_has_scrollbar = true
@@ -519,7 +527,9 @@ var _any = false
 if (instance_exists(CustomModeMenu)) {
 	with (CustomModeMenu) {
 		scroll = other.scroll - other.scroll_min
+		dragging = other.dragging
 		event_user(0)
+		_any = free_touch
 	}
 }
 else for (var i = 0; i < array_length(_items); i++) {
@@ -783,8 +793,10 @@ else for (var i = 0; i < array_length(_items); i++) {
 				}
 				
 				if !is_undefined(_value) {
-					if _opt.type == "slider" {
-						_value = string(round(_value * 100)) + "%"
+					if (_opt.type == "slider") {
+						if (_opt.scalar_slider) {
+							_value = string(round(_value * 100)) + "%"
+						}
 						
 						var _slider_x = drawx - 6,
 							_slider_y = drawy - 4,
@@ -866,7 +878,7 @@ if slider != undefined {
 }
 
 if (!_any) {
-	if (_has_scrollbar && is_touch()
+	if (_has_scrollbar //&& is_touch()
 		&& !dragging && (dragging == -1 || (_press && abs(_mx - drawx) > 60))
 	) {
 		if (mouse_check_button(mb_left)) {

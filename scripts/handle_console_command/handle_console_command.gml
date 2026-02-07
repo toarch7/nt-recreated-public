@@ -211,7 +211,7 @@ function handle_console_command(str) {
 
                     if m[0] % 2 == 0 && m[0] < 100 && m[0] != 106 {
                         GameCont.area = m[0] - 1
-                        GameCont.subarea = 3
+                        GameCont.subarea = GameCont.maxsubarea
                     }
 
                     with GameCont {

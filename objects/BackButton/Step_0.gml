@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-drawx = is_touch() ? 24 : 20
+drawx = (is_touch() || instance_exists(CoopController)) ? 24 : 16
 drawy = 20
 
 x = view_xview + drawx

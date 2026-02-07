@@ -9,7 +9,7 @@ if disclaimer {
 	
 	if (disclaimer_setup) {
 		disclaimer_message = string_insert_wordwraps(string_hash_to_newline(
-			loc("R:Intro:ProjectDisclaimerText", disclaimer_message)), game_screen_width)
+			loc("R:Intro:ProjectDisclaimerText", disclaimer_message)), game_screen_width, fa_center)
 		
 		disclaimer_setup = false
 	}

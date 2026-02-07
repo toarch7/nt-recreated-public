@@ -15,7 +15,7 @@ else if appeary == -1 {
     appeary = num * 32
 }
 
-draw_sprite_ext(sprite_index, skill, x, y + appeary - sign(selected), 1, 1, 0, selected ? c_white : c_gray, 1)
+draw_sprite_ext(sprite_index, skill, x, y + appeary - sign(selected), image_xscale, image_yscale, 0, selected ? c_white : c_gray, 1)
 
 var _description = loc("Skills", skill, "Text", scr_skill_get_text(skill))
 

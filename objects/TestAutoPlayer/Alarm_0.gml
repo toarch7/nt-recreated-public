@@ -35,7 +35,7 @@ with (Player) {
 }
 
 with (GameCont) {
-	var _str = scrAreaGetMapName(area, subarea, loops)
+	var _str = scrAreaGetMapName(area, subarea, loops, scrGameIsHardmode(), false)
 	window_set_caption(_str)
 	print("Entered", _str)
 }

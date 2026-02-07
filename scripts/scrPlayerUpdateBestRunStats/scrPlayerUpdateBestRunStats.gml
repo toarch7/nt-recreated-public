@@ -1,4 +1,6 @@
 function scrPlayerUpdateBestRunStats(_race, _is_end = false) {
+	if (scrGameIsCustomMode()) exit
+	
 	if (!scrGameIsHardmode()) {
 	    if (GameCont.kills > UberCont.cbst_kill[_race]) {
 	        UberCont.cbst_race[_race] = _race

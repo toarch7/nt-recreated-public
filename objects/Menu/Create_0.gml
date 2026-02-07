@@ -19,20 +19,28 @@ with Campfire {
 
 var _slot_index = 0,
 	_slot_height = sprite_get_height(sprCharSelect),
-	_slot_ystart = view_height - _slot_height - ((LETTERBOX_SIZE - _slot_height) div 2),
-	_slot_step_size = 20,
-	_slot_xstart = 8,
-	_slot_x = _slot_xstart;
+	_unlocked_chars = 0,
+	_char_list = [];
 
-for (var _race_id = Race.Random; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
-	if scrRaceIsHidden(_race_id) && !scr_race_is_unlocked(_race_id) continue
-	
+for(var _race_id = Race.Random; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
+	if (!scrRaceIsHidden(_race_id) || scr_race_is_unlocked(_race_id)) {
+		array_push(_char_list, _race_id)
+	}
+}
+
+var _count = array_length(_char_list),
+	_slot_ystart = view_height - _slot_height - ((LETTERBOX_SIZE - _slot_height) div 2),
+	_slot_step_size = min(20, floor((game_screen_width - 40) / max(1, _count))),
+	_slot_xstart = 8,
+	_slot_x = _slot_xstart
+
+for(var i = 0; i < _count; ++i) {
 	// relative to the camera
 	_slot_x = _slot_xstart + _slot_step_size * _slot_index
 	
     with instance_create(_slot_x, _slot_ystart, CharSelect) {
         slot_index = _slot_index
-        race = _race_id
+        race = _char_list[i]
     }
 	
 	_slot_index ++

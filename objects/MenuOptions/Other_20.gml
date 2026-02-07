@@ -1,8 +1,11 @@
 /// @description Define options
 
+resourcepack_disclaimer_scale = 0.5
 resourcepack_disclaimer_message = "RESOURCEPACKS ARE AN EXCLUSIVE FEATURE OF#NUCLEAR THRONE MOBILE.##A RESOURCEPACK IS A USER-CREATED ASSET COLLECTION (TEXTURES, SOUNDS, TEXT) FOR DECORATIVE PURPOSES ONLY, WITH NO GAMEPLAY BENEFITS.##RESOURCEPACK BROWSER, DESPITE BEING MODERATED,#MAY STILL CONTAIN QUESTIONABLE CONTENT.##THE DEVELOPER IS NOT LIABLE FOR ANY HARMFUL MATERIAL."
 /// @loc:token [ResourcepackOptions] DisclaimerText "RESOURCEPACKS ARE AN EXCLUSIVE FEATURE OF#NUCLEAR THRONE MOBILE.##A RESOURCEPACK IS A USER-CREATED ASSET COLLECTION (TEXTURES, SOUNDS, TEXT) FOR DECORATIVE PURPOSES ONLY, WITH NO GAMEPLAY BENEFITS.##RESOURCEPACK BROWSER, DESPITE BEING MODERATED,#MAY STILL CONTAIN QUESTIONABLE CONTENT.##THE DEVELOPER IS NOT LIABLE FOR ANY HARMFUL MATERIAL."
-resourcepack_disclaimer_message = string_insert_wordwraps(string_hash_to_newline(loc("ResourcepackOptions:DisclaimerText", resourcepack_disclaimer_message)), game_screen_width)
+resourcepack_disclaimer_message = string_insert_wordwraps(string_hash_to_newline(
+	loc("ResourcepackOptions:DisclaimerText", resourcepack_disclaimer_message)),
+	game_screen_width / resourcepack_disclaimer_scale, fa_center)
 
 #region define categories
 
@@ -1009,10 +1012,88 @@ var _get_value_stub = function() {
 	return ""
 }
 var _custom_mode_button_category = function(_opt) {
-	print("Click category", _opt.category)
-	scrOptionsMenuChangeCategory(_opt.category)
+	var _store = _opt.category != OptionCategory.CustomMode_Reset
+	scrOptionsMenuChangeCategory(_opt.category, _store)
+}
+var _cm_number_input = function(_opt) {
+	assert(variable_struct_exists(_opt, "key"))
+	
+	_opt.type = "input"
+	_opt[$ "value_min"] ??= 0
+	_opt[$ "value_max"] ??= 99
+	
+	_opt.validate = function(_opt, _input, _confirm) {
+		_input = string_trim(_input)
+		
+		if (string_length(_input) == 0) return false
+		
+		if (_opt.key == "seed") {
+			if (string_char_at(_input, 4) == "-") {
+				_input = string_delete(_input, 4, 1)
+			}
+			else if (string_length(string(_opt.value)) < string_length(_input) && string_length(_input) == 3) {
+				keyboard_string = _input + "-"
+			}
+			
+			if (string_length(_input) > 6) return true
+			
+			if (_confirm) {
+				_input = string_pad_end(_input, 6, "0")
+			}
+		}
+		
+		try {
+			var _number = real(_input)
+				
+			if (_number > _opt.value_max || _number < _opt.value_min) {
+				return true
+			}
+			
+			if (_confirm) {
+				scrCustomParamChange(_opt.key, _number)
+				_opt.value = _number
+			}
+		}
+		catch(e) {
+			return true
+		}
+			
+		return false
+	}
+	
+	_opt[$ "get_value"] ??= function(_opt) {
+		return scrCustomParam(_opt.key)
+	}
+	
+	_opt.awake = function(_opt) {
+		_opt.value = scrCustomParam(_opt.key)
+	}
+	
+	_opt.keyboard_type = kbv_type_numbers
+	
+	_opt.halign = fa_left
+	
+	return _opt
+}
+var _cm_switch = function(_opt) {
+	assert(variable_struct_exists(_opt, "key"))
+	
+	_opt.type = "button"
+	
+	_opt.click = function(_opt) {
+		scrCustomParamChange(_opt.key, !scrCustomParam(_opt.key))
+	}
+	
+	_opt[$ "get_value"] ??= function(_opt) {
+		return scrCustomParam(_opt.key) ? OPTION_ON : OPTION_OFF
+	}
+	
+	_opt.halign = fa_left
+	
+	return _opt
 }
 
+#region
 scrOptionsMenuCreateElements(
 	{ type: "button", name: L("Start", "START"), halign: fa_left,
 		click: function() {
@@ -1036,7 +1117,8 @@ scrOptionsMenuCreateElements(
 		},
 		get_value: function() {
 			return $"{UberCont.custom_mode_slot_index + 1}/{array_length(UberCont.custom_mode_slots)}"
-		}
+		},
+		halign: fa_left
 	},
 	
 	{ type: "button", name: L("Loadout", "LOADOUT"),
@@ -1064,6 +1146,7 @@ scrOptionsMenuCreateElements(
 			category: OptionCategory.CustomMode_Reset,
 			click: _custom_mode_button_category },
 )
+#endregion
 
 #endregion
 #region CustomMode_Lodout
@@ -1071,22 +1154,56 @@ scrOptionsMenuCreateElements(
 L = LF("CustomMode.Setup")
 scrOptionsMenuCategoryBegin(OptionCategory.CustomMode_Loadout)
 
+__custom_mode_weapon = function(_key) {
+	var _weapon = scrCustomParam(_key), _sprite;
+	
+	var _ox = 16, _oy = 0;
+	
+	if (_weapon == wep_none) {
+		_sprite = sprCustomModeWeaponNo
+	}
+	else if (_weapon == -1) {
+		_sprite = sprCustomModeWeaponDefault
+	}
+	else if (scr_weapon_is_valid(_weapon)) {
+		_sprite = scr_weapon_get_sprite(_weapon)
+		
+		if (sprite_exists(_sprite)) {
+			_ox -= sprite_get_xoffset(_sprite) + sprite_get_width(_sprite) div 2 - 2
+			_oy -= sprite_get_yoffset(_sprite) - 7
+		}
+		else {
+			_sprite = sprDefault
+		}
+	}
+	
+	return $"@({sprite_get_name(_sprite)},0,{_ox},{_oy})"
+}
+
 scrOptionsMenuCreateElements(
 	{ type: "button", name: L("Primary weapon", "PRIMARY WEAPON"),
 		click: function() {
 			instance_destroy(CustomModeMenu)
 			instance_create(0, 0, CustomModeWeaponSelector)
 			snd_play(sndClick)
-		}
+		},
+		get_value: function() {
+			return __custom_mode_weapon("wep")
+		},
+		halign: fa_left
 	},
-	{ type: "button", name: L("Primary weapon", "PRIMARY WEAPON"),
+	{ type: "button", name: L("Secondary weapon", "SECONDARY WEAPON"),
 		click: function() {
 			instance_destroy(CustomModeMenu)
 			with (instance_create(0, 0, CustomModeWeaponSelector)) {
 				choosing_secondary = true
 			}
 			snd_play(sndClick)
-		}
+		},
+		get_value: function() {
+			return __custom_mode_weapon("bwep")
+		},
+		halign: fa_left
 	},
 	{ type: "button", name: loc("CustomMode.Extras:ProtoWep", "PROTO WEAPON"),
 		click: function() {
@@ -1095,32 +1212,242 @@ scrOptionsMenuCreateElements(
 				choosing_proto = true
 			}
 			snd_play(sndClick)
-		}
+		},
+		get_value: function() {
+			return __custom_mode_weapon("protowep")
+		},
+		halign: fa_left
 	},
-	{ type: "button", name: L("PickMutataions", "STARTING MUTATIONS"),
+	{ type: "button", name: L("PickMutations", "STARTING MUTATIONS"),
 		click: function() {
 			instance_destroy(CustomModeMenu)
 			instance_create(0, 0, CustomModeSkillSelector)
 			snd_play(sndClick)
-		}
+		},
+		get_value: function() {
+			return $"{scrCustomModeCountMutations()}/{maxskill}"
+		},
+		halign: fa_left
 	},
-	{ type: "button", name: L("Mutation choices", "MUTATION CHOICES"),
-		click: function() {
-		}
+	_cm_number_input({
+		key: "skill_choices",
+		name: L("Mutation choices", "MUTATION CHOICES"),
+		value_max: 10
+	}),
+	_cm_number_input({
+		key: "maxlevel",
+		name: L("MaxLevel", "MAX LEVEL")
+	}),
+	{ type: "slider", name: L("LevelReq", "LEVEL COST"),
+		click: function(_opt) {
+			var _n = max(1, _opt.value * 200)
+			
+			if (_n >= 95 && _n <= 105) {
+				_opt.value = 0.5
+				_n = 100
+			}
+			
+			scrCustomParamChange("radmax", _n)
+		},
+		get_value: function(_opt) {
+			return max(0.01, _opt.value * 2)
+		},
+		awake: function(_opt) {
+			_opt.value = scrCustomParam("radmax") / 200
+		},
+		halign: fa_left
 	},
-	{ type: "button", name: L("MaxLevel", "MAX LEVEL"),
-		click: function() {
+	_cm_switch({ key: "endpoints", name: L("Level.Ultra", "LEVEL ULTRA") })
+	
+)
+
+#endregion
+#region CustomMode_Generation
+
+L = LF("CustomMode.Setup")
+scrOptionsMenuCategoryBegin(OptionCategory.CustomMode_Generation)
+
+scrOptionsMenuCreateElements(
+	_cm_switch({ key: "seed_enable", name: L("SeedEnable", "SEEDED RUN") }),
+	_cm_number_input({
+		key: "seed",
+		name: L("Seed", "SEED"),
+		value_max: 999_999,
+		get_value: function(_opt) {
+			var _seed = scrCustomParam("seed"),
+				_string = string_pad_start(_seed, 6, "0"),
+				_lhs = string_copy(_string, 1, 3),
+				_rhs = string_copy(_string, 4, 3)
+			
+			return $"{_lhs}-{_rhs}"
+		},
+		condition: function() {
+			return scrCustomParam("seed_enable")
 		}
+	}),
+	{ type: "input", name: L("Area", "START AT"),
+		get_value: function() {
+			return $"{scrCustomParam("area")}-{scrCustomParam("subarea")}"
+		},
+		validate: function(_opt, _input, _confirm) {
+			var _string = string(_opt.value)
+			
+			print(_input)
+			
+			if (string_pos("--", _input) != 0) return true
+			
+			if (string_length(_input) > string_length(_string)) {
+				if (string_length(_input) == 1) _input += "-"
+			}
+			
+			try {
+				if (string_length(string_trim(_input)) == 0) return _confirm
+				
+				var _parts = string_split(_input, "-", false)
+				
+				if (array_length(_parts) == 1) {
+					_parts[1] = "0"
+				}
+				else if (array_length(_parts) == 0) {
+					_parts = [ "0", "1" ]
+				}
+				
+				if (string_length(array_first(_parts)) > 1
+					|| string_length(array_last(_parts)) > 1
+				) {
+					return true
+				}
+				
+				var _area = scrReal(array_first(_parts)),
+					_subarea = max(1, scrReal(array_last(_parts)))
+				
+				if ((_area < 0 || _area > area_palace) || _subarea > scrAreaGetMaxSubareas(_area)) {
+					return true
+				}
+				
+				if (_confirm) {
+					scrCustomParamChange("area", _area)
+					scrCustomParamChange("subarea", _subarea)
+				}
+				else {
+					keyboard_string = _input
+				}
+			}
+			catch(e) {
+				return true
+			}
+		},
+		awake: function(_opt) {
+			_opt.value = _opt.get_value(_opt)
+		},
+		keyboard_type: kbv_type_numbers,
+		halign: fa_left
 	},
-	{ type: "button", name: L("LevelCost", "LEVEL COST"),
-		click: function() {
-		}
-	},
-	{ type: "button", name: L("LevelUltra", "LEVEL ULTRA"),
-		click: function() {
-		}
+	_cm_number_input({ key: "loops", name: L("Loop", "LOOP"), value_max: 10 }),
+	_cm_number_input({ key: "area_size", name: L("AreaSize", "ODD AREAS") }),
+	_cm_number_input({ key: "area_size_alt", name: L("AreaSizeAlt", "EVEN AREAS") })
+)
+
+#endregion CustomMode_Generation
+#region CustomMode_Difficulty
+
+L= LF("CustomMode.Difficulty")
+scrOptionsMenuCategoryBegin(OptionCategory.CustomMode_Difficulty)
+
+var _cm_multiplier_scale = function(_opt) {
+	assert(variable_struct_exists(_opt, "key"))
+	_opt.type = "slider"
+	_opt[$ "value_min"] ??= 0
+	_opt[$ "value_max"] ??= 1
+	
+	_opt.awake = function(_opt) {
+		var _value = scrCustomParam(_opt.key) / 100
+		_opt.value = _value / (_opt.value_min + _opt.value_max)
 	}
 	
+	_opt.get_value = function(_opt) {
+		//return _opt.value_min + (_opt.value_max - _opt.value_min) * _opt.value
+		return scrCustomParam(_opt.key) / 100
+	}
+	
+	_opt.click = function(_opt) {
+		var _v = _opt.value_min + (_opt.value_max - _opt.value_min) * _opt.value,
+			_n = floor(_v * 100)
+		
+		if (_n > 95 && _n < 105) _n = 100
+		
+		scrCustomParamChange(_opt.key, _n)
+	}
+	
+	return _opt
+}
+
+scrOptionsMenuCreateElements(
+	_cm_switch({ key: "hardmode", name: L("Hard mode", "HARD MODE") }),
+	{
+		type: "slider",
+		name: L("DamageAdjust", "DAMAGE TO PLAYER"),
+		scalar_slider: false,
+		get_value: function(_opt) {
+			var _n = scrCustomParam("damage_to_player")
+			return (_n >= 0) ? $"+{_n}" : _n
+		},
+		click: function(_opt) {
+			var _n = floor((_opt.value - 0.5) * custom_player_damage_adj * 2)
+			scrCustomParamChange("damage_to_player", _n)
+		},
+		awake: function(_opt) {
+			_opt.value = 0.5 + (scrCustomParam("damage_to_player") / custom_player_damage_adj) * 0.5
+		},
+		halign: fa_left
+	},
+	_cm_multiplier_scale({ key: "enemy_health", value_min: 0.1, value_max: 2, name: L("EnemyHealth", "ENEMY HEALTH") }),
+	_cm_multiplier_scale({ key: "boss_health",  value_min: 0.1, value_max: 2, name: L("BossHealth", "BOSS HEALTH") }),
+	_cm_multiplier_scale({ key: "pickup_time",  value_min: 0.1, value_max: 2, name: L("PickupTimer", "PICKUP TIMER") })
+)
+
+#endregion CustomMode_Difficulty
+#region CustomMode_Other
+
+var L = LF("CustomMode.Extras")
+scrOptionsMenuCategoryBegin(OptionCategory.CustomMode_Other)
+
+scrOptionsMenuCreateElements(
+	_cm_switch({ key: "unlock_chars", name: L("UnlockCharacters"), width: 300 }),
+	_cm_switch({ key: "unlock_crowns", name: L("UnlockCrowns"), width: 300 }),
+)
+
+#endregion CustomMode_Other
+#region CustomMode_Reset
+
+scrOptionsMenuCategoryBegin(OptionCategory.CustomMode_Reset)
+
+scrOptionsMenuCreateElements(
+	{ type: "button", name: loc("CustomMode.Reset:Reset", "RESET"),
+		draw: function(_opt) {
+			var _str = loc("CustomMode.Reset:Are you sure that you want to reset#this slot's settings to defaults?#This cannot be undone!",
+					"Are you sure that you want to reset#this slot's settings to defaults?#This cannot be undone!"),
+				_dx = drawx,
+				_dy = drawy - font_get_string_height(_str) - 20
+			
+			draw_text_nt(_dx, _dy + _opt.anim, _str, 1, 1, 0, c_white)
+		},
+		awake: function(_opt) {
+			_opt.timestamp = current_frame + 50
+		},
+		condition: function(_opt) {
+			return current_frame > _opt.timestamp
+		},
+		click: function() {
+			snd_play(sndEXPChest)
+			with (UberCont) {
+				var _current = custom_mode_slots[custom_mode_slot_index]
+				custom_options = new CustomModeOptions(_current.name)
+				custom_mode_slots[custom_mode_slot_index] = custom_options
+			}
+			scrOptionsMenuChangeCategory(OptionCategory.CustomMode, false)
+		}
+	}
 )
 
 #endregion

@@ -264,6 +264,8 @@ function scrInit() {
     scrInitStats()
 	
     scrLoadoutMenuInit()
+	
+	scrCustomModeLoadPresets()
 }
 
 function scrInitPostGamestart() {

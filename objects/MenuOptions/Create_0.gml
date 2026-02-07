@@ -188,14 +188,4 @@ element_functions[$ "keybind"] = function(_opt) {
 	mouse_lastbutton = -1
 }
 
-// can be removed..?
-foreach(options, function(_value) {
-    for (var i = 0; i < array_length(_value); i++) {
-        var v = _value[i]
-		
-		if is_method(v[$ "awake"])
-			method_execute(v.awake, v)
-    }
-})
-
 dispose_on_empty = false

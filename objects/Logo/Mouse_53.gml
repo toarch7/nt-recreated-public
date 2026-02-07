@@ -2,7 +2,7 @@ if lockstep_stop
 	exit
 
 if instance_exists(GameCont) {
-    if GameCont.area == 7 && GameCont.subarea == 3 {
+    if GameCont.area == area_palace && GameCont.subarea == GameCont.maxsubarea {
         with Credits instance_destroy()
         with SpiralCont instance_destroy()
         with Spiral instance_destroy()

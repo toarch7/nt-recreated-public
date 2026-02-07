@@ -7,7 +7,8 @@ function scrDrawPlayerHUD(_player = noone) {
 		_bwep = _player.bwep,
 		_hp = max(0, _player.hp),
 		_max_hp = _player.max_hp,
-		_wave = _player.wave
+		_wave = _player.wave,
+		_level_max = PLAYER_LEVEL_MAX
 	
 	draw_align(fa_center, fa_top)
 
@@ -34,12 +35,12 @@ function scrDrawPlayerHUD(_player = noone) {
 			var _healthbar_color = UberCont.opt_healthcol,
 				_healthbar_bg = max(0, 84 * (_player.lsthealth / _max_hp)),
 				_healthbar_fg = max(0, 84 * (_hp / _max_hp)),
-				_shift = (is_desktop ? 0.01 : 0)
+				_shift = (is_desktop ? 0.01 : 0),
+				_x = 22 + _shift,
+				_y = 7 + _shift
 			
-			if (_healthbar_color != c_white) {
-				var _bg_hue = color_get_hue(_healthbar_color) - 5,
-					_x = 22 + _shift,
-					_y = 7 + _shift
+			if (_healthbar_color) {
+				var _bg_hue = color_get_hue(_healthbar_color) - 5
 				
 				if (_bg_hue < 0) _bg_hue = 255 + _bg_hue
 				
@@ -182,11 +183,16 @@ function scrDrawPlayerHUD(_player = noone) {
 	#endregion
 	
 	#region Experience bar
-		if (GameCont.skillpoints > 0 || GameCont.ultrapoints) draw_sprite(sprExpBarLevel, 0, 4, 4)
+		if (GameCont.skillpoints > 0 || GameCont.ultrapoints || GameCont.wantdestinyskill) {
+			draw_sprite(sprExpBarLevel, 0, 4, 4)
+		}
 		
-		draw_sprite(sprExpBar, (GameCont.rad / GameCont.max_rad) * 16, 4, 4)
+		draw_sprite(sprExpBar, min(1, GameCont.rad / GameCont.max_rad) * 16, 4, 4)
 		
-		if GameCont.level < 10 {
+		if (_level_max <= 0) {
+			draw_sprite(sprNomutsLevel, 0, 11, 16)
+		}
+		else if (GameCont.level < _level_max) {
 			draw_set_font(fntM1)
 			draw_set_valign(fa_middle)
 			

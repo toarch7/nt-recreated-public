@@ -34,6 +34,10 @@ function scrAreaGetName(_area, _macrolike_format=false) {
 /// @function scrAreaGetMaxSubareas
 /// @param area
 function scrAreaGetMaxSubareas(_area) {
+	if (scrGameIsCustomMode() && _area < 100) {
+		return ((_area % 2 == 0) ? scrCustomParam("area_size_alt") : scrCustomParam("area_size"))
+	}
+	
 	switch (_area) {
 		case area_desert:
 		case area_scrapyards:
@@ -77,9 +81,9 @@ function scrAreaGetGenerationGoal() {
 		if (area == area_campfire) return 60
 		if (area == area_crib) return 20
 		if (area == area_pizza_sewers) return 70
-		if (area == area_palace) return (subarea == 3 ? 420 : 130)
+		if (area == area_palace) return (subarea == maxsubarea ? 420 : 130)
 		if (area == area_mansion || area == area_oasis) return 130
-		if (area == area_hq && subarea == 3) return 48
+		if (area == area_hq && subarea == maxsubarea) return 48
 	}
 	
 	return 110
@@ -87,8 +91,10 @@ function scrAreaGetGenerationGoal() {
 
 function scrAreaHasSafespawn() {
 	with (GameCont) {
-		if (area == area_campfire || area == area_crib || area == area_vault
-			|| (area == area_palace && subarea == 3) || (area == area_hq && subarea == 3)
+		if (area == area_campfire
+			|| area == area_crib || area == area_vault
+			|| (area == area_palace && subarea == maxsubarea)
+			|| (area == area_hq && subarea == maxsubarea)
 		) {
 			return false
 		}
@@ -99,8 +105,12 @@ function scrAreaHasSafespawn() {
 
 function scrAreaCanHavePopo() {
 	with GameCont {
-		if area == area_vault || area == area_crib || (area == area_hq && subarea == 3) || (area == 7 && subarea == 3)
+		if (area == area_vault || area == area_crib
+			|| (area == area_hq && subarea == maxsubarea)
+			|| (area == area_palace && subarea == maxsubarea)
+		) {
 			return false
+		}
 	}
 	
 	return true

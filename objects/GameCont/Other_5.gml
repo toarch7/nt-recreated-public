@@ -113,15 +113,18 @@ if (subarea >= _max_subareas) {
 		}
 		else {
 		    loops ++
-		    UberCont.ctot_loop[_race] ++
 			area = area_campfire
-			
-			scrUnlocksWinOrLoop()
 			
 		    scrAchievementUnlock(Achievement.GAME_LOOPED)
 			
-		    if (loops > UberCont.cbst_loop[_race]) {
-				UberCont.cbst_loop[_race] = loops
+			if (!scrGameIsCustomMode()) {
+			    UberCont.ctot_loop[_race] ++
+				
+			    if (loops > UberCont.cbst_loop[_race]) {
+					UberCont.cbst_loop[_race] = loops
+				}
+				
+				scrUnlocksWinOrLoop()
 			}
 		}
 

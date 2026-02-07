@@ -239,7 +239,7 @@ function scrPopulate() {
 	
 	#region Pizza Sewers & Entrance
 	random_set_seed(rng_next_int(RNGStates.Generation))
-	if (_area == area_sewers) {
+	if (_area == area_sewers && _subarea == 1) {
 		with (Floor) {
 			if (sprite_index == sprFloor2 && (image_index == 1 || image_index == 5)) {
 				if (!place_meeting(x, y, __props)) instance_create(x, y, PizzaEntrance)

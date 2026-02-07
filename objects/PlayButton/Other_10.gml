@@ -10,6 +10,9 @@ with (UberCont) {
 	if (!(scrGameIsEventRun() || scrGameIsCustomMode())) {
 		protowep = save_get_value("etc", "protowep", wep_rusty_revolver)
 	}
+	else {
+		protowep = wep_rusty_revolver
+	}
 }
 
 scrGameCustomModeReset()
@@ -86,6 +89,7 @@ else if _image == 4 {
 	
 	with (UberCont) {
 		custom_options = custom_mode_slots[custom_mode_slot_index]
+		print("whar the fuck", custom_mode_slot_index, custom_options)
 		custom = true
 	}
 	

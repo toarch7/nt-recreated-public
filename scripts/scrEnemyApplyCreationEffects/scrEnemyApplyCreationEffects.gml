@@ -1,5 +1,20 @@
 function scrEnemyApplyCreationEffects() {
-	gml_pragma("forceinline")
+	if (scrGameIsCustomMode()) {
+		var _m;
+		
+		if (scrEnemyIsBoss(id)) {
+			_m = scrCustomParam("boss_health") / 100
+		}
+		else {
+			_m = scrCustomParam("enemy_health") / 100
+		}
+		
+		if (_m != 1) {
+			max_hp = max(1, floor(max_hp * _m))
+			if (hp > max_hp) hp = max_hp
+		}
+	}
+	
 	if scr_skill_get(mut_scarier_face) {
 		hp = floor(hp * 0.8)
 		

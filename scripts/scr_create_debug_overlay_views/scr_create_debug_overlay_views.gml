@@ -19,6 +19,7 @@ function scr_debug_overlay_load() {
 	load("__debug_immortality", false)
 	load("__debug_noreload", false)
 	load("__debug_infammo", false)
+	load("__debug_teleportation", false)
 	ini_close()
 }
 
@@ -45,13 +46,14 @@ function scr_debug_overlay_save() {
 	write("__debug_immortality")
 	write("__debug_noreload")
 	write("__debug_infammo")
+	write("__debug_teleportation")
 	ini_close()
 }
 
 function scr_debug_cheats_enabled() {
 	gml_pragma("forceinline")
 	return global.__debug_menu_options || global.__debug_hitboxes
-		|| global.__debug_health || global.__debug_immortality
+		|| global.__debug_health || global.__debug_immortality || global.__debug_teleportation
 		|| global.__debug_noreload || global.__debug_infammo || global.cheats
 }
 
@@ -71,6 +73,7 @@ function scr_create_debug_overlay_views() {
 		dbg_checkbox(ref_create(global, "__debug_immortality"), "Player immortality")
 		dbg_checkbox(ref_create(global, "__debug_noreload"), "Disable reload")
 		dbg_checkbox(ref_create(global, "__debug_infammo"), "Infinite ammo")
+		dbg_checkbox(ref_create(global, "__debug_teleportation"), "MMB Teleportation")
 		
 		dbg_section("Technical")
 		dbg_button("Reload languges", function() {
@@ -125,7 +128,7 @@ function scr_create_debug_overlay_views() {
 					
 					hard = scrAreaGetDifficulty(_area, _subarea, loops)
 					
-					print("Teleporting to", scrAreaGetMapName(_area, _subarea, loops), "diff", hard)
+					print("Teleporting to", scrAreaGetMapName(_area, _subarea, loops, scrGameIsHardmode(), false), "diff", hard)
 					
 					waypnt[waypoints] = area
 					waysub[waypoints] = subarea

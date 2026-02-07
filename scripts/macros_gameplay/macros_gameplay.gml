@@ -1,5 +1,5 @@
 #macro CHEAT_PRACTICE_FAINTED_TIME (45 * 30)
-#macro PLAYER_LEVEL_MAX 10
+#macro PLAYER_LEVEL_MAX scrCustomParam("maxlevel", 10)
 
 #macro c_gold     #dad090
 #macro c_curse    #8b448c

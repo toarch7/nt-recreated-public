@@ -1,4 +1,6 @@
-function scrShowVirtualKeyboard(){
+/// @function scrShowVirtualKeyboard
+/// @param kbv_type=kbv_type_default
+function scrShowVirtualKeyboard(_kbv_type = kbv_type_default) {
 	keyboard_virtual_show(
 		kbv_type_default,
 		kbv_returnkey_default,

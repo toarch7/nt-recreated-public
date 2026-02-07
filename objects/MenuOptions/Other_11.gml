@@ -17,9 +17,14 @@ if (!editing_mode) {
 #region Header
 
 draw_align(fa_center, fa_middle)
-var _name = loc("MainMenu:Settings", "SETTINGS")
+var _name = loc("MainMenu:Settings", "SETTINGS"), _handled = false
 
-if _current_category != OptionCategory.Main {
+with (CustomModeMenu) if (is_string(name)) {
+	_name = name
+	_handled = true
+}
+
+if (!_handled && _current_category != OptionCategory.Main) {
 	var _main_options = options[OptionCategory.Main],
 		_category = _current_category - 1
 	
@@ -36,6 +41,7 @@ if _current_category != OptionCategory.Main {
 }
 
 draw_text_bigname(gui_w div 2, 24, _name, c_uigray)
+
 draw_align()
 
 #endregion

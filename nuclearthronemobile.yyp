@@ -329,7 +329,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.14.2.213",
+    "IDEVersion":"2024.14.3.217",
   },
   "name":"nuclearthronemobile",
   "resources":[
@@ -419,6 +419,7 @@
     {"id":{"name":"CharSelect","path":"objects/CharSelect/CharSelect.yy",},},
     {"id":{"name":"ChestOpen","path":"objects/ChestOpen/ChestOpen.yy",},},
     {"id":{"name":"chestprop","path":"objects/chestprop/chestprop.yy",},},
+    {"id":{"name":"ChickenHead","path":"objects/ChickenHead/ChickenHead.yy",},},
     {"id":{"name":"Cinematic","path":"objects/Cinematic/Cinematic.yy",},},
     {"id":{"name":"ClusterNade","path":"objects/ClusterNade/ClusterNade.yy",},},
     {"id":{"name":"Cocoon","path":"objects/Cocoon/Cocoon.yy",},},
@@ -3781,6 +3782,7 @@
     {"id":{"name":"sprNightCactusDead","path":"sprites/sprNightCactusDead/sprNightCactusDead.yy",},},
     {"id":{"name":"sprNightCactusHurt","path":"sprites/sprNightCactusHurt/sprNightCactusHurt.yy",},},
     {"id":{"name":"sprNightDesertTopDecal","path":"sprites/sprNightDesertTopDecal/sprNightDesertTopDecal.yy",},},
+    {"id":{"name":"sprNomutsLevel","path":"sprites/sprNomutsLevel/sprNomutsLevel.yy",},},
     {"id":{"name":"sprNothing2Appear","path":"sprites/sprNothing2Appear/sprNothing2Appear.yy",},},
     {"id":{"name":"sprNothing2Death","path":"sprites/sprNothing2Death/sprNothing2Death.yy",},},
     {"id":{"name":"sprNothing2Hurt","path":"sprites/sprNothing2Hurt/sprNothing2Hurt.yy",},},

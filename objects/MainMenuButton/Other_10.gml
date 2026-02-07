@@ -45,14 +45,6 @@ switch image_index {
 						image_blend = c_uidark
 					}
 				}
-				else if num == 4 {
-					if global.__debug_menu_options {
-						image_blend = c_uidark
-					}
-					else {
-						available = false
-					}
-				}
             }
 
             _ypos += 24

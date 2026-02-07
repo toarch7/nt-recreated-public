@@ -60,6 +60,7 @@ else if instance_exists(Menu) && scr_is_authority() {
 		
 	    UberCont.daily_run = false
 	    UberCont.weekly_run = false
+		global.crownpick = crwn_none
 		
 		scr_playerinstance_reset(global.index)
 		
@@ -116,6 +117,13 @@ else if instance_exists(ResourcepackManager) {
 		snd_play(sndCrownAppear)
 	}
 	
+}
+else if instance_exists(CustomModeMenu) {
+	with (MenuOptions) {
+		last_change = current_frame + 3
+		scroll_check = true
+	}
+	instance_destroy(CustomModeMenu)
 }
 else if instance_exists(MenuOptions) && (!(UberCont.opt_gamepad && MenuOptions.editing_mode) or instance_exists(CoopController)) {
     with MenuOptions {

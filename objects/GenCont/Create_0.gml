@@ -53,7 +53,6 @@ with instance_create(10000, 10000, FloorMaker) {
 }
 
 with (GameCont) {
-	// TODO: this can be abused by save-loading, granting patience skill immedeately
 	if (!gocrib && scr_skill_get(mut_patience) && !patient) {
 	    skillpoints ++
 		patiencepick = true
