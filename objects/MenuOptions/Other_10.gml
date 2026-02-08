@@ -518,6 +518,12 @@ else {
 	drawy = gui_h - LETTERBOX_SIZE - 14 * item_count
 }
 
+if (_current_category == OptionCategory.CustomMode_Disclaimer
+	|| _current_category == OptionCategory.CustomMode_Reset
+) {
+	drawy += 20
+}
+
 startdrawy = drawy
 
 draw_set_color(c_white)
@@ -844,7 +850,10 @@ else for (var i = 0; i < array_length(_items); i++) {
 				
 				drawx -= _size
 			}
-			else if _opt.type == "category" && _current_category == OptionCategory.Main {
+			else if (
+				(_opt.type == "category" && _current_category == OptionCategory.Main)
+				|| _current_category == OptionCategory.CustomMode_Disclaimer
+			) {
 				draw_text_bigname(drawx, drawy, loc(_name))
 				drawy += 2
 			}

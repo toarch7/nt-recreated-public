@@ -80,4 +80,4 @@ text[TutorialStep.Power, 0] = "@wABILITY BUTTON@s USES YOUR SPECIAL SKILL#@wGIVE
 text[TutorialStep.Power, 1] = "@wRIGHT MOUSE BUTTON@s USES YOUR ABILITY#GIVE IT A GO!"
 text[TutorialStep.Power, 2] = "(butsmall:spec) USES YOUR ABILITY#GIVE IT A GO!"
 
-text[TutorialStep.Fin, 0] = "COOL, WE'RE DONE HERE!"
+text[TutorialStep.Fin, 0] = loc("Tutorial:Default:6", "COOL, WE'RE DONE HERE!")

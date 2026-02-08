@@ -1,17 +1,22 @@
 if lockstep_stop
 	exit
 
-if (!(instance_exists(GenCont) || !instance_exists(Player) || instance_exists(SitDown)
+if (timer_setup || !(instance_exists(GenCont) || !instance_exists(Player) || instance_exists(SitDown)
 	|| instance_exists(Credits) || instance_exists(Cinematic) || instance_exists(GameOver) || room == romInit)
 ) {
-	tottimer += timescale
-    timer += timescale
-
-	if timer >= 30 {
+	if (timer_setup) {
+		timer_setup = false
+	}
+	else {
+		tottimer += timescale
+	    timer += timescale
+	}
+	
+	if (timer >= 30) {
 	    timer = 0
 	    seconds ++
 		
-		if seconds >= 60 {
+		if (seconds >= 60) {
 		    minutes ++
 			seconds = 0
 		}
@@ -36,9 +41,11 @@ else _mult = 1
 
 max_rad = max(1, level) * 60 * _mult
 
-if (scr_ultra_get(Race.Horror, UltraSkill.Meltdown)) max_rad *= 2
-
 var _level_max = PLAYER_LEVEL_MAX
+
+if (level >= _level_max && scr_ultra_get(Race.Horror, UltraSkill.Meltdown)) {
+	max_rad *= 2
+}
 
 if rad > max_rad {
 	if (_level_max > 0 && level < _level_max) {

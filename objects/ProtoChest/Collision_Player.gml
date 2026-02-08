@@ -6,6 +6,7 @@ sprite_index = sprProtoChestOpen
 
 with (scrWeaponPickupCreate(x, y, other.wep)) {
 	curse = other.curse
+	depth = other.depth - 1
 }
 
 instance_create(x, y, FXChestOpen)

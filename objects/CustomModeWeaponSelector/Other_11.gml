@@ -37,15 +37,17 @@ for(var _weapon_id = 1; _weapon_id <= maxwep; ++_weapon_id) {
 array_foreach(groups, function(_group) {
 	array_sort(_group, function(a, b) {
 		var _x = loc("Weapons", a, "Name", scr_weapon_get_name(a)),
-			_y = loc("Weapons", b, "Name", scr_weapon_get_name(b))
+			_y = loc("Weapons", b, "Name", scr_weapon_get_name(b)),
+			_u = scr_weapon_get_area(a),
+			_v = scr_weapon_get_area(b)
 		
-		if (_x == _y) {
-			return 0
-		}
-		else if (_x > _y) {
-			return 1
-		}
-		else return -1
+		if (_u < 0) _u = 1000 + a
+		if (_v < 0) _v = 1000 + b
+		
+		if (scr_weapon_is_golden(a)) _u += 500
+		if (scr_weapon_is_golden(b)) _v += 500
+		
+		return sign(_u - _v)
 	})
 })
 

@@ -89,7 +89,6 @@ else if _image == 4 {
 	
 	with (UberCont) {
 		custom_options = custom_mode_slots[custom_mode_slot_index]
-		print("whar the fuck", custom_mode_slot_index, custom_options)
 		custom = true
 	}
 	

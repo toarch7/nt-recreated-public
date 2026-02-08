@@ -14,7 +14,7 @@ camera_set_view_pos(view_camera, view_xview, view_yview)
 
 with GameCont {
     area = area_hq
-    subarea = maxsubarea
+    subarea = scrAreaGetMaxSubarea(area)
 }
 
 with Player {

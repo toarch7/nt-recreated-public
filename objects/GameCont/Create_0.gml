@@ -64,6 +64,8 @@ hasfiredshots = false
 haspickedweps = false
 swordbosskill = []
 
+timer_setup = false
+
 same_weapon_signature = -1
 same_weapons_for = 0
 

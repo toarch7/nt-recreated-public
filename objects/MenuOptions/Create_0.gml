@@ -37,6 +37,7 @@ enum OptionCategory {
 	CustomMode_Reset,
 	CustomMode_WeaponSelector,
 	CustomMode_SkillSelector,
+	CustomMode_Disclaimer,
 	
 	NUM_MENU_OPTIONS
 }

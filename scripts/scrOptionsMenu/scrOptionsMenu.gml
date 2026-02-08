@@ -153,6 +153,10 @@ function scrOptionsMenuChangeCategory(_category, _queue = true) {
 			exit
 		}
 		
+		if (_category == OptionCategory.CustomMode && !UberCont.custom_mode_disclaimer) {
+			_category = OptionCategory.CustomMode_Disclaimer
+		}
+		
 		if category != _category && _queue {
 			ds_stack_push(category_stack, category)
 		}

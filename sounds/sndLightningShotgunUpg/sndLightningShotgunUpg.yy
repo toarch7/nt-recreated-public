@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 1.9263439,
+  "duration": 1.9213605,
   "exportDir": "",
   "name": "sndLightningShotgunUpg",
   "parent": {
@@ -22,5 +22,5 @@
   "resourceVersion": "2.0",
   "sampleRate": 44100,
   "soundFile": "sndLightningShotgunUpg.wav",
-  "volume": 0.6
+  "volume": 1
 }

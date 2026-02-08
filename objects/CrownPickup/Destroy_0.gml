@@ -1,4 +1,4 @@
-if instance_exists(Player) {
-    GameCont.area = GameCont.lastarea
-    GameCont.subarea = 2
+with (GameCont) if (instance_exists(Player)) {
+	area = lastarea
+	subarea = lastsubarea
 }

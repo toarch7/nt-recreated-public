@@ -161,8 +161,8 @@ function scr_create_debug_overlay_views() {
 			
 			dbg_button(scrAreaGetName(_area), __area_transit_button(_area, 1), 120)
 			
-			var _subareas = scrAreaGetMaxSubareas(_area),
-				_secret_subareas = scrAreaGetMaxSubareas(_secret_area),
+			var _subareas = scrAreaGetMaxSubarea(_area),
+				_secret_subareas = scrAreaGetMaxSubarea(_secret_area),
 				_missing_subareas = max(0, _default_max_subareas - _subareas),
 				_has_secret = true
 			

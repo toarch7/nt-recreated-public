@@ -1012,7 +1012,7 @@ var _get_value_stub = function() {
 	return ""
 }
 var _custom_mode_button_category = function(_opt) {
-	var _store = _opt.category != OptionCategory.CustomMode_Reset
+	var _store = category != OptionCategory.CustomMode_Reset
 	scrOptionsMenuChangeCategory(_opt.category, _store)
 }
 var _cm_number_input = function(_opt) {
@@ -1141,7 +1141,7 @@ scrOptionsMenuCreateElements(
 			category: OptionCategory.CustomMode_Other,
 			click: _custom_mode_button_category },
 	
-	{ type: "button", name: L("Reset", "RESET SLOT TO DEFAULTS"),
+	{ type: "button", name: loc("CustomMode.Disclaimer:Caption", "RESET SLOT TO DEFAULTS"),
 			get_value: _get_value_stub, halign: fa_left,
 			category: OptionCategory.CustomMode_Reset,
 			click: _custom_mode_button_category },
@@ -1321,7 +1321,7 @@ scrOptionsMenuCreateElements(
 				var _area = scrReal(array_first(_parts)),
 					_subarea = max(1, scrReal(array_last(_parts)))
 				
-				if ((_area < 0 || _area > area_palace) || _subarea > scrAreaGetMaxSubareas(_area)) {
+				if ((_area < 0 || _area > area_palace) || _subarea > scrAreaGetMaxSubarea(_area)) {
 					return true
 				}
 				
@@ -1445,7 +1445,37 @@ scrOptionsMenuCreateElements(
 				custom_options = new CustomModeOptions(_current.name)
 				custom_mode_slots[custom_mode_slot_index] = custom_options
 			}
+			scrOptionsMenuChangeCategory(OptionCategory.CustomMode)
+		}
+	}
+)
+
+#endregion
+#region CustomMode_Disclaimer
+
+scrOptionsMenuCategoryBegin(OptionCategory.CustomMode_Disclaimer)
+
+scrOptionsMenuCreateElements(
+	{ type: "button", name: loc("CustomMode.Disclaimer:OK", "OK"), height: 24,
+		draw: function(_opt) {
+			var _str = loc("CustomMode.Disclaimer:Text",
+					"CUSTOM MODE ALLOWS YOU TO CUSTOMIZE#NUCLEAR THRONE TO YOUR LIKING.##NOTE THAT IT MIGHT CONTAIN SPOILERS,#AND YOU WON'T BE ABLE TO GAIN ANY UNLOCKS."),
+				_dx = drawx,
+				_dy = drawy - font_get_string_height(_str) - 35
+			
+			draw_text_nt(_dx, _dy + _opt.anim, _str, 1, 1, 0, c_white)
+		},
+		awake: function(_opt) {
+			_opt.timestamp = current_frame + 50
+		},
+		condition: function(_opt) {
+			return current_frame > _opt.timestamp
+		},
+		click: function() {
+			with (UberCont) custom_mode_disclaimer = true
 			scrOptionsMenuChangeCategory(OptionCategory.CustomMode, false)
+			snd_play(sndVlambeer)
+			scrSave()
 		}
 	}
 )

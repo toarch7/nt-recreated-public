@@ -3,8 +3,8 @@
 var _area = GameCont.area,
 	_subarea = GameCont.subarea,
 	_loops = GameCont.loops,
-	_max_subareas = scrAreaGetMaxSubareas(_area),
-	_is_last = (_subarea == _max_subareas),
+	_max_subarea = scrAreaGetMaxSubarea(_area),
+	_is_last = (_subarea == _max_subarea),
 	_actual_loops = _loops - scrGameIsHardmode(),
 	_is_throne_arena = (_area == area_palace && _is_last)
 
@@ -141,17 +141,20 @@ if ((_area == area_palace && _is_last) || _area == area_campfire || _area == are
 		
         instance_create(10016, 8586, Carpet)
 		
-		var _num = 0
-		repeat (1 + scr_skill_get(mut_open_mind)) {
-			if (_num > 0) {
-				var _offset = 36 * _num + 1
-				instance_create(10016 - 32, 10016 - _offset, choose(WeaponChest, RadChest, AmmoChest))
-				instance_create(10016 + 32, 10016 - _offset, choose(WeaponChest, RadChest, AmmoChest))
+		var _num = 0, _y = 10000,
+			_count = 1 + scr_skill_get(mut_open_mind)
+		
+		repeat (_count) {
+			if (_num) {
+				var _offset = 32 * _num
+				instance_create(10016 - 32, _y - _offset, choose(WeaponChest, RadChest, AmmoChest))
+				instance_create(10016 + 32, _y - _offset, choose(WeaponChest, RadChest, AmmoChest))
 			}
 			else {
-		        instance_create(10016 - 32, 9984, WeaponChest)
-		        instance_create(10016 + 32, 9984, AmmoChest)
-		    }
+			    instance_create(10016 - 32, _y, WeaponChest)
+			    instance_create(10016 + 32, _y, AmmoChest)
+			}
+			
 			_num ++
 		}
 		

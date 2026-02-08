@@ -51,7 +51,7 @@ if global.is_server && _slot_x < (view_width - 30) {
 		_offset = sprite_get_bbox_height(_sprite) div 2,
 		_ypos = view_height - LETTERBOX_SIZE + _offset - 2
     
-	with instance_create(_slot_x + _slot_step_size, _ypos, GoButton) {
+	with instance_create(_slot_x + _slot_step_size + 2, _ypos, GoButton) {
 		sprite_index = _sprite
 		visible = false
 	}

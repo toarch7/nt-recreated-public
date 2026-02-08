@@ -31,10 +31,10 @@ function scrAreaGetName(_area, _macrolike_format=false) {
 	return _name
 }
 
-/// @function scrAreaGetMaxSubareas
+/// @function scrAreaGetMaxSubarea
 /// @param area
-function scrAreaGetMaxSubareas(_area) {
-	if (scrGameIsCustomMode() && _area < 100) {
+function scrAreaGetMaxSubarea(_area) {
+	if (scrGameIsCustomMode() && (_area < 100 || _area == area_hq)) {
 		return ((_area % 2 == 0) ? scrCustomParam("area_size_alt") : scrCustomParam("area_size"))
 	}
 	
@@ -125,7 +125,7 @@ function scrAreaGetDifficulty(_area, _subarea, _loops) {
 	
 	_area = floor(_area % 100)
 	
-	for(var n = 1; n < _area; ++n) _result += scrAreaGetMaxSubareas(n)
+	for(var n = 1; n < _area; ++n) _result += scrAreaGetMaxSubarea(n)
 	
 	return _result
 }

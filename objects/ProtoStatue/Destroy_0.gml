@@ -14,7 +14,11 @@ if rad > 24 {
         type = 3
     }
 
-    GameCont.area = 100
+    with (GameCont) {
+		lastarea = area
+		lastsubarea = subarea
+		area = area_vault
+	}
 } else {
     raddrop = rad
 

@@ -4,7 +4,7 @@ function scrPopulate() {
 	var _difficulty = GameCont.hard,
 		_area = GameCont.area,
 		_subarea = GameCont.subarea,
-		_max_subarea = scrAreaGetMaxSubareas(_area),
+		_max_subarea = scrAreaGetMaxSubarea(_area),
 		_has_boss = (_subarea == _max_subarea),
 		_loops = GameCont.loops,
 		

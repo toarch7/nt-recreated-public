@@ -23,7 +23,7 @@ if instance_exists(TutCont) {
     goal = 1
 }
 
-if GameCont.area == 106 && GameCont.subarea == GameCont.maxsubarea {
+if (GameCont.area == area_hq && GameCont.subarea == scrAreaGetMaxSubarea(GameCont.area)) {
     styleb = 0
 
     with GenCont {

@@ -4,7 +4,11 @@
 /// @param direction
 /// @param length
 function scrLightningCreate(_x, _y, _direction, _length) {
-	with instance_create(x, y, LightningSpawn) {
+	with instance_create(
+		x + ldrx(8, _direction),
+		y + ldry(8, _direction),
+		LightningSpawn
+	) {
 		image_angle = _direction
 	}
 	

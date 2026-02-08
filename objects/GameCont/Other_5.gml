@@ -38,12 +38,12 @@ if (gocrib) {
     waypnt[waypoints] = area
     waysub[waypoints] = subarea
     waylps[waypoints] = loops
-    waypoints++
+    waypoints ++
 	scrRaceUnlock(Race.Cuz)
 	_went_crib = true
 }
 
-maxsubarea = scrAreaGetMaxSubareas(area)
+maxsubarea = scrAreaGetMaxSubarea(area)
 finalsubarea = (subarea == maxsubarea)
 
 if (!can_advance_stage) {
@@ -63,7 +63,8 @@ if (_is_secret && !_went_crib) {
 		
 	    if area == area_jungle {
 	        area = area_city
-	        subarea = 2
+	        subarea = scrAreaGetMaxSubarea(area)
+			can_advance_stage = false
 	    }
 		
 	    if area == area_cursed_caves {
@@ -73,7 +74,8 @@ if (_is_secret && !_went_crib) {
 		
 	    if area == area_mansion || area == area_oasis {
 	        area = area_scrapyards
-	        subarea = 2
+	        subarea = scrAreaGetMaxSubarea(area)
+			can_advance_stage = false
 	    }
 		
 	    if area == area_pizza_sewers {
@@ -87,8 +89,8 @@ else if (!_went_crib && area != area_crib) {
     lastsubarea = subarea
 }
 
-var _max_subareas = scrAreaGetMaxSubareas(area)
-if (subarea >= _max_subareas) {
+var _max_subarea = scrAreaGetMaxSubarea(area)
+if (subarea >= _max_subarea) {
 	if (!_is_secret) {
 		if (area < area_palace) {
 			#region B-theme
@@ -140,12 +142,9 @@ waysub[waypoints] = subarea
 waylps[waypoints] = loops
 waypoints ++
 
-if (GameCont.hard > UberCont.cbst_diff[_race])
-	UberCont.cbst_diff[_race] = GameCont.hard
-
 if instance_exists(Player) {
 	if (instance_exists(WeaponChest) || instance_exists(BigWeaponChest)) && !(area == 1 && subarea == 1) {
-	    nochest++
+	    nochest ++
 	}
 	
 	if instance_exists(RadChest) || instance_exists(RadChestBig) || instance_exists(RadMaggotChest) {
@@ -163,6 +162,8 @@ if loops >= 2 && !UberCont.hardgot {
     scrShowUnlockPopup("@wHARDMODE UNLOCKED@s#FOR REACHING LOOP 2")
     scrAchievementUnlock(Achievement.GO_HARD)
     UberCont.hardgot = true
+	scrSave()
 }
 
-maxsubarea = scrAreaGetMaxSubareas(area)
+maxsubarea = scrAreaGetMaxSubarea(area)
+finalsubarea = (subarea == maxsubarea)
