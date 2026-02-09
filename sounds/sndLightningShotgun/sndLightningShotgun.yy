@@ -10,7 +10,7 @@
   "compression": 0,
   "compressionQuality": 4,
   "conversionMode": 0,
-  "duration": 1.2197189,
+  "duration": 1.2147392,
   "exportDir": "",
   "name": "sndLightningShotgun",
   "parent": {
@@ -22,5 +22,5 @@
   "resourceVersion": "2.0",
   "sampleRate": 44100,
   "soundFile": "sndLightningShotgun.wav",
-  "volume": 0.5
+  "volume": 1
 }

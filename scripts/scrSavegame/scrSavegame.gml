@@ -82,13 +82,14 @@ function scrSavegameSession(_buffer, _is_load) {
 			})
 		}
 		
-		global.harmode = _session_info.hardmode
 		global.recontinued_times = _session_info.recontinued_times
 		
 		with (UberCont) {
 			daily_run = _session_info.daily_run
 			weekly_run = _session_info.weekly_run
+			custom = _session_info.custom
 			custom_options = _session_info.custom_options
+			harmode = _session_info.hardmode
 			
 			if (is_string(_session_info.weekly_data)) {
 				if (!ds_exists(weekly_data, ds_type_map)) {
@@ -118,6 +119,8 @@ function scrSavegameSession(_buffer, _is_load) {
 	        daily_run: UberCont.daily_run,
 	        weekly_run: UberCont.weekly_run,
 			weekly_data: undefined,
+			
+			custom: UberCont.custom,
 			custom_options: UberCont.custom_options,
 			
 			persistentweps: [],

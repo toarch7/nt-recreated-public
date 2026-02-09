@@ -7,7 +7,8 @@ function scrDrawPlayerHUD(_player = noone) {
 		_bwep = _player.bwep,
 		_hp = max(0, _player.hp),
 		_max_hp = _player.max_hp,
-		_wave = _player.wave
+		_wave = _player.wave,
+		_level_max = PLAYER_LEVEL_MAX
 	
 	draw_align(fa_center, fa_top)
 
@@ -34,12 +35,12 @@ function scrDrawPlayerHUD(_player = noone) {
 			var _healthbar_color = UberCont.opt_healthcol,
 				_healthbar_bg = max(0, 84 * (_player.lsthealth / _max_hp)),
 				_healthbar_fg = max(0, 84 * (_hp / _max_hp)),
-				_shift = (is_desktop ? 0.01 : 0)
+				_shift = (is_desktop ? 0.01 : 0),
+				_x = 22 + _shift,
+				_y = 7 + _shift
 			
-			if (_healthbar_color != c_white) {
-				var _bg_hue = color_get_hue(_healthbar_color) - 5,
-					_x = 22 + _shift,
-					_y = 7 + _shift
+			if (_healthbar_color) {
+				var _bg_hue = color_get_hue(_healthbar_color) - 5
 				
 				if (_bg_hue < 0) _bg_hue = 255 + _bg_hue
 				
@@ -182,11 +183,16 @@ function scrDrawPlayerHUD(_player = noone) {
 	#endregion
 	
 	#region Experience bar
-		if (GameCont.skillpoints > 0 || GameCont.ultrapoints) draw_sprite(sprExpBarLevel, 0, 4, 4)
+		if (GameCont.skillpoints > 0 || GameCont.ultrapoints || GameCont.wantdestinyskill) {
+			draw_sprite(sprExpBarLevel, 0, 4, 4)
+		}
 		
-		draw_sprite(sprExpBar, (GameCont.rad / GameCont.max_rad) * 16, 4, 4)
+		draw_sprite(sprExpBar, min(1, GameCont.rad / GameCont.max_rad) * 16, 4, 4)
 		
-		if GameCont.level < 10 {
+		if (_level_max <= 0) {
+			draw_sprite(sprNomutsLevel, 0, 11, 16)
+		}
+		else if (GameCont.level < _level_max) {
 			draw_set_font(fntM1)
 			draw_set_valign(fa_middle)
 			
@@ -343,6 +349,7 @@ function scrDrawInteractionHUD(_player) {
 			var _x = floor(x - view_xview),
 				_y = floor(y - view_yview),
 				_offset = font_get_height_diff(),
+				_prompt_text = undefined,
 				_name = name
 			
 			var _text_offset = draw_pickup_button(_x, _y)
@@ -364,18 +371,17 @@ function scrDrawInteractionHUD(_player) {
 			else {
 				var _object_name = object_get_name(object_index)
 				if (object_is_ancestor(object_index, Car)) _object_name = "Car"
-				draw_text_nt(_x, _y - 31, loc("HUD", $"Prompt{_object_name}", _name))
+				_prompt_text = loc("HUD", $"Prompt{_object_name}", _name)
+				draw_text_nt(_x, _y - 31, _prompt_text)
 			}
 			
 			if is_touch(_player.index) {
 				if instance_is(self, WepPickup) {
 					/// @loc:token [R:HUD] PickUpAction "PICK UP"
-					_name = loc("R:HUD:PickUpAction", "PICK UP")
+					_prompt_text = loc("R:HUD:PickUpAction", "PICK UP")
 				}
 				
 				with ButtonAct {
-					draw_text_nt(x, y + (((y - rad * 0.5) < 40) ? 36 : -36), _name)
-					
 					var _sprite = other.sprite_index,
 						_xoffset = sprite_get_xoffset(_sprite),
 						_yoffset = sprite_get_yoffset(_sprite),
@@ -386,6 +392,11 @@ function scrDrawInteractionHUD(_player) {
 					draw_sprite_ext(_sprite, other.image_index, x, y,
 						other.image_xscale * 1.6, other.image_yscale * 1.6, other.image_angle, other.image_blend, other.image_alpha)
 					sprite_set_offset(_sprite, _xoffset, _yoffset)
+					
+					if (is_string(_prompt_text)) {
+						var _height = font_get_string_height(_prompt_text)
+						draw_text_nt(x, max(_height, y - rad * 0.5 - _height - 12), _prompt_text)
+					}
 					
 					alpha = approach(alpha, 1.1, 0.4)
 					active = true

@@ -1,4 +1,6 @@
 function scrUnlocksArea() {
+	if (scrGameIsCustomMode()) exit
+	
     var _player = instance_is(self, Player) ? id : instance_nearest(x, y, Player),
 		_race = instance_exists(_player) ? _player.race : scr_playerinstance_find().get_race(),
 		_hardmode = scrGameIsHardmode(),
@@ -174,7 +176,8 @@ function scrUnlocksCharacterStats() {
 
 function scrUnlocksThroneDefeat() {
 	// unlocked through SitDown
-	//scrRaceUnlock(Race.Rogue)
+	
+	if (scrGameIsCustomMode()) exit
 	
 	with (Player) {
 		if (!scr_player_is_local(index)) continue
@@ -201,6 +204,8 @@ function scrUnlocksThroneDefeat() {
 }
 
 function scrUnlocksPlayerEquipment(_player) {
+	if (scrGameIsCustomMode()) exit
+	
 	with (_player) {
 		if (!scr_player_is_local(index)) break
 		
@@ -228,6 +233,8 @@ function scrUnlocksPlayerEquipment(_player) {
 }
 
 function scrUnlocksWinOrLoop() {
+	if (scrGameIsCustomMode()) exit
+	
 	with (Player) {
 		if (!scr_player_is_local(index)) continue
 		
@@ -242,6 +249,8 @@ function scrUnlocksWinOrLoop() {
 }
 
 function scrPlayerTryUnlockGoldenWeapons(_player) {
+	if (scrGameIsCustomMode()) exit
+	
 	with _player {
 		if (!scr_player_is_local(index) || !scr_loadout_is_available_for_race(race)) {
 			continue

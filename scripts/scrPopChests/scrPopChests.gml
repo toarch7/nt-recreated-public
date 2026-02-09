@@ -10,7 +10,7 @@ function scrPopChests() {
 		if instance_exists(CrownObject) {
 			with instance_furthest(10016, 10016, WeaponChest) {
 				instance_create(x, y, ProtoChest)
-				instance_destroy(id, 0)
+				instance_destroy(id, false)
 			}
 		}
 		
@@ -63,7 +63,8 @@ function scrPopChests() {
 		scrReplacePropWithChest(AmmoChest)
 	}
 	else {
-		instance_destroy(chestprop, false)
+		instance_destroy(AmmoChest, false)
+		instance_destroy(WeaponChest, false)
 		instance_destroy(RadChest, false)
 	}
 	

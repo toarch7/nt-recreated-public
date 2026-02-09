@@ -118,10 +118,16 @@ function scrCrownApplyEquipEffect(_crown_id, _is_equipped) {
 				case Crown.Destiny:
 					if !destiny {
 						codpick = true
-						skillpoints += 1
 						destiny = true
 						
-						if instance_exists(LevCont) {
+						if (tottimer != 0) {
+							skillpoints ++
+							if (instance_exists(LevCont)) {
+								scrSavegameSave()
+							}
+						}
+						else {
+							wantdestinyskill = true
 							scrSavegameSave()
 						}
 					}

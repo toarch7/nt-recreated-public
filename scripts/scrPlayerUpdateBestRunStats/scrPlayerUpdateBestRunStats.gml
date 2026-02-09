@@ -1,4 +1,6 @@
 function scrPlayerUpdateBestRunStats(_race, _is_end = false) {
+	if (scrGameIsCustomMode()) exit
+	
 	if (!scrGameIsHardmode()) {
 	    if (GameCont.kills > UberCont.cbst_kill[_race]) {
 	        UberCont.cbst_race[_race] = _race
@@ -6,6 +8,7 @@ function scrPlayerUpdateBestRunStats(_race, _is_end = false) {
 	        UberCont.cbst_loop[_race] = GameCont.loops
 	        UberCont.cbst_suba[_race] = GameCont.subarea
 	        UberCont.cbst_kill[_race] = GameCont.kills
+			UberCont.cbst_diff[_race] = GameCont.hard
 	    }
 		
 	    if (scrGameIsDailyRun()) {

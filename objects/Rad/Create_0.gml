@@ -4,7 +4,7 @@ depth = 0
 
 blink = 30
 
-alarm[0] = (150 + random(30)) / ((4 + GameCont.loops) / 4)
+alarm[0] = ceil((150 + random(30)) / ((4 + GameCont.loops) / 4) * scrCustomModePickupTimeMult())
 
 if (scrCrownCheck(crwn_haste)) alarm[0] /= 3
 

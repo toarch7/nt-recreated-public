@@ -21,8 +21,10 @@ function scrMakeFloor() {
 			
             break
         case 3:
-            if rng_float(RNGStates.Generation, 8) < 1 or GameCont.subarea == 3 {
-                if GameCont.subarea == 3 {
+            if (rng_float(RNGStates.Generation, 8) < 1
+				|| GameCont.subarea == GameCont.maxsubarea
+			) {
+                if (GameCont.subarea == GameCont.maxsubarea) {
                     xoff = rng_choose(0, 32, 0, 0, -32)
                     yoff = rng_choose(0, 32, 0, 0, -32)
                 }

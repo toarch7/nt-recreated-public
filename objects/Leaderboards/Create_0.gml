@@ -21,8 +21,9 @@ time = 0
 
 items = []
 
+// player entry from the online leaderboard
 my_entry = undefined
-
+// player entry from a locally stored file
 local_entry = undefined
 
 last_min = 0

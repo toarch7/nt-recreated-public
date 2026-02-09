@@ -45,3 +45,5 @@ if GameCont.area == area_city {
     spr_hurt = sprSnowBanditHurt
     spr_dead = sprSnowBanditDead
 }
+
+hitid = HitId.Bandit

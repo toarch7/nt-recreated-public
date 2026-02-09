@@ -89,8 +89,16 @@ else if instance_exists(GameCont) {
 		instance_create(x, y, SpiralCont)
 	}
 	
-    if (!instance_exists(Cinematic) && GameCont.tottimer != 0
-		&& (GameCont.skillpoints > 0 || GameCont.crownpoints > 0 || GameCont.ultrapoints > 0)
+	if (_just_loaded) {
+		GameCont.is_level_continuation = true
+	}
+	
+	var _can_skill = (!(_just_loaded && GameCont.patiencepick))
+	
+    if (!instance_exists(Cinematic)
+		&& ((GameCont.skillpoints > 0 && _can_skill)
+			|| GameCont.crownpoints > 0
+			|| GameCont.ultrapoints > 0)
 	) {
         instance_create(0, 0, BackCont)
         instance_create(x, y, LevCont)
@@ -100,7 +108,12 @@ else if instance_exists(GameCont) {
         instance_create(x, y, GenCont)
     }
 	
-	if (!_just_loaded) scrSavegameSave()
+	if (!_just_loaded) {
+		with (GameCont) {
+			is_level_continuation = false
+		}
+		scrSavegameSave()
+	}
 	
     instance_destroy()
 }

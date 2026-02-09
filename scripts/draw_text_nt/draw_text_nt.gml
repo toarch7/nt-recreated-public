@@ -25,11 +25,14 @@ function render_text_reset() {
 function render_parse_text(_text) {
 	var _def_width = 0,
 		_def_height = 0,
-		_length = string_length(_text),
 		_line_width = _def_width,
 		_line_height = _def_height,
 		_str = "", _string_index = 1,
 		_escape = false
+	
+	_text = string_replace_all(_text, "\r\n", "\n")
+	
+	var _length = string_length(_text)
 	
 	for(var i = _length; i >= 1; --i) {
 		var _char = string_char_at(_text, i)
@@ -327,7 +330,7 @@ function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0,
 		_y -= _height * 0.5 * _yscale
 	}
 	else if (_valign == fa_bottom) {
-		_y += _height
+		_y += _height * _yscale
 		_ymove *= -1
 	}
 	
@@ -339,10 +342,12 @@ function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0,
 			_string_count = array_length(_string_list)
 		
 		if _halign == fa_center {
-			_xpos = _x - _width * 0.5 + (_width - _line.width) * 0.5
+			//_xpos = _x - (_width * 0.5 + (_width - _line.width) * 0.5) * _xscale
+			_xpos = _x - _line.width * 0.5 * _xscale
 		}
 		else if _halign == fa_right {
-			_xpos = _x - _width + (_width - _line.width)
+			//_xpos = _x - (_width + (_width - _line.width)) * _xscale
+			_xpos = _x - _line.width * _xscale
 		}
 		else {
 			_xpos = _x
@@ -355,40 +360,40 @@ function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0,
 				_dy = _ypos
 			
 			if _shaking_text > 0 {
-				_dx += orandom(_shaking_text)
-				_dy += orandom(_shaking_text)
+				_dx += orandom(_shaking_text) * _xscale
+				_dy += orandom(_shaking_text) * _yscale
 			}
 			
 			if _fragment.type == TextRenderFragment.String {
-				if _xmove == -1 _xpos += _fragment.width
+				if _xmove == -1 _xpos += (_fragment.width * _xscale)
 				
 				if _shadows {
-					draw_text_color(_dx + 1, _dy + 1, _fragment.string, c_black, c_black, c_black, c_black, 1)
-					draw_text_color(_dx, _dy + 1, _fragment.string, c_black, c_black, c_black, c_black, 1)
+					draw_text_transformed_color(_dx + _xscale, _dy + _yscale, _fragment.string, _xscale, _yscale, 0, c_black, c_black, c_black, c_black, 1)
+					draw_text_transformed_color(_dx, _dy + _yscale, _fragment.string, _xscale, _yscale, 0, c_black, c_black, c_black, c_black, 1)
 					
 					if _is_bold {
-						draw_text_color(_dx + 2, _dy + 1, _fragment.string, c_black, c_black, c_black, c_black, 1)
-						draw_text_color(_dx + 1, _dy + 1, _fragment.string, c_black, c_black, c_black, c_black, 1)
+						draw_text_transformed_color(_dx + 2 * _xscale, _dy + _yscale, _fragment.string, _xscale, _yscale, 0, c_black, c_black, c_black, c_black, 1)
+						draw_text_transformed_color(_dx + _xscale, _dy + _yscale, _fragment.string, _xscale, _yscale, 0, c_black, c_black, c_black, c_black, 1)
 					}
 				}
 				
-				draw_text(_dx, _dy, _fragment.string)
+				draw_text_transformed(_dx, _dy, _fragment.string, _xscale, _yscale, 0)
 				
 				if _is_bold {
-					draw_text(_dx + 1, _dy, _fragment.string)
+					draw_text_transformed(_dx + _xscale, _dy, _fragment.string, _xscale, _yscale, 0)
 				}
 				
-				if _xmove == 1 _xpos += _fragment.width
+				if _xmove == 1 _xpos += (_fragment.width * _xscale)
 			}
 			else if _fragment.type == TextRenderFragment.Sprite {
 				draw_sprite_ext(
 					_fragment.sprite_index,
 					_fragment.image_index,
 					
-					_dx + _fragment.xoffset + (_fragment.width - 8) + 1,
-					_dy + _fragment.yoffset + (_fragment.height - 8) + font_get_height_diff() + 1,
+					_dx + _xscale * (_fragment.xoffset + (_fragment.width - 8) + 1),
+					_dy + _yscale * (_fragment.yoffset + (_fragment.height - 8) + font_get_height_diff() + 1),
 					
-					1, 1, 0, c_white, draw_get_alpha())
+					_xscale, _yscale, 0, c_white, draw_get_alpha())
 				
 				_xpos += _fragment.width * _xmove
 			}
@@ -414,7 +419,7 @@ function draw_text_nt(_x, _y, _text, _xscale = 1, _yscale = _xscale, _angle = 0,
 			}
 		}
 		
-		_ypos += _line.height * _ymove
+		_ypos += _line.height * _ymove * _yscale
 	}
 	
 	draw_set_color(_last_color)

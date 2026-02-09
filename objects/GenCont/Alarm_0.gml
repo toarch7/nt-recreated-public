@@ -16,9 +16,9 @@ if instance_exists(Player) {
     }
 }
 
-var _max_subareas = scrAreaGetMaxSubareas(GameCont.area)
+var _max_subarea = scrAreaGetMaxSubarea(GameCont.area)
 
-if (!(GameCont.subarea == _max_subareas && (GameCont.area == area_palace || GameCont.area == area_hq))) {
+if (!(GameCont.subarea == _max_subarea && (GameCont.area == area_palace || GameCont.area == area_hq))) {
 	scrPopulate()
 	
 	if (instance_exists(TutCont)) {

@@ -179,7 +179,7 @@ function performSpriteImport(isForce) {
         }
 
         if (hasBZ2QOI && flagBZ2QOIDisabled) {
-            console.warn("It appears like the game BZ2+QOI (or just QOI) encoded textures, which are not currently supported. Please report if some of the game sprites will be missing.");
+            console.warn("It appears that some of the game textures are encoded using QOI/BZ2+QOI format, which is not currently supported. If some of the game sprites will be missing, please make sure to let us know.");
         }
         
         // 2nd pass for embedded textures

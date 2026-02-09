@@ -8,9 +8,10 @@ goal = 110
 if instance_exists(GenCont) {
     goal = GenCont.goal
 
-    if GameCont.area == 7 && GameCont.subarea == 3 {
+    if GameCont.area == 7 && GameCont.subarea == GameCont.maxsubarea {
         direction = 90
         styleb = 0
+		exit
     }
 }
 
@@ -22,9 +23,7 @@ if instance_exists(TutCont) {
     goal = 1
 }
 
-instance_create(x, y, Floor)
-
-if GameCont.area == 106 && GameCont.subarea == 3 {
+if (GameCont.area == area_hq && GameCont.subarea == scrAreaGetMaxSubarea(GameCont.area)) {
     styleb = 0
 
     with GenCont {
@@ -95,3 +94,5 @@ if GameCont.area == 106 && GameCont.subarea == 3 {
     instance_destroy()
     exit
 }
+
+instance_create(x, y, Floor)

@@ -67,8 +67,6 @@ if (!scrGameIsGenerationScreen() && !instance_exists(GameOver)) {
 	        }
 	    }
 		
-        if (bleed) break
-		
 		var _sx = ldrx(_dis, _dir) + ldrx(_dis2, _dir2),
 			_sy = ldry(_dis, _dir) + ldry(_dis2, _dir2)
 		
@@ -78,9 +76,22 @@ if (!scrGameIsGenerationScreen() && !instance_exists(GameOver)) {
 			_sy += orandom(_shake)
 		}
 		
+		if (bleed) {
+			var _any = false
+			
+			with (ChickenHead) if (index == other.index) {
+				_any = true
+				view_xview = lerp(view_xview, x - view_width * 0.5, 0.5)
+				view_yview = lerp(view_yview, y - view_height * 0.5, 0.5)
+				break
+			}
+			
+			if (!_any) break
+		}
+		
         view_xview = round(lerp(view_xview, x - view_width * 0.5 + other.viewx2 + _sx, 0.4))
         view_yview = round(lerp(view_yview, y - view_height * 0.5 + other.viewy2 + _sy, 0.4))
-    }
+	}
 }
 
 viewx2 = round(viewx2 - viewx2 * 0.4)

@@ -151,7 +151,7 @@ function scrSendDailyData() {
                 _footer = "(no score improvement)"
             }
 			
-			var _area = scrAreaGetMapName(GameCont.area, GameCont.subarea, GameCont.loops),
+			var _area = scrAreaGetMapName(GameCont.area, GameCont.subarea, GameCont.loops, false, false),
 				
 				_gap = "<:none:763720063140233226> <:none:763720063140233226> <:none:763720063140233226> <:Kills:763751370901159979>",
 				
@@ -238,7 +238,7 @@ function scrSendDailyData() {
 				skills: _skills,
 				crown: GameCont.crown,
 				version: UberCont.version,
-				uid: scrSavedatascrGetUID()
+				uid: scrSavedataGetUID()
 			}
 			
 			my_entry.runId = runId

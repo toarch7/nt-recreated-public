@@ -1,5 +1,5 @@
 #macro GAME_VERSION "beta-3.0.0"
-#macro GAME_BUILD 3001
+#macro GAME_BUILD 3002
 #macro BETA true
 
 global.string_split_list = ds_list_create()
@@ -43,7 +43,7 @@ hardmode = false
 custom = false
 custom_options = undefined
 custom_mode_slots = array_create(max_custom_mode_slots, undefined)
-custom_mode_disclaimer = true
+custom_mode_disclaimer = false
 custom_mode_slot_index = 0
 global.is_server = false
 

@@ -17,7 +17,7 @@ splatimg = 0
 
 if GameCont.patiencepick {
 	random_set_seed(global.seed + 200513)
-	GameCont.patiencepick = 0
+	GameCont.patiencepick = false
 	placeonpatience = 1
 }
 
@@ -68,12 +68,16 @@ if GameCont.crownpoints > 0 {
 else if GameCont.skillpoints {
 	scrSkills()
 	
-	var _maxskills = _destiny ? 1 : 4
-	_maxskills += scrPlayerCountRace(Race.Horror)
+	var _maxskills = scrCustomParam("skill_choices", 4)
+	
+	if (_maxskills > 0) {
+		_maxskills += scrPlayerCountRace(Race.Horror)
+		if (_destiny) _maxskills -= 3
+	}
 	
 	var _num = 0
 	
-	repeat _maxskills {
+	repeat (_maxskills) {
 		var _skill = scrDecideSkill(_num == 0)
 		
 		if (!scr_skill_is_valid(_skill)) break
@@ -92,6 +96,10 @@ else if GameCont.skillpoints {
 			
 			GameCont.wantheavy = 1
 		}
+	}
+	
+	if (!instance_exists(SkillIcon)) {
+		scrLevelUpScreenSubmit()
 	}
 }
 else if GameCont.ultrapoints {

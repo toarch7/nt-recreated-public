@@ -198,7 +198,7 @@ else {
 	}
 }
 
-if bleed > 0 && hp > 0 && visible {
+if bleed > 0 && hp > 0 && max_hp > 0 && visible {
 	snd_stop(sndChickenHeadlessLoop)
 	snd_play(sndChickenRegenHead)
 	bleed = 0
@@ -210,12 +210,8 @@ if bleed > 0 && hp > 0 && visible {
 	spr_gosit = scr_race_get_sprite(race, "GoSit", sprMutant9GoSit, bskin)
 	spr_sit = scr_race_get_sprite(race, "Sit", sprMutant9Sit, bskin)
 
-	with Corpse {
-		if sprite_index == sprMutant9HeadIdle
-		|| sprite_index == sprMutant9BHeadIdle
-		|| sprite_index == sprMutant9CHeadIdle {
-			instance_destroy()
-		}
+	with (ChickenHead) {
+		if (index == other.index) instance_destroy()
 	}
 }
 
@@ -240,10 +236,13 @@ if hp <= 0 {
 					image_angle = direction
 				}
 			}
-
-			headloses += 2
-			if (max_hp) max_hp -= 2
-
+			
+			if (max_hp > 0) {
+				var _n = min(2, max_hp)
+				headloses += _n
+				max_hp -= _n
+			}
+			
 			var _skin = bskin
 			
 			repeat (9 + irandom(4)) {
@@ -258,7 +257,8 @@ if hp <= 0 {
 			spr_gosit = scr_race_get_sprite(race, "HeadlessGoSit", sprMutant9HeadlessGoSit, _skin)
 			spr_sit = scr_race_get_sprite(race, "HeadlessSit", sprMutant9HeadlessSit, _skin)
 			
-			with instance_create(x, y, CorpseActive) {
+			with instance_create(x, y, ChickenHead) {
+				index = other.index
 				mask_index = other.mask_index
 				motion_add(other.direction, other.speed + 1)
 				/**/ if (_skin == SkinLetter.B) sprite_index = sprMutant9BHeadIdle
@@ -553,7 +553,7 @@ if drawempty > 0 {
 		if ((_t1 && ammo[_t1] <= _v1 && ammo[_t1] > (_v1 - scr_weapon_get_cost(wep)))
 			|| (race == Race.Steroids && _t2 && ammo[_t2] <= _v2 && ammo[_t2] > (_v2 - scr_weapon_get_cost(bwep)))
 		) {
-			if !audio_is_playing(snd_lowa) snd_play(snd_lowa)
+			if (!audio_is_playing(snd_lowa)) snd_play(snd_lowa)
 		}
 	}
 	
@@ -703,6 +703,35 @@ if (global.__debug_noreload) {
 	if (breload > 0) {
 		bcan_shoot = true
 		breload = 0
+	}
+}
+
+if (global.__debug_teleportation) {
+	if (mouse_check_button_pressed(mb_middle) || scr_keyboard_check_pressed(vk_f1)) {
+		x = mouse_x
+		y = mouse_y
+		xprevious = x
+		yprevious = y
+		
+		repeat (6 + irandom(3)) {
+	        with instance_create(x, y, AnimParticle) {
+	            sprite_index = sprCrystTrail
+	            image_speed = 0.4
+	            friction = 0.4
+	            depth = -7
+				
+	            motion_add(random_angle, 3 + random(2))
+	        }
+	    }
+		
+		if (place_meeting(x, y, Wall)) {
+			with (instance_create(x, y, PortalClear)) {
+				image_xscale = 0.25
+				image_yscale = 0.25
+			}
+		}
+		
+		snd_play(sndCrystalTB)
 	}
 }
 

@@ -10,6 +10,9 @@ with (UberCont) {
 	if (!(scrGameIsEventRun() || scrGameIsCustomMode())) {
 		protowep = save_get_value("etc", "protowep", wep_rusty_revolver)
 	}
+	else {
+		protowep = wep_rusty_revolver
+	}
 }
 
 scrGameCustomModeReset()

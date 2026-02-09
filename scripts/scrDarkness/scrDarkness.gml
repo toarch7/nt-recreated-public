@@ -31,7 +31,9 @@ function scrDarkness() {
 	with (Revive) draw_circle(x - _xview, y - _yview, 130 + random(4), 0)
 	with (HyperCrystal) draw_circle(x - _xview, y - _yview, 30 + dist + random(4), 0)
 	with (MeatExplosion) draw_circle(x - _xview, y - _yview, 140 + random(4), 0)
-	with (Explosion) draw_circle(x - _xview, y - _yview, 160 + random(4), 0)
+	with (Explosion) {
+		draw_circle(x - _xview, y - _yview, 80 * (1 + (object_index != SmallExplosion)) + random(4), 0)
+	}
 	with (Portal) draw_circle(x - _xview, y - _yview, 120 + random(8), 0)
 	with (IDPDSpawn) draw_circle(x - _xview, y - _yview, 60 + random(8), 0)
 	with (VanSpawn) draw_circle(x - _xview, y - _yview, 120 + random(8), 0)

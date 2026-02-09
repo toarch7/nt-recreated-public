@@ -1,6 +1,6 @@
 novans = false
-	
-if (area == area_palace && subarea == 3) || (area == area_hq && subarea == 3)
+
+if (area == area_palace && subarea == maxsubarea) || (area == area_hq && subarea == maxsubarea)
 || loops == 0 || area == area_vault || area == area_campfire || area == area_crib {
 	novans = true
 }

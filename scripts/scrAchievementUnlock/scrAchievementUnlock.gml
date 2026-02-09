@@ -3,9 +3,11 @@
 function scrAchievementUnlock(_achievement_id) {
 	assert(_achievement_id >= 0 && _achievement_id <= achievementmax)
 	
-    if save_get_value("achievement", string(_achievement_id)) exit
+	if (scrGameIsCustomMode()) exit
 	
-	if UberCont.opt_achievs {
+    if (save_get_value("achievement", string(_achievement_id))) exit
+	
+	if (UberCont.opt_achievs) {
 	    with instance_create(instance_number(AchievementSplash), 0, AchievementSplash) {
 	        str1 = loc("Achievements", _achievement_id, "name", chiev_name[_achievement_id])
 	        str2 = loc("Achievements", _achievement_id, "text", chiev_text[_achievement_id])

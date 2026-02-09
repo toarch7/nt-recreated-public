@@ -35,5 +35,5 @@ if instance_exists(_player) {
 }
 
 if instance_exists(_player) && place_meeting(x, y, Portal) {
-	event_perform(ev_collision, _player)
+	event_perform(ev_collision, Player)
 }

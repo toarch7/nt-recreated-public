@@ -1,5 +1,6 @@
-#macro max_custom_mode_slots 10
+#macro max_custom_mode_slots 9
 #macro custom_mode_version 1
+#macro custom_player_damage_adj 10
 
 function CustomModeOptions(_slot_name) constructor {
 	name = string(_slot_name)
@@ -44,12 +45,11 @@ function CustomModeOptions(_slot_name) constructor {
 	
 	weapon_tier_base = -2
 	weapon_tier_pairs = []
-	pickup_time = 100
-	
-	enemy_health = 100
-	boss_health = 100
 	
 	self[$ "game_speed"] = 100
+	enemy_health = 100
+	boss_health = 100
+	pickup_time = 100
 }
 
 function scrCustomModeLoadPresets() {
@@ -66,7 +66,13 @@ function scrCustomModeLoadPresets() {
 		with (UberCont) {
 			custom_mode_disclaimer = _data.accepted_disclaimer
 			custom_mode_slot_index = _data.index
-			custom_mode_slots = _data.array
+			
+			custom_mode_slots = array_map(_data.array, function(_slot, _index) {
+				if (!is_struct(_slot)) {
+					return new CustomModeOptions(string(_index + 1))
+				}
+				return _slot
+			})
 		}
 	}
 	catch(e) {
@@ -101,7 +107,6 @@ function scrCustomModeSavePresets(_reset_all = false) {
 			"version": custom_mode_version,
 			"array": UberCont.custom_mode_slots
 		}
-		_data = _struct.array
 	}
 	
 	var _filepath = game_directory + "custom-mode.json"
@@ -122,9 +127,24 @@ function scrCustomParam(_key, _default=undefined) {
 	return _default
 }
 
+function scrCustomParamChange(_key, _value) {
+	variable_struct_set(UberCont.custom_options, _key, _value)
+}
+
 function scrGameCustomModeReset() {
 	with (UberCont) {
 		custom = false
 		custom_options = undefined
 	}
+}
+
+function scrCustomModeCountMutations() {
+	return array_length(UberCont.custom_options.skill_start)
+}
+
+function scrCustomModePickupTimeMult() {
+	if (scrGameIsCustomMode()) {
+		return scrCustomParam("pickup_time") / 100
+	}
+	return 1
 }

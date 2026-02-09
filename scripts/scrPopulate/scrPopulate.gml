@@ -4,7 +4,7 @@ function scrPopulate() {
 	var _difficulty = GameCont.hard,
 		_area = GameCont.area,
 		_subarea = GameCont.subarea,
-		_max_subarea = scrAreaGetMaxSubareas(_area),
+		_max_subarea = scrAreaGetMaxSubarea(_area),
 		_has_boss = (_subarea == _max_subarea),
 		_loops = GameCont.loops,
 		
@@ -239,7 +239,7 @@ function scrPopulate() {
 	
 	#region Pizza Sewers & Entrance
 	random_set_seed(rng_next_int(RNGStates.Generation))
-	if (_area == area_sewers) {
+	if (_area == area_sewers && _subarea == 1) {
 		with (Floor) {
 			if (sprite_index == sprFloor2 && (image_index == 1 || image_index == 5)) {
 				if (!place_meeting(x, y, __props)) instance_create(x, y, PizzaEntrance)

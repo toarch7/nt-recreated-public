@@ -32,13 +32,13 @@ function scr_log_push(_message, _color = c_white) {
 		exit
 	}
 	
+	if array_length(global.log_output) >= CONSOLE_LOG_CAPACITY {
+		array_delete(global.log_output, CONSOLE_LOG_CAPACITY - 1, 1)
+		array_delete(global.log_color, CONSOLE_LOG_CAPACITY - 1, 1)
+	}
+	
 	array_insert(global.log_output, 0, _message)
 	array_insert(global.log_color, 0, _color)
-	
-	if array_length(global.log_output) >= CONSOLE_LOG_CAPACITY {
-		array_delete(global.log_output, CONSOLE_LOG_CAPACITY, 1)
-		array_delete(global.log_color, CONSOLE_LOG_CAPACITY, 1)
-	}
 }
 
 function scr_debug_print_stacktrace(_message = undefined, _start = 0) {

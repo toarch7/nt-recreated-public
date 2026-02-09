@@ -39,7 +39,7 @@ try {
 			packet_begin(event.tcp_connect)
 			
 			packet_write(buffer_string, string(GAME_BUILD))
-			packet_write(buffer_string, scrSavedatascrGetUID())
+			packet_write(buffer_string, scrSavedataGetUID())
 			packet_write(buffer_string, json_stringify(my_player))
 			
 			packet_send()
@@ -98,7 +98,7 @@ try {
 				_user_signature = buffer_read(data, buffer_string),
 				_pinst = json_parse(buffer_read(data, buffer_string))
 			
-			if _user_signature == scrSavedatascrGetUID() { // is that for me??
+			if _user_signature == scrSavedataGetUID() { // is that for me??
 				var _playerinstances = json_parse(buffer_read(data, buffer_string)),
 					_seed = buffer_read(data, buffer_u32)
 				

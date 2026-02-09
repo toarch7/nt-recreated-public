@@ -1,1 +1,1 @@
-instance_destroy()
+if (instance_exists(Nothing)) instance_destroy()

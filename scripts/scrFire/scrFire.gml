@@ -56,7 +56,7 @@ function scrFire(_wep, _consume_ammo = true) {
 	    if (GameCont.area == area_oasis) snd_play_gun(sndOasisMelee)
 	}
 	else {
-		if (!specfiring && race == Race.Steroids) drawempty = 30
+		drawempty = 30
 	}
 	
 	if (!_is_melee) {

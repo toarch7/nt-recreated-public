@@ -98,5 +98,7 @@ function scrSave() {
 		
 		file_write(savepath, json)
 		file_write("NuclearThrone.sav", json)
+		
+		scrCustomModeSavePresets()
     }
 }

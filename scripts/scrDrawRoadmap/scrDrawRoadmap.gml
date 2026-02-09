@@ -28,7 +28,7 @@ function scrDrawRoadmap(_drawx, _drawy, _pos) {
 	
 	// calc total map width
 	for(var _area = _start_area; _area <= area_palace; ++_area) {
-		_total_map_size += scrAreaGetMaxSubareas(_area) * _segment_length
+		_total_map_size += scrAreaGetMaxSubarea(_area) * _segment_length
 	}
 	_drawx -= (_total_map_size div 2)
 	
@@ -43,7 +43,7 @@ function scrDrawRoadmap(_drawx, _drawy, _pos) {
 		draw_sprite_ext(sprMapDot, 0, _px + 1, _py + 2, 1, 1, 0, c_black, 1)
 		draw_sprite_ext(sprMapDot, 0, _px + 1, _py + 1, 1, 1, 0, c_black, 1)
 		
-		_map_x += scrAreaGetMaxSubareas(_area) * _segment_length
+		_map_x += scrAreaGetMaxSubarea(_area) * _segment_length
 		
 		draw_line_pixelated(_px + 0, _py + 1, _map_x + 0, _map_y + 1, c_black, 1)
 		draw_line_pixelated(_px + 1, _py + 0, _map_x + 1, _map_y + 0, c_black, 1)
@@ -52,6 +52,9 @@ function scrDrawRoadmap(_drawx, _drawy, _pos) {
 		
 		if (_area == area_palace) {
 			draw_sprite_ext(sprMapCrown, 0, _map_x - 3, _map_y + 1, 1, 1, 0, c_white, 1)
+			if (scrAreaGetMaxSubarea(_area) <= 1) {
+				break
+			}
 			draw_sprite_ext(sprPixel, 0, _map_x - 8, _map_y + 1, 1, 1, 0, c_black, 1)
 		}
 		
@@ -66,11 +69,12 @@ function scrDrawRoadmap(_drawx, _drawy, _pos) {
 		_waysub = GameCont.waysub,
 		_waylps = GameCont.waylps,
 		
-		_odd_length = max(1, scrAreaGetMaxSubareas(1) - 1) * _segment_length,
-		_even_length = scrAreaGetMaxSubareas(2) * _segment_length
+		_odd_length = scrAreaGetMaxSubarea(1) * _segment_length,
+		_even_length = scrAreaGetMaxSubarea(2) * _segment_length
 	
 	// Shadow
-	var _map_x = _drawx,
+	var _current_loop = undefined,
+		_map_x = _drawx,
 		_map_y = _drawy
 	
 	for(var _index = 0; _index < _waypoint_count; ++_index) {
@@ -79,13 +83,23 @@ function scrDrawRoadmap(_drawx, _drawy, _pos) {
 			_subarea = _waysub[_index],
 			_loop = _waylps[_index]
 		
-		var _px = _map_x, _py = _map_y
+		if (_current_loop != _loop) {
+			_current_loop = _loop
+			_map_x = _drawx
+			_map_y = _drawy
+		}
+		
+		var _px = _map_x,
+			_py = _map_y
 		
 		if (!_is_secret) {
+			var _even = _area div 2,
+				_odd = _area - _even
+			
 			_map_x = _drawx
-				+ ((_area - 1) * _even_length)
+				+ ((_odd - 1) * _even_length)
+				+ (_even * _odd_length)
 				+ ((_subarea - 1) * _segment_length)
-				+ ((_area div 2) * _odd_length)
 		}
 		
 		_map_y = _drawy + (_segment_length + 1) * _is_secret
@@ -94,14 +108,16 @@ function scrDrawRoadmap(_drawx, _drawy, _pos) {
 			draw_sprite_ext(sprMapDotOut, 0, _map_x, _map_y + 1, 1, 1, 0, c_black, 1)
 		}
 		
-		draw_line_pixelated(_px + 2, _py + 1, _map_x + 2, _map_y + 1, c_black, 1)
+		draw_line_pixelated(_px + 1, _py + 1, _map_x + 1, _map_y + 1, c_black, 1)
+		draw_line_pixelated(_px + 2, _py + 0, _map_x + 1, _map_y + 0, c_black, 1)
+		draw_line_pixelated(_px + 2, _py + 1, _map_x + 1, _map_y + 1, c_black, 1)
 	}
 	
 	// Colored lines
 	draw_set_color(c_white)
 	
 	var _color = -1,
-		_current_loop = -1,
+		_current_loop = undefined,
 		_map_x = _drawx,
 		_map_y = _drawy
 	
@@ -122,10 +138,13 @@ function scrDrawRoadmap(_drawx, _drawy, _pos) {
 			_py = _map_y
 		
 		if (!_is_secret) {
+			var _even = _area div 2,
+				_odd = _area - _even
+			
 			_map_x = _drawx
-				+ ((_area - 1) * _even_length)
+				+ ((_odd - 1) * _even_length)
+				+ (_even * _odd_length)
 				+ ((_subarea - 1) * _segment_length)
-				+ ((_area div 2) * _odd_length)
 		}
 		
 		_map_y = _drawy + (_segment_length + 1) * _is_secret

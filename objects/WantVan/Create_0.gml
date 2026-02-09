@@ -1,5 +1,10 @@
 target = noone
-if ((GameCont.area == 100) || (((GameCont.area == 7) && (GameCont.subarea == 3)) || ((GameCont.area == 0) || (GameCont.area == 107)))) instance_destroy()
+with (GameCont) {
+	if (area == area_oasis || (area == area_palace && subarea == maxsubarea) || area == area_campfire || area == area_crib) {
+		instance_destroy(other)
+		break
+	}
+}
 enemies = instance_number(enemy)
 spawnmoment = (0.2 + random(0.4))
 canspawn = 0

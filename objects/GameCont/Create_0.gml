@@ -34,9 +34,9 @@ guitar = false
 horror = false
 vans = 0
 spawn_vans = 0
-destiny = 0
-start = 0
-proto = 0
+destiny = false
+wantdestinyskill = false
+proto = false
 heavyheart = false
 wantheavy = false
 triedhq = false
@@ -64,6 +64,8 @@ hasfiredshots = false
 haspickedweps = false
 swordbosskill = []
 
+timer_setup = false
+
 same_weapon_signature = -1
 same_weapons_for = 0
 
@@ -89,6 +91,7 @@ fromcrib = false
 win = false
 
 is_level_ended = false
+is_level_continuation = false
 levseed = global.seed
 
 persistentweps = undefined

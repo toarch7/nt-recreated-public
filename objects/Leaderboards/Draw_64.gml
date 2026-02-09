@@ -1,16 +1,14 @@
-if instance_exists(DailyList)
-	exit
+if (instance_exists(DailyList)) exit
 
-if loaded {
-	if max_height > 0
-		event_user(1)
-}
-else {
+if (!loaded) {
 	event_user(0)
 	
-	draw_sprite(sprDailyLoad, current_frame * 0.4, view_width / 2, 18)
+	draw_sprite(sprDailyLoad, current_frame * 0.4, gui_w div 2, 18)
 	
 	exit
+}
+else {
+	if (max_height > 0) event_user(1)
 }
 
 var start = ypos div 20,
@@ -31,13 +29,8 @@ if last_min != start or last_max != count {
 	}
 	
 	for(var i = last_min; i < last_max; i ++) {
-		if i < start or i > count {
-			var item = items[i]
-			
-			if item == my_entry
-				splat = 0
-			
-			item.appear = 0
+		if ((i < start || i > count) && items[i] == my_entry) {
+			splat = 0
 		}
 	}
 	
@@ -117,5 +110,5 @@ event_user(0)
 
 draw_align(fa_center, fa_middle)
 /// @loc:token [R:MainMenu] Leaderboards "LEADERBOARDS"
-draw_text_bigname(view_width / 2, 18, loc("R:MainMenu:Leaderboards", "LEADERBOARDS"), c_uigray)
+draw_text_bigname(view_width / 2, 24, loc("R:MainMenu:Leaderboards", "LEADERBOARDS"), c_uigray)
 draw_align()

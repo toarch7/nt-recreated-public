@@ -5,12 +5,18 @@ if !instance_exists(Player) scrDrawGameModeIndication()
 // render loadout
 event_user(1)
 
-with (CharSelect) if (tooltip) {
-	var _str = can
-		? loc("Races", race, "Name", scrRaceGetName(race))
-		: loc("Races", race, "Unlock", scrRaceGetUnlockDescription(race))
+with (CharSelect) {
+	if (can && race != Race.Random && !UberCont.ctot_dead[race]) {
+	    draw_sprite(sprNew, -1, bbox_right - view_xview, y - view_yview)
+	}
 	
-	scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc(_str), 0, true)
+	if (tooltip) {
+		var _str = can
+			? loc("Races", race, "Name", scrRaceGetName(race))
+			: loc("Races", race, "Unlock", scrRaceGetUnlockDescription(race))
+		
+		scrDrawTooltip(bbox_center_x - view_xview, bbox_top - view_yview, loc(_str), 0, true)
+	}
 }
 
 with (GoButton) if (tooltip) {

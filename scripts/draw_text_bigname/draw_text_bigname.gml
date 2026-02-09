@@ -29,14 +29,23 @@ function draw_text_bigname(_x, _y, _text, _color = draw_get_color(), _alpha = dr
 		var _w = ceil(font_get_string_width(_text) * _scale),
 			_h = ceil(font_get_string_height(_text) * _scale)
 		
-		_surface = surface_create(_w, _h)
+		_surface = surface_create(_w + 4, _h)
 		
 		surface_set_target(_surface)
 		draw_clear_alpha(c_black, 0)
 		
 		//
-		if (_scale >= 1) draw_text_nt(0, 1 - font_get_height_diff(), _text, _scale, _scale, 0, c_black)
-		draw_text_nt(0, 0 - font_get_height_diff(), _text, _scale, _scale, 0, c_white)
+		var _offset = font_get_height_diff() - 6,
+			_info = font_get_info(_font)
+		
+		if (sprite_exists(_info.spriteIndex)) {
+			_offset -= sprite_get_yoffset(_info.spriteIndex) - 7
+		}
+		
+		if (_scale >= 1) {
+			draw_text_nt(4, 1 - _offset, _text, _scale, _scale, 0, c_black)
+		}
+		draw_text_nt(4, 0 - _offset, _text, _scale, _scale, 0, c_white)
 		
 		surface_reset_target()
 		
@@ -54,12 +63,12 @@ function draw_text_bigname(_x, _y, _text, _color = draw_get_color(), _alpha = dr
 	/**/ if (_halign == fa_center) _x -= surface_get_width(_surface) / 2
 	else if (_halign == fa_right) _x -= surface_get_width(_surface)
 	
-	/**/ if (_valign == fa_center) _y -= surface_get_height(_surface) / 2
+	/**/ if (_valign == fa_middle) _y -= surface_get_height(_surface) / 2
 	else if (_valign == fa_bottom) _y -= surface_get_height(_surface)
 	
 	var _f = draw_get_font()
 	draw_set_font(global.language_font_bigname_default)
-	draw_surface_ext(_surface, round(_x), round(_y - font_get_height_diff()), 1, 1, _angle, _color, _alpha)
+	draw_surface_ext(_surface, round(_x), round(_y - font_get_height_diff() - 6), 1, 1, _angle, _color, _alpha)
 	draw_set_font(_f)
 }
 

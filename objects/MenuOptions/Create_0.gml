@@ -37,6 +37,7 @@ enum OptionCategory {
 	CustomMode_Reset,
 	CustomMode_WeaponSelector,
 	CustomMode_SkillSelector,
+	CustomMode_Disclaimer,
 	
 	NUM_MENU_OPTIONS
 }
@@ -160,7 +161,7 @@ element_functions[$ "switch"] = function(_opt) {
 
 element_functions[$ "list"] = function(_opt) {
 	var list = _opt.list,
-		index = array_indexof(list, _opt.value)
+		index = array_get_index(list, _opt.value)
 	
 	if index != -1 && array_length(list) > index + 1 {
 		_opt.value = list[index + 1]
@@ -187,15 +188,5 @@ element_functions[$ "keybind"] = function(_opt) {
 	keyboard_lastkey = -1
 	mouse_lastbutton = -1
 }
-
-// can be removed..?
-foreach(options, function(_value) {
-    for (var i = 0; i < array_length(_value); i++) {
-        var v = _value[i]
-		
-		if is_method(v[$ "awake"])
-			method_execute(v.awake, v)
-    }
-})
 
 dispose_on_empty = false

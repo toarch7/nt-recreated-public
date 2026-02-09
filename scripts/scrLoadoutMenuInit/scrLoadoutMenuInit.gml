@@ -113,6 +113,10 @@ function scr_loadout_race_set_start_crown(_race_id, _crown_id) {
 /// @param crown_id
 function scr_loadout_race_is_crown_unlocked(_race_id, _crown_id) {
 	with UberCont {
+		if (scrGameIsCustomMode() && scrCustomParam("unlock_crowns")) {
+			return true
+		}
+		
 		return cgot[_race_id] && crowngot[_race_id, _crown_id]
 	}
 	
@@ -163,8 +167,13 @@ function scr_loadout_race_set_skin(_race_id, _skin_id) {
 /// @function scr_loadout_is_available_for_race
 /// @param {Real|Enum.Race} race_id
 function scr_loadout_is_available_for_race(_race) {
-	if _race == Race.BigDog || _race == Race.Skeleton || _race == Race.Frog
+	if (scrGameIsCustomMode() && scrCustomParam("unlock_crowns")) {
+		return true
+	}
+	
+	if (_race == Race.BigDog || _race == Race.Skeleton || _race == Race.Frog) {
 		return false
+	}
 	
 	return true
 }

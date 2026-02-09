@@ -244,7 +244,7 @@ if touch_duration {
 	if !touch_duration && !speed {
 		if !browsing && is_string(clicked_item[$ "path"]) {
 			if !directory_exists(clicked_item.path) {
-				array_delete(Resourcepacks, array_indexof(Resourcepacks, clicked_item), 1)
+				array_delete(Resourcepacks, array_get_index(Resourcepacks, clicked_item), 1)
 				
 				/// @loc:token [ResourcepackBrowser] ErrorMissingFiles "MISSING RESOURCEPACK FILES"
 				error = L("ErrorMissingFiles", "MISSING RESOURCEPACK FILES")

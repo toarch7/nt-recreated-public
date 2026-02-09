@@ -10,3 +10,6 @@ if object_index != EnemyLaser {
 img = 0
 damage = 2
 alarm[0] = 1
+
+spr_start = sprLaserStart
+spr_end = sprLaserEnd

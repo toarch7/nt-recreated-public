@@ -1,9 +1,8 @@
 function scrEmpty() {
-    clicked = false
-    snd_play(sndEmpty)
+    var _type = scr_weapon_get_type(wep)
+	if (_type == Ammo.None) exit
 	
     var _instance = scrPopupCreate(x, y, loc("HUD:NoAmmo", "EMPTY")),
-		_type = scr_weapon_get_type(wep)
 	
 	if (ammo[_type] > 0) {
 		var _ammo_name = loc("Ammo:Type", _type, typ_name[_type])
@@ -18,14 +17,14 @@ function scrEmpty() {
 	drawempty = 30
     clicked = 0
     wkick = -2
+    snd_play(sndEmpty)
 }
 
 function scrEmptyB() {
-    clicked = false
-    snd_play(sndEmpty)
+    var _type = scr_weapon_get_type(bwep)
+	if (_type == Ammo.None) exit
 	
-    var _instance = scrPopupCreate(x, y, loc("HUD:NoAmmo", "EMPTY")),
-		_type = scr_weapon_get_type(bwep)
+    var _instance = scrPopupCreate(x, y, loc("HUD:NoAmmo", "EMPTY"))
 	
 	if (ammo[_type] > 0) {
 		var _ammo_name = loc("Ammo:Type", _type)
@@ -37,8 +36,8 @@ function scrEmptyB() {
         _instance.mytext = loc("HUD:InsRads", "NOT ENOUGH RADS")
     }
 	
-    clicked = 0
-    wkick = -2
+	bwkick = -2
+	snd_play(sndEmpty)
 }
 
 function scrEmptyRads() {

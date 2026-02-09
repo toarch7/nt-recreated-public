@@ -2,6 +2,7 @@ if (
 	instance_exists(Portal) || instance_exists(GenCont) || (!forceportal && scr_check_enemies()) || GameCont.area == area_crib || instance_exists(RadMaggotChest)
 	|| instance_exists(CrownGuardian) || instance_exists(VaultStatue) || instance_exists(CrownPickup) || instance_exists(TutCont) || !instance_exists(Player)
 	|| instance_exists(BecomeScrapBoss) || ((GameCont.area == area_palace || GameCont.area == area_hq) && GameCont.subarea == GameCont.maxsubarea)
+	|| instance_exists(SitDown)
 ) {
 	exit
 }

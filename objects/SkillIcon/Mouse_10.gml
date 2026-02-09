@@ -8,8 +8,16 @@ if is_keyboard() && appeary == 0 {
     with (LevCont) splat = true
     snd_play(sndHover)
 	
-	with SkillIcon
-		selected = false
-	
-    selected = true
+	if (!instance_exists(CoopController)) {
+		var _nearest = instance_nearest(mouse_x, mouse_y, SkillIcon)
+		with (SkillIcon) {
+			selected = (_nearest == id)
+		}
+	}
+	else {
+		with (SkillIcon) {
+			selected = false
+		}
+		selected = true
+	}
 }

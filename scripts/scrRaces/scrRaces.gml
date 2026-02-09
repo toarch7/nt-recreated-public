@@ -33,14 +33,20 @@ enum SkinLetter {
 /// @function scr_race_is_unlocked
 /// @param {Real|Enum.Race} race
 function scr_race_is_unlocked(_race) {
-	with UberCont return cgot[_race]
+	with (UberCont) {
+		if (scrGameIsCustomMode() && scrCustomParam("unlock_chars") && !scrRaceIsHidden(_race)) {
+			return true
+		}
+		
+		return cgot[_race]
+	}
 }
 
 /// @function scr_race_set_unlocked
 /// @param {Real|Enum.Race} race
 /// @param is_unlocked=true
 function scr_race_set_unlocked(_race, _unlocked = true) {
-	with UberCont cgot[_race] = _unlocked
+	with (UberCont) cgot[_race] = _unlocked
 }
 
 /// @function scr_race_is_skin_unlocked
@@ -458,14 +464,16 @@ function scrRaceGetSkinUnlockCauseText(_race, _skin_id) {
 
 /// @function scrRaceGetMaxSkinCount
 /// @param {Real|Enum.Race} race_id
-function scrRaceGetMaxSkinCount(_race) {
-    if _race == Race.BigDog || _race == Race.Frog
+/// @param include_secret=false
+function scrRaceGetMaxSkinCount(_race, _show_secret=true) {
+    if (_race == Race.BigDog || _race == Race.Frog) {
 		return 1
+	}
 	
-	// TODO: these are NTT skins. Maybe these should become accessible once you have a 100% savefile?
-	if false {
-		if _race == Race.Robot return 4
-		else if _race == Race.Skeleton return 2
+	// TODO: both of are NTT-exclusive skins. Maybe these should become accessible once you have get ?
+	if (_show_secret || scrCustomParam("unlock_chars", false)) {
+		if (_race == Race.Skeleton) return 2
+		if (_race == Race.Robot) return 4
 	}
 	
 	return 3

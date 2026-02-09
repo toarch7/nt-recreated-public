@@ -45,6 +45,33 @@ function scrRunStart() {
         save_set_value("etc", "seed", UberCont.daily_seed)
     }
 	
+	if scrGameIsCustomMode() {
+		// Starting muts
+		var _mutlist = scrCustomParam("skill_start"),
+			_count = array_length(_mutlist)
+		
+		for(var i = _count - 1; i >= 0; --i) {
+			scr_skill_set(_mutlist[i], true)
+		}
+		
+		with (GameCont) {
+			area = scrCustomParam("area", area_desert)
+			subarea = scrCustomParam("subarea", 1)
+			loops = scrCustomParam("loops", 1)
+			rad = scrCustomParam("rad", 0)
+			can_advance_stage = false
+			
+			hard = scrAreaGetDifficulty(area, subarea, loops)
+			if (_count) level = clamp(_count + 1, 1, PLAYER_LEVEL_MAX - 1)
+			if (scrCustomParam("endpoints")) ultrapoints = 1
+			
+			waypnt[waypoints] = area
+			waysub[waypoints] = subarea
+			waylps[waypoints] = loops
+			waypoints ++
+		}
+	}
+	
     room_restart()
 	
 	if (scrPlayerCountRace(Race.Venuz) && scrPlayerCountRace(Race.Cuz)) {

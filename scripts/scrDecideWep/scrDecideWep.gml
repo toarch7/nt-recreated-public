@@ -22,6 +22,8 @@ function scrDecideWep(_extra, _curse = false) {
 		_tier_min = median(6, 1, _tier_max + _extra)
 	}
 	
+	if (_tier_min > _tier_max) _tier_max = _tier_min + 1
+	
 	var _iteration = 0
 	while ((++_iteration) < 1_000) {
 		var _wep = irandom_range(1, maxwep - 1)

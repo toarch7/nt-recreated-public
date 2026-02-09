@@ -1,5 +1,11 @@
-function string_insert_wordwraps(_string, _width) {
+/// @function string_insert_wordwraps
+/// @param string
+/// @param width
+/// @param alignment=fa_left
+function string_insert_wordwraps(_string, _width, _alignment = fa_left) {
 	static _buffer = buffer_create(512, buffer_grow, 1)
+	
+	if (_alignment == fa_center) _width /= 2
 	
 	var _length = string_length(_string),
 		_ctx = {

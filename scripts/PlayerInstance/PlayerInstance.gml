@@ -366,7 +366,7 @@ function scr_draw_multiplayer_player_card(_index, _x, _y, _width = 160, _halign 
 
 function scr_player_pref(_pinst, _name) {
 	var _list = UberCont.cpref_list,
-		_index = array_indexof(_list, _name)
+		_index = array_get_index(_list, _name)
 	
 	// todo: uncrutch
 	if _index == -1 || (_name == "rogue" && instance_exists(CoopController)) {
