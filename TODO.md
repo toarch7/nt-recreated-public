@@ -2,7 +2,7 @@
 > This is a temporary solution for tracking the list of tasks list. Ideally this should be fixed to use GitHub issues & milestones...
 
 # Release requirements
-- [ ] Credits screen rework
+- [x] Credits screen rework
 - [ ] Proper gamepad controls in the loadout menu
 - [ ] Assign all enemies & damage sourcers their proper `hitid`s
 - [ ] Introduce backwards-compatible resourcepack loader mode

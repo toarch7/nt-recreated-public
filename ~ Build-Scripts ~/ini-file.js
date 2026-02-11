@@ -91,7 +91,7 @@ class IniFile {
                     }
                     continue;
                 }
-                if (typeof(value) === "string" && value.indexOf("#") != -1 && !value.startsWith("\"")) {
+                if (typeof(value) === "string" && (value.trim().length === 0 || (value.indexOf("#") != -1 && !value.startsWith("\"")))) {
                     value = "\"" + value + "\"";
                 }
                 if (comment) {
@@ -146,7 +146,11 @@ class IniFile {
         }
 
         this.sections = Object.fromEntries(Object.entries(this.sections).sort((a, b) => {
-            return String(b[1]).length - String(a[1]).length;
+			var x = String(a[1]).length;
+			var y = String(b[1]).length;
+			if (a[0] == "Meta") x = 0x7fffffff;
+			if (b[0] == "Meta") y = 0x7fffffff;
+            return Math.sign(y - x);
         }));
 
         this.sectionEntries = {};
