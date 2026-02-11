@@ -155,6 +155,7 @@ function scrPowers() {
 				motion_add_m(gunangle + 180, 8)
 				snd_play(_tb ? sndPopPopUpg : sndPopPop)
 				repeat (_count) scrFire(wep, true)
+				if (speed > 14) speed = 14
 				
 				specfiring = false
 				reload *= (2 + _tb)
