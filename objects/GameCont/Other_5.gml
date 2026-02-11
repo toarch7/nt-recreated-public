@@ -64,7 +64,6 @@ if (_is_secret && !_went_crib) {
 	    if area == area_jungle {
 	        area = area_city
 	        subarea = scrAreaGetMaxSubarea(area)
-			can_advance_stage = false
 	    }
 		
 	    if area == area_cursed_caves {
@@ -75,7 +74,6 @@ if (_is_secret && !_went_crib) {
 	    if area == area_mansion || area == area_oasis {
 	        area = area_scrapyards
 	        subarea = scrAreaGetMaxSubarea(area)
-			can_advance_stage = false
 	    }
 		
 	    if area == area_pizza_sewers {
