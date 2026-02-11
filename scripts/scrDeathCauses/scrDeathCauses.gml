@@ -3,6 +3,7 @@ deathcause_types = array_create(HitId.NUM_HIT_IDS, undefined)
 
 enum HitId {
 	None = -1,
+	Unknown,
 	Bandit,
 	Maggot,
 	RadMaggot,

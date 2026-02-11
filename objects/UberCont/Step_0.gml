@@ -18,7 +18,16 @@ if (instance_exists(CoopController)) {
 	with (CoopController) event_user(0)
 }
 
-if (splatindex < 3 && paused) splatindex ++
+if (paused) {
+	if (splatindex < 3) splatindex ++
+	
+	// this is some sort of weird edge-case when
+	// you minimize your game by opening another app and that
+	// locks you into paused state with no UI elements
+	if (!bossintro && !instance_exists(PauseButton) && !instance_exists(MenuOptions)) {
+		scrGameUnpause()
+	}
+}
 
 if (!KeyCont.press_paus[_index]) {
 	KeyCont.press_paus[_index] = scr_keyboard_check_pressed(vk_escape)
