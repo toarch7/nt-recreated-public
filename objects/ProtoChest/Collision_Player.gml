@@ -4,7 +4,7 @@ if (sprite_index == sprProtoChestOpen) exit
 
 sprite_index = sprProtoChestOpen
 
-with (scrWeaponPickupCreate(x, y, other.wep)) {
+with (scrWeaponPickupCreate(x, y, wep)) {
 	curse = other.curse
 	depth = other.depth - 1
 }

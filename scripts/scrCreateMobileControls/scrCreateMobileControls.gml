@@ -5,7 +5,7 @@ function scrCreateMobileControls() {
 	instance_create(0, 0, ButtonAct)
 	instance_create(0, 0, ButtonActive)
 	
-	if UberCont.opt_wepstick {
+	if false /*UberCont.opt_wepstick*/ {
 		with instance_create(0, 0, WepstickAttack)
 			primary = true
 		

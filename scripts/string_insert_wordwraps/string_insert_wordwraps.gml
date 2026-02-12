@@ -5,7 +5,7 @@
 function string_insert_wordwraps(_string, _width, _alignment = fa_left) {
 	static _buffer = buffer_create(512, buffer_grow, 1)
 	
-	if (_alignment == fa_center) _width /= 2
+	if (_alignment == fa_center || _alignment == fa_middle) _width /= 2
 	
 	var _length = string_length(_string),
 		_ctx = {

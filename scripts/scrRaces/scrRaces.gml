@@ -493,7 +493,8 @@ function scrRaceIsHidden(_race, _count_in_unlockable = true) {
 /// @function scrRaceUnlock
 /// @param {Real|Enum.Race} race_id
 function scrRaceUnlock(_race) {
-	if scr_race_is_unlocked(_race) exit
+	if (scrGameIsCustomMode()) exit
+	if (scr_race_is_unlocked(_race)) exit
 	
 	scr_race_set_unlocked(_race, true)
 	
@@ -528,9 +529,7 @@ function scrRaceUnlock(_race) {
 /// @param {Real|Enum.Race} race_id
 /// @param {Real|Enum.SkinLetter} skin
 function scrRaceUnlockSkin(_race, _skin_id) {
-	if (GM_build_type == "run") {
-		print(scrRaceGetName(_race), scr_race_get_skin_letter(_skin_id, true), "unlock triggered")
-	}
+	if (scrGameIsCustomMode()) exit
 	
 	if scr_race_is_unlocked(_race) && !scr_race_is_skin_unlocked(_race, _skin_id) {
 		scr_race_set_skin_unlocked(_race, _skin_id, true)

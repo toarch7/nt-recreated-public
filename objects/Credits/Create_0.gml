@@ -28,22 +28,29 @@ credittext = [
     "@wTHANK YOU FOR PLAYING!"
 ]
 
-show = 0
-alarm[0] = 60
+event_user(1)
 
-if !instance_exists(MenuOptions) {
+show = 0
+scroll = 0
+scroll_delay = 0
+scroll_speed = 0
+largetext = false
+height = 0
+timer = 60
+text = ""
+
+if (!instance_exists(MenuOptions)) {
 	audio_stop_all()
 	
 	snd_play(sndRestart)
 	
-	if !instance_exists(SpiralCont) {
-		with instance_create(x, y, SpiralCont)
-			bossfight = 1
+	if (!instance_exists(SpiralCont)) {
+		with (instance_create(x, y, SpiralCont)) {
+			bossfight = true
+		}
 	}
 	
-	with MusCont {
-	    instance_destroy()
-	}
+	instance_destroy(MusCont)
 	
 	with instance_create(0, 0, MusCont) {
 	    snd_stop(song)
@@ -55,8 +62,8 @@ if !instance_exists(MenuOptions) {
 	    amb = custom_sound_check(amb)
 	    snd_play(song)
 	}
+	
+	file_delete(savegame_file)
 }
-
-file_delete(savegame_file)
 
 scrLetterbox(false)

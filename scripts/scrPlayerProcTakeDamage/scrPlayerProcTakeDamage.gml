@@ -56,7 +56,7 @@ function scrPlayerProcTakeDamage(_amount) {
 	else if (race == Race.BigDog) {
 		UberCont.ctot_uniq[Race.BigDog] += _amount
 	}
-	else if (race == Race.Cuz) {
+	else if (race == Race.Cuz && _amount > 0) {
 		if (cuz_ammo < cuz_ammo_max) {
 			if (scr_skill_get(mut_throne_butt)) {
 				cuz_ammo = cuz_ammo_max

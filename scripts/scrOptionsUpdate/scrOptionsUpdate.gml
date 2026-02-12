@@ -54,7 +54,6 @@ function scrOptionsUpdate() {
         opt_hud = save_get_option("visual", "hud", true)
 		
         opt_controls_scale = save_get_option("controls", "scale", 0.5)
-		opt_wepstick = save_get_option("controls", "wepstick", false)
 		opt_splitfire = save_get_option("controls", "splitfire", false)
 		
 		if (opt_aimbot) opt_splitfire = false
