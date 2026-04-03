@@ -24,7 +24,10 @@ if (paused) {
 	// this is some sort of weird edge-case when
 	// you minimize your game by opening another app and that
 	// locks you into paused state with no UI elements
-	if (!bossintro && !instance_exists(PauseButton) && !instance_exists(MenuOptions)) {
+	if (!bossintro && !want_pause
+		&& !instance_exists(PauseButton)
+		&& !instance_exists(MenuOptions)
+	) {
 		scrGameUnpause()
 	}
 }
