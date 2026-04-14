@@ -2,6 +2,7 @@ if lockstep_stop
 	exit
 
 if instance_exists(GenCont) exit
+
 if scrChestOpened() exit
 
 var _player = instance_nearest(x, y, Player),
@@ -16,7 +17,7 @@ random_set_seed(dropseed)
 instance_create(x, y, PortalClear)
 
 repeat _count {
-	var _wep = scrDecideWep(1 + other.curse * 2, false),
+	var _wep = scrDecideWep(1 + curse * 2, false),
 		_x = bbox_center_x + orandom(2),
 		_y = bbox_center_y + orandom(2)
 		
