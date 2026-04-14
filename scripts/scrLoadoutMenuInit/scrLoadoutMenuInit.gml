@@ -76,10 +76,12 @@ function scr_loadout_race_get_start_weapon(_race_id) {
 /// @param weapon_id
 function scr_loadout_race_set_start_weapon(_race_id, _weapon_id) {
 	with UberCont {
-		if !scr_weapon_is_valid(_weapon_id) break
-		if my_player.get_race() == _race_id {
+		if (!scr_weapon_is_valid(_weapon_id)) break
+		
+		if (my_player.get_race() == _race_id && !scrGameIsEventRun()) {
 			my_player.cwep = _weapon_id
 		}
+		
 		save_set_value("cswep", _race_id, _weapon_id)
 	}
 }
