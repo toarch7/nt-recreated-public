@@ -27,4 +27,6 @@ sprite_index = sprSaplingAppear
 walk = 0
 alarm[0] = 30
 
+wantdir = random_angle
+
 snd_play_hit(sndSaplingSpawn, 0.2)

@@ -114,6 +114,16 @@ with Player {
 
 if instance_exists(Player) && place_meeting(x, y, Tangle) {
 	repeat scr_ultra_get(Race.Plant, UltraSkill.Killer) {
-	    instance_create(x, y, Sapling)
+	    with (instance_create(x, y, Sapling)) {
+			if (place_meeting(x, y, Wall)) {
+				var _floor = instance_nearest(x, y, Floor)
+				with (_floor) {
+					other.x = approach(other.x, bbox_center_x, 8)
+					other.y = approach(other.y, bbox_center_y, 8)
+				}
+				xprevious = x
+				yprevious = y
+			}
+		}
 	}
 }

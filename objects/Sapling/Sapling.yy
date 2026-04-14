@@ -42,6 +42,9 @@
     "name":"sprSaplingIdle",
     "path":"sprites/sprSaplingIdle/sprSaplingIdle.yy",
   },
-  "spriteMaskId":null,
+  "spriteMaskId":{
+    "name":"sprSaplingAppear",
+    "path":"sprites/sprSaplingAppear/sprSaplingAppear.yy",
+  },
   "visible":true,
 }
