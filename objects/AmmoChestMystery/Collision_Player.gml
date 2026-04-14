@@ -17,14 +17,14 @@ if scr_ultra_get(Race.Steroids, UltraSkill.GetLoaded) {
 	
 	for(var _ammo_type = Ammo.Bullets; _ammo_type < Ammo.NUM_AMMO_TYPES; _ammo_type ++) {
 		if (_player_ammo_type != _ammo_type && _player_ammo_type_b != _ammo_type) {
-			var _give_amount = scrAmmoGetTypeCapacity(_ammo_type) * 3
+			var _give_amount = scrAmmoGetPickupAmount(_ammo_type) * 3
 			scrPlayerGiveAmmo(_player, _ammo_type, _give_amount, true)
 		}
 	}
 }
 else {
 	var _ammo_type = scrAmmoDecideTypeMystery(_player),
-		_give_amount = scrAmmoGetTypeCapacity(_ammo_type) * 3
+		_give_amount = scrAmmoGetPickupAmount(_ammo_type) * 3
 	
 	scrPlayerGiveAmmo(_player, _ammo_type, _give_amount, true)
 }
