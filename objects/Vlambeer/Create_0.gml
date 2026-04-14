@@ -112,7 +112,9 @@ else if instance_exists(GameCont) {
 		with (GameCont) {
 			is_level_continuation = false
 		}
-		scrSavegameSave()
+		if (!instance_exists(Credits) && !instance_exists(Cinematic)) {
+			scrSavegameSave()
+		}
 	}
 	
     instance_destroy()
