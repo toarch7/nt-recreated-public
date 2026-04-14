@@ -9,7 +9,7 @@ function scr_hit(_instance, _amount, _hitid = HitId.None) {
 			if (_amount != 0 && _adj != 0) _amount = max(1, _amount + _adj)
 			if (scrPlayerProcTakeDamage(_amount)) return false
 			if (is_array(_hitid) || (_hitid >= 0 && _hitid != HitId.Player)) {
-				if (scr_player_is_local(index)) GameCont.deathcause = _hitid
+				if (scr_player_is_local(index) && _amount > 0) GameCont.deathcause = _hitid
 			}
 			drawlowhp = 30
 		}
