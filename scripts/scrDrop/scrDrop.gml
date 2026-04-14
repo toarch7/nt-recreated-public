@@ -25,7 +25,7 @@ function scrDrop(_pickup_chance, _weapon_chance) {
 	}
 	
     if (scr_skill_get(mut_rabbit_paw)) {
-		_paw_chance = 1 + scr_skill_get(mut_rabbit_paw) * 0.6
+		_paw_chance = scr_skill_get(mut_rabbit_paw) * 0.4
 	}
 	
 	with (_player) {
@@ -36,7 +36,7 @@ function scrDrop(_pickup_chance, _weapon_chance) {
 		var _slot = wep, _first = true
 		
 		repeat (2) {
-			if scr_weapon_is_valid(_slot) {
+			if (scr_weapon_is_valid(_slot)) {
 				var _type = scr_weapon_get_type(_slot),
 					_cap = scrAmmoGetTypeCapacity(_type)
 				
@@ -51,13 +51,11 @@ function scrDrop(_pickup_chance, _weapon_chance) {
 		}
 	}
 	
-	if scrCrownCheck(Crown.Risk) {
+	if (scrCrownCheck(Crown.Risk)) {
 		_pickup_chance *= (_hp >= _max_hp) ? 1.5 : 0.5
 	}
 	
-	if (_paw_chance != 0) _need += _paw_chance
-	
-    if _pickup_chance > 0 && random(100) < _pickup_chance {
+    if (_pickup_chance > 0 && random(100) < (_pickup_chance * (_need + _paw_chance))) {
 		var _advantage = (scrGameIsHardmode() ? 1.5 : 2)
 		
 		// Health
@@ -77,7 +75,7 @@ function scrDrop(_pickup_chance, _weapon_chance) {
 	}
 	// Drop weapons
 	else if _weapon_chance > 0 {
-        if random(100) < _weapon_chance {
+        if (random(100) < _weapon_chance) {
             //drop weps
 			if _confiscate {
 				instance_create(x + orandom(2), y + orandom(2), WeaponChest)
