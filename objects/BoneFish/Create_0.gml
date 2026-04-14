@@ -10,11 +10,10 @@ spr_dead = sprBoneFish1Dead
 
 event_inherited()
 
-
 snd_hurt = sndOasisHurt
 snd_dead = sndOasisDeath
 snd_mele = sndOasisMelee
-
+hitid = HitId.BoneFish
 //behavior
 walk = 0
 alarm[1] = 30 + random(90)

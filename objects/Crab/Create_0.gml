@@ -20,5 +20,5 @@ ammo = 8
 walk = 0
 gunangle = random_angle
 alarm[1] = 50 + random(90)
-
+hitid = HitId.Crab
 spr_shadow = shd48

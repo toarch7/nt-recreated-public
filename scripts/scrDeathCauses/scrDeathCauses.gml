@@ -42,7 +42,7 @@ enum HitId {
 	DogGuardian,
 	Throne,
 	Throne2,
-	Bonefish,
+	BoneFish,
 	Crab,
 	Turtle,
 	VenusGrunt,
@@ -157,7 +157,7 @@ function scrDeathCauses() {
     scrDeathCauseDefine(HitId.DogGuardian, sprDogGuardianWalk, "DOG GUARDIAN")
     scrDeathCauseDefine(HitId.Throne, sprNothingOn, "THRONE")
     scrDeathCauseDefine(HitId.Throne2, sprNothing2Idle, "THRONE 2")
-    scrDeathCauseDefine(HitId.Bonefish, sprBoneFish1Idle, "BONEFISH")
+    scrDeathCauseDefine(HitId.BoneFish, sprBoneFish1Idle, "BoneFish")
     scrDeathCauseDefine(HitId.Crab, sprCrabIdle, "CRAB")
     scrDeathCauseDefine(HitId.Turtle, sprTurtleIdle, "TURTLE")
     scrDeathCauseDefine(HitId.VenusGrunt, sprMolefishIdle, "VENUS GRUNT")
