@@ -1,6 +1,13 @@
 if lockstep_stop
 	exit
 
+var _force_snap = false
+
+if (force_snap_camera_position) {
+	force_snap_camera_position = false
+	_force_snap = true
+}
+
 if (!scrGameIsGenerationScreen() && !instance_exists(GameOver)) {
     if instance_exists(Cinematic) {
         with (Cinematic) {
@@ -76,7 +83,13 @@ if (!scrGameIsGenerationScreen() && !instance_exists(GameOver)) {
 			_sy += orandom(_shake)
 		}
 		
-		if (bleed) {
+		if (_force_snap) {
+			_sx = 0
+			_sy = 0
+			other.viewx2 = 0
+			other.viewy2 = 0
+		}
+		else if (bleed) {
 			var _any = false
 			
 			with (ChickenHead) if (index == other.index) {
@@ -89,8 +102,9 @@ if (!scrGameIsGenerationScreen() && !instance_exists(GameOver)) {
 			if (!_any) break
 		}
 		
-        view_xview = round(lerp(view_xview, x - view_width * 0.5 + other.viewx2 + _sx, 0.4))
-        view_yview = round(lerp(view_yview, y - view_height * 0.5 + other.viewy2 + _sy, 0.4))
+		var _m = _force_snap ? 1 : 0.4
+        view_xview = round(lerp(view_xview, x - view_width * 0.5 + other.viewx2 + _sx, _m))
+        view_yview = round(lerp(view_yview, y - view_height * 0.5 + other.viewy2 + _sy, _m))
 	}
 }
 

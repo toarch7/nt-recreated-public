@@ -43,7 +43,7 @@ with CrownObject {
 
 GameCont.deathcause = HitId.None
 
-if (scrCrownCheck(Crown.Luck)) hp = 1
+if (scrCrownCheck(Crown.Luck) && hp > 1) hp = 1
 
 mask_index = mskPlayer
 

@@ -86,6 +86,11 @@ try {
 	
 	scrSavegameLoad()
 	
+	with (Player) {
+		var _pinst = scr_playerinstance_find(index)
+		if (is_struct(_pinst)) _pinst.hp = hp
+	}
+	
 	instance_create(0, 0, SpiralCont)
 	instance_create(0, 0, TopCont)
 	

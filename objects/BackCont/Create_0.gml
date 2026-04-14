@@ -12,6 +12,8 @@ surface_reset_target()
 
 shadow_color = c_black
 
+force_snap_camera_position = false
+
 playerx = 10016
 playery = 10016
 

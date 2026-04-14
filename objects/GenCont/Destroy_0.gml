@@ -16,8 +16,12 @@ with (SubTopCont) alarm[0] = 1
 random_set_seed(GameCont.levseed)
 
 if instance_exists(Player) {
-    with Player {
+	with (BackCont) force_snap_camera_position = true
+	
+    with (Player) {
 		if (instance_exists(Cinematic)) break
+		
+		if (bleed > 1) bleed = 1
 		
 		if (is_me) {
 			with (MobileUI) player = other.id
