@@ -80,6 +80,7 @@ function scrDarkness() {
 	with (TopDecalCave) draw_circle(x - _xview, y - _yview - 8, 45, 0)
 	with (Ally) draw_circle(x - _xview, y - _yview, 30, 0)
 	with (Flame) draw_circle(x - _xview, y - _yview, 30 + random(3), 0)
+	with (FlameShell) draw_circle(x - _xview, y - _yview, 30 + random(3), 0)
 	with (PopoNade) draw_circle(x - _xview, y - _yview, 30 + random(3), 0)
 	with (JockRocket) draw_circle(x - _xview, y - _yview, 30 + random(3), 0)
 	with (Torch) draw_circle(x - _xview, y - _yview, 30 + random(3), 0)
