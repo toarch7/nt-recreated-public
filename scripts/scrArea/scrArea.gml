@@ -34,7 +34,11 @@ function scrAreaGetName(_area, _macrolike_format=false) {
 /// @function scrAreaGetMaxSubarea
 /// @param area
 function scrAreaGetMaxSubarea(_area) {
-	if (scrGameIsCustomMode() && (_area < 100 || _area == area_hq)) {
+	if (scrGameIsCustomMode() && _area < 100) {
+		if (_area == area_hq) {
+			return scrCustomParam("area_size")
+		}
+		
 		return ((_area % 2 == 0) ? scrCustomParam("area_size_alt") : scrCustomParam("area_size"))
 	}
 	
