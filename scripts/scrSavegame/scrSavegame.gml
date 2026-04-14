@@ -63,7 +63,7 @@ function scrSavegameSession(_buffer, _is_load) {
 			
 			if (is_undefined(_pinst)) {
 				_pinst = new PlayerInstance()
-				scr_playerinstance_add(_playerdata.index, _pinst)
+				scr_playerinstance_add(_player_data.index, _pinst)
 			}
 			
 			_pinst.read_from_struct(_player_data)
@@ -89,7 +89,7 @@ function scrSavegameSession(_buffer, _is_load) {
 			weekly_run = _session_info.weekly_run
 			custom = _session_info.custom
 			custom_options = _session_info.custom_options
-			harmode = _session_info.hardmode
+			hardmode = _session_info.hardmode
 			
 			if (is_string(_session_info.weekly_data)) {
 				if (!ds_exists(weekly_data, ds_type_map)) {
