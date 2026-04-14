@@ -166,7 +166,7 @@ if ((_area == area_palace && _is_last) || _area == area_campfire || _area == are
     }
 }
 
-if _area == area_campfire && _actual_loops == 1 {
+if (_area == area_campfire && _actual_loops == 1) {
 	with (Player) {
 		if (race == Race.Fish) {
 			scrWeaponPickupCreate(10016, 10016,

@@ -1,23 +1,26 @@
 /// @description Control pause states
 
-if want_pause > 0 && (instance_exists(Player) && !instance_exists(GenCont) && !instance_exists(GameOver)) {
-	if ((-- want_pause) <= 0) {
-	    want_pause = 0
+if (want_pause > 0) {
+	if (instance_exists(Player) && !instance_exists(GenCont) && !instance_exists(GameOver)) {
+		if ((-- want_pause) <= 0) {
+		    want_pause = 0
 		
-	    if (!bossintro) scrMakePauseButtons()
+		    if (!bossintro) scrMakePauseButtons()
 		
-	    with (MobileUI) index = -1
+		    with (MobileUI) index = -1
 		
-	    instance_deactivate_all(true)
-	    instance_activate_object(BackCont)
-	    instance_activate_object(GameCont)
-	    instance_activate_object(TopCont)
-	    instance_activate_object(PauseButton)
-	    instance_activate_object(CoopController)
-	    instance_activate_object(MusCont)
-	    instance_activate_object(Console)
-		instance_activate_object(PauseImage)
+		    instance_deactivate_all(true)
+		    instance_activate_object(BackCont)
+		    instance_activate_object(GameCont)
+		    instance_activate_object(TopCont)
+		    instance_activate_object(PauseButton)
+		    instance_activate_object(CoopController)
+		    instance_activate_object(MusCont)
+		    instance_activate_object(Console)
+			instance_activate_object(PauseImage)
+		}
 	}
+	else if (paused) scrGameUnpause()
 }
 
 if quit_pause {

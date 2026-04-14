@@ -44,8 +44,8 @@ function scrGameUnpause() {
 		
         pausespr = -1
         paused = false
-		
 		quit_pause = true
+		want_pause = 0
 		
 		if (os_type == os_android && opt_volumecontrol) {
 			SetVolumeControl(true)
