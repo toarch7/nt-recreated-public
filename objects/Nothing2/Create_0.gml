@@ -40,3 +40,4 @@ attack = 1
 sndhalfhp = 0
 sndtaunt = 0
 tauntdelay = 0
+hitid = HitId.Throne2
