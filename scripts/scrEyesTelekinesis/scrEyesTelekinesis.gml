@@ -18,8 +18,8 @@ function scrEyesTelekinesis() {
 			var _dir = point_direction(x, y, _px, _py), \
 				_lx = lengthdir_x(_strength, _dir), \
 				_ly = lengthdir_y(_strength, _dir) \
-			if (!place_meeting(x + _lx, y, Wall)) x += _lx \
-			if (!place_meeting(x, y + _ly, Wall)) y += _ly \
+			if (place_free(x + _lx, y)) x += _lx \
+			if (place_free(x, y + _ly)) y += _ly \
 		}
 	
 	// push away
@@ -27,8 +27,8 @@ function scrEyesTelekinesis() {
 		var _dir = point_direction(_px, _py, x, y),
 			_lx = lengthdir_x(_strength, _dir),
 			_ly = lengthdir_y(_strength, _dir)
-		if (!place_meeting(x + _lx, y, Wall)) x += _lx
-		if (!place_meeting(x, y + _ly, Wall)) y += _ly
+		if (place_free(x + _lx, y)) x += _lx
+		if (place_free(x, y + _ly)) y += _ly
 	}
 	
 	// attract

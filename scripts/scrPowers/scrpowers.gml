@@ -51,11 +51,14 @@ function scrPowers() {
 				if (_is_local) UberCont.ctot_uniq[race] ++
 				
 				if scr_ultra_get(race, UltraSkill.ProjectileStyle) {
-					with projectile {
-						if creator == other.id {
-							x = lerp(x, _px + lengthdir_x(8, direction), 0.8)
-							y = lerp(y, _py + lengthdir_y(8, direction), 0.8)
-							if (speed < 16 && friction > 0) speed += friction
+					with (projectile) {
+						if (creator == other.id && object_index != Laser && object_index != Lightning) {
+							x = lerp(x, _px + lengthdir_x(8, direction), 0.6)
+							y = lerp(y, _py + lengthdir_y(8, direction), 0.6)
+							
+							if (speed < 16 && friction > 0) {
+								speed += friction
+							}
 						}
 					}
 				}
@@ -65,10 +68,17 @@ function scrPowers() {
 			else {
 				if audio_is_playing(eyesloop) eyesloop = snd_stop(eyesloop)
 				
-				if scr_ultra_get(Race.Eyes, UltraSkill.MonsterStyle) {
-					with enemy {
-						if point_distance(x, y, _px, _py) <= 72 && speed < 16 {
-							motion_add(point_direction(other.x, other.y, x, y), 0.4)
+				if (scr_ultra_get(Race.Eyes, UltraSkill.MonsterStyle)) {
+					var _px = x, _py = y
+					
+					with (enemy) {
+						if (point_distance(x, y, _px, _py) <= 130) {
+							var _dir = point_direction(_px, _py, x, y),
+								_lx = lengthdir_x(1, _dir),
+								_ly = lengthdir_y(1, _dir)
+							
+							if (place_free(x + _lx, y)) x += _lx
+							if (place_free(x, y + _ly)) y += _ly
 						}
 					}
 				}
