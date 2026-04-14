@@ -487,13 +487,27 @@ function scrMeltingCorpseExplosion(_is_local, _tb) {
 		instance_create(x, y, MeatExplosion)
 	}
 	
-	if (instance_is(other, Player) && scr_player_is_local(other.index)) {
+	if (instance_is(other, Player) && _is_local) {
 		UberCont.ctot_uniq[Race.Melting] ++
 	}
 	
 	snd_play(sndExplosion)
 	
-	instance_destroy()
+	if (object_is_ancestor(object_index, enemy)) {
+		var _corpse = corpse
+		
+		if (scr_check_enemies(2)) corpse = false
+		
+		hp = 0
+		event_perform(ev_step, ev_step_normal)
+		
+		if (hp > 0 && !corpse && _corpse) {
+			corpse = true
+		}
+	}
+	else {
+		instance_destroy()
+	}
 }
 
 function scrCuzThrowAllAbility() {
