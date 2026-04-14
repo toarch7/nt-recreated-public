@@ -12,13 +12,12 @@ function scrLoadoutMenuInit() {
 			
 			for (var _crown_id = 1; _crown_id <= _crownmax; _crown_id++) {
 				if (crowngot[_race_id, _crown_id]) {
-					_any_crowns = true
-					
-					if _crown_id > crwn_none {
+					if (_crown_id > crwn_none) {
 						_unlocked_crowns ++
+						_any_crowns = true
 					}
 				}
-				else if _crown_id > 1 {
+				else if (_crown_id > crwn_none) {
 					_all_crowns = false
 				}
 			}
