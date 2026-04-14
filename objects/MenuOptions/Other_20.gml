@@ -743,7 +743,7 @@ cpref_condition = function(_opt) { return UberCont.ctot_time[_opt.char] > 0 }
 cpref_name = function(_opt) {
 	/// @loc:token [CharacterPrefOptions] CharacterLocked "LOCKED"
 	return (!UberCont.ctot_time[_opt.char]) ? "@d- " + loc("CharacterPrefOptions:CharacterLocked", "LOCKED") + " -"
-		: "@(sprMapIcon," + string(scr_race_get_skin_subimage(_opt.char, 0)) + ") " + _opt.name
+		: "@(sprMapIcon," + string(scr_race_get_skin_subimage(_opt.char, 0)) + ",0,-10) " + _opt.name
 }
 
 scrOptionsMenuCreateElements(
