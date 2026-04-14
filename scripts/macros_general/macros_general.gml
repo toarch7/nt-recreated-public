@@ -39,12 +39,7 @@
 
 #macro random_angle (random(360))
 
-#macro DevelopmentMode false
 #macro MultiplayerConfig false
-
-#macro Development:DevelopmentMode true
-
-#macro MultiplayerTesting:DevelopmentMode true
 #macro MultiplayerTesting:MultiplayerConfig true
 
 global.__disable_sandboxing = false

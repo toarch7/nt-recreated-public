@@ -254,7 +254,9 @@ function scrLanguageProcess(_language) {
 			self[$ _key] = _value
 		})
 		
-		scrJSONToIni(_ini_contents, "test/" + _language[$ "Init:Id"] + ".ini")
+		if (GM_build_type == "run") {
+			scrJSONToIni(_ini_contents, "test/" + _language[$ "Init:Id"] + ".ini")
+		}
 	}
 	#endregion
 	
