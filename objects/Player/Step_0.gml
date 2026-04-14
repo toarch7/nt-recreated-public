@@ -97,7 +97,7 @@ if fainted {
 
 if (!visible || scrGameIsLockState()) exit
 
-if !roll {
+if (!roll) {
 	if can_walk && KeyCont.moving[index] > 0 {
 		var _maxspeed = maxspeed, // * KeyCont.moving[index]
 			_movspeed = 3
@@ -141,41 +141,45 @@ if !roll {
 else {
 	// rolling
 	var _rollspeed = maxspeed + (1 - scr_skill_get(mut_throne_butt) * 0.5)
-
-	if scr_skill_get(mut_throne_butt) {
-		angle = direction - 90
-
-		if race == 1 {
-			if !snd_is_playing(sndFishTB) snd_play_loop(sndFishTB)
-
-			with instance_create(x, y, FishBoost) {
-				motion_add(other.direction + 180 - random_range(-15, 15), 2 - random(1))
+	
+	if (roll) speed = _rollspeed
+	
+	if (scr_skill_get(mut_throne_butt)) {
+		angle = angle_lerp(angle, direction - 90, timescale)
+		
+		if (race == Race.Fish) {
+			if (!snd_is_playing(sndFishTB)) {
+				snd_play_loop(sndFishTB)
+			}
+			
+			if (current_frame_active) {
+				with (instance_create(x, y, FishBoost)) {
+					motion_add(other.direction + 180 - orandom(15), 2 - random(1))
+				}
 			}
 		}
-
-		if !KeyCont.hold_spec[index] {
+		
+		if (!KeyCont.hold_spec[index]) {
 			roll = 0
 			angle = 0
 
 			snd_stop(sndFishTB)
 		}
-
-		if KeyCont.moving[index] {
-			motion_add(KeyCont.dir_move[index], 4)
-		}
+		
+		if (KeyCont.moving[index]) motion_add(KeyCont.dir_move[index], 4 * timescale)
 	}
 	else {
-		instance_create(x + random(6) - 3, y + random(6), Dust)
-
-		angle += 40 * right
-
-		if abs(angle) >= 540 {
+		if (current_frame_active) {
+			instance_create(x + orandom(3), y + random(6), Dust)
+		}
+		
+		angle += 40 * timescale * right
+		
+		if (abs(angle) >= 540) {
 			angle = 0
 			roll = 0
 		}
 	}
-
-	if (roll) speed = _rollspeed
 }
 
 if (sprite_exists(spr_cry) && sprite_index == spr_cry) {

@@ -6,6 +6,8 @@ if fainted {
 	exit
 }
 
+var _angle = image_angle + angle
+
 wave += 0.4
 
 if wave > 6.2 {
@@ -17,10 +19,10 @@ if race == Race.Eyes {
 	
 	if KeyCont.hold_spec[index] {
 		var _sprite = scr_skill_get(mut_throne_butt) ? sprMindPowerTB : sprMindPower
-		draw_sprite_ext(_sprite, _img % 3, x, y, right, 1, angle, c_white, 1)
+		draw_sprite_ext(_sprite, _img % 3, x, y, right, 1, _angle, c_white, 1)
 	}
 	else if scr_ultra_get(Race.Eyes, UltraSkill.MonsterStyle) {
-		draw_sprite_ext(sprEyesB, _img % 6, x, y, right, 1, angle, 0xccfbc7, 1)
+		draw_sprite_ext(sprEyesB, _img % 6, x, y, right, 1, _angle, 0xccfbc7, 1)
 	}
 }
 
@@ -115,16 +117,16 @@ if instance_exists(CoopController) && UberCont.opt_outlines {
 	if pinst {
 		gpu_set_fog(true, pinst.color, 0, 0)
 		
-	    draw_sprite_ext(sprite_index, image_index, x - 1, y, right, 1, angle, c_white, 1)
-	    draw_sprite_ext(sprite_index, image_index, x + 1, y, right, 1, angle, c_white, 1)
-	    draw_sprite_ext(sprite_index, image_index, x, y - 1, right, 1, angle, c_white, 1)
-	    draw_sprite_ext(sprite_index, image_index, x, y + 1, right, 1, angle, c_white, 1)
+	    draw_sprite_ext(sprite_index, image_index, x - 1, y, right, 1, _angle, c_white, 1)
+	    draw_sprite_ext(sprite_index, image_index, x + 1, y, right, 1, _angle, c_white, 1)
+	    draw_sprite_ext(sprite_index, image_index, x, y - 1, right, 1, _angle, c_white, 1)
+	    draw_sprite_ext(sprite_index, image_index, x, y + 1, right, 1, _angle, c_white, 1)
 		
 	    gpu_set_fog(0, 0, 0, 0)
 	}
 }
 
-draw_sprite_ext(sprite_index, -1, x, y, right, 1, angle, c_white, 1)
+draw_sprite_ext(sprite_index, -1, x, y, right, 1, _angle, c_white, 1)
 
 if !back && !_is_shielding && wep {
 	draw_sprite_ext(wep_sprt[wep], max(0, trigger_fingers_shine),
