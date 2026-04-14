@@ -2,11 +2,18 @@ function scrTurnIntoSkeleton() {
     with GameCont {
         level = 1
         rad = 0
-        ultra = 0
         ultrapoints = 0
         patient = -1
         race = other.race
         ds_list_clear(skills)
+		
+		repeat (4) {
+			var _ultra = scr_ultra_get_from_race(Race.Melting)
+			
+			if (_ultra != -1) {
+				scr_ultra_set(Race.Melting, _ultra, false)
+			}
+		}
     }
 
     maxspeed = 3
