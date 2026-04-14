@@ -53,7 +53,7 @@ for(var i = 0; i <= achievementmax; i ++) {
 		
 		var _name_height = font_get_string_height(_name),
 			_scale = 1,//clamp(1 - (font_get_string_width(string_hash_to_newline(_text)) / (view_width - 32) - 0.5), 1, 0.8),
-			_offset = floor(font_get_string_height(_text) * _scale * 0.5)
+			_offset = floor(font_get_string_height(_text) * _scale * 0.5) - 5
 		
 		draw_text_nt(_drawx, _drawy - _scroll - _offset, c + _name)
 		
