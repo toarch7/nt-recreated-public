@@ -31,7 +31,7 @@ function loc_fmt(_key, _default) {
 
 
 /// @function loc_fmt_either
-/// @description Like `loc_fmt`, which can fallback to `key2` if the `key1` is actively undefined
+/// @description Like `loc_fmt`, but with a fallback parameter `key2` if the `key1` is undefined
 /// @param key1
 /// @param key2
 /// @param default
