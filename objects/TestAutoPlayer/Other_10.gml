@@ -216,8 +216,21 @@ with (Player) {
 		}
 		
 		var _wall = instance_nearest(x, y, Wall)
-		if (instance_exists(_wall) && place_meeting(x + hspeed, y + vspeed, _wall)) {
-			scrWallDestroy(_wall)
+		
+		with (other) {
+			if (instance_exists(_wall)
+				&& point_distance(other.x, other.y, _wall.x + 8, _wall.y + 8) <= 32
+			) {
+				autoplayer_unstuck_timer ++
+				
+				if (autoplayer_unstuck_timer >= 5) {
+					if (instance_exists(_wall)) scrWallDestroy(_wall)
+					autoplayer_unstuck_timer = 0
+				}
+			}
+			else {
+				autoplayer_unstuck_timer = 0
+			}
 		}
 		
 		if (instance_exists(_instance)) {
