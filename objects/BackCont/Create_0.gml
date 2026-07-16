@@ -44,7 +44,7 @@ if area == 107 shadow_color = 1310738
 alarm[0] = 1
 
 try {
-    var c = global.customshadowcolors[$ string(area)]
+    var c = global.custom_shadow_colors[$ string(area)]
 
     if c != undefined && is_array(c) && array_length(c) == 3 {
         shadow_color = make_color_rgb(real(c[0]), real(c[1]), real(c[2]))

@@ -1,28 +1,26 @@
-function directory_destroy_recursive(path) {
-    if !directory_exists(path)
-		exit
-	
-    var f = file_find_first(path + "/*", fa_directory)
-	
-    while f != "" {
-        directory_destroy_recursive(path + "/" + f)
-        f = file_find_next()
+function directory_destroy_recursive(_path) {
+	//
+    var _find = file_find_first(_path + "/*", fa_directory)
+    while (_find != "") {
+        directory_destroy_recursive(_path + "/" + _find)
+        _find = file_find_next()
     }
-	
     file_find_close()
 	
-    var f = file_find_first(path + "/*", 0)
+	//
+    var _find = file_find_first(_path + "/*", 0)
 	
-    while f != "" {
-        if directory_exists(path + "/" + f) {
-            directory_destroy_recursive(path + "/" + f)
+    while (_find != "") {
+        if (file_exists(_path + "/" + _find)) {
+			file_delete(_path + "/" + _find)
+		}
+		else {
+            directory_destroy_recursive(_path + "/" + _find)
         }
-		else file_delete(path + "/" + f)
-		
-        f = file_find_next()
+        _find = file_find_next()
     }
-	
     file_find_close()
 	
-    directory_destroy(path)
+	//
+    directory_destroy(_path)
 }

@@ -4,16 +4,16 @@ if !UberCont.opt_console
 /// @description update virtual keyboard
 
 if global.console_active {
-    snd_play(sndClick)
+	snd_play(sndClick)
 
-    if os_type == os_android {
-        scrShowVirtualKeyboard()
-    }
+	if os_type == os_android {
+		scrShowVirtualKeyboard()
+	}
 }
 else {
-    snd_play(sndClickBack)
+	snd_play(sndClickBack)
 
-    if os_type == os_android {
-        keyboard_virtual_hide()
-    }
+	if os_type == os_android {
+		keyboard_virtual_hide()
+	}
 }

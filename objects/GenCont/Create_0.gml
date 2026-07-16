@@ -13,8 +13,8 @@ with Player {
 
 background_set_colour(scrAreaGetBackroundColor(GameCont.area))
 
-if !is_undefined(global.customareacolors) && !is_undefined(global.customareacolors[$ string(GameCont.area)]) {
-    var col = global.customareacolors[$ string(GameCont.area)]
+if !is_undefined(global.custom_area_colors) && !is_undefined(global.custom_area_colors[$ string(GameCont.area)]) {
+    var col = global.custom_area_colors[$ string(GameCont.area)]
 
     if !is_undefined(col) && is_array(col) && array_length(col) == 3 {
         background_set_colour(make_color_rgb(col[0], col[1], col[2]))

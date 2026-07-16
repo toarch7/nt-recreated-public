@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"files_find_all",
+  "%Name":"RectCompactor",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"files_find_all",
+  "name":"RectCompactor",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

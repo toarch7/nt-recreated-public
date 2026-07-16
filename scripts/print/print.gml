@@ -16,29 +16,31 @@ function print() {
     buffer_write(_buffer, buffer_u8, 0)
 	
 	var _str = buffer_peek(_buffer, 0, buffer_text)
-	
+	scr_log_push(_str, c_white, false)
 	show_debug_message(_str)
-	scr_log_push(_str)
 }
 
-function scr_log_push(_message, _color = c_white) {
+function scr_log_push(_message, _color = c_white, _output_echo = true) {
 	if string_count("\n", _message) > 0 {
 		var list = string_split(_message, "\n", true),
 			count = array_length(list)
 		
-		repeat count
+		repeat (count) {
 			scr_log_push(list[-- count], _color)
+		}
 		
 		exit
 	}
 	
-	if array_length(global.log_output) >= CONSOLE_LOG_CAPACITY {
+	if (array_length(global.log_output) >= CONSOLE_LOG_CAPACITY) {
 		array_delete(global.log_output, CONSOLE_LOG_CAPACITY - 1, 1)
 		array_delete(global.log_color, CONSOLE_LOG_CAPACITY - 1, 1)
 	}
 	
 	array_insert(global.log_output, 0, _message)
 	array_insert(global.log_color, 0, _color)
+	
+	if (_output_echo) show_debug_message(_message)
 }
 
 function scr_debug_print_stacktrace(_message = undefined, _start = 0) {

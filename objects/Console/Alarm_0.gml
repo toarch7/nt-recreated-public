@@ -1,5 +1,2 @@
-if cursor == ""
-cursor = "|"
-else cursor = ""
-
+cursor = (cursor == "" ? "|" : "")
 alarm[0] = room_speed

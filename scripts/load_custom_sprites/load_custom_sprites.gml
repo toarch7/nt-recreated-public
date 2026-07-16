@@ -1,132 +1,188 @@
-function load_custom_sprites(path) {
-	var status = false
-
-    if !file_exists(path + ".nomedia") {
-        var f = file_text_open_write(path + ".nomedia")
-        file_text_write_string(f, "")
-        file_text_close(f)
-    }
-
-    var _find = files_find_all(path + "*.png")
-
-    var index = 0,
-        b = 0
-
-    var replace_frames = {}
-
-    for(var _f = 0; _f < array_length(_find); _f ++) {
-        var handled = 0,
-			find = _find[_f]
-
-        if string_char_at(find, 1) != "s" {
-            handled = true
-        }
-
-        if !handled {
-            var asset = -1
-
-            asset = asset_get_index(string_replace(find, ".png", ""))
-
-            if !sprite_exists(asset) {
-                var p = string_pos("_strip", find)
-
-                if p > 0 {
-                    asset = asset_get_index(string_delete(find, p, string_length(find)))
-                }
-				else if string_count("_frame", find) {
-                    var p = string_pos("_frame", find)
-
-                    if p > 0 {
-                        asset = asset_get_index(string_delete(find, p, string_length(find)))
-
-                        if sprite_exists(asset) {
-                            try {
-                                var frame = string_digits(string_copy(find, p, string_length(find)))
-
-                                var s = sprite_add(path + find, 1, 0, 0, 0, 0)
-
-                                if sprite_exists(s) {
-                                    var a = sprite_get_name(asset)
-									
-                                    if replace_frames[$ a] == undefined
-                                        replace_frames[$ a] = []
-									
-                                    replace_frames[$ a][real(frame)] = s
-									
-									b = true
-                                    handled = true
-                                }
-								else if !b {
-                                    scr_log_push("[!!!] Failed to load frame " + find + " to replace", c_red)
-                                    status = true
-                                }
-								else handled = true
-                            }
-							catch (e) {
-                                scr_log_push("[!!!] Failed to parse framecount of sprite " + sprite_get_name(find), c_red)
-                                status = true
-                            }
-                        }
-						else {
-                            print("[!] Couldn't find sprite for " + find + " to replace frames.", c_yellow)
-                            status = true
-                        }
-                    }
-
-                    handled = true
-                }
-            }
-			
-            if !handled && sprite_exists(asset) {
-                var frames = sprite_get_number(asset)
-                var sprite = sprite_add(path + find, frames, 0, 0, sprite_get_xoffset(asset), sprite_get_yoffset(asset))
-
-                if sprite_exists(sprite) {
-                    if sprite_get_width(sprite) == sprite_get_width(asset) && sprite_get_height(sprite) == sprite_get_height(asset) {
-                        sprite_flush(sprite)
-                        sprite_delete(sprite)
-
-                        sprite_strip_save(asset, "replacedsprites/" + string(asset) + ".png")
-                        array_push(global.customSprites, asset)
-
-                        if sprite_replace(asset, path + find, sprite_get_number(asset), 0, 0, sprite_get_xoffset(asset), sprite_get_yoffset(asset)) {
-                            // ok
-                        } else {
-                            scr_log_push("[!!!] Failed to replace sprite " + find, c_red);
-                            status = true
-                        }
-                    } else {
-                        print("[!!!]", find, "image is invalid. Requested dimensions:",
-                        sprite_get_width(asset), "x", string(sprite_get_height(asset)) + ",", "got",
-                        sprite_get_width(sprite), "x", sprite_get_height(sprite))
-
-                        scr_log_push("^^^ " + find + " is not being replaced", c_red)
-
-                        status = true
-                        sprite_flush(sprite)
-                        sprite_delete(sprite)
-                    }
-                }
-				else {
-                    scr_log_push("[!!!] Unable to create sprite for " + find, c_red);
-                    status = true
-                }
-            }
-			else if !b {
-                scr_log_push("[!] Unable to find sprite named " + find, c_yellow);
-                status = true
-            }
-        }
-    }
+function load_custom_sprites(_namespace, _load_directory) {
+	static _header_buffer = buffer_create(32, buffer_fixed, 1)
 	
-    var keys = struct_keys(replace_frames)
-	
-    for (var j = 0; j < array_length(keys); j++) {
-        var f = replace_frames[$ keys[j]],
-			asset = asset_get_index(keys[j])
+	var _load_errors = 0,
 		
-        sprite_replace_frames(asset, f)
-    }
+		_sprite_files = directory_read(_load_directory + "*.png", fa_directory),
+		_sprite_file_count = array_length(_sprite_files),
+		
+		_sprite_replacement_markings = global.custom_sprite_markings,
+		_frame_replacement_indices = global.custom_texturepage_replacement_frames,
+		
+		_compactor = new CustomTexturePageCompactor(),
+		_texture_rects = global.custom_texturepage_bucket,
+		_temporary_sprites = global.temporary_custom_sprites
 	
-    return status
+	scr_log_push($"[{_namespace}] {_sprite_file_count} images to process", c_gray)
+	
+	for(var _file_index = _sprite_file_count - 1; _file_index >= 0; --_file_index) {
+		var _handled = false,
+			_file_name = _sprite_files[_file_index],
+			_sprite_name = string_replace(_file_name, ".png", ""),
+			_sprite_path = _load_directory + _file_name,
+			_sprite_location = $"{_namespace}/usersprites/{_file_name}",
+			_original_sprite = asset_get_index(_sprite_name),
+			_is_strip_replacement = false,
+			_strip_replacement_frames = -1,
+			_is_frame_replacement = false,
+			_frame_replacement_index = -1,
+			_png_width, _png_height;
+		
+		buffer_load_partial(_header_buffer, _sprite_path, 0, 31, 0)
+		buffer_seek(_header_buffer, buffer_seek_start, 0)
+		
+		if (!(buffer_read(_header_buffer, buffer_u8) == 0x89
+			&& buffer_read(_header_buffer, buffer_u8) == 0x50
+			&& buffer_read(_header_buffer, buffer_u8) == 0x4E
+			&& buffer_read(_header_buffer, buffer_u8) == 0x47)
+		) {
+			scr_log_push($"[!!!] {_sprite_location} is not a valid PNG image", c_red)
+			_load_errors ++
+			continue
+		}
+	
+		_png_width = buffer_peek_u32be(_header_buffer, 16)
+		_png_height = buffer_peek_u32be(_header_buffer, 20)
+		
+		if (_png_width > 0x2000 || _png_height >= 0x2000) {
+			scr_log_push($"[!!!] {_sprite_name} PNG format is invalid (width and height are too big {_png_width}/{_png_height}), or the provided image is just too big", c_red)
+			_load_errors ++
+			continue
+		}
+		
+		if (!sprite_exists(_original_sprite) && string_pos("_", _sprite_name) != 0) {
+			var _strip_suffix_pos = string_pos("_strip", _sprite_name)
+			
+			if (_strip_suffix_pos != 0) {
+				if (_strip_suffix_pos == 1) {
+					scr_log_push($"[!!!] {_sprite_name} is not a valid sprite name")
+					_load_errors ++
+					continue
+				}
+				
+				var _frame_number_slice = string_digits(string_copy(
+						_sprite_name, _strip_suffix_pos, string_length(_sprite_name)))
+				
+				_strip_replacement_frames = scrRealExt(_frame_number_slice)
+				
+				if (!is_numeric(_strip_replacement_frames) || _strip_replacement_frames <= 0) {
+					scr_log_push($"[!!!] {_frame_number_slice} is not a valid number of frames (in {_sprite_location})")
+					_load_errors ++
+					continue
+				}
+				
+				_original_sprite = asset_get_index(string_copy(_sprite_name, 1, _strip_suffix_pos - 1))
+				_is_strip_replacement = true
+			}
+			else {
+				var _frame_suffix_pos = string_pos("_frame", _sprite_name)
+				
+				if (_frame_suffix_pos != 0) {
+					if (_frame_suffix_pos == 1) {
+						scr_log_push($"[!!!] {_sprite_name} is not a valid sprite name")
+						_load_errors ++
+						continue
+					}
+					
+					var _frame_number_slice = string_digits(string_copy(
+							_sprite_name, _frame_suffix_pos, string_length(_sprite_name)))
+					
+					_frame_replacement_index = scrRealExt(_frame_number_slice)
+					
+					if (!is_numeric(_frame_replacement_index) || _frame_replacement_index <= 0) {
+						scr_log_push($"[!!!] {_frame_number_slice} is not a valid frame number (in {_sprite_location})")
+						_load_errors ++
+						continue
+					}
+					
+					_original_sprite = asset_get_index(string_copy(_sprite_name, 1, _frame_suffix_pos - 1))
+					
+					if (sprite_exists(_original_sprite)) {
+						if (_frame_replacement_index >= sprite_get_number(_original_sprite)) {
+							scr_log_push($"[!!!] cannot replace frame {_frame_replacement_index} of {_sprite_location}: the index number exceeds max frames ({sprite_get_number(_original_sprite)})")
+							_load_errors ++
+							continue
+						}
+						else if (variable_struct_exists(_frame_replacement_indices, _sprite_name)
+							&& _frame_replacement_indices[$ _sprite_name] != _original_sprite
+						) {
+							scr_log_push($"[!] frame {_frame_number_slice} of {_sprite_name} is already replaced in another resourcepack. Skipped", c_ltgray)
+							continue
+						}
+					}
+					
+					_is_frame_replacement = true
+				}
+			}
+		}
+		
+		if (!sprite_exists(_original_sprite)) {
+			scr_log_push($"[!!!] {_sprite_name} is not a known sprite name", c_red)
+			_load_errors ++
+			continue
+		}
+		
+		if (!_is_frame_replacement && variable_struct_exists(global.custom_sprite_registry, _sprite_name)) {
+			var _replaced_by_whom = global.custom_sprite_registry[$ _sprite_name].full_name
+			scr_log_push($"{_sprite_name} was alreday replaced in {_replaced_by_whom}", c_ltgray)
+			continue
+		}
+		
+		var _replacement_frames, _sprite_frames = sprite_get_number(_original_sprite);
+		
+		/**/ if (_is_frame_replacement) _replacement_frames = 1
+		else if (_is_strip_replacement) _replacement_frames = _strip_replacement_frames
+		else _replacement_frames = _sprite_frames
+		
+		if (_replacement_frames > 1 && frac(_png_width / _replacement_frames) != 0) {
+			scr_log_push($"[!!!] cannot replace {_sprite_location} - the width ({_png_width}) cannot be divided into {_replacement_frames} equal frames", c_red)
+			_load_errors ++
+			continue
+		}
+		
+		if (!_is_frame_replacement && _sprite_frames != _replacement_frames) {
+			scr_log_push($"[!!!] cannot replace {_sprite_location} - the number of frames doesn't match (expected: {_sprite_frames}, replacement: {_replacement_frames})", c_red)
+			_load_errors ++
+			continue
+		}
+		
+		var _replacement_sprite = sprite_add(_sprite_path, _replacement_frames, 0, 0, 0, 0)
+		
+		if (!sprite_exists(_replacement_sprite)) {
+			scr_log_push($"[!!!] failed to load sprite for {_sprite_location}")
+			_load_errors ++
+			continue
+		}
+		else {
+			array_push(_temporary_sprites, _replacement_sprite)
+		}
+		
+		if (!variable_struct_exists(_sprite_replacement_markings, _sprite_name)) {
+			sprite_strip_save(_original_sprite, "replacedsprites/" + sprite_get_name(_original_sprite) + ".png")
+		}
+		
+		var _replacement_sprite_width = sprite_get_width(_replacement_sprite),
+			_replacement_sprite_height = sprite_get_height(_replacement_sprite)
+		
+		if (_is_frame_replacement) {
+			var _sprite_frame_array;
+			
+			if (!variable_struct_exists(_frame_replacement_indices, _sprite_name)) {
+				_sprite_frame_array = array_create(_sprite_frames, _original_sprite)
+			}
+			else {
+				_sprite_frame_array = _frame_replacement_indices[$ _sprite_name]
+			}
+			
+			_frame_replacement_indices[_frame_replacement_index] = _replacement_sprite
+		}
+		else {
+			for(var _subimage = _replacement_frames - 1; _subimage >= 0; --_subimage) {
+				array_push(_texture_rects, new CustomTexturePageRect(_sprite_name, _subimage,
+					_replacement_frames, _replacement_sprite_width, _replacement_sprite_height, _replacement_sprite))
+			}
+		}
+	}
+	
+	return _load_errors
 }

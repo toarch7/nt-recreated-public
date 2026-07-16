@@ -7,7 +7,7 @@ function load_custom_sounds(path) {
         file_text_close(f)
     }
 	
-	var _find = files_find_all(path + "*.ogg")
+	var _find = directory_read(path + "*.ogg")
 	
     for(var i = 0; i < array_length(_find); i ++) {
 		var find = _find[i]
@@ -22,7 +22,7 @@ function load_custom_sounds(path) {
             var stream = audio_create_stream(path + find)
 
             if stream {
-                global.customSounds[$ string(asset)] = stream
+                global.custom_sounds[$ string(asset)] = stream
             } else {
                 print("!!! Unable to create audio stream for", find);
                 status = 1

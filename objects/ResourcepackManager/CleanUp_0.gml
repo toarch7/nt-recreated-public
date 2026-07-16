@@ -15,9 +15,11 @@ if surface_exists(text_surface)
 
 directory_destroy_recursive(game_directory + "install")
 
-if reload_needed {
-	if reload_needed == 2 {
+if (reload_needed) {
+	if (reload_needed == 2) {
 		game_restart()
 	}
-	else load_resourcepacks()
+	else {
+		load_resourcepacks()
+	}
 }

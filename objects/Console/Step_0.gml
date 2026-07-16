@@ -76,19 +76,19 @@ if key_check("console", keystate_press) or open {
 		show_debug_overlay(global.console_active, true)
 	}
 	
-    event_user(0)
+	event_user(0)
 
-    keyboard_string = ""
+	keyboard_string = ""
 
-    open = false
+	open = false
 }
 
 if scr_keyboard_check_pressed(vk_escape)
 or (os_type == os_android && scr_keyboard_check_pressed(vk_backspace))
 or (keyboard_string == "" && scr_keyboard_check_pressed(vk_enter))
 {
-    global.console_active = false
-    event_user(0)
+	global.console_active = false
+	event_user(0)
 }
 
 if !UberCont.opt_console
@@ -98,69 +98,69 @@ if !UberCont.opt_console
 	exit
 
 if bound_command != "" {
-    if scr_keyboard_check_pressed(ord("P")) {
-        handle_console_command(bound_command)
-    }
+	if scr_keyboard_check_pressed(ord("P")) {
+		handle_console_command(bound_command)
+	}
 
-    if mouse_check_button_pressed(mb_right) {
-        bound_command = ""
-        print("Bind removed.")
-    }
+	if mouse_check_button_pressed(mb_right) {
+		bound_command = ""
+		print("Bind removed.")
+	}
 }
 
 if (flags & 2) == 2 && instance_exists(GenCont) {
-    var iter = 0
+	var iter = 0
 
-    do {
-        with FloorMaker
+	do {
+		with FloorMaker
 			event_perform(ev_step, 0)
 
-        iter ++
+		iter ++
 
-        if iter >= 100
+		if iter >= 100
 			break
-    } until instance_number(Floor) >= GenCont.goal
+	} until instance_number(Floor) >= GenCont.goal
 }
 
 if !global.console_active exit
 
 if array_length(history) {
-    if scr_keyboard_check_pressed(vk_up) {
-        historypos--
+	if scr_keyboard_check_pressed(vk_up) {
+		historypos--
 
-        if historypos < 0 {
-            historypos = array_length(history) - 1
-        }
+		if historypos < 0 {
+			historypos = array_length(history) - 1
+		}
 
-        keyboard_string = history[historypos]
-    }
+		keyboard_string = history[historypos]
+	}
 	else if scr_keyboard_check_pressed(vk_down) {
-        historypos++
+		historypos++
 
-        if historypos >= array_length(history) {
-            historypos = 0
-        }
+		if historypos >= array_length(history) {
+			historypos = 0
+		}
 
-        keyboard_string = history[historypos]
-    }
+		keyboard_string = history[historypos]
+	}
 }
 
 if scr_keyboard_check_held(vk_control) && scr_keyboard_check_pressed(ord("V")) {
-    keyboard_string += clipboard_get_text()
+	keyboard_string += clipboard_get_text()
 }
 
 if scr_keyboard_check_pressed(vk_enter) && string_length(keyboard_string) {
-    if laststr != keyboard_string {
-        array_push(history, keyboard_string)
-        laststr = keyboard_string
-    }
+	if laststr != keyboard_string {
+		array_push(history, keyboard_string)
+		laststr = keyboard_string
+	}
 
-    if handle_console_command(keyboard_string) {
-        scr_log_push(keyboard_string, c_gray)
-    }
+	if handle_console_command(keyboard_string) {
+		scr_log_push(keyboard_string, c_gray)
+	}
 	else scr_log_push(keyboard_string, c_white - 1)
 
-    keyboard_string = ""
+	keyboard_string = ""
 
-    historypos = -1
+	historypos = -1
 }

@@ -9,7 +9,7 @@ function sprite_replace_frames(spr, frames) {
 		return undefined
 
     sprite_strip_save(spr, "replacedsprites/" + string(spr) + ".png")
-    array_push(global.customSprites, spr)
+    array_push(global.custom_sprites, spr)
 
     var s = surface_create(w * n, h)
     surface_set_target(s)

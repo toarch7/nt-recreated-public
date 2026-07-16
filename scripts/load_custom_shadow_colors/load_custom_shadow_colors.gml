@@ -6,7 +6,7 @@ function load_custom_shadow_colors(path) {
         var keys = struct_keys(data)
 
         for (var i = 0; i < array_length(keys); i++) {
-            global.customshadowcolors[$ keys[i]] = data[$ keys[i]]
+            global.custom_shadow_colors[$ keys[i]] = data[$ keys[i]]
         }
     } catch (e) {
         scr_log_push("[!!!] Failed to load custom background colors: " + e.message, c_red)

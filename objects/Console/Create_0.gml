@@ -1,7 +1,7 @@
 width = display_get_gui_width()
 height = display_get_gui_height()
 
-if instance_number(object_index) > 1 {
+if (instance_number(object_index) > 1) {
     instance_destroy()
 }
 
@@ -19,21 +19,21 @@ alert = ""
 
 seed = undefined
 
-open = 0
+open = false
 
-self[$ "text"] = function(x, y, txt, col = draw_get_color(), alpha = draw_get_alpha(), scale = 1) {
-    draw_set_color(c_black)
-    draw_set_alpha(1)
-
-    draw_text_transformed(x - 1, y, txt, scale, scale, 0)
-    draw_text_transformed(x, y + 1, txt, scale, scale, 0)
-    draw_text_transformed(x, y - 1, txt, scale, scale, 0)
-    draw_text_transformed(x + 1, y, txt, scale, scale, 0)
-
-    draw_set_color(col)
-    draw_set_alpha(alpha)
-
-    draw_text_transformed(x, y, txt, scale, scale, 0)
+__draw_text = function(_x, _y, _string, _color = undefined, _alpha = undefined, _scale = 1) {
+	draw_set_color(c_black)
+	draw_set_alpha(1)
+	
+	draw_text_transformed(_x - _scale, _y, _string, _scale, _scale, 0)
+	draw_text_transformed(_x, _y + _scale, _string, _scale, _scale, 0)
+	draw_text_transformed(_x, _y - _scale, _string, _scale, _scale, 0)
+	draw_text_transformed(_x + _scale, _y, _string, _scale, _scale, 0)
+	
+	if (is_numeric(_color)) draw_set_color(_color)
+	if (is_numeric(_color)) draw_set_alpha(_alpha)
+	
+	draw_text_transformed(_x, _y, _string, _scale, _scale, 0)
 }
 
 enemy_test = false

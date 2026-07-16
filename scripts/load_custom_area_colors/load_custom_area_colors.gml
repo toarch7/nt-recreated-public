@@ -6,7 +6,7 @@ function load_custom_area_colors(path) {
         var keys = struct_keys(data)
 
         for (var i = 0; i < array_length(keys); i++) {
-            global.customareacolors[$ keys[i]] = data[$ keys[i]]
+            global.custom_area_colors[$ keys[i]] = data[$ keys[i]]
         }
     }
 	catch (e) {
