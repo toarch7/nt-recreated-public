@@ -43,7 +43,7 @@ function scrFire(_wep, _consume_ammo = true) {
     }
 	
 	// Consume ammo
-    if !infammo && _consume_ammo && !global.__debug_infammo {
+    if (!infammo && _consume_ammo && !global.__debug_infammo) {
         ammo[_weapon_type] -= scr_weapon_get_cost(_wep)
 		
 		var _wep_rads = scr_weapon_get_rads(_wep)
@@ -51,6 +51,13 @@ function scrFire(_wep, _consume_ammo = true) {
             GameCont.rad -= _wep_rads
 		}
     }
+	
+	// Skeleton B
+	if (race == Race.Skeleton && wep == wep_gun_gun
+		&& scr_loadout_can_access_hidden_ntt_skins()
+	) {
+		scrRaceUnlockSkin(Race.Skeleton, SkinLetter.B)
+	}
 
     if (_weapon_type == Ammo.None) {
 	    if (GameCont.area == area_oasis) snd_play_gun(sndOasisMelee)

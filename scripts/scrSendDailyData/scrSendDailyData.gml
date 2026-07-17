@@ -135,19 +135,24 @@ function scrSendDailyData() {
 			
             var week = 0
 
-            if UberCont.weekly_run {
-                week = scrReal(UberCont.weekly_data[? "week"])
+            if (UberCont.weekly_run) {
+                week = scrRealExt(UberCont.weekly_data[? "week"], 0)
                 date = "Week #" + string(week) + " " + date
             }
-
-            var _char_icon = chricon[_race, _bskin + 1]
-            var _crown_icon = cwnicon[GameCont.crown]
-
+			
+			var _char_skins = chricon[_race],
+				
+				_char_icon_skin_index = min(_bskin + 1, array_length(_char_skins) - 1),
+				
+				_char_icon = _char_skins[_char_icon_skin_index],
+				
+				_crown_icon = cwnicon[GameCont.crown % array_length(cwnicon)]
+			
             random_set_seed(global.seed)
-
+			
             var _footer = "(v" + string(GAME_BUILD) + ") " + save_get_value("general", "uid", "-1") + ";" + runId
-
-            if avg <= 0 && scrGameIsWeeklyRun() {
+			
+            if (avg <= 0 && scrGameIsWeeklyRun()) {
                 _footer = "(no score improvement)"
             }
 			

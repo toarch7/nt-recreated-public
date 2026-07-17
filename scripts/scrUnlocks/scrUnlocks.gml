@@ -109,7 +109,7 @@ function scrUnlocksCharacterStats() {
         for (var _race_id = Race.Fish; _race_id < Race.NUM_ALL_RACE_TYPES; _race_id++) {
 			if (scrRaceIsHidden(_race_id)) continue
 			
-			var _max_skins = scrRaceGetMaxSkinCount(_race_id)
+			var _max_skins = scrRaceGetMaxSkinCount(_race_id, false)
 			
 			if (_max_skins > 1 && !scr_race_is_skin_unlocked(_race_id, SkinLetter.B)) {
 				_allb = false

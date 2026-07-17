@@ -116,6 +116,10 @@ function scr_race_get_sound(_race, _sound_name, _default = -1) {
 /// @param {Real|Enum.SkinLetter} skin
 function scr_race_get_skin_subimage(_race, _skin) {
 	gml_pragma("forceinline")
+	
+	// NTT Bug: Robot-D skin is erronously placed at image index 56, rather than 55
+	if (_race == Race.Robot && _skin == SkinLetter.D) return 56
+	
 	return ((_race > 0) ?
 		((_skin < 2) ? (_skin + (_race - 1) * 2)
 					 : (_skin * 16 + (_race - 1))) : -1)
@@ -348,9 +352,9 @@ function scrRaceGetUnlockDescription(_race) {
 /// @param {Real|Enum.Race} race_id
 /// @param {Real|Enum.SkinLetter} skin
 function scrRaceGetSkinUnlockDescription(_race, _skin_id) {
-	switch _skin_id {
+	switch (_skin_id) {
 		case SkinLetter.B:
-			switch _race {
+			switch (_race) {
 		        case Race.Fish: return "Loop with every character"
 		        case Race.Crystal: return "Reach 4-?"
 		        case Race.Eyes: return "Reach 2-?"
@@ -364,13 +368,13 @@ function scrRaceGetSkinUnlockDescription(_race, _skin_id) {
 		        case Race.Horror: return "Defeat 4-1 Boss"
 		        case Race.Rogue: return "Defeat ???"
 		        case Race.BigDog: return "EMBRACE ETERNITY"
-		        case Race.Skeleton: return "NO SKIN"
+		        case Race.Skeleton: return "SHOOT A ??? GUN"
 		        case Race.Frog: return "NO SKIN"
 		        case Race.Cuz: return "CARRY 3 @y???"
 		    }
-		break
+			break
 		case SkinLetter.C:
-			switch _race {
+			switch (_race) {
 				case Race.Fish: return "Unlock all B-skins"
 				case Race.Crystal: return "Survive over 100 damage"
 				case Race.Eyes: return "REACH THE NUCLEAR THRONE#WITHOUT FIRING A SHOT"
@@ -388,7 +392,12 @@ function scrRaceGetSkinUnlockDescription(_race, _skin_id) {
 				case Race.Frog: return "NO SKIN"
 				case Race.Cuz: return "CARRY 6 @q???"
 			}
-		break
+			break
+		case SkinLetter.D:
+			switch (_race) {
+				case Race.Robot: return "EAT ANY @g???@w WEAPON"
+			}
+			break
 	}
 	
 	return "???"
@@ -422,9 +431,9 @@ function scrRaceGetUnlockCauseText(_race) {
 /// @param skin_id
 function scrRaceGetSkinUnlockCauseText(_race, _skin_id) {
 	
-	switch _skin_id {
+	switch (_skin_id) {
 		case SkinLetter.B:
-			switch _race {
+			switch (_race) {
 				case Race.Fish: return "FOR LOOPING WITH EVERY CHARACTER"
 				case Race.Crystal: return "FOR REACHING 4-?"
 				case Race.Eyes: return "FOR REACHING 2-?"
@@ -437,11 +446,12 @@ function scrRaceGetSkinUnlockCauseText(_race, _skin_id) {
 				case Race.Rebel: return "FOR DEFEATING MOM"
 				case Race.Horror: return "FOR DEFEATING HYPER CRYSTAL"
 				case Race.Rogue: return "FOR REACHING THE NUCLEAR THRONE"
+				case Race.Skeleton: return "FOR FIRING GUN GUN"
 				case Race.Cuz: return "FOR CARRYING#3 GOLD WEAPONS"
 			}
-		break
+			break
 		case SkinLetter.C:
-			switch _race {
+			switch (_race) {
 				case Race.Fish: return "FOR GETTING ALL B-SKINS"
 				case Race.Crystal: return "FOR SURVIVING#A LOT OF DAMAGE"
 				case Race.Eyes: return "FOR REACHING THE THRONE#WITHOUT SHOOTING"
@@ -456,7 +466,12 @@ function scrRaceGetSkinUnlockCauseText(_race, _skin_id) {
 				case Race.Rogue: return "FOR NOT DEFEATING#LIL HUNTER"
 				case Race.Cuz: return "FOR CARRYING#6 CURSED WEAPONS"
 			}
-		break
+			break
+		case SkinLetter.D:
+			switch (_race) {
+				case Race.Robot: return "FOR EATING AN @gULTRA@s WEAPON"
+			}
+			break
 	}
 	
 	return ""
@@ -464,14 +479,13 @@ function scrRaceGetSkinUnlockCauseText(_race, _skin_id) {
 
 /// @function scrRaceGetMaxSkinCount
 /// @param {Real|Enum.Race} race_id
-/// @param include_secret=false
-function scrRaceGetMaxSkinCount(_race, _show_secret=true) {
+/// @param include_hidden=false
+function scrRaceGetMaxSkinCount(_race, _show_secret=false) {
     if (_race == Race.BigDog || _race == Race.Frog) {
 		return 1
 	}
 	
-	// TODO: both of are NTT-exclusive skins. Maybe these should become accessible once you have get ?
-	if (_show_secret || scrCustomParam("unlock_chars", false)) {
+	if (_show_secret || scr_loadout_can_access_hidden_ntt_skins()) {
 		if (_race == Race.Skeleton) return 2
 		if (_race == Race.Robot) return 4
 	}

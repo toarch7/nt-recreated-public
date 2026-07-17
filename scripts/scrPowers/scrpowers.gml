@@ -196,6 +196,12 @@ function scrPowers() {
 					}
 				}
 				
+				if (scr_loadout_can_access_hidden_ntt_skins()
+					&& string_pos("ULTRA", scr_weapon_get_name(wep))
+				) {
+					scrRaceUnlockSkin(Race.Robot, SkinLetter.D)
+				}
+				
 				if (scr_weapon_get_rads(wep)) {
 					scrRadDrop(x, y, 15, false, false)
 				}
@@ -383,11 +389,11 @@ function scrPowers() {
 				reload = scr_weapon_get_load(wep)
 				can_shoot = false
 				
-				if scr_ultra_get(Race.Skeleton, UltraSkill.Damnation) {
+				if (scr_ultra_get(Race.Skeleton, UltraSkill.Damnation)) {
 					reload = max(1, reload * 0.2)
 				}
 				
-				with instance_create(x, y, BulletHit) {
+				with (instance_create(x, y, BulletHit)) {
 					sprite_index = sprBloodGamble
 					image_angle = other.gunangle
 					depth = other.depth - 1
@@ -403,14 +409,14 @@ function scrPowers() {
 					skeletongamble = 0
 					
 					repeat (3) {
-						with instance_create(x, y, BloodStreak) {
+						with (instance_create(x, y, BloodStreak)) {
 							motion_add(random_angle, 2)
 							image_angle = direction
 						}
 					}
 				}
 				
-				if _is_local && skeletongamble > UberCont.ctot_uniq[race] {
+				if (_is_local && skeletongamble > UberCont.ctot_uniq[race]) {
 					UberCont.ctot_uniq[race] = skeletongamble
 				}
 			}

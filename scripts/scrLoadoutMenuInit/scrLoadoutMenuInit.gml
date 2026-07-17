@@ -7,8 +7,7 @@ function scrLoadoutMenuInit() {
 		for (var _race_id = Race.Fish; _race_id < Race.NUM_ALL_RACE_TYPES; ++_race_id) {
 			_all_crowns = true
 			
-			var _skins_max = scrRaceGetMaxSkinCount(_race_id),
-				_unlocked_crowns = 0
+			var _unlocked_crowns = 0
 			
 			for (var _crown_id = 1; _crown_id <= _crownmax; _crown_id++) {
 				if (crowngot[_race_id, _crown_id]) {
@@ -173,8 +172,13 @@ function scr_loadout_is_available_for_race(_race) {
 	}
 	
 	if (_race == Race.BigDog || _race == Race.Skeleton || _race == Race.Frog) {
-		return false
+		return (!instance_exists(CoopController) && !scrGameIsEventRun()
+			&& scr_loadout_can_access_hidden_ntt_skins())
 	}
 	
 	return true
+}
+
+function scr_loadout_can_access_hidden_ntt_skins() {
+	return scrCustomParam("unlock_chars", false) || save_get_value("achievement", Achievement.ULTRA_MUTANT)
 }

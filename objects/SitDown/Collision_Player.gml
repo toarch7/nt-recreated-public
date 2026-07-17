@@ -19,9 +19,13 @@ with (other) {
 
 if (sit) exit
 
-GameCont.win = true
-
-if (scrGameIsEventRun()) scrSendDailyData()
+if (!GameCont.win) {
+	GameCont.win = true
+	
+	if (scrGameIsEventRun()) {
+		scrSendDailyData()
+	}
+}
 
 sprite_index = spr_gosit
 image_speed = 0.4
