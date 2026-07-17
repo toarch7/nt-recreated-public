@@ -45,7 +45,7 @@ function load_custom_sprites(_namespace, _load_directory) {
 		_png_height = buffer_peek_u32be(_header_buffer, 20)
 		
 		if (_png_width > 0x2000 || _png_height >= 0x2000) {
-			scr_log_push($"[!!!] {_sprite_name} PNG format is invalid (width and height are too big {_png_width}/{_png_height}), or the provided image is just too big", c_red)
+			scr_log_push($"[!!!] \"{_sprite_name}\" PNG format is invalid (width and height are too big {_png_width}/{_png_height}), or the provided image is just too big", c_red)
 			_load_errors ++
 			continue
 		}
@@ -55,7 +55,7 @@ function load_custom_sprites(_namespace, _load_directory) {
 			
 			if (_strip_suffix_pos != 0) {
 				if (_strip_suffix_pos == 1) {
-					scr_log_push($"[!!!] {_sprite_name} is not a valid sprite name")
+					scr_log_push($"[!!!] \"{_sprite_name}\" is not a valid sprite name")
 					_load_errors ++
 					continue
 				}
@@ -79,7 +79,7 @@ function load_custom_sprites(_namespace, _load_directory) {
 				
 				if (_frame_suffix_pos != 0) {
 					if (_frame_suffix_pos == 1) {
-						scr_log_push($"[!!!] {_sprite_name} is not a valid sprite name")
+						scr_log_push($"[!!!] \"{_sprite_name}\" is not a valid sprite name")
 						_load_errors ++
 						continue
 					}
@@ -99,7 +99,7 @@ function load_custom_sprites(_namespace, _load_directory) {
 					
 					if (sprite_exists(_original_sprite)) {
 						if (_frame_replacement_index >= sprite_get_number(_original_sprite)) {
-							scr_log_push($"[!!!] cannot replace frame {_frame_replacement_index} of {_sprite_location}: the index number exceeds max frames ({sprite_get_number(_original_sprite)})")
+							scr_log_push($"[!!!] cannot replace frame {_frame_replacement_index} of \"{_sprite_location}\": the index number exceeds max frames ({sprite_get_number(_original_sprite)})")
 							_load_errors ++
 							continue
 						}
@@ -117,14 +117,14 @@ function load_custom_sprites(_namespace, _load_directory) {
 		}
 		
 		if (!sprite_exists(_original_sprite)) {
-			scr_log_push($"[!!!] {_sprite_name} is not a known sprite name", c_red)
+			scr_log_push($"[!!!] \"{_sprite_name}\" is not a known sprite name", c_red)
 			_load_errors ++
 			continue
 		}
 		
 		if (!_is_frame_replacement && variable_struct_exists(global.custom_sprite_registry, _sprite_name)) {
 			var _replaced_by_whom = global.custom_sprite_registry[$ _sprite_name].full_name
-			scr_log_push($"{_sprite_name} was alreday replaced in {_replaced_by_whom}", c_ltgray)
+			scr_log_push($"\"{_sprite_name}\" was alreday replaced in {_replaced_by_whom}", c_ltgray)
 			continue
 		}
 		
@@ -135,7 +135,7 @@ function load_custom_sprites(_namespace, _load_directory) {
 		else _replacement_frames = _sprite_frames
 		
 		if (_replacement_frames > 1 && frac(_png_width / _replacement_frames) != 0) {
-			scr_log_push($"[!!!] cannot replace {_sprite_location} - the width ({_png_width}) cannot be divided into {_replacement_frames} equal frames", c_red)
+			scr_log_push($"[!!!] cannot replace \"{_sprite_location}\" - the width ({_png_width}) canot be split into {_replacement_frames} equal frames", c_red)
 			_load_errors ++
 			continue
 		}

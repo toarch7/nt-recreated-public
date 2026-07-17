@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"sprite_replace_frames",
+  "%Name":"load_custom_generic_area_colors",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"sprite_replace_frames",
+  "name":"load_custom_generic_area_colors",
   "parent":{
     "name":"CustomResources",
     "path":"folders/Scripts/CustomResources.yy",

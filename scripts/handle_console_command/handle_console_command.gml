@@ -94,7 +94,7 @@ function handle_console_command(str) {
                 break
 
             case "reload":
-                discard_custom_sprites(1)
+                discard_custom_sprites(true)
                 discard_custom_sounds()
                 load_resourcepacks()
                 break

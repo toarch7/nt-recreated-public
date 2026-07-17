@@ -1,14 +1,16 @@
 globalvar game_directory;
 game_directory = ""
 
+scrGameSafemodeValidate()
+
 scrLanguagesInit()
 scrLanguagesLoad()
 
 legacy = false
 request_perm = false
 
-if android_check_storage_permission() == os_permission_denied {
-	if IsVersionR() && android_check_any_local_files() {
+if (os_type == os_android && android_check_storage_permission() == os_permission_denied) {
+	if (IsVersionR() && android_check_any_local_files()) {
 		request_perm = true
 		legacy = true
 	}
@@ -32,7 +34,7 @@ posy = 8
 
 pointed_item = -1
 
-loading = file_exists(savegame_file)
+loading = (!global.safemode && file_exists(savegame_file))
 
 game_directory = "/files/"
 

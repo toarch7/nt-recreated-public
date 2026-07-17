@@ -216,7 +216,7 @@ function CustomTexturePageCompactor() constructor {
 		return _texture_pages
 	}
 	
-	static write_texturegroup_info_and_textures = function(_texture_pages) {
+	static write_texturegroup_info_and_textures = function(_texture_pages, _sprite_prefix = undefined) {
 		var _grid_width = compactor_texturepage_width,
 			_grid_height = compactor_texturepage_height,
 			
@@ -238,9 +238,15 @@ function CustomTexturePageCompactor() constructor {
 				_keys = variable_struct_get_names(_texturepage_sprites)
 			
 			for(var i = array_length(_keys) - 1; i >= 0; --i) {
-				var _sprite_name = _keys[i],
-					_frames = _texturepage_sprites[$ _sprite_name],
-					_frame_count = array_length(_frames), _sprite_frames;
+				var _key = _keys[i],
+					
+					_sprite_name = (is_string(_sprite_prefix) ? ($"{_sprite_prefix}{_key}") : _key),
+					
+					_frames = _texturepage_sprites[$ _key],
+					
+					_frame_count = array_length(_frames),
+					
+					_sprite_frames;
 				
 				if (variable_struct_exists(_texturegroup_sprite_data, _sprite_name)) {
 					_sprite_frames = _texturegroup_sprite_data[$ _sprite_name].frames

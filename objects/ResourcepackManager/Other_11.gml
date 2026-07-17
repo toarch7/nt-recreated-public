@@ -199,8 +199,8 @@ for(var i = start; i < count; i ++) {
 	if !browsing && item[$ "priority"] != undefined {
 		var change = 0
 		
-		draw_sprite(sprLoadoutArrow, 0, dx - 20, _y + 24)
-		draw_sprite(sprLoadoutArrow, 1, dx - 20, _y + height)
+		draw_sprite(sprLoadoutArrow, 0, dx - 30, _y + 15)
+		draw_sprite(sprLoadoutArrow, 1, dx - 30, _y + height - 9)
 		
 		if press {
 			if point_in_circle(mx, my, dx - 32, _y + 12, 12) {

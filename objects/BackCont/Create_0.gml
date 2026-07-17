@@ -10,36 +10,13 @@ surface_set_target(shad)
 draw_clear_alpha(c_black, 0)
 surface_reset_target()
 
-shadow_color = c_black
-
 force_snap_camera_position = false
 
 playerx = 10016
 playery = 10016
 
 area = GameCont.area
-
-if area == 2 shadow_color = 68872
-
-if area == 4 shadow_color = 786950
-
-if area == 5 shadow_color = 4461326
-
-if area == 7 shadow_color = 65805
-
-if area == 101 shadow_color = 4401921
-
-if area == 102 shadow_color = 1179657
-
-if area == 103 shadow_color = 1310738
-
-if area == 104 shadow_color = 66
-
-if area == 105 shadow_color = 65556
-
-if area == 106 shadow_color = 9184256
-
-if area == 107 shadow_color = 1310738
+shadow_color = scrAreaGetShadowColor(area)
 
 alarm[0] = 1
 

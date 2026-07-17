@@ -1,10 +1,10 @@
-if instance_exists(UberCont) {
-    with UberCont
+if (instance_exists(UberCont)) {
+    with (UberCont) {
 		scrSetViewSize()
+	}
 	
     instance_destroy()
     room_goto(romGame)
-	
     exit
 }
 

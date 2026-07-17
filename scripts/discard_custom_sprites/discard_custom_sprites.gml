@@ -1,13 +1,21 @@
-function discard_custom_sprites(fast = 0) {
-    if !fast {
-        // restore sprites
-        for (var i = 0; i < array_length(global.custom_sprites); i++) {
-            var s = global.custom_sprites[i]
-            var p = "replacedsprites/" + string(s) + ".png"
-
-            sprite_replace(s, p, sprite_get_number(s), 0, 0, sprite_get_xoffset(s), sprite_get_yoffset(s))
-        }
-    }
-
-    global.custom_sprites = []
+function discard_custom_sprites(_restore_original_sprites) {
+	if (_restore_original_sprites) {
+		array_foreach(global.replaced_base_sprites, function(_sprite_name) {
+			var _sprite_index = asset_get_index(_sprite_index),
+				_path = $"replacedsprites/{_sprite_name}.png"
+			
+			sprite_replace(
+				_sprite_index, _path,
+				
+				sprite_get_number(_sprite_index),
+				
+				false, false,
+				
+				sprite_get_xoffset(_sprite_index),
+				sprite_get_yoffset(_sprite_index))
+		})
+	}
+	
+	global.replaced_base_sprites = []
+	
 }

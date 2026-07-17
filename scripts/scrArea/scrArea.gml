@@ -56,27 +56,70 @@ function scrAreaGetMaxSubarea(_area) {
 
 /// @function scrAreaGetBackroundColor
 /// @param area
-function scrAreaGetBackroundColor(_area) {
+/// @param check_custom=true
+function scrAreaGetBackroundColor(_area, _check_custom=true) {
+	if (_check_custom && is_struct(global.custom_area_colors)) {
+		var _components = global.custom_area_colors[$ string(_area)]
+		
+		if (is_array(_components) && array_length(_components) >= 3) {
+			return make_color_rgb(_components[0], _components[1], _components[2])
+		}
+	}
+	
 	switch (_area) {
-		case area_campfire: return #6a7aaf
-		case area_desert: return #af8f6a
-		case area_sewers: return #4c5946
-		case area_scrapyards: return #8a969e
-		case area_caves: return #8152bc
-		case area_city: return #b4bdc5
-		case area_labs: return #091c20
-		case area_palace: return #611d24
-		case area_vault: return #433523
-		case area_oasis: return #51d1c8
+		case area_campfire:     return #6a7aaf
+		case area_desert:       return #af8f6a
+		case area_sewers:       return #4c5946
+		case area_scrapyards:   return #8a969e
+		case area_caves:        return #8152bc
+		case area_city:         return #b4bdc5
+		case area_labs:         return #091c20
+		case area_palace:       return #611d24
+		case area_vault:        return #433523
+		case area_oasis:        return #51d1c8
 		case area_pizza_sewers: return #a04b63
-		case area_mansion: return #eef0f2
+		case area_mansion:      return #eef0f2
 		case area_cursed_caves: return #ff9c23
-		case area_jungle: return #2a900c
-		case area_hq: return #f5fafb
-		case area_crib: return #eef0f2
+		case area_jungle:       return #2a900c
+		case area_hq:           return #f5fafb
+		case area_crib:         return #eef0f2
 	}
 	
 	return #6a7aaf
+}
+
+/// @function scrAreaGetShadowColor
+/// @param area
+/// @param check_custom=true
+function scrAreaGetShadowColor(_area, _check_custom=true) {
+	if (_check_custom && is_struct(global.custom_shadow_colors)) {
+		var _components = global.custom_shadow_colors[$ string(_area)]
+		
+		if (is_array(_components) && array_length(_components) >= 3) {
+			return make_color_rgb(_components[0], _components[1], _components[2])
+		}
+	}
+	
+	switch (_area) {
+		case area_campfire:     return c_black
+		case area_desert:       return c_black
+		case area_sewers:       return #080d01
+		case area_scrapyards:   return c_black
+		case area_caves:        return #06020c
+		case area_city:         return #0e1344
+		case area_labs:         return c_black
+		case area_palace:       return #0d0101
+		case area_vault:        return #00030e
+		case area_oasis:        return #012b43
+		case area_pizza_sewers: return #090012
+		case area_mansion:      return #120014
+		case area_cursed_caves: return #420000
+		case area_jungle:       return #140001
+		case area_hq:           return #00248c
+		case area_crib:         return #120014
+	}
+	
+	return c_black
 }
 
 function scrAreaGetGenerationGoal() {

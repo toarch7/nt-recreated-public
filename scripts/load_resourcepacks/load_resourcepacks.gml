@@ -1,3 +1,8 @@
+#macro resourcepack_format_version_major 1
+#macro resourcepack_format_version_minor 0
+
+#macro resourcepack_texturegen_prefix "__PACK_TEXTUREGEN_"
+
 function load_resourcepacks() {
 	globalvar Resourcepacks;
     Resourcepacks = []
@@ -15,7 +20,7 @@ function load_resourcepacks() {
 	#endregion
 	
 	//
-    global.custom_sprites = []
+    global.replaced_base_sprites = []
     global.custom_sprite_markings = {}
 	
 	//
@@ -31,17 +36,26 @@ function load_resourcepacks() {
 	global.custom_sprite_registry = {}
 	
 	//
-	directory_create(game_directory + "resourcepacks")
+	print("Default sprite culling is", gpu_get_sprite_cull() ? "ON" : "OFF")
     
+	//
+	directory_create(game_directory + "resourcepacks")
+	
 	var _time = get_timer()
 	try {
+		// this loads sorts of resources into the global variables from above
 		load_resourcepacks_from(game_directory + "resourcepacks/")
 		
-		//
+		// texturepage generation
 		var _compactor = new CustomTexturePageCompactor(),
 			_texture_rects = global.custom_texturepage_bucket
 		
 		#region Finish up frame replacements
+		
+		// frame replacements are essentially just resonstructions of base sprites, where we poke
+		// original frames out and replaced them with custom sprites (frames).
+		// this whole process has to be done in bulk so that we don't do this from
+		// scratch for every individual frame replacement
 		var _frame_replacement_indices = global.custom_texturepage_replacement_frames,
 			_frame_replacement_keys = struct_keys(_frame_replacement_indices)
 		
@@ -53,6 +67,7 @@ function load_resourcepacks() {
 			array_push(_texture_rects, new CustomTexturePageRect(_key, _subimage,
 				sprite_get_number(_original_sprite), sprite_get_width(_original_sprite), sprite_get_height(_original_sprite), _replacement_sprite))
 		}
+		
 		#endregion
 		
 		_compactor.populate_textures(_texture_rects)
@@ -61,9 +76,13 @@ function load_resourcepacks() {
 			
 			_texture_pages = _compactor.process_texture_pages(),
 			
-			_texturegroup_info = _compactor.write_texturegroup_info_and_textures(_texture_pages, "texture")
+			// texturegroups are prefixed, because we don't want the engine to manage sprite replacements itself
+			// (and yes gamemaker overrides existing sprites with new sprites that share names, but these will have different indicees (bad))
+			_texturegroup_info = _compactor.write_texturegroup_info_and_textures(_texture_pages, resourcepack_texturegen_prefix)
 		
-		file_write("resourcepack-texturegroup.json", json_stringify(_texturegroup_info, true))
+		if (GM_build_type == "run") {
+			file_write("resourcepack-texturegroup.json", json_stringify(_texturegroup_info, true))
+		}
 		
 		texturegroup_add(
 			_custom_texturegroup_name,
@@ -72,11 +91,28 @@ function load_resourcepacks() {
 				sprites: _texturegroup_info.sprite_data
 			})
 		
-		print(texturegroup_get_sprites(_custom_texturegroup_name))
-		
-		gpu_set_sprite_cull(false)
-		
 		array_push(global.custom_texture_groups, _custom_texturegroup_name)
+		
+		array_foreach(
+			texturegroup_get_sprites(_custom_texturegroup_name),
+			
+			function(_custom_sprite) {
+				static __trim_pfx = [ resourcepack_texturegen_prefix ]
+				
+				var _custom_sprite_name = sprite_get_name(_custom_sprite),
+					_original_sprite_name = string_trim_start(_custom_sprite_name, __trim_pfx),
+					_original_sprite = asset_get_index(_original_sprite_name),
+					
+					_xoffset = sprite_get_xoffset(_original_sprite),
+					_yoffset = sprite_get_yoffset(_original_sprite)
+				
+				sprite_set_offset(_custom_sprite, _xoffset, _yoffset)
+				sprite_assign(_original_sprite, _custom_sprite)
+				
+				//
+				array_push(global.replaced_base_sprites, _original_sprite_name)
+			})
+		
 	}
 	catch(e) {
 		print_exception("Something got caught on fire while loading resourcepacks", e)
@@ -89,4 +125,24 @@ function load_resourcepacks() {
 	})
 	
 	print("load_resourcepacks() time ellapsed:", (get_timer() - _time) / 100_000, "ms.")
+	
+	//
+	var _resourcepacks = Resourcepacks,
+		_active_resourcepack_list = []
+	
+	for(var i = array_length(_resourcepacks) - 1; i >= 0; --i) {
+		var _resourcepack_data = _resourcepacks[i]
+		
+		if (_resourcepack_data.active) {
+			array_push(_active_resourcepack_list, _resourcepack_data.full_name)
+		}
+	}
+	
+	if (array_length(_active_resourcepack_list) != 0) {
+		file_write(".active_resourcepacks",
+			string_join_ext("\n", _active_resourcepack_list))
+	}
+	else if (file_exists(".active_resourcepacks")) {
+		file_delete(".active_resourcepacks")
+	}
 }
