@@ -72,6 +72,7 @@ function load_custom_sprites(_namespace, _load_directory) {
 				}
 				
 				_original_sprite = asset_get_index(string_copy(_sprite_name, 1, _strip_suffix_pos - 1))
+				if (sprite_exists(_original_sprite)) _sprite_name = sprite_get_name(_original_sprite)
 				_is_strip_replacement = true
 			}
 			else {
@@ -89,7 +90,7 @@ function load_custom_sprites(_namespace, _load_directory) {
 					
 					_frame_replacement_index = scrRealExt(_frame_number_slice)
 					
-					if (!is_numeric(_frame_replacement_index) || _frame_replacement_index <= 0) {
+					if (!is_numeric(_frame_replacement_index) || _frame_replacement_index < 0) {
 						scr_log_push($"[!!!] {_frame_number_slice} is not a valid frame number (in {_sprite_location})")
 						_load_errors ++
 						continue
@@ -98,13 +99,15 @@ function load_custom_sprites(_namespace, _load_directory) {
 					_original_sprite = asset_get_index(string_copy(_sprite_name, 1, _frame_suffix_pos - 1))
 					
 					if (sprite_exists(_original_sprite)) {
+						_sprite_name = sprite_get_name(_original_sprite)
+						
 						if (_frame_replacement_index >= sprite_get_number(_original_sprite)) {
 							scr_log_push($"[!!!] cannot replace frame {_frame_replacement_index} of \"{_sprite_location}\": the index number exceeds max frames ({sprite_get_number(_original_sprite)})")
 							_load_errors ++
 							continue
 						}
 						else if (variable_struct_exists(_frame_replacement_indices, _sprite_name)
-							&& _frame_replacement_indices[$ _sprite_name] != _original_sprite
+							&& _frame_replacement_indices[$ _sprite_name][_frame_replacement_index] != _original_sprite
 						) {
 							scr_log_push($"[!] frame {_frame_number_slice} of {_sprite_name} is already replaced in another resourcepack. Skipped", c_ltgray)
 							continue
@@ -168,13 +171,19 @@ function load_custom_sprites(_namespace, _load_directory) {
 			var _sprite_frame_array;
 			
 			if (!variable_struct_exists(_frame_replacement_indices, _sprite_name)) {
-				_sprite_frame_array = array_create(_sprite_frames, _original_sprite)
+				_sprite_frame_array = array_create(_sprite_frames)
+				
+				for(var i = _sprite_frames - 1; i >= 0; --i) {
+					_sprite_frame_array[i] = _original_sprite
+				}
+				
+				_frame_replacement_indices[$ _sprite_name] = _sprite_frame_array
 			}
 			else {
 				_sprite_frame_array = _frame_replacement_indices[$ _sprite_name]
 			}
 			
-			_frame_replacement_indices[_frame_replacement_index] = _replacement_sprite
+			_sprite_frame_array[_frame_replacement_index] = _replacement_sprite
 		}
 		else {
 			for(var _subimage = _replacement_frames - 1; _subimage >= 0; --_subimage) {

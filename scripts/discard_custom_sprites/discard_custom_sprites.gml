@@ -1,7 +1,7 @@
 function discard_custom_sprites(_restore_original_sprites) {
 	if (_restore_original_sprites) {
 		array_foreach(global.replaced_base_sprites, function(_sprite_name) {
-			var _sprite_index = asset_get_index(_sprite_index),
+			var _sprite_index = asset_get_index(_sprite_name),
 				_path = $"replacedsprites/{_sprite_name}.png"
 			
 			sprite_replace(

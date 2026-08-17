@@ -59,18 +59,27 @@ function load_resourcepacks() {
 		var _frame_replacement_indices = global.custom_texturepage_replacement_frames,
 			_frame_replacement_keys = struct_keys(_frame_replacement_indices)
 		
-		for (var _subimage = array_length(_frame_replacement_keys) - 1; _subimage >= 0; --_subimage) {
-			var _key = _frame_replacement_keys[_subimage],
-				_replacement_sprite = _frame_replacement_indices[$ _key],
-				_original_sprite = asset_get_index(_key)
+		for (var i = array_length(_frame_replacement_keys) - 1; i >= 0; --i) {
+			var _key = _frame_replacement_keys[i],
+				_original_sprite = asset_get_index(_key),
+				_number = sprite_get_number(_original_sprite),
+				_width = sprite_get_width(_original_sprite),
+				_height = sprite_get_height(_original_sprite),
+				_sprite_frames = _frame_replacement_indices[$ _key]
 			
-			array_push(_texture_rects, new CustomTexturePageRect(_key, _subimage,
-				sprite_get_number(_original_sprite), sprite_get_width(_original_sprite), sprite_get_height(_original_sprite), _replacement_sprite))
+			for(var _subimage = array_length(_sprite_frames) - 1; _subimage >= 0; --_subimage) {
+				var _replacement_sprite = _sprite_frames[_subimage]
+				
+				array_push(_texture_rects, new CustomTexturePageRect(
+					_key, _subimage, _number, _width, _height, _replacement_sprite))
+			}
 		}
 		
 		#endregion
 		
 		_compactor.populate_textures(_texture_rects)
+		
+		file_write($"texture_rects.json", json_stringify(_texture_rects, true))
 		
 		var _custom_texturegroup_name = "custom_textures",
 			

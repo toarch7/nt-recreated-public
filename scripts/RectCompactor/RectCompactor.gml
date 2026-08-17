@@ -2,6 +2,8 @@
 #macro compactor_texturepage_height 2048
 
 function CustomTexturePageRect(_name, _image, _max_images, _width, _height, _sprite) constructor {
+	assert(is_numeric(_sprite) && _sprite >= 0, _name)
+	
 	name = _name
 	image_index = _image
 	image_number = _max_images
@@ -16,7 +18,8 @@ function CustomTexturePageRect(_name, _image, _max_images, _width, _height, _spr
 	x = 0
 	y = 0
 	
-	image_blend = make_color_hsv((real(_sprite) * 45) % 0xff, 255, 255)
+	// frame background color for debugging purposes
+	image_blend = c_white
 	
 	is_sorted = false
 	sort_index = -1
@@ -213,6 +216,8 @@ function CustomTexturePageCompactor() constructor {
 			array_push(_texture_pages, _sprite_data)
 		}
 		
+		file_write("texture_pages.json", json_stringify(_texture_pages, true))
+		
 		return _texture_pages
 	}
 	
@@ -256,11 +261,11 @@ function CustomTexturePageCompactor() constructor {
 				}
 				
 				for(var j = _frame_count - 1; j >= 0; --j) {
-					var _frame = _frames[j]
+					var _frame = _frames[j], _sprite = _frame.sprite;
 					
 					if (debug_render_custom_texturepage_backgrounds) {
 						draw_set_color(_frame.image_blend)
-						draw_rectangle(_frame.x, _frame.y, _frame.x + _frame.width, _frame.y + _frame.height, false)
+						draw_rectangle(_frame.x, _frame.y, _frame.x + _frame.width, _frame.y + _frame.height, !_frame.is_sorted)
 						
 						draw_set_color(c_black)
 						draw_text_transformed(_frame.x + 4, _frame.y + 3, _sprite_name, debug_texture_text_scale, debug_texture_text_scale, 0)
@@ -270,7 +275,10 @@ function CustomTexturePageCompactor() constructor {
 						draw_text_transformed(_frame.x + 3, _frame.y + 3, _sprite_name, debug_texture_text_scale, debug_texture_text_scale, 0)
 					}
 					
-					draw_sprite(_frame.sprite, _frame.image_index, _frame.x, _frame.y)
+					draw_sprite(_sprite, _frame.image_index,
+								
+								_frame.x + sprite_get_xoffset(_sprite),
+								_frame.y + sprite_get_yoffset(_sprite))
 					
 					_sprite_frames[_frame.image_index] = _frame.to_frame_entry(_texturepage_index)
 				}
