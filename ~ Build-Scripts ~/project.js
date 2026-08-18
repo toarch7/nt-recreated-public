@@ -4,6 +4,8 @@ const path = require("path");
 const fs = require("fs");
 const Options = require("./options.json");
 
+const wadFileLocations = [ "data.win", "assets/game.unx", "assets/game.ios", "assets/game.droid" ];
+
 function stringSimilarity(s1, s2) {
     function editDistance(s1, s2) {
         s1 = s1.toLowerCase();
@@ -122,9 +124,26 @@ const locateSteamLibrary = (theRest) => {
 
     assert.ok(false, "Couldn't locate \"path\" in libraryfolders.vdf");
 };
+
 const locateSteamLibraryGame = (gameDirectoryName) => {
     if (Options.customGameDirectory) return Options.customGameDirectory + path.sep;
     return locateSteamLibrary("steamapps/common/" + gameDirectoryName) + path.sep;
+}
+
+const locateSteamLibraryGameAssets = (gameDirectoryName, includeWadFile = false) => {
+    let gamePath = locateSteamLibraryGame(gameDirectoryName);
+    
+    if (!gamePath) return null;
+
+    for(const wadLoc of wadFileLocations) {
+        if (fs.existsSync(gamePath + wadLoc)) {
+            if (includeWadFile) return gamePath + wadLoc;
+            if (wadLoc.indexOf("/") == -1) return gamePath;
+            return gamePath + wadLoc.slice(0, wadLoc.indexOf("/"));
+        }
+    }
+
+    return null;
 }
 
 const readResourceDir = resourceLocation => {
@@ -144,6 +163,8 @@ module.exports = {
     parseProjectFile,
     locateSteamLibrary,
     locateSteamLibraryGame,
+    locateSteamLibraryGameAssets,
     readResourceDir,
+    wadFileLocations,
     locate
 };

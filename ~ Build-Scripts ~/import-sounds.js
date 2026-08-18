@@ -12,7 +12,7 @@ const AUDIO_FLAG_IS_COMPRESSED = 0x2;
 const AUDIO_FLAG_IS_DECOMPRESSED_ON_LOAD = 0x3;
 const AUDIO_FLAG_IS_REGULAR = 0x64;
 
-const gameInstallationDirectory = project.locateSteamLibraryGame("Nuclear Throne");
+const gameInstallationDirectory = project.locateSteamLibraryGameAssets("Nuclear Throne");
 
 function processSoundImport(doExtractSounds) {
     const gameWadFilePath = WadTools.locateGameWADFilePath();

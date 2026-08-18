@@ -10,7 +10,7 @@ const { isDryRun } = Options;
 
 const spriteOverridesMap = require("./sprite-overrides.json");
 
-const gameInstallationDirectory = project.locateSteamLibraryGame("Nuclear Throne");
+const gameInstallationDirectory = project.locateSteamLibraryGameAssets("Nuclear Throne");
 const gameWadFilePath = WadTools.locateGameWADFilePath();
 
 // BZ2+QOI support is currently not prioritized by me.

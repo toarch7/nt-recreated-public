@@ -5,7 +5,7 @@ const path = require("node:path");
 const overrides = require("./sprite-overrides.json");
 const Options = require("./options.json");
 
-const gameInstallationDirectory = project.locateSteamLibraryGame("Nuclear Throne");
+const gameInstallationDirectory = project.locateSteamLibraryGameAssets("Nuclear Throne");
 const projectSpriteNames = project.readResourceDir("sprites");
 const projectSoundNames = project.readResourceDir("sounds");
 

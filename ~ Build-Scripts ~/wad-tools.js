@@ -114,20 +114,22 @@ class GameMakerWAD {
 }
 
 function locateGameWADFilePath(throwIfNotFound = true) {
-    const wadFileTypes = [ "data.win", "game.unx", "game.ios", "game.droid" ];
     const gameInstallationDirectory = project.locateSteamLibraryGame("Nuclear Throne");
+    let wadFileLocations = project.wadFileLocations;
+    let throwingIt = false;
 
     if (Options.prioritizedWAD) {
         console.log("Including", Options.prioritizedWAD, "as WAD file.");
-        wadFileTypes.splice(0, 0, Options.prioritizedWAD);
+        wadFileLocations = [ Options.prioritizedWAD, ...wadFileLocations ];
     }
+    else if (!gameInstallationDirectory) throwingIt = true;
     
-    for(const wadFile of wadFileTypes) {
+    for(const wadFile of wadFileLocations) {
         const gameWadFilePath = gameInstallationDirectory + wadFile;
         if (fs.existsSync(gameWadFilePath)) return gameWadFilePath;
     }
 
-    if (throwIfNotFound) {
+    if (throwIfNotFound && throwingIt) {
         throw new Error("Couldn't locate any WAD files - please make sure you have installed the game from Steam.");
     }
 
