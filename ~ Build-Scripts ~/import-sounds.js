@@ -180,8 +180,16 @@ function processSoundImport(doExtractSounds) {
             // copy the files from the game
             if (isExternal) {
                 const externalSoundPath = gameInstallationDirectory + soundInfo.soundPath;
-                assert.ok(fs.existsSync(externalSoundPath), "Couldn't find external sound file" + externalSoundPath);
-                fs.copyFileSync(externalSoundPath, importingTo);
+                const externalSoundPathLower = gameInstallationDirectory + soundInfo.soundPath.toLowerCase();
+
+                if (fs.existsSync(externalSoundPath)) {
+                    fs.copyFileSync(externalSoundPath, importingTo);
+                }
+                else if (fs.existsSync(externalSoundPathLower)) {
+                    fs.copyFileSync(externalSoundPathLower, importingTo);
+                }
+                else assert.ok(false, "Couldn't find external sound file" + externalSoundPath);
+
                 continue;
             }
 

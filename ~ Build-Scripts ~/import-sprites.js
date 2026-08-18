@@ -463,6 +463,10 @@ function performSpriteImport(isForce) {
             
             for(let frame of spriteInfo.frames) {
                 const frameImageLocation = spriteLocation + frame.name + ".png";
+                if (!fs.existsSync(frameImageLocation)) {
+                    console.log(frameImageLocation, "frame not found");
+                    continue;
+                }
                 const frameImageDims = getPngFileDimensions(frameImageLocation);
                 let correctWidth = sprtImageDimensions.width;
                 let correctHeight = sprtImageDimensions.height;

@@ -139,7 +139,7 @@ const locateSteamLibraryGameAssets = (gameDirectoryName, includeWadFile = false)
         if (fs.existsSync(gamePath + wadLoc)) {
             if (includeWadFile) return gamePath + wadLoc;
             if (wadLoc.indexOf("/") == -1) return gamePath;
-            return gamePath + wadLoc.slice(0, wadLoc.indexOf("/"));
+            return gamePath + wadLoc.slice(0, wadLoc.indexOf("/") + 1);
         }
     }
 

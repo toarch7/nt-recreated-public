@@ -1,7 +1,5 @@
 node_modules
 
-game_sounds.json
-game_sprites.json
 options.json
 
 *.wav
