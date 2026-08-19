@@ -20,7 +20,7 @@ Please make sure that you have NodeJS of version 20.0+ installed on your machine
 
 Clone this repository, open your terminal in this folder and run the following commands in your terminal:
 ```shell
-cd "./~ Build-Scripts ~"
+cd node-scripts
 npm ci
 npm run regen
 ```
