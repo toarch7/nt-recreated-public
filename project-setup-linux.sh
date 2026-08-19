@@ -17,7 +17,7 @@ else
     all_good=false
 fi
 
-if [[ $all_good -neq false ]] then
+if [[ "$all_good" = false ]] then
     echo -e "\e[31mFailure\e[0m: Missing or incomplete node.js setup!"
     echo -e "Please, make sure that you have properly proceeded with installing \e[36mnode\e[0m and \e[36mnpm\e[0m before running the script:\e[36m https://nodejs.org/en \e[0m"
     exit 1
