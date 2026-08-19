@@ -2,217 +2,217 @@
   "amb0": {
     "name": "amb0",
     "flags": 100,
-    "soundPath": "amb0.ogg"
+    "soundPath": "amb/0"
   },
   "amb0b": {
     "name": "amb0b",
     "flags": 100,
-    "soundPath": "amb0b.ogg"
+    "soundPath": "amb/0b"
   },
   "amb0c": {
     "name": "amb0c",
     "flags": 100,
-    "soundPath": "amb0c.ogg"
+    "soundPath": "amb/0c"
   },
   "amb1": {
     "name": "amb1",
     "flags": 100,
-    "soundPath": "amb1.ogg"
+    "soundPath": "amb/1"
   },
   "amb100": {
     "name": "amb100",
     "flags": 100,
-    "soundPath": "amb100.ogg"
+    "soundPath": "amb/100"
   },
   "amb101": {
     "name": "amb101",
     "flags": 100,
-    "soundPath": "amb101.ogg"
+    "soundPath": "amb/101"
   },
   "amb102": {
     "name": "amb102",
     "flags": 100,
-    "soundPath": "amb102.ogg"
+    "soundPath": "amb/102"
   },
   "amb103": {
     "name": "amb103",
     "flags": 100,
-    "soundPath": "amb103.ogg"
+    "soundPath": "amb/103"
   },
   "amb104": {
     "name": "amb104",
     "flags": 100,
-    "soundPath": "amb104.ogg"
+    "soundPath": "amb/104"
   },
   "amb105": {
     "name": "amb105",
     "flags": 100,
-    "soundPath": "amb105.ogg"
+    "soundPath": "amb/105"
   },
   "amb106": {
     "name": "amb106",
     "flags": 100,
-    "soundPath": "amb106.ogg"
+    "soundPath": "amb/106"
   },
   "amb2": {
     "name": "amb2",
     "flags": 100,
-    "soundPath": "amb2.ogg"
+    "soundPath": "amb/2"
   },
   "amb3": {
     "name": "amb3",
     "flags": 100,
-    "soundPath": "amb3.ogg"
+    "soundPath": "amb/3"
   },
   "amb4": {
     "name": "amb4",
     "flags": 100,
-    "soundPath": "amb4.ogg"
+    "soundPath": "amb/4"
   },
   "amb5": {
     "name": "amb5",
     "flags": 100,
-    "soundPath": "amb5.ogg"
+    "soundPath": "amb/5"
   },
   "amb6": {
     "name": "amb6",
     "flags": 100,
-    "soundPath": "amb6.ogg"
+    "soundPath": "amb/6"
   },
   "amb7": {
     "name": "amb7",
     "flags": 100,
-    "soundPath": "amb7.ogg"
+    "soundPath": "amb/7"
   },
   "mus1": {
     "name": "mus1",
     "flags": 100,
-    "soundPath": "mus1.ogg"
+    "soundPath": "mus/1"
   },
   "mus100": {
     "name": "mus100",
     "flags": 100,
-    "soundPath": "mus100.ogg"
+    "soundPath": "mus/100"
   },
   "mus100b": {
     "name": "mus100b",
     "flags": 100,
-    "soundPath": "mus100b.ogg"
+    "soundPath": "mus/100b"
   },
   "mus101": {
     "name": "mus101",
     "flags": 100,
-    "soundPath": "mus101.ogg"
+    "soundPath": "mus/101"
   },
   "mus102": {
     "name": "mus102",
     "flags": 100,
-    "soundPath": "mus102.ogg"
+    "soundPath": "mus/102"
   },
   "mus103": {
     "name": "mus103",
     "flags": 100,
-    "soundPath": "mus103.ogg"
+    "soundPath": "mus/103"
   },
   "mus104": {
     "name": "mus104",
     "flags": 100,
-    "soundPath": "mus104.ogg"
+    "soundPath": "mus/104"
   },
   "mus105": {
     "name": "mus105",
     "flags": 100,
-    "soundPath": "mus105.ogg"
+    "soundPath": "mus/105"
   },
   "mus106": {
     "name": "mus106",
     "flags": 100,
-    "soundPath": "mus106.ogg"
+    "soundPath": "mus/106"
   },
   "mus106b": {
     "name": "mus106b",
     "flags": 100,
-    "soundPath": "mus106b.ogg"
+    "soundPath": "mus/106b"
   },
   "mus107": {
     "name": "mus107",
     "flags": 100,
-    "soundPath": "mus107.ogg"
+    "soundPath": "mus/107"
   },
   "mus1b": {
     "name": "mus1b",
     "flags": 100,
-    "soundPath": "mus1b.ogg"
+    "soundPath": "mus/1b"
   },
   "mus2": {
     "name": "mus2",
     "flags": 100,
-    "soundPath": "mus2.ogg"
+    "soundPath": "mus/2"
   },
   "mus3": {
     "name": "mus3",
     "flags": 100,
-    "soundPath": "mus3.ogg"
+    "soundPath": "mus/3"
   },
   "mus3b": {
     "name": "mus3b",
     "flags": 100,
-    "soundPath": "mus3b.ogg"
+    "soundPath": "mus/3b"
   },
   "mus4": {
     "name": "mus4",
     "flags": 100,
-    "soundPath": "mus4.ogg"
+    "soundPath": "mus/4"
   },
   "mus5": {
     "name": "mus5",
     "flags": 100,
-    "soundPath": "mus5.ogg"
+    "soundPath": "mus/5"
   },
   "mus5b": {
     "name": "mus5b",
     "flags": 100,
-    "soundPath": "mus5b.ogg"
+    "soundPath": "mus/5b"
   },
   "mus6": {
     "name": "mus6",
     "flags": 100,
-    "soundPath": "mus6.ogg"
+    "soundPath": "mus/6"
   },
   "mus7": {
     "name": "mus7",
     "flags": 100,
-    "soundPath": "mus7.ogg"
+    "soundPath": "mus/7"
   },
   "mus7b": {
     "name": "mus7b",
     "flags": 100,
-    "soundPath": "mus7b.ogg"
+    "soundPath": "mus/7b"
   },
   "musBoss1": {
     "name": "musBoss1",
     "flags": 100,
-    "soundPath": "musBoss1.ogg"
+    "soundPath": "mus/Boss1"
   },
   "musBoss2": {
     "name": "musBoss2",
     "flags": 100,
-    "soundPath": "musBoss2.ogg"
+    "soundPath": "mus/Boss2"
   },
   "musBoss3": {
     "name": "musBoss3",
     "flags": 100,
-    "soundPath": "musBoss3.ogg"
+    "soundPath": "mus/Boss3"
   },
   "musBoss4A": {
     "name": "musBoss4A",
     "flags": 100,
-    "soundPath": "musBoss4A.ogg"
+    "soundPath": "mus/Boss4A"
   },
   "musBoss4B": {
     "name": "musBoss4B",
     "flags": 100,
-    "soundPath": "musBoss4B.ogg"
+    "soundPath": "mus/Boss4B"
   },
   "musBoss4BSilence": {
     "name": "musBoss4BSilence",
@@ -222,62 +222,62 @@
   "musBoss4Silence": {
     "name": "musBoss4Silence",
     "flags": 100,
-    "soundPath": "musBoss4Silence.ogg"
+    "soundPath": "mus/Boss4Silence"
   },
   "musBoss5": {
     "name": "musBoss5",
     "flags": 100,
-    "soundPath": "musBoss5.ogg"
+    "soundPath": "mus/Boss5"
   },
   "musBoss6": {
     "name": "musBoss6",
     "flags": 100,
-    "soundPath": "musBoss6.ogg"
+    "soundPath": "mus/Boss6"
   },
   "musBoss6B": {
     "name": "musBoss6B",
     "flags": 100,
-    "soundPath": "musBoss6B.ogg"
+    "soundPath": "mus/Boss6B"
   },
   "musBoss7": {
     "name": "musBoss7",
     "flags": 100,
-    "soundPath": "musBoss7.ogg"
+    "soundPath": "mus/Boss7"
   },
   "musBoss8": {
     "name": "musBoss8",
     "flags": 100,
-    "soundPath": "musBoss8.ogg"
+    "soundPath": "mus/Boss8"
   },
   "musBoss9": {
     "name": "musBoss9",
     "flags": 100,
-    "soundPath": "musBoss9.ogg"
+    "soundPath": "mus/Boss9"
   },
   "musBossDead": {
     "name": "musBossDead",
     "flags": 100,
-    "soundPath": "musBossDead.ogg"
+    "soundPath": "mus/BossDead"
   },
   "musCredits": {
     "name": "musCredits",
     "flags": 100,
-    "soundPath": "musCredits.ogg"
+    "soundPath": "mus/Credits"
   },
   "musThemeA": {
     "name": "musThemeA",
     "flags": 100,
-    "soundPath": "musThemeA.ogg"
+    "soundPath": "mus/ThemeA"
   },
   "musThemeB": {
     "name": "musThemeB",
     "flags": 100,
-    "soundPath": "musThemeB.ogg"
+    "soundPath": "mus/ThemeB"
   },
   "musThemeP": {
     "name": "musThemeP",
     "flags": 100,
-    "soundPath": "musThemeP.ogg"
+    "soundPath": "mus/ThemeP"
   },
   "sndAllyDead": {
     "name": "sndAllyDead",
@@ -397,7 +397,7 @@
   "sndBasicUltra": {
     "name": "sndBasicUltra",
     "flags": 100,
-    "soundPath": "sndBasicUltra.ogg"
+    "soundPath": "snd/BasicUltra"
   },
   "sndBecomeNothingHurt": {
     "name": "sndBecomeNothingHurt",
@@ -692,7 +692,7 @@
   "sndCarLoop": {
     "name": "sndCarLoop",
     "flags": 100,
-    "soundPath": "sndCarLoop.ogg"
+    "soundPath": "snd/CarLoop"
   },
   "sndCharUnlock": {
     "name": "sndCharUnlock",
@@ -747,12 +747,12 @@
   "sndChickenUltraA": {
     "name": "sndChickenUltraA",
     "flags": 100,
-    "soundPath": "sndChickenUltraA.ogg"
+    "soundPath": "snd/ChickenUltraA"
   },
   "sndChickenUltraB": {
     "name": "sndChickenUltraB",
     "flags": 100,
-    "soundPath": "sndChickenUltraB.ogg"
+    "soundPath": "snd/ChickenUltraB"
   },
   "sndClick": {
     "name": "sndClick",
@@ -827,12 +827,12 @@
   "sndCoopUltraA": {
     "name": "sndCoopUltraA",
     "flags": 100,
-    "soundPath": "sndCoopUltraA.ogg"
+    "soundPath": "snd/CoopUltraA"
   },
   "sndCoopUltraB": {
     "name": "sndCoopUltraB",
     "flags": 100,
-    "soundPath": "sndCoopUltraB.ogg"
+    "soundPath": "snd/CoopUltraB"
   },
   "sndCorpseExplo": {
     "name": "sndCorpseExplo",
@@ -987,12 +987,12 @@
   "sndCrystalUltraA": {
     "name": "sndCrystalUltraA",
     "flags": 100,
-    "soundPath": "sndCrystalUltraA.ogg"
+    "soundPath": "snd/CrystalUltraA"
   },
   "sndCrystalUltraB": {
     "name": "sndCrystalUltraB",
     "flags": 100,
-    "soundPath": "sndCrystalUltraB.ogg"
+    "soundPath": "snd/CrystalUltraB"
   },
   "sndCursedChest": {
     "name": "sndCursedChest",
@@ -1022,7 +1022,7 @@
   "sndCuzCry": {
     "name": "sndCuzCry",
     "flags": 100,
-    "soundPath": "sndCuzCry.ogg"
+    "soundPath": "snd/CuzCry"
   },
   "sndCuzCryAttack": {
     "name": "sndCuzCryAttack",
@@ -1092,7 +1092,7 @@
   "sndCuzCryNew": {
     "name": "sndCuzCryNew",
     "flags": 100,
-    "soundPath": "sndCuzCryNew.ogg"
+    "soundPath": "snd/CuzCryNew"
   },
   "sndCuzGreet": {
     "name": "sndCuzGreet",
@@ -1102,12 +1102,12 @@
   "sndCuzGreetOther": {
     "name": "sndCuzGreetOther",
     "flags": 100,
-    "soundPath": "sndCuzGreetOther.ogg"
+    "soundPath": "snd/CuzGreetOther"
   },
   "sndCuzGreetYV": {
     "name": "sndCuzGreetYV",
     "flags": 100,
-    "soundPath": "sndCuzGreetYV.ogg"
+    "soundPath": "snd/CuzGreetYV"
   },
   "sndCuzHorn": {
     "name": "sndCuzHorn",
@@ -1517,12 +1517,12 @@
   "sndEyesUltraA": {
     "name": "sndEyesUltraA",
     "flags": 100,
-    "soundPath": "sndEyesUltraA.ogg"
+    "soundPath": "snd/EyesUltraA"
   },
   "sndEyesUltraB": {
     "name": "sndEyesUltraB",
     "flags": 100,
-    "soundPath": "sndEyesUltraB.ogg"
+    "soundPath": "snd/EyesUltraB"
   },
   "sndFastRatDie": {
     "name": "sndFastRatDie",
@@ -1587,12 +1587,12 @@
   "sndFishUltraA": {
     "name": "sndFishUltraA",
     "flags": 100,
-    "soundPath": "sndFishUltraA.ogg"
+    "soundPath": "snd/FishUltraA"
   },
   "sndFishUltraB": {
     "name": "sndFishUltraB",
     "flags": 100,
-    "soundPath": "sndFishUltraB.ogg"
+    "soundPath": "snd/FishUltraB"
   },
   "sndFishWarrantEnd": {
     "name": "sndFishWarrantEnd",
@@ -2197,12 +2197,12 @@
   "sndFrogUltraA": {
     "name": "sndFrogUltraA",
     "flags": 100,
-    "soundPath": "sndFrogUltraA.ogg"
+    "soundPath": "snd/FrogUltraA"
   },
   "sndFrogUltraB": {
     "name": "sndFrogUltraB",
     "flags": 100,
-    "soundPath": "sndFrogUltraB.ogg"
+    "soundPath": "snd/FrogUltraB"
   },
   "sndGambleButt": {
     "name": "sndGambleButt",
@@ -2567,7 +2567,7 @@
   "sndHalloweenWolf": {
     "name": "sndHalloweenWolf",
     "flags": 100,
-    "soundPath": "sndHalloweenWolf.ogg"
+    "soundPath": "snd/HalloweenWolf"
   },
   "sndHammer": {
     "name": "sndHammer",
@@ -2672,12 +2672,12 @@
   "sndHorrorUltraA": {
     "name": "sndHorrorUltraA",
     "flags": 100,
-    "soundPath": "sndHorrorUltraA.ogg"
+    "soundPath": "snd/HorrorUltraA"
   },
   "sndHorrorUltraB": {
     "name": "sndHorrorUltraB",
     "flags": 100,
-    "soundPath": "sndHorrorUltraB.ogg"
+    "soundPath": "snd/HorrorUltraB"
   },
   "sndHorrorUltraC": {
     "name": "sndHorrorUltraC",
@@ -3232,12 +3232,12 @@
   "sndMeltingUltraA": {
     "name": "sndMeltingUltraA",
     "flags": 100,
-    "soundPath": "sndMeltingUltraA.ogg"
+    "soundPath": "snd/MeltingUltraA"
   },
   "sndMeltingUltraB": {
     "name": "sndMeltingUltraB",
     "flags": 100,
-    "soundPath": "sndMeltingUltraB.ogg"
+    "soundPath": "snd/MeltingUltraB"
   },
   "sndMenuASkin": {
     "name": "sndMenuASkin",
@@ -3437,12 +3437,12 @@
   "sndMutant10Spch": {
     "name": "sndMutant10Spch",
     "flags": 100,
-    "soundPath": "sndMutant10Spch.ogg"
+    "soundPath": "snd/Mutant10Spch"
   },
   "sndMutant10Thrn": {
     "name": "sndMutant10Thrn",
     "flags": 100,
-    "soundPath": "sndMutant10Thrn.ogg"
+    "soundPath": "snd/Mutant10Thrn"
   },
   "sndMutant10Valt": {
     "name": "sndMutant10Valt",
@@ -3507,12 +3507,12 @@
   "sndMutant11Spch": {
     "name": "sndMutant11Spch",
     "flags": 100,
-    "soundPath": "sndMutant11Spch.ogg"
+    "soundPath": "snd/Mutant11Spch"
   },
   "sndMutant11Thrn": {
     "name": "sndMutant11Thrn",
     "flags": 100,
-    "soundPath": "sndMutant11Thrn.ogg"
+    "soundPath": "snd/Mutant11Thrn"
   },
   "sndMutant11Valt": {
     "name": "sndMutant11Valt",
@@ -3562,7 +3562,7 @@
   "sndMutant12IDPDSpch": {
     "name": "sndMutant12IDPDSpch",
     "flags": 100,
-    "soundPath": "sndMutant12IDPDSpch.ogg"
+    "soundPath": "snd/Mutant12IDPDSpch"
   },
   "sndMutant12LowA": {
     "name": "sndMutant12LowA",
@@ -3587,7 +3587,7 @@
   "sndMutant12Thrn": {
     "name": "sndMutant12Thrn",
     "flags": 100,
-    "soundPath": "sndMutant12Thrn.ogg"
+    "soundPath": "snd/Mutant12Thrn"
   },
   "sndMutant12Valt": {
     "name": "sndMutant12Valt",
@@ -3607,7 +3607,7 @@
   "sndMutant13Cnfm": {
     "name": "sndMutant13Cnfm",
     "flags": 100,
-    "soundPath": "sndMutant13Cnfm.ogg"
+    "soundPath": "snd/Mutant13Cnfm"
   },
   "sndMutant13Cptn": {
     "name": "sndMutant13Cptn",
@@ -3652,12 +3652,12 @@
   "sndMutant13Spch": {
     "name": "sndMutant13Spch",
     "flags": 100,
-    "soundPath": "sndMutant13Spch.ogg"
+    "soundPath": "snd/Mutant13Spch"
   },
   "sndMutant13Thrn": {
     "name": "sndMutant13Thrn",
     "flags": 100,
-    "soundPath": "sndMutant13Thrn.ogg"
+    "soundPath": "snd/Mutant13Thrn"
   },
   "sndMutant13Valt": {
     "name": "sndMutant13Valt",
@@ -3712,12 +3712,12 @@
   "sndMutant14Spch": {
     "name": "sndMutant14Spch",
     "flags": 100,
-    "soundPath": "sndMutant14Spch.ogg"
+    "soundPath": "snd/Mutant14Spch"
   },
   "sndMutant14Thrn": {
     "name": "sndMutant14Thrn",
     "flags": 100,
-    "soundPath": "sndMutant14Thrn.ogg"
+    "soundPath": "snd/Mutant14Thrn"
   },
   "sndMutant14Turn": {
     "name": "sndMutant14Turn",
@@ -3787,12 +3787,12 @@
   "sndMutant15Spch": {
     "name": "sndMutant15Spch",
     "flags": 100,
-    "soundPath": "sndMutant15Spch.ogg"
+    "soundPath": "snd/Mutant15Spch"
   },
   "sndMutant15Thrn": {
     "name": "sndMutant15Thrn",
     "flags": 100,
-    "soundPath": "sndMutant15Thrn.ogg"
+    "soundPath": "snd/Mutant15Thrn"
   },
   "sndMutant15Valt": {
     "name": "sndMutant15Valt",
@@ -3862,7 +3862,7 @@
   "sndMutant16Thrn": {
     "name": "sndMutant16Thrn",
     "flags": 100,
-    "soundPath": "sndMutant16Thrn.ogg"
+    "soundPath": "snd/Mutant16Thrn"
   },
   "sndMutant16Valt": {
     "name": "sndMutant16Valt",
@@ -3927,12 +3927,12 @@
   "sndMutant1Spch": {
     "name": "sndMutant1Spch",
     "flags": 100,
-    "soundPath": "sndMutant1Spch.ogg"
+    "soundPath": "snd/Mutant1Spch"
   },
   "sndMutant1Thrn": {
     "name": "sndMutant1Thrn",
     "flags": 100,
-    "soundPath": "sndMutant1Thrn.ogg"
+    "soundPath": "snd/Mutant1Thrn"
   },
   "sndMutant1Valt": {
     "name": "sndMutant1Valt",
@@ -3997,12 +3997,12 @@
   "sndMutant2Spch": {
     "name": "sndMutant2Spch",
     "flags": 100,
-    "soundPath": "sndMutant2Spch.ogg"
+    "soundPath": "snd/Mutant2Spch"
   },
   "sndMutant2Thrn": {
     "name": "sndMutant2Thrn",
     "flags": 100,
-    "soundPath": "sndMutant2Thrn.ogg"
+    "soundPath": "snd/Mutant2Thrn"
   },
   "sndMutant2Valt": {
     "name": "sndMutant2Valt",
@@ -4067,12 +4067,12 @@
   "sndMutant3Spch": {
     "name": "sndMutant3Spch",
     "flags": 100,
-    "soundPath": "sndMutant3Spch.ogg"
+    "soundPath": "snd/Mutant3Spch"
   },
   "sndMutant3Thrn": {
     "name": "sndMutant3Thrn",
     "flags": 100,
-    "soundPath": "sndMutant3Thrn.ogg"
+    "soundPath": "snd/Mutant3Thrn"
   },
   "sndMutant3Valt": {
     "name": "sndMutant3Valt",
@@ -4137,12 +4137,12 @@
   "sndMutant4Spch": {
     "name": "sndMutant4Spch",
     "flags": 100,
-    "soundPath": "sndMutant4Spch.ogg"
+    "soundPath": "snd/Mutant4Spch"
   },
   "sndMutant4Thrn": {
     "name": "sndMutant4Thrn",
     "flags": 100,
-    "soundPath": "sndMutant4Thrn.ogg"
+    "soundPath": "snd/Mutant4Thrn"
   },
   "sndMutant4Valt": {
     "name": "sndMutant4Valt",
@@ -4207,12 +4207,12 @@
   "sndMutant5Spch": {
     "name": "sndMutant5Spch",
     "flags": 100,
-    "soundPath": "sndMutant5Spch.ogg"
+    "soundPath": "snd/Mutant5Spch"
   },
   "sndMutant5Thrn": {
     "name": "sndMutant5Thrn",
     "flags": 100,
-    "soundPath": "sndMutant5Thrn.ogg"
+    "soundPath": "snd/Mutant5Thrn"
   },
   "sndMutant5Valt": {
     "name": "sndMutant5Valt",
@@ -4282,12 +4282,12 @@
   "sndMutant6Spch": {
     "name": "sndMutant6Spch",
     "flags": 100,
-    "soundPath": "sndMutant6Spch.ogg"
+    "soundPath": "snd/Mutant6Spch"
   },
   "sndMutant6Thrn": {
     "name": "sndMutant6Thrn",
     "flags": 100,
-    "soundPath": "sndMutant6Thrn.ogg"
+    "soundPath": "snd/Mutant6Thrn"
   },
   "sndMutant6Valt": {
     "name": "sndMutant6Valt",
@@ -4352,12 +4352,12 @@
   "sndMutant7Spch": {
     "name": "sndMutant7Spch",
     "flags": 100,
-    "soundPath": "sndMutant7Spch.ogg"
+    "soundPath": "snd/Mutant7Spch"
   },
   "sndMutant7Thrn": {
     "name": "sndMutant7Thrn",
     "flags": 100,
-    "soundPath": "sndMutant7Thrn.ogg"
+    "soundPath": "snd/Mutant7Thrn"
   },
   "sndMutant7Valt": {
     "name": "sndMutant7Valt",
@@ -4417,12 +4417,12 @@
   "sndMutant8Spch": {
     "name": "sndMutant8Spch",
     "flags": 100,
-    "soundPath": "sndMutant8Spch.ogg"
+    "soundPath": "snd/Mutant8Spch"
   },
   "sndMutant8Thrn": {
     "name": "sndMutant8Thrn",
     "flags": 100,
-    "soundPath": "sndMutant8Thrn.ogg"
+    "soundPath": "snd/Mutant8Thrn"
   },
   "sndMutant8Valt": {
     "name": "sndMutant8Valt",
@@ -4487,12 +4487,12 @@
   "sndMutant9Spch": {
     "name": "sndMutant9Spch",
     "flags": 100,
-    "soundPath": "sndMutant9Spch.ogg"
+    "soundPath": "snd/Mutant9Spch"
   },
   "sndMutant9Thrn": {
     "name": "sndMutant9Thrn",
     "flags": 100,
-    "soundPath": "sndMutant9Thrn.ogg"
+    "soundPath": "snd/Mutant9Thrn"
   },
   "sndMutant9Valt": {
     "name": "sndMutant9Valt",
@@ -4987,12 +4987,12 @@
   "sndPlantUltraA": {
     "name": "sndPlantUltraA",
     "flags": 100,
-    "soundPath": "sndPlantUltraA.ogg"
+    "soundPath": "snd/PlantUltraA"
   },
   "sndPlantUltraB": {
     "name": "sndPlantUltraB",
     "flags": 100,
-    "soundPath": "sndPlantUltraB.ogg"
+    "soundPath": "snd/PlantUltraB"
   },
   "sndPlasma": {
     "name": "sndPlasma",
@@ -5287,12 +5287,12 @@
   "sndRebelUltraA": {
     "name": "sndRebelUltraA",
     "flags": 100,
-    "soundPath": "sndRebelUltraA.ogg"
+    "soundPath": "snd/RebelUltraA"
   },
   "sndRebelUltraB": {
     "name": "sndRebelUltraB",
     "flags": 100,
-    "soundPath": "sndRebelUltraB.ogg"
+    "soundPath": "snd/RebelUltraB"
   },
   "sndRecGlandProc": {
     "name": "sndRecGlandProc",
@@ -5342,12 +5342,12 @@
   "sndRobotUltraA": {
     "name": "sndRobotUltraA",
     "flags": 100,
-    "soundPath": "sndRobotUltraA.ogg"
+    "soundPath": "snd/RobotUltraA"
   },
   "sndRobotUltraB": {
     "name": "sndRobotUltraB",
     "flags": 100,
-    "soundPath": "sndRobotUltraB.ogg"
+    "soundPath": "snd/RobotUltraB"
   },
   "sndRocket": {
     "name": "sndRocket",
@@ -5377,12 +5377,12 @@
   "sndRogueUltraA": {
     "name": "sndRogueUltraA",
     "flags": 100,
-    "soundPath": "sndRogueUltraA.ogg"
+    "soundPath": "snd/RogueUltraA"
   },
   "sndRogueUltraB": {
     "name": "sndRogueUltraB",
     "flags": 100,
-    "soundPath": "sndRogueUltraB.ogg"
+    "soundPath": "snd/RogueUltraB"
   },
   "sndRoll": {
     "name": "sndRoll",
@@ -5572,12 +5572,12 @@
   "sndSkeletonUltraA": {
     "name": "sndSkeletonUltraA",
     "flags": 100,
-    "soundPath": "sndSkeletonUltraA.ogg"
+    "soundPath": "snd/SkeletonUltraA"
   },
   "sndSkeletonUltraB": {
     "name": "sndSkeletonUltraB",
     "flags": 100,
-    "soundPath": "sndSkeletonUltraB.ogg"
+    "soundPath": "snd/SkeletonUltraB"
   },
   "sndSkillPick": {
     "name": "sndSkillPick",
@@ -5747,12 +5747,12 @@
   "sndSteroidsUltraA": {
     "name": "sndSteroidsUltraA",
     "flags": 100,
-    "soundPath": "sndSteroidsUltraA.ogg"
+    "soundPath": "snd/SteroidsUltraA"
   },
   "sndSteroidsUltraB": {
     "name": "sndSteroidsUltraB",
     "flags": 100,
-    "soundPath": "sndSteroidsUltraB.ogg"
+    "soundPath": "snd/SteroidsUltraB"
   },
   "sndSteroidsUpg": {
     "name": "sndSteroidsUpg",
@@ -6212,12 +6212,12 @@
   "sndYVUltraA": {
     "name": "sndYVUltraA",
     "flags": 100,
-    "soundPath": "sndYVUltraA.ogg"
+    "soundPath": "snd/YVUltraA"
   },
   "sndYVUltraB": {
     "name": "sndYVUltraB",
     "flags": 100,
-    "soundPath": "sndYVUltraB.ogg"
+    "soundPath": "snd/YVUltraB"
   },
   "sndHeavyRevolver": {
     "name": "sndHeavyRevolver",

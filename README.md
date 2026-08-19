@@ -16,9 +16,15 @@ This project is built with the GameMaker engine, much so is the original game - 
 
 There's a set of tools available that would allow you to extract assets directly from your installation of the game. By default[\*](#custom-install-footnote), these tools will look for game files in your Steam library, so no action is needed as long as your Steam library is installed conventionally.
 
-Please make sure that you have NodeJS of version 20.0+ installed on your machine. Resource extraction scripts should work on any platform that supports NodeJS runtime. (You might also need to install `npm` in case if it's not bundled with Node on your platform)
+Please make sure that you have [NodeJS](https://nodejs.org/) of version 20.0+ installed on your machine. Resource extraction scripts should work on any platform that supports NodeJS runtime. (You might also need to install `npm` separately in case it's not bundled with NodeJS on your platform)
 
 Clone this repository, open your terminal in this folder and run the following commands in your terminal:
+
+Windows: `.\project-setup-windows.bat`
+
+Linux: `bash ./project-setup-linux.sh`
+
+Or a manual variant, without using batch scripts:
 ```shell
 cd node-scripts
 npm ci
@@ -27,7 +33,8 @@ npm run regen
 
 After that, all the assets will be automatically extracted and copied to the GameMaker project in this repository, making it compileable.
 
-Whenever you introduce new assets that weren't part of the project before (for instance, if an update adds a new weapon), you should run `npm run regen-ignores`. This ensures that the resources ignore file is updated, preventing any of the new assets from being included in your commit.
+Whenever you introduce new base game assets that weren't part of the project before, you must run `npm run regen-ignores`.
+This will update the ignore files and prevent these raw assets from being added to your commit.
 
 <a name="custom-install-footnote"></a>\(*\): You can specify a custom game installation path by using a parameter when executing the installation script (`npm run regen --game-path="/your/path/here/"`)
 
