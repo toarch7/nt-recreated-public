@@ -44,20 +44,40 @@ function stringSimilarity(s1, s2) {
     return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
 }
 const showSelectDirectoryDialog = () => {
-    // todo: implement something similar for Linux using zenity
-    let cmd = `powershell -command "[System.Reflection.Assembly]::LoadWithPartialName(\'System.Windows.Forms\');`
-            + `$dialog = New-Object System.Windows.Forms.FolderBrowserDialog;`
-            + `$dialog.Description = \'Please select the directory where the game is installed.\';`
-            + `$dialog.SelectedPath = \'C:\\Program Files (x86)\\';`
-            + `$dialog.ShowNewFolderButton = $false;`
-            + `$dialog.ShowDialog();`
-            + `$dialog.SelectedPath"`;
-    
-    let result = cp.execSync(cmd).toString("utf-8");
-    let lines = result.split("\n").map(s => s.trim()).filter(s => s.length != 0);
-    let chosenDirectory = lines.pop();
-    
-    return chosenDirectory;
+    const pickerTitle = "Please select the directory where the game is installed.";
+    switch (process.platform) {
+        case "win32": {
+            let cmd = `powershell -command "[System.Reflection.Assembly]::LoadWithPartialName(\'System.Windows.Forms\');`
+                    + `$dialog = New-Object System.Windows.Forms.FolderBrowserDialog;`
+                    + `$dialog.Description = \'${pickerTitle}\';`
+                    + `$dialog.SelectedPath = \'C:\\Program Files (x86)\\';`
+                    + `$dialog.ShowNewFolderButton = $false;`
+                    + `$dialog.ShowDialog();`
+                    + `$dialog.SelectedPath"`;
+            
+            let result = cp.execSync(cmd).toString("utf-8");
+            let lines = result.split("\n").map(s => s.trim()).filter(s => s.length != 0);
+            let chosenDirectory = lines.pop();
+            
+            return chosenDirectory;
+        }
+        case "linux": {
+            let filePickerProg = "zenity";
+            try {
+                cp.execSync(`command -v ${filePickerProg} >/dev/null 2>&1`, { stdio: 'ignore' });
+            }
+            catch(e) {
+                console.warn("Unable to invoke filepicker (" + filePickerProg + ")");
+                return null;
+            }
+            let cmd = `${filePickerProg} --file-selection --directory --title "${pickerTitle}"`;
+            let result = cp.execSync(cmd).toString("utf-8");
+            let lines = result.split("\n").map(s => s.trim()).filter(s => s.length != 0);
+            let chosenDirectory = lines.pop();
+            return chosenDirectory;
+        }
+        default: return null;
+    }
 };
 const projectDirectory = path.dirname(__dirname.slice(0, __dirname.length - 1)) + path.sep;
 const parseYY = yyString => JSON.parse(yyString.replaceAll(/,(?=\s*[\]}])/g, ""));
@@ -109,13 +129,14 @@ const locateSteamLibrary = (theRest) => {
         }
     }
 
-    if (process.platform == "win32") {
+    if (process.platform == "win32" || process.platform == "linux") {
         try {
             let openDirectoryResult = showSelectDirectoryDialog();
             if (openDirectoryResult) {
                 Options.customGameDirectory = openDirectoryResult;
                 fs.writeFileSync("options.json", JSON.stringify(Options, null, 2));
             }
+            return openDirectoryResult;
         }
         catch(e) {
             console.error("showSelectDirectoryDialog() failed:", e);
