@@ -49,5 +49,18 @@ function runDirChecks(dirName) {
     }
 }
 
-runDirChecks("sprites");
-runDirChecks("sounds");
+function checkProjectIntegrity() {
+    const { resources } = project.parseProjectFile();
+    const projectLocation = project.locate("");
+
+    for(const { id } of resources) {
+        if (!fs.existsSync(projectLocation + id.path)) {
+            console.log("Resource file not found:", id.path, "name:", id.name);
+        }
+    }
+}
+
+checkProjectIntegrity();
+
+// runDirChecks("sprites");
+// runDirChecks("sounds");
