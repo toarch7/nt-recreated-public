@@ -2,6 +2,12 @@ node_modules
 
 options.json
 
+dumped_sprites
+dumped_sounds
+
+game_sounds.json
+game_sprites.json
+
 *.wav
 *.ogg
 *.png
