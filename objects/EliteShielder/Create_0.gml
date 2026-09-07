@@ -20,7 +20,7 @@ if GameCont.underwater {
     snd_dead = sndOasisDeath
 }
 
-team = 3
+team = team_popo
 
 //behavior
 walk = 30

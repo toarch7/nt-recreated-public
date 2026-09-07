@@ -147,7 +147,6 @@ if MultiplayerConfig && false {
 	
 	draw_set_color(c_gray)
 	
-	draw_text_nt(8, 72, struct_trace(my_player))
 	//draw_text_nt(24, 96, string(global.index) + "\n" + global.inputs_current)
 	
 	draw_set_color(c_white)

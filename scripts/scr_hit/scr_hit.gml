@@ -4,7 +4,9 @@
 /// @param {Enum.HitId|Array} hitid=HitId.None
 function scr_hit(_instance, _amount, _hitid = HitId.None) {
 	with _instance {
-		if instance_is(self, Player) {
+		//print("huh", _instance.object_index, _amount, _hitid)
+		
+		if (instance_is(self, Player)) {
 			var _adj = scrCustomParam("damage_to_player", 0)
 			if (_amount != 0 && _adj != 0) _amount = max(1, _amount + _adj)
 			if (scrPlayerProcTakeDamage(_amount)) return false

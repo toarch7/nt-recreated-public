@@ -5,7 +5,7 @@ team = team_none
 nexthurt = 0
 right = 1
 
-hitid = HitId.None
+if (!variable_instance_exists(id, "hitid")) hitid = HitId.None
 
 self[$ "spr_idle"] ??= -1
 self[$ "spr_hurt"] ??= -1

@@ -44,7 +44,7 @@ var _mut_count = max(GameCont.level, ds_list_size(GameCont.skills))
 
 scr_skills_clear()
 
-var _new_muts = array_shuffle(range(1, maxskill))
+var _new_muts = array_shuffle(array_create_number_range(1, maxskill))
 repeat (_mut_count) {
 	var _skill = array_shift(_new_muts)
 	if (scr_skill_is_valid(_skill) && scr_skill_can_appear(_skill)) {

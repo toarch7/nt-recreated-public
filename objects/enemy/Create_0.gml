@@ -16,8 +16,6 @@ scrEnemyApplyCreationEffects()
 target = noone
 team = team_enemy
 
-if (!variable_struct_exists(self, "hitid")) hitid = HitId.None
-
 givekill = true
 corpse = true
 

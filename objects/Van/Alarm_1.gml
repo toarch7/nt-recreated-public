@@ -1,7 +1,8 @@
-drive = 0
+drive = false
 
-if freak {
-	instance_destroy(); exit
+if (freak) {
+	instance_destroy()
+	exit
 }
 
 
@@ -11,22 +12,23 @@ drawimg = 0
 
 alarm[2] = 15
 
-repeat 3 + GameCont.loops
+repeat (3 + GameCont.loops) {
 	instance_create(x - (55 * right), y + orandom(5), Grunt)
+}
 
-var spwn;
+var _spawn;
 
-if irandom(1) {
-	spwn = choose(Inspector, Shielder)
+if (random(1) < 0.5) {
+	_spawn = choose(Inspector, Shielder)
 	
-	repeat 1 + GameCont.loops {
-		instance_create(x - 50 * right, y + orandom(5), spwn)
+	repeat (1 + GameCont.loops) {
+		instance_create(x - 50 * right, y + orandom(5), _spawn)
 	}
 }
 else {
-	spwn = choose(EliteGrunt, EliteInspector, EliteShielder)
+	_spawn = choose(EliteGrunt, EliteInspector, EliteShielder)
 	
-	repeat GameCont.loops {
-		instance_create(x - 50 * right, y + orandom(5), spwn)
+	repeat (GameCont.loops) {
+		instance_create(x - 50 * right, y + orandom(5), _spawn)
 	}
 }

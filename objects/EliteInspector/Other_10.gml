@@ -1,7 +1,8 @@
 event_inherited();
 
 if walk > 0 {
-    walk--motion_add(direction, 0.8)
+    walk --
+	motion_add(direction, 0.8)
 }
 
 if speed > 3.5 speed = 3.5

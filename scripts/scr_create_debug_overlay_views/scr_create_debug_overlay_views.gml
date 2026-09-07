@@ -149,7 +149,7 @@ function scr_create_debug_overlay_views() {
 		dbg_slider_int(ref_create(global, "__debug_transit_loop"), -1, 10, "Loop")
 		
 		var _default_max_subareas = 3,
-			_area_list = range(area_campfire, area_palace)
+			_area_list = array_create_number_range(area_campfire, area_palace)
 		
 		array_push(_area_list, area_hq)
 		

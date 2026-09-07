@@ -1,8 +1,7 @@
 alarm[1] = 20 + random(10)
 
-if control {
-    if (random(2) < 1) control = 0
-
+if (control) {
+    if (random(2) < 1) control = false
     snd_play_hit_big(sndEliteInspectorEnd, 0.2)
 }
 
@@ -40,7 +39,8 @@ if instance_exists(target) {
 
         scrRight(0)
     } else if random(3 + instance_number(PopoNade) * 3) < 1 && grenades > 0 && freeze > 40 && point_distance(x, y, target.x, target.y) < 160 && point_distance(lastx, lasty, target.x, target.y) < 160 && point_distance(x, y, lastx, lasty) > 64 || random(8) < 1 {
-        grenades--gunangle = point_direction(x, y, lastx, lasty)
+        grenades --
+		gunangle = point_direction(x, y, lastx, lasty)
         snd_play_hit_big(sndEliteInspectorAlarmed, 0.2)
         wkick = 8
         with instance_create(x, y, PopoNade) {

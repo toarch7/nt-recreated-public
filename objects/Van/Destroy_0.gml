@@ -1,21 +1,21 @@
 speed /= 20
 event_inherited()
 snd_play_hit_big(sndIDPDNadeExplo, 0.1)
-scrDrop(100, 0)
-scrDrop(100, 0)
-scrDrop(100, 0)
-repeat(3) {
-    with(instance_create(((x + random(40)) - 20), ((y + random(20)) - 10), PopoExplosion)) {
-        team = other.team
-        hitid = other.hitid
-    }
-}
-repeat(7)
-instance_create(((x + random(96)) - 48), ((y + random(48)) - 24), BlueFlame)
-if (freak == 1) {
-    repeat(3)
-    instance_create(((x + random(16)) - 8), ((y + random(16)) - 8), PopoFreak)
+
+repeat (3) scrDrop(100, 0)
+
+repeat (3) {
+    scr_damage_create(x + orandom(10), y + orandom(10), PopoExplosion)
 }
 
-with WantVan
-canspawn = 1
+repeat (7) {
+	instance_create(x + orandom(48), y + orandom(48), BlueFlame)
+}
+
+if (freak) {
+    repeat(3) {
+	    instance_create(x + orandom(8), y + orandom(8), PopoFreak)
+	}
+}
+
+with (WantVan) canspawn = true

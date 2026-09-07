@@ -211,79 +211,41 @@ function method_execute(meth, args = undefined) {
 	return m()
 }
 
-function range(a, b) {
-	var r = []
-	
-	if a > b {
-		var t = a
-		
-		a = b
-		b = t
+function array_create_number_range(_min, _max) {
+	if (_min > _max) {
+		var _t = _max
+		_max = _min
+		_min = _t
 	}
 	
-	for(var i = a; i <= b; i ++) {
-		array_push(r, i)
+	var _index = 0,
+		_count = _max - _min + 1,
+		_result = array_create(_count, 0)
+	
+	repeat _count {
+		_result[_index ++] = _min ++
 	}
 	
-	return r
+	return _result
 }
 
 function file_write(path, str) {
-	var f = file_text_open_write(path)
-    file_text_write_string(f, str)
-    file_text_close(f)
+	var _file = file_text_open_write(path)
+    file_text_write_string(_file, str)
+    file_text_close(_file)
 }
 
-function file_read(path) {
-	var f = file_text_open_read(path),
-		str = ""
+function file_read(_path) {
+	var _buffer = buffer_load(_path),
+		_contents = buffer_read(_buffer, buffer_string)
 	
-	while !file_text_eof(f) {
-		if str != ""
-			str += "\n"
-		
-		str += file_text_read_string(f)
-		file_text_readln(f)
-	}
+	buffer_delete(_buffer)
 	
-    file_text_close(f)
-	
-	return str
+	return _contents
 }
 
-function array_delete_val(array, value) {
-	var l = array_length(array)
-	
-	for(var i = 0; i < l; i ++) {
-		if array[i] == value {
-			array_delete(array, i, 1)
-			
-			return i
-		}
-	}
-	
-	return -1
-}
-
-function struct_trace(struct) {
-	var keys = struct_keys(struct), out = ""
-	
-	for(var i = 0; i < array_length(keys); i ++) {
-		var key = keys[i],
-			val = struct[$ key]
-		
-		if is_method(val) {
-			val = "func()"
-		}
-		else if is_struct(val) {
-			if val != struct {
-				val = "{\n" + string_replace_all(struct_trace(val), "\n", "  \n") + "}"
-			}
-			else val = "{ SELF }"
-		}
-		
-		out += key + ": " + string(val) + "\n"
-	}
-	
-	return out
+function array_delete_val(_array, _value) {
+	var _index = array_get_index(_array, _value)
+	if (_index >= 0) array_delete(_array, _index, 1)
+	return _index
 }

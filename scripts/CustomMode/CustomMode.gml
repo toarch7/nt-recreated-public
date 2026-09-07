@@ -58,10 +58,10 @@ function scrCustomModeLoadPresets() {
 		scrCustomModeSavePresets(true)
 	}
 	
-	var _contents = file_read(_filepath)
-	
 	try {
-		var _data = json_parse(_contents)
+		var _contents = file_read(_filepath),
+			
+			_data = json_parse(_contents)
 		
 		with (UberCont) {
 			custom_mode_disclaimer = _data.accepted_disclaimer

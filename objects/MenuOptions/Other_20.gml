@@ -114,7 +114,7 @@ scrOptionsMenuCreateElements(
 	
 	{
 		type: "list", name: L("Crosshair", "CROSSHAIR"), key: "options_crosshair",
-		list: range(0, sprite_get_number(sprCrosshair) - 1),
+		list: array_create_number_range(0, sprite_get_number(sprCrosshair) - 1),
 		
 		draw: function(_opt) {
 			draw_sprite(sprCrosshair, _opt.value, drawx + 90, drawy)
@@ -127,7 +127,7 @@ scrOptionsMenuCreateElements(
 	
 	{
 		type: "list", name: L("SideArt", "SIDE ART"), key: "options_sideart",
-		list: range(0, sprite_get_number(sprSideArt) - 1),
+		list: array_create_number_range(0, sprite_get_number(sprSideArt) - 1),
 		
 		condition: function() {
 			return !UberCont.opt_resolution
@@ -156,7 +156,7 @@ scrOptionsMenuCreateElements(
 	{ type: "switch",  name: L("HideHUD", "HIDE HUD"),    key: "visual_hud",         states: [ OPTION_ON, OPTION_OFF ] },
 	
 	{
-		type: "list", name: L("PixelMode", "PIXEL MODE"), key: "visual_scaling", list: range(1, 4),
+		type: "list", name: L("PixelMode", "PIXEL MODE"), key: "visual_scaling", list: array_create_number_range(1, 4),
 		draw: function(_opt) {
 			var _dx = view_xview + drawx + 90,
 				_dy = view_yview + drawy
@@ -524,7 +524,7 @@ scrOptionsMenuCreateElements(
 	{ type: "switch", name: L("GamepadOn", "GAMEPAD"), key: "options_gamepad" },
 	
 	/// @loc:token [ControlOptions] GamepadStyle "GAMEPAD STYLE"
-	{ type: "list", name: L("GamepadStyle", "GAMEPAD STYLE"), key: "options_gamepad_type", list: range(0, array_length(gamepad_types) - 1),
+	{ type: "list", name: L("GamepadStyle", "GAMEPAD STYLE"), key: "options_gamepad_type", list: array_create_number_range(0, array_length(gamepad_types) - 1),
 		condition: function() {
 			return is_gamepad(global.index)
 		},
