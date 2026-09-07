@@ -121,7 +121,7 @@ for (var i = pg; i < maxpg; i++) {
 		has_skills = array_length(run.skills),
 		has_ultra = is_array(run[$ "ultra_hud"]) || variable_struct_exists(run, "ultra")
 	
-    var str = month_name_short(run.month) + ". " + string_pad_zeroes(run.day, 1) + " " + scrAreaGetMapName(run.area, run.subarea, run.loop)
+    var str = month_name_short(run.month) + ". " + string_pad_zeroes(run.day, 1) + " " + scrAreaGetMapName(run.area, run.subarea, run.loop, false, false)
 	
     draw_sprite(sprDailyHistorySplat, anim, view_width / 2, yy + 3)
 	

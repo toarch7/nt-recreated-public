@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"area_get_name",
+  "%Name":"scrAreaGetMapName",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"area_get_name",
+  "name":"scrAreaGetMapName",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

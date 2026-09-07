@@ -12,10 +12,10 @@ function scrAreaGetMapName(_area, _subarea, _loop, _is_hardmode=undefined, _loca
 	if (is_undefined(_is_hardmode)) _is_hardmode = scrGameIsHardmode()
 	
     if _area == area_hq {
-        _area_string = loc_fmt("Area:HQ", "HQ%", _subarea)
+        _area_string = _localize ? loc_fmt("Area:HQ", "HQ%", _subarea) : ("HQ" + string(_subarea))
     }
 	else if _area == area_crib {
-        _area_string = loc("Area:Crib", "$$$")
+        _area_string = _localize ? loc("Area:Crib", "$$$") : "$$$"
     }
 	// secret areas
 	else if _area > 100 {
@@ -23,7 +23,7 @@ function scrAreaGetMapName(_area, _subarea, _loop, _is_hardmode=undefined, _loca
 		_subarea_string = ""
     }
 	else if _area == area_vault {
-        _area_string = loc("Area:Vault", "???")
+        _area_string = _localize ? loc("Area:Vault", "???") : "???"
     }
 	else {
         _area_string = string(_area)
@@ -33,11 +33,11 @@ function scrAreaGetMapName(_area, _subarea, _loop, _is_hardmode=undefined, _loca
     if (instance_exists(GameCont) && GameCont.win) {
         // END1 - Throne
         if instance_exists(Cinematic) {
-            _area_string = loc("Area:End1", "END1")
+            _area_string = _localize ? loc("Area:End1", "END1") : "END1"
         }
 		// END2 - HQ
 		else if (GameCont.area == area_hq && GameCont.subarea == GameCont.maxsubarea) {
-			_area_string = loc("Area:End2", "END2")
+			_area_string = _localize ? loc("Area:End2", "END2") : "END2"
         }
     }
 	
@@ -46,16 +46,19 @@ function scrAreaGetMapName(_area, _subarea, _loop, _is_hardmode=undefined, _loca
 			_result = _area_string
 		}
 		else if (_subarea_string != "") {
-			_result = loc_fmt("Area:Base", "%1-%2", _area_string, _subarea_string)
+			_result = _localize ? loc_fmt("Area:Base", "%1-%2", _area_string, _subarea_string) : $"{_area_string}-{_subarea_string}"
 		}
 		else {
-			_result = loc_fmt("Area:Secret", "%1-?", _area_string)
+			_result = _localize ? loc_fmt("Area:Secret", "%1-?", _area_string) : $"{_area_string}-?"
 		}
 	}
 	
     if (_loop != 0) {
-		return loc_fmt(_is_hardmode ? "Area:Hardmode" : "Area:Loop",
-			$"%1 {(_is_hardmode ? "H" : "L")}%2", _result, _loop)
+		if (_localize) {
+			return loc_fmt(_is_hardmode ? "Area:Hardmode" : "Area:Loop",
+				$"%1 {(_is_hardmode ? "H" : "L")}%2", _result, _loop)
+		}
+		return $"{_result} {(_is_hardmode ? "H" : "L")}{_loop}"
 	}
 	
     return _result

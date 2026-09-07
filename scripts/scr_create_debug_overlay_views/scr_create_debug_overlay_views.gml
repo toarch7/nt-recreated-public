@@ -171,7 +171,7 @@ function scr_create_debug_overlay_views() {
 			for(var _subarea = 1; _subarea <= _subareas; ++_subarea) {
 				dbg_same_line()
 				dbg_button(
-					scrAreaGetMapName(_area, _subarea, 0),
+					scrAreaGetMapName(_area, _subarea, 0, false, false),
 					__area_transit_button(_area, _subarea),
 					(65 + _missing_subareas * 20.33) * max(1, _missing_subareas))
 			}
