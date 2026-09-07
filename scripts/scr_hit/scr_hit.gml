@@ -3,9 +3,7 @@
 /// @param amount
 /// @param {Enum.HitId|Array} hitid=HitId.None
 function scr_hit(_instance, _amount, _hitid = HitId.None) {
-	with _instance {
-		//print("huh", _instance.object_index, _amount, _hitid)
-		
+	with (_instance) {
 		if (instance_is(self, Player)) {
 			var _adj = scrCustomParam("damage_to_player", 0)
 			if (_amount != 0 && _adj != 0) _amount = max(1, _amount + _adj)
@@ -16,9 +14,9 @@ function scr_hit(_instance, _amount, _hitid = HitId.None) {
 			drawlowhp = 30
 		}
 		
-		if _amount > 0 {
+		if (_amount > 0) {
+			nexthurt = current_frame + 6
 			hp -= _amount
-			nexthurt = current_frame + 5
 		}
 		
 		sprite_index = spr_hurt
