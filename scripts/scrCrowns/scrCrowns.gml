@@ -141,14 +141,18 @@ function scrCrownApplyEquipEffect(_crown_id, _is_equipped) {
 /// @param {Real|Enum.Race} race_id
 /// @param {Real|Enum.Crown} crown_id
 function scrCrownUnlock(_race_id, _crown_id) {
-	if (scr_loadout_race_is_crown_unlocked(_race_id, _crown_id)
-	|| !scr_loadout_is_available_for_race(_race_id))
-		return false
+	//if (scr_loadout_race_is_crown_unlocked(_race_id, _crown_id)
+	//|| !scr_loadout_is_available_for_race(_race_id))
+	//	return false
 	
 	scr_loadout_race_unlock_crown(_race_id, _crown_id)
 	
-    scrShowUnlockPopup(loc_fmt("@w%@s UNLOCKED#FOR @w%",
-		loc(scr_crown_get_name(_crown_id)), loc(scrRaceGetName(_race_id))))
+	var _crown_name = loc("Crowns", _crown_id, "Name", scr_crown_get_name(_crown_id)),
+		_race_name = loc("Races", _race_id, "Name", scrRaceGetName(_race_id))
+	
+    scrShowUnlockPopup(
+		loc_fmt("Unlock:Crown:1", "@w%@s", _crown_name),
+		loc_fmt("Unlock:Crown:2", "FOR @w%", _race_name))
     
 	scrSave()
 	
