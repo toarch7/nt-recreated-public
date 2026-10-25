@@ -4,7 +4,7 @@
 # Release requirements
 - [x] Credits screen rework
 - [ ] Proper gamepad controls in the loadout menu
-- [ ] Assign all enemies & damage sourcers their proper `hitid`s
+- [x] Assign all enemies & damage sourcers their proper `hitid`s
 - [ ] Introduce backwards-compatible resourcepack loader mode
 
 # Main priority
