@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"input_ignore_key_remove",
   "parent":{
-    "name":"Other",
-    "path":"folders/Extensions/Input/Other.yy",
+    "name":"23  Other",
+    "path":"folders/Input/23  Other.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

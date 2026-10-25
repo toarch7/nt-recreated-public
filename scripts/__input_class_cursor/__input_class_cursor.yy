@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"__input_class_cursor",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Extensions/Input/(System).yy",
+    "name":"Classes",
+    "path":"folders/Input/(System)/Classes.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

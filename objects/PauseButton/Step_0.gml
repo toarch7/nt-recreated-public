@@ -10,7 +10,7 @@ if wait {
 }
 
 // Back
-if gamepad_button_check(0, gp_face2) && image_index == 3 {
+if (input_gamepad_check_pressed(0, gp_face2) && image_index == 3) {
 	event_user(0)
 }
 

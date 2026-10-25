@@ -1,32 +1,21 @@
-/// @param [playerIndex]
+// Feather disable all
+/// @desc    Returns the y-coordinate of the player's cursor
+///          The coordinate space should be a member of the INPUT_COORD_SPACE enum:
+///              .ROOM      Room coordinates; should be the same as mouse_x and mouse_y. This is the default value
+///              .GUI       GUI coordinates
+///              .DEVICE    Raw device-space coordinates
+/// 
+/// @param   [playerIndex=0]
+/// @param   [coordSpace]     Coordinate space to use. If not specified, the coordinate space set by input_cursor_coord_space_set() is used
 
-function input_cursor_y()
+function input_cursor_y(_player_index = 0, _output_system = undefined)
 {
-    if (INPUT_WARNING_DEPRECATED) __input_error("This function has been deprecated\n(Set INPUT_WARNING_DEPRECATED to <false> to ignore this warning)");
+    __INPUT_GLOBAL_STATIC_LOCAL  //Set static _global
+    __INPUT_VERIFY_PLAYER_INDEX
     
-    var _player_index = ((argument_count > 0) && (argument[0] != undefined))? argument[0] : 0;
-    
-    if (_player_index < 0)
-    {
-        __input_error("Invalid player index provided (", _player_index, ")");
-        return undefined;
-    }
-    
-    if (_player_index >= INPUT_MAX_PLAYERS)
-    {
-        __input_error("Player index too large (", _player_index, " vs. ", INPUT_MAX_PLAYERS, ")\nIncrease INPUT_MAX_PLAYERS to support more players");
-        return undefined;
-    }
-    
-    with(global.__input_players[_player_index].cursor)
-    {
-        if (is_numeric(camera) && (camera >= 0) && (INPUT_MOUSE_MODE == 0))
-        {
-            return camera_get_view_y(camera) + y;
-        }
-        else
-        {
-            return y;
-        }
-    }
+    var _cursor = _global.__players[_player_index].__cursor;
+    return __input_transform_coordinate(_cursor.__x,
+                                        _cursor.__y,
+                                        _cursor.__coord_space,
+                                        _output_system ?? _cursor.__coord_space).y;
 }

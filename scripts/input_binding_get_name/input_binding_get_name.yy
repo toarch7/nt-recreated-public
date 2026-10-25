@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"input_binding_get_name",
   "parent":{
-    "name":"Binding Management",
-    "path":"folders/Extensions/Input/Binding Management.yy",
+    "name":"06  Binding Access",
+    "path":"folders/Input/06  Binding Access.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

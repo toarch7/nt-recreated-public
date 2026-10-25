@@ -162,52 +162,52 @@ function scrKeyName(_key) {
 }
 
 function scrGamepadAnykey() {
-    if gamepad_button_check_pressed(0, gp_shoulderl) {
+    if input_gamepad_check_pressed(0, gp_shoulderl) {
         return gp_shoulderl
     }
-	else if gamepad_button_check_pressed(0, gp_shoulderr) {
+	else if input_gamepad_check_pressed(0, gp_shoulderr) {
         return gp_shoulderr
     }
-	else if gamepad_button_check_pressed(0, gp_shoulderlb) {
+	else if input_gamepad_check_pressed(0, gp_shoulderlb) {
         return gp_shoulderlb
     }
-	else if gamepad_button_check_pressed(0, gp_shoulderrb) {
+	else if input_gamepad_check_pressed(0, gp_shoulderrb) {
         return gp_shoulderrb
     }
-	else if gamepad_button_check_pressed(0, gp_face1) {
+	else if input_gamepad_check_pressed(0, gp_face1) {
         return gp_face1
     }
-	else if gamepad_button_check_pressed(0, gp_face2) {
+	else if input_gamepad_check_pressed(0, gp_face2) {
         return gp_face2
     }
-	else if gamepad_button_check_pressed(0, gp_face3) {
+	else if input_gamepad_check_pressed(0, gp_face3) {
         return gp_face3
     }
-	else if gamepad_button_check_pressed(0, gp_face4) {
+	else if input_gamepad_check_pressed(0, gp_face4) {
         return gp_face4
     }
-	else if gamepad_button_check_pressed(0, gp_padd) {
+	else if input_gamepad_check_pressed(0, gp_padd) {
         return gp_padd
     }
-	else if gamepad_button_check_pressed(0, gp_padu) {
+	else if input_gamepad_check_pressed(0, gp_padu) {
         return gp_padu
     }
-	else if gamepad_button_check_pressed(0, gp_padr) {
+	else if input_gamepad_check_pressed(0, gp_padr) {
         return gp_padr
     }
-	else if gamepad_button_check_pressed(0, gp_padl) {
+	else if input_gamepad_check_pressed(0, gp_padl) {
         return gp_padl
     }
-	else if gamepad_button_check_pressed(0, gp_start) {
+	else if input_gamepad_check_pressed(0, gp_start) {
         return gp_start
     }
-	else if gamepad_button_check_pressed(0, gp_select) {
+	else if input_gamepad_check_pressed(0, gp_select) {
         return gp_select
     }
 	else if scr_keyboard_check_pressed(vk_space) {
         return gp_face1
     }
-	else if gamepad_button_check_pressed(0, gp_stickl) {
+	else if input_gamepad_check_pressed(0, gp_stickl) {
         return gp_stickl
     }
 	else if scr_keyboard_check_pressed(gp_stickr) {
@@ -273,7 +273,7 @@ function scrHandleInputsGeneral(_index) {
 	    if localcoop {
 	        scrSetGamepadInputs(1)
 	    }
-		else if gamepad_button_check(0, gp_start) {
+		else if input_gamepad_check(0, gp_start) {
 	        opt_gamepad = true
 	    }
 		

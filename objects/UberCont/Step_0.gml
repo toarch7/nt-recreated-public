@@ -3,8 +3,6 @@ var _index = global.index
 if native_cursor_inst != -1
 	native_cursor_update()
 
-input_tick()
-
 if (!block_input_frames) {
 	scrHandleInputsGeneral(global.index)
 	scrGamepadUIControl()
@@ -34,7 +32,7 @@ if (paused) {
 
 if (!KeyCont.press_paus[_index]) {
 	KeyCont.press_paus[_index] = scr_keyboard_check_pressed(vk_escape)
-		|| scr_keyboard_check_pressed(vk_backspace) || gamepad_button_check_pressed(0, gp_start)
+		|| scr_keyboard_check_pressed(vk_backspace) || input_gamepad_check_pressed(0, gp_start)
 	
 	if !paused && !want_pause && (!is_desktop || (!instance_exists(CoopController) && opt_autopause)) {
 		if (is_desktop ? (!window_has_focus()) : os_is_paused()) {

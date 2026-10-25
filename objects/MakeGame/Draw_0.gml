@@ -150,8 +150,8 @@ if loading {
             draw_set_alpha(1)
         }
 		
-		var _pad_yes = gamepad_button_check_pressed(0, gp_face1),
-			_pad_no = gamepad_button_check_pressed(0, gp_face2)
+		var _pad_yes = input_gamepad_check_pressed(0, gp_face1),
+			_pad_no = input_gamepad_check_pressed(0, gp_face2)
 		
         if ((pointed_item != -1 && mouse_ui_clicked()) || _pad_yes || _pad_no) {
             // yes

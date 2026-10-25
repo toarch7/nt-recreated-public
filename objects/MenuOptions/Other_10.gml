@@ -335,7 +335,7 @@ if (sliderheld > 0) if (-- sliderheld) <= 0 {
 }
 
 var _press = mouse_ui_clicked()
-		|| (UberCont.opt_gamepad && gamepad_button_check_pressed(0, gp_face1))
+		|| (UberCont.opt_gamepad && input_gamepad_check_pressed(0, gp_face1))
 		|| (UberCont.opt_keyboard && scr_keyboard_check_pressed(vk_enter)),
 	
 	yoff = 6 * (_current_category != 0),

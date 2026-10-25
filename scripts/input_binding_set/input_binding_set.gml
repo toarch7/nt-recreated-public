@@ -1,38 +1,20 @@
-/// @param verb
-/// @param binding
-/// @param [playerIndex]
-/// @param [alternate]
+// Feather disable all
+/// @desc    Sets the binding for the given verb. The alternate index parameter can be used to
+///          set multiple parallel inputs for one verb. If no profile name is provided, the
+///          current profile is used
+/// @param   verb
+/// @param   binding
+/// @param   [playerIndex=0]
+/// @param   [alternate=0]
+/// @param   [profileName]
 
-function input_binding_set()
+function input_binding_set(_verb_name, _binding, _player_index = 0, _alternate = 0, _profile_name = undefined)
 {
-    var _verb         = argument[0];
-    var _binding      = argument[1];
-    var _player_index = ((argument_count > 2) && (argument[2] != undefined))? argument[2] : 0;
-    var _alternate    = ((argument_count > 3) && (argument[3] != undefined))? argument[3] : 0;
-    
-    if (_player_index < 0)
-    {
-        __input_error("Invalid player index provided (", _player_index, ")");
-        return undefined;
-    }
-    
-    if (_player_index >= INPUT_MAX_PLAYERS)
-    {
-        __input_error("Player index too large (", _player_index, " vs. ", INPUT_MAX_PLAYERS, ")\nIncrease INPUT_MAX_PLAYERS to support more players");
-        return undefined;
-    }
-    
-    if (_alternate < 0)
-    {
-        __input_error("Invalid \"alternate\" argument (", _alternate, ")");
-        return undefined;
-    }
-    
-    if (_alternate >= INPUT_MAX_ALTERNATE_BINDINGS)
-    {
-        __input_error("\"alternate\" argument too large (", _alternate, " vs. ", INPUT_MAX_ALTERNATE_BINDINGS, ")\nIncrease INPUT_MAX_ALTERNATE_BINDINGS for more alternate binding slots");
-        return undefined;
-    }
+    __INPUT_GLOBAL_STATIC_LOCAL  //Set static _global
+    __INPUT_VERIFY_PLAYER_INDEX
+    __INPUT_VERIFY_ALTERNATE_INDEX
+    __INPUT_VERIFY_BASIC_VERB_NAME
+    __INPUT_VERIFY_PROFILE_NAME
     
     if (!input_value_is_binding(_binding))
     {
@@ -40,10 +22,8 @@ function input_binding_set()
         return undefined;
     }
     
-    with(global.__input_players[_player_index])
-    {
-        var _source = __input_binding_get_source(_binding)
-        __input_trace("Setting player ", _player_index, " binding for source=", input_source_get_name(_source), ", verb=", _verb, ", alt=", _alternate, " to \"", input_binding_get_name(_binding), "\"");
-        set_binding(_source, _verb, _alternate, _binding);
-    }
+    _global.__players[_player_index].__binding_set(_profile_name, _verb_name, _alternate, _binding);
+    
+    //Ensure verb state doesn't leak through anywhere
+    input_verb_consume(all, _player_index);
 }

@@ -232,8 +232,12 @@ function CustomTexturePageCompactor() constructor {
 			_texturegroup_textures = [],
 			_texturegroup_sprite_data = {}
 		
-		#macro debug_render_custom_texturepage_backgrounds false
+		#macro debug_render_custom_texturepage_backgrounds true
 		#macro debug_texture_text_scale 1
+		
+		if (debug_render_custom_texturepage_backgrounds) {
+			draw_set_font(fntSmaller)
+		}
 		
 		for(var _texturepage_index = 0; _texturepage_index < _texture_page_count; ++_texturepage_index) {
 			surface_set_target(_surface)
@@ -266,19 +270,27 @@ function CustomTexturePageCompactor() constructor {
 					if (debug_render_custom_texturepage_backgrounds) {
 						draw_set_color(_frame.image_blend)
 						draw_rectangle(_frame.x, _frame.y, _frame.x + _frame.width, _frame.y + _frame.height, !_frame.is_sorted)
-						
-						draw_set_color(c_black)
-						draw_text_transformed(_frame.x + 4, _frame.y + 3, _sprite_name, debug_texture_text_scale, debug_texture_text_scale, 0)
-						draw_text_transformed(_frame.x + 4, _frame.y + 4, _sprite_name, debug_texture_text_scale, debug_texture_text_scale, 0)
-						
-						draw_set_color(c_white)
-						draw_text_transformed(_frame.x + 3, _frame.y + 3, _sprite_name, debug_texture_text_scale, debug_texture_text_scale, 0)
 					}
 					
 					draw_sprite(_sprite, _frame.image_index,
 								
 								_frame.x + sprite_get_xoffset(_sprite),
 								_frame.y + sprite_get_yoffset(_sprite))
+					
+					if (debug_render_custom_texturepage_backgrounds) {
+						var _str = $"{string_trim_start(_sprite_name, [ resourcepack_texturegen_prefix ])}\n{_frame.image_index}"
+						
+						draw_set_color(c_black)
+						draw_text_transformed(_frame.x + 4, _frame.y + 3, _str, debug_texture_text_scale, debug_texture_text_scale, 0)
+						draw_text_transformed(_frame.x + 4, _frame.y + 4, _str, debug_texture_text_scale, debug_texture_text_scale, 0)
+						draw_text_transformed(_frame.x + 2, _frame.y + 4, _str, debug_texture_text_scale, debug_texture_text_scale, 0)
+						draw_text_transformed(_frame.x + 3, _frame.y + 2, _str, debug_texture_text_scale, debug_texture_text_scale, 0)
+						draw_text_transformed(_frame.x + 3, _frame.y + 4, _str, debug_texture_text_scale, debug_texture_text_scale, 0)
+						draw_text_transformed(_frame.x + 2, _frame.y + 3, _str, debug_texture_text_scale, debug_texture_text_scale, 0)
+						
+						draw_set_color(c_white)
+						draw_text_transformed(_frame.x + 3, _frame.y + 3, _str, debug_texture_text_scale, debug_texture_text_scale, 0)
+					}
 					
 					_sprite_frames[_frame.image_index] = _frame.to_frame_entry(_texturepage_index)
 				}
@@ -300,6 +312,10 @@ function CustomTexturePageCompactor() constructor {
 			var _texture_name = $"texturepage_{_texturepage_index}.png"
 			array_push(_texturegroup_textures, _texture_name)
 			surface_save(_surface, _texture_name)
+		}
+		
+		if (debug_render_custom_texturepage_backgrounds) {
+			draw_reset_font()
 		}
 		
 		surface_free(_surface)

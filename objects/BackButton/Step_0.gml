@@ -19,7 +19,7 @@ with MenuOptions {
 		backspace = false
 }
 
-if ((gamepad_button_check_pressed(0, gp_face2) || scr_keyboard_check_pressed(vk_escape) || backspace)
+if ((input_gamepad_check_pressed(0, gp_face2) || scr_keyboard_check_pressed(vk_escape) || backspace)
 	|| (is_keyboard() && mouse_check_button_pressed(mb_right) && !(instance_exists(CoopController) && instance_exists(Menu)))
 ) {
 	if (!instance_exists_var(MenuOptions, "await_input", true)) event_user(0)

@@ -1,4 +1,9 @@
 /// @description Volume controls, event dates, options
+
+if (!instance_exists(input_controller_object)) {
+	instance_create(0, 0, input_controller_object)
+}
+
 if !instance_exists(Player) {
     UberCont.hardmode = false
     SetVolumeControl(false)

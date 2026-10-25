@@ -1,36 +1,36 @@
-/// @param verbA
-/// @param alternateA
-/// @param verbB
-/// @param alternateB
-/// @param [source]
-/// @param [playerIndex]
+// Feather disable all
+/// @desc    Swaps over two bindings within the same profile. This is useful to resolve binding conflicts
+/// @param   verbA
+/// @param   alternateA
+/// @param   verbB
+/// @param   alternateB
+/// @param   [playerIndex=0]
+/// @param   [profileName]
 
-function input_binding_swap()
+function input_binding_swap(_verb_a, _alternate_a, _verb_b, _alternate_b, _player_index = 0, _profile_name = undefined)
 {
-    var _verb_a       = argument[0];
-    var _alternate_a  = argument[1];
-    var _verb_b       = argument[2];
-    var _alternate_b  = argument[3];
-    var _source       = (argument_count > 4)? argument[4] : undefined;
-    var _player_index = ((argument_count > 5) && (argument[5] != undefined))? argument[5] : 0;
+    __INPUT_GLOBAL_STATIC_LOCAL  //Set static _global
+    __INPUT_VERIFY_PLAYER_INDEX
+    __INPUT_VERIFY_PROFILE_NAME
     
-    if (_player_index < 0)
+    var _binding_a = input_binding_get(_verb_a, _player_index, _alternate_a, _profile_name);
+    var _binding_b = input_binding_get(_verb_b, _player_index, _alternate_b, _profile_name);
+    
+    if (_binding_b == undefined)
     {
-        __input_error("Invalid player index provided (", _player_index, ")");
-        return undefined;
+        input_binding_remove(_verb_a, _player_index, _alternate_a, _profile_name);
+    }
+    else
+    {
+        input_binding_set(_verb_a, _binding_b, _player_index, _alternate_a, _profile_name);
     }
     
-    if (_player_index >= INPUT_MAX_PLAYERS)
+    if (_binding_a == undefined)
     {
-        __input_error("Player index too large (", _player_index, " vs. ", INPUT_MAX_PLAYERS, ")\nIncrease INPUT_MAX_PLAYERS to support more players");
-        return undefined;
+        input_binding_remove(_verb_b, _player_index, _alternate_b, _profile_name);
     }
-    
-    if (_source == undefined) _source = global.__input_players[_player_index].source;
-    
-    var _binding_a = input_binding_get(_verb_a, _source, _player_index, _alternate_a);
-    var _binding_b = input_binding_get(_verb_b, _source, _player_index, _alternate_b);
-    
-    input_binding_set(_verb_a, _binding_b, _player_index, _alternate_a);
-    input_binding_set(_verb_b, _binding_a, _player_index, _alternate_b);
+    else
+    {
+        input_binding_set(_verb_b, _binding_a, _player_index, _alternate_b, _profile_name);
+    }
 }

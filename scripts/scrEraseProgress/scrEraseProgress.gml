@@ -14,9 +14,8 @@ function scrEraseProgress() {
         dont_save = 1
     }
 
-    with all {
-        if object_index != Console instance_destroy(id, 0)
-    }
-
+    scrCleanupSessionInstances()
+	instance_destroy(UberCont, true)
+	
     room_goto(romInit)
 }

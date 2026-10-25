@@ -1,40 +1,32 @@
-/// @param leftVerb
-/// @param rightVerb
-/// @param upVerb
-/// @param downVerb
-/// @param [playerIndex]
+// Feather disable all
+/// @desc    Returns the vector represented by the sum of the verb values
+/// @param   leftVerb
+/// @param   rightVerb
+/// @param   upVerb
+/// @param   downVerb
+/// @param   [playerIndex=0]
+/// @param   [mostRecent]
 
-function input_xy()
+function input_xy(_verb_l, _verb_r, _verb_u, _verb_d, _player_index = 0, _most_recent = INPUT_DEFAULT_2D_MOST_RECENT)
 {
-    var _verb_l       = argument[0];
-    var _verb_r       = argument[1];
-    var _verb_u       = argument[2];
-    var _verb_d       = argument[3];
-    var _player_index = ((argument_count > 4) && (argument[4] != undefined))? argument[4] : 0;
+    static _result = {
+        x: 0,
+        y: 0,
+    };
     
     if (!is_struct(_player_index))
     {
-        //Check to see if the given player index is suitable
-        if (_player_index < 0)
-        {
-            __input_error("Invalid player index provided (", _player_index, ")");
-            return undefined;
-        }
-        
-        if (_player_index >= INPUT_MAX_PLAYERS)
-        {
-            __input_error("Player index too large (", _player_index, " vs. ", INPUT_MAX_PLAYERS, ")\nIncrease INPUT_MAX_PLAYERS to support more players");
-            return undefined;
-        }
+        __INPUT_GLOBAL_STATIC_LOCAL  //Set static _global
+        __INPUT_VERIFY_PLAYER_INDEX
         
         //Grab the player's verbs
-        var _player_verbs_struct = global.__input_players[_player_index].verbs;
+        var _player_verbs_struct = _global.__players[_player_index].__verb_state_dict;
     }
     else
     {
         //Secret feature that's used internally!
         //If you provide a player struct instead of an integer index then we pull the verbs struct from that instead
-        var _player_verbs_struct = _player_index.verbs;
+        var _player_verbs_struct = _player_index.__verb_state_dict;
     }
     
     //And pull out verb structs for each verb name passed into the function
@@ -50,36 +42,49 @@ function input_xy()
     if (!is_struct(_verb_struct_d)) __input_error("Down verb not recognised (", _verb_d, ")");
     
     //If any of the verbs have been consumed then set their value to 0, otherwise use the raw value from the binding
-    var _value_l = _verb_struct_l.consumed? 0.0 : _verb_struct_l.raw;
-    var _value_r = _verb_struct_r.consumed? 0.0 : _verb_struct_r.raw;
-    var _value_u = _verb_struct_u.consumed? 0.0 : _verb_struct_u.raw;
-    var _value_d = _verb_struct_d.consumed? 0.0 : _verb_struct_d.raw;
+    var _value_l = _verb_struct_l.__inactive? 0.0 : _verb_struct_l.__raw;
+    var _value_r = _verb_struct_r.__inactive? 0.0 : _verb_struct_r.__raw;
+    var _value_u = _verb_struct_u.__inactive? 0.0 : _verb_struct_u.__raw;
+    var _value_d = _verb_struct_d.__inactive? 0.0 : _verb_struct_d.__raw;
     
     //Check to see if any the verbs are non-analogue (and are being pressed)
     var _any_non_analogue = false;
     
-    if (((_value_l > 0.0) && !_verb_struct_l.raw_analogue)
-    ||  ((_value_r > 0.0) && !_verb_struct_r.raw_analogue)
-    ||  ((_value_u > 0.0) && !_verb_struct_u.raw_analogue)
-    ||  ((_value_d > 0.0) && !_verb_struct_d.raw_analogue))
+    if (((_value_l > 0.0) && !_verb_struct_l.__raw_analogue)
+    ||  ((_value_r > 0.0) && !_verb_struct_r.__raw_analogue)
+    ||  ((_value_u > 0.0) && !_verb_struct_u.__raw_analogue)
+    ||  ((_value_d > 0.0) && !_verb_struct_d.__raw_analogue))
     {
         _any_non_analogue = true;
         
         //If we *do* have some non-analogue buttons pressed, then find all the analogue values and set them to zero
         //This means that if the player presses on the dpad whilst also using an analogue stick we ignore the thumbstick and use the dpad input instead
-        if (_verb_struct_u.raw_analogue) _value_u = 0.0;
-        if (_verb_struct_d.raw_analogue) _value_d = 0.0;
-        if (_verb_struct_l.raw_analogue) _value_l = 0.0;
-        if (_verb_struct_r.raw_analogue) _value_r = 0.0;
+        if (_verb_struct_u.__raw_analogue) _value_u = 0.0;
+        if (_verb_struct_d.__raw_analogue) _value_d = 0.0;
+        if (_verb_struct_l.__raw_analogue) _value_l = 0.0;
+        if (_verb_struct_r.__raw_analogue) _value_r = 0.0;
     }
     
-    //Calculate the actual raw x/y values, and the displacement
+    //Calculate the actual raw x/y values
     var _dx = _value_r - _value_l;
     var _dy = _value_d - _value_u;
+    
+    if (_most_recent)
+    {
+        if ((_value_l > 0.0) && (_value_r > 0.0)) { _dx = ((_verb_struct_l.__press_time > _verb_struct_r.__press_time)? -_value_l : _value_r); }
+        if ((_value_u > 0.0) && (_value_d > 0.0)) { _dy = ((_verb_struct_u.__press_time > _verb_struct_d.__press_time)? -_value_u : _value_d); }
+    }
+    
+    //Calculate the displacement
     var _d = sqrt(_dx*_dx + _dy*_dy);
     
     //If the displacement is exactly zero then skip then early-out
-    if (_d <= 0.0) return { x : 0, y : 0 };
+    if (_d <= 0.0)
+    {
+        _result.x = 0;
+        _result.y = 0;
+        return _result;
+    }
     
     //Scale down the x/y values if we want to clamp output values between 0.0 and 1.0
     if (INPUT_2D_CLAMP || !_any_non_analogue)
@@ -92,7 +97,9 @@ function input_xy()
     if (_any_non_analogue)
     {
         //No need to do a lot of maths if we have non-analogue input, just output the answer
-        return { x : _dx, y : _dy };
+        _result.x = _dx;
+        _result.y = _dy;
+        return _result;
     }
     
     //Approximate average of axis thresholds across all active verbs
@@ -100,15 +107,17 @@ function input_xy()
     var _min_threshold = 0.0;
     var _max_threshold = 0.0;
     
-    if (_value_l > 0.0) { _active_count++;   _min_threshold += _verb_struct_l.min_threshold;   _max_threshold += _verb_struct_l.max_threshold; }
-    if (_value_r > 0.0) { _active_count++;   _min_threshold += _verb_struct_r.min_threshold;   _max_threshold += _verb_struct_r.max_threshold; }
-    if (_value_u > 0.0) { _active_count++;   _min_threshold += _verb_struct_u.min_threshold;   _max_threshold += _verb_struct_u.max_threshold; }
-    if (_value_d > 0.0) { _active_count++;   _min_threshold += _verb_struct_d.min_threshold;   _max_threshold += _verb_struct_d.max_threshold; }
+    if (_value_l > 0.0) { _active_count++;   _min_threshold += _verb_struct_l.__min_threshold;   _max_threshold += _verb_struct_l.__max_threshold; }
+    if (_value_r > 0.0) { _active_count++;   _min_threshold += _verb_struct_r.__min_threshold;   _max_threshold += _verb_struct_r.__max_threshold; }
+    if (_value_u > 0.0) { _active_count++;   _min_threshold += _verb_struct_u.__min_threshold;   _max_threshold += _verb_struct_u.__max_threshold; }
+    if (_value_d > 0.0) { _active_count++;   _min_threshold += _verb_struct_d.__min_threshold;   _max_threshold += _verb_struct_d.__max_threshold; }
     
     //Catch an edge case
     if (_active_count <= 0.0)
     {
-        return { x : 0, y : 0 };
+        _result.x = 0;
+        _result.y = 0;
+        return _result;
     }
     
     _min_threshold /= _active_count;
@@ -116,9 +125,26 @@ function input_xy()
     
     //Apply the min/max thresholds for fully analogue input
     var _coeff = clamp((_d - _min_threshold) / (_max_threshold - _min_threshold), 0.0, 1.0);
-    _dx *= _coeff;
-    _dy *= _coeff;
+    _dx = (_dx/_d)*_coeff;
+    _dy = (_dy/_d)*_coeff;
+    
+    if (INPUT_2D_XY_AXIS_BIAS > 0)
+    {
+        var _divisor = INPUT_2D_XY_AXIS_BIAS_DIAGONALS? 45 : 90;
+        
+        var _direction = point_direction(0, 0, _dx, _dy);
+        var _dir_mod = (_direction mod _divisor) / _divisor;
+        _dir_mod = clamp((_dir_mod - 0.5*0.999*INPUT_2D_XY_AXIS_BIAS) / (1 - 0.999*INPUT_2D_XY_AXIS_BIAS), 0, 1);
+        _dir_mod = _dir_mod*_dir_mod*(3 - 2*_dir_mod); //Smooth step babyyyy
+        _direction = _divisor*((_direction div _divisor) + _dir_mod);
+        
+        var _distance = point_distance(0, 0, _dx, _dy);
+        _dx = lengthdir_x(_distance, _direction);
+        _dy = lengthdir_y(_distance, _direction);
+    }
     
     //Spit out the answer!
-    return { x : _dx, y : _dy };
+    _result.x = _dx;
+    _result.y = _dy;
+    return _result;
 }

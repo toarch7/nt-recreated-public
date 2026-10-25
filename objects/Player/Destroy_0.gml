@@ -15,6 +15,8 @@ if scrCrownCheck(crwn_death) {
     }
 }
 
+snd_stop(snd_lowa)
+snd_stop(snd_lowh)
 snd_play(snd_dead)
 
 if (wep > 0) with (scrWeaponPickupCreate(x, y, wep)) {

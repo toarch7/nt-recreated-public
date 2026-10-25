@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"input_is_analogue",
   "parent":{
-    "name":"Checkers",
-    "path":"folders/Extensions/Input/Checkers.yy",
+    "name":"01  Checking Verbs",
+    "path":"folders/Input/01  Checking Verbs.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

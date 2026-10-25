@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"input_xy",
   "parent":{
-    "name":"2D Checkers",
-    "path":"folders/Extensions/Input/2D Checkers.yy",
+    "name":"02  2D Checkers",
+    "path":"folders/Input/02  2D Checkers.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

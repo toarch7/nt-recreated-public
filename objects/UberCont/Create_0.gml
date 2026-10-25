@@ -118,7 +118,10 @@ scrUnlocksCharacterStats()
 
 device_mouse_dbclick_enable(0)
 //mp_potential_settings(90, 5, 5, 0)
-gamepad_set_axis_deadzone(0, 0.1)
+
+for(var i = 0; i < 4; ++i) {
+	gamepad_set_axis_deadzone(i, 0.2)
+}
 
 localcoop = 0
 gamepad_sel = 0
@@ -143,8 +146,7 @@ global.crownpick = 1
 
 global.recontinued_times = 0
 
-if os_type == os_android
-	volqueue = ds_queue_create()
+if (os_type == os_android) volqueue = ds_queue_create()
 
 continued_run = 0
 
@@ -154,12 +156,14 @@ load_resourcepacks()
 
 show_crosshair = true
 
-if is_steamdeck
-	show_crosshair = false
+if (is_steamdeck) show_crosshair = false
 
-if MultiplayerConfig
-	scrWindowOpenSecondary(true)
+if (MultiplayerConfig) scrWindowOpenSecondary(true)
 
 global.seed = random_get_seed()
 
 test_framerate_uncapped = false
+
+if (!instance_exists(input_controller_object)) {
+	instance_create(0, 0, input_controller_object)
+}

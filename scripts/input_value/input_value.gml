@@ -1,22 +1,14 @@
-/// @param verb/array
-/// @param [playerIndex]
+// Feather disable all
+/// @desc    Returns the analogue value that the verb is currently receiving
+///          If the verb has not received analogue input, this function will return either 0 or 1
+///          If an array of verbs is provided, this function will return the sum of all verb values
+/// @param   {any} verb/array
+/// @param   [playerIndex=0]
 
-function input_value()
+function input_value(_verb, _player_index = 0)
 {
-    var _verb         = argument[0];
-    var _player_index = ((argument_count > 1) && (argument[1] != undefined))? argument[1] : 0;
-    
-    if (_player_index < 0)
-    {
-        __input_error("Invalid player index provided (", _player_index, ")");
-        return undefined;
-    }
-    
-    if (_player_index >= INPUT_MAX_PLAYERS)
-    {
-        __input_error("Player index too large (", _player_index, " vs. ", INPUT_MAX_PLAYERS, ")\nIncrease INPUT_MAX_PLAYERS to support more players");
-        return undefined;
-    }
+    __INPUT_GLOBAL_STATIC_LOCAL  //Set static _global
+    __INPUT_VERIFY_PLAYER_INDEX
     
     if (is_array(_verb))
     {
@@ -32,14 +24,9 @@ function input_value()
         return _sum;
     }
     
-    var _verb_struct = variable_struct_get(global.__input_players[_player_index].verbs, _verb);
-    if (!is_struct(_verb_struct))
-    {
-        __input_error("Verb not recognised (", _verb, ")");
-        return undefined;
-    }
+    __INPUT_GET_VERB_STRUCT
     
-    if (_verb_struct.consumed) return false;
+    if (_verb_struct.__inactive) return false;
     
-    return _verb_struct.value;
+    return _verb_struct.__value;
 }

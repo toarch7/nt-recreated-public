@@ -1,40 +1,41 @@
-/// @param centerX
-/// @param centerY
-/// @param radius
-/// @param [playerIndex]
+// Feather disable all
+/// @desc    Limits the cursor’s motion inside a circle centred at the given point
+/// @param   x
+/// @param   y
+/// @param   radius
+/// @param   [playerIndex=0]
 
-function input_cursor_limit_circle()
+function input_cursor_limit_circle(_x, _y, _radius, _player_index = 0)
 {
-    if (INPUT_WARNING_DEPRECATED) __input_error("This function has been deprecated\n(Set INPUT_WARNING_DEPRECATED to <false> to ignore this warning)");
+    __INPUT_GLOBAL_STATIC_LOCAL  //Set static _global
     
-    var _centre_x     = argument[0];
-    var _centre_y     = argument[1];
-    var _radius       = argument[2];
-    var _player_index = ((argument_count > 3) && (argument[3] != undefined))? argument[3] : 0;
-    
-    if (_player_index < 0)
+    if (_player_index == all)
     {
-        __input_error("Invalid player index provided (", _player_index, ")");
-        return undefined;
+        var _p = 0;
+        repeat(INPUT_MAX_PLAYERS)
+        {
+            input_cursor_limit_circle(_x, _y, _radius, _p);
+            ++_p;
+        }
+        
+        return;
     }
     
-    if (_player_index >= INPUT_MAX_PLAYERS)
-    {
-        __input_error("Player index too large (", _player_index, " vs. ", INPUT_MAX_PLAYERS, ")\nIncrease INPUT_MAX_PLAYERS to support more players");
-        return undefined;
-    }
+    __INPUT_VERIFY_PLAYER_INDEX
     
-    with(global.__input_players[_player_index].cursor)
+    with(_global.__players[_player_index].__cursor)
     {
-        limit_l = undefined;
-        limit_t = undefined;
-        limit_r = undefined;
-        limit_b = undefined;
+        __limit_l = undefined;
+        __limit_t = undefined;
+        __limit_r = undefined;
+        __limit_b = undefined;
         
-        limit_x = _centre_x;
-        limit_y = _centre_y;
-        limit_radius = _radius;
+        __limit_x      = _x;
+        __limit_y      = _y;
+        __limit_radius = _radius;
         
-        limit();
+        __limit_boundary_margin = undefined;
+        
+        __limit();
     }
 }

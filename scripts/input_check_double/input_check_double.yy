@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"input_check_double",
   "parent":{
-    "name":"Checkers",
-    "path":"folders/Extensions/Input/Checkers.yy",
+    "name":"03  Advanced Checkers",
+    "path":"folders/Input/03  Advanced Checkers.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

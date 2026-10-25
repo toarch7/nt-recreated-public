@@ -47,10 +47,7 @@ if instance_exists(DailyList) {
 }
 else if instance_exists(Menu) && scr_is_authority() {
 	if !Menu.loadout_open {
-	    with all {
-	        if object_index != MusCont && object_index != UberCont && object_index != Console
-				instance_destroy(id, 0)
-	    }
+	    scrCleanupSessionInstances()
 		
 		scr_camera_set_position(0, 0)
 		

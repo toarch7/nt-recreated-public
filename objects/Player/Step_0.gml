@@ -293,6 +293,8 @@ if hp <= 0 {
 		else if UberCont.opt_practice {
 			mask_index = mskNone
 			fainted = CHEAT_PRACTICE_FAINTED_TIME
+			snd_stop(snd_lowa)
+			snd_stop(snd_lowh)
 			snd_play(snd_dead)
 		}
 		else if player_count > 1 {

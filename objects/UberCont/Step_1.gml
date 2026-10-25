@@ -18,6 +18,7 @@ if (want_pause > 0) {
 		    instance_activate_object(MusCont)
 		    instance_activate_object(Console)
 			instance_activate_object(PauseImage)
+			instance_activate_object(input_controller_object)
 		}
 	}
 	else if (paused) scrGameUnpause()

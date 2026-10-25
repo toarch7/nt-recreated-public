@@ -102,6 +102,8 @@ function load_resourcepacks() {
 		
 		array_push(global.custom_texture_groups, _custom_texturegroup_name)
 		
+		texturegroup_load(_custom_texturegroup_name, true)
+		
 		array_foreach(
 			texturegroup_get_sprites(_custom_texturegroup_name),
 			

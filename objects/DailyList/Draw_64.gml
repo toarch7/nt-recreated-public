@@ -77,7 +77,7 @@ if maxpages > 1 {
         }
     }
 
-    if touchr or gamepad_button_check_pressed(0, gp_padr) or scr_keyboard_check_pressed(vk_right) {
+    if touchr or input_gamepad_check_pressed(0, gp_padr) or scr_keyboard_check_pressed(vk_right) {
         page ++
 		
 		snd_play(sndClick)
@@ -87,7 +87,7 @@ if maxpages > 1 {
             page = 0
         }
     }
-	else if touchl or gamepad_button_check_pressed(0, gp_padl) or scr_keyboard_check_pressed(vk_left) {
+	else if touchl or input_gamepad_check_pressed(0, gp_padl) or scr_keyboard_check_pressed(vk_left) {
         page --
 		
 		snd_play(sndClick)

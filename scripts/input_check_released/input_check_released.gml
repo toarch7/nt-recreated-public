@@ -1,23 +1,20 @@
-/// @param verb/array
-/// @param [playerIndex]
-/// @param [bufferDuration]
+// Feather disable all
+/// @desc    Returns a boolean indicating whether the given verb was newly deactivated this frame (a button was released etc.)
+///          If the keyword <all> is used then this function will return <true> if ANY verb whatsoever was newly deactivated
+///          If an array of verbs is given then this function will return <true> if ANY of the verbs in the array were newly deactivated
+///          If a buffer duration is specified then this function will return <true> if the verb has been newly deactive at any point within that timeframe
+/// @param   {any} verb/array
+/// @param   [playerIndex=0]
+/// @param   [bufferDuration=0]
 
-function input_check_released()
+function input_check_released(_verb, _player_index = 0, _buffer_duration = 0)
 {
-    var _verb            = argument[0];
-    var _player_index    = ((argument_count > 1) && (argument[1] != undefined))? argument[1] : 0;
-    var _buffer_duration = ((argument_count > 2) && (argument[2] != undefined))? argument[2] : 0;
+    __INPUT_GLOBAL_STATIC_LOCAL  //Set static _global
+    __INPUT_VERIFY_PLAYER_INDEX
     
-    if (_player_index < 0)
+    if (_verb == all)
     {
-        __input_error("Invalid player index provided (", _player_index, ")");
-        return undefined;
-    }
-    
-    if (_player_index >= INPUT_MAX_PLAYERS)
-    {
-        __input_error("Player index too large (", _player_index, " vs. ", INPUT_MAX_PLAYERS, ")\nIncrease INPUT_MAX_PLAYERS to support more players");
-        return undefined;
+        return input_check_released(_global.__basic_verb_array, _player_index, _buffer_duration);
     }
     
     if (is_array(_verb))
@@ -32,33 +29,16 @@ function input_check_released()
         return false;
     }
     
-    var _verb_struct = variable_struct_get(global.__input_players[_player_index].verbs, _verb);
-    if (!is_struct(_verb_struct))
-    {
-        __input_error("Verb not recognised (", _verb, ")");
-        return undefined;
-    }
+    __INPUT_GET_VERB_STRUCT
     
-    if (_verb_struct.consumed) return false;
+    if (_verb_struct.__inactive) return false;
     
     if (_buffer_duration <= 0)
     {
-        return _verb_struct.release;
+        return ((_global.__cleared)? false : _verb_struct.__release);
     }
     else
     {
-        return ((_verb_struct.release_time >= 0) && ((__input_get_time() - _verb_struct.release_time) <= _buffer_duration));
+        return ((_verb_struct.__release_time >= 0) && ((__input_get_time() - _verb_struct.__release_time) <= _buffer_duration));
     }
-}
-
-/// @param verb
-/// @param [playerIndex]
-/// @param [bufferDuration]
-function input_check_r()
-{
-    var _verb            = argument[0];
-    var _player_index    = ((argument_count > 1) && (argument[1] != undefined))? argument[1] : 0;
-    var _buffer_duration = ((argument_count > 2) && (argument[2] != undefined))? argument[2] : 0;
-    
-    return input_check_released(_verb, _player_index, _buffer_duration);
 }

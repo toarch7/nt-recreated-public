@@ -2,8 +2,6 @@ function scrGamepadUIControl() {
     gamepad_h = KeyCont.press_east[global.index] - KeyCont.press_west[global.index]
 	gamepad_v = KeyCont.press_sout[global.index] - KeyCont.press_nort[global.index]
 	
-	if (gamepad_h == 0 && gamepad_v == 0) exit
-	
 	if (scrGamepadUIConrolMainMenu(MainMenuButton)) exit
 	if (scrGamepadUIConrolMainMenu(PlayButton)) exit
 	
@@ -51,15 +49,14 @@ function scrGamepadUIControl() {
 	}
 	
 	with PauseButton {
-		if hover && gamepad_button_check_pressed(0, gp_face1) {
+		if hover && input_gamepad_check_pressed(0, gp_face1) {
 			event_user(0)
 		}
 	}
 }
 
 function scrGamepadUIConrolMainMenu(object) {
-	if !instance_exists(object)
-		return 0
+	if (!instance_exists(object)) return false
 	
 	var count = instance_number(object)
 	
@@ -84,12 +81,12 @@ function scrGamepadUIConrolMainMenu(object) {
 	            hover = 1
 			}
 			
-            if gamepad_button_check_pressed(0, gp_face1)
+            if input_gamepad_check_pressed(0, gp_face1)
 				event_user(0)
         }
     }
 	
-	return 1
+	return true
 }
 
 function scrGamepadUIConrolCharSelect(object) {
@@ -117,7 +114,7 @@ function scrGamepadUIConrolCharSelect(object) {
 		}
 		
         with object {
-            if gamepad_button_check_pressed(0, gp_face1) && selected
+            if input_gamepad_check_pressed(0, gp_face1) && selected
                 event_perform(ev_mouse, ev_left_press)
         }
     }
@@ -126,48 +123,53 @@ function scrGamepadUIConrolCharSelect(object) {
 }
 
 function scrGamepadUIConrolSkillIcon(object) {
-	if !instance_exists(object)
-		return 0
+	if (!instance_exists(object)) return false
 	
-	var any = 0
+	var any = false
 	
 	with object {
 		if selected {
-			any = true; break
+			any = true
+			break
 		}
 	}
 	
-	if any {
+	if (any) {
 		gamepad_sel += gamepad_h
 	}
-	else gamepad_sel = 0
+	else {
+		gamepad_sel = 0
+	}
 	
-    if gamepad_sel < 0 or gamepad_sel >= instance_number(object) {
-		if UberCont.opt_griller && instance_exists(SkillIcon) {
-			with LevCont
+    if (gamepad_sel < 0 || gamepad_sel >= instance_number(object)) {
+		if (UberCont.opt_griller && instance_exists(SkillIcon)) {
+			with (LevCont) {
 				grillpadchange = other.gamepad_h
+			}
 		}
-		else gamepad_sel = gamepad_h ? 0 : (instance_number(object) - 1)
-    }
+		else {
+			gamepad_sel = gamepad_h ? 0 : (instance_number(object) - 1)
+		}
+	}
 	
     var button = instance_find(object, gamepad_sel)
 	
-    if instance_exists(button) {
-        if gamepad_h != 0 {
-            with button {
-	            if !selected {
+    if (instance_exists(button)) {
+        if (gamepad_h != 0) {
+            with (button) {
+	            if (!selected) {
 	                event_perform(ev_mouse, ev_left_press)
 					snd_play(sndHover)
 				}
 			}
         }
 
-        with button {
-            if gamepad_button_check_pressed(0, gp_face1) {
-                event_perform(ev_mouse, ev_left_press)
+        with (button) {
+            if (input_gamepad_check_pressed(0, gp_face1)) {
+				event_perform(ev_mouse, ev_left_press)
             }
         }
     }
 	
-	return 1
+	return true
 }

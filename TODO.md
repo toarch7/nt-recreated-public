@@ -11,7 +11,6 @@
 - [ ] Implement freezeframes
     - [x] Implement `sleep`
     - [ ] Go over all cases where `Sleep()` is called in the base game and introduce these calls in the project.
-- [ ] Drop Input library support, as it was only used because of its handy-dandy gamepad mappings
 - [ ] Damage & projectile system refactoring
     - [x] Refactor object-based damage dealing
     - [x] Clean up projectile collision damage code

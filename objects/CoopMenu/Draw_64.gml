@@ -11,7 +11,7 @@ if UberCont.showtutorial {
 
 
 if !instance_exists(CoopController) {
-	if gamepad_button_check_pressed(0, gp_start) {
+	if input_gamepad_check_pressed(0, gp_start) {
 	    with UberCont
 			localcoop = 1
 		

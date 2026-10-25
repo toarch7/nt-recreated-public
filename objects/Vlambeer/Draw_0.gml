@@ -11,7 +11,7 @@ draw_reset_font()
 draw_align(fa_center, fa_middle)
 draw_clear(c_black)
 
-if gamepad_button_check_pressed(0, gp_face1) {
+if input_gamepad_check_pressed(0, gp_face1) {
     event_perform(ev_mouse, ev_global_left_release)
 }
 

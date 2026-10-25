@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"__input_load_blacklist_csv",
   "parent":{
-    "name":"(System)",
-    "path":"folders/Extensions/Input/(System).yy",
+    "name":"Initialization",
+    "path":"folders/Input/(System)/Initialization.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

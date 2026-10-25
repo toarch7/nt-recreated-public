@@ -152,3 +152,7 @@ if MultiplayerConfig && false {
 	draw_set_color(c_white)
 	draw_reset_font()
 }
+
+//for(var i = 0; i < 12; ++i) {
+//	draw_sprite(sprLoadoutSkin, i, 40, 90 + i * sprite_get_height(sprLoadoutSkin))
+//}

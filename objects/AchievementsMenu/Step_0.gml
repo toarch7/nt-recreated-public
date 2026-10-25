@@ -1,7 +1,7 @@
 if lockstep_stop
 	exit
 
-if mouse_check_button_pressed(mb_left) {
+if (mouse_check_button_pressed(mb_left)) {
     click = 1
 	
     mousex = mouse_x
@@ -9,27 +9,24 @@ if mouse_check_button_pressed(mb_left) {
 	
     speed = 0
 	
-	if device_mouse_x_to_gui(0) < view_width - 32 {
+	if (device_mouse_x_to_gui(0) < view_width - 32) {
 		dragging = -1
 	}
 }
 
-if !mouse_check_button(mb_left) && dragging == -1
+if (!mouse_check_button(mb_left) && dragging == -1) {
 	dragging = false
+}
 
-
-
-if is_gamepad() {
-	var v = (gamepad_button_check(0, gp_padd) - gamepad_button_check(0, gp_padu)) * 4
+if (is_gamepad()) {
+	var v = (input_gamepad_check(0, gp_padd) - input_gamepad_check(0, gp_padu)) * 4
 	
-	if v == 0
-		v = gamepad_axis_value(0, gp_axislv)
+	if (v == 0) v = gamepad_axis_value(0, gp_axislv)
 	
 	vspeed = v * 8
 }
 
-if mouse_wheel_up() vspeed = -18
-if mouse_wheel_down() vspeed = 18
+vspeed = clamp(vspeed, -20, 20)
 
 var p = ypos div 40
 
