@@ -116,7 +116,6 @@ outsound = 0
 // check for potential achievement sync-up
 scrUnlocksCharacterStats()
 
-device_mouse_dbclick_enable(0)
 //mp_potential_settings(90, 5, 5, 0)
 
 for(var i = 0; i < 4; ++i) {
@@ -124,7 +123,9 @@ for(var i = 0; i < 4; ++i) {
 }
 
 localcoop = 0
-gamepad_sel = 0
+gamepad_ui_selection = 0
+directional_ui_click = false
+directional_ui_control = false
 
 update_request_since_last = -1
 update_request = scrGameQueryUpdateVersion()

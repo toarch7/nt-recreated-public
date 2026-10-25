@@ -112,7 +112,7 @@ if !(instance_exists(Leaderboards)
 }
 
 with UberCont {
-	gamepad_sel = 0
+	gamepad_ui_selection = 0
 }
 
 snd_play(sndClick)

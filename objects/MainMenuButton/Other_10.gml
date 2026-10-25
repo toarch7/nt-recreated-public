@@ -107,5 +107,5 @@ switch image_index {
 if (!instance_exists(Player)) my_player.reset_session_data()
 
 with UberCont {
-	gamepad_sel = 0
+	gamepad_ui_selection = 0
 }

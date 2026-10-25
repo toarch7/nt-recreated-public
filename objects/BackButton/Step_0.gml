@@ -34,17 +34,15 @@ else {
 }
 
 if mouse_ui_hovered(id, false) {
-	if !is_gamepad() {
-		if !hover {
+	if (!is_directional_ui()) {
+		if (!hover) {
 			snd_play(sndHover)
-			hover = 1
+			hover = true
 		}
 	}
 	
-	if press {
-		event_user(0)
-	}
+	if (press) event_user(0)
 }
-else if !is_gamepad() && hover {
-	hover = 0
+else if (!is_directional_ui() && hover) {
+	hover = false
 }

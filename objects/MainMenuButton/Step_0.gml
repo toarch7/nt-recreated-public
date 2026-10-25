@@ -9,25 +9,22 @@ if current_frame == start {
 	visible = 1
 	appear = 2
 }
-else if appear {
-	appear --
-}
+else if (appear) appear --
 
 var press = mouse_ui_clicked()
 
 if mouse_ui_hovered(id, false) {
-	if !is_gamepad() {
-		if !hover && available {
+	if (!is_directional_ui()) {
+		if (!hover && available) {
 			snd_play(sndHover)
-			hover = 1
+			hover = true
 		}
 	}
 	
-	if press
-		event_user(0)
+	if (press) event_user(0)
 }
-else if !is_gamepad() && hover {
-	hover = 0
+else if (!is_directional_ui() && hover) {
+	hover = false
 }
 
 splat = approach(splat, hover * 3, timescale * 0.8)

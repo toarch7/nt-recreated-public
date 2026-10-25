@@ -83,7 +83,7 @@ if !ready {
 	snd_play(sndMenuCharSelect)
 	
 	with UberCont
-		gamepad_sel = 0
+		gamepad_ui_selection = 0
 }
 
 // read inputs
