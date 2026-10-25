@@ -16,8 +16,8 @@
     "path":"folders/Objects/Enemies.yy",
   },
   "parentObjectId":{
-    "name":"enemy",
-    "path":"objects/enemy/enemy.yy",
+    "name":"Ratking",
+    "path":"objects/Ratking/Ratking.yy",
   },
   "persistent":false,
   "physicsAngularDamping":0.1,

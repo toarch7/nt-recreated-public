@@ -1,3 +1,1 @@
-with RadChest {
-    instance_destroy()
-}
+with (RadChest) instance_destroy()

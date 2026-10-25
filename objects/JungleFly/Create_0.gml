@@ -23,3 +23,5 @@ ammo = 3
 fire = 10
 alarm[1] = 50 + random(10)
 rage = 0
+
+hitid = HitId.JungleFly

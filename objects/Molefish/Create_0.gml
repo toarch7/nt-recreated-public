@@ -20,3 +20,5 @@ alarm[1] = 30 + random(90)
 wkick = 0
 
 move_contact_solid(random_angle, random(16))
+
+hitid = HitId.VenusGrunt

@@ -23,3 +23,5 @@ alarm[1] = 30 + random(90)
 
 spr_shadow = shd32
 spr_shadow_y = 4
+
+hitid = HitId.GoldenScorpion

@@ -17,3 +17,4 @@ alarm[1] = 60 + random(10)
 ammo = 0
 charge = 0
 instance_create(x, y, PortalClear)
+hitid = HitId.Horror

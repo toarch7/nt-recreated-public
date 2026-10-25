@@ -8,7 +8,8 @@ function scr_test_is_fps_uncapped() {
 
 /// @function scr_test_create_arena
 /// @param size=5
-function scr_test_create_arena(_size = 5) {
+/// @param create_dummies=true
+function scr_test_create_arena(_size = 5, _create_dummies) {
 	scrCleanupAreaInstances()
 	
 	with Player {
@@ -25,9 +26,11 @@ function scr_test_create_arena(_size = 5) {
 		with (Floor) mcr_floor_make_walls;
 		with (Floor) mcr_floor_create_tops;
 		
-		for(var i = 0; i < 360; i += 10) {
-			var _n = 24 + ((i % 90) / 90) * 64
-			instance_create(x + ldrx(_n, i), y + ldry(_n, i), Dummy)
+		if (_create_dummies) {
+			for(var i = 0; i < 360; i += 10) {
+				var _n = 24 + ((i % 90) / 90) * 64
+				instance_create(x + ldrx(_n, i), y + ldry(_n, i), Dummy)
+			}
 		}
 	}
 }

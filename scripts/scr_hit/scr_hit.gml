@@ -1,3 +1,5 @@
+#macro debug_hitid_testing true
+
 /// @function scr_hit
 /// @param instance
 /// @param amount
@@ -30,6 +32,20 @@ function scr_hit(_instance, _amount, _hitid = HitId.None) {
 			}
 			else {
 				print(real(id), object_get_name(object_index), $"{hp}/{max_hp}", "was hit by", _amount, "from", _hitid, $"({object_get_name(other.object_index)})")
+			}
+		}
+		
+		if (debug_hitid_testing) {
+			if (instance_exists(other) && instance_is(self, Player)) {
+				var _object = object_get_name(other.object_index),
+					_cause = scrDeathCauseGetName(_hitid)
+				
+				with (TestHitIds) {
+					if (!variable_struct_exists(projectile_hitids, _object)) {
+						print("registered hit from", _object, "as", _cause, _hitid)
+						projectile_hitids[$ _object] = _cause
+					}
+				}
 			}
 		}
 		

@@ -19,6 +19,7 @@ if ammo {
             snd_play_gun(sndBallMamaFire, 0)
             image_angle = direction
             team = other.team
+			hitid = other.hitid
         }
 
         sprite_index = spr_fire

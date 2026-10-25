@@ -250,9 +250,8 @@ function scr_create_debug_overlay_views() {
 		
 		__create_test_option(TestWeapons)
 		__create_test_option(TestDamageSources)
-		
-		//
 		__create_test_option(TestAutoPlayer)
+		__create_test_option(TestHitIds)
 		
 		var _list = []
 		for(var i = Race.Random; i < Race.NUM_ALL_RACE_TYPES; ++i) {

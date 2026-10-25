@@ -21,3 +21,5 @@ spr_shadow_y = 3
 if (GameCont.loops > 0) {
 	alarm[0] = max(1, 12 - GameCont.loops)
 }
+
+hitid = HitId.BigDogMissile

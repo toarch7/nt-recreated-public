@@ -12,6 +12,8 @@ function scrCleanupAreaInstances() {
 	instance_destroy(SpiralStar)
 	instance_destroy(Detail)
 	instance_destroy(TopPot)
+	instance_destroy(SitDown)
+	instance_destroy(NothingDeath)
 	
 	instance_destroy(FloorMaker, false)
 	instance_destroy(GenCont, false)

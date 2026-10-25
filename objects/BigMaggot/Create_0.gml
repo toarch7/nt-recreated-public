@@ -20,3 +20,5 @@ alarm[1] = 45 + random(10)
 rage = 0
 
 spr_shadow = shd32
+
+hitid = HitId.BigMaggot

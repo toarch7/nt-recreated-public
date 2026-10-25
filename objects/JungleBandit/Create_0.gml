@@ -19,3 +19,5 @@ gunangle = random_angle
 alarm[1] = 30 + random(90)
 wkick = 0
 ammo = 0
+
+hitid = HitId.JungleBandit

@@ -20,6 +20,7 @@ introcharge = 0
 gunangle = random_angle
 charge = 0
 alarm[1] = 1
+hitid = HitId.Captain
 with(instance_create(x, y, PopoExplosion)) {
     team = other.team
     hitid = other.hitid
@@ -37,4 +38,3 @@ sndtaunt = 0
 tauntdelay = 0
 
 spr_shadow = shd48
-hitid = HitId.Captain
