@@ -1,0 +1,2 @@
+/// @loc:token [ResourcepackBrowser] RestartMessage "The game will now close to apply changes."
+message = show_message_async(loc("ResourcepackBrowser:RestartMessage", "The game will now close to apply changes."))

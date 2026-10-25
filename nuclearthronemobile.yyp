@@ -727,6 +727,7 @@
     {"id":{"name":"RavenFly","path":"objects/RavenFly/RavenFly.yy",},},
     {"id":{"name":"RecycleGland","path":"objects/RecycleGland/RecycleGland.yy",},},
     {"id":{"name":"ResourcepackManager","path":"objects/ResourcepackManager/ResourcepackManager.yy",},},
+    {"id":{"name":"ResourcepackRestartMessage","path":"objects/ResourcepackRestartMessage/ResourcepackRestartMessage.yy",},},
     {"id":{"name":"Revive","path":"objects/Revive/Revive.yy",},},
     {"id":{"name":"ReviveCircle","path":"objects/ReviveCircle/ReviveCircle.yy",},},
     {"id":{"name":"ReviveFX","path":"objects/ReviveFX/ReviveFX.yy",},},

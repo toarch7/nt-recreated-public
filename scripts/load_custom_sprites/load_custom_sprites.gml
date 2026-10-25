@@ -13,6 +13,7 @@ function load_custom_sprites(_namespace, _load_directory) {
 		_texture_rects = global.custom_texturepage_bucket,
 		_temporary_sprites = global.temporary_custom_sprites
 	
+	print(_sprite_files)
 	scr_log_push($"[{_namespace}] {_sprite_file_count} images to process", c_gray)
 	
 	for(var _file_index = _sprite_file_count - 1; _file_index >= 0; --_file_index) {
@@ -160,8 +161,11 @@ function load_custom_sprites(_namespace, _load_directory) {
 			array_push(_temporary_sprites, _replacement_sprite)
 		}
 		
-		if (!variable_struct_exists(_sprite_replacement_markings, _sprite_name)) {
-			sprite_strip_save(_original_sprite, "replacedsprites/" + sprite_get_name(_original_sprite) + ".png")
+		// we no longer restore sprites on the run, so there's no need to store replaced strips
+		if (false) {
+			if (!variable_struct_exists(_sprite_replacement_markings, _sprite_name)) {
+				sprite_strip_save(_original_sprite, "replacedsprites/" + sprite_get_name(_original_sprite) + ".png")
+			}
 		}
 		
 		var _replacement_sprite_width = sprite_get_width(_replacement_sprite),
@@ -188,7 +192,7 @@ function load_custom_sprites(_namespace, _load_directory) {
 		else {
 			for(var _subimage = _replacement_frames - 1; _subimage >= 0; --_subimage) {
 				array_push(_texture_rects, new CustomTexturePageRect(_sprite_name, _subimage,
-					_replacement_frames, _replacement_sprite_width, _replacement_sprite_height, _replacement_sprite))
+					_replacement_frames, _replacement_sprite_width, _replacement_sprite_height, _replacement_sprite, true))
 			}
 		}
 	}

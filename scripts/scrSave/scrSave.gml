@@ -94,7 +94,7 @@ function scrSave() {
 	        file_text_close(f)
 		}
 		
-		var json = json_encode(save)
+		var json = json_encode(save, true)
 		
 		file_write(savepath, json)
 		file_write("NuclearThrone.sav", json)

@@ -99,9 +99,16 @@ switch image_index {
 	// Quit
     case 4:
 		snd_play(sndClick)
-        game_restart()
-        game_end()
-        break
+		if (os_type == os_android) {
+			KillAndroidTask()
+		}
+		else {
+			if (os_type == os_ios) {
+				game_restart()
+			}
+			game_end()
+		}
+		break
 }
 
 if (!instance_exists(Player)) my_player.reset_session_data()

@@ -3,6 +3,8 @@
 
 #macro resourcepack_texturegen_prefix "__PACK_TEXTUREGEN_"
 
+global.__resourcepack_sprite_frame_transparency_cache = {}
+
 function load_resourcepacks() {
 	globalvar Resourcepacks;
     Resourcepacks = []
@@ -34,6 +36,21 @@ function load_resourcepacks() {
     global.custom_area_colors = {}
     global.custom_shadow_colors = {}
 	global.custom_sprite_registry = {}
+	
+	// load cached static sprite transparency frames information
+	if (GM_build_type != "run" && file_exists(".rp_frame_transparency_cache.json")) {
+		try {
+			var _data = json_parse(file_read(".rp_frame_transparency_cache.json"))
+			
+			if (is_struct(_data) && _data[? "__cache_version__"] == GAME_BUILD) {
+				global.__resourcepack_sprite_frame_transparency_cache = _data
+			}
+		}
+		catch(e) { print(e) }
+	}
+	
+	// store current cache version
+	global.__resourcepack_sprite_frame_transparency_cache[$ "__cache_version__"] = GAME_BUILD
 	
 	//
 	print("Default sprite culling is", gpu_get_sprite_cull() ? "ON" : "OFF")
@@ -68,10 +85,11 @@ function load_resourcepacks() {
 				_sprite_frames = _frame_replacement_indices[$ _key]
 			
 			for(var _subimage = array_length(_sprite_frames) - 1; _subimage >= 0; --_subimage) {
-				var _replacement_sprite = _sprite_frames[_subimage]
+				var _replacement_sprite = _sprite_frames[_subimage],
+					_is_dynamic = (_replacement_sprite != _original_sprite)
 				
 				array_push(_texture_rects, new CustomTexturePageRect(
-					_key, _subimage, _number, _width, _height, _replacement_sprite))
+					_key, _subimage, _number, _width, _height, _replacement_sprite, _is_dynamic))
 			}
 		}
 		
@@ -121,7 +139,7 @@ function load_resourcepacks() {
 				sprite_assign(_original_sprite, _custom_sprite)
 				
 				//
-				array_push(global.replaced_base_sprites, _original_sprite_name)
+				/* array_push(global.replaced_base_sprites, _original_sprite_name) */
 			})
 		
 	}
@@ -156,4 +174,8 @@ function load_resourcepacks() {
 	else if (file_exists(".active_resourcepacks")) {
 		file_delete(".active_resourcepacks")
 	}
+	
+	// store cached transparency frames
+	file_write(".rp_frame_transparency_cache.json",
+		json_stringify(global.__resourcepack_sprite_frame_transparency_cache, GM_build_type == "run"))
 }

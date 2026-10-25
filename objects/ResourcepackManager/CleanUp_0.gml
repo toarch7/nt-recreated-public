@@ -18,15 +18,9 @@ if (surface_exists(text_surface)) {
 
 directory_destroy_recursive(game_directory + "install")
 
-if (reload_needed) {
-	if (global.safemode) {
-		show_message_async("The game is running in safe mode. Resourcepacks won't be applied until the game is restarted.")
-	}
-	
-	if (reload_needed == 2) {
-		game_restart()
-	}
-	else {
-		load_resourcepacks()
-	}
+if (global.safemode) {
+	show_message_async("The game is running in safe mode. Resourcepacks won't be applied until the game is restarted.")
+}
+else if (reload_needed) {
+	instance_create(0, 0, ResourcepackRestartMessage)
 }

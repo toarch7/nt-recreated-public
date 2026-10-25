@@ -8,13 +8,12 @@ function scrInit() {
     saveData = undefined
 
     if file_exists(game_directory + "NuclearThrone.sav") {
-        var f = file_text_open_read(game_directory + "NuclearThrone.sav")
-        var raw = file_text_read_string(f)
-        file_text_close(f)
-
+        var raw = file_read(game_directory + "NuclearThrone.sav")
         saveData = json_decode(raw)
 	}
-	else saveData = ds_map_create()
+	else {
+		saveData = ds_map_create()
+	}
 	
     if saveData < 0 || is_undefined(saveData) {
         show_message_async("Your save data has corrupted. Please do not close the game while saving icon is on-screen.")

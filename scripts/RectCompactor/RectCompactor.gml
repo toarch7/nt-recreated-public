@@ -1,7 +1,7 @@
 #macro compactor_texturepage_width 2048
 #macro compactor_texturepage_height 2048
 
-function CustomTexturePageRect(_name, _image, _max_images, _width, _height, _sprite) constructor {
+function CustomTexturePageRect(_name, _image, _max_images, _width, _height, _sprite, _is_dynamic) constructor {
 	assert(is_numeric(_sprite) && _sprite >= 0, _name)
 	
 	name = _name
@@ -15,6 +15,9 @@ function CustomTexturePageRect(_name, _image, _max_images, _width, _height, _spr
 	
 	weight = _width * _height * _height
 	
+	dynamic = false
+	fully_transparent = false
+	
 	x = 0
 	y = 0
 	
@@ -24,7 +27,83 @@ function CustomTexturePageRect(_name, _image, _max_images, _width, _height, _spr
 	is_sorted = false
 	sort_index = -1
 	
+	static do_transparency_check = function() {
+		static _buffer = buffer_create(65_536, buffer_grow, 1)
+		
+		var _cache_key = name,
+			
+			_cache = global.__resourcepack_sprite_frame_transparency_cache,
+			
+			_max_images = sprite_get_number(sprite);
+		
+		if (variable_struct_exists(_cache, _cache_key)) {
+			var _cache_frames = _cache[$ _cache_key]
+			if (image_index >= 0 && image_index < array_length(_cache_frames)) {
+				fully_transparent = _cache_frames[image_index]
+				exit
+			}
+		}
+		
+		sprite_prefetch(sprite)
+		
+		_cache[$ _cache_key] = array_create(_max_images, false)
+		
+		//
+		var _surface = surface_create(width, height),
+			
+			_ox = sprite_get_xoffset(sprite),
+			_oy = sprite_get_yoffset(sprite),
+			
+			_size = 4 * width * height,
+			_width_size = 4 * width;
+		
+		for(var _subimage = 0; _subimage < _max_images; _subimage ++) {
+			
+			surface_set_target(_surface)
+			draw_clear_alpha(c_black, 0)
+			draw_sprite(sprite, _subimage, _ox, _oy)
+			surface_reset_target()
+			
+			surface_save(_surface, $"blyaa/{name}_{_subimage}.png")
+			
+			//
+			buffer_get_surface(_buffer, _surface, 0)
+			
+			//
+			var _result = true
+			for (var _offset = 0; _offset < _size; _offset += 4) {
+				if (buffer_peek(_buffer, _offset + 3, buffer_u8) != 0) {
+					_result = false
+					break
+				}
+			}
+			
+			// store transparency in cache
+			_cache[$ _cache_key][_subimage] = _result
+			if (image_index == _subimage) {
+				fully_transparent = _result
+			}
+		}
+		
+		//
+		surface_free(_surface)
+	}
+	
+	if (!_is_dynamic) do_transparency_check()
+	
 	static to_frame_entry = function(_texturepage_index) {
+		if (fully_transparent) {
+			return {
+				"x": 0,
+				"y": 0,
+				"w": 0,
+				"h": 0,
+				"original_width": width,
+				"original_height": height,
+				"tp": _texturepage_index
+			}
+		}
+		
 		return {
 			"x": x,
 			"y": y,
@@ -46,11 +125,7 @@ function CustomTexturePageCompactor() constructor {
 		array_copy(rectangles, 0, _texture_rects, 0, _count)
 	}
 	
-	static count_rects = function() {
-		return array_length(rectangles)
-	}
-	
-	static find_tiniest_fit = function(_min_width, _from_index = 0) {
+	static find_tiniest_fit = function(_min_width, _max_height, _from_index = 0) {
 		var _rectangles = rectangles,
 			_count = array_length(_rectangles),
 			
@@ -60,9 +135,9 @@ function CustomTexturePageCompactor() constructor {
 		for(var i = _from_index; i < _count; ++i) {
 			var _rectangle = _rectangles[i]
 			
-			if (!_rectangle.is_sorted
-				&& _rectangle.width < _min_width
-				&& _rectangle.width > _max_width
+			if (!_rectangle.is_sorted && !_rectangle.fully_transparent
+				&& _rectangle.width < _min_width && _rectangle.width > _max_width
+				&& _rectangle.height <= _max_height
 			) {
 				_max_width = _rectangle.width
 				_result_index = i
@@ -84,13 +159,14 @@ function CustomTexturePageCompactor() constructor {
 			_rectangle_count = array_length(_rectangles),
 			_texture_pages = [];
 		
-		_rectangles = rectangles
-		_rectangle_count = count_rects()
-		
 		array_sort(_rectangles, function(a, b) {
 			var _d = b.weight - a.weight
-			if (_d == 0) _d = (b.image_number - a.image_number)
-			if (_d == 0) _d = (a.name > b.name) ? -1 : 1
+			if (_d == 0) {
+				_d = (b.image_number - a.image_number)
+				if (_d == 0) {
+					return (a.name > b.name) ? -1 : 1
+				}
+			}
 			return sign(_d)
 		})
 		
@@ -120,20 +196,29 @@ function CustomTexturePageCompactor() constructor {
 				_width = _rectangle.width,
 				_height = _rectangle.height,
 				
+				_is_transparent = _rectangle.fully_transparent,
+				
 				_is_present = variable_struct_exists(_sprite_data, _sprite_name),
 				
 				_all_good = true,
 				_cannot_fit_whole = false,
 				_new_page_requested = false
 			
-			// skip if we can't fit this sprite vertically
-			if ((_py + _rectangle.height) >= _grid_height) {
-				_new_page_requested = true
-				_cannot_fit_whole = true
-				_all_good = false
+			if (!_is_transparent) {
+				// skip if we can't fit this sprite vertically
+				if ((_py + _rectangle.height) >= _grid_height) {
+					_new_page_requested = true
+					_cannot_fit_whole = true
+					_all_good = false
+				}
+			}
+			else {
+				// fully transparent frames don't occupy space so they don't need sorting
+				_rectangle.sort_index = _rectangle_index
+				_rectangle.is_sorted = true
 			}
 			
-			if (_all_good) {
+			if (_all_good && !_is_transparent) {
 				_rectangle.x = _px
 				_rectangle.y = _py
 				
@@ -143,19 +228,27 @@ function CustomTexturePageCompactor() constructor {
 				_max_rect_height = max(_height, _max_rect_height)
 				
 				if ((_px + _width) >= _grid_width) {
-					var _leftover = _width - ((_px + _width) - _grid_width)
+					var _leftover = _width - ((_px + _width) - _grid_width),
+						_base_rectangle_index = _rectangle_index
 					
 					for (;;) {
-						// TODO: implement height check
-						var _fit = find_tiniest_fit(_leftover, _rectangle_index + 1)
-						//print("fitting", _leftover)
+						var _fit = find_tiniest_fit(_leftover, _max_rect_height, _rectangle_index + 1)
+						
 						if (_fit == undefined) break
+						
+						_fit.x = _px
+						_fit.y = _py
 						
 						_fit.is_sorted = true
 						_fit.image_blend = c_gray
 						_fit.sort_index = ++ _rectangle_index
-						_fit.x = _rectangle.x
-						_fit.y = _py
+						
+						if (variable_struct_exists(_sprite_data, _fit.name)) {
+							array_push(_sprite_data[$ _fit.name], _fit)
+						}
+						else {
+							_sprite_data[$ _fit.name] = [ _fit ]
+						}
 						
 						_leftover -= _fit.width
 						if (_leftover <= 0) break
@@ -173,14 +266,16 @@ function CustomTexturePageCompactor() constructor {
 						
 						_max_rect_height = _height
 						
-						if (_py < _grid_height) {
-							_rectangle.x = _px
-							_rectangle.y = _py
+						if (_py > _grid_height) {
+							_rectangle.is_sorted = false
+							_skipped_index_start = _base_rectangle_index
+							_new_page_requested = true
+							_cannot_fit_whole = true
+							_all_good = false
 						}
 						else {
-							// TODO: resolve such cases
-							show_error("fucky wucky", true)
-							_rectangle.is_sorted = false
+							_rectangle.x = _px
+							_rectangle.y = _py
 						}
 					}
 				}
@@ -232,7 +327,7 @@ function CustomTexturePageCompactor() constructor {
 			_texturegroup_textures = [],
 			_texturegroup_sprite_data = {}
 		
-		#macro debug_render_custom_texturepage_backgrounds true
+		#macro debug_render_custom_texturepage_backgrounds false
 		#macro debug_texture_text_scale 1
 		
 		if (debug_render_custom_texturepage_backgrounds) {

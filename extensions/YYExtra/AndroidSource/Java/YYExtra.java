@@ -18,6 +18,7 @@ import android.view.InputEvent;
 import android.view.KeyEvent;
 import android.view.View;
 import android.os.AsyncTask;
+import android.os.Process;
 import android.net.Uri;
 
 // Import Game Maker classes
@@ -219,7 +220,11 @@ public class YYExtra extends ExtensionBase {
 		return 0.0;
 	}
 
-
+	public double KillAndroidTask() {
+		RunnerActivity.CurrentActivity.finishAndRemoveTask();
+        Process.killProcess(Process.myPid());
+		return 0.0;
+	}
 
 
 

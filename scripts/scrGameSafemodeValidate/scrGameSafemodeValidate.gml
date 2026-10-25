@@ -1,6 +1,9 @@
+global.safemode_check_performed = false
 global.safemode = false
 
 function scrGameSafemodeValidate() {
+	if (global.safemode_check_performed) exit
+	
 	var _has_resourcepacks = file_exists(".active_resourcepacks"),
 		
 		_has_savegame = file_exists(savegame_file),
@@ -9,6 +12,8 @@ function scrGameSafemodeValidate() {
 		
 		_safemode_file_name = ".safemode_check",
 		_file_is_present = file_exists(_safemode_file_name)
+	
+	global.safemode_check_performed = true
 	
 	if (!_is_this_thing_even_required) {
 		if (_file_is_present) {
@@ -25,7 +30,7 @@ function scrGameSafemodeValidate() {
 			_footnote = "\n\nThe following resourcepacks were enabled:\n" + file_read(".active_resourcepacks")
 		}
 		
-		show_message_async("It seems that the couldn't initialize properly on previous startup.\n"
+		show_message_async("It seems that the game couldn't initialize properly on previous startup.\n"
 			            + "Resourcepacks and Run Continuation screen will be disabled until the next restart."
 						+ _footnote)
 		
