@@ -6,7 +6,7 @@
   "name":"__input_steam_handles_changed",
   "parent":{
     "name":"Gamepads and Steam",
-    "path":"folders/Input/(System)/Gamepads and Steam.yy",
+    "path":"folders/Extensions/Input/(System)/Gamepads and Steam.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

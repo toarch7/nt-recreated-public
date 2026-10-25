@@ -6,7 +6,7 @@
   "name":"input_mouse_coord_space_get",
   "parent":{
     "name":"24  Mouse (Direct)",
-    "path":"folders/Input/24  Mouse (Direct).yy",
+    "path":"folders/Extensions/Input/24  Mouse (Direct).yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

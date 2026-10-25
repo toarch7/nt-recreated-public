@@ -6,7 +6,7 @@
   "name":"input_source_is_available",
   "parent":{
     "name":"18  Sources",
-    "path":"folders/Input/18  Sources.yy",
+    "path":"folders/Extensions/Input/18  Sources.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

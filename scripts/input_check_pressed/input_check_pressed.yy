@@ -6,7 +6,7 @@
   "name":"input_check_pressed",
   "parent":{
     "name":"01  Checking Verbs",
-    "path":"folders/Input/01  Checking Verbs.yy",
+    "path":"folders/Extensions/Input/01  Checking Verbs.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

@@ -17,93 +17,90 @@ function scrGamepadUIControl() {
 		exit
 	}
 	
-	var count = instance_number(PauseButton)
-	if ((count > 2 && gamepad_h != 0) || gamepad_v != 0) {
-		var button = noone
+	var _count = instance_number(PauseButton)
+	
+	if ((_count > 2 && gamepad_h != 0) || gamepad_v != 0) {
+		var _button = noone
 		
-		if gamepad_h != 0 && count > 2 {
+		if gamepad_h != 0 && _count > 2 {
 			gamepad_sel += gamepad_h * 2
 		}
 		else if gamepad_v != 0 {
 			gamepad_sel += gamepad_v
 		}
 		
-		if (gamepad_sel < 0) gamepad_sel = count - 1
-		if (gamepad_sel >= count) gamepad_sel = 0
+		if (gamepad_sel < 0) gamepad_sel = _count - 1
+		if (gamepad_sel >= _count) gamepad_sel = 0
 		
-		button = instance_find(PauseButton, gamepad_sel)
+		_button = instance_find(PauseButton, gamepad_sel)
 		
-		print("Selection", gamepad_sel)
-		
-		with PauseButton {
-			if id == button {
-				if !hover {
+		with (PauseButton) {
+			if (id == _button) {
+				if (!hover) {
 					snd_play(sndHover)
 					hover = true
 				}
 			}
-			else if hover {
-				hover = false
-			}
+			else if (hover) hover = false
 		}
 	}
 	
-	with PauseButton {
-		if hover && input_gamepad_check_pressed(0, gp_face1) {
+	with (PauseButton) {
+		if (hover && input_gamepad_check_pressed(0, gp_face1)) {
 			event_user(0)
 		}
 	}
 }
 
-function scrGamepadUIConrolMainMenu(object) {
-	if (!instance_exists(object)) return false
+function scrGamepadUIConrolMainMenu(_object) {
+	if (!instance_exists(_object)) return false
 	
-	var count = instance_number(object)
+	var _count = instance_number(_object)
 	
 	gamepad_sel += gamepad_v
 
-    if gamepad_sel < 0 || gamepad_sel >= count {
-        gamepad_sel = gamepad_v ? 0 : (count - 1)
+    if (gamepad_sel < 0 || gamepad_sel >= _count) {
+        gamepad_sel = gamepad_v ? 0 : (_count - 1)
     }
 	
-    var button = instance_find(object, gamepad_sel)
+    var _button = instance_find(_object, gamepad_sel)
 	
-    if instance_exists(button) {
-        with object {
-			if button != id {
-				hover = 0
-				
+    if (instance_exists(_button)) {
+        with (_object) {
+			if (_button != id) {
+				hover = false
 				continue
 			}
 			
-			if !hover {
+			if (!hover) {
 				snd_play(sndHover)
-	            hover = 1
+	            hover = true
 			}
 			
-            if input_gamepad_check_pressed(0, gp_face1)
+            if (input_gamepad_check_pressed(0, gp_face1)) {
 				event_user(0)
+			}
         }
     }
 	
 	return true
 }
 
-function scrGamepadUIConrolCharSelect(object) {
-	if (!instance_exists(object)) return 0
+function scrGamepadUIConrolCharSelect(_object) {
+	if (!instance_exists(_object)) return false
 	
 	gamepad_sel += gamepad_h
 
-    if gamepad_sel < 0 || gamepad_sel >= instance_number(object) {
-        gamepad_sel = gamepad_h ? 0 : (instance_number(object) - 1)
+    if (gamepad_sel < 0 || gamepad_sel >= instance_number(_object)) {
+        gamepad_sel = gamepad_h ? 0 : (instance_number(_object) - 1)
     }
 
-    var button = instance_find(object, gamepad_sel)
+    var _button = instance_find(_object, gamepad_sel)
 
-    if instance_exists(button) {
-        if gamepad_h != 0 {
-            with object {
-                if !selected && id == button {
+    if (instance_exists(_button)) {
+        if (gamepad_h != 0) {
+            with (_object) {
+                if (!selected && id == _button) {
                     event_perform(ev_mouse, ev_left_press)
                 }
             }
@@ -113,50 +110,51 @@ function scrGamepadUIConrolCharSelect(object) {
 			return true
 		}
 		
-        with object {
-            if input_gamepad_check_pressed(0, gp_face1) && selected
+        with (_object) {
+            if (input_gamepad_check_pressed(0, gp_face1) && selected) {
                 event_perform(ev_mouse, ev_left_press)
+			}
         }
     }
 	
-	return 1
+	return true
 }
 
-function scrGamepadUIConrolSkillIcon(object) {
-	if (!instance_exists(object)) return false
+function scrGamepadUIConrolSkillIcon(_object) {
+	if (!instance_exists(_object)) return false
 	
-	var any = false
+	var _any = false
 	
-	with object {
-		if selected {
-			any = true
+	with (_object) {
+		if (selected) {
+			_any = true
 			break
 		}
 	}
 	
-	if (any) {
+	if (_any) {
 		gamepad_sel += gamepad_h
 	}
 	else {
 		gamepad_sel = 0
 	}
 	
-    if (gamepad_sel < 0 || gamepad_sel >= instance_number(object)) {
+    if (gamepad_sel < 0 || gamepad_sel >= instance_number(_object)) {
 		if (UberCont.opt_griller && instance_exists(SkillIcon)) {
 			with (LevCont) {
 				grillpadchange = other.gamepad_h
 			}
 		}
 		else {
-			gamepad_sel = gamepad_h ? 0 : (instance_number(object) - 1)
+			gamepad_sel = gamepad_h ? 0 : (instance_number(_object) - 1)
 		}
 	}
 	
-    var button = instance_find(object, gamepad_sel)
+    var _button = instance_find(_object, gamepad_sel)
 	
-    if (instance_exists(button)) {
+    if (instance_exists(_button)) {
         if (gamepad_h != 0) {
-            with (button) {
+            with (_button) {
 	            if (!selected) {
 	                event_perform(ev_mouse, ev_left_press)
 					snd_play(sndHover)
@@ -164,7 +162,7 @@ function scrGamepadUIConrolSkillIcon(object) {
 			}
         }
 
-        with (button) {
+        with (_button) {
             if (input_gamepad_check_pressed(0, gp_face1)) {
 				event_perform(ev_mouse, ev_left_press)
             }

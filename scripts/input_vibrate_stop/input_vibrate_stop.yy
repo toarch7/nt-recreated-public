@@ -6,7 +6,7 @@
   "name":"input_vibrate_stop",
   "parent":{
     "name":"19  Vibration",
-    "path":"folders/Input/19  Vibration.yy",
+    "path":"folders/Extensions/Input/19  Vibration.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

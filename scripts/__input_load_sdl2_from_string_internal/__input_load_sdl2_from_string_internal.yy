@@ -6,7 +6,7 @@
   "name":"__input_load_sdl2_from_string_internal",
   "parent":{
     "name":"Initialization",
-    "path":"folders/Input/(System)/Initialization.yy",
+    "path":"folders/Extensions/Input/(System)/Initialization.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

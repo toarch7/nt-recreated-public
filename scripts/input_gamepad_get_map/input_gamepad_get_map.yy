@@ -6,7 +6,7 @@
   "name":"input_gamepad_get_map",
   "parent":{
     "name":"25  Gamepads (Direct)",
-    "path":"folders/Input/25  Gamepads (Direct).yy",
+    "path":"folders/Extensions/Input/25  Gamepads (Direct).yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

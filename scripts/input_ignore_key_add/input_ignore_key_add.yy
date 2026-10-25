@@ -6,7 +6,7 @@
   "name":"input_ignore_key_add",
   "parent":{
     "name":"23  Other",
-    "path":"folders/Input/23  Other.yy",
+    "path":"folders/Extensions/Input/23  Other.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

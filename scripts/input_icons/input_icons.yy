@@ -6,7 +6,7 @@
   "name":"input_icons",
   "parent":{
     "name":"Deprecated",
-    "path":"folders/Input/(System)/Deprecated.yy",
+    "path":"folders/Extensions/Input/(System)/Deprecated.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
